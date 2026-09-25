@@ -81,14 +81,10 @@ const gwara = {
     "Cosik wiysz. Widza po tobie. Ale niy moja sprawa.",
   "Trzy beczki. Liczę i liczę, i zawsze wychodzą trzy.":
     "Trzy beczki. Licza i licza, i dycki wychodzą trzy.",
-  "Słyszałeś Racibora. Jutro mam wysadzić upadową.":
-    "Słyszołeś Racibora. Jutro mom wysadzić upadową.",
   "Ktoś już raz ją wysadził, żeby nikt tamtędy nie przeszedł. A my ją otworzymy. Mądrzy ludzie.":
     "Ftoś już roz jom wysadził, coby nikt tamtędy niy przeszoł. A my jom otworzymy. Mądrzy ludzie.",
   "Proch jest, lonty są. Tylko ręce mi się jakoś nie chcą rwać do tej roboty.":
     "Proch je, lonty som. Ino rynce mi sie jakoś niy chcom rwać do tej roboty.",
-  "Ostatni dzień rozpoznania. Od jutra fedrujemy na całego.":
-    "Ostatni dziyń rozpoznanio. Od jutra fedrujymy na cołego.",
   "Wysadzić zawał, który ktoś już raz wysadził, żeby nikt tam nie wlazł? Wysadzę. Ale nie mówcie potem, że nikt was nie ostrzegał.":
     "Wysadzić zawał, kery ftoś już roz wysadził, coby nikt tam niy wlazł? Wysadza. Ale niy godejcie potym, że nikt wos niy ostrzegoł.",
   "Jak trzeba, to wysadzę. Tylko niech mi nikt z ogniem nie łazi koło beczek.":
@@ -168,6 +164,40 @@ const gwara = {
     "Trzeci dziyń. Jak tak dalij pódzie, to sie tu zestarza drugi roz.",
   "Nad grobem przewodnika kopać nie będziesz, panie zarządco. Po moim trupie.":
     "Nad grobym przewodnika kopać niy bydziesz, panie zarządco. Po moim trupie.",
+  // --- task_05: the week (Mirosław) ---
+  "Dobrze, że ktoś siedzi. Jak jestem sam, to ogień zaczyna gadać.":
+    "Dobrze, że ftoś siedzi. Jak żech je sam, to łogiyń zaczyno godać.",
+  "Pali. Dobrze, że pali. Jak pali, to znaczy, że jeszcze coś czuję.":
+    "Pali. Dobrze, że pali. Jak pali, to znaczy, że jeszcze cosik czuja.",
+  "Jak Pierwsi przyszli do Głuszy, to magowie przyjechali trzy dni później. Obejrzeli, co zostało, zapisali coś w księgach i pojechali.":
+    "Jak Pierwsi przyszli do Głuszy, to magowie przijechali trzy dni niyskorzij. Pozaglądali, co ostało, zapisali cosik w ksiyngach i pojechali.",
+  "Mnie z tej piwnicy wyciągnęła baba spod Mirosila, co wiozła rzepę na targ. Nie mag.":
+    "Mie z tej piwnicy wyciongła baba spod Mirosila, co wiozła rzepa na targ. Niy mag.",
+  "Nie idź jeszcze. Jak ktoś siedzi obok, to wybuchy są ciszej.":
+    "Niy idź jeszcze. Jak ftoś siedzi łobok, to wybuchy som cisze.",
+  "Słyszałeś Racibora. Jak policzy żyły, mam wysadzić upadową.":
+    "Słyszołeś Racibora. Jak porachuje żyły, mom wysadzić upadowo.",
+  "Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego.":
+    "Tydziyń, godo Racibor. Dwanaście żył. A potym fedrujymy na cołego.",
+  "Dziś Racibor liczy. Jakby nie liczył, to i tak wszyscy liczymy. Dni, beczki, kto jeszcze śpi spokojnie.":
+    "Dzisiej Racibor rachuje. A choćby niy rachowoł, to i tak wszyscy rachujymy. Dni, beczki, fto jeszcze śpi spokojnie.",
+  "Znowu mi się śniło, że wszystko wybucha. Tym razem po cichu. To było najgorsze.":
+    "Zaś mi sie śniło, że wszystko wybucho. Tym razym po cichu. To było nojgorsze.",
+  "[[Żyjesz? No to dobrze.|Proch suchy, ręce trzęsą się mniej. Dobry dzień.|Uważaj dziś na siebie. Ja uważam na beczki.]]":
+    "[[Żyjesz? No to dobrze.|Proch suchy, rynce trzynsom sie mnij. Dobry dziyń.|Uwożej dzisiej na sia. Jo uwożom na beczki.]]",
+  // --- task_05: the week (Bolko) ---
+  "Hawiar. Kopie za trzech, gada za pięciu, a śpiewa za całą Przystań. Dobry chłop.":
+    "Hawiar. Fedruje za trzech, godo za piyńciu, a śpiywo za cołko Przystań. Dobry chop.",
+  "Tylko w ciasne chodniki nie wlezie. Widziałem, jak stoi przed szczeliną i patrzy. Tak patrzy człowiek, co już raz kogoś odkopywał.":
+    "Ino w ciasne chodniki niy wlezie. Widzioł żech, jak stoi przed szczelinom i zaglądo. Tak zaglądo chop, co już roz kogoś odkopywoł.",
+  "Widziałem. Jedna czarownica w obozie to był znak. Dwie to już zwyczaj.":
+    "Widzioł żech. Jedna czarownica w łobozie to boł znak. Dwie to już zwyk.",
+  "Ta nowa przynajmniej mówi „dzień dobry”. Jak do psa, ale mówi.":
+    "Ta nowo przinajmnij godo „dziyń dobry”. Jak do psa, ale godo.",
+  "Ostatni dzień przed liczeniem. Racibor chodzi jak struty. Znam to. Twój dziadek też miał taki dzień. Ostatni.":
+    "Ostatni dziyń przed rachowaniym. Racibor łazi jak struty. Znom to. Twój starzik tyż mioł taki dziyń. Ostatni.",
+  "[[Żyjesz jeszcze? To dobrze.|Nie łaź dziś za daleko, coś mi w kościach strzyka.|Znowu ty. Siadaj, jak chcesz.]]":
+    "[[Żyjesz jeszcze? To dobrze.|Niy łaź dzisiej za daleko, cosik mi w kościach strzyko.|Zaś ty. Siadej, jak chcesz.]]",
 };
 
 // Collect the miners' spoken lines from every dialogue file (they also speak in other scenes).

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dtto3g6d88mlx"
+path="res://.godot/imported/welf.dialogue-c1a924f4e596ccdc2dd913f0ecc7f567.tres"
+
+[deps]
+
+source_file="res://dialogue/welf.dialogue"
+dest_files=["res://.godot/imported/welf.dialogue-c1a924f4e596ccdc2dd913f0ecc7f567.tres"]
+
+[params]
+
+defaults=true

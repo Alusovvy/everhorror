@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/hieronim_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/hieronim.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"hieronim"
+display_name = "Hieronim z Grotthamu"
+dialogue_name = "Hieronim"
+display_name_instrumental = "Hieronimem"
+faction = 0
+role = "Stary Drugi z Exitium, szaleniec wyprawy"
+max_sanity = 60
+start_sanity = 10
+max_health = 100
+start_reputation = 0
+history = "Najstarszy Drugi w Exitium. Przekroczył więcej progów bólu, niż ktokolwiek powinien, i coś w nim pękło. Nie nosi maski, bo i tak nikt go nie dotknie. Śmieje się, nuci, gada ze skałą. Najgorsze jest to, że skała czasem mu odpowiada. I często ma rację."
+sanity_zero_effect = "Odchodzi w głąb, nucąc. Jego śmiech słychać jeszcze przez trzy noce, coraz niżej."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62
+female = false

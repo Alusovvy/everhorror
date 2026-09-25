@@ -1,0 +1,83 @@
+using GameState
+
+~ start
+if not has_flag("met_ottokar_field")
+	$> set_flag("met_ottokar_field")
+	Ottokar stoi pod ścianą z kosturem wbitym w szczelinę skały i nasłuchuje. Fioletowe światło kostura pulsuje w rytm czegoś, czego nie słyszysz.
+	Ottokar: Przewodnik. Znowu. Zaczynam podejrzewać, że za mną chodzisz. Albo że idziemy w to samo miejsce.
+else
+	Ottokar: [[Przewodnik.|Znowu ty. Kopalnia robi się ciasna.|Czego chcesz tym razem?]]
+=> hub
+
+~ hub
+Ottokar czeka, aż się odezwiesz. Wygląda na kogoś, kto umie czekać bardzo długo.
+- Co tu robisz? [if not done_today("ott_what") /]
+	$> mark_today("ott_what")
+	Ottokar: Słucham. Skała mówi, jeśli się umie słuchać. Wy słyszycie tylko kapiącą wodę. My słyszymy, dokąd płynie energia.
+	Ottokar: Wszystko tu płynie w dół, jak do lejka. Ciekawi mnie, co jest na dnie tego lejka. Ciebie nie?
+	=> hub
+- Kim jest Seitaro Nakamura? [if not has_flag("ott_nakamura") /]
+	$> set_flag("ott_nakamura")
+	Ottokar: Założyciel Exitium. Najpotężniejszy mag po samym Wielkim Mistrzu. Stracił rękę w rytuale, który miał ją zamienić w żelazną broń.
+	Ottokar: Ręka nie zamieniła się w broń. Po prostu wyparowała. Od tamtej pory Nakamura jest ostrożny. Ja nie muszę. Mam jeszcze obie ręce.
+	=> hub
+- Dlaczego mówicie na nas „bezmagiczni”? [if not has_flag("ott_peasants") /]
+	$> set_flag("ott_peasants")
+	Ottokar: Bo to prawda. Żyjecie obok energii jak ślepcy obok obrazu. Możecie go dotknąć, ale nie zobaczycie.
+	Ottokar: Nie gardzę wami, przewodniku. Pogarda wymaga wysiłku. Po prostu wiem, do czego się nadajecie. Do noszenia, kopania i umierania w miejscach, w których my nie chcemy.
+	$> change_player_sanity(-2)
+	=> hub
+- W sprawie twojej oferty. [if not has_flag("ott_deal_done") /]
+	=> offer
+- Muszę iść.
+	Ottokar: Idź. Kopalnia jest duża, a i tak się spotkamy. Wszystkie drogi prowadzą tu w dół.
+	=> END
+
+~ offer
+$> start_quest("oferta")
+if has_item("krysztal")
+	Ottokar: Wiem, co nosisz. Czuję to od trzech korytarzy. Kryształ z kaplicy. Klucz albo zapis, jeszcze nie wiem. Chcę się dowiedzieć.
+	Ottokar: Dam ci za niego coś, czego potrzebujesz bardziej. Twój zarządca liczy żyły. Ja wiem, gdzie są dwie, do których sam nigdy nie trafisz.
+	- Zaznacz mi te żyły. Kryształ jest twój.
+		$> take_item("krysztal")
+		$> set_flag("crystal_to_ottokar")
+		$> set_flag("ott_deal_done")
+		$> mark_veins_for_player(2)
+		$> quest_log("oferta", "krysztal")
+		$> complete_quest("oferta")
+		Ottokar bierze kryształ przez rękawicę. Fioletowe światło kostura na chwilę gaśnie, a potem wraca, jaśniejsze niż przedtem.
+		Ottokar: Mądra decyzja. Zaznaczyłem ci je na mapie. Nie dziękuj. Nie zrobiłem tego dla ciebie.
+		Amulet dziadka stygnie ci na piersi. Pierwszy raz, odkąd go nosisz, jest zupełnie zimny.
+		$> change_player_sanity(-6)
+	- Nie. Dziadek zabronił oddawać go komuś w masce.
+		$> set_flag("ott_deal_done")
+		$> quest_log("oferta", "odmowa")
+		$> fail_quest("oferta")
+		$> change_rep("ottokar", -10)
+		Ottokar: Twój dziadek. Oczywiście. Umarli zawsze mają najwięcej do powiedzenia.
+		Ottokar unosi dłoń w rękawicy. Nie dotyka cię. Nie musi. Nagle robi ci się zimno ze strachu, zwyczajnie, jak dziecku w ciemnym pokoju, i nie wiesz dlaczego.
+		Ottokar: To był drugi krąg. Wywoływanie cudzych uczuć. Chciałem, żebyś wiedział, co tracisz, odmawiając uprzejmym ludziom.
+		$> change_player_sanity(-8)
+	- Jeszcze się zastanowię.
+		Ottokar: Zastanawiaj się. Tylko nie za długo. Kryształy lubią zmieniać właścicieli.
+else
+	Ottokar: Mapy twojego dziadka. Pokaż mi je. Tylko pokaż. Przerysuję, co trzeba, i oddam. W zamian wskażę ci żyłę, której twój zarządca nie znajdzie do końca świata.
+	- Pokaż mi tę żyłę. Masz mapy. (1 h)
+		$> advance_time(1, "Ottokar przerysowuje mapy")
+		$> set_flag("ott_deal_done")
+		$> set_flag("ott_has_maps")
+		$> mark_veins_for_player(1)
+		$> quest_log("oferta", "mapy")
+		$> complete_quest("oferta")
+		Ottokar przerysowuje mapy dziadka kreska po kresce, szybko i bezbłędnie, jakby robił to już kiedyś. Przy znaku zapytania pod jaskinią zatrzymuje się dłużej.
+		Ottokar: Twój dziadek był lepszym magiem niż połowa Initium. Szkoda, że o tym nie wiedział.
+		$> change_player_sanity(-3)
+	- Mapy dziadka zostają ze mną.
+		$> set_flag("ott_deal_done")
+		$> quest_log("oferta", "odmowa")
+		$> fail_quest("oferta")
+		$> change_rep("ottokar", -5)
+		Ottokar: Jak chcesz. Przerysuję je i tak, kiedy umrzesz. W tej kopalni to kwestia czasu.
+	- Jeszcze się zastanowię.
+		Ottokar: Zastanawiaj się. Ja poczekam. Umiem czekać.
+=> END

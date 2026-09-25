@@ -1,0 +1,88 @@
+using GameState
+
+~ start
+if npc_place("sabina") == "teren"
+	=> field
+if not has_flag("met_sabina_camp")
+	$> set_flag("met_sabina_camp")
+	Sabina stoi z dala od wszystkich, z kosturem opartym o ramię. Mosiężna maska odbija płomień lampy, więc wygląda, jakby zamiast twarzy miała ogień.
+	Sabina: O, przewodnik! Ten spod ściany. Nie bój się, nie gryzę. Po prostu stój tam, gdzie stoisz.
+	Sabina: Mam tu mieszkać, dopóki von Brühl nie uzna, że wiem dość. Czyli długo. On nigdy nie uznaje, że ktoś wie dość.
+=> hub
+
+~ field
+Sabina: Mistrz rozmawia ze ścianą, a ja pilnuję, żeby ściana nie odpowiedziała. Porozmawiamy w obozie, dobrze? Tu nie ma czym oddychać.
+=> END
+
+~ hub
+Sabina: [[Tak, kochanie?|Słucham cię.|Mów, mów, nie wstydź się.]]
+- Dlaczego mówisz do mnie jak do dziecka? [if not has_flag("sab_child") /]
+	$> set_flag("sab_child")
+	Sabina przechyla głowę. Spod maski dobiega krótki śmiech.
+	Sabina: Naprawdę tak mówię? Przepraszam. W Initium uczą nas, że wy, bezmagiczni, żyjecie jak we mgle. Nie widzicie linii, nie czujecie aur. Trochę jak dzieci, które jeszcze nie otworzyły oczu.
+	Sabina: To nie wasza wina. Ja też się taka urodziłam. Po prostu mnie potem... otworzono.
+	- Otworzono?
+		Sabina: W Maszynie. Miałam sześć lat, kiedy rodzice oddali mnie do Initium, i czternaście, kiedy weszłam do walca. Pamiętam światło. Potem tylko ból. Potem linie.
+	- Nie potrzebuję twojej litości.
+		$> change_rep("sabina", 2)
+		Sabina: Oczywiście, że nie. Przepraszam. Znowu to zrobiłam, prawda?
+	=> hub
+- Możesz mnie uleczyć? [if player_health < 100 and not done_today("sabina_heal") /]
+	if not has_flag("anzelm_sabina_peace") and not has_flag("sab_heal_secret")
+		$> set_flag("sab_heal_secret")
+		Sabina: Mogę. Tylko nie mów bratu Anzelmowi. On patrzy na mnie, jakbym była pożarem. Nie chcę mu dokładać.
+	Sabina zdejmuje rękawicę. Dłoń ma bladą, a na przegubie srebrne linie, które zaczynają świecić, zanim jeszcze cię dotknie. Dotyka cię przez materiał, ledwo, samymi palcami.
+	Ciepło wlewa się w rany jak gorąca woda. Sabina syczy przez zaciśnięte zęby i przez chwilę trzęsą się jej kolana.
+	Sabina: To nic. Zawsze tak jest. Drugi krąg boli jak ręka pod wrzątkiem. Przyzwyczajasz się. Nie, nie przyzwyczajasz się. Po prostu wiesz, że minie.
+	$> mark_today("sabina_heal")
+	$> heal_player(45)
+	$> change_sanity("sabina", -6)
+	$> change_rep("sabina", 3)
+	=> hub
+- Czujesz, gdzie są żyły? [if not done_today("sabina_sense") /]
+	$> mark_today("sabina_sense")
+	Sabina zamyka oczy za maską. Linie na jej przedramionach jarzą się słabo.
+	Sabina: Czuję je jak ciepło przez ścianę. Wszystkie ciągną w dół, jak woda do odpływu.
+	Sabina: {{vein_hint()}}
+	=> hub
+- Czego szukacie w tej kopalni? [if not has_flag("sab_why") /]
+	$> set_flag("sab_why")
+	Sabina: Źródła. Błękit nie rośnie w skale sam z siebie. Metal nasiąka aurą, jeśli coś bardzo długo na niego działa. Setki lat. Tysiące.
+	Sabina: Gdzieś pod wami leży coś, co tak działa. Artefakt Onych. Może maszyna, jak ta w Initium. Może coś, czego jeszcze nie umiemy nazwać.
+	Sabina: Von Brühl chce go znaleźć pierwszy. Ja chcę go tylko zrozumieć. To chyba różnica. Mam nadzieję.
+	=> hub
+- Co byś stąd chciała mieć? [if has_flag("sab_why") and quest_state("odlamek") == "" /]
+	$> start_quest("odlamek")
+	Sabina: Och, pytasz jak kupiec! Czysty błękit. Kawałek bez grama skały. Z niego wyczytałabym więcej niż z tysiąca kamieni z waszych wózków.
+	Sabina: Najczystszy będzie tam, gdzie jest go najwięcej. Najniżej. Tam, gdzie Hieronim chodzi i się śmieje.
+	=> hub
+- Mam dla ciebie odłamek z galerii. [if quest_state("odlamek") == "active" and has_item("odlamek") /]
+	$> take_item("odlamek")
+	Sabina bierze odłamek dwoma palcami, jak coś żywego. Przez chwilę nie oddycha.
+	Sabina: Słyszysz? Nie, oczywiście, że nie. Buczy. Śpiewa. To nie jest kamień, to zapis. Ktoś zapisał coś w metalu, a ja... ja prawie umiem to przeczytać.
+	Sabina: Masz. Lekarstwo z Exitium. Nie mów von Brühlowi, że dałam je bezmagicznemu. I dziękuję. Naprawdę. Tak, jak się dziękuje dorosłym.
+	$> give_item("lekarstwo")
+	$> quest_log("odlamek", "oddany")
+	$> complete_quest("odlamek")
+	$> change_rep("sabina", 12)
+	$> change_sanity("sabina", 6)
+	=> hub
+- Brat Anzelm nie chce twojej pomocy przy chorych. [if quest_state("pokoj") == "active" and not has_flag("sab_promised") /]
+	Sabina: Wiem. Widzę, jak na mnie patrzy. Jak ci z Zakonu, co przychodzili pod bramy Initium z pochodniami.
+	Sabina: Ale on nie jest jak oni. Oni nienawidzą magii. On nienawidzi siebie za to, że jej nienawidzi. Czujesz różnicę?
+	- Obiecaj, że nie będziesz leczyć nikogo za jego plecami.
+		$> set_flag("sab_promised")
+		$> quest_log("pokoj", "sabina")
+		$> change_rep("sabina", 3)
+		Sabina: Obiecuję. Na linie. U nas to więcej niż na honor.
+	- Może pogadasz z nim sama?
+		Sabina: Próbowałam. Odwrócił się i zaczął się modlić. Do Onych, przy mnie. Nie wiedział, że to trochę tak, jakby modlił się do moich nauczycieli.
+	=> hub
+- Czy Nasirowi pomoże magia? [if has_fever("nasir") and not has_flag("sab_on_fever") /]
+	$> set_flag("sab_on_fever")
+	Sabina: Gorączki nie zaleczę. Drugi krąg składa ciało, a nie przepędza tego, co w nim siedzi. Gdybym spróbowała, zabiłabym go szybciej niż ta gorączka.
+	Sabina: Potrzebuje lekarstwa. Zwykłego, gorzkiego, bezmagicznego lekarstwa. Czasem wasze sposoby są lepsze od naszych. Nie mów nikomu, że tak powiedziałam.
+	=> hub
+- Muszę iść.
+	Sabina: Idź. Tylko wracaj przed nocą, dobrze? Nie lubię, kiedy ktoś ginie na mojej zmianie.
+	=> END

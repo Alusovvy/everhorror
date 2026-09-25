@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"oferta"
+title = "Oferta z Exitium"
+giver = "Ottokar von Brühl"
+entries = {
+"start": "Ottokar von Brühl chce map dziadka. Albo kryształu. Za cenę, o jakiej mi się nie śniło.",
+"krysztal": "Oddałem Ottokarowi kryształ. W zamian zaznaczył mi na mapie dwie żyły, do których sam bym nie trafił.",
+"mapy": "Pokazałem Ottokarowi mapy dziadka. Przerysował je co do kreski, a w zamian zaznaczył mi jedną żyłę.",
+"odmowa": "Odmówiłem Ottokarowi. Nie wyglądał na zaskoczonego. Wyglądał na kogoś, kto ma czas."
+}

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"galeria"
+display_name = "Kryształowa galeria"
+unknown_name = "Przekreślona gwiazda"
+direction = "najniżej"
+text = "Najniżej, dokąd sięga mapa. Dziadek narysował tam gwiazdę, a potem ją przekreślił."
+links = {
+"zalany": 1.5,
+"szyb": 1.5
+}
+requires = PackedStringArray("item:olej")
+locked = {
+"item:olej": "Tam nie wisi już żadna latarnia. Bez zapasu oleju lampa zgaśnie ci w połowie drogi."
+}
+entry = "GaleriaEntry"
+veins = PackedStringArray("galeria_1", "galeria_2", "galeria_3")
+depth = 4
+map_pos = Vector2(0.33, 0.91)
+dread = 6
+arrival_text = "Ściany świecą tak jasno, że mógłbyś zgasić lampę. Nie gasisz."

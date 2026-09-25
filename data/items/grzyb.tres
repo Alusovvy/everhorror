@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"grzyb"
+display_name = "Świecący grzyb"
+name_accusative = "świecący grzyb"
+description = "Blady grzyb z groty, z niebieską poświatą pod kapeluszem. Anzelm mówił, że z takich warzy się lekarstwo. Hagiwara chciałby go zobaczyć."
+category = 3
+heal = 0
+sanity = 0
+cures_fever = false
+consumable = true
+use_hours = 0
+use_text = ""

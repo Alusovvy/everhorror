@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://jj780a6eup70"
+path="res://.godot/imported/nasir.dialogue-bf46af947fcc526922282dc63660d8fb.tres"
+
+[deps]
+
+source_file="res://dialogue/nasir.dialogue"
+dest_files=["res://.godot/imported/nasir.dialogue-bf46af947fcc526922282dc63660d8fb.tres"]
+
+[params]
+
+defaults=true

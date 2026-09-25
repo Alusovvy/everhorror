@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"kaplica"
+display_name = "Kaplica"
+unknown_name = "Znak zapytania"
+direction = "wschód, w dół"
+text = "Znak zapytania z mapy dziadka, pod jaskinią. W dół prowadzi wąskie przejście z wykutymi stopniami."
+links = {
+"east": 1.0,
+"kostnica": 1.0
+}
+requires = PackedStringArray("flag:kaplica_known")
+locked = {
+"flag:kaplica_known": "Na mapie dziadka pod jaskinią jest tylko znak zapytania. Nie wiesz, czego tam szukać."
+}
+entry = "KaplicaEntry"
+veins = PackedStringArray("kaplica", "kaplica_2")
+depth = 2
+map_pos = Vector2(0.92, 0.47)
+dread = 0
+arrival_text = ""

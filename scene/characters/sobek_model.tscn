@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Ranger.gltf" id="2_male_ranger"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Buzzed.gltf" id="3_hair_buzzed"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Beard.gltf" id="4_beard"]
+[ext_resource type="PackedScene" path="res://scene/characters/sword.tscn" id="5_sword"]
+
+[node name="SobekModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_male_ranger"), ExtResource("3_hair_buzzed"), ExtResource("4_beard")])
+hidden_meshes = PackedStringArray("Male_Ranger_Head_Hood")
+hand_attachments = Array[PackedScene]([ExtResource("5_sword")])
+outfit_tint = Color(0.52, 0.56, 0.42, 1)
+hair_tint = Color(0.4, 0.32, 0.26, 1)
+skin_tint = Color(0.9, 0.8, 0.7, 1)

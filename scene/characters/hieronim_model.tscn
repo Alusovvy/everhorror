@@ -1,0 +1,19 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Peasant.gltf" id="2_male_peasant"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Long.gltf" id="3_hair_long"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Beard.gltf" id="4_beard"]
+[ext_resource type="PackedScene" path="res://scene/characters/staff_crooked.tscn" id="5_staff_crooked"]
+[ext_resource type="Texture2D" path="res://assets/characters/quaternius/outfits/T_Peasant_2_BaseColor.png" id="6_peasant2"]
+
+[node name="HieronimModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_male_peasant"), ExtResource("3_hair_long"), ExtResource("4_beard")])
+hand_attachments = Array[PackedScene]([ExtResource("5_staff_crooked")])
+outfit_texture = ExtResource("6_peasant2")
+outfit_tint = Color(0.62, 0.62, 0.6, 1)
+hair_tint = Color(1.3, 1.28, 1.25, 1)
+skin_tint = Color(0.92, 0.88, 0.86, 1)
+hand_bone = "LeftHand"
+animation = &"Idle_Torch"

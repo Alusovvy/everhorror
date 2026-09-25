@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"wiersz"
+title = "Wiersz o świetle"
+giver = "Kiyoshi Hagiwara"
+entries = {
+"start": "Hagiwara pisze wiersz o świetle, które rośnie w ciemności. Chciałby zobaczyć świecący grzyb z groty, o którym gadają górnicy.",
+"oddany": "Dałem Hagiwarze świecący grzyb. Napisał wiersz i dał mi w zamian lekarstwo z Czterech Wysp."
+}

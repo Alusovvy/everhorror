@@ -1,0 +1,12 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Peasant.gltf" id="2_male_peasant"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_SimpleParted.gltf" id="3_hair_parted"]
+
+[node name="AnzelmModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_male_peasant"), ExtResource("3_hair_parted")])
+outfit_tint = Color(0.9, 0.88, 0.84, 1)
+hair_tint = Color(1.15, 1.12, 1.1, 1)
+skin_tint = Color(0.95, 0.9, 0.86, 1)

@@ -1,0 +1,101 @@
+using GameState
+
+~ start
+if has_fever("nasir")
+	=> sick
+if not has_flag("met_nasir")
+	$> set_flag("met_nasir")
+	if npc_place("nasir") == "teren"
+		Przy pompie klęczy ciemnoskóry mężczyzna w kapturze naciągniętym po same oczy. Stuka kluczem w rurę i nasłuchuje, jak felczer, który osłuchuje chorego.
+	else
+		Ciemnoskóry mężczyzna w kapturze naciągniętym na uszy grzeje dłonie o kubek, choć ten dawno już ostygł.
+	Nasir: Nasir. Z Bakaszu, w Sułtanacie. Tak, daleko. Tak, zimno. Nie, nie przyzwyczaiłem się.
+	Nasir: U nas mówią, że gdzie woda, tam życie. A gdzie jej za dużo, tam śmierć. W tej kopalni wody jest za dużo, habibi.
+elif has_flag("nasir_fever_started") and not has_flag("nas_thanked_health")
+	$> set_flag("nas_thanked_health")
+	Nasir: Żyję, habibi. Ręce jeszcze mi się trzęsą, ale żyję. W Nerdii długi pamięta się dłużej niż krzywdy. Nie zapomnę.
+=> hub
+
+~ hub
+Nasir: [[Mów, habibi.|Słucham.|Tak?]]
+- Jak trafiłeś z Sułtanatu do Jaksaru? [if not has_flag("nas_asked_story") /]
+	$> set_flag("nas_asked_story")
+	Nasir: Ojciec miał długi. W Nerdii długi spłaca się sobą albo dziećmi. Ojciec wybrał dzieci.
+	Nasir: Dwanaście lat w kamieniołomach sułtana. Nosiłem wodę inżynierom z Waldgrossen, bo nikt inny nie chciał. Patrzyłem, słuchałem.
+	Nasir: Po dwunastu latach umiałem wypompować wodę z każdej dziury. Wykupiłem się i poszedłem tam, gdzie takich jak ja potrzebują. Czyli tam, gdzie mokro i ciemno.
+	=> hub
+- Opowiedz o Sułtanacie. [if has_flag("nas_asked_story") and not has_flag("nas_sultanate") /]
+	$> set_flag("nas_sultanate")
+	Nasir: Piasek, kamień i słońce, które zabija. U was Rinust daje życie. U nas mówimy „kapryśny jak Rinust”. Kiedy patrzy, zabija upałem, a kiedy nie patrzy, ludzie grzeszą.
+	Nasir: W Gorejącą Paladę nikt nie handluje od świtu do zmierzchu. Ulice puste, a kto musi wyjść, ten często już nie wraca.
+	Nasir: Ale bazary w Lajihar, habibi... Tam kupisz wszystko. Przyprawy, klejnoty, wodę, ludzi. Kto nie handluje, ten nie jest Nerdyjczykiem.
+	- Handlujecie ludźmi?
+		Nasir: Handlujemy wszystkim. Mnie też sprzedali. Dlatego ja już nie handluję.
+	- Tęsknisz?
+		Nasir: Za słońcem? Tak. Za sułtanem? Niech go Dżiny ulepią z powrotem w piasek.
+	=> hub
+- Kim są Dżiny? [if has_flag("nas_sultanate") and not has_flag("nas_djinn") /]
+	$> set_flag("nas_djinn")
+	Nasir: U was mówią Oni. U nas Dżiny. Ulepili nas z piasku i śliny, a potem wpuścili w nas dusze, żebyśmy się nie rozsypali na wietrze.
+	Nasir: Starzy mówią, że Dżiny przychodzą po człowieka, kiedy umiera. Stoją przy łóżku i czekają.
+	Nasir: A tu, pod ziemią, czasem czuję, że ktoś stoi przy moim posłaniu. Tylko że ja nie umieram. Jeszcze.
+	$> change_player_sanity(-2)
+	=> hub
+- Wiesz coś o pompach pod rząpiem? [if quest_state("pompy") == "" /]
+	$> start_quest("pompy")
+	Nasir: Wiem, że są. Tekla mówiła, że woda w rząpiu kiedyś schodziła sama. Nic nie schodzi samo. Ktoś ją pompował.
+	Nasir: Jeśli stare pompy jeszcze stoją, to za nimi jest zalany chodnik. A w zalanych chodnikach, habibi, zawsze coś się kryje. Pustych chodników nikt nie zalewa.
+	Nasir: Daj mi oleju do tłoków, a zajrzę do nich. Od następnego dnia będę tam siedział za dnia, aż ruszą.
+	=> hub
+- Mam olej do tłoków. [if quest_state("pompy") == "active" and has_item("olej") and not has_flag("nasir_at_pumps") /]
+	$> take_item("olej")
+	$> set_flag("nasir_at_pumps", day)
+	$> quest_log("pompy", "olej")
+	$> change_rep("nasir", 5)
+	Nasir odkorkowuje bańkę, wącha i rozciera kroplę między palcami.
+	Nasir: Dobry. Gęsty. Stara ekipa znała się na rzeczy.
+	Nasir: Od jutra za dnia będę przy pompach. Przyjdź tam, pomożesz mi przy korbie. Sam nie dam rady, a Wszebor się nie nadaje. Za duży i za dużo gada.
+	=> hub
+- Pomogę ci przy korbie. (2 h) [if npc_place("nasir") == "teren" and has_flag("nasir_at_pumps") and not has_flag("pump_running") and can_afford(2) /]
+	$> advance_time(2, "Praca przy pompach")
+	Kręcicie korbą na zmianę. Koło najpierw ani drgnie, potem jęczy, potem skrzypi, a potem nagle rusza i w rurze coś ciężko chlupie.
+	Nasir: Yalla! Idzie! Słyszysz? Tak brzmi życie, habibi. Woda, która idzie tam, gdzie jej każesz.
+	Nasir: Do wieczora zalany chodnik opadnie po kolana. Niżej nie zejdzie, za dużo tam źródeł. Ale po kolana da się chodzić. Zimno, ale da się.
+	$> set_flag("pump_running")
+	$> quest_log("pompy", "ruszyly")
+	$> complete_quest("pompy")
+	$> change_rep("nasir", 5)
+	$> note_event("Uruchomiłeś z Nasirem stare pompy. Zalany chodnik stoi otworem.")
+	=> hub
+- Co to za paciorek na szyi? [if rep("nasir") >= 5 and not has_flag("nas_jewel") and not has_item("klejnot") /]
+	$> set_flag("nas_jewel")
+	Nasir: Daleki Klejnot. Kawałek planety Kinkenheim. W Lajihar sprzedają takie na każdym rogu i wszystkie są fałszywe.
+	Nasir: Oprócz tego. Ten jest prawdziwy. Kupiłem go za pierwsze srebro po wykupie. Wiem, że to szkło. Ale kto płaci wolnym srebrem, ten kupuje prawdziwe rzeczy.
+	=> hub
+- Muszę iść.
+	Nasir: Idź w pokoju. I nie pij wody z rząpia, nawet jak bardzo chce ci się pić.
+	=> END
+
+~ sick
+Nasir leży skulony pod dwoma kocami i trzęsie się, choć czoło ma rozpalone. Anzelm zmienia mu mokrą szmatę na głowie.
+if not has_flag("nas_sick_seen")
+	$> set_flag("nas_sick_seen")
+	Nasir: Habibi... Wiesz, co jest najgłupsze? Dwanaście lat w kamieniołomie, w upale, i nic. A tu, w zimnie... Zimno mnie dopadło.
+else
+	Nasir: [[Jeszcze... jestem.|Dżiny stoją przy łóżku. Powiedz im, żeby poczekały.|Zimno. Tak strasznie zimno.]]
+Anzelm patrzy na ciebie znad miski z wodą i nic nie mówi.
+- Mam dla ciebie lekarstwo. [if has_item("lekarstwo") /]
+	$> give_to_npc("lekarstwo", "nasir")
+	$> change_npc_health("nasir", 30)
+	$> quest_log("goraczka", "wyleczony")
+	$> complete_quest("goraczka")
+	$> change_rep("nasir", 15)
+	$> change_rep("anzelm", 5)
+	Nasir przełyka gorzki wywar i krzywi się tak, że Anzelm prycha pod nosem.
+	Nasir: Obrzydlistwo. Dziękuję, habibi. Pamiętam takie rzeczy.
+	if not has_item("klejnot")
+		Nasir zdejmuje z szyi szklany paciorek i wciska ci go w dłoń. Nie przyjmuje odmowy.
+		$> give_item("klejnot")
+- Trzymaj się.
+	Nasir: Trzymam się... czego mogę.
+=> END

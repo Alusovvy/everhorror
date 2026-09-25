@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://ivdipcdgw3va"
+path="res://.godot/imported/sobek.dialogue-2cf040168a43064e828cbf8702ee003a.tres"
+
+[deps]
+
+source_file="res://dialogue/sobek.dialogue"
+dest_files=["res://.godot/imported/sobek.dialogue-2cf040168a43064e828cbf8702ee003a.tres"]
+
+[params]
+
+defaults=true

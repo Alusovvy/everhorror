@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/wszebor_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/wszebor.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"wszebor"
+display_name = "Wszebor ze Śnieżnej Przystani"
+dialogue_name = "Wszebor"
+display_name_instrumental = "Wszeborem"
+faction = 1
+role = "Rębacz, Hawiar z Czarnych Gór"
+max_sanity = 100
+start_sanity = 76
+max_health = 100
+start_reputation = 0
+history = "Hawiar ze Śnieżnej Przystani, rębacz i kowal. Wielki jak drzwi do stodoły, śmieje się tak, że sypie się strop. Od kiedy w kopalni pod Przystanią zasypało jego brata Bogdala, boi się ciasnych chodników, choć za nic się do tego nie przyzna. Zjechał tu, bo Kniaź płaci potrójnie, a wdowa po bracie ma czworo dzieci."
+sanity_zero_effect = "Ucieka z ciasnego chodnika i biegnie przed siebie w ciemność. Znajdują go po dwóch dniach w ślepym korytarzu. Siedzi w kącie i nuci kołysankę z Długiej Nocy."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.78
+female = false

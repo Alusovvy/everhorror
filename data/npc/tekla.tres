@@ -21,3 +21,4 @@ sanity_zero_effect = "[ROBOCZE] Nocą zabiera zapasy i ucieka szybem. Obóz zost
 model = ExtResource("2_model")
 dialogue = ExtResource("3_dialogue")
 portrait_eye_height = 1.57
+female = true

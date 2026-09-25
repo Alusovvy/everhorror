@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"wiersz_hagiwary"
+title = "Wiersz Hagiwary"
+text = "Hagiwara napisał go pędzelkiem na skrawku papieru i dał mi w zamian za grzyb.\n\nPod górą, w czarnej\nziemi rośnie blade światło.\nNikt go nie sadził.\n\nMówi, że w Cesarstwie na koniec roku pali się takie kartki razem z życzeniami. Mam tego nie palić. „Tu nie ma końca roku. Tu jest tylko koniec tygodnia.”"

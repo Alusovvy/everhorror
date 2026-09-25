@@ -51,6 +51,42 @@ Tekla: [[No?|Co tam?|Czego ci trzeba?]]
 	Tekla: Kaszę. Wczoraj też była kasza. Jutro, jak dobrze pójdzie, będzie kasza ze słoniną.
 	Tekla: Ale nie narzekaj. W kopalniach Sułtanatu karmią ludzi tym, co spadnie z wozu.
 	=> hub
+- Daj mi świecę. [if not done_today("tekla_candle") /]
+	$> mark_today("tekla_candle")
+	$> give_item("swieca")
+	Tekla: Jedna. Dziennie jedna na głowę, takie są zasady. Nie patrz tak, świece też się kończą.
+	=> hub
+- Potrzebuję oleju do lampy. [if not has_flag("tekla_gave_oil") /]
+	if has_flag("tekla_owes") or rep("tekla") >= 10
+		$> set_flag("tekla_gave_oil")
+		$> give_item("olej")
+		Tekla rozgląda się, czy Racibor nie patrzy, i wsuwa ci pod ladą blaszaną bańkę.
+		Tekla: Na koszt Konfraterni. Ciii.
+	else
+		Tekla: Olej jest do lamp obozowych. Chcesz oleju na własne wyprawy, to zasłuż sobie. Albo przynieś kwit.
+	=> hub
+- Masz jakieś lekarstwo? [if (quest_state("goraczka") == "active" or player_fever) and not has_flag("tekla_gave_medicine") /]
+	Tekla: Mam jedną buteleczkę. Jedną. Na czarną godzinę.
+	if has_flag("tekla_owes")
+		$> set_flag("tekla_gave_medicine")
+		$> give_item("lekarstwo")
+		Tekla: Czarna godzina chyba właśnie przyszła. Bierz. Jesteśmy kwita za tobołek. Prawie.
+	else
+		Tekla: Konfraternia nic nie daje za darmo. Mogę się zamienić. Coś cennego za coś cennego.
+		- Dam ci za nie Daleki Klejnot. [if has_item("klejnot") /]
+			$> take_item("klejnot")
+			$> give_item("lekarstwo")
+			$> set_flag("tekla_gave_medicine")
+			Tekla ogląda paciorek pod światło świecy i wzdycha.
+			Tekla: Szkło. Ale ładne szkło. Niech ci będzie.
+		- Dam ci za nie nalewkę. [if has_item("nalewka") /]
+			$> take_item("nalewka")
+			$> give_item("lekarstwo")
+			$> set_flag("tekla_gave_medicine")
+			Tekla: Nalewka za lekarstwo. Tak to już jest pod ziemią. Jedno leczy, drugie pozwala zapomnieć, że się jest chorym.
+		- Nie mam nic cennego.
+			Tekla: To wróć, jak będziesz miał.
+	=> hub
 - Co sądzisz o tej kobiecie w masce? [if day >= 2 and not has_flag("tekla_asked_dobrawa") /]
 	$> set_flag("tekla_asked_dobrawa")
 	Tekla: Nie je, nie pije, nie siada. Wczoraj przez godzinę stała przy starych wózkach i mówiła coś do kamieni.
@@ -124,15 +160,23 @@ Tekla: Przyszedłeś popatrzeć? Patrz. Za darmo.
 => END
 
 ~ day3
-if has_flag("tekla_owes")
+if has_flag("tekla_owes") and not has_flag("tekla_day3")
+	$> set_flag("tekla_day3")
 	Tekla odciąga cię na bok, za beczki z olejem.
 	if has_flag("plan_upadowa") and has_flag("tekla_father")
 		Tekla: Racibor chce otwierać upadową. To ten zawał, na który mój ojciec sprzedał twojemu dziadkowi proch, prawda? Dziadek wiedział, co zamyka.
 	elif has_flag("plan_upadowa")
 		Tekla: Racibor chce otwierać stary zawał. Ludzie już się boją, a on liczy wozy.
 	else
-		Tekla: Za trzy dni zaczną kopać na całego. Wtedy nikt nie będzie liczył, ile błękitu wyjeżdża w workach po kaszy.
+		Tekla: Jak Racibor policzy żyły, zaczną kopać na całego. Wtedy nikt nie będzie liczył, ile błękitu wyjeżdża w workach po kaszy.
 	Tekla: Ja wyjeżdżam na górę z pierwszym koszem. Tobie radzę to samo.
-else
-	Tekla: Kasza jest, tylko zimna. Jak ci się nie podoba, to idź się poskarżyć zarządcy.
-=> END
+elif not done_today("tekla_greet")
+	$> mark_today("tekla_greet")
+	if has_flag("sabina_joined") and not has_flag("tekla_on_sabina")
+		$> set_flag("tekla_on_sabina")
+		Tekla: Druga czarownica w obozie. Ta przynajmniej je. Kaszę, jak my. Ale bez łyżki, sama nie wiem jak.
+	elif day >= 7
+		Tekla: Ostatni dzień. Kasza jest, świece są, a Racibor od rana nic nie jadł. Liczy.
+	else
+		Tekla: [[Kasza jest, tylko zimna. Jak ci się nie podoba, to idź się poskarżyć zarządcy.|Znowu ty. Czego tym razem?|Świece liczę. Nie przeszkadzaj, bo zacznę od nowa.]]
+=> hub

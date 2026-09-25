@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://cf3vy2eo0cba7"
+path="res://.godot/imported/hagiwara.dialogue-3b0ac58a0213384e938b7a098fbac054.tres"
+
+[deps]
+
+source_file="res://dialogue/hagiwara.dialogue"
+dest_files=["res://.godot/imported/hagiwara.dialogue-3b0ac58a0213384e938b7a098fbac054.tres"]
+
+[params]
+
+defaults=true

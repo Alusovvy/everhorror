@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/nasir_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/nasir.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"nasir"
+display_name = "Nasir z Bakaszu"
+dialogue_name = "Nasir"
+display_name_instrumental = "Nasirem"
+faction = 2
+role = "Pompiarz i górnik z Sułtanatu Nerdii"
+max_sanity = 100
+start_sanity = 72
+max_health = 100
+start_reputation = 0
+history = "Nerdyjczyk z Bakaszu. Jako chłopak trafił do sułtańskich kamieniołomów za długi ojca. Wykupił się po dwunastu latach, podpatrując waldgrosseńskich inżynierów wodnych, aż umiał wypompować wodę z każdej dziury. Mówi, że gdzie woda, tam życie, a gdzie jej za dużo, tam śmierć. Na północy marznie od pierwszego dnia. Na szyi nosi szklany paciorek, który nazywa Dalekim Klejnotem."
+sanity_zero_effect = "Przestaje schodzić pod ziemię. Siada pod szybem, patrzy w kwadrat nieba i szepcze do Dżinów w swoim języku."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62
+female = false

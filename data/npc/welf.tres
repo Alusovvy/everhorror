@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/welf_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/welf.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"welf"
+display_name = "Welf von Hagen"
+dialogue_name = "Welf"
+display_name_instrumental = "Welfem"
+faction = 0
+role = "Młody Drugi z Exitium"
+max_sanity = 60
+start_sanity = 44
+max_health = 100
+start_reputation = 0
+history = "Syn waldgrosseńskiego rodu, który ma więcej herbów niż pieniędzy. Dwa lata po Inicjacji i bardzo dumny z linii na przedramionach. Bezmagicznych uważa za gorszy gatunek ludzi, a siebie za kogoś, kogo w kopalni nic nie zaskoczy. Kopalnia ma na ten temat inne zdanie."
+sanity_zero_effect = "Wpada w panikę i ciska zaklęciami na oślep, aż ból zwala go z nóg."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62
+female = false

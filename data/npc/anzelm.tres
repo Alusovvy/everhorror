@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/anzelm_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/anzelm.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"anzelm"
+display_name = "Brat Anzelm"
+dialogue_name = "Anzelm"
+display_name_instrumental = "Anzelmem"
+faction = 2
+role = "Felczer, były zakonnik Niebiańskiego Płomienia"
+max_sanity = 100
+start_sanity = 64
+max_health = 100
+start_reputation = 0
+history = "Pochodzi z Kinkengardu. Wstąpił do Zakonu Niebiańskiego Płomienia, żeby bronić ludzi przed magią, i przez dwa lata służył pod Wysokim Inkwizytorem Przemirem z Łask. Odszedł po egzekucji, o której nie chce mówić. Teraz leczy górników ziołami, wrzątkiem i modlitwą. Wszyscy wciąż mówią do niego „bracie”. Magii nie znosi, ludzi kocha, a siebie ledwo znosi."
+sanity_zero_effect = "Wraca do dawnej wiary w najgorszym wydaniu i próbuje wygnać z obozu wszystko, co ma w sobie magię. Zaczyna od Sabiny."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62
+female = false

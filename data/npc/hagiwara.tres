@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/hagiwara_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/hagiwara.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"hagiwara"
+display_name = "Kiyoshi Hagiwara"
+dialogue_name = "Hagiwara"
+display_name_instrumental = "Hagiwarą"
+faction = 2
+role = "Pisarz ekspedycji, wygnaniec z Cesarstwa Czterech Wysp"
+max_sanity = 100
+start_sanity = 80
+max_health = 100
+start_reputation = 0
+history = "Urzędnik Ministerstwa Ziemi z gałęzi pomniejszego klanu na Shihon. Prowadził księgi kopalń na Nagate, gdzie pracują Szarzy. Kiedy wpisał do raportu prawdziwe liczby zamiast tych, których oczekiwał jego pan, stracił twarz, urząd i ojczyznę. Teraz prowadzi księgi Racibora. Liczby, powtarza, nie kłamią. Kłamią ludzie, którzy je zapisują."
+sanity_zero_effect = "Przestaje prowadzić księgi. Pisze za to wiersz, bez końca ten sam, na każdej kartce, jaką znajdzie."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62
+female = false

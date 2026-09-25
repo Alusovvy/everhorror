@@ -1,0 +1,104 @@
+using GameState
+
+~ start
+if not has_flag("met_anzelm")
+	$> set_flag("met_anzelm")
+	if npc_place("anzelm") == "modlitwa"
+		W zachodnim kącie hali klęczy chudy mężczyzna w wypłowiałym habicie i szepcze do ściany, na której nic nie ma. Wstaje powoli, jakby kolana miały mu jeszcze coś do powiedzenia.
+	else
+		Chudy mężczyzna w wypłowiałym habicie zwija bandaże w równe rolki. Na piersi nosi płomień z brązu, przecięty ciemną rysą.
+	Anzelm: Anzelm. Wszyscy mówią do mnie „bracie”, choć bratem już nie jestem. Leczę tu, co się da wyleczyć. Resztę opatruję i się modlę.
+=> hub
+
+~ hub
+if has_fever("nasir") and quest_state("goraczka") == ""
+	Anzelm: Dobrze, że jesteś. Nasir ma gorączkę. Taką, co pali od środka.
+	=> fever
+Anzelm: [[Mów, synu.|Słucham.|Czym mogę pomóc?]]
+- Opatrzysz mnie? (1 h) [if player_health < 100 and not done_today("anzelm_care") /]
+	$> mark_today("anzelm_care")
+	$> advance_time(1, "Opatrywanie ran")
+	$> heal_player(25)
+	Anzelm przemywa ci rany wrzątkiem z octem, aż zgrzytasz zębami, a potem obwiązuje je ciasno i starannie, jakby pakował coś cennego.
+	Anzelm: Nie drap. I nie łaź tam, gdzie cię pokiereszowało, przynajmniej do jutra. Wiem, że i tak polezie. Wszyscy łażą.
+	=> hub
+- Masz dla mnie bandaże na drogę? [if not done_today("anzelm_bandage") and rep("anzelm") >= 0 /]
+	$> mark_today("anzelm_bandage")
+	$> give_item("bandaze")
+	Anzelm: Masz. Jedną rolkę, więcej nie mogę, bo reszta jest dla tych, co wrócą pokiereszowani. Wygotowana, więc nie kładź jej na ziemi.
+	=> hub
+- Czemu odszedłeś z Zakonu? [if not has_flag("anz_order") /]
+	$> set_flag("anz_order")
+	Anzelm dotyka płomienia na piersi, tam gdzie przecina go rysa.
+	Anzelm: Wstąpiłem, żeby bronić ludzi przed magią. Tak to sobie tłumaczyłem. Magia burzy porządek świata, uczyli nas. Trzeba ją trzymać krótko, a to, czego się nie da utrzymać...
+	Anzelm: Dwa lata służyłem pod Przemirem z Łask. Wysoki Inkwizytor. Mówił o Drugich „wrzody na pięknym ciele Everoldu”. Ludzie go kochali, bo mówił prosto.
+	- Co się stało?
+		Anzelm: Dziewczynka. Dziewięć lat. Zapalała świeczki, patrząc na nie. Nikt jej niczego nie uczył, żadna Maszyna jej nie otwierała. Po prostu umiała.
+		Anzelm: Przemir kazał ją spalić na rynku w Bakaszu. Żeby lud widział, że Zakon czuwa.
+		Anzelm: Tej nocy odprułem z habitu naszywkę i poszedłem na północ. Szedłem tak długo, aż skończyła się ziemia i trzeba było zejść pod nią.
+		$> change_player_sanity(-3)
+		$> change_rep("anzelm", 5)
+	- Nie musisz mówić.
+		Anzelm: Dziękuję. Kiedyś powiem. Komuś.
+	=> hub
+- Dlaczego nie lubisz Sabiny? [if has_flag("sabina_joined") and not has_flag("anz_on_sabina") /]
+	$> set_flag("anz_on_sabina")
+	Anzelm: Nie jej nie lubię. Tego, co w niej siedzi. Leczy dotykiem, w jedną chwilę, to, co ja leczę tygodniami.
+	Anzelm: I płaci za to bólem, widziałem. Zaciska zęby tak jak ja nad każdym chorym. Tylko że mnie Zakon uczył, że to, co ona robi, trzeba spalić.
+	Anzelm: Nie umiem na nią patrzeć bez tego głosu w głowie. To moja wina, nie jej.
+	if quest_state("pokoj") == ""
+		$> start_quest("pokoj")
+	=> hub
+- Sabina obiecała, że nie będzie leczyć za twoimi plecami. [if quest_state("pokoj") == "active" and has_flag("sab_promised") and not has_flag("anzelm_sabina_peace") /]
+	Anzelm długo milczy. Potem zdejmuje z szyi płomień z rysą i odkłada go na skrzynię z bandażami.
+	Anzelm: Niech przychodzi. Niech pyta, zanim kogoś dotknie. Pokażę jej, jak się przemywa rany. A ona mi pokaże... Nie wiem, co mi pokaże. Zobaczymy.
+	$> set_flag("anzelm_sabina_peace")
+	$> quest_log("pokoj", "zgoda")
+	$> complete_quest("pokoj")
+	$> change_rep("anzelm", 10)
+	$> change_sanity("anzelm", 10)
+	$> change_sanity("sabina", 8)
+	=> hub
+- Co z Nasirem? [if quest_state("goraczka") == "active" /]
+	=> fever
+- Mam świecący grzyb. [if has_item("grzyb") and not has_flag("anzelm_brewing_day") /]
+	Anzelm: Grzyb z groty? Pokaż.
+	Anzelm obwąchuje go ostrożnie, jakby spodziewał się, że ugryzie.
+	Anzelm: Tak. Wiem ze starych ksiąg Zakonu, że da się z tego uwarzyć lekarstwo. Zakon trzymał te księgi, żeby wiedzieć, co palić. Ja wyniosłem z nich tylko przepisy.
+	- Uwarz lekarstwo.
+		$> take_item("grzyb")
+		$> set_flag("anzelm_brewing_day", day)
+		$> quest_log("goraczka", "grzyb")
+		Anzelm: Do rana. Warzy się całą noc i śmierdzi jak przypalony ser.
+	- Jeszcze nie.
+		Anzelm: Jak chcesz. Tylko go nie jedz. Nie żartuję.
+	=> hub
+- Lekarstwo gotowe? [if has_flag("anzelm_brewing_day") and not has_flag("anzelm_brew_given") /]
+	if day > get_flag("anzelm_brewing_day", 99)
+		Anzelm podaje ci glinianą buteleczkę zatkaną szmatką. W środku coś gęstego, co lekko świeci.
+		Anzelm: Świeci. Tak ma być. Chyba. W księdze nie pisali, że będzie świecić.
+		$> give_item("lekarstwo")
+		$> set_flag("anzelm_brew_given")
+	else
+		Anzelm: Jeszcze się warzy. Jutro rano.
+	=> hub
+- Muszę iść.
+	Anzelm: Niech Oni mają cię w opiece. A jak nie Oni, to chociaż bandaże.
+	=> END
+
+~ fever
+if quest_state("goraczka") == ""
+	$> start_quest("goraczka")
+if npc_status("nasir") == "gone"
+	Anzelm: Nasira wywieźli na górę, w nocy. Tu nie przeżyłby następnego dnia, więc może przeżyje tam.
+	=> hub
+if not has_fever("nasir")
+	Anzelm: Nasir wyzdrowiał. Nie wiem, czy to lekarstwo, czy uparty nerdyjski łeb. Pewnie jedno i drugie.
+	=> hub
+Anzelm: Bez lekarstwa do końca tygodnia nie dociągnie. Ja mogę mu tylko zbijać gorączkę mokrą szmatą i się modlić.
+Anzelm: Lekarstwa w obozie prawie nie ma. Tekla ma podobno jedną buteleczkę na czarną godzinę. Mogę też spróbować uwarzyć coś ze świecących grzybów, jeśli ktoś mi je przyniesie.
+if has_flag("sabina_joined") and not has_flag("anzelm_sabina_peace")
+	Anzelm: Ta czarownica z Exitium pewnie by go dotknęła i jutro by chodził. Nie pozwolę jej. Nie pytaj, dlaczego.
+elif has_flag("anzelm_sabina_peace")
+	Anzelm: Sabina mówi, że gorączki magią się nie zbija, tylko rany. Szkoda. Pierwszy raz żałuję, że czegoś się nie da.
+=> hub

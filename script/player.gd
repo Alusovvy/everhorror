@@ -78,6 +78,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		eye_camera.rotate_x(-relative.y)
 		eye_camera.rotation.x = clamp(eye_camera.rotation.x, deg_to_rad(-MAX_LOOK_DOWN), deg_to_rad(MAX_LOOK_UP))
 	elif event.is_action_pressed("interact") and focused:
+		# Locked (no crowbar, too late): say why and don't open the description.
+		var blocked := focused.blocked_reason()
+		if blocked != "":
+			GameState.message.emit(blocked)
+			return
 		# The HUD reads the target first (a pickup disappears on use).
 		interacted.emit(focused)
 		focused.interact()

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"pompy"
+title = "Pompy Nasira"
+giver = "Nasir z Bakaszu"
+entries = {
+"start": "Nasir chce uruchomić stare pompy pod rząpiem. Za nimi jest zalany chodnik, a w zalanych chodnikach, mówi, zawsze coś się kryje. Potrzebuje oleju do tłoków.",
+"olej": "Dałem Nasirowi olej. Od jutra w dzień będzie przy pompach. Mam do niego zajrzeć i pomóc przy korbie.",
+"ruszyly": "Pompy ruszyły. Woda z zalanego chodnika powoli schodzi."
+}

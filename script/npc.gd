@@ -88,10 +88,13 @@ func _on_dialogue_finished(npc_id: StringName) -> void:
 		model.play(pose)
 
 ## Sitting NPCs talk sitting down, crouching ones stay down; anyone busy stands up to talk.
+## Someone holding a staff or a sword keeps his stance (gestures would swing it around).
 func _talking_pose() -> StringName:
 	match pose:
 		&"Sitting_Idle", &"Sitting_Talking":
 			return &"Sitting_Talking"
 		&"Crouch_Idle":
 			return &"Crouch_Idle"
+	if not model.hand_attachments.is_empty():
+		return &"Idle_Torch" if model.hand_bone == "LeftHand" else pose
 	return &"Idle_Talking"

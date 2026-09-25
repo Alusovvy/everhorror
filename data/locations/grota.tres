@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"grota"
+display_name = "Grzybowa grota"
+unknown_name = ""
+direction = "wschód, w dół"
+text = "Grota za wyrobiskiem. Dziadek narysował tam coś jak grzyby i postawił trzy wykrzykniki."
+links = {
+"wyrobisko": 1.5,
+"szczelina": 1.0
+}
+requires = PackedStringArray()
+locked = {
+
+}
+entry = "GrotaEntry"
+veins = PackedStringArray("grota_1", "grota_2")
+depth = 3
+map_pos = Vector2(0.74, 0.7)
+dread = 4
+arrival_text = "Grzyby świecą na niebiesko. Powietrze jest gęste i słodkawe, aż kręci się w głowie."

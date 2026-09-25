@@ -96,6 +96,26 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 		- Nic nie mówisz.
 			Mirosław: Coś wiesz. Widzę po tobie. Ale nie moja sprawa.
 	=> hub
+- Posiedzę z tobą przy ogniu. (1 h) [if npc_place("miroslaw") == "ognisko" and not done_today("mir_company") /]
+	$> mark_today("mir_company")
+	$> advance_time(1, "Przy ogniu z Mirosławem")
+	$> change_sanity("miroslaw", 3)
+	$> change_player_sanity(2)
+	Siedzicie przy ogniu. Mirosław siedzi tak, żeby mieć do niego jak najdalej, i patrzy w płomienie jak w coś, co może wybuchnąć.
+	Mirosław: Dobrze, że ktoś siedzi. Jak jestem sam, to ogień zaczyna gadać.
+	=> hub
+- Napij się. To na nerwy. [if has_item("nalewka") and not done_today("mir_drink") /]
+	$> mark_today("mir_drink")
+	$> give_to_npc("nalewka", "miroslaw")
+	$> change_rep("miroslaw", 3)
+	Mirosław pociąga długi łyk i wstrzymuje oddech.
+	Mirosław: Pali. Dobrze, że pali. Jak pali, to znaczy, że jeszcze coś czuję.
+	=> hub
+- Co myślisz o Drugich z Exitium? [if has_flag("drudzy_met") and not has_flag("mir_asked_drudzy") /]
+	$> set_flag("mir_asked_drudzy")
+	Mirosław: Jak Pierwsi przyszli do Głuszy, to magowie przyjechali trzy dni później. Obejrzeli, co zostało, zapisali coś w księgach i pojechali.
+	Mirosław: Mnie z tej piwnicy wyciągnęła baba spod Mirosila, co wiozła rzepę na targ. Nie mag.
+	=> hub
 - Muszę iść.
 	Mirosław: To idź. Tylko nie zabłądź.
 	=> END
@@ -126,13 +146,33 @@ else
 if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
 	Mirosław kuli się w kącie i kiwa w przód i w tył. Szepcze coś pod nosem.
 	Mirosław: Trzy beczki. Liczę i liczę, i zawsze wychodzą trzy.
+	- Posiedzę z tobą. (1 h) [if not done_today("mir_company") /]
+		$> mark_today("mir_company")
+		$> advance_time(1, "Z Mirosławem w kącie")
+		$> change_sanity("miroslaw", 4)
+		Siadasz obok niego na zimnej ziemi i nic nie mówisz. Po godzinie Mirosław przestaje liczyć.
+		Mirosław: Nie idź jeszcze. Jak ktoś siedzi obok, to wybuchy są ciszej.
+	- Napij się. To na nerwy. [if has_item("nalewka") /]
+		$> give_to_npc("nalewka", "miroslaw")
+		Mirosław pije łapczywie, połowa ścieka mu po brodzie.
+		Mirosław: Pali. Dobrze, że pali. Jak pali, to znaczy, że jeszcze coś czuję.
+	- Zostawiam cię.
+		Mirosław nie odpowiada.
 	=> END
-if has_flag("plan_upadowa")
-	Mirosław: Słyszałeś Racibora. Jutro mam wysadzić upadową.
-	if has_flag("mir_saw_charge")
-		Mirosław: Ktoś już raz ją wysadził, żeby nikt tamtędy nie przeszedł. A my ją otworzymy. Mądrzy ludzie.
+if not done_today("mir_greet")
+	$> mark_today("mir_greet")
+	if day == 3 and has_flag("plan_upadowa")
+		Mirosław: Słyszałeś Racibora. Jak policzy żyły, mam wysadzić upadową.
+		if has_flag("mir_saw_charge")
+			Mirosław: Ktoś już raz ją wysadził, żeby nikt tamtędy nie przeszedł. A my ją otworzymy. Mądrzy ludzie.
+		else
+			Mirosław: Proch jest, lonty są. Tylko ręce mi się jakoś nie chcą rwać do tej roboty.
+	elif day == 3
+		Mirosław: Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego.
+	elif day >= 7
+		Mirosław: Dziś Racibor liczy. Jakby nie liczył, to i tak wszyscy liczymy. Dni, beczki, kto jeszcze śpi spokojnie.
+	elif sanity_band("miroslaw") == "niespokojny"
+		Mirosław: Znowu mi się śniło, że wszystko wybucha. Tym razem po cichu. To było najgorsze.
 	else
-		Mirosław: Proch jest, lonty są. Tylko ręce mi się jakoś nie chcą rwać do tej roboty.
-else
-	Mirosław: Ostatni dzień rozpoznania. Od jutra fedrujemy na całego.
-=> END
+		Mirosław: [[Żyjesz? No to dobrze.|Proch suchy, ręce trzęsą się mniej. Dobry dzień.|Uważaj dziś na siebie. Ja uważam na beczki.]]
+=> hub

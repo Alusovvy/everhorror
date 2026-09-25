@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://skldnso83kwk"
+path="res://.godot/imported/drudzy.dialogue-3f83038ad159985c0aee6b9f3c0a866d.tres"
+
+[deps]
+
+source_file="res://dialogue/drudzy.dialogue"
+dest_files=["res://.godot/imported/drudzy.dialogue-3f83038ad159985c0aee6b9f3c0a866d.tres"]
+
+[params]
+
+defaults=true

@@ -9,12 +9,14 @@ class_name Hud
 @onready var description_title: Label = $DescriptionPanel/VBox/Title
 @onready var description_body: Label = $DescriptionPanel/VBox/Body
 @onready var clock: Label = $Clock
+## The hero's state under the clock, only when something is wrong ("ranny · gorączka").
+@onready var condition: Label = $Condition
 @onready var toasts: VBoxContainer = $Toasts
 
 const CROSSHAIR_IDLE := Color(1, 1, 1, 0.5)
 const CROSSHAIR_FOCUSED := Color(1.0, 0.72, 0.38, 0.95)
 const TOAST_SECONDS := 4.0
-const PICKUP_SECONDS := 7.0
+const PICKUP_SECONDS := 12.0
 
 var _focused: Interactable
 var _described: Interactable
@@ -29,7 +31,10 @@ func _ready() -> void:
 	GameState.state_replaced.connect(_update_clock)
 	GameState.message.connect(show_toast)
 	GameState.quest_updated.connect(_on_quest_updated)
+	GameState.player_changed.connect(_update_condition)
+	GameState.state_replaced.connect(_update_condition)
 	_update_clock()
+	_update_condition()
 	_refresh()
 
 func _process(_delta: float) -> void:
@@ -37,6 +42,7 @@ func _process(_delta: float) -> void:
 	var modal := GameState.is_modal()
 	crosshair.visible = not modal
 	clock.visible = not modal
+	condition.visible = not modal
 	if modal:
 		prompt.hide()
 		description_panel.hide()
@@ -49,6 +55,19 @@ func _process(_delta: float) -> void:
 func connect_player(player: Player) -> void:
 	player.focus_changed.connect(show_focus)
 	player.interacted.connect(_on_interacted)
+
+func _unhandled_input(event: InputEvent) -> void:
+	# "[E] zamknij": with a description on screen, E only closes it. It never uses the object
+	# again (no second time cost, no repeated effects). The HUD comes after the player in the
+	# scene tree, so it gets the key first.
+	if description_panel.visible and event.is_action_pressed(&"interact"):
+		get_viewport().set_input_as_handled()
+		close_description()
+
+func close_description() -> void:
+	_described = null
+	_pinned_until = 0.0
+	_refresh()
 
 func show_focus(target: Interactable) -> void:
 	_focused = target
@@ -74,13 +93,16 @@ func show_toast(text: String) -> void:
 func _on_interacted(target: Interactable) -> void:
 	if target.action != Interactable.Action.DESCRIBE:
 		return
-	if target.remove_after_use:
+	# Objects that disappear once used (pickups, a vein after marking) can't stay in focus,
+	# so their text is pinned for a while instead (E closes it earlier).
+	var vanishes := target.remove_after_use or (target.hidden_by_flag != "" and target.hidden_by_flag == target.on_use_flag)
+	if vanishes:
 		_pinned_title = target.display_name
 		_pinned_body = target.description
 		_pinned_until = Time.get_ticks_msec() / 1000.0 + PICKUP_SECONDS
 		_described = null
 	else:
-		_described = null if _described == target else target
+		_described = target
 	_refresh()
 
 func _on_time_advanced(hours: float, reason: String) -> void:
@@ -96,6 +118,16 @@ func _on_quest_updated(quest: QuestData, entry_text: String) -> void:
 
 func _update_clock() -> void:
 	clock.text = GameState.clock_text()
+
+func _update_condition() -> void:
+	var parts: Array[String] = []
+	if GameState.health_band() != "zdrowy":
+		parts.append(GameState.health_text())
+	if GameState.mind_band() in ["na_krawedzi", "zalamany"]:
+		parts.append(GameState.mind_text())
+	if GameState.player_fever:
+		parts.append("gorączka")
+	condition.text = "  ·  ".join(parts)
 
 func _refresh() -> void:
 	crosshair.color = CROSSHAIR_FOCUSED if _focused else CROSSHAIR_IDLE

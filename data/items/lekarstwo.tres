@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"lekarstwo"
+display_name = "Lekarstwo"
+name_accusative = "lekarstwo"
+description = "Gliniana buteleczka gorzkiego wywaru. Zbija gorączkę i stawia na nogi. Jest go mało, a chorych w kopalni nie brakuje."
+category = 1
+heal = 15
+sanity = 0
+cures_fever = true
+consumable = true
+use_hours = 0
+use_text = "Gorzkie jak piołun. Po chwili gorąco w głowie przygasa, a ręce przestają drżeć."

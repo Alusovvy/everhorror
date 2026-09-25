@@ -13,6 +13,16 @@ if not has_flag("met_bolko")
 
 ~ hub
 Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
+- Co myślisz o Wszeborze? [if has_flag("met_wszebor") and not has_flag("bolko_on_wszebor") /]
+	$> set_flag("bolko_on_wszebor")
+	Bolko: Hawiar. Kopie za trzech, gada za pięciu, a śpiewa za całą Przystań. Dobry chłop.
+	Bolko: Tylko w ciasne chodniki nie wlezie. Widziałem, jak stoi przed szczeliną i patrzy. Tak patrzy człowiek, co już raz kogoś odkopywał.
+	=> hub
+- W obozie mieszka teraz czarownica z Exitium. [if has_flag("sabina_joined") and not has_flag("bolko_on_sabina") /]
+	$> set_flag("bolko_on_sabina")
+	Bolko: Widziałem. Jedna czarownica w obozie to był znak. Dwie to już zwyczaj.
+	Bolko: Ta nowa przynajmniej mówi „dzień dobry”. Jak do psa, ale mówi.
+	=> hub
 - Jaki był mój dziadek? [if not has_flag("bolko_asked_grandpa") /]
 	$> set_flag("bolko_asked_grandpa")
 	Bolko: Cichy. Za cichy jak na przewodnika. Wszystko zapisywał, ale tak, że nikt poza nim nie umiał tego przeczytać.
@@ -100,10 +110,17 @@ else
 if rep("bolko") < 0
 	Bolko stoi do ciebie plecami i udaje, że nie słyszy.
 	=> END
-if has_flag("bolko_knows_fate")
-	Bolko: Całą noc myślałem o twoim dziadku. Zapalę mu lampkę w kaplicy. Tak się kiedyś robiło.
-if has_flag("plan_upadowa")
-	Bolko: Upadową chcą otwierać. Stare chodniki powinny spać, ale kto by słuchał starego.
-else
-	Bolko: Trzeci dzień. Jak tak dalej pójdzie, to się tu zestarzeję drugi raz.
-=> END
+if not done_today("bolko_greet")
+	$> mark_today("bolko_greet")
+	if has_flag("bolko_knows_fate") and not has_flag("bolko_lamp_said")
+		$> set_flag("bolko_lamp_said")
+		Bolko: Całą noc myślałem o twoim dziadku. Zapalę mu lampkę w kaplicy. Tak się kiedyś robiło.
+	elif has_flag("plan_upadowa") and day == 3
+		Bolko: Upadową chcą otwierać. Stare chodniki powinny spać, ale kto by słuchał starego.
+	elif day == 3
+		Bolko: Trzeci dzień. Jak tak dalej pójdzie, to się tu zestarzeję drugi raz.
+	elif day >= 7
+		Bolko: Ostatni dzień przed liczeniem. Racibor chodzi jak struty. Znam to. Twój dziadek też miał taki dzień. Ostatni.
+	else
+		Bolko: [[Żyjesz jeszcze? To dobrze.|Nie łaź dziś za daleko, coś mi w kościach strzyka.|Znowu ty. Siadaj, jak chcesz.]]
+=> hub

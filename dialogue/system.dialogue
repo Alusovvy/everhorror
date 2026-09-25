@@ -5,6 +5,8 @@ if is_day_over()
 	Ledwo trzymasz się na nogach. Posłanie jest twarde i śmierdzi stęchlizną, ale teraz nic cię to nie obchodzi.
 else
 	Posłanie jest twarde i śmierdzi stęchlizną. Do wieczora zostało jeszcze {{hours_left_text()}}.
+if day == 7
+	Jutro rano Racibor policzy żyły. Masz ich {{veins_mapped()}} z {{quota()}}.
 Kładziesz się?
 - Tak, idę spać (koniec dnia {{day}}).
 	$> request("sleep")
@@ -13,6 +15,14 @@ Kładziesz się?
 
 ~ dream
 Śnisz.
+if player_fever
+	W gorączce wszystko płynie. Ściany się pocą, ty się pocisz, a ktoś bardzo cierpliwy liczy twoje oddechy.
+if day >= 7
+	=> dream_last
+if day >= 5
+	=> dream4
+if day >= 3
+	=> dream3
 if day >= 2
 	=> dream2
 if has_flag("visited_east")
@@ -24,7 +34,8 @@ I znowu te myśli. Nie twoje. Ciekawskie, łapczywe, jakby ktoś bardzo chciał 
 if has_flag("west_blasted")
 	Gdzieś daleko coś huka. Echo długo nie cichnie, tłucze się po chodnikach.
 Budzisz się z amuletem zaciśniętym w garści. Metal jest ciepły.
-if has_note("odszyfrowana")
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+	$> set_flag("dream_decipher_seen")
 	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
 
@@ -38,7 +49,37 @@ elif has_flag("saw_charge")
 else
 	Stoisz przed gładką ścianą. Znaki przesuwają się po niej jak robaki pod skórą. Jeden ma twój kształt.
 I znowu te myśli, nie twoje. Tym razem spokojne. Ktoś, kto bardzo długo śpi, przewraca się na drugi bok.
-Budzisz się z ręką na amulecie. Metal jest gorący.
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+	$> set_flag("dream_decipher_seen")
+	Budzisz się z ręką na amulecie. Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem.
+else
+	Budzisz się z ręką na amulecie. Metal jest gorący.
+=> END
+
+~ dream3
+if has_flag("drudzy_met")
+	Stoisz w białym, zimnym świetle. Ktoś w żelaznej masce kładzie ci dłoń na twarzy i nic się nie dzieje.
+	A potem dzieje się wszystko naraz. Widzisz linie. Biegną przez skałę, przez ludzi w obozie, przez ciebie. Wszystkie w dół.
+else
+	Widzisz obóz z góry, jakby sklepienie hali było ze szkła. Wszyscy śpią. Tylko Racibor siedzi nad mapą i liczy na palcach.
+	Liczy i liczy, a palców ciągle mu brakuje.
+Z bardzo daleka ktoś odpowiada na twój oddech swoim. Wolniejszym.
+Budzisz się zlany potem. Amulet jest ciepły, choć leżał na zimnej ziemi.
+=> END
+
+~ dream4
+Leżysz na dnie galerii, której nigdy nie widziałeś. Ściany świecą tak jasno, że przez powieki widzisz żyły we własnych dłoniach.
+Po drugiej stronie skały coś bardzo dużego obraca się we śnie. Przez chwilę śni o tobie.
+if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
+	Gdzieś obok ktoś płacze przez sen. Poznajesz głos Mirosława, choć Mirosław nigdy nie płacze.
+Budzisz się i przez dłuższą chwilę nie wiesz, po której stronie skały jesteś.
+=> END
+
+~ dream_last
+Śnisz dziadka. Siedzi przy ognisku jak wtedy, kiedy byłeś mały, i struga coś nożem.
+Nie podnosi wzroku. Pyta tylko, czy policzyłeś.
+Chcesz zapytać, co miał policzyć, ale ogień gaśnie, a on razem z nim.
+Budzisz się przed świtem. W hali jest cicho, jakby wszyscy wstrzymali oddech.
 => END
 
 ~ too_late
@@ -48,6 +89,15 @@ Robi się późno. Na dziś wystarczy, pora wracać na posłanie.
 ~ intro
 Zeszliście szybem wczoraj po zmroku. Lina skrzypiała przez całą drogę w dół, a na górze został tylko pusty wóz.
 Obóz rozbito w starej hali górniczej. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
-Zarządca Racibor daje wam trzy dni na rozpoznanie. Potem zaczyna się prawdziwe kopanie.
-Pogadaj z ludźmi. Dokąd iść, zdecydujesz przy stole z mapą w kwaterze zarządcy, za drewnianą ścianką. Wieczorem wróć na posłanie.
+Zarządca Racibor dał wam tydzień. Do wieczora siódmego dnia Kniaź chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano przyjdzie po raport wóz.
+Pogadaj z ludźmi. Wyprawy planujesz przy stole z mapą w kwaterze zarządcy, za drewnianą ścianką. W chodnikach mapa [M] pokaże ci drogę dalej albo z powrotem. Na noc wracasz na posłanie.
+=> END
+
+~ left_behind
+Budzi cię cisza. Nie trzaska ogień, nikt nie chrapie, nikt nie klnie przy kociołku.
+Posłania są zwinięte. Ze stołu zarządcy zniknęła mapa. Została tylko wypalona do końca świeca.
+Idziesz do szybu. Lina wisi wysoko, poza zasięgiem ręki, wciągnięta do połowy. Ktoś na górze o tobie zapomniał albo nie chciał pamiętać. Nie wiesz, co gorsze.
+Wołasz. Echo wraca trzy razy. Za trzecim razem nie twoim głosem.
+Siadasz pod szybem, w kwadracie szarego światła. Amulet dziadka jest ciepły. Coraz cieplejszy.
+Gdzieś niżej ktoś cierpliwie stuka w skałę. Jakby czekał, aż zejdziesz.
 => END

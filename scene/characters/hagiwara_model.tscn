@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Peasant.gltf" id="2_male_peasant"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Buzzed.gltf" id="3_hair_buzzed"]
+[ext_resource type="Texture2D" path="res://assets/characters/quaternius/outfits/T_Peasant_2_BaseColor.png" id="4_peasant2"]
+
+[node name="HagiwaraModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_male_peasant"), ExtResource("3_hair_buzzed")])
+outfit_texture = ExtResource("4_peasant2")
+outfit_tint = Color(1.05, 1.08, 1.3, 1)
+hair_tint = Color(0.18, 0.18, 0.2, 1)
+skin_tint = Color(1, 0.94, 0.82, 1)

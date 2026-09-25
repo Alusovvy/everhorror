@@ -1,0 +1,37 @@
+using GameState
+
+~ meeting
+Zza zakrętu wypływa światło. Nie żółte jak od lampy, tylko białe i zimne, jakby ktoś niósł w garści kawałek księżyca.
+Czworo ludzi w długich płaszczach. Troje w żelaznych maskach. Czwarty, siwy, bez maski, uśmiecha się do ściany jak do starej znajomej.
+Ottokar: Stój. Nie podchodź bliżej niż na trzy kroki. To dla twojego dobra, nie dla mojego.
+Ottokar: Ottokar von Brühl, przewodniczący rozwoju w Exitium. Twierdza Końca, po drugiej stronie Wąwozu. Nie mówi ci to nic. Oczywiście.
+- Kim jesteście?
+	Ottokar: Wyprawą. Taką samą jak wasza, z jedną różnicą. My wiemy, czego szukamy.
+- Czego tu szukacie?
+	Ottokar: Tego samego co wy. Tyle że wy szukacie kamieni, a my przyczyny, dla której te kamienie świecą.
+- Nic nie mówisz.
+	Ottokar: Milczący przewodnik. Rzadkość. Zwykle wasi gadają, zanim pomyślą.
+Welf: Mistrzu, to ten przewodnik? Wnuk tamtego? Wygląda jak każdy inny kopacz.
+Ottokar: Welf. Bezmagiczni też mają uszy. Czasem nawet ich używają.
+Sabina: Nie strasz go, Welfie. Zobacz, jak mu drżą ręce.
+Sabina: Nie bój się, nikt ci nic nie zrobi. Tylko nas nie dotykaj, dobrze? Dla ciebie to byłby ostatni dotyk w życiu.
+Hieronim: Słyszycie? Chrapie. Cała góra chrapie. Hehe. Równiutko.
+Ottokar: Hieronimie.
+Hieronim: Już milczę. Ona nie.
+Ottokar: Wasz zarządca dostanie pismo. Exitium ma prawo obserwować każde wydobycie w Wąwozie, z nadania Kniazia. Sabina zostanie w waszym obozie.
+Sabina: Będę patrzeć, liczyć i leczyć. Głównie leczyć, jeśli znam górników.
+Ottokar: A ty, przewodniku, zastanów się nad jednym. Twój dziadek zostawił po sobie mapy. Mapy mają cenę.
+- Mapy dziadka nie są na sprzedaż.
+	$> change_rep("ottokar", -3)
+	Ottokar: Wszystko jest na sprzedaż. Tylko nie wszystko za pieniądze.
+- Jaką cenę?
+	$> set_flag("ottokar_offer_open")
+	Ottokar: Taką, o jakiej ci się nie śniło. Chociaż, sądząc po twoich oczach, śni ci się ostatnio sporo.
+if has_item("krysztal")
+	Ottokar zatrzymuje wzrok na twojej kieszeni. Długo. Amulet dziadka robi się gorący.
+	Ottokar: Nosisz przy sobie coś, co do ciebie nie należy. Porozmawiamy o tym. Niedługo.
+	$> set_flag("ottokar_knows_crystal")
+Ottokar: Idziemy. Welf. Hieronim. Hieronim!
+Hieronim nachyla się do ciebie tak blisko, że czujesz od niego zapach kurzu i spalonych ziół.
+Hieronim: Nie schodź za nim, wnuczku. On idzie tam, skąd się nie wraca, i nawet o tym nie wie. Hehe.
+=> END

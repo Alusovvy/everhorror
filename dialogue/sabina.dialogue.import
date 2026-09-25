@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://0hfi7c7e8fna"
+path="res://.godot/imported/sabina.dialogue-4c4946d3fd34738e672761662601ddca.tres"
+
+[deps]
+
+source_file="res://dialogue/sabina.dialogue"
+dest_files=["res://.godot/imported/sabina.dialogue-4c4946d3fd34738e672761662601ddca.tres"]
+
+[params]
+
+defaults=true

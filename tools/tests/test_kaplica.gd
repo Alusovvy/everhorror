@@ -8,10 +8,10 @@ func _setup() -> void:
 	gs.add_note(&"slowniczek")
 	gs.start_quest(&"sciana")
 	gs.day = 2
-	gs.hour = 16.0
+	gs.hour = 15.0
 
 func scenario() -> void:
-	step("start: day 2, 16:00, travel to the chapel (3 h)")
+	step("start: day 2, 15:00, travel to the chapel (3 h + 1 h scouting)")
 	await start_world(_setup)
 	await travel("kaplica")
 	check(is_equal_approx(gs.hour, 19.0), "19:00 in the chapel (%s)" % gs.clock_text())
@@ -25,9 +25,12 @@ func scenario() -> void:
 	check("otwarta" in gs.quests[&"sciana"]["entries"], "quest entry for the open wall")
 
 	step("the niche opens")
-	await seconds(3.0)
 	var wall := world.get_node("Locations/Kaplica/RiddleWall")
-	check(wall.get_node("Slab").position.y < -0.5, "the slab went down (y %.2f)" % wall.get_node("Slab").position.y)
+	# the slab moves 1.3–2.6 s after the dialogue closes; headless frames can be slower
+	var deadline := Time.get_ticks_msec() + 6000
+	while wall.get_node("Slab").position.y > -0.45 and Time.get_ticks_msec() < deadline:
+		await frames(5)
+	check(wall.get_node("Slab").position.y < -0.45, "the slab went down 0.9 m (y %.2f)" % wall.get_node("Slab").position.y)
 	check(wall.get_node("NicheLight").visible, "the niche glows")
 
 	step("letter and crystal, back (3 h)")
@@ -35,6 +38,5 @@ func scenario() -> void:
 	await use(world.get_node("Locations/Kaplica/Crystal/CrystalPickup"))
 	check(gs.has_note(&"list_dziadka") and gs.has_item("krysztal"), "letter read, crystal taken")
 	check("list" in gs.quests[&"slady"]["entries"], "grandfather's trail updated")
-	await use(world.get_node("Locations/Kaplica/Sign/ExitSign/KaplicaExitUse"))
-	await wait_idle()
+	await go_on("oboz")
 	check(gs.is_day_over() and String(gs.get_flag("location", "")) == "", "back in the camp, day over (%s)" % gs.clock_text())

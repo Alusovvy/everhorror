@@ -1,0 +1,82 @@
+using GameState
+
+~ start
+if not has_flag("met_sobek")
+	$> set_flag("met_sobek")
+	if npc_place("sobek") == "kosci"
+		Przy wspólnym stole brodaty mężczyzna gra sam ze sobą w kości i przegrywa. Goły miecz leży obok talerza, jak łyżka.
+	else
+		Przy wyjściu na wschód stoi brodaty mężczyzna z gołym mieczem opuszczonym ku ziemi. Obraca w palcach dwie kości do gry.
+	Sobek: Stój, kto idzie! Żartuję. Widziałem cię przy śniadaniu.
+	Sobek: Sobek, z Wielkiego Stepu. Pilnuję, żeby nikt nie wyniósł zapasów. I żeby nic nie wlazło tu z ciemności.
+=> hub
+
+~ hub
+Sobek: [[No?|Mów, byle krótko.|Słucham, przewodniku.]]
+- Czemu nosisz goły miecz? [if not has_flag("sob_sword") /]
+	$> set_flag("sob_sword")
+	Sobek unosi ostrze. Wzdłuż klingi biegną cienkie srebrne linie, jak żyłki na liściu.
+	Sobek: Bo jest zaklęty. Sam z siebie tnie jak każdy miecz. Ale jak go nakarmię... Patrz.
+	Sobek zaciska dłoń na rękojeści. Linie na klindze zapalają się bladym światłem, a powietrze wokół ostrza zaczyna cicho syczeć.
+	Sobek: Mrowi w palcach, jakbym wsadził rękę w mrowisko. I tyle. Cała różnica między mną a Drugim. Ja płacę mrówkami, oni płacą bólem.
+	=> hub
+- Jesteś Egzarchą? [if has_flag("sob_sword") and not has_flag("sob_exarch") /]
+	$> set_flag("sob_exarch")
+	Sobek podwija rękaw. Na przedramieniu cienkie, blade linie, jak stare blizny po batogu.
+	Sobek: Egzarchą. „Egsar arachi”, w połowie drogi, jak mówią mądrale z Initium. Pół treningu maga, pół ustawienia Maszyny i proszę. Pół człowieka, pół czarownika, całe życie najemnika.
+	Sobek: Drudzy nazywają nas półmagami. Wiesz, jak ja nazywam Drugich? Nie powiem, jesteś za młody.
+	=> hub
+- Skąd jesteś? [if not has_flag("sob_steppe") /]
+	$> set_flag("sob_steppe")
+	Sobek: Z Wielkiego Stepu. Tam się człowiek rodzi na koniu i na koniu umiera, a w międzyczasie czasem z niego złazi.
+	Sobek: Trzy zimy jeździłem z Gniewomirem. Słyszałeś o Gniewomirze i Przyjaciołach? Nie? To dobrze. Znaczy, że nas nie złapali.
+	- Byłeś rozbójnikiem?
+		Sobek: Byłem przyjacielem. Tak mówił Gniewomir, a on też był Egzarchą, więc się nie kłóciliśmy. Kradliśmy zimą, bo zimą pościgi są cięższe.
+		Sobek: Aż raz jaksarski patrol trafił mnie w udo i zrozumiałem, że rozbójnik z kulawą nogą to trup, który jeszcze o tym nie wie. Teraz pilnuję zapasów. Śmieszne, co?
+	- Czemu przestałeś?
+		Sobek: Znudziło mi się uciekać. Tu przynajmniej nikt mnie nie goni. Chyba że liczyć to, co siedzi w ścianach.
+	=> hub
+- Załóżmy się o coś. [if quest_state("zaklad") == "" and quest_state("zloza") != "" /]
+	Sobek: O! To rozumiem. O co?
+	Sobek: Już wiem. Stawiam, że do jutra wieczora nie zaznaczysz trzech nowych żył. Moja nalewka przeciwko niczemu. Bo i tak nic nie masz.
+	- Przyjmuję.
+		$> start_quest("zaklad")
+		$> set_flag("bet_day", day)
+		$> set_flag("bet_target", veins_mapped() + 3)
+		Sobek: Ha! Świadkiem jest Racibor. To znaczy, nic mu nie powiemy. Ale gdyby pytał, to jest świadkiem.
+	- Nie gram.
+		Sobek: Tchórz. Rozsądny, ale tchórz.
+	=> hub
+- Wygrałem zakład. [if quest_state("zaklad") == "active" and veins_mapped() >= get_flag("bet_target", 99) /]
+	Sobek liczy na palcach, potem jeszcze raz, potem klnie tak, że Hagiwara na drugim końcu hali podnosi wzrok znad księgi.
+	Sobek: Na stepowe konie... Dobra. Umowa to umowa. Masz, ale wypij ze mną, zanim zabierzesz.
+	$> give_item("nalewka")
+	$> quest_log("zaklad", "wygrany")
+	$> complete_quest("zaklad")
+	$> change_rep("sobek", 10)
+	=> hub
+- Jak nasz zakład? [if quest_state("zaklad") == "active" and veins_mapped() < get_flag("bet_target", 99) /]
+	if day > get_flag("bet_day", 0) + 1
+		Sobek: Czas minął, przewodniku. Przegrałeś. Na twoje szczęście stawiałem tylko ja.
+		$> quest_log("zaklad", "przegrany")
+		$> fail_quest("zaklad")
+	else
+		Sobek: Brakuje ci jeszcze {{get_flag("bet_target", 99) - veins_mapped()}}. Zegar tyka. W moją stronę.
+	=> hub
+- Co wiesz o tych z Exitium? [if has_flag("drudzy_met") and not has_flag("sob_exitium") /]
+	$> set_flag("sob_exitium")
+	Sobek: Exitium to Twierdza Końca, po drugiej stronie Wąwozu. Siedzą w ruinach Onych i dłubią w nich jak dzieci w mrowisku. Ich zbrojni to Miecze. Sami Egzarchowie, jak ja.
+	Sobek: Tylko że Miecz nie może odejść. Kto raz wejdzie do Exitium, zostaje tam do śmierci. Dlatego wolę Racibora. Racibor płaci co tydzień i nie pyta o duszę.
+	Sobek: A na von Brühla uważaj. Najbardziej trzeba się bać tych, którzy są uprzejmi dla wszystkich.
+	=> hub
+- Zagramy w kości? (1 h) [if npc_place("sobek") == "kosci" and not done_today("sob_dice") /]
+	$> mark_today("sob_dice")
+	Sobek potrząsa kośćmi w zwiniętej dłoni i rzuca je na deski stołu.
+	Sobek: [[Dwie szóstki! Mówiłem, że dziś mój dzień.|Jedynka i dwójka. Psiakrew. Kości też się tu boją.|Piątka i szóstka. Nie patrz tak, nie oszukuję. Za bardzo.]]
+	Gracie do późna. Przegrywasz trzy razy, wygrywasz dwa. Przez godzinę nie myślisz o chodnikach.
+	$> advance_time(1, "Kości z Sobkiem")
+	$> change_player_sanity(5)
+	=> hub
+- Muszę iść.
+	Sobek: Idź. A jakby coś za tobą lazło z ciemności, to biegnij tutaj. Ja i miecz dawno się nie ruszaliśmy.
+	=> END

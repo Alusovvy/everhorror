@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"kuznia"
+display_name = "Kuźnia starej ekipy"
+unknown_name = ""
+direction = "zachód"
+text = "Kuźnia przy zachodnim chodniku. Tu ostrzono kilofy i kuto okucia do stempli."
+links = {
+"west": 1.0,
+"szyb": 1.0
+}
+requires = PackedStringArray()
+locked = {
+
+}
+entry = "KuzniaEntry"
+veins = PackedStringArray("kuznia_1")
+depth = 2
+map_pos = Vector2(0.3, 0.5)
+dread = 0
+arrival_text = "Kowadło pod warstwą rdzy i pyłu. W palenisku nikt nie palił od czterdziestu lat."

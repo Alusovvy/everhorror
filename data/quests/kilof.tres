@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"kilof"
+title = "Kilof dla przewodnika"
+giver = "Wszebor ze Śnieżnej Przystani"
+entries = {
+"start": "Wszebor mówi, że obozowe kilofy to miękkie jaksarskie żelazo. Stara ekipa miała hawiarskiego kowala, więc gdzieś w chodnikach mógł zostać porządny obuch. Wszebor osadzi go na nowym trzonku.",
+"znaleziony": "W starym wyrobisku, pod wywróconym wózkiem, znalazłem obuch hawiarskiego kilofa.",
+"oddany": "Oddałem obuch Wszeborowi. Do rana ma być gotowy.",
+"gotowy": "Mam kilof. Wszebor twierdzi, że rozłupie nim nawet naciek, pod którym chowają się żyły."
+}

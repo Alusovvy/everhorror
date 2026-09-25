@@ -152,6 +152,33 @@ func interactable(parent: Node3D, display_name: String, description: String, sol
 		area.set(key, extra[key])
 	own(area, parent)
 
+## Racibor's quest (task_05): marking a vein costs an hour; afterwards a stake shows it is done.
+func vein_mark(rock: Node3D, vein_id: String, description: String, stake_pos: Vector3) -> void:
+	var mark := script_area("VeinMark", {
+		"display_name": "Żyła błękitnego żelaza", "prompt_text": "Zaznacz żyłę na mapie", "description": description,
+		"time_cost_hours": 1.0, "time_reason": "Znaczenie żyły", "on_use_flag": "vein_" + vein_id,
+		"hidden_by_flag": "vein_" + vein_id, "highlight_target": rock, "solid": false, "padding": 0.1,
+	})
+	own(mark, rock.get_parent())
+	var stakes := Node3D.new()
+	stakes.name = "Stake_" + vein_id
+	stakes.set_script(load("res://script/material_applier.gd"))
+	stakes.set("material", load("res://material/kenney_wood.tres"))
+	own(stakes, rock.get_parent().get_parent())
+	var stake := add(stakes, "res://assets/props/kenney_survival/signpost-single.glb", stake_pos, rot_y(randf() * 360.0).scaled(Vector3.ONE * 1.6), "VeinStake")
+	own(script_area("Look", {
+		"display_name": "Twój palik", "description": "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę.",
+		"required_flag": "vein_" + vein_id, "solid": false, "padding": 0.08,
+	}), stake)
+
+func script_area(area_name: String, props: Dictionary) -> Area3D:
+	var area := Area3D.new()
+	area.name = area_name
+	area.set_script(load("res://script/interactable.gd"))
+	for key in props:
+		area.set(key, props[key])
+	return area
+
 func _initialize() -> void:
 	seed(7)
 	root3d = Node3D.new()
@@ -268,6 +295,8 @@ func _initialize() -> void:
 	for v in vein_rocks:
 		add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_%s.tscn" % v[0], v[1], rot_y(v[2]))
 	interactable(veins.get_child(2), "Żyła błękitnego żelaza", "Przez skałę biegną cienkie żyłki, świecące na niebiesko. Metal jest ciepły, choć dookoła ziąb. Jak się dłużej przyjrzeć, światło rośnie i słabnie. Jakby ktoś oddychał.")
+	vein_mark(veins.get_child(3), "east_1", "Żyła biegnie przez całą ścianę, od spągu po strop, i znika w szczelinie. Odmierzasz ją krokami i wrysowujesz na mapę dla Racibora.", Vector3(80.6, y0, 6.2))
+	vein_mark(veins.get_child(5), "east_2", "Cienka, ale czysta żyła, jak nitka wszyta w skałę. Stara ekipa jej nie ruszyła. Może nie zdążyła. Zaznaczasz ją na mapie.", Vector3(72.9, y0, 8.7))
 	var vein_lights := group(root3d, "VeinLights")
 	for p in [Vector3(80.4, y0 + 1.6, 3.2), Vector3(76.4, y0 + 1.4, -2.2), Vector3(72.0, y0 + 1.5, 8.2), Vector3(76.8, y0 + 2.2, 3.8)]:
 		var l := OmniLight3D.new()

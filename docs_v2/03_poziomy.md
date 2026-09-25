@@ -1,6 +1,6 @@
 # 03 Poziomy
 
-> Status: 🔴 do ustalenia · Właściciel: — · Aktualizacja: 2026-09-25
+> Status: 🟡 szkic (demo zaimplementowane, 15 miejsc) · Właściciel: — · Aktualizacja: 2026-09-25 (task_05)
 
 ## Struktura gry **[GDD]**
 | Warstwa | Charakter | Zawartość |
@@ -14,15 +14,142 @@
 ❓ Czy obóz jest jeden, czy ekspedycja przenosi go niżej? GDD wspomina „pierwszy obóz”.
 
 ## Zasady projektowania segmentów
-[propozycja]
-1. **Segment = jedna scena Godot** wczytywana po wyborze na mapie. Ma punkt wejścia i wyjścia z powrotem do obozu.
+1. **Segment = osobna przestrzeń** z punktem wejścia i drogowskazem, który otwiera mapę [M] (dalej albo do obozu). W demie wszystkie leżą w jednej scenie świata (`scene/levels/locations.tscn`), daleko od siebie. Podróż to przejście przez czerń z planszą. Każdy segment ma punkty `<Miejsce>Spot1..4` dla spotkanych ludzi, a miejsca pracy górników `<Miejsce>Work`.
 2. **Mały i gęsty:** 2–5 minut eksploracji, 3–6 obiektów interakcji, jeden „powód, by przyjść” (złoże, notatka, zagadka, odnoga).
 3. **Czytelne drogi:** światło (lampy, żyły błękitnego żelaza) prowadzi gracza zamiast znaczników w interfejsie.
-4. **Zablokowane przejścia są widoczne** (zawalisko, szyb bez liny), żeby gracz wiedział, czego szukać albo kogo poprosić.
-5. **Budujemy z modułowych zestawów** (Mine & Caves, Sewer, prop_pack). Nie edytujemy plików zestawów, tylko wstawiamy ich instancje.
+4. **Zablokowane przejścia są widoczne** (zawalisko, szyb bez liny), a mapa podaje powód blokady.
+5. **Budujemy z modułowych zestawów** (Mine & Caves, prop_pack, Kenney) i własnych brył z materiałem skały. Nie edytujemy plików zestawów.
+6. **Generujemy sceny skryptami** (`tools/generators/`), więc układ da się zmienić i odtworzyć. Poprawki robimy w generatorze, nie w scenie.
 
-## Obecny poziom testowy
-`scene/world.tscn`: przykładowy poziom z zestawu Mine & Caves (tunel ze skalną podłogą), kilka rekwizytów, ambient jaskini, 5 obiektów interakcji ([Interakcje](systemy/interakcje.md#obecne-obiekty-poziom-testowy)). Służy do testów mechanik, nie jest docelowym poziomem.
+## Obóz (hala, `scene/levels/camp.tscn`)
+Stara hala górnicza (x 0–32, z −5–4,5) jest podzielona drewnianą ścianką z drzwiami przy południowej ścianie.
+
+| Strefa | Sala | Co tam jest | Kto i kiedy |
+|---|---|---|---|
+| Posłania | zachodnia | posłania gracza, Bolka i Mirosława, worki, beczka z wodą | Bolko wieczorem, gracz śpi |
+| Kuchnia i wspólny stół | zachodnia | ognisko z rożnem i kociołkiem, kącik kucharki, długi stół z ławami, talerze, świeca | śniadanie (do 8:00) i kolacja (18–20) |
+| Magazyn | zachodnia | skrzynie, beczki, stół z narzędziami, osełka, wózek ze starym urobkiem (świeci) | Bolko w dzień, Dobrawa 9–12 przy starych wózkach |
+| Skład prochu | zachodnia, kąt | beczki z prochem, skrzynia z lontami, jak najdalej od ognia | Mirosław w dzień |
+| Stół dowódcy | wschodnia | stół z mapą (**wyprawy**), świecznik, księga zarządcy, chorągiew Kniazia, łóżko | Racibor w dzień i wieczorem, Dobrawa rano w dniu 2 |
+| Zaopatrzenie | wschodnia, przy wyjściu | stragan z linami i olejem, beczki, półka z butelkami | Tekla w dzień i wieczorem |
+| Izba chorych | zachodnia, kąt przy ścianie | posłanie dla chorych, skrzynka Anzelma z ziołami i bandażami, świeca, skrzynka do siedzenia | Anzelm cały dzień, chory Nasir, Sabina przy chorych |
+| Kącik pisarza | wschodnia, kąt | stołek, skrzynia z kubkiem, pędzelkiem i zeszytem wierszy | Hagiwara wieczorem (w dzień przy księdze zarządcy) |
+| Wyjście na wschód | wschodnia | Sobek z mieczem | Sobek cały dzień, oprócz kolacji |
+
+W jaskini przy starym wejściu stoi zabita skrzynia z zapasami ze znakiem Kniazia. Łom otwiera ją raz: bandaże, świece, nalewka.
+
+Rozkład dnia opisuje [NPC](systemy/npc.md#rozkład-dnia).
+
+## Miejsca wypraw (demo)
+
+**Graf dróg** (godziny w jedną stronę; pierwsza wizyta +1 h rozpoznania):
+```
+obóz ─2─ Stara sztolnia ─1─ Stare wyrobisko ─1,5─ Grzybowa grota ─1─ Parująca szczelina
+  │            └─1─ Kaplica ─1─ Kostnica          └─1─ Przekop Grabca ─1,5─┘
+  ├─2─ Zawalony chodnik ─1─ Upadowa                       │
+  │            └─1─ Kuźnia ─1─ Ślepy szyb ─1,5─┐          1,5
+  └─2─ Rząpie ─1─ Komora pomp ─1─ Zalany chodnik ─1,5─ Kryształowa galeria
+                       └───────────1,5──────────── Przekop Grabca
+```
+Dane: `data/locations/*.tres` (generator `tools/generators/write_world_data.js`).
+
+
+### Stara sztolnia (wschód)
+- Warstwa: kopalnia → jaskinia
+- Koszt podróży z obozu: 2 h (powrót tyle samo)
+- Wymaga: nic
+- Zawartość: korytarz z szynami, pochylnia, jaskinia z żyłami, skrzynka lontów, kartka z szyfrem dziadka, porzucony kilof ze znakiem dziadka
+- Odnogi: → Kaplica (wąskie przejście w dół, „znak zapytania” na mapie dziadka)
+
+### Zawalony chodnik (zachód)
+- Koszt: 2 h
+- Wymaga: zawał wysadzony przez Mirosława
+- Zawartość: gruz po wybuchu, deska z kluczem do szyfru, połamane stemple nad upadową
+- Odnogi: → Upadowa (z liną)
+
+### Rząpie starego szybu (północ)
+- Koszt: 2 h
+- Wymaga: nic
+- Zawartość:
+  - zalane dno szybu, pomost do podestu pod szybem,
+  - blade światło z góry, urwana drabina, lina przecięta nożem,
+  - tobołek Tekli z listem Konfraterni,
+  - żyła do zaznaczenia,
+  - czternaście kresek wydrapanych na skale
+- Stan zmienia się: tobołek znika po zabraniu, przy zaznaczonej żyle staje palik
+
+### Upadowa (zachód, w dół)
+- Koszt: 3 h
+- Wymaga: zawał wysadzony + lina
+- Zawartość:
+  - chodnik opadający pod kątem 20°, zejście po linie przywiązanej do stempla, dwie przygaszone latarnie,
+  - na dnie zawał z sadzą, klepkami beczki i nadpalonymi belkami,
+  - znak dziadka „NIE KOPAĆ”,
+  - najgrubsza żyła,
+  - stukanie kilofa zza zawału
+- Stan zmienia się: po zaznaczeniu żyły staje palik. W dniu 3 Racibor chce tę upadową otworzyć
+
+### Kaplica (wschód, w dół)
+- Koszt: 3 h
+- Wymaga: wiedza o kaplicy (odszyfrowana wiadomość dziadka, Dobrawa albo Bolko)
+- Zawartość:
+  - stopnie w dół, jaskinia z błękitnymi żyłami,
+  - **ściana Onych**: gładki kamień ze świecącymi znakami sanctinu, trzy kamienne kręgi, zagadka w trybie VN,
+  - dwa ołtarzyki starych górników (modlitewnik, kielich, paląca się lampka), ławka,
+  - nisza z listem dziadka i kryształem
+- Event VN: rozmowa ze ścianą ([Dialogi](systemy/dialogi_vn.md#zagadka-ściany))
+- Stan zmienia się: po rozwiązaniu kręgi stoją w nowym położeniu, znaki są przygaszone, nisza otwarta
+
+### Stare wyrobisko (wschód, poziom 2)
+- Droga: Stara sztolnia 1 h
+- Zawartość: niska komora na trzech filarach (na jednym czternaście kresek), wywrócony wózek, szyny, obuch hawiarskiego kilofa w gruzie, 2 żyły
+- Ludzie: za dnia kopie tu Wszebor
+- Odnogi: → Grzybowa grota, → Przekop Grabca
+
+### Komora pomp (północ, poziom 2)
+- Droga: rząpie 1 h
+- Zawartość: drewniane koło pompy między stemplami, rura w górę do rząpia, koryto z wodą, bańka oleju, 1 żyła nad korytem
+- Ludzie: Nasir za dnia (od dnia po oleju)
+- Stan zmienia się: po uruchomieniu pomp (Nasir, 2 h) opis pompy i dostęp do zalanego chodnika
+- Odnogi: → Zalany chodnik (po pompach), → Przekop Grabca
+
+### Kuźnia starej ekipy (zachód, poziom 2)
+- Droga: zachodni chodnik 1 h
+- Zawartość: zimne palenisko ze znakiem dziadka w popiele, kowadło z łomem, beczka, stojak na broń, łańcuch, butelka nalewki za szufladą, 1 żyła
+- Odnogi: → Ślepy szyb (z liną)
+
+### Grzybowa grota (wschód, poziom 3)
+- Droga: stare wyrobisko 1,5 h · groza przy pierwszej wizycie
+- Zawartość: jaskinia z filarami, kępy świecących na turkusowo grzybów (zarodniki: −poczytalność), 2 duże grzyby do zabrania, 2 żyły
+- Odnogi: → Parująca szczelina
+
+### Przekop Grabca (poziom 3)
+- Droga: stare wyrobisko 1 h albo komora pomp 1,5 h
+- Zawartość: prosty chodnik 24 m z odrzwiami i szynami, tabliczka sztygara, wózek, na końcu zabita deskami skrytka (łom: olej i zeszyt Grabca), 1 żyła
+- Odnogi: → Parująca szczelina
+
+### Zalany chodnik (północ, poziom 3)
+- Droga: komora pomp 1 h · wymaga uruchomionych pomp
+- Zawartość: chodnik z wodą po kolana (w nocy gorączka), pływające deski, zatopiony wózek, 2 żyły
+- Odnogi: → Kryształowa galeria
+
+### Ślepy szyb (zachód, poziom 3)
+- Droga: kuźnia 1 h · wymaga liny · groza
+- Zawartość: dno szybu bez wyjścia na powierzchnię, twoja lina z góry, wiatr znikąd, półka ze świecami (upadek: rana), 1 żyła pnąca się w ciemność
+- Odnogi: → Kryształowa galeria
+
+### Kostnica (wschód, poziom 3)
+- Droga: kaplica 1 h · najstraszniejsze miejsce (groza 8)
+- Zawartość: nisze z czaszkami (imiona starej ekipy, jedno nieczytelne), świece na posadzce, ołtarz ze świeżym chlebem, nowe świece do zabrania (kosztem poczytalności), 1 żyła
+
+### Parująca szczelina (poziom 4)
+- Droga: grota 1 h albo przekop 1,5 h
+- Zawartość: wysoka, wąska szczelina, dwa wyloty pary z siarką i czerwonym żarem, 2 żyły (druga przy wylocie: oparzenie)
+
+### Kryształowa galeria (poziom 4, najniżej)
+- Droga: zalany chodnik albo ślepy szyb 1,5 h · wymaga oleju do lampy · groza 6 · bez latarni
+- Zawartość: ściany z błękitu, kryształowe kolumny pochylone w dół, odłamek czystego błękitu, 3 żyły, stukanie zza ściany
+- Ludzie: najczęściej Ottokar albo Hieronim
 
 ## Szablon opisu segmentu
 ```
@@ -37,5 +164,7 @@
 ```
 
 ## Otwarte pytania
-- ❓ Lista pomieszczeń do pionowego wycinka.
-- ❓ Obóz: osobna scena, jak wygląda, gdzie stoją NPC.
+- ❓ Co jest za zawałem w upadowej (pełna gra: szkielet dziadka, głębsze chodniki, Świątynia Onych)?
+- ❓ Czy miejsca wypraw mają się zmieniać między dniami (np. woda w rząpiu rośnie, wstrząs zasypuje przejście)?
+- ❓ Czy 10 prostych miejsc z task_05 ma zostać w pełnej grze, czy to wypełniacz tygodnia?
+- ✅ Obóz: jedna scena w starej hali, strefy jak wyżej.

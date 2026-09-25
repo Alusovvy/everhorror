@@ -1,0 +1,8 @@
+[gd_scene format=3]
+
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Sword_Bronze.gltf" id="1_sword"]
+
+[node name="Sword" type="Node3D"]
+transform = Transform3D(0, -1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Blade" parent="." instance=ExtResource("1_sword")]

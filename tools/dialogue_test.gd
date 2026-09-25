@@ -2,7 +2,8 @@ extends SceneTree
 ## Usage: godot --headless --path . --script res://tools/dialogue_test.gd
 ## Plays the demo's dialogues without UI (picks responses by text) and checks the state:
 ## the dialect switch, Mirosław and Bolko (day 1), the new NPCs and their quests, the riddle
-## wall, the crystal, the night texts and Racibor's announcement on the last morning.
+## wall, the crystal, the night texts and Racibor's announcement on day 3; task_05: the week,
+## items and the new people (camp and Exitium), Racibor's reminder and reckoning.
 
 var _failures := 0
 var _requests: Array[String] = []
@@ -79,7 +80,7 @@ func _run() -> void:
 	_check(gs.quest_state("zloza") == "active", "one vein is not enough")
 	gs.set_flag("vein_upadowa")
 	await _talk(racibor, "start", ["Mam zaznaczone żyły.", "Muszę iść."])
-	_check(gs.quest_state("zloza") == "done" and gs.has_note(&"raport_archiwum"), "report accepted, archive note given")
+	_check(gs.has_flag("rac_first_report") and gs.has_note(&"raport_archiwum") and gs.quest_state("zloza") == "active", "first report accepted, archive note given, the quota goes on")
 	_check(gs.has_flag("racibor_wants_upadowa"), "Racibor wants the decline")
 
 	print("--- Tekla: the rope for the permit, the bundle, her father")
@@ -157,8 +158,144 @@ func _run() -> void:
 	await _talk(system, "sleep", ["Tak, idę spać"])
 	_check("sleep" in _requests, "sleep requested")
 
+	await _task05()
+
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit()
+
+## task_05: the week, items and the new people (camp and Exitium).
+func _task05() -> void:
+	var wszebor: Resource = load("res://dialogue/wszebor.dialogue")
+	var nasir: Resource = load("res://dialogue/nasir.dialogue")
+	var hagiwara: Resource = load("res://dialogue/hagiwara.dialogue")
+	var sobek: Resource = load("res://dialogue/sobek.dialogue")
+	var anzelm: Resource = load("res://dialogue/anzelm.dialogue")
+	var sabina: Resource = load("res://dialogue/sabina.dialogue")
+	var ottokar: Resource = load("res://dialogue/ottokar.dialogue")
+	var hieronim: Resource = load("res://dialogue/hieronim.dialogue")
+	var welf: Resource = load("res://dialogue/welf.dialogue")
+	var drudzy: Resource = load("res://dialogue/drudzy.dialogue")
+	var racibor: Resource = load("res://dialogue/racibor.dialogue")
+	var tekla: Resource = load("res://dialogue/tekla.dialogue")
+	var mir: Resource = load("res://dialogue/miroslaw.dialogue")
+	var system: Resource = load("res://dialogue/system.dialogue")
+
+	print("--- Wszebor: the pickaxe head, a new handle overnight")
+	gs.reset()
+	await _talk(wszebor, "start", ["Potrzebuję porządnego kilofa.", "Muszę iść."])
+	_check(gs.quest_state("kilof") == "active", "quest kilof started")
+	gs.give_item("obuch")
+	await _talk(wszebor, "start", ["Mam obuch.", "Jak tam mój kilof?", "Muszę iść."])
+	_check(not gs.has_item("kilof"), "no pickaxe the same day")
+	gs.start_next_day()
+	await _talk(wszebor, "start", ["Jak tam mój kilof?", "Muszę iść."])
+	_check(gs.has_item("kilof") and gs.quest_state("kilof") == "done", "pickaxe the next day")
+
+	print("--- Nasir: oil for the pumps, the crank, the fever and the medicine")
+	gs.reset()
+	await _talk(nasir, "start", ["Wiesz coś o pompach pod rząpiem?", "Muszę iść."])
+	gs.give_item("olej")
+	await _talk(nasir, "start", ["Mam olej do tłoków.", "Muszę iść."])
+	_check(gs.has_flag("nasir_at_pumps") and not gs.has_item("olej"), "Nasir takes the oil")
+	gs.start_next_day()
+	gs.hour = 10.0
+	gs.places[&"nasir"] = "teren"
+	await _talk(nasir, "start", ["Pomogę ci przy korbie.", "Muszę iść."])
+	_check(gs.has_flag("pump_running") and gs.quest_state("pompy") == "done", "the pumps run")
+	gs.set_flag("fever_nasir")
+	gs.set_flag("nasir_fever_started")
+	gs.give_item("lekarstwo")
+	await _talk(nasir, "start", ["Mam dla ciebie lekarstwo."])
+	_check(not gs.has_fever(&"nasir") and gs.has_item("klejnot"), "Nasir cured, gives his jewel")
+	_check(gs.quest_state("goraczka") == "done", "quest goraczka done")
+
+	print("--- Anzelm: care, a medicine brewed from a mushroom")
+	gs.reset()
+	gs.player_health = 50
+	await _talk(anzelm, "start", ["Opatrzysz mnie?", "Muszę iść."])
+	_check(gs.player_health == 75, "Anzelm heals 25 (got %d)" % gs.player_health)
+	gs.give_item("grzyb")
+	await _talk(anzelm, "start", ["Mam świecący grzyb.", "Uwarz lekarstwo.", "Muszę iść."])
+	gs.start_next_day()
+	await _talk(anzelm, "start", ["Lekarstwo gotowe?", "Muszę iść."])
+	_check(gs.has_item("lekarstwo"), "medicine brewed overnight")
+
+	print("--- Hagiwara: a poem for a mushroom, no forged ledger")
+	gs.reset()
+	await _talk(hagiwara, "start", ["Skąd jesteś?", "Nagate?", "Opowiedz o Cesarstwie.", "Co byś zapisał?", "Czego ci tu brakuje?", "Muszę iść."])
+	gs.give_item("grzyb")
+	await _talk(hagiwara, "start", ["Przyniosłem świecący grzyb.", "Muszę iść."])
+	_check(gs.has_note(&"wiersz_hagiwary") and gs.has_item("lekarstwo"), "poem and medicine")
+	gs.day = 6
+	await _talk(hagiwara, "start", ["Mógłbyś dopisać", "Muszę iść."])
+	_check(gs.veins_mapped() == 0 and gs.has_flag("hag_asked_lie"), "Hagiwara does not forge the ledger")
+
+	print("--- Sobek: the bet")
+	gs.reset()
+	gs.start_quest("zloza")
+	await _talk(sobek, "start", ["Załóżmy się", "Przyjmuję.", "Muszę iść."])
+	for vein in ["east_1", "east_2", "west_1"]:
+		gs.set_flag("vein_" + vein)
+	await _talk(sobek, "start", ["Wygrałem zakład.", "Muszę iść."])
+	_check(gs.quest_state("zaklad") == "done" and gs.has_item("nalewka"), "bet won, nalewka")
+
+	print("--- Sabina and Anzelm: healing, the promise, peace; the shard")
+	gs.reset()
+	gs.set_flag("sabina_joined")
+	gs.player_health = 40
+	await _talk(sabina, "start", ["Możesz mnie uleczyć?", "Czujesz, gdzie są żyły?", "Muszę iść."])
+	_check(gs.player_health == 85, "Sabina heals 45 (got %d)" % gs.player_health)
+	await _talk(anzelm, "start", ["Dlaczego nie lubisz Sabiny?", "Muszę iść."])
+	await _talk(sabina, "start", ["Brat Anzelm nie chce", "Obiecaj", "Muszę iść."])
+	await _talk(anzelm, "start", ["Sabina obiecała", "Muszę iść."])
+	_check(gs.has_flag("anzelm_sabina_peace") and gs.quest_state("pokoj") == "done", "peace between Anzelm and Sabina")
+	gs.give_item("odlamek")
+	await _talk(sabina, "start", ["Czego szukacie", "Co byś stąd chciała mieć?", "Mam dla ciebie odłamek", "Muszę iść."])
+	_check(gs.quest_state("odlamek") == "done" and gs.has_item("lekarstwo"), "shard for Sabina, medicine")
+
+	print("--- The Exitium meeting, Ottokar's offer, Hieronim, Welf")
+	gs.reset()
+	gs.give_item("krysztal")
+	await _talk(drudzy, "meeting", ["Czego tu szukacie?", "Jaką cenę?"])
+	_check(gs.has_flag("ottokar_knows_crystal"), "Ottokar notices the crystal")
+	await _talk(ottokar, "start", ["W sprawie twojej oferty.", "Zaznacz mi te żyły."])
+	_check(not gs.has_item("krysztal") and gs.veins_mapped() == 2, "crystal for two veins (got %d)" % gs.veins_mapped())
+	await _talk(hieronim, "start", ["Kto oddycha?", "Znałeś mojego dziadka?"])
+	await _talk(hieronim, "start", ["Co wiesz o błękicie?"])
+	await _talk(hieronim, "start", ["Wstawaj"])
+	_check(gs.has_item("swieca") and gs.has_item("bandaze"), "Hieronim gives a candle, then a bandage")
+	gs.set_flag("welf_wounded")
+	await _talk(welf, "start", ["Mam bandaże."])
+	_check(gs.has_flag("welf_helped") and not gs.has_item("bandaze"), "Welf bandaged")
+	await _talk(welf, "start", [])
+	_check(gs.has_item("lekarstwo"), "Welf pays his debt")
+
+	print("--- Tekla's stall, Mirosław by the fire")
+	gs.reset()
+	gs.set_flag("tekla_owes")
+	await _talk(tekla, "start", ["Daj mi świecę.", "Potrzebuję oleju", "Muszę iść."])
+	_check(gs.has_item("swieca") and gs.has_item("olej"), "candle and oil from Tekla")
+	gs.places[&"miroslaw"] = "ognisko"
+	gs.set_flag("met_miroslaw")
+	gs.give_item("nalewka")
+	var mir_before: int = gs.sanity(&"miroslaw")
+	await _talk(mir, "start", ["Posiedzę z tobą przy ogniu.", "Napij się.", "Muszę iść."])
+	_check(gs.done_today("mir_company") and gs.sanity(&"miroslaw") > mir_before, "company and a drink for Mirosław")
+
+	print("--- Racibor: the reminder, the reckoning; the ending without the quota")
+	gs.reset()
+	gs.day = 5
+	gs.set_flag("vein_east_1")
+	gs.set_flag("vein_east_2")
+	await _talk(racibor, "reminder", ["Znajdę je."])
+	_check(_seen.any(func(l): return l.contains("mam 2 żyły. Brakuje 10")), "reminder counts the missing veins")
+	for vein in gs.vein_ids().slice(0, 12):
+		gs.set_flag("vein_" + vein)
+	_check(gs.quota_met() and "norma" in gs.quests[&"zloza"]["entries"], "quota met is logged")
+	await _talk(racibor, "reckoning", [])
+	_check(gs.quest_state("zloza") == "done", "zloza done at the reckoning")
+	await _talk(system, "left_behind", [])
+	_check(_seen.back().contains("stuka w skałę"), "left alone ending text")
 
 ## Runs a conversation, choosing responses whose text starts with the given strings, in order.
 func _talk(resource: Resource, cue: String, choices: Array) -> void:

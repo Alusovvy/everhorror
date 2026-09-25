@@ -19,15 +19,16 @@ func scenario() -> void:
 	step("sleep: dream, day card, announcement")
 	await use(world.get_node("Camp/CampProps/Cloth/Bedroll/BedUse"))
 	await drive(["Tak, idę spać"])
+	await wait_for_vn(20.0)
 	await drive([])   # the dream
-	await wait_for_vn()
+	await wait_for_vn(25.0)
 	await drive(["Dziadek sam zasypał upadową."])
 	await wait_idle()
 	check(gs.day == 3 and gs.has_flag("announcement_done"), "day 3 began with the announcement")
 	check(gs.has_flag("plan_upadowa"), "Racibor plans to open the decline")
 
-	step("the map table ends the demo")
+	step("the week goes on: the map table opens the map")
 	await use(world.get_node("Camp/CampProps/MapTable/MapTableUse"))
-	await seconds(2.5)   # the end screen fades in over real time
-	check(world.get_node("ScreenFade/EndPanel").visible, "end screen shown")
-	print("   summary: ", world.get_node("ScreenFade/EndPanel/Center/VBox/Summary").text.replace("\n", " | "))
+	check(world.get_node("MapScreen").visible, "map open on day 3, the demo goes on")
+	check(not world.get_node("ScreenFade/EndPanel").visible, "no end screen on day 3")
+	world.get_node("MapScreen").close()

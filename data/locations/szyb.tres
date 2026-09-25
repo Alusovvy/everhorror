@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"szyb"
+display_name = "Ślepy szyb"
+unknown_name = ""
+direction = "zachód, w dół"
+text = "Szyb wykuty z chodnika w dół, bez wyjścia na powierzchnię. Dziadek dopisał obok jedno słowo: „wiatr”."
+links = {
+"kuznia": 1.0,
+"galeria": 1.5
+}
+requires = PackedStringArray("item:lina")
+locked = {
+"item:lina": "Szyb idzie pionowo w dół. Bez liny nawet nie podchodź do krawędzi."
+}
+entry = "SzybEntry"
+veins = PackedStringArray("szyb_1")
+depth = 3
+map_pos = Vector2(0.2, 0.72)
+dread = 3
+arrival_text = "Z dołu ciągnie zimne powietrze. Szyb oddycha."

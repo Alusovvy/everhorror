@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name ScreenFade
 
-## Full-screen fades, title cards ("Dzień 2") and the end-of-demo screen.
+## Full-screen fades, title cards ("Dzień 2") and the end screen (end of the week, death).
 ## All methods are awaitable: `await fade.fade_out()`.
 
 @onready var black: ColorRect = $Black
@@ -9,7 +9,9 @@ class_name ScreenFade
 @onready var card_title: Label = $Card/Title
 @onready var card_subtitle: Label = $Card/Subtitle
 @onready var end_panel: Control = $EndPanel
+@onready var end_title: Label = $EndPanel/Center/VBox/Title
 @onready var end_summary: Label = $EndPanel/Center/VBox/Summary
+@onready var retry_button: Button = $EndPanel/Center/VBox/Buttons/RetryButton
 @onready var menu_button: Button = $EndPanel/Center/VBox/Buttons/MenuButton
 @onready var quit_button: Button = $EndPanel/Center/VBox/Buttons/QuitButton
 
@@ -41,10 +43,15 @@ func show_card(title: String, subtitle: String = "", hold: float = 2.2) -> void:
 	tween.tween_property(card, "modulate:a", 0.0, 0.7)
 	await tween.finished
 
-func show_end(summary: String) -> void:
+## The final screen. `retry` adds a button that starts the day again (after a death).
+func show_end(summary: String, title: String = "Everhorror: koniec wersji demo", retry: Callable = Callable()) -> void:
 	await fade_out(1.2)
+	end_title.text = title
 	end_summary.text = summary
+	retry_button.visible = retry.is_valid()
+	if retry.is_valid():
+		retry_button.pressed.connect(retry, CONNECT_ONE_SHOT)
 	end_panel.show()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameState.push_modal()
-	menu_button.grab_focus()
+	(retry_button if retry.is_valid() else menu_button).grab_focus()

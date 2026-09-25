@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://cx5qnhp4rsuok"
+path="res://.godot/imported/wszebor.dialogue-0a12f46edf6b8df06637c9f2421fc202.tres"
+
+[deps]
+
+source_file="res://dialogue/wszebor.dialogue"
+dest_files=["res://.godot/imported/wszebor.dialogue-0a12f46edf6b8df06637c9f2421fc202.tres"]
+
+[params]
+
+defaults=true

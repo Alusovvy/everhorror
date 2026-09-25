@@ -10,7 +10,10 @@ class_name Interactable
 ## - DIALOGUE: opens the VN screen with `dialogue` / `dialogue_cue`.
 ## - USE: emits `used`; the scene decides what happens (map table, bed, exits…).
 ## Effects (flag, note, item, quest entry) are applied every time it is used; they are
-## idempotent except for items, so item pickups should use `remove_after_use`.
+## idempotent except for items, so item pickups should use `remove_after_use`. Wounds and
+## sanity changes happen only on the first use when `on_use_flag` is set (a place that
+## scares you once), every time when it isn't (a hot vent burns whenever you touch it).
+## `required_item` locks the action until the hero carries that item (a crowbar, a pickaxe).
 
 signal used(interactable: Interactable)
 
@@ -42,6 +45,7 @@ static var _highlight_material: ShaderMaterial
 @export_group("Effects")
 @export var on_use_flag: String = ""
 @export var on_use_note: StringName = &""
+## Item id given on use. Several: "bandaze,nalewka"; a count: "swieca:2".
 @export var on_use_item: String = ""
 @export var on_use_quest: StringName = &""
 @export var on_use_quest_entry: String = ""
@@ -49,12 +53,28 @@ static var _highlight_material: ShaderMaterial
 @export var quest_only_if_active: bool = false
 ## The parent object disappears after use (a pickup). Remembered via `on_use_flag`.
 @export var remove_after_use: bool = false
+## Health the hero loses (a burn, a fall). Death only on top of earlier wounds.
+@export var wound: int = 0
+@export var wound_reason: String = ""
+## Sanity change for the hero (negative: bones, whispers).
+@export var sanity_change: int = 0
+@export var sanity_reason: String = ""
+## Line for the expedition summary, e.g. "Uruchomiłeś stare pompy".
+@export var expedition_event: String = ""
 
 @export_group("Availability")
 ## Only usable (and visible) when this flag is set.
 @export var required_flag: String = ""
 ## Hidden, together with its parent, when this flag is set.
 @export var hidden_by_flag: String = ""
+## Switching off leaves the parent visible (a crate that stays after it was opened).
+@export var keep_parent_visible: bool = false
+## The action needs this item (the prompt says so; without it nothing happens).
+@export var required_item: String = ""
+## The required item is used up.
+@export var consume_item: bool = false
+## Said when the item is missing. Empty = "Potrzebujesz: <item>."
+@export var missing_text: String = ""
 
 @export_group("Shape")
 ## Node whose meshes glow when aimed at. Defaults to the parent.
@@ -91,15 +111,28 @@ func get_prompt() -> String:
 		text += " · %s h" % _format_hours(time_cost_hours)
 		if not GameState.can_afford(time_cost_hours):
 			text += "  (za późno)"
+	if required_item != "" and not GameState.has_item(required_item):
+		text += "  (potrzebny: %s)" % GameState.item_name(required_item).to_lower()
 	return text
+
+## Why the action can't happen right now ("" = it can). The player checks it before using.
+func blocked_reason() -> String:
+	if required_item != "" and not GameState.has_item(required_item):
+		return missing_text if missing_text != "" else "Potrzebujesz: %s." % GameState.item_name(required_item)
+	if time_cost_hours > 0.0 and not GameState.can_afford(time_cost_hours):
+		return "Już za późno. Pora odpocząć."
+	return ""
 
 ## Called by the player when the interact key is pressed on this object.
 func interact() -> void:
 	if not _active:
 		return
-	if time_cost_hours > 0.0 and not GameState.can_afford(time_cost_hours):
-		GameState.message.emit("Już za późno. Pora odpocząć.")
+	var blocked := blocked_reason()
+	if blocked != "":
+		GameState.message.emit(blocked)
 		return
+	if consume_item and required_item != "":
+		GameState.take_item(required_item)
 	GameState.advance_time(time_cost_hours, time_reason if time_reason != "" else display_name)
 	_apply_effects()
 	match action:
@@ -143,12 +176,22 @@ func set_highlighted(on: bool) -> void:
 			mesh.material_overlay = _previous_overlays.get(mesh)
 
 func _apply_effects() -> void:
+	var first_time := on_use_flag == "" or not GameState.has_flag(on_use_flag)
 	if on_use_flag != "":
 		GameState.set_flag(on_use_flag)
 	if on_use_note != &"":
 		GameState.add_note(on_use_note)
-	if on_use_item != "":
-		GameState.give_item(on_use_item)
+	for entry in on_use_item.split(",", false):
+		var item_id := entry.strip_edges().get_slice(":", 0)
+		var count := int(entry.get_slice(":", 1)) if entry.contains(":") else 1
+		GameState.give_item(item_id, maxi(count, 1))
+	if first_time:
+		if wound > 0:
+			GameState.hurt_player(wound, wound_reason)
+		if sanity_change != 0:
+			GameState.change_player_sanity(sanity_change, sanity_reason)
+	if expedition_event != "":
+		GameState.note_event(expedition_event)
 	if on_use_quest != &"" and on_use_quest_entry != "":
 		if not quest_only_if_active or GameState.quest_state(on_use_quest) == "active":
 			GameState.quest_log(on_use_quest, on_use_quest_entry)
@@ -159,7 +202,7 @@ func _set_active(active: bool) -> void:
 	_active = active
 	collision_layer = (1 << (INTERACTABLE_LAYER - 1)) if active else 0
 	var parent := get_parent() as Node3D
-	if parent and highlight_target == parent:
+	if parent and highlight_target == parent and not keep_parent_visible:
 		parent.visible = active
 	if _solid_body:
 		_solid_body.process_mode = Node.PROCESS_MODE_INHERIT if active else Node.PROCESS_MODE_DISABLED

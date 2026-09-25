@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Ranger.gltf" id="2_male_ranger"]
+[ext_resource type="PackedScene" path="res://scene/characters/mask_silver.tscn" id="3_mask_silver"]
+[ext_resource type="PackedScene" path="res://scene/characters/staff_violet.tscn" id="4_staff_violet"]
+
+[node name="OttokarModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_male_ranger")])
+head_attachments = Array[PackedScene]([ExtResource("3_mask_silver")])
+hand_attachments = Array[PackedScene]([ExtResource("4_staff_violet")])
+outfit_tint = Color(0.44, 0.32, 0.58, 1)
+hand_bone = "LeftHand"
+animation = &"Idle_Torch"

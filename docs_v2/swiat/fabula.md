@@ -6,11 +6,40 @@
 Bohater jest wnukiem górnika, przewodnika i kryptografa, który latami po cichu wynosił z kopalni cenny kruszec i nigdy nie został złapany. Dziadek zaginął na szychcie. Bohater wierzy, że nie z powodu kradzieży, i podejrzewa, że zginął za gruzami zawalonego tunelu. Zna mapy dziadka niemal na pamięć i narysował własne. Zaciąga się do nowej ekspedycji, żeby pójść jego tropem i dowiedzieć się, jak skończył.
 
 ## Fabuła główna
-🔴 **Do napisania** (GDD §3 jest pusty, właściciel: Ren).
-[propozycja] Minimum potrzebne do pionowego wycinka:
-- co gracz odkrywa na pierwszym poziomie (1–2 notatki, jedna tajemnica),
-- pierwsza oznaka, że z ekspedycją jest coś nie tak,
-- jak amulet i sny łączą się z tym, co gracz znajduje.
+🔴 **Do napisania** (GDD §3 jest pusty, właściciel: Ren). Poniżej to, co już zagrało w demie. Wszystko to [propozycja] do przeglądu.
+
+## Demo: tydzień (task_04 i task_05)
+**Wątek główny:**
+1. Szyfr dziadka (Stara sztolnia) i klucz (zachodni chodnik, za zawałem wysadzonym przez Mirosława) dają w nocy wiadomość: błękit rośnie z Nich, to kawałek Ich snu, dziadek zszedł niżej.
+2. Raport sztygara sprzed 40 lat od Racibora mówi, że kamienie przy zawale były okopcone, a ze składu zginęły trzy beczki prochu. Tekla opowiada, że jej ojciec sprzedał przewodnikowi trzy beczki prochu. Mirosław stwierdza, że zawał w upadowej zrobił ładunek.
+3. Kaplica ze ścianą Onych: zagadka i nisza. Ostatni list dziadka mówi, że widział Onych, którzy śpią, że błękit to Ich oddech, że przy samym sercu nie wolno kopać, że sam zasypał upadową i został po tamtej stronie, i że kryształu nie wolno oddać nikomu, „kto nosi maskę albo koronę”.
+4. Dzień 3: Racibor ogłasza normę Kniazia (12 żył do wieczora dnia 7) i chce po liczeniu otworzyć upadową, bo tam jest najgrubsza żyła. Czyli dokładnie to, przed czym dziadek ostrzegał.
+5. Dzień 3 w tunelach: wyprawa Drugich z Exitium (Ottokar, Sabina, Hieronim, Welf). Ottokar chce map dziadka albo kryształu. Sabina zostaje w obozie jako obserwatorka.
+6. Dni 4–7: norma, upomnienia, gorączka Nasira, wstrząs w piątą noc, Drudzy w głębinach (ranny Welf, szalony Hieronim, który mówi, że „ona śpi do góry nogami”).
+7. Rano w dniu 8 Racibor liczy żyły. Z normą gracz zostaje, a upadowa zostanie otwarta, chyba że list dziadka przekonał Racibora. Bez normy wyprawa wyjeżdża bez gracza: pusta hala, lina wciągnięta do połowy, stukanie zza skały.
+
+**Wybory i ich skutki w demie:**
+
+| Wybór | Skutek |
+|---|---|
+| Posiedzieć z Mirosławem po wybuchu | mniejsza utrata poczytalności w nocy |
+| Tobołek oddać Tekli albo Raciborowi | dług Tekli i historia ojca albo Tekla pod strażą i wyższa reputacja u Racibora |
+| Kryształ oddać Dobrawie, Raciborowi albo zatrzymać | Dobrawa wyjeżdża przed świtem albo kryształ idzie do Kniazia albo zostaje u gracza |
+| Powiedzieć Bolkowi prawdę o dziadku | Bolko w dniu 3 staje przeciw Raciborowi |
+| Zaprotestować na ogłoszeniu w dniu 3 | przy zaufaniu Racibora ≥ 10 zarządca przeczyta list i odłoży otwarcie upadowej |
+| Lekarstwo dla Nasira albo dla siebie | Nasir żyje i daje Klejnot albo wywożą go na górę (pompy stają) |
+| Kryształ dla Ottokara | 2 żyły do normy, ale amulet dziadka stygnie |
+| Bandaże dla rannego Welfa | Welf żyje, oddaje dług lekarstwem i ostrzega przed mistrzem |
+| Pogodzić Anzelma z Sabiną | spokój w obozie, Sabina pomaga przy chorych |
+| Nie dbać o Mirosława | przy zerze wysadza się nocą i zasypuje zachodni chodnik na zawsze |
+| Zdążyć z normą czy nie | zakończenie „Koniec tygodnia” albo „Zostałeś sam” |
+
+**Powiązanie z LoreDoc:** LoreDoc pisze, że górnicy sami zawalili szyb w Wąwozie Pierwszych, żeby coś uwięzić. Zob. [niespójności, pkt 18](loredoc_niespojnosci.md) i propozycję, żeby akcja toczyła się w 1518 roku.
+
+**Kanon do potwierdzenia:**
+- ❓ Czy dziadek sam wysadził zejście (i gdzie jest jego ciało)?
+- ❓ Czy kryształ to nośnik Onych jak w Maszynie?
+- ❓ Kim jest „ktoś”, kto zapala lampkę w kaplicy i stuka kilofem za zawałem w upadowej?
 
 ## Prolog **[GDD §2.1]**
 | # | Scena | Tryb | Nastrój |

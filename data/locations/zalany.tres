@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"zalany"
+display_name = "Zalany chodnik"
+unknown_name = ""
+direction = "północ, w dół"
+text = "Chodnik pod komorą pomp. Odkąd pompy stanęły, stoi w nim woda."
+links = {
+"pompy": 1.0,
+"galeria": 1.5
+}
+requires = PackedStringArray("flag:pump_running")
+locked = {
+"flag:pump_running": "Woda stoi tam po sam strop. Póki pompy nie ruszą, nie ma przejścia."
+}
+entry = "ZalanyEntry"
+veins = PackedStringArray("zalany_1", "zalany_2")
+depth = 3
+map_pos = Vector2(0.4, 0.74)
+dread = 0
+arrival_text = "Woda sięga ci do kolan i jest lodowata. Długo tu nie wytrzymasz."

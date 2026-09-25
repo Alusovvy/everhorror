@@ -1,0 +1,68 @@
+using GameState
+
+~ start
+$> set_flag("hier_count", get_flag("hier_count", 0) + 1)
+if get_flag("hier_count", 0) == 1
+	=> first
+if get_flag("hier_count", 0) == 2
+	=> second
+if get_flag("hier_count", 0) == 3
+	=> third
+=> later
+
+~ first
+Hieronim kuca pod ścianą i przykłada do niej ucho, jak do drzwi, za którymi ktoś się kłóci.
+Hieronim: Ciii, wnuczku. Słuchaj. Słyszysz? Oddycha. Wdech tutaj, wydech w galerii. Hehe. Tysiąc lat na jeden oddech.
+- Kto oddycha?
+	Hieronim: Kto, kto. Ona. Ta, co śpi. Dziadek ci nie powiedział? Twój dziadek wiedział. On też przykładał ucho.
+	- Znałeś mojego dziadka?
+		$> change_player_sanity(-3)
+		Hieronim: Znam wszystkich, którzy słuchają skały. Jest nas niewielu. Niektórzy już są skałą. Hehe.
+	- Dziadek nie żyje.
+		$> change_player_sanity(-4)
+		Hieronim: Nie żyje, nie żyje. A kto powiedział, że żeby słuchać, trzeba żyć?
+- Odsuń się od tej ściany, stary.
+	Hieronim: Sam się odsuń. Ja tu byłem pierwszy. Ona też. Hehe.
+Hieronim grzebie w kieszeniach i wciska ci coś w dłoń. Ogarek świecy, ciepły, jakby przed chwilą się palił.
+Hieronim: Masz. Tylko nie zapalaj go przy mnie. Nie lubię, jak ktoś widzi moją twarz.
+$> give_item("swieca")
+=> END
+
+~ second
+Hieronim nuci pod nosem i rysuje palcem na zakurzonej skale kręgi. Trzy, jeden w drugim.
+Hieronim: O, wnuczek. Wiesz, co to jest? Wszyscy myślą, że Maszyna robi Drugich. A Maszyna tylko otwiera drzwi. Drzwi już tam są. W każdym z was.
+Hieronim: Ja swoje otwierałem za często. Teraz nie umiem ich zamknąć. Straszny przeciąg. Hehe.
+- Czemu nie nosisz maski?
+	Hieronim: A kto by mnie dotknął? Ty? Hehe. Spróbuj. Nie, nie próbuj. Umarłbyś, a ja miałbym wyrzuty sumienia do wieczora.
+- Co wiesz o błękicie?
+	$> change_player_sanity(-3)
+	Hieronim: Błękit to pot. Ona się poci przez sen. Śni jej się coś gorącego. Może my? Hehe. Na pewno my.
+if has_flag("visited_rzapie") and not has_flag("vein_rzapie_2")
+	Hieronim: Aha. W tej dziurze pod szybem, gdzie woda. Pod białym jest jeszcze jedna. Pod białym zawsze coś jest. Weź kilof, nie paznokcie.
+elif has_flag("visited_kaplica") and not has_flag("vein_kaplica_2")
+	Hieronim: W kaplicy ktoś zamalował żyłę naciekiem. Wiesz kto? Hehe. Ona sama. Wstydzi się.
+=> END
+
+~ third
+Hieronim leży na wznak na gołej skale i patrzy w strop, uśmiechnięty jak dziecko w stogu siana.
+Hieronim: Wnuczku. Ottokar szuka drzwi na dół. Znajdzie je. Wiesz, co jest za drzwiami na dół? Hehe. Góra. Ona leży do góry nogami.
+Hieronim: Nie mów mu. Niech się sam zdziwi. Lubię, jak się dziwi. Robi wtedy pod maską taką minę, że aż ją słychać.
+- Hieronimie, czy ty wiesz, co tam jest?
+	$> change_player_sanity(-6)
+	Hieronim przestaje się uśmiechać. Pierwszy raz, odkąd go znasz.
+	Hieronim: Wiem. I dlatego się śmieję. Bo gdybym przestał, zacząłbym krzyczeć. I już bym nie skończył.
+- Wstawaj, zmarzniesz.
+	Hieronim: Zmarznę? Tu? Hehe. Wnuczku, tu nigdy nie jest zimno. Ona grzeje.
+Hieronim wyjmuje zza pazuchy bandaż, zupełnie czysty, i kładzie ci go na dłoni.
+Hieronim: Dla chłopca w czerwonym. Przyda się. Już niedługo.
+$> give_item("bandaze")
+=> END
+
+~ later
+Hieronim: [[Hehe. Wnuczek.|Słyszysz? Nie? Ja też już nie. Zrobiło się za cicho.|Nie stój tak blisko ściany. Ona się rusza, kiedy nikt nie patrzy.]]
+if day >= 6
+	Hieronim: Za dwa dni twój zarządca będzie liczył. A ona liczy dłużej. Dużo dłużej. Hehe.
+elif has_flag("welf_lost")
+	Hieronim: Chłopiec w czerwonym nie wrócił. Mówiłem, że się przyda bandaż. Nikt nie słucha starego Hieronima.
+$> change_player_sanity(-2)
+=> END

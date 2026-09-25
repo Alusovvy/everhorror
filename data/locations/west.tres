@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"west"
+display_name = "Zawalony chodnik"
+unknown_name = ""
+direction = "zachód"
+text = "Ulubiona droga dziadka. Na jego mapach zaznaczona podwójną kreską."
+links = {
+"oboz": 2.0,
+"upadowa": 1.0,
+"kuznia": 1.0
+}
+requires = PackedStringArray("noflag:mir_dead", "flag:west_blasted")
+locked = {
+"noflag:mir_dead": "Mirosław zasypał ten chodnik razem ze sobą. Tej drogi już nie ma.",
+"flag:west_blasted": "Zasypane. Bez prochu się nie przebijesz, może Mirosław coś poradzi."
+}
+entry = "WestEntry"
+veins = PackedStringArray("west_1")
+depth = 1
+map_pos = Vector2(0.24, 0.24)
+dread = 0
+arrival_text = ""

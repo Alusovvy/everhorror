@@ -14,16 +14,20 @@
 
 | Ekran | Zawartość | Stan |
 |---|---|---|
-| **HUD (FPP)** | celownik (biały, a na obiekcie bursztynowy), podpowiedź „[E] nazwa”, panel opisu na dole ekranu | ✅ |
+| **HUD (FPP)** | celownik (biały, a na obiekcie bursztynowy), podpowiedź „[E] nazwa · koszt (potrzebny: …)”, panel opisu na dole ekranu, zegar „Dzień N · GG:MM”, pod nim stan bohatera tylko gdy coś jest nie tak („ranny · gorączka”), komunikaty (czas, przedmioty, notatki, zadania, żyły, szepty) | ✅ |
 | **Menu główne** | tytuł EVERHORROR, START / OPTIONS / LOAD GAME / EXIT | ✅ |
 | **Pauza** | przyciemnienie, RESUME / SAVE GAME / LOAD GAME / OPTIONS / MAIN MENU / EXIT | ✅ |
-| **Opcje** | czułość myszy, głośność, pełny ekran, BACK | ✅ |
+| **Opcje** | czułość myszy, głośność, pełny ekran, gwara śląska górników, BACK | ✅ |
 | **Sloty zapisu** | 3 sloty z datą, komunikat o zapisie | ✅ |
-| **Ekran VN** | tło, postać, tekst, opcje (zablokowane z podpowiedzią) | 🟡 prototyp |
-| **Stół z mapą** | graf pomieszczeń, koszty podróży, złoża, odnogi | ⬜ |
-| **Ekwipunek na wyprawę** | wybór przedmiotów do limitu | ⬜ |
-| **Notes** | questy, notatki dziadka i dowódcy | ⬜ |
-| **Ekran nowego dnia** | [propozycja] „Dzień N”, krótkie podsumowanie nocy | ⬜ |
+| **Ekran VN** | rozmyte tło gry, portret 3D postaci (albo statyczny obraz, np. ściana Onych), imię, tekst, opcje, zegar | ✅ |
+| **Stół z mapą** | rysunek grafu dróg (trasa, gdzie jesteś, kreski żył), licznik żył i termin, lista znanych miejsc z kosztem, opis, powód blokady, WYRUSZ | ✅ |
+| **Mapa w terenie [M]** | ten sam ekran: sąsiednie miejsca i powrót do obozu, IDŹ DALEJ / WRACAJ DO OBOZU / ZOSTAŃ TUTAJ | ✅ |
+| **Podsumowanie wyprawy** | czas, miejsca, żyły i norma, przyniesione rzeczy, zdarzenia, stan bohatera, komentarz; DALEJ [E] | ✅ |
+| **Ekwipunek [I]** | stan bohatera słowami, norma, lista przedmiotów, opis, UŻYJ z czasem i powodem, gdy się nie da | ✅ |
+| **Ekwipunek na wyprawę** | wybór przedmiotów do limitu | ⬜ (brak limitu w demie) |
+| **Notes** | zakładki Zadania (z normą), Notatki i Ludzie (zdrowie, głowa, stosunek do bohatera, słowami) [J] | ✅ |
+| **Ekran nowego dnia** | plansza „Dzień N” z jednym zdaniem o poranku, przed nią sen (VN) | ✅ |
+| **Koniec tygodnia / śmierć** | logo, tytuł („Koniec tygodnia”, „Zostałeś sam”, „Nie żyjesz”), podsumowanie wyborów, RETRY FROM MORNING (po śmierci) / MAIN MENU / EXIT | ✅ |
 
 ## Przepływ ekranów
 ```

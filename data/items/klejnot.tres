@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"klejnot"
+display_name = "Daleki Klejnot"
+name_accusative = "Daleki Klejnot"
+description = "Szklany paciorek w mosiężnej oprawce. Na bazarach w Lajihar sprzedają takie jako kawałek planety Kinkenheim. Nasir twierdzi, że ten jest prawdziwy."
+category = 4
+heal = 0
+sanity = 0
+cures_fever = false
+consumable = false
+use_hours = 0
+use_text = ""

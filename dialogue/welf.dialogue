@@ -1,0 +1,41 @@
+using GameState
+
+~ start
+if has_flag("welf_wounded") and not has_flag("welf_helped")
+	=> wounded
+if has_flag("welf_helped")
+	=> after
+Welf: Czego? Nie mam czasu dla kopaczy. Mistrz czeka.
+=> END
+
+~ wounded
+Welf siedzi pod ścianą z ręką przyciśniętą do boku. Czerwony płaszcz jest ciemniejszy tam, gdzie trzyma dłoń. Maskę ma przekrzywioną.
+Welf: Nie podchodź! Nic mi nie jest. Para. Albo ta ściana. Coś mnie trafiło, kiedy próbowałem... Nieważne.
+Welf: Mistrz poszedł dalej. Powiedział, że go dogonię. Nie dogonię.
+- Mam bandaże. Pokaż ranę. [if has_item("bandaze") /]
+	$> take_item("bandaze")
+	$> set_flag("welf_helped")
+	$> change_rep("welf", 20)
+	$> note_event("Opatrzyłeś rannego Welfa z Exitium. Żyje dzięki tobie.")
+	Welf odsuwa rękę. Oparzenie jest paskudne, ale czyste. Obwiązujesz je przez płaszcz, żeby nie dotknąć skóry.
+	Welf: Uważaj... Uważaj, mówię! Jeden dotyk i... No. Tak. Tak jest dobrze.
+	Welf: Bezmagiczny opatruje Drugiego. W Exitium by mnie wyśmiali. Nikt się nie dowie, jasne? Nikt.
+	Welf: ...Dziękuję. Nie przywykłem tego mówić. Nie takim jak ty.
+- Poczekaj, poszukam pomocy.
+	Welf: Tu nie ma żadnej pomocy. Jest ciemność i ty. Idź już.
+- Nie mam czym cię opatrzyć. [if not has_item("bandaze") /]
+	$> change_player_sanity(-3)
+	Welf: To po co tu stoisz? Idź. Idź sobie, kopaczu. Nie chcę, żebyś patrzył.
+=> END
+
+~ after
+if not has_flag("welf_thanked")
+	$> set_flag("welf_thanked")
+	Welf poprawia maskę i stoi prosto, jakby tamto spotkanie w ogóle się nie wydarzyło. Spod płaszcza widać twój opatrunek.
+	Welf: Ty. Przewodnik. Mam u ciebie dług, a nie lubię długów. Zwłaszcza u bezmagicznych.
+	Welf: Masz. Lekarstwo z Exitium, najlepsze, jakie robią. Mistrz nie wie, że je mam. Nie wie też, że mi pomogłeś, i niech tak zostanie.
+	$> give_item("lekarstwo")
+	Welf: I jeszcze jedno. Nie ufaj mistrzowi. On mnie nie zostawił, bo mu się spieszyło. Zostawił, bo policzył, ile jestem wart. Wyszło mu, że mało.
+else
+	Welf: [[Znowu ty. Zaczynam się przyzwyczajać.|Przewodnik. Żyjesz jeszcze. Dobrze. To znaczy, obojętne mi to.|Nie mów nikomu, że rozmawiamy. Mam reputację.]]
+=> END

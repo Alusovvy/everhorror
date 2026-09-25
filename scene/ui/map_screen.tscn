@@ -20,9 +20,12 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="ButtonGroup" id="ButtonGroup_dest"]
+
 [node name="MapScreen" type="CanvasLayer"]
 layer = 6
 script = ExtResource("1_script")
+destination_group = SubResource("ButtonGroup_dest")
 
 [node name="Root" type="Control" parent="."]
 layout_mode = 3
@@ -59,35 +62,85 @@ layout_mode = 2
 
 [node name="VBox" type="VBoxContainer" parent="Root/Center/Panel/Margin"]
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+[node name="TitleRow" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
 layout_mode = 2
+
+[node name="Title" type="Label" parent="Root/Center/Panel/Margin/VBox/TitleRow"]
+layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(1, 0.72, 0.38, 1)
 theme_override_font_sizes/font_size = 26
 text = "Mapa dziadka"
 
-[node name="Clock" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+[node name="Clock" type="Label" parent="Root/Center/Panel/Margin/VBox/TitleRow"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 1)
 theme_override_font_sizes/font_size = 15
 text = "Dzień 1 · 06:00"
+horizontal_alignment = 2
+
+[node name="Quota" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.62, 0.78, 1, 1)
+theme_override_font_sizes/font_size = 16
+text = "Żyły błękitu: 0 z 12"
 
 [node name="HBox" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 22
 
 [node name="Drawing" type="Control" parent="Root/Center/Panel/Margin/VBox/HBox"]
-custom_minimum_size = Vector2(380, 300)
+custom_minimum_size = Vector2(470, 440)
 layout_mode = 2
 script = ExtResource("3_drawing")
 
-[node name="Destinations" type="VBoxContainer" parent="Root/Center/Panel/Margin/VBox/HBox"]
-custom_minimum_size = Vector2(360, 0)
+[node name="Side" type="VBoxContainer" parent="Root/Center/Panel/Margin/VBox/HBox"]
+custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="CloseButton" type="Button" parent="Root/Center/Panel/Margin/VBox"]
+[node name="ListTitle" type="Label" parent="Root/Center/Panel/Margin/VBox/HBox/Side"]
 layout_mode = 2
-size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.72, 0.66, 0.58, 1)
+theme_override_font_sizes/font_size = 15
+text = "Dokąd:"
+
+[node name="Scroll" type="ScrollContainer" parent="Root/Center/Panel/Margin/VBox/HBox/Side"]
+custom_minimum_size = Vector2(0, 190)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Destinations" type="VBoxContainer" parent="Root/Center/Panel/Margin/VBox/HBox/Side/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="Details" type="RichTextLabel" parent="Root/Center/Panel/Margin/VBox/HBox/Side"]
+custom_minimum_size = Vector2(0, 170)
+layout_mode = 2
+theme_override_colors/default_color = Color(0.86, 0.82, 0.74, 1)
+theme_override_font_sizes/normal_font_size = 15
+theme_override_font_sizes/bold_font_size = 18
+bbcode_enabled = true
+text = ""
+
+[node name="GoButton" type="Button" parent="Root/Center/Panel/Margin/VBox/HBox/Side"]
+layout_mode = 2
+text = "WYRUSZ"
+
+[node name="Footer" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+
+[node name="Hint" type="Label" parent="Root/Center/Panel/Margin/VBox/Footer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.6, 0.56, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = ""
+
+[node name="CloseButton" type="Button" parent="Root/Center/Panel/Margin/VBox/Footer"]
+layout_mode = 2
 text = "ZAMKNIJ  [Esc]"

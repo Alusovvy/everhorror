@@ -1,0 +1,88 @@
+using GameState
+
+~ start
+if not has_flag("met_hagiwara")
+	$> set_flag("met_hagiwara")
+	if npc_place("hagiwara") == "ksiega"
+		Szczupły mężczyzna stoi przy pulpicie z księgą i pisze pędzelkiem, drobno i równo, jakby każdy znak kosztował go srebro.
+	elif npc_place("hagiwara") == "herbata"
+		W kącie, na stołku przy skrzyni, siedzi szczupły mężczyzna z kubkiem w obu dłoniach i patrzy w ciemność, jak inni patrzą w ogień.
+	else
+		Przy stole szczupły mężczyzna je powoli, pałeczkami wystruganymi z drzazgi. Nikt się już temu nie dziwi.
+	Hagiwara odkłada wszystko i kłania się lekko. Dokładnie tak nisko, jak wypada.
+	Hagiwara: Kiyoshi Hagiwara. Prowadzę księgi pana zarządcy. Pan jest przewodnikiem, jak mniemam. Pański dziadek ma w księgach Kniazia bardzo porządny wpis. Ostatni.
+=> hub
+
+~ hub
+Hagiwara: [[Słucham pana.|Czym mogę służyć?|Proszę mówić.]]
+- Skąd jesteś? [if not has_flag("hag_asked_home") /]
+	$> set_flag("hag_asked_home")
+	Hagiwara: Z Shihon, z Cesarstwa Czterech Wysp. Z gałęzi klanu, który nie ma dość znaczenia, żeby jego nazwa coś panu powiedziała.
+	Hagiwara: Służyłem w Ministerstwie Ziemi. Prowadziłem księgi kopalń na Nagate.
+	- Nagate? Tam, gdzie żyją Szarzy?
+		Hagiwara: Tam, gdzie Szarzy pracują. Żyć to za dużo powiedziane. Nie wolno im opuścić wyspy, a kto spróbuje, ginie na brzegu.
+		Hagiwara: Kopią dla Cesarstwa, a Cesarstwo przysyła im jedzenie i paczki na Dzień Pamięci. Wszyscy są bardzo zadowoleni z tego układu. Poza Szarymi.
+	- Czemu wyjechałeś?
+		=> exile
+	=> hub
+- Czemu wyjechałeś z Cesarstwa? [if has_flag("hag_asked_home") and not has_flag("hag_exile") /]
+	=> exile
+- Co mówią twoje księgi o żyłach? [if has_flag("met_racibor") /]
+	Hagiwara przewraca kartki i wodzi palcem po rubryce.
+	if veins_mapped() == 0
+		Hagiwara: Rubryka „żyły” jest pusta. Czysta jak śnieg na Shihon. Obawiam się, że pan zarządca nie ceni czystych rubryk.
+	elif quota_met()
+		Hagiwara: {{veins_mapped()}} na {{quota()}}. Norma zrobiona. Zapisałem to starannie, dwa razy, na wszelki wypadek.
+	else
+		Hagiwara: {{veins_mapped()}} z {{quota()}}. Brakuje {{veins_short()}}, a do terminu {{days_left_text()}}. Liczby nie kłamią. Czasem są tylko nieuprzejme.
+	=> hub
+- Mógłbyś dopisać w księdze kilka żył? [if day >= 6 and not quota_met() and not has_flag("hag_asked_lie") /]
+	$> set_flag("hag_asked_lie")
+	$> change_rep("hagiwara", -2)
+	Hagiwara odkłada pędzelek. Długo nic nie mówi.
+	Hagiwara: Za jedno takie zdanie straciłem kiedyś ojczyznę, panie przewodniku. Tylko że wtedy to mnie proszono, żebym dopisał. I nie dopisałem.
+	Hagiwara: Drugi raz ojczyzny nie stracę, bo jej nie mam. Ale siebie mogę. Nie dopiszę.
+	=> hub
+- Opowiedz o Cesarstwie. [if has_flag("hag_asked_home") and not has_flag("hag_empire") /]
+	$> set_flag("hag_empire")
+	Hagiwara: Nazywamy się Rinusota no aisatsu. Ci, którzy witają Rinust. Nikt nie wie, czy dalej na wschód jest jeszcze jakiś ląd, więc przyjęliśmy, że słońce wita najpierw nas.
+	Hagiwara: W Dzień Morza sam Cesarz wchodzi w wodę po pas, nacina sobie dłoń i daje krew morzu. Jeśli wieczorem morze zabierze jego deseczkę z prośbą, rok będzie dobry.
+	Hagiwara: A na koniec roku każdy zapisuje swoje życzenia na papierze i odciska na nim krwawiący kciuk. Potem pali się to wszystko razem na ołtarzu wioski.
+	- Co byś zapisał?
+		Hagiwara: W zeszłym roku, żeby wrócić do domu. W tym nie pisałem nic. Tu nie ma ołtarza. Jest tylko skrzynia.
+	- Dużo tam krwi.
+		Hagiwara: Krew jest tania, a honor drogi. U was bywa odwrotnie, jak zdążyłem zauważyć.
+	=> hub
+- Czego ci tu brakuje? [if has_flag("hag_empire") and quest_state("wiersz") == "" /]
+	$> start_quest("wiersz")
+	Hagiwara: Piękna. Proszę mi wybaczyć, to brzmi niewdzięcznie. Ale w tej ciemności nie ma niczego, co mógłbym zapisać wierszem.
+	Hagiwara: Górnicy mówią o grocie, w której rosną grzyby świecące jak latarnie. Jeśli to prawda, chciałbym jeden zobaczyć. Tylko zobaczyć. I napisać.
+	=> hub
+- Przyniosłem świecący grzyb. [if quest_state("wiersz") == "active" and has_item("grzyb") /]
+	$> take_item("grzyb")
+	Hagiwara bierze grzyb w obie dłonie jak czarkę i długo się w niego wpatruje. Poświata kładzie mu się na twarzy.
+	Hagiwara: Proszę chwilę zaczekać.
+	Hagiwara macza pędzelek i pisze trzy linijki, szybko, bez namysłu. Potem dmucha na tusz i podaje ci kartkę.
+	Hagiwara: I jeszcze to. Lekarstwo z Czterech Wysp. Wiozłem je na własną śmierć, ale ta się nie spieszy. Panu bardziej się przyda.
+	$> add_note("wiersz_hagiwary")
+	$> give_item("lekarstwo")
+	$> quest_log("wiersz", "oddany")
+	$> complete_quest("wiersz")
+	$> change_rep("hagiwara", 12)
+	$> change_player_sanity(4)
+	=> hub
+- Co sądzisz o magach z Exitium? [if has_flag("drudzy_met") and not has_flag("hag_drudzy") /]
+	$> set_flag("hag_drudzy")
+	Hagiwara: U nas magów robi Maszyna na Sutāto. Pierwszy Cesarz użył jej, żeby zjednoczyć klany. Tych, którzy się nie zgodzili, już nie ma.
+	Hagiwara: Dlatego kiedy ktoś z maską na twarzy mówi mi, że przyszedł tylko popatrzeć, zapisuję to w księdze. I datę. Na wszelki wypadek.
+	=> hub
+- Muszę iść.
+	Hagiwara: Proszę uważać na siebie. Księga nie ma rubryki na zaginionych, a nie chciałbym jej zakładać.
+	=> END
+
+~ exile
+$> set_flag("hag_exile")
+Hagiwara: Kopalnia na Nagate dawała mniej, niż obiecał mój pan. Mój pan obiecał więcej swojemu panu. Poprosił, żebym w raporcie poprawił liczby.
+Hagiwara: Nie poprawiłem. Raport poszedł do Ministerstwa taki, jaki był. Mój pan stracił twarz, a ja straciłem wszystko inne.
+Hagiwara: Tu nikt nie wie, kim byłem. To bardzo wygodne. I bardzo samotne.
+=> hub

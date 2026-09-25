@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"odlamek"
+display_name = "Odłamek błękitu"
+name_accusative = "odłamek błękitu"
+description = "Odłamek z Kryształowej galerii, czysty błękit bez grama skały. Buczy cicho, kiedy przyłożysz go do ucha. Sabina bardzo chciała taki mieć."
+category = 4
+heal = 0
+sanity = 0
+cures_fever = false
+consumable = true
+use_hours = 0
+use_text = ""

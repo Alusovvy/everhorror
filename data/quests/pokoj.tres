@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"pokoj"
+title = "Brat i czarownica"
+giver = "Anzelm i Sabina"
+entries = {
+"start": "Anzelm nie znosi Sabiny, a Sabina nie rozumie, czemu on nie chce jej pomocy przy chorych. Obozowi przydałby się spokój.",
+"sabina": "Sabina obiecała, że nie będzie leczyć nikogo za plecami Anzelma.",
+"zgoda": "Anzelm i Sabina pracują razem przy chorych. Nikt nie wierzył, że to możliwe."
+}

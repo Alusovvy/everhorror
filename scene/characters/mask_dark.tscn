@@ -1,0 +1,16 @@
+[gd_scene format=3]
+
+[ext_resource type="ArrayMesh" path="res://assets/characters/iron_mask.res" id="1_mask"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_mask"]
+albedo_color = Color(0.16, 0.14, 0.14, 1)
+metallic = 0.4
+roughness = 0.55
+cull_mode = 2
+
+[node name="DarkMask" type="Node3D"]
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.028)
+mesh = ExtResource("1_mask")
+material_override = SubResource("Mat_mask")

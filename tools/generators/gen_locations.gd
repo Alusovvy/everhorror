@@ -1,13 +1,18 @@
 extends SceneTree
 ## Usage: godot --headless --path . --script res://tools/generators/gen_locations.gd
 ## (run gen_sanctin_textures.gd and import first).
-## Generates res://scene/levels/locations.tscn: the three expedition places reached from the map
-## table (docs_v2/03_poziomy.md). Each is a closed space far away from the main level; travel
-## places the player at its entry marker and the signpost takes them back to the camp.
+## Generates res://scene/levels/locations.tscn: the expedition places reached from the map
+## table and with [M] (docs_v2/03_poziomy.md). Each is a closed space far away from the main
+## level; travel places the player at its entry marker and the signpost opens the field map.
+## Every place has spots "<Place>Spot1..4" for people met there (FieldSchedule).
 ## - Rzapie: the flooded bottom of the old shaft (Tekla's bundle, a vein, scratches on the wall),
 ## - Upadowa: the steep decline behind the broken supports, ending at the old collapse (a vein,
 ##   grandfather's mark, soot and barrel staves: the collapse was a charge),
 ## - Kaplica: the chapel below the east cave: the carved wall with the riddle (VN), the niche.
+## task_05 adds ten simple places (a template: chamber or gallery, lights, a few props, looks,
+## veins, pickups) further down the map: Wyrobisko, Pompy, Kuznia, Grota, Przekop, Zalany,
+## Szyb, Kostnica, Szczelina, Galeria; and a hidden second vein (under flowstone, needs a
+## pickaxe) in the sump, the decline and the chapel.
 ## WARNING: overwrites the scene. Edit this generator, not the scene.
 
 const P := "res://assets/prop_pack/Exports/glTF/"
@@ -18,6 +23,18 @@ const OUT := "res://scene/levels/locations.tscn"
 const RZAPIE := Vector3(-60.0, 0.0, 70.0)
 const UPADOWA := Vector3(-60.0, 0.0, 110.0)
 const KAPLICA := Vector3(60.0, 0.0, 110.0)
+const WYROBISKO := Vector3(-100.0, 0.0, 150.0)
+const POMPY := Vector3(-50.0, 0.0, 150.0)
+const GROTA := Vector3(0.0, 0.0, 150.0)
+const KOSTNICA := Vector3(50.0, 0.0, 150.0)
+const GALERIA := Vector3(100.0, 0.0, 150.0)
+const KUZNIA := Vector3(-100.0, 0.0, 200.0)
+const PRZEKOP := Vector3(-50.0, 0.0, 200.0)
+const ZALANY := Vector3(0.0, 0.0, 200.0)
+const SZCZELINA := Vector3(50.0, 0.0, 200.0)
+const SZYB := Vector3(100.0, 0.0, 200.0)
+## Veins that were in the demo before task_05 keep their entries in Racibor's quest.
+const LEGACY_VEINS := ["rzapie", "upadowa", "kaplica"]
 ## Upadowa: 20° decline between x 4 and 20 (local).
 const SLOPE_DEG := 20.0
 const SLOPE_X := Vector2(4.0, 20.0)
@@ -32,6 +49,8 @@ var floor_mat: Material
 var wood: Material
 var soot_mat: StandardMaterial3D
 var charred: StandardMaterial3D
+var crust_mat: StandardMaterial3D
+var bone_mat: StandardMaterial3D
 
 func scene(path: String) -> PackedScene:
 	if not cache.has(path):
@@ -159,30 +178,35 @@ func vein_group(parent: Node, group_name: String) -> Node3D:
 	return own(g, parent)
 
 ## Racibor's quest: marking the vein costs an hour; afterwards a stake shows it is done.
-func vein_mark(parent: Node, rock_node: Node3D, vein_id: String, description: String, stake_pos: Vector3) -> void:
-	interactable(parent, "VeinMark", {
+## `extra` overrides the interactable's properties (e.g. a pickaxe for a hidden vein).
+func vein_mark(parent: Node, rock_node: Node3D, vein_id: String, description: String, stake_pos: Vector3, extra := {}, stake_parent: Node = null) -> void:
+	var legacy := vein_id in LEGACY_VEINS
+	var props := {
 		"display_name": "Żyła błękitnego żelaza", "prompt_text": "Zaznacz żyłę na mapie",
 		"description": description, "time_cost_hours": 1.0, "time_reason": "Znaczenie żyły",
-		"on_use_flag": "vein_" + vein_id, "on_use_quest": &"zloza", "on_use_quest_entry": vein_id,
-		"quest_only_if_active": true, "hidden_by_flag": "vein_" + vein_id,
+		"on_use_flag": "vein_" + vein_id, "hidden_by_flag": "vein_" + vein_id,
 		"highlight_target": rock_node, "solid": false, "padding": 0.1,
-	})
+	}
+	if legacy:
+		props.merge({"on_use_quest": &"zloza", "on_use_quest_entry": vein_id, "quest_only_if_active": true}, true)
+	props.merge(extra, true)
+	interactable(parent, "VeinMark" if legacy else "VeinMark_" + vein_id, props)
 	var stakes := Node3D.new()
-	stakes.name = "Stake"
+	stakes.name = "Stake" if legacy else "Stake_" + vein_id
 	stakes.set_script(load("res://script/material_applier.gd"))
 	stakes.set("material", wood)
-	own(stakes, parent)
+	own(stakes, stake_parent if stake_parent else parent)
 	var stake := add(stakes, K + "signpost-single.glb", stake_pos, randf() * 360.0, 1.6, "VeinStake")
 	look(stake, "Twój palik", "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę.", {"required_flag": "vein_" + vein_id})
 
-func exit_sign(parent: Node, place_id: String, pos: Vector3, yaw_deg: float, hours: int) -> void:
+func exit_sign(parent: Node, place_id: String, pos: Vector3, yaw_deg: float, _hours := 0) -> void:
 	var signs := Node3D.new()
 	signs.name = "Sign"
 	signs.set_script(load("res://script/material_applier.gd"))
 	signs.set("material", wood)
 	own(signs, parent)
 	var post := add(signs, K + "signpost-single.glb", pos, yaw_deg, 3.2, "ExitSign")
-	interactable(post, "%sExitUse" % place_id.capitalize(), {"display_name": "Droga powrotna", "prompt_text": "Wróć do obozu · %d h" % hours, "action": 2})
+	interactable(post, "%sExitUse" % place_id.capitalize(), {"display_name": "Drogowskaz", "prompt_text": "Dokąd dalej? (albo [M])", "action": 2})
 
 func rope(parent: Node, rope_name: String, from: Vector3, to: Vector3, radius := 0.025) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
@@ -237,9 +261,25 @@ func _initialize() -> void:
 	soot_tex.fill_from = Vector2(0.5, 0.5)
 	soot_tex.fill_to = Vector2(1.0, 0.5)
 	soot_mat.albedo_texture = soot_tex
+	crust_mat = StandardMaterial3D.new()
+	crust_mat.albedo_color = Color(0.5, 0.49, 0.45)
+	crust_mat.roughness = 1.0
+	bone_mat = StandardMaterial3D.new()
+	bone_mat.albedo_color = Color(0.72, 0.68, 0.58)
+	bone_mat.roughness = 0.9
 	_rzapie()
 	_upadowa()
 	_kaplica()
+	_wyrobisko()
+	_pompy()
+	_grota()
+	_kostnica()
+	_galeria()
+	_kuznia()
+	_przekop()
+	_zalany()
+	_szczelina()
+	_szyb()
 	var packed := PackedScene.new()
 	var err := packed.pack(root3d)
 	if err == OK:
@@ -360,6 +400,8 @@ func _rzapie() -> void:
 	blue_light(g, Vector3(3.7, 1.6, -2.3), 1.2, 5.5)
 	vein_mark(g, vein_rock, "rzapie", "Wąska żyła biegnie ukosem przez skałę i znika pod wodą. Odmierzasz ją krokami i wrysowujesz na mapę dla Racibora.", Vector3(2.9, 0.0, -3.3))
 	light(g, "LandingGlow", Vector3(7.6, 1.4, 0.0), Color(0.7, 0.78, 0.9), 0.7, 5.0, false, 0.05, 0.5)
+	hidden_vein(g, "rzapie_2", "c", Vector3(5.6, 1.3, 3.9), 180.0, "Odłupujesz naciek kawałek po kawałku. Pod spodem błękit, czysty i gruby na dwa palce. Stara ekipa musiała tu stać tysiąc razy i nic nie widziała.", Vector3(5.3, 0.0, 3.1))
+	spots("rzapie", RZAPIE, [Vector3(3.0, 0.0, -2.3), Vector3(2.4, 0.0, 2.5), Vector3(4.8, 0.0, -2.8), Vector3(4.4, 0.0, 2.9)])
 	emitter(g, "DripShaft", "drip", Vector3(7.6, 4.2, 0.4), 1.8, 5.0, -4.0, 16.0, 0.25)
 	emitter(g, "DripCorner", "drip", Vector3(1.5, 4.0, -3.0), 3.0, 8.0, -7.0, 14.0, 0.3)
 	emitter(g, "Rumble", "rumble", Vector3(5.0, 2.0, 0.0), 30.0, 70.0, -6.0, 40.0, 0.15)
@@ -440,6 +482,8 @@ func _upadowa() -> void:
 	add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_f.tscn", Vector3(21.9, bottom + 1.6, -2.05), 0.0, 1.1)
 	blue_light(g, Vector3(24.0, bottom + 1.4, 1.1), 3.2, 7.5)
 	blue_light(g, Vector3(26.4, bottom + 1.0, -0.2), 2.0, 5.0)
+	hidden_vein(g, "upadowa_2", "d", Vector3(18.2, bottom + 1.2, -2.05), 0.0, "Pod białym naciekiem druga żyła, cieńsza, ale długa. Biegnie w stronę zawału, jak wszystko tutaj.", Vector3(18.4, bottom, -1.3))
+	spots("upadowa", UPADOWA, [Vector3(3.8, 0.0, -1.5), Vector3(3.6, 0.0, 1.5), Vector3(6.0, _slope_y(6.0), -1.3), Vector3(6.4, _slope_y(6.4), 1.2)])
 	vein_mark(g, vein_rock, "upadowa", "Najgrubsza żyła, jaką widziałeś. Gruba jak ramię. Świeci też przez szczeliny w zawale, jakby po tamtej stronie było jej jeszcze więcej.\n\nZaznaczasz ją na mapie dla Racibora.", Vector3(22.8, bottom, 1.3))
 	emitter(g, "Creak", "creak", Vector3(10.0, -1.0, 0.0), 12.0, 28.0, -6.0, 22.0, 0.12)
 	emitter(g, "Pebbles", "drip", Vector3(14.0, -2.0, 1.0), 4.0, 11.0, -8.0, 18.0, 0.4)
@@ -490,6 +534,8 @@ func _kaplica() -> void:
 	add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_e.tscn", Vector3(11.4, y0 + 1.6, -4.95), 0.0, 1.2)
 	blue_light(g, Vector3(12.4, y0 + 1.6, 4.0), 2.2, 6.5)
 	blue_light(g, Vector3(11.4, y0 + 1.8, -4.0), 1.8, 6.0)
+	hidden_vein(g, "kaplica_2", "e", Vector3(13.3, y0 + 1.3, -4.95), 0.0, "Naciek odpada płatami. Pod nim błękit tak jasny, że na chwilę zamykasz oczy. Ktoś ten naciek kiedyś wygładził ręką, jakby chciał coś zakryć.", Vector3(13.2, y0, -4.2))
+	spots("kaplica", KAPLICA, [Vector3(8.8, y0, -2.6), Vector3(8.8, y0, 2.6), Vector3(10.4, y0, -3.4), Vector3(10.4, y0, 3.4)])
 	vein_mark(g, vein_rock, "kaplica", "Tu nie trzeba szukać. Błękit biegnie przez całe ściany, a im bliżej wyrytych znaków, tym jaśniej świeci. Zaznaczasz go na mapie dla Racibora.", Vector3(12.1, y0, 4.2))
 	emitter(g, "Drip", "drip", Vector3(10.0, y0 + 4.5, -2.0), 3.0, 9.0, -6.0, 18.0, 0.25)
 	emitter(g, "Hum", "rumble", Vector3(16.0, y0 + 1.0, 0.0), 20.0, 45.0, -10.0, 25.0, 0.3)
@@ -620,6 +666,554 @@ func _chapel_props(g: Node3D, y0: float) -> void:
 	look(lamp, "Lampka", "Mała lampka oliwna. Pali się. Knot przycięty, olej świeży. Ktoś tu bywa.", {"on_use_flag": "saw_lamp"})
 	add(g, P + "Bench.gltf", Vector3(12.6, y0, 0.0), 90.0, 0.9, "PrayerBench")
 	look(g.get_node("PrayerBench"), "Ławka", "Ławka z tych samych desek co stemple. Wytarta do połysku przez setki kolan i tyłków. Górnicy siadali tu przed szychtą.", {"solid": true})
+
+#endregion
+
+#region task_05: helpers for the simple places
+
+## Entry from the west: a short tunnel stub with a lantern, the signpost (field map) and the
+## entry marker. The chamber's west wall leaves a 2.4 m opening at z -1.2..1.2 for it.
+func stub(g: Node3D, place_id: String, origin: Vector3, lamp := true) -> void:
+	var tunnel := group(g, "Tunnel")
+	slab(tunnel, "Floor", Vector3(3.8, 0.4, 2.6), Vector3(-1.9, -0.2, 0.0), floor_mat)
+	slab(tunnel, "WallN", Vector3(3.8, 3.6, 0.4), Vector3(-1.9, 1.6, -1.4), rock)
+	slab(tunnel, "WallS", Vector3(3.8, 3.6, 0.4), Vector3(-1.9, 1.6, 1.4), rock)
+	slab(tunnel, "Ceiling", Vector3(3.8, 0.4, 3.2), Vector3(-1.9, 3.3, 0.0), rock)
+	slab(tunnel, "End", Vector3(0.4, 3.6, 2.8), Vector3(-3.8, 1.6, 0.0), rock)
+	for r in [["a", Vector3(-3.3, 0.3, -0.6), 1.0], ["c", Vector3(-3.4, 0.3, 0.7), 0.9]]:
+		add(tunnel, M + "Rocks/Cave_Rocks/cave_rocks_%s.tscn" % r[0], r[1], randf() * 360.0, r[2])
+	add(tunnel, M + "Posts/post_f.tscn", Vector3(-0.35, 0.0, -1.1), 0.0)
+	add(tunnel, M + "Posts/post_f.tscn", Vector3(-0.35, 0.0, 1.1), 180.0)
+	if lamp:
+		lantern(tunnel, Vector3(-1.7, 2.05, 1.2), 180.0, 1.1, 6.0)
+	exit_sign(g, place_id, Vector3(-1.2, 0.0, -0.95), 90.0)
+	marker("%sEntry" % place_id.capitalize(), origin + Vector3(-2.3, 0.0, 0.0), -90.0)
+
+## A plain rock chamber x 0..w, z -d/2..d/2, h high, open to the west for the stub.
+func chamber(g: Node3D, w: float, d: float, h: float) -> void:
+	slab(g, "Floor", Vector3(w + 0.4, 0.4, d + 0.4), Vector3(w * 0.5, -0.2, 0.0), floor_mat)
+	slab(g, "WallNorth", Vector3(w + 0.8, h + 0.6, 0.4), Vector3(w * 0.5, h * 0.5, -d * 0.5 - 0.2), rock)
+	slab(g, "WallSouth", Vector3(w + 0.8, h + 0.6, 0.4), Vector3(w * 0.5, h * 0.5, d * 0.5 + 0.2), rock)
+	slab(g, "WallEast", Vector3(0.4, h + 0.6, d + 0.8), Vector3(w + 0.2, h * 0.5, 0.0), rock)
+	var side := (d - 2.4) * 0.5
+	if side > 0.01:
+		slab(g, "WallWestN", Vector3(0.4, h + 0.6, side), Vector3(-0.2, h * 0.5, -1.2 - side * 0.5), rock)
+		slab(g, "WallWestS", Vector3(0.4, h + 0.6, side), Vector3(-0.2, h * 0.5, 1.2 + side * 0.5), rock)
+	if h > 3.3:
+		slab(g, "WallWestTop", Vector3(0.4, h - 3.1, 2.4), Vector3(-0.2, 3.1 + (h - 3.1) * 0.5, 0.0), rock)
+	slab(g, "Ceiling", Vector3(w + 0.8, 0.4, d + 0.8), Vector3(w * 0.5, h + 0.2, 0.0), rock, false)
+
+## Relief on the walls: [piece, local position, yaw, scale].
+func reliefs(g: Node3D, list: Array) -> void:
+	for r in list:
+		add(g, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_%s.tscn" % r[0], r[1], r[2], r[3])
+
+## Loose rocks on the floor: [piece, local position, scale].
+func rubble(g: Node3D, list: Array) -> void:
+	for r in list:
+		add(g, M + "Rocks/Cave_Rocks/cave_rocks_%s.tscn" % r[0], r[1], randf() * 360.0, r[2])
+
+## Timber frames across a gallery (posts at ±half_width, a beam on top).
+func frames(g: Node3D, xs: Array, half_width: float, beam_y := 3.75) -> Node3D:
+	var f := group(g, "Frames")
+	for x in xs:
+		add(f, M + "Posts/post_f.tscn", Vector3(x, 0.0, -half_width), 0.0)
+		add(f, M + "Posts/post_f.tscn", Vector3(x, 0.0, half_width), 180.0)
+		add(f, M + "Posts/beam_a.tscn", Vector3(x, beam_y, 0.0), 90.0)
+	return f
+
+## A vein: a glowing wall rock, a blue light in front of it and the mark with its stake.
+## The rock faces +Z at yaw 0 (north wall), -X at yaw -90 (east wall), -Z at 180 (south wall).
+func vein(g: Node3D, vein_id: String, piece: String, pos: Vector3, yaw: float, text: String, stake_pos: Vector3, rock_scale := 1.2, extra := {}) -> Node3D:
+	var veins := vein_group(g, "Vein_" + vein_id)
+	var rock_node := add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_%s.tscn" % piece, pos, yaw, rock_scale)
+	var normal := Basis(Vector3.UP, deg_to_rad(yaw)) * Vector3.BACK
+	blue_light(g, pos + normal * 1.3 + Vector3(0.0, 0.3, 0.0), 1.6, 6.0)
+	vein_mark(g, rock_node, vein_id, text, stake_pos, extra)
+	return rock_node
+
+## A vein under white flowstone: a pickaxe opens it; the crust is gone once the vein is marked.
+func hidden_vein(g: Node3D, vein_id: String, piece: String, pos: Vector3, yaw: float, text: String, stake_pos: Vector3) -> void:
+	var veins := vein_group(g, "Vein_" + vein_id)
+	add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_%s.tscn" % piece, pos, yaw, 1.0)
+	var normal := Basis(Vector3.UP, deg_to_rad(yaw)) * Vector3.BACK
+	var crust := Node3D.new()
+	crust.name = "Crust_" + vein_id
+	crust.transform = Transform3D(Basis(Vector3.UP, deg_to_rad(yaw)), pos + normal * 0.28)
+	own(crust, g)
+	for c in [[Vector3(1.1, 0.9, 0.28), Vector3(0.0, 0.1, 0.0), 8.0], [Vector3(0.8, 0.7, 0.24), Vector3(-0.35, -0.4, 0.04), -14.0],
+			[Vector3(0.6, 0.8, 0.22), Vector3(0.4, -0.35, 0.06), 22.0], [Vector3(0.35, 0.6, 0.18), Vector3(0.1, -0.9, 0.08), -5.0]]:
+		slab(crust, "Flowstone", c[0], c[1], crust_mat, false, Basis(Vector3.BACK, deg_to_rad(c[2])))
+	light(g, "FaintBlue_" + vein_id, pos + normal * 0.12 + Vector3(0.0, -0.2, 0.0), Color(0.35, 0.6, 1.0), 0.6, 2.2, false, 0.3, 0.7, 1)
+	vein_mark(crust, crust, vein_id, text, stake_pos, {
+		"display_name": "Biały naciek", "prompt_text": "Odkuj naciek i zaznacz żyłę", "time_cost_hours": 2.0,
+		"time_reason": "Odkuwanie nacieku", "required_item": "kilof",
+		"missing_text": "Spod białego nacieku sączy się niebieskie światło. Gołymi rękami się do tego nie dobierzesz, potrzebny kilof.",
+	}, g)
+
+## A prop that can be taken (disappears when used; its flag remembers it).
+func pickup(g: Node3D, prop: String, pos: Vector3, yaw: float, prop_scale: float, node_name: String, props: Dictionary) -> Node3D:
+	var n := add(g, prop, pos, yaw, prop_scale, node_name)
+	pickup_on(n, node_name, props)
+	return n
+
+func pickup_on(n: Node3D, node_name: String, props: Dictionary) -> void:
+	var all := {"remove_after_use": true, "padding": 0.12}
+	all.merge(props, true)
+	interactable(n, node_name + "Pickup", all)
+
+## Where people met here stand ("<Place>Spot1..n", facing the entry) and where a miner works
+## ("<Place>Work", with its own facing).
+func spots(place_id: String, origin: Vector3, list: Array, work := []) -> void:
+	for i in list.size():
+		marker("%sSpot%d" % [place_id.capitalize(), i + 1], origin + list[i], -90.0)
+	if work.size() == 2:
+		marker("%sWork" % place_id.capitalize(), origin + work[0], work[1])
+
+## A mesh node (not a prop scene): a primitive with its material.
+func mesh(parent: Node, node_name: String, primitive: PrimitiveMesh, pos: Vector3, material: Material, basis := Basis.IDENTITY) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.name = node_name
+	mi.mesh = primitive
+	mi.material_override = material
+	mi.transform = Transform3D(basis, pos)
+	own(mi, parent)
+	return mi
+
+func glow_material(albedo: Color, emission: Color, energy: float, alpha := 1.0) -> StandardMaterial3D:
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(albedo, alpha)
+	if alpha < 1.0:
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.emission_enabled = true
+	m.emission = emission
+	m.emission_energy_multiplier = energy
+	m.roughness = 0.3
+	return m
+
+## A crystal prism of blue iron (emissive), standing or leaning.
+func crystal_prism(parent: Node, node_name: String, pos: Vector3, height: float, tilt_deg: float, yaw_deg: float) -> MeshInstance3D:
+	var prism := CylinderMesh.new()
+	prism.top_radius = 0.0
+	prism.bottom_radius = height * 0.16
+	prism.height = height
+	prism.radial_segments = 6
+	var basis := Basis(Vector3.UP, deg_to_rad(yaw_deg)) * Basis(Vector3.RIGHT, deg_to_rad(tilt_deg))
+	return mesh(parent, node_name, prism, pos + basis * Vector3(0.0, height * 0.5, 0.0), glow_material(Color(0.55, 0.78, 1.0), Color(0.3, 0.6, 1.0), 2.4, 0.8), basis)
+
+## A glowing mushroom: a stem and a flat cap.
+func mushroom(parent: Node, node_name: String, pos: Vector3, size: float, material: Material) -> Node3D:
+	var m := Node3D.new()
+	m.name = node_name
+	m.position = pos
+	own(m, parent)
+	var stem := CylinderMesh.new()
+	stem.top_radius = 0.035 * size
+	stem.bottom_radius = 0.05 * size
+	stem.height = 0.3 * size
+	mesh(m, "Stem", stem, Vector3(0.0, 0.15 * size, 0.0), material)
+	var cap := SphereMesh.new()
+	cap.radius = 0.16 * size
+	cap.height = 0.12 * size
+	mesh(m, "Cap", cap, Vector3(0.0, 0.3 * size, 0.0), material)
+	return m
+
+## A skull from primitives: a pale dome with two dark sockets.
+func skull(parent: Node, pos: Vector3, yaw_deg: float) -> void:
+	var s := Node3D.new()
+	s.name = "Skull"
+	s.transform = Transform3D(Basis(Vector3.UP, deg_to_rad(yaw_deg)), pos)
+	own(s, parent)
+	var head := SphereMesh.new()
+	head.radius = 0.1
+	head.height = 0.19
+	mesh(s, "Head", head, Vector3(0.0, 0.095, 0.0), bone_mat)
+	var dark := StandardMaterial3D.new()
+	dark.albedo_color = Color(0.03, 0.03, 0.03)
+	for side in [-1.0, 1.0]:
+		var eye := SphereMesh.new()
+		eye.radius = 0.026
+		eye.height = 0.052
+		mesh(s, "Eye", eye, Vector3(0.037 * side, 0.1, 0.082), dark)
+
+## Steam rising from a crack (CPU particles, soft white quads).
+func steam(parent: Node, node_name: String, pos: Vector3) -> void:
+	var p := CPUParticles3D.new()
+	p.name = node_name
+	p.position = pos
+	p.amount = 24
+	p.lifetime = 2.6
+	p.direction = Vector3.UP
+	p.spread = 12.0
+	p.initial_velocity_min = 0.6
+	p.initial_velocity_max = 1.1
+	p.gravity = Vector3(0.0, 0.25, 0.0)
+	p.scale_amount_min = 0.5
+	p.scale_amount_max = 1.2
+	var quad := QuadMesh.new()
+	quad.size = Vector2(0.7, 0.7)
+	var m := StandardMaterial3D.new()
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	m.billboard_mode = BaseMaterial3D.BILLBOARD_PARTICLES
+	m.albedo_color = Color(0.85, 0.85, 0.82, 0.16)
+	var tex := GradientTexture2D.new()
+	var grad := Gradient.new()
+	grad.set_color(0, Color(1, 1, 1, 1))
+	grad.set_color(1, Color(1, 1, 1, 0))
+	tex.gradient = grad
+	tex.fill = GradientTexture2D.FILL_RADIAL
+	tex.fill_from = Vector2(0.5, 0.5)
+	tex.fill_to = Vector2(1.0, 0.5)
+	m.albedo_texture = tex
+	quad.material = m
+	p.mesh = quad
+	own(p, parent)
+
+## Flat water over a floor (visual only), reusing the sump's shader.
+func water(parent: Node, node_name: String, size: Vector2, pos: Vector3) -> void:
+	var water_mat := ShaderMaterial.new()
+	water_mat.shader = load("res://shader/water.gdshader")
+	for key in ["ripples_a", "ripples_b"]:
+		var noise_tex := NoiseTexture2D.new()
+		noise_tex.seamless = true
+		noise_tex.as_normal_map = true
+		noise_tex.bump_strength = 6.0
+		noise_tex.width = 256
+		noise_tex.height = 256
+		var noise := FastNoiseLite.new()
+		noise.frequency = 0.02 if key == "ripples_a" else 0.035
+		noise.seed = 5 if key == "ripples_a" else 11
+		noise_tex.noise = noise
+		water_mat.set_shader_parameter(key, noise_tex)
+	var plane := PlaneMesh.new()
+	plane.size = size
+	mesh(parent, node_name, plane, pos, water_mat)
+
+#endregion
+
+#region task_05: the ten simple places
+
+## Stare wyrobisko: a wide, low working held up by rock pillars; an overturned cart; Wszebor
+## works here by day. The pickaxe head for him lies in the rubble.
+func _wyrobisko() -> void:
+	var g := group(root3d, "Wyrobisko", WYROBISKO)
+	chamber(g, 14.0, 10.0, 3.4)
+	stub(g, "wyrobisko", WYROBISKO)
+	for pl in [["a", Vector3(4.6, 0.0, -1.9)], ["b", Vector3(8.2, 0.0, 2.1)], ["c", Vector3(10.6, 0.0, -2.3)]]:
+		add(g, M + "Rocks/Cave_Rocks/cave_pillar_%s.tscn" % pl[0], pl[1], randf() * 360.0, 1.0, "Pillar_" + pl[0])
+	look(g.get_node("Pillar_a"), "Filar", "Filar zostawiony przez starą ekipę, żeby trzymał strop. Ktoś wyrył na nim rząd kresek. Czternaście. Tyle dni tu kopali. Albo tylu ich tu zostało.", {"padding": 0.1})
+	reliefs(g, [["a", Vector3(2.0, 1.1, -4.9), 0.0, 1.1], ["g", Vector3(11.5, 1.2, -4.9), 0.0, 1.0], ["b", Vector3(13.9, 1.2, -3.0), -90.0, 1.1],
+		["e", Vector3(3.5, 1.0, 4.9), 180.0, 1.1], ["f", Vector3(9.8, 1.2, 4.9), 180.0, 1.0]])
+	rubble(g, [["b", Vector3(12.2, 0.2, 3.9), 1.1], ["d", Vector3(1.6, 0.2, 3.6), 0.9], ["a", Vector3(6.0, 0.15, -4.0), 0.8]])
+	add(g, M + "Mine_Rails/rail_a.tscn", Vector3(9.0, 0.02, 3.2), 90.0)
+	add(g, M + "Mine_Rails/rail_end.tscn", Vector3(12.4, 0.02, 3.2), 90.0)
+	var cart := add(g, M + "Mine_Carts/mine_cart_aa.tscn", Vector3(11.4, 0.45, 3.1), 70.0, 1.0, "OverturnedCart")
+	cart.rotate_object_local(Vector3.FORWARD, deg_to_rad(80.0))
+	look(cart, "Wywrócony wózek", "Wózek bez jednego koła, na boku. Ktoś go tu zostawił w pośpiechu, z urobkiem w środku. Urobek potem ktoś wybrał. Co do kamienia.", {"padding": 0.1})
+	var head := pickup(g, P + "Pickaxe_Bronze.gltf", Vector3(10.3, 0.05, 4.2), 0.0, 1.0, "PickHead", {
+		"display_name": "Kilof w gruzie",
+		"description": "W gruzie pod wózkiem leży kilof. Trzonek zbutwiał i rozpada się w palcach, ale obuch jest cały. Stal dobra, hawiarska. Wszebor by się ucieszył.\n\nZabierasz obuch.",
+		"on_use_item": "obuch", "on_use_flag": "took_obuch", "on_use_quest": &"kilof", "on_use_quest_entry": "znaleziony", "quest_only_if_active": true,
+	})
+	head.basis = Basis(Vector3.UP, 0.7) * Basis(Vector3.RIGHT, PI / 2)
+	vein(g, "wyrobisko_1", "c", Vector3(7.0, 1.3, -4.9), 0.0, "Stara ekipa kopała tuż obok i jej nie zauważyła. Błękit przebija spod kurzu dopiero, kiedy przetrzesz skałę rękawem. Zaznaczasz ją na mapie.", Vector3(6.6, 0.0, -4.0))
+	vein(g, "wyrobisko_2", "e", Vector3(13.9, 1.2, 1.5), -90.0, "Żyła wchodzi w ścianę, na której opiera się strop. Kto ją kiedyś wybierze, pójdzie razem ze stropem. Zaznaczasz ją z dopiskiem: ostrożnie.", Vector3(13.0, 0.0, 2.3))
+	light(g, "Glow", Vector3(6.5, 2.6, 0.0), Color(1.0, 0.62, 0.32), 0.55, 9.0, true, 0.1, 3.0)
+	spots("wyrobisko", WYROBISKO, [Vector3(3.2, 0.0, -2.6), Vector3(3.0, 0.0, 2.4), Vector3(5.8, 0.0, 0.2), Vector3(6.2, 0.0, 3.2)], [Vector3(9.5, 0.0, -3.9), 180.0])
+	emitter(g, "Drip", "drip", Vector3(8.0, 3.0, -1.0), 3.0, 9.0, -7.0, 16.0, 0.25)
+	emitter(g, "Creak", "creak", Vector3(5.0, 3.0, 2.0), 14.0, 30.0, -8.0, 20.0, 0.12)
+
+## Komora pomp: the old crew's pump under the sump. It needs oil and someone who knows pumps
+## (Nasir); once it runs, the flooded gallery below can be reached.
+func _pompy() -> void:
+	var g := group(root3d, "Pompy", POMPY)
+	chamber(g, 11.0, 9.0, 5.0)
+	stub(g, "pompy", POMPY)
+	reliefs(g, [["d", Vector3(2.4, 1.2, -4.4), 0.0, 1.1], ["f", Vector3(10.9, 1.3, -1.2), -90.0, 1.0], ["a", Vector3(4.0, 1.1, 4.4), 180.0, 1.0]])
+	# the pump: a wooden wheel between two posts, a pipe up to the sump, a trough of water
+	var pump := group(g, "Pump", Vector3(7.2, 0.0, -2.9))
+	add(pump, M + "Posts/post_reinforced_a.tscn", Vector3(-0.9, 0.0, 0.0), 0.0)
+	add(pump, M + "Posts/post_reinforced_a.tscn", Vector3(0.9, 0.0, 0.0), 0.0)
+	var wheel := CylinderMesh.new()
+	wheel.top_radius = 1.1
+	wheel.bottom_radius = 1.1
+	wheel.height = 0.22
+	wheel.radial_segments = 24
+	var wheel_node := mesh(pump, "Wheel", wheel, Vector3(0.0, 1.6, 0.0), wood, Basis(Vector3.RIGHT, PI / 2))
+	var axle := CylinderMesh.new()
+	axle.top_radius = 0.08
+	axle.bottom_radius = 0.08
+	axle.height = 2.0
+	mesh(pump, "Axle", axle, Vector3(0.0, 1.6, 0.0), wood, Basis(Vector3.BACK, PI / 2))
+	var pipe := CylinderMesh.new()
+	pipe.top_radius = 0.13
+	pipe.bottom_radius = 0.13
+	pipe.height = 5.0
+	mesh(g, "Pipe", pipe, Vector3(8.6, 2.5, -3.9), wood)
+	solid(pump, "Block", Vector3(2.2, 3.0, 0.8), Vector3(0.0, 1.5, 0.0))
+	look(wheel_node, "Pompa", "Koło zablokowane, skórzane uszczelki spękały na wiór. Bez smaru i kogoś, kto zna się na pompach, ani drgnie. Nasir by wiedział, od czego zacząć.", {"hidden_by_flag": "pump_running", "padding": 0.15})
+	interactable(wheel_node, "LookRunning", {"display_name": "Pompa", "required_flag": "pump_running", "solid": false, "padding": 0.15,
+		"description": "Pompa skrzypi i sapie, ale chodzi. W rurze chlupie woda, a z dołu, z zalanego chodnika, dochodzi bulgotanie."})
+	slab(g, "Trough", Vector3(8.0, 0.3, 1.2), Vector3(5.5, 0.15, 3.6), wood)
+	water(g, "TroughWater", Vector2(7.8, 1.0), Vector3(5.5, 0.32, 3.6))
+	pickup(g, P + "Bucket_Metal.gltf", Vector3(9.6, 0.0, -3.4), 20.0, 0.9, "OilCan", {
+		"display_name": "Bańka pod pompą",
+		"description": "Blaszana bańka, szczelnie zamknięta. W środku gęsty olej, którym smarowano tłoki. Do lampy też się nada. Albo do pompy, jeśli ktoś umie.",
+		"on_use_item": "olej", "on_use_flag": "took_pump_oil",
+	})
+	vein(g, "pompy_1", "b", Vector3(10.9, 1.4, 2.0), -90.0, "Żyła tuż nad lustrem wody w korycie. Woda jest przez nią lekko niebieska, jakby ktoś wrzucił do niej kawałek nieba. Zaznaczasz ją.", Vector3(10.0, 0.0, 1.6))
+	lantern(g, Vector3(0.6, 1.6, -4.3), 0.0, 0.9, 6.0)
+	light(g, "PumpLight", Vector3(5.6, 2.9, -1.6), Color(1.0, 0.62, 0.32), 0.9, 7.5, true, 0.12, 4.0)
+	spots("pompy", POMPY, [Vector3(3.0, 0.0, -2.0), Vector3(3.2, 0.0, 2.0), Vector3(5.0, 0.0, 0.4), Vector3(5.8, 0.0, 1.8)], [Vector3(6.3, 0.0, -1.7), 145.0])
+	emitter(g, "Drip", "drip", Vector3(7.0, 4.5, 3.0), 2.0, 6.0, -5.0, 16.0, 0.3)
+	emitter(g, "Creak", "creak", Vector3(7.2, 2.0, -2.9), 18.0, 40.0, -9.0, 16.0, 0.1)
+
+## Grzybowa grota: a cave full of glowing fungi. The spores make your head swim; Anzelm can
+## brew medicine from the mushrooms and Hagiwara wants to see one.
+func _grota() -> void:
+	var g := group(root3d, "Grota", GROTA)
+	chamber(g, 12.0, 12.0, 5.5)
+	stub(g, "grota", GROTA)
+	reliefs(g, [["a", Vector3(2.2, 1.0, -5.9), 0.0, 1.3], ["g", Vector3(9.4, 1.2, -5.9), 0.0, 1.2], ["b", Vector3(11.9, 1.1, -3.4), -90.0, 1.3],
+		["e", Vector3(3.2, 1.1, 5.9), 180.0, 1.3], ["c", Vector3(7.4, 1.3, 5.9), 180.0, 1.1], ["f", Vector3(11.9, 1.2, 4.6), -90.0, 1.1]])
+	for pl in [["b", Vector3(6.5, 0.0, 1.2)], ["a", Vector3(9.0, 0.0, -2.6)]]:
+		add(g, M + "Rocks/Cave_Rocks/cave_pillar_%s.tscn" % pl[0], pl[1], randf() * 360.0, 1.1)
+	rubble(g, [["c", Vector3(2.6, 0.2, 4.0), 1.2], ["a", Vector3(10.4, 0.2, 2.8), 1.0], ["d", Vector3(4.2, 0.2, -3.8), 0.9]])
+	var spore := glow_material(Color(0.55, 0.85, 0.8), Color(0.25, 0.9, 0.75), 2.2)
+	var clusters := group(g, "Fungi")
+	var centres := [Vector3(3.8, 0.0, -4.4), Vector3(8.4, 0.0, 4.6), Vector3(10.6, 0.0, -0.6), Vector3(5.6, 0.0, 3.6)]
+	for c in centres.size():
+		var cluster := group(clusters, "Cluster%d" % c)
+		for i in 6:
+			var offset := Vector3(randf_range(-0.7, 0.7), 0.0, randf_range(-0.5, 0.5))
+			mushroom(cluster, "Mushroom%d" % i, centres[c] + offset, randf_range(0.7, 1.6), spore)
+		light(g, "SporeLight%d" % c, centres[c] + Vector3(0.0, 0.7, 0.0), Color(0.3, 0.95, 0.8), 1.1, 4.5, false, 0.3, 0.6, 1)
+	look(clusters.get_child(0), "Grzyby", "Z bliska kapelusze pulsują w rytm, którego nie słyszysz, ale czujesz w zębach. Kręci ci się w głowie. Lepiej nie wdychać tego za długo.", {
+		"on_use_flag": "saw_fungi", "sanity_change": -4, "sanity_reason": "Zarodniki", "padding": 0.2})
+	var one := mushroom(g, "BigMushroom1", Vector3(2.4, 0.0, -1.8), 2.0, spore)
+	pickup_on(one, "Mushroom1", {"display_name": "Świecący grzyb", "on_use_item": "grzyb", "on_use_flag": "took_mushroom_1",
+		"description": "Grzyb wielkości pięści, blady, z niebieską poświatą pod kapeluszem. Pachnie słodko, jak zepsute jabłka. Odcinasz go nożem i owijasz w chustę."})
+	var two := mushroom(g, "BigMushroom2", Vector3(9.8, 0.0, 2.2), 2.1, spore)
+	pickup_on(two, "Mushroom2", {"display_name": "Świecący grzyb", "on_use_item": "grzyb", "on_use_flag": "took_mushroom_2",
+		"description": "Drugi taki sam, tylko większy. Przez chwilę masz wrażenie, że odsuwa się od noża. Tylko wrażenie."})
+	vein(g, "grota_1", "d", Vector3(5.6, 1.5, -5.9), 0.0, "Żyła przerasta grzybnię albo grzybnia przerasta żyłę. Trudno powiedzieć, co tu rosło pierwsze. Zaznaczasz ją.", Vector3(5.8, 0.0, -5.0))
+	vein(g, "grota_2", "f", Vector3(11.9, 1.3, 1.2), -90.0, "Pod grzybami ściana świeci równo i spokojnie. Grzyby rosną tylko tam, gdzie błękitu jest najwięcej. Wrysowujesz ją na mapę.", Vector3(11.0, 0.0, 0.4))
+	spots("grota", GROTA, [Vector3(3.0, 0.0, 0.4), Vector3(4.2, 0.0, -1.9), Vector3(4.6, 0.0, 1.9), Vector3(6.0, 0.0, -0.5)])
+	emitter(g, "Drip", "drip", Vector3(6.0, 5.0, 0.0), 2.5, 7.0, -5.0, 18.0, 0.35)
+	emitter(g, "Hum", "rumble", Vector3(10.0, 1.0, 0.0), 25.0, 55.0, -10.0, 22.0, 0.4)
+
+## Kostnica: the old crew's dead in wall niches, candles that someone keeps lit, fresh bread.
+func _kostnica() -> void:
+	var g := group(root3d, "Kostnica", KOSTNICA)
+	chamber(g, 10.0, 8.0, 3.6)
+	stub(g, "kostnica", KOSTNICA)
+	var niches := group(g, "Niches")
+	for side in [-1.0, 1.0]:
+		for i in 4:
+			var x := 2.0 + i * 2.1
+			var z: float = 3.75 * side
+			var shelf := group(niches, "Niche%d%s" % [i, "S" if side > 0 else "N"])
+			slab(shelf, "Shelf", Vector3(1.4, 0.12, 0.5), Vector3(x, 1.0, z), rock, false)
+			slab(shelf, "ShelfHigh", Vector3(1.4, 0.12, 0.5), Vector3(x, 1.9, z), rock, false)
+			skull(shelf, Vector3(x - 0.3, 1.06, z), 180.0 if side > 0 else 0.0)
+			skull(shelf, Vector3(x + 0.35, 1.96, z), 180.0 if side > 0 else 0.0)
+	for c in [Vector3(3.0, 0.0, -3.1), Vector3(7.1, 0.0, -3.1), Vector3(5.0, 0.0, 3.1)]:
+		var floor_candle := add(niches, P + "Candle_2.gltf", c, 0.0)
+		light(floor_candle, "Flame", Vector3(0.0, 0.25, 0.0), Color(1.0, 0.64, 0.33), 0.9, 4.5, false, 0.3, 8.0)
+	look(niches.get_child(1), "Nisze z czaszkami", "Stara ekipa chowała tu swoich. Pod każdą czaszką wydrapane imię. Dwóch Grabców. Trzech Wojsławów. Jedna nisza jest pusta i podpisana, ale imienia nie umiesz przeczytać, choć litery są wyraźne.", {
+		"on_use_flag": "saw_niches", "sanity_change": -2, "sanity_reason": "Czaszki", "padding": 0.2})
+	# the altar with bread and candles that someone keeps lit
+	slab(g, "Altar", Vector3(0.8, 0.8, 1.6), Vector3(8.6, 0.4, 0.0), rock)
+	var loaf := SphereMesh.new()
+	loaf.radius = 0.16
+	loaf.height = 0.18
+	var bread_mat := StandardMaterial3D.new()
+	bread_mat.albedo_color = Color(0.55, 0.36, 0.18)
+	bread_mat.roughness = 0.9
+	var bread := mesh(g, "Bread", loaf, Vector3(8.6, 0.88, -0.4), bread_mat)
+	look(bread, "Chleb", "Bochenek chleba. Świeży, jeszcze pachnie. Tak w Jaksarze karmi się zmarłych w Święto Przodków, tylko że do Święta Przodków daleko. Ktoś tu schodzi. Regularnie.", {
+		"on_use_flag": "saw_bread", "sanity_change": -3, "sanity_reason": "Ktoś tu bywa", "padding": 0.12})
+	for c in [Vector3(8.4, 0.8, 0.5), Vector3(8.8, 0.8, 0.6)]:
+		var stick := add(g, P + "CandleStick.gltf", c, 0.0)
+		light(stick, "Flame", Vector3(0.0, 0.3, 0.0), Color(1.0, 0.66, 0.35), 0.7, 4.0, false, 0.3, 8.0)
+	pickup(g, P + "Candle_1.gltf", Vector3(8.7, 0.8, -0.1), 0.0, 1.0, "Candles", {
+		"display_name": "Nowe świece",
+		"description": "Dwie łojowe świece, jeszcze nie zapalone, zostawione przy chlebie. Bierzesz je. Zmarłym wystarczą te, które już płoną. Chyba.",
+		"on_use_item": "swieca:2", "on_use_flag": "took_ossuary_candles", "sanity_change": -2, "sanity_reason": "Zabierasz zmarłym świece",
+	})
+	vein(g, "kostnica_1", "a", Vector3(9.9, 1.4, -2.2), -90.0, "Za ołtarzem, w ścianie, żyła. Czaszki patrzą na nią ze wszystkich nisz, jakby jej pilnowały. Zaznaczasz ją szybko.", Vector3(9.1, 0.0, -2.8))
+	spots("kostnica", KOSTNICA, [Vector3(2.8, 0.0, -1.6), Vector3(2.8, 0.0, 1.6), Vector3(4.8, 0.0, -2.0), Vector3(4.8, 0.0, 2.0)])
+	emitter(g, "Drip", "drip", Vector3(5.0, 3.2, 0.0), 4.0, 11.0, -8.0, 14.0, 0.2)
+
+## Kryształowa galeria: the deepest place on the map, walls of blue iron and crystal columns.
+## No lanterns here: you need oil for your own lamp to get this far.
+func _galeria() -> void:
+	var g := group(root3d, "Galeria", GALERIA)
+	chamber(g, 16.0, 12.0, 7.0)
+	stub(g, "galeria", GALERIA, false)
+	var walls := vein_group(g, "BlueWalls")
+	for r in [["a", Vector3(2.5, 1.4, -5.9), 0.0, 1.4], ["g", Vector3(9.0, 2.2, -5.9), 0.0, 1.5], ["b", Vector3(15.9, 1.6, -4.0), -90.0, 1.4],
+			["f", Vector3(15.9, 2.4, 3.4), -90.0, 1.5], ["e", Vector3(4.2, 1.6, 5.9), 180.0, 1.4], ["d", Vector3(13.4, 2.0, 5.9), 180.0, 1.3]]:
+		add(walls, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_%s.tscn" % r[0], r[1], r[2], r[3])
+	var columns := group(g, "Columns")
+	for c in [[Vector3(5.5, 0.0, -1.8), 1.3, 8.0], [Vector3(6.0, 0.0, -2.3), 0.8, -12.0], [Vector3(8.2, 0.0, 2.6), 1.6, 5.0], [Vector3(8.8, 0.0, 3.0), 0.9, 18.0],
+			[Vector3(11.4, 0.0, -2.8), 1.1, -6.0], [Vector3(12.8, 0.0, 1.4), 1.4, 10.0], [Vector3(13.2, 0.0, 1.9), 0.7, -15.0], [Vector3(3.6, 0.0, 3.8), 0.9, 12.0]]:
+		crystal_prism(columns, "Column", c[0], c[1], c[2], randf() * 360.0)
+	look(columns.get_child(0), "Kryształowe kolumny", "Kryształy rosną tu z podłogi jak kolumny w świątyni. Najwyższe sięgają ci do piersi. Wszystkie pochylone w jedną stronę, w dół, jak trawa pod wiatrem.", {"padding": 0.15})
+	var shard := crystal_prism(g, "Shard", Vector3(10.2, 0.02, 0.4), 0.22, 70.0, 30.0)
+	pickup_on(shard, "Shard", {"display_name": "Odłamek", "on_use_item": "odlamek", "on_use_flag": "took_shard",
+		"description": "Od kolumny odprysnął kawałek wielkości kciuka. Czysty błękit, bez grama skały. Kiedy go podnosisz, buczy, a amulet dziadka buczy razem z nim."})
+	vein(g, "galeria_1", "c", Vector3(6.0, 1.5, -5.9), 0.0, "Tu nie ma żył. Tu cała ściana jest żyłą. Rysujesz na mapie grubą kreskę i przez chwilę nie możesz oderwać wzroku.", Vector3(6.2, 0.0, -5.0), 1.5)
+	vein(g, "galeria_2", "e", Vector3(15.9, 1.4, -0.6), -90.0, "Błękit pulsuje tu wolniej niż gdzie indziej. Równo z twoim oddechem. Wstrzymujesz oddech. Błękit też.", Vector3(15.0, 0.0, -1.2), 1.4)
+	vein(g, "galeria_3", "g", Vector3(9.4, 1.3, 5.9), 180.0, "Najjaśniejsza żyła, jaką widziałeś. Światło przechodzi ci przez palce, kiedy zasłaniasz ją dłonią. Zaznaczasz ją drżącą ręką.", Vector3(9.6, 0.0, 5.0), 1.4)
+	for p in [Vector3(4.0, 3.5, 0.0), Vector3(10.0, 4.0, -1.0), Vector3(13.5, 3.0, 2.0)]:
+		light(g, "Glow", p, Color(0.35, 0.6, 1.0), 2.4, 10.0, true, 0.35, 0.5, 1)
+	spots("galeria", GALERIA, [Vector3(3.0, 0.0, -1.2), Vector3(3.2, 0.0, 1.6), Vector3(5.2, 0.0, 0.4), Vector3(7.0, 0.0, -0.4)])
+	emitter(g, "Hum", "rumble", Vector3(12.0, 1.0, 0.0), 12.0, 30.0, -6.0, 30.0, 0.5)
+	emitter(g, "Taps", "pick_taps", Vector3(16.5, 1.0, 0.0), 30.0, 70.0, -8.0, 30.0, 0.05)
+
+## Kuźnia starej ekipy: a cold forge, an anvil with a crowbar on it, a hidden flask.
+func _kuznia() -> void:
+	var g := group(root3d, "Kuznia", KUZNIA)
+	chamber(g, 9.0, 8.0, 3.6)
+	stub(g, "kuznia", KUZNIA)
+	# the hearth against the north wall, with a hood up to the roof
+	slab(g, "Hearth", Vector3(1.8, 0.8, 1.2), Vector3(3.0, 0.4, -3.3), rock)
+	slab(g, "Hood", Vector3(1.6, 2.8, 0.9), Vector3(3.0, 2.2, -3.5), rock)
+	var ash := slab(g, "Ash", Vector3(1.4, 0.05, 0.8), Vector3(3.0, 0.82, -3.2), charred, false)
+	look(ash, "Palenisko", "Zimne od czterdziestu lat. W popiele ktoś narysował palcem znak: dwie skrzyżowane kreski i kropkę. Popiół powinien był to dawno zatrzeć.", {"on_use_flag": "saw_forge_mark", "padding": 0.2})
+	add(g, P + "Anvil_Log.gltf", Vector3(4.8, 0.0, -1.0), 30.0, 1.0, "Anvil")
+	var bar := CylinderMesh.new()
+	bar.top_radius = 0.018
+	bar.bottom_radius = 0.018
+	bar.height = 0.9
+	var iron := StandardMaterial3D.new()
+	iron.albedo_color = Color(0.18, 0.17, 0.16)
+	iron.metallic = 0.7
+	iron.roughness = 0.5
+	var crowbar := mesh(g, "Crowbar", bar, Vector3(4.8, 0.95, -1.0), iron, Basis(Vector3.UP, 0.4) * Basis(Vector3.BACK, PI / 2))
+	pickup_on(crowbar, "Crowbar", {"display_name": "Łom na kowadle", "on_use_item": "lom", "on_use_flag": "took_crowbar",
+		"description": "Łom leży na kowadle, jakby kowal odłożył go na chwilę. Ciężki, dobrze kuty, z rozpłaszczonym końcem. Taki podważy wszystko, co ktoś kiedyś zabił na głucho."})
+	add(g, P + "WeaponStand.gltf", Vector3(7.8, 0.0, 3.3), 180.0)
+	add(g, P + "Barrel.gltf", Vector3(6.4, 0.0, -3.3), 0.0)
+	add(g, P + "Bucket_Metal.gltf", Vector3(6.9, 0.0, -2.6), 40.0)
+	add(g, P + "Chain_Coil.gltf", Vector3(1.6, 0.0, 2.8), 0.0)
+	add(g, P + "Workbench_Drawers.gltf", Vector3(2.6, 0.0, 3.5), 180.0, 1.0, "Bench")
+	pickup(g, P + "Bottle_1.gltf", Vector3(2.9, 0.93, 3.4), 0.0, 1.0, "Flask", {
+		"display_name": "Butelka za szufladą",
+		"description": "Zakurzona butelka schowana za szufladą, korek zalany woskiem. W środku coś, co pachnie korzeniami i ogniem. Kowal starej ekipy wiedział, co dobre.",
+		"on_use_item": "nalewka", "on_use_flag": "took_smith_flask",
+	})
+	reliefs(g, [["c", Vector3(8.9, 1.2, -2.6), -90.0, 1.0], ["a", Vector3(6.0, 1.1, 3.9), 180.0, 1.0]])
+	vein(g, "kuznia_1", "b", Vector3(8.9, 1.3, 1.4), -90.0, "Kowal musiał na nią patrzeć codziennie przez całą robotę. Może dlatego wykuwał tu tylko gwoździe. Zaznaczasz ją.", Vector3(8.0, 0.0, 1.0))
+	light(g, "Glow", Vector3(4.5, 2.6, 0.5), Color(1.0, 0.6, 0.3), 0.6, 8.0, true, 0.1, 3.0)
+	spots("kuznia", KUZNIA, [Vector3(2.6, 0.0, 0.6), Vector3(3.4, 0.0, -1.4), Vector3(3.8, 0.0, 1.8), Vector3(6.0, 0.0, 0.6)])
+	emitter(g, "Creak", "creak", Vector3(4.0, 3.0, 0.0), 16.0, 34.0, -9.0, 16.0, 0.12)
+
+## Przekop Grabca: a dead-straight crosscut with frames and rails; at its end the old sztygar's
+## cache behind nailed boards (a crowbar opens it).
+func _przekop() -> void:
+	var g := group(root3d, "Przekop", PRZEKOP)
+	chamber(g, 24.0, 3.6, 4.0)
+	stub(g, "przekop", PRZEKOP)
+	var f := frames(g, [2.0, 5.0, 8.0, 11.0, 14.0, 17.0, 20.0], 1.4)
+	look(f.get_child(0), "Tabliczka na stemplu", "Wypalone w drewnie: PRZEKOP SIÓDMY. SZTYGAR W. GRABIEC. Pod spodem, nożem, inną ręką: kto to czyta, niech idzie prosto i się nie ogląda.", {"padding": 0.1})
+	for x in [3.0, 7.0, 11.0, 15.0, 19.0]:
+		add(g, M + "Mine_Rails/rail_a.tscn", Vector3(x, 0.02, 0.0), 90.0)
+	add(g, M + "Mine_Carts/mine_cart_ba.tscn", Vector3(15.6, 0.0, 0.0), 90.0, 1.0, "Cart")
+	var boards := add(g, M + "Panel_Wood/panel_wood_a.tscn", Vector3(23.7, 0.0, 0.0), 90.0, 1.0, "CacheBoards")
+	interactable(boards, "CachePickup", {
+		"display_name": "Zabita deskami wnęka", "prompt_text": "Podważ deski łomem", "time_cost_hours": 0.5, "time_reason": "Rozbijanie skrytki",
+		"required_item": "lom", "missing_text": "Deski przybite na głucho. Gołymi rękami ich nie oderwiesz. Przydałby się łom.",
+		"description": "Deski puszczają z jękiem. W środku skrzynka: bańka oleju, zeszyt w ceracie i garść zardzewiałych gwoździ. Zeszyt jest pełen liczb, a na ostatniej stronie liczby się urywają.\n\nZabierasz olej i zeszyt.",
+		"on_use_item": "olej", "on_use_note": &"zapiski_grabca", "on_use_flag": "opened_grabiec_cache", "remove_after_use": true,
+		"expedition_event": "Otworzyłeś skrytkę sztygara Grabca.", "padding": 0.1,
+	})
+	vein(g, "przekop_1", "d", Vector3(12.5, 1.3, -1.7), 0.0, "Przekop idzie prosto przez żyłę, jakby Grabiec jej nie zauważył. Albo zauważył i kopał dalej, bo miał rozkaz iść prosto. Zaznaczasz ją.", Vector3(12.3, 0.0, -0.9))
+	for x in [6.5, 16.5]:
+		light(g, "Glow", Vector3(x, 2.8, 0.0), Color(1.0, 0.6, 0.3), 0.5, 7.0, true, 0.12, 4.0)
+	spots("przekop", PRZEKOP, [Vector3(3.8, 0.0, -0.8), Vector3(4.6, 0.0, 0.8), Vector3(6.2, 0.0, -0.8), Vector3(7.0, 0.0, 0.8)])
+	emitter(g, "Creak", "creak", Vector3(12.0, 3.0, 0.0), 12.0, 26.0, -7.0, 22.0, 0.12)
+	emitter(g, "Drip", "drip", Vector3(20.0, 3.5, 0.0), 3.0, 9.0, -7.0, 16.0, 0.25)
+
+## Zalany chodnik: a gallery with knee-deep icy water (after the pump runs). A night after
+## wading here brings a fever.
+func _zalany() -> void:
+	var g := group(root3d, "Zalany", ZALANY)
+	chamber(g, 16.0, 3.6, 4.0)
+	stub(g, "zalany", ZALANY)
+	frames(g, [2.5, 6.0, 9.5, 13.0], 1.4)
+	water(g, "Water", Vector2(16.0, 3.6), Vector3(8.0, 0.45, 0.0))
+	for pl in [[Vector3(5.0, 0.48, 0.6), 20.0], [Vector3(10.4, 0.48, -0.7), -35.0]]:
+		slab(g, "FloatingPlank", Vector3(1.4, 0.05, 0.22), pl[0], wood, false, Basis(Vector3.UP, deg_to_rad(pl[1])))
+	var cart := add(g, M + "Mine_Carts/mine_cart_ba.tscn", Vector3(12.0, 0.0, 0.6), 80.0, 1.0, "DrownedCart")
+	look(cart, "Woda", "Lodowata woda po kolana. Po kilku krokach nie czujesz palców. Coś ociera ci się o łydkę. Pewnie deska. Pewnie.\n\nPo takiej kąpieli łatwo o gorączkę.", {"padding": 0.1})
+	vein(g, "zalany_1", "a", Vector3(6.2, 1.3, -1.7), 0.0, "Żyła biegnie tuż nad wodą i odbija się w niej, więc widzisz ją podwójnie. Zaznaczasz tę prawdziwą.", Vector3(6.0, 0.0, -0.9))
+	vein(g, "zalany_2", "c", Vector3(15.9, 1.4, 0.4), -90.0, "Na samym końcu chodnika, gdzie woda jest najgłębsza, ściana świeci jak latarnia. Brniesz do niej i zaznaczasz ją na mapie.", Vector3(15.0, 0.0, -0.4))
+	light(g, "Glow", Vector3(3.0, 2.6, 0.0), Color(1.0, 0.6, 0.3), 0.45, 6.0, true, 0.12, 4.0)
+	spots("zalany", ZALANY, [Vector3(3.2, 0.0, -0.8), Vector3(3.8, 0.0, 0.9), Vector3(5.2, 0.0, -0.6), Vector3(5.8, 0.0, 0.9)])
+	emitter(g, "Drip", "drip", Vector3(8.0, 3.5, 0.0), 1.5, 5.0, -4.0, 18.0, 0.3)
+	emitter(g, "Drip2", "drip", Vector3(13.0, 3.5, 0.5), 2.0, 6.0, -6.0, 18.0, 0.3)
+
+## Parująca szczelina: a tall, narrow crack with hot steam and sulphur. One vein sits right
+## next to a vent: marking it burns you.
+func _szczelina() -> void:
+	var g := group(root3d, "Szczelina", SZCZELINA)
+	chamber(g, 14.0, 3.0, 6.0)
+	stub(g, "szczelina", SZCZELINA)
+	reliefs(g, [["b", Vector3(2.6, 1.4, -1.8), 0.0, 0.9], ["d", Vector3(8.0, 2.6, -1.8), 0.0, 1.0], ["f", Vector3(6.6, 1.5, 1.8), 180.0, 0.9],
+		["a", Vector3(13.9, 1.8, 0.0), -90.0, 1.0], ["g", Vector3(9.2, 3.2, 1.8), 180.0, 0.9]])
+	var sulphur := StandardMaterial3D.new()
+	sulphur.albedo_color = Color(0.72, 0.64, 0.18)
+	sulphur.roughness = 1.0
+	var first_stain: Node3D = null
+	for v in [Vector3(6.2, 0.0, 0.8), Vector3(11.0, 0.0, -0.7)]:
+		steam(g, "Steam", v)
+		var stain := slab(g, "Sulphur", Vector3(0.9, 0.03, 0.7), v + Vector3(0.0, 0.015, 0.0), sulphur, false)
+		if first_stain == null:
+			first_stain = stain
+		light(g, "Heat", v + Vector3(0.0, 0.4, 0.0), Color(1.0, 0.42, 0.18), 1.2, 4.5, false, 0.35, 5.0)
+	look(first_stain, "Para", "Z pęknięcia bucha para, gorąca jak z kotła. Śmierdzi zgniłymi jajami. Dziadek miał rację: nie siedzieć tu długo.", {"padding": 0.3})
+	vein(g, "szczelina_1", "e", Vector3(4.4, 1.4, -1.75), 0.0, "Wąska żyła w pęknięciu skały, ciepła jak piec. Zaznaczasz ją, zanim zdążysz się spocić.", Vector3(4.0, 0.0, -0.8), 1.0)
+	vein(g, "szczelina_2", "b", Vector3(11.2, 1.3, 1.75), 180.0, "Żyła biegnie tuż nad wylotem pary. Kiedy się nad nią pochylasz, para bucha ci prosto w twarz. Parzy, ale kończysz rysunek.", Vector3(11.4, 0.0, 0.9), 1.0, {
+		"wound": 10, "wound_reason": "Poparzyła cię para"})
+	spots("szczelina", SZCZELINA, [Vector3(2.8, 0.0, -0.6), Vector3(3.4, 0.0, 0.7), Vector3(5.0, 0.0, -0.7), Vector3(5.4, 0.0, 0.6)])
+	emitter(g, "Hiss", "rumble", Vector3(8.0, 1.0, 0.0), 6.0, 14.0, -6.0, 18.0, 0.6)
+
+## Ślepy szyb: the bottom of a blind shaft you came down on a rope. Wind from nowhere, a vein
+## and candles on a ledge (a fall if you climb for them).
+func _szyb() -> void:
+	var g := group(root3d, "Szyb", SZYB)
+	chamber(g, 6.5, 6.0, 9.0)
+	stub(g, "szyb", SZYB)
+	slab(g, "CeilingDark", Vector3(6.0, 0.4, 5.6), Vector3(3.25, 8.4, 0.0), charred, false)
+	rope(g, "YourRope", Vector3(1.4, 9.0, -0.4), Vector3(1.4, 0.05, -0.4), 0.03)
+	add(g, P + "Rope_3.gltf", Vector3(1.6, 0.0, -0.2), 30.0)
+	reliefs(g, [["a", Vector3(3.4, 1.2, -2.9), 0.0, 1.1], ["e", Vector3(6.4, 3.8, -1.2), -90.0, 1.2], ["c", Vector3(2.6, 4.5, 2.9), 180.0, 1.2],
+		["g", Vector3(5.0, 6.0, -2.9), 0.0, 1.0]])
+	slab(g, "Ledge", Vector3(1.4, 0.2, 0.7), Vector3(4.6, 2.0, -2.65), rock)
+	var niche := add(g, P + "CandleStick_Triple.gltf", Vector3(4.6, 2.1, -2.65), 0.0, 1.0, "Niche")
+	pickup_on(niche, "Candles", {
+		"display_name": "Świece na półce",
+		"description": "Wspinasz się na półkę po świece. Kamień obsuwa ci się pod nogą i spadasz z wysokości człowieka. Świece ocalały. Ty trochę mniej.",
+		"on_use_item": "swieca:2", "on_use_flag": "took_shaft_candles", "wound": 15, "wound_reason": "Spadłeś z półki",
+	})
+	var draft := Node3D.new()
+	draft.name = "Draft"
+	draft.position = Vector3(3.2, 1.2, 0.0)
+	own(draft, g)
+	var draft_box := BoxMesh.new()
+	draft_box.size = Vector3(0.6, 0.6, 0.6)
+	var invisible := StandardMaterial3D.new()
+	invisible.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	invisible.albedo_color = Color(1, 1, 1, 0.0)
+	mesh(draft, "Air", draft_box, Vector3.ZERO, invisible)
+	look(draft, "Wiatr", "Z góry ciągnie zimne powietrze, choć szyb nie ma wyjścia na powierzchnię. Dziadek napisał tylko jedno słowo: wiatr. Teraz wiesz dlaczego. I zarazem nie wiesz.", {"padding": 0.3})
+	vein(g, "szyb_1", "f", Vector3(6.4, 1.5, 1.4), -90.0, "Żyła pnie się po ścianie szybu w górę, w ciemność. Zaznaczasz tyle, ile widzisz. Reszta ucieka poza zasięg lampy.", Vector3(5.6, 0.0, 1.9), 1.3)
+	light(g, "Glow", Vector3(3.0, 2.0, 0.5), Color(1.0, 0.6, 0.3), 0.45, 6.0, true, 0.12, 4.0)
+	spots("szyb", SZYB, [Vector3(2.8, 0.0, 1.4), Vector3(3.6, 0.0, -1.2), Vector3(4.4, 0.0, 1.8), Vector3(4.8, 0.0, 0.0)])
+	emitter(g, "Wind", "rumble", Vector3(3.2, 7.0, 0.0), 8.0, 18.0, -4.0, 20.0, 0.9)
 
 #endregion
 

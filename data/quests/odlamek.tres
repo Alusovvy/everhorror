@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"odlamek"
+title = "Odłamek dla Sabiny"
+giver = "Sabina von Reuss"
+entries = {
+"start": "Sabina chce zbadać czysty błękit. Najczystszy ma być w Kryształowej galerii, najniżej na mapie.",
+"oddany": "Dałem Sabinie odłamek z galerii. Pierwszy raz widziałem, jak Druga się cieszy. Tak mi się przynajmniej wydaje, pod maską."
+}

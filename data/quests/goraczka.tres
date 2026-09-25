@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"goraczka"
+title = "Gorączka Nasira"
+giver = "Brat Anzelm"
+entries = {
+"start": "Nasir ma gorączkę. Anzelm mówi, że bez lekarstwa Nasir nie dociągnie do końca tygodnia, a lekarstwa w obozie prawie nie ma.",
+"grzyb": "Anzelm uwarzy lekarstwo ze świecącego grzyba z groty, jeśli mu go przyniosę.",
+"wyleczony": "Nasir wyzdrowiał. Przeżył północ i gorączkę, a to już dwa cuda.",
+"wywieziony": "Nasira wywieźli na górę w gorączce. Nie zdążyłem."
+}

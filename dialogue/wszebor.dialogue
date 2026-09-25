@@ -1,0 +1,104 @@
+using GameState
+
+~ start
+if not has_flag("met_wszebor")
+	$> set_flag("met_wszebor")
+	if npc_place("wszebor") == "ognisko"
+		Olbrzym przy ognisku śpiewa coś niskim głosem, a Tekla udaje, że jej to nie przeszkadza. Na twój widok urywa w pół słowa.
+	elif npc_place("wszebor") == "teren"
+		W głębi wyrobiska ktoś wali kilofem tak, że ze stropu sypie się pył. Olbrzym z jasną brodą odwraca się na dźwięk twoich kroków.
+	else
+		Przy stole siedzi olbrzym z jasną brodą i je za trzech. Ława ugina się pod nim jak pod dwoma.
+	Wszebor: Hej! Ty żeś ten wnuk przewodnika? Wszebor jestem, ze Śnieżnej Przystani. Rębacz. A jak trza, to i kowal.
+	Wszebor: Siadaj, siadaj. Pod ziemią ino dwie rzeczy grzeją, ogień i gadanie.
+elif npc_place("wszebor") == "teren" and not done_today("wsz_field")
+	$> mark_today("wsz_field")
+	Wszebor ociera pot z czoła i opiera kilof o ścianę.
+	Wszebor: Hej, przewodniku! Nie łaź mi za plecami, bo jak się zamachnę, to cię wyślę na górę bez liny.
+=> hub
+
+~ hub
+Wszebor: [[Gadaj, gadaj.|No?|Czego ci trza?]]
+- Skąd jesteś? [if not has_flag("wsz_asked_home") /]
+	$> set_flag("wsz_asked_home")
+	Wszebor: Ze Śnieżnej Przystani, spod Czarnych Gór. Tam śnieg leży od jesieni do wiosny, a wiosna trwa ze trzy dni.
+	Wszebor: My, Hawiarowie, kopiemy od zawsze. Najlepsze klingi w Jaksarze wychodzą spod naszych młotów. Kniaź o tym wie i dlatego płaci potrójnie.
+	Wszebor: Ale powiem ci, co tu jest dziwne. U nas w kopalni zimno jak w psiarni. A tu? Im niżej, tym cieplej. Skała nie powinna tak robić.
+	=> hub
+- Co to za blizna na dłoni? [if has_flag("wsz_asked_home") and not has_flag("wsz_asked_ring") /]
+	$> set_flag("wsz_asked_ring")
+	Wszebor pokazuje ci otwartą dłoń. Na jej środku biały, gładki pierścień wypalony w skórze.
+	Wszebor: A, to z Nocy Onych. U nas chłopaków po postrzyżynach znaczy się rozgrzanym żelazem. Kto nie krzyknie, temu Oni nie poskąpią dzieci.
+	Wszebor: Ja krzyknąłem. Tak, że było słychać w trzech dolinach. I co? Dzieci nie mam. Za to mam czworo po bracie.
+	- Po bracie?
+		Wszebor milknie. Pierwszy raz, odkąd go znasz.
+		Wszebor: Bogdal. Zasypało go pod Przystanią, w chodniku tak ciasnym, że trza było iść bokiem. Kopaliśmy do niego trzy dni.
+		Wszebor: Jak go wyciągnęliśmy, to jeszcze był ciepły. Ino co z tego.
+		Wszebor: Od tamtej pory ciasne chodniki... Nie, nic. Mniejsza z tym. Wdowa ma czworo dzieci, a Kniaź płaci potrójnie. Tyle.
+		$> set_flag("wsz_told_brother")
+		$> change_rep("wszebor", 3)
+	- Nie będę wypytywał.
+		Wszebor: I dobrze. Łeb masz nie od parady.
+	=> hub
+- Opowiedz o Długiej Nocy. [if has_flag("wsz_asked_home") and not has_flag("wsz_long_night") /]
+	$> set_flag("wsz_long_night")
+	Wszebor: Najdłuższa noc w roku. U nas na północy trwa dłużej niż cały dzień.
+	Wszebor: Siedzi się w chacie, daje się sobie prezenty, co je człowiek całą zimę strugał, i śpi. Kto nie prześpi osiemnastu godzin, tego zjedzą Wultany.
+	Wszebor: I pije się napar z sosnowych igieł. Paskudztwo, ale zdrowe. Matka mi go wlewała do gęby na siłę.
+	- A Wultany?
+		Wszebor: A kto je tam wie. Nikt ich nie widział, bo kto widział, tego zjadły. Hej, hej.
+		Wszebor: Ale tu, pod ziemią, jakby Długa Noc trwała cały czas. I myślę sobie czasem, że tu Wultany nie muszą czekać do zimy.
+	- Brzmi jak dobre święto.
+		Wszebor: Najlepsze! Zaraz po Dniu Życia. Ale o Dniu Życia przy kobietach się nie gada.
+	$> change_player_sanity(3)
+	=> hub
+- W nocy ziemia drżała. Czułeś? [if has_flag("tremor_seen") and not has_flag("wsz_tremor") /]
+	$> set_flag("wsz_tremor")
+	Wszebor: Czułem. U nas nad morzem mówią na to Dzień Krwawego Nieba. Chmury czarne od pyłu, siarka, fale walą w brzeg, a ziemia drży.
+	Wszebor: Wtedy najwięksi grzesznicy łażą w pochodach i błagają Onych o litość. A za tydzień grzeszą dalej.
+	Wszebor: Ale tu nieba nie ma. Tu trzęsie się coś pod nami. I to nie jest morze.
+	=> hub
+- Potrzebuję porządnego kilofa. [if quest_state("kilof") == "" /]
+	$> start_quest("kilof")
+	Wszebor: Ha! Porządnego to tu nie ma. Obozowe kilofy to miękkie jaksarskie żelazo, zegnie się na pierwszym twardym kamieniu.
+	Wszebor: Ale stara ekipa miała hawiarskiego kowala, to wiem na pewno. Po robocie widać. Gdzieś w chodnikach musiał zostać jego obuch. Ja bym szukał w starym wyrobisku, tam, gdzie kopię. Tylko że ja nie mam czasu szukać.
+	Wszebor: Znajdź mi obuch, a ja ci go osadzę na trzonku z porządnego jesionu. Do rana będzie gotowy.
+	=> hub
+- Mam obuch. [if has_item("obuch") and quest_state("kilof") != "done" /]
+	$> take_item("obuch")
+	$> quest_log("kilof", "oddany")
+	$> set_flag("wsz_forging_day", day)
+	$> change_rep("wszebor", 5)
+	Wszebor obraca obuch w wielkich dłoniach, stuka w niego paznokciem i przykłada do ucha jak muszlę.
+	Wszebor: Hawiarska robota. Poznałbym po dźwięku nawet przez sen. Stal twarda jak łeb mojej teściowej.
+	Wszebor: Jutro rano będzie kilof. Taki, co rozłupie ci nawet naciek, spod którego błękit wyziera.
+	=> hub
+- Jak tam mój kilof? [if has_flag("wsz_forging_day") and not has_item("kilof") and quest_state("kilof") != "done" /]
+	if day > get_flag("wsz_forging_day", 99)
+		Wszebor sięga za siebie i podaje ci kilof na nowym, jasnym trzonku. Leży w dłoni, jakby na nią czekał.
+		Wszebor: Masz. Ino nie zgub. Drugiego takiego obucha w tej kopalni nie ma.
+		$> give_item("kilof")
+		$> quest_log("kilof", "gotowy")
+		$> complete_quest("kilof")
+	else
+		Wszebor: Jutro, mówiłem. Dobry trzonek musi przeschnąć. Jak człowiek.
+	=> hub
+- Masz łyk czegoś mocnego? [if rep("wszebor") >= 5 and not has_flag("wsz_gave_flask") /]
+	$> set_flag("wsz_gave_flask")
+	Wszebor: Dla ciebie? Juści!
+	Wszebor wyciąga zza pazuchy piersiówkę, pociąga sam, potem podaje tobie.
+	Wszebor: Zatrzymaj. Ja mam jeszcze jedną. Zawsze mam jeszcze jedną.
+	$> give_item("nalewka")
+	=> hub
+- Zaśpiewaj coś. [if npc_place("wszebor") == "ognisko" and not done_today("wsz_song") /]
+	$> mark_today("wsz_song")
+	Wszebor odchrząkuje tak, że Tekla przewraca oczami, i zaczyna śpiewać, nisko i powoli. O śniegu, o piecu, o bracie, który poszedł na dół i wrócił z gwiazdą w kieszeni.
+	Przy trzeciej zwrotce Mirosław przestaje dłubać przy ogniu i słucha. Przy piątej ktoś w ciemności cicho pociąga nosem.
+	Wszebor: No. Żeby się Wultany wystraszyły.
+	$> change_player_sanity(6)
+	$> change_sanity("miroslaw", 3)
+	$> change_sanity("wszebor", 3)
+	=> hub
+- Muszę iść.
+	Wszebor: Idź, idź. Tylko łeb trzymaj nisko, strop jest niżej, niż myślisz.
+	=> END

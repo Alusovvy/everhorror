@@ -21,3 +21,4 @@ sanity_zero_effect = "[ROBOCZE] Przestaje odróżniać przeszłość od teraźni
 model = ExtResource("2_model")
 dialogue = ExtResource("3_dialogue")
 portrait_eye_height = 1.62
+female = false

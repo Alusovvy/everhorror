@@ -81,12 +81,28 @@ Dobrawa: [[Słucham.|Tak?|Mów krótko. To miejsce boli.]]
 	Dobrawa: Wszystko, co tu jest, albo śpi, albo nie żyje. Energia płynie wolno i równo, jak oddech kogoś pogrążonego we śnie.
 	Dobrawa: Pytanie, co się stanie, kiedy ktoś zacznie kopać przy samym sercu.
 	=> hub
+- Spotkałem w chodnikach Drugich z Exitium. [if has_flag("drudzy_met") and not has_flag("dob_on_exitium") /]
+	$> set_flag("dob_on_exitium")
+	Dobrawa: Ludzie Nakamury. Exitium to nasza córka, która uciekła z domu i zamieszkała w ruinach. Initium jej pozwoliło. Initium zawsze wszystko pozwala, jeśli zyska na tym wiedzę.
+	Dobrawa: Von Brühl rozbiera rzeczy na części, żeby zobaczyć, jak działały. Niektórych rzeczy nie składa się z powrotem.
+	if has_flag("sabina_joined")
+		Dobrawa: Sabina jest dobra. Za dobra na Exitium. Tam dobro szybko się zużywa.
+	=> hub
 - Muszę iść.
 	Dobrawa: Idź. I nie noś amuletu na gołej skórze. Ciągnie cię za sobą w dół.
 	=> END
 
 ~ day3
-Dobrawa: Czuję, że coś się zmieniło w nocy. Energia płynie szybciej. Jakby ktoś po drugiej stronie przewrócił się na drugi bok.
-if has_item("krysztal")
-	Dobrawa: I wciąż masz kryształ. Pilnuj go.
-=> END
+if not has_flag("dob_day3")
+	$> set_flag("dob_day3")
+	Dobrawa: Czuję, że coś się zmieniło w nocy. Energia płynie szybciej. Jakby ktoś po drugiej stronie przewrócił się na drugi bok.
+	if has_item("krysztal")
+		Dobrawa: I wciąż masz kryształ. Pilnuj go.
+elif not done_today("dob_greet")
+	$> mark_today("dob_greet")
+	if sanity_band("dobrawa") == "na_krawedzi" or sanity_band("dobrawa") == "zalamany"
+		Dobrawa stoi nieruchomo, z czołem przy zimnej skale. Maska dzwoni cicho o kamień.
+		Dobrawa: Coraz trudniej mi stąd nie iść. W dół. Ono woła, a ja nie umiem już udawać, że nie słyszę.
+	else
+		Dobrawa: [[Słucham.|Znowu ty. Dobrze. Mniej tu wtedy cicho.|Energia płynie dziś wolniej. To zły znak albo dobry. Jeszcze nie wiem.]]
+=> hub

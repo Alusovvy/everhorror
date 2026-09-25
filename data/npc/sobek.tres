@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/sobek_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/sobek.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"sobek"
+display_name = "Sobek z Wielkiego Stepu"
+dialogue_name = "Sobek"
+display_name_instrumental = "Sobkiem"
+faction = 1
+role = "Egzarcha, najemnik, straż obozu"
+max_sanity = 100
+start_sanity = 84
+max_health = 100
+start_reputation = 0
+history = "Egzarcha ze stepu. Przez trzy zimy jeździł z bandą Gniewomira, aż znudziło mu się uciekać przed jaksarskimi patrolami. Teraz Racibor płaci mu za pilnowanie wyjścia i zapasów. Nosi zaklęty miecz, który tnie tylko wtedy, kiedy Sobek go karmi, i gra w kości z każdym, kto ma czym zapłacić. Drudzy nazywają go półmagiem. On ich nazywa gorzej."
+sanity_zero_effect = "Stwierdza, że nikt mu nie płaci za umieranie. Zabiera miecz, trochę zapasów i znika szybem na górę."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62
+female = false

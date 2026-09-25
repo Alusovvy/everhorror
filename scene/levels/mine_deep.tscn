@@ -1,726 +1,785 @@
 [gd_scene format=4]
 
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Mines/ground_mines_a.tscn" id="1_gkvl8"]
-[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material" id="2_0kt3f"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Mines/wall_mines_b.tscn" id="3_rw1ut"]
-[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Walls_2.tres" id="4_tv0fb"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Panel_Wood/panel_wood_a.tscn" id="5_qtdh3"]
-[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material" id="6_dq8p3"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/post_f.tscn" id="7_004ol"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/beam_a.tscn" id="8_7k8qp"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Mines/wall_mines_entrance_a.tscn" id="9_i57gt"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Panel_Wood/panel_wood_entrance_a.tscn" id="10_rveyg"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Mine_Rails/rail_a.tscn" id="11_dw8lj"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Mine_Carts/mine_cart_aa.tscn" id="12_56ap2"]
-[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Carts.material" id="13_s1m0w"]
-[ext_resource type="Script" path="res://script/interactable.gd" id="14_l5ron"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Lantern_Wall.gltf" id="15_ib14l"]
-[ext_resource type="Script" path="res://script/light_flicker.gd" id="16_c63je"]
-[ext_resource type="AudioStream" path="res://assets/sounds/generated/lantern_crackle.wav" id="17_23pys"]
-[ext_resource type="Material" path="res://material/cave_floor.tres" id="18_tnx7o"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_d.tscn" id="19_ycg8t"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_e.tscn" id="20_qdpbw"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_f.tscn" id="21_jjtgy"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_a.tscn" id="22_c6tx1"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_b.tscn" id="23_qaqkq"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_c.tscn" id="24_4ehm0"]
-[ext_resource type="Material" path="res://material/cave_rock.tres" id="25_rcapw"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_a.tscn" id="26_8lch2"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_b.tscn" id="27_ea17y"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_c.tscn" id="28_17iln"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_d.tscn" id="29_pv5pv"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_pillar_a.tscn" id="30_vxghn"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_a.tscn" id="31_kh5oo"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_b.tscn" id="32_whmro"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_a.tscn" id="33_gm58f"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_b.tscn" id="34_qjc5y"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_c.tscn" id="35_s7av0"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_d.tscn" id="36_ewp1c"]
-[ext_resource type="Script" path="res://script/overlay_applier.gd" id="37_4lcrv"]
-[ext_resource type="Shader" path="res://shader/blue_iron_vein.gdshader" id="38_phb0n"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_pillar_b.tscn" id="39_sonxb"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_pillar_c.tscn" id="40_u8fp1"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_c.tscn" id="41_jr6jx"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_e.tscn" id="42_lhwp4"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_d.tscn" id="43_ar5el"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_f.tscn" id="44_ex77b"]
-[ext_resource type="AudioStream" path="res://assets/sounds/generated/drip.wav" id="45_xyewh"]
-[ext_resource type="Script" path="res://script/random_sound_emitter.gd" id="46_kxwjv"]
-[ext_resource type="AudioStream" path="res://assets/sounds/generated/creak.wav" id="47_754dh"]
-[ext_resource type="AudioStream" path="res://assets/sounds/generated/rumble.wav" id="48_1i540"]
-[ext_resource type="AudioStream" path="res://assets/sounds/generated/pick_taps.wav" id="49_lepoj"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pickaxe_Bronze.gltf" id="50_3hen4"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_2.gltf" id="51_sa52i"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Mines/ground_mines_a.tscn" id="1_tv0fb"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material" id="2_qtdh3"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Mines/wall_mines_b.tscn" id="3_dq8p3"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Walls_2.tres" id="4_004ol"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Panel_Wood/panel_wood_a.tscn" id="5_7k8qp"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material" id="6_i57gt"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/post_f.tscn" id="7_rveyg"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/beam_a.tscn" id="8_dw8lj"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Mines/wall_mines_entrance_a.tscn" id="9_56ap2"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Panel_Wood/panel_wood_entrance_a.tscn" id="10_s1m0w"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Mine_Rails/rail_a.tscn" id="11_l5ron"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Mine_Carts/mine_cart_aa.tscn" id="12_ib14l"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Carts.material" id="13_c63je"]
+[ext_resource type="Script" path="res://script/interactable.gd" id="14_23pys"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Lantern_Wall.gltf" id="15_tnx7o"]
+[ext_resource type="Script" path="res://script/light_flicker.gd" id="16_ycg8t"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/lantern_crackle.wav" id="17_qdpbw"]
+[ext_resource type="Material" path="res://material/cave_floor.tres" id="18_jjtgy"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_d.tscn" id="19_c6tx1"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_e.tscn" id="20_qaqkq"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_f.tscn" id="21_4ehm0"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_a.tscn" id="22_rcapw"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_b.tscn" id="23_8lch2"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Cave/ground_cave_c.tscn" id="24_ea17y"]
+[ext_resource type="Material" path="res://material/cave_rock.tres" id="25_17iln"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_a.tscn" id="26_pv5pv"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_b.tscn" id="27_vxghn"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_c.tscn" id="28_kh5oo"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wall/Wall_Cave/wall_caves_d.tscn" id="29_whmro"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_pillar_a.tscn" id="30_gm58f"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_a.tscn" id="31_qjc5y"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_b.tscn" id="32_s7av0"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_a.tscn" id="33_ewp1c"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_b.tscn" id="34_4lcrv"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_c.tscn" id="35_phb0n"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_d.tscn" id="36_sonxb"]
+[ext_resource type="Script" path="res://script/overlay_applier.gd" id="37_u8fp1"]
+[ext_resource type="Shader" path="res://shader/blue_iron_vein.gdshader" id="38_jr6jx"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_pillar_b.tscn" id="39_lhwp4"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_pillar_c.tscn" id="40_ar5el"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_c.tscn" id="41_ex77b"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_e.tscn" id="42_xyewh"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_d.tscn" id="43_kxwjv"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_f.tscn" id="44_754dh"]
+[ext_resource type="Script" path="res://script/material_applier.gd" id="45_1i540"]
+[ext_resource type="Material" path="res://material/kenney_wood.tres" id="46_lepoj"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/signpost-single.glb" id="47_3hen4"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/drip.wav" id="48_sa52i"]
+[ext_resource type="Script" path="res://script/random_sound_emitter.gd" id="49_synqs"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/creak.wav" id="50_6j8jw"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/rumble.wav" id="51_goo8y"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/pick_taps.wav" id="52_nry7c"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pickaxe_Bronze.gltf" id="53_tv2yc"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_2.gltf" id="54_u1fq6"]
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_synqs"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_x8f67"]
 size = Vector2(15, 15)
 subdivide_width = 8
 subdivide_depth = 8
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6j8jw"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ys4pt"]
 size = Vector3(15, 0.4, 15)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_goo8y"]
+[sub_resource type="PlaneMesh" id="PlaneMesh_ihftr"]
 flip_faces = true
 size = Vector2(15, 15)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_nry7c"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_p8b1t"]
 size = Vector3(1, 6, 5.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_tv2yc"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_ss7xq"]
 size = Vector3(1, 6, 5.4)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_u1fq6"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5s72u"]
 size = Vector3(1, 6, 15)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_x8f67"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_28hpd"]
 size = Vector3(15, 6, 1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ys4pt"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_5fe1e"]
 size = Vector3(15, 6, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ihftr"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oww1w"]
 render_priority = 0
-shader = ExtResource("38_phb0n")
+shader = ExtResource("38_jr6jx")
 shader_parameter/vein_color = null
 shader_parameter/intensity = null
 shader_parameter/vein_scale = null
 shader_parameter/vein_width = null
 shader_parameter/pulse_speed = null
 
-[node name="MineDeep" type="Node3D" unique_id=79278495]
+[node name="MineDeep" type="Node3D" unique_id=436485271]
 
-[node name="Corridor" type="Node3D" parent="." unique_id=2131781968]
+[node name="Corridor" type="Node3D" parent="." unique_id=2101918289]
 
-[node name="ceiling_mines_a_1" type="MeshInstance3D" parent="Corridor" unique_id=1073101486 instance=ExtResource("1_gkvl8")]
+[node name="ceiling_mines_a_1" type="MeshInstance3D" parent="Corridor" unique_id=1908054313 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 46, 4, 3)
 
-[node name="wall_mines_b_1" type="MeshInstance3D" parent="Corridor" unique_id=1169064421 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_1" type="MeshInstance3D" parent="Corridor" unique_id=1506667268 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 5)
 
-[node name="wall_mines_b_2" type="MeshInstance3D" parent="Corridor" unique_id=1012509135 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_2" type="MeshInstance3D" parent="Corridor" unique_id=1121850363 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 46, 0, 1)
 
-[node name="panel_wood_a_1" type="MeshInstance3D" parent="Corridor" unique_id=743731843 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_1" type="MeshInstance3D" parent="Corridor" unique_id=919442993 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 4.5)
 
-[node name="panel_wood_a_2" type="MeshInstance3D" parent="Corridor" unique_id=1292469322 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_2" type="MeshInstance3D" parent="Corridor" unique_id=1017502071 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0, 1.4)
 
-[node name="ground_mines_a_1" type="MeshInstance3D" parent="Corridor" unique_id=777957589 instance=ExtResource("1_gkvl8")]
+[node name="ground_mines_a_1" type="MeshInstance3D" parent="Corridor" unique_id=1341300241 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 50, 0, 3)
 
-[node name="ceiling_mines_a_2" type="MeshInstance3D" parent="Corridor" unique_id=434723046 instance=ExtResource("1_gkvl8")]
+[node name="ceiling_mines_a_2" type="MeshInstance3D" parent="Corridor" unique_id=2077939084 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 50, 4, 3)
 
-[node name="wall_mines_b_3" type="MeshInstance3D" parent="Corridor" unique_id=324519409 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_3" type="MeshInstance3D" parent="Corridor" unique_id=1531226596 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 5)
 
-[node name="wall_mines_b_4" type="MeshInstance3D" parent="Corridor" unique_id=516145730 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_4" type="MeshInstance3D" parent="Corridor" unique_id=1501217321 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 50, 0, 1)
 
-[node name="panel_wood_a_3" type="MeshInstance3D" parent="Corridor" unique_id=1187646617 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_3" type="MeshInstance3D" parent="Corridor" unique_id=1667023353 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 4.5)
 
-[node name="panel_wood_a_4" type="MeshInstance3D" parent="Corridor" unique_id=411537688 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_4" type="MeshInstance3D" parent="Corridor" unique_id=196783209 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0, 1.4)
 
-[node name="ground_mines_a_2" type="MeshInstance3D" parent="Corridor" unique_id=389074877 instance=ExtResource("1_gkvl8")]
+[node name="ground_mines_a_2" type="MeshInstance3D" parent="Corridor" unique_id=76082052 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.304731e-08, 0.17364818, -0.9848077, 7.590403e-09, 0.9848077, 0.17364818, 1, 0, -4.371139e-08, 54, -0.35265395, 3)
 
-[node name="ceiling_mines_a_3" type="MeshInstance3D" parent="Corridor" unique_id=1084467456 instance=ExtResource("1_gkvl8")]
+[node name="ceiling_mines_a_3" type="MeshInstance3D" parent="Corridor" unique_id=1456728110 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.304731e-08, 0.17364818, -0.9848077, 7.590403e-09, 0.9848077, 0.17364818, 1, 0, -4.371139e-08, 54, 3.647346, 3)
 
-[node name="wall_mines_b_5" type="MeshInstance3D" parent="Corridor" unique_id=801712795 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_5" type="MeshInstance3D" parent="Corridor" unique_id=1090818680 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 54, -0.35265395, 5)
 
-[node name="wall_mines_b_6" type="MeshInstance3D" parent="Corridor" unique_id=559702702 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_6" type="MeshInstance3D" parent="Corridor" unique_id=1777756277 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 54, -0.35265395, 1)
 
-[node name="panel_wood_a_5" type="MeshInstance3D" parent="Corridor" unique_id=970941052 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_5" type="MeshInstance3D" parent="Corridor" unique_id=162211546 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 54, -0.35265395, 4.5)
 
-[node name="panel_wood_a_6" type="MeshInstance3D" parent="Corridor" unique_id=1297643038 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_6" type="MeshInstance3D" parent="Corridor" unique_id=977850351 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 54, -0.35265395, 1.4)
 
-[node name="ground_mines_a_3" type="MeshInstance3D" parent="Corridor" unique_id=1688861699 instance=ExtResource("1_gkvl8")]
+[node name="ground_mines_a_3" type="MeshInstance3D" parent="Corridor" unique_id=484997279 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.304731e-08, 0.17364818, -0.9848077, 7.590403e-09, 0.9848077, 0.17364818, 1, 0, -4.371139e-08, 58, -1.057962, 3)
 
-[node name="ceiling_mines_a_4" type="MeshInstance3D" parent="Corridor" unique_id=2144374869 instance=ExtResource("1_gkvl8")]
+[node name="ceiling_mines_a_4" type="MeshInstance3D" parent="Corridor" unique_id=1000738131 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.304731e-08, 0.17364818, -0.9848077, 7.590403e-09, 0.9848077, 0.17364818, 1, 0, -4.371139e-08, 58, 2.942038, 3)
 
-[node name="wall_mines_b_7" type="MeshInstance3D" parent="Corridor" unique_id=1035901281 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_7" type="MeshInstance3D" parent="Corridor" unique_id=177479811 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 58, -1.057962, 5)
 
-[node name="wall_mines_b_8" type="MeshInstance3D" parent="Corridor" unique_id=1409477205 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_8" type="MeshInstance3D" parent="Corridor" unique_id=605621944 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 58, -1.057962, 1)
 
-[node name="panel_wood_a_7" type="MeshInstance3D" parent="Corridor" unique_id=1356997841 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_7" type="MeshInstance3D" parent="Corridor" unique_id=1158341465 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 58, -1.057962, 4.5)
 
-[node name="panel_wood_a_8" type="MeshInstance3D" parent="Corridor" unique_id=686804877 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_8" type="MeshInstance3D" parent="Corridor" unique_id=1615194986 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 58, -1.057962, 1.4)
 
-[node name="ground_mines_a_4" type="MeshInstance3D" parent="Corridor" unique_id=814703631 instance=ExtResource("1_gkvl8")]
+[node name="ground_mines_a_4" type="MeshInstance3D" parent="Corridor" unique_id=1271075180 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.304731e-08, 0.17364818, -0.9848077, 7.590403e-09, 0.9848077, 0.17364818, 1, 0, -4.371139e-08, 62, -1.7632698, 3)
 
-[node name="ceiling_mines_a_5" type="MeshInstance3D" parent="Corridor" unique_id=1093463815 instance=ExtResource("1_gkvl8")]
+[node name="ceiling_mines_a_5" type="MeshInstance3D" parent="Corridor" unique_id=783772303 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.304731e-08, 0.17364818, -0.9848077, 7.590403e-09, 0.9848077, 0.17364818, 1, 0, -4.371139e-08, 62, 2.23673, 3)
 
-[node name="wall_mines_b_9" type="MeshInstance3D" parent="Corridor" unique_id=551443717 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_9" type="MeshInstance3D" parent="Corridor" unique_id=946450609 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 62, -1.7632698, 5)
 
-[node name="wall_mines_b_10" type="MeshInstance3D" parent="Corridor" unique_id=234167751 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_10" type="MeshInstance3D" parent="Corridor" unique_id=1549497227 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 62, -1.7632698, 1)
 
-[node name="panel_wood_a_9" type="MeshInstance3D" parent="Corridor" unique_id=961349740 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_9" type="MeshInstance3D" parent="Corridor" unique_id=1547358055 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 62, -1.7632698, 4.5)
 
-[node name="panel_wood_a_10" type="MeshInstance3D" parent="Corridor" unique_id=2099900624 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_10" type="MeshInstance3D" parent="Corridor" unique_id=1922469939 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 62, -1.7632698, 1.4)
 
-[node name="ground_mines_a_5" type="MeshInstance3D" parent="Corridor" unique_id=137413578 instance=ExtResource("1_gkvl8")]
+[node name="ground_mines_a_5" type="MeshInstance3D" parent="Corridor" unique_id=602655276 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 66, -2.115924, 3)
 
-[node name="ceiling_mines_a_6" type="MeshInstance3D" parent="Corridor" unique_id=396706315 instance=ExtResource("1_gkvl8")]
+[node name="ceiling_mines_a_6" type="MeshInstance3D" parent="Corridor" unique_id=534942493 instance=ExtResource("1_tv0fb")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 66, 1.8840762, 3)
 
-[node name="wall_mines_b_11" type="MeshInstance3D" parent="Corridor" unique_id=1710345088 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_11" type="MeshInstance3D" parent="Corridor" unique_id=1942700223 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -2.115924, 5)
 
-[node name="wall_mines_b_12" type="MeshInstance3D" parent="Corridor" unique_id=692454735 instance=ExtResource("3_rw1ut")]
+[node name="wall_mines_b_12" type="MeshInstance3D" parent="Corridor" unique_id=1348254545 instance=ExtResource("3_dq8p3")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 66, -2.115924, 1)
 
-[node name="panel_wood_a_11" type="MeshInstance3D" parent="Corridor" unique_id=1420762892 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_11" type="MeshInstance3D" parent="Corridor" unique_id=612131029 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -2.115924, 4.5)
 
-[node name="panel_wood_a_12" type="MeshInstance3D" parent="Corridor" unique_id=1634307969 instance=ExtResource("5_qtdh3")]
+[node name="panel_wood_a_12" type="MeshInstance3D" parent="Corridor" unique_id=405573486 instance=ExtResource("5_7k8qp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, -2.115924, 1.4)
 
-[node name="post_f_1" type="MeshInstance3D" parent="Corridor" unique_id=478029663 instance=ExtResource("7_004ol")]
+[node name="post_f_1" type="MeshInstance3D" parent="Corridor" unique_id=868090112 instance=ExtResource("7_rveyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 0, 4.5)
 
-[node name="post_f_2" type="MeshInstance3D" parent="Corridor" unique_id=159052026 instance=ExtResource("7_004ol")]
+[node name="post_f_2" type="MeshInstance3D" parent="Corridor" unique_id=1566533450 instance=ExtResource("7_rveyg")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 48, 0, 1.4)
 
-[node name="beam_a_1" type="MeshInstance3D" parent="Corridor" unique_id=393253142 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_1" type="MeshInstance3D" parent="Corridor" unique_id=380502226 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 48, 3.9, 2.5)
 
-[node name="beam_a_2" type="MeshInstance3D" parent="Corridor" unique_id=1352393899 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_2" type="MeshInstance3D" parent="Corridor" unique_id=1325981812 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 48, 3.9, 4.5)
 
-[node name="beam_a_3" type="MeshInstance3D" parent="Corridor" unique_id=533635693 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_3" type="MeshInstance3D" parent="Corridor" unique_id=1299425377 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 48, 3.9, 1.4)
 
-[node name="post_f_3" type="MeshInstance3D" parent="Corridor" unique_id=1968173063 instance=ExtResource("7_004ol")]
+[node name="post_f_3" type="MeshInstance3D" parent="Corridor" unique_id=1782498969 instance=ExtResource("7_rveyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 0, 4.5)
 
-[node name="post_f_4" type="MeshInstance3D" parent="Corridor" unique_id=1351318910 instance=ExtResource("7_004ol")]
+[node name="post_f_4" type="MeshInstance3D" parent="Corridor" unique_id=1649841667 instance=ExtResource("7_rveyg")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 52, 0, 1.4)
 
-[node name="beam_a_4" type="MeshInstance3D" parent="Corridor" unique_id=819002431 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_4" type="MeshInstance3D" parent="Corridor" unique_id=1596597409 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 52, 3.9, 2.5)
 
-[node name="beam_a_5" type="MeshInstance3D" parent="Corridor" unique_id=1057920895 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_5" type="MeshInstance3D" parent="Corridor" unique_id=1852248452 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 52, 3.9, 4.5)
 
-[node name="beam_a_6" type="MeshInstance3D" parent="Corridor" unique_id=1390323604 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_6" type="MeshInstance3D" parent="Corridor" unique_id=549255668 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 52, 3.9, 1.4)
 
-[node name="post_f_5" type="MeshInstance3D" parent="Corridor" unique_id=276095212 instance=ExtResource("7_004ol")]
+[node name="post_f_5" type="MeshInstance3D" parent="Corridor" unique_id=64392187 instance=ExtResource("7_rveyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, -0.7053079, 4.5)
 
-[node name="post_f_6" type="MeshInstance3D" parent="Corridor" unique_id=1702528586 instance=ExtResource("7_004ol")]
+[node name="post_f_6" type="MeshInstance3D" parent="Corridor" unique_id=1473069932 instance=ExtResource("7_rveyg")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 56, -0.7053079, 1.4)
 
-[node name="beam_a_7" type="MeshInstance3D" parent="Corridor" unique_id=415756728 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_7" type="MeshInstance3D" parent="Corridor" unique_id=100819823 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 56, 3.1946921, 2.5)
 
-[node name="beam_a_8" type="MeshInstance3D" parent="Corridor" unique_id=1471824973 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_8" type="MeshInstance3D" parent="Corridor" unique_id=672824448 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 56, 3.1946921, 4.5)
 
-[node name="beam_a_9" type="MeshInstance3D" parent="Corridor" unique_id=257158593 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_9" type="MeshInstance3D" parent="Corridor" unique_id=707598376 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 56, 3.1946921, 1.4)
 
-[node name="post_f_7" type="MeshInstance3D" parent="Corridor" unique_id=2068730542 instance=ExtResource("7_004ol")]
+[node name="post_f_7" type="MeshInstance3D" parent="Corridor" unique_id=1470050485 instance=ExtResource("7_rveyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, -1.4106158, 4.5)
 
-[node name="post_f_8" type="MeshInstance3D" parent="Corridor" unique_id=29326358 instance=ExtResource("7_004ol")]
+[node name="post_f_8" type="MeshInstance3D" parent="Corridor" unique_id=476529684 instance=ExtResource("7_rveyg")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 60, -1.4106158, 1.4)
 
-[node name="beam_a_10" type="MeshInstance3D" parent="Corridor" unique_id=484127132 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_10" type="MeshInstance3D" parent="Corridor" unique_id=1012329717 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 60, 2.4893842, 2.5)
 
-[node name="beam_a_11" type="MeshInstance3D" parent="Corridor" unique_id=1500787220 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_11" type="MeshInstance3D" parent="Corridor" unique_id=1054254413 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 60, 2.4893842, 4.5)
 
-[node name="beam_a_12" type="MeshInstance3D" parent="Corridor" unique_id=533508807 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_12" type="MeshInstance3D" parent="Corridor" unique_id=1388182847 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 60, 2.4893842, 1.4)
 
-[node name="post_f_9" type="MeshInstance3D" parent="Corridor" unique_id=1266639568 instance=ExtResource("7_004ol")]
+[node name="post_f_9" type="MeshInstance3D" parent="Corridor" unique_id=1835274540 instance=ExtResource("7_rveyg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, -2.115924, 4.5)
 
-[node name="post_f_10" type="MeshInstance3D" parent="Corridor" unique_id=203903605 instance=ExtResource("7_004ol")]
+[node name="post_f_10" type="MeshInstance3D" parent="Corridor" unique_id=610633921 instance=ExtResource("7_rveyg")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 64, -2.115924, 1.4)
 
-[node name="beam_a_13" type="MeshInstance3D" parent="Corridor" unique_id=304124428 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_13" type="MeshInstance3D" parent="Corridor" unique_id=1169986388 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 64, 1.7840762, 2.5)
 
-[node name="beam_a_14" type="MeshInstance3D" parent="Corridor" unique_id=1849635362 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_14" type="MeshInstance3D" parent="Corridor" unique_id=249569051 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 64, 1.7840762, 4.5)
 
-[node name="beam_a_15" type="MeshInstance3D" parent="Corridor" unique_id=326736846 instance=ExtResource("8_7k8qp")]
+[node name="beam_a_15" type="MeshInstance3D" parent="Corridor" unique_id=2072493232 instance=ExtResource("8_dw8lj")]
 transform = Transform3D(-0.9848077, 0.17364818, -8.609462e-08, 0.17364818, 0.9848077, 1.5180806e-08, 8.742278e-08, 0, -1, 64, 1.7840762, 1.4)
 
-[node name="wall_mines_entrance_a_1" type="MeshInstance3D" parent="Corridor" unique_id=1176374951 instance=ExtResource("9_i57gt")]
+[node name="wall_mines_entrance_a_1" type="MeshInstance3D" parent="Corridor" unique_id=2098678252 instance=ExtResource("9_56ap2")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 67.7, -2.115924, 3)
 
-[node name="panel_wood_entrance_a_1" type="MeshInstance3D" parent="Corridor" unique_id=360069861 instance=ExtResource("10_rveyg")]
+[node name="panel_wood_entrance_a_1" type="MeshInstance3D" parent="Corridor" unique_id=1468452112 instance=ExtResource("10_s1m0w")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 67.1, -2.115924, 3)
 
-[node name="Rails" type="Node3D" parent="." unique_id=2008459712]
+[node name="Rails" type="Node3D" parent="." unique_id=2023745163]
 
-[node name="rail_a_1" type="MeshInstance3D" parent="Rails" unique_id=288554173 instance=ExtResource("11_dw8lj")]
+[node name="rail_a_1" type="MeshInstance3D" parent="Rails" unique_id=1593594278 instance=ExtResource("11_l5ron")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 46, 0.02, 3)
 
-[node name="rail_a_2" type="MeshInstance3D" parent="Rails" unique_id=951935218 instance=ExtResource("11_dw8lj")]
+[node name="rail_a_2" type="MeshInstance3D" parent="Rails" unique_id=44553926 instance=ExtResource("11_l5ron")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 0.02, 3)
 
-[node name="rail_a_3" type="MeshInstance3D" parent="Rails" unique_id=89710961 instance=ExtResource("11_dw8lj")]
+[node name="rail_a_3" type="MeshInstance3D" parent="Rails" unique_id=510977445 instance=ExtResource("11_l5ron")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 54, -0.33265397, 3)
 
-[node name="rail_a_4" type="MeshInstance3D" parent="Rails" unique_id=586693755 instance=ExtResource("11_dw8lj")]
+[node name="rail_a_4" type="MeshInstance3D" parent="Rails" unique_id=2119678305 instance=ExtResource("11_l5ron")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 58, -1.0379618, 3)
 
-[node name="rail_a_5" type="MeshInstance3D" parent="Rails" unique_id=1806488950 instance=ExtResource("11_dw8lj")]
+[node name="rail_a_5" type="MeshInstance3D" parent="Rails" unique_id=2030018561 instance=ExtResource("11_l5ron")]
 transform = Transform3D(0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 0, 0, 1, 62, -1.7432698, 3)
 
-[node name="mine_cart_aa_1" type="MeshInstance3D" parent="Rails" unique_id=1102226166 instance=ExtResource("12_56ap2")]
+[node name="mine_cart_aa_1" type="MeshInstance3D" parent="Rails" unique_id=399166313 instance=ExtResource("12_ib14l")]
 transform = Transform3D(0.9824088, 0.17364818, 0.068696715, -0.17322518, 0.9848077, -0.012113084, -0.06975647, 0, 0.9975641, 61.6, -1.222739, 3)
 
-[node name="Interactable" type="Area3D" parent="Rails/mine_cart_aa_1" unique_id=1655277550]
-script = ExtResource("14_l5ron")
+[node name="Interactable" type="Area3D" parent="Rails/mine_cart_aa_1" unique_id=543274778]
+script = ExtResource("14_23pys")
 display_name = "Wózek górniczy"
 description = "Wózek stanął na pochylni, do połowy pełen urobku. Kamienie połyskują w świetle lampy na niebiesko. Nikt ich nie wywiózł na górę."
 
-[node name="Lanterns" type="Node3D" parent="." unique_id=550722591]
+[node name="Lanterns" type="Node3D" parent="." unique_id=358592215]
 
-[node name="Lantern_1" type="Node3D" parent="Lanterns" unique_id=1062626669 instance=ExtResource("15_ib14l")]
+[node name="Lantern_1" type="Node3D" parent="Lanterns" unique_id=1062626669 instance=ExtResource("15_tnx7o")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 50, 1.35, 4.45)
 
-[node name="Light" type="OmniLight3D" parent="Lanterns/Lantern_1" unique_id=1859242281]
+[node name="Light" type="OmniLight3D" parent="Lanterns/Lantern_1" unique_id=550207471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.6
 shadow_enabled = true
 omni_range = 8.0
 omni_attenuation = 1.4
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 housing_casts_shadow = false
 
-[node name="Crackle" type="AudioStreamPlayer3D" parent="Lanterns/Lantern_1" unique_id=298133719]
+[node name="Crackle" type="AudioStreamPlayer3D" parent="Lanterns/Lantern_1" unique_id=1768324131]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
-stream = ExtResource("17_23pys")
+stream = ExtResource("17_qdpbw")
 volume_db = -12.0
 unit_size = 1.5
 autoplay = true
 max_distance = 7.0
 bus = &"SFX"
 
-[node name="Lantern_2" type="Node3D" parent="Lanterns" unique_id=1832896627 instance=ExtResource("15_ib14l")]
+[node name="Lantern_2" type="Node3D" parent="Lanterns" unique_id=2141214068 instance=ExtResource("15_tnx7o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 0.2920381, 1.45)
 
-[node name="Light" type="OmniLight3D" parent="Lanterns/Lantern_2" unique_id=681206667]
+[node name="Light" type="OmniLight3D" parent="Lanterns/Lantern_2" unique_id=1195531085]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.6
 shadow_enabled = true
 omni_range = 8.0
 omni_attenuation = 1.4
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 housing_casts_shadow = false
 
-[node name="Crackle" type="AudioStreamPlayer3D" parent="Lanterns/Lantern_2" unique_id=18271303]
+[node name="Crackle" type="AudioStreamPlayer3D" parent="Lanterns/Lantern_2" unique_id=1955648742]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
-stream = ExtResource("17_23pys")
+stream = ExtResource("17_qdpbw")
 volume_db = -12.0
 unit_size = 1.5
 autoplay = true
 max_distance = 7.0
 bus = &"SFX"
 
-[node name="Lantern_3" type="Node3D" parent="Lanterns" unique_id=421739784 instance=ExtResource("15_ib14l")]
+[node name="Lantern_3" type="Node3D" parent="Lanterns" unique_id=1339940093 instance=ExtResource("15_tnx7o")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 66, -0.7659238, 4.45)
 
-[node name="Light" type="OmniLight3D" parent="Lanterns/Lantern_3" unique_id=733390957]
+[node name="Light" type="OmniLight3D" parent="Lanterns/Lantern_3" unique_id=1529749473]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.6
 shadow_enabled = true
 omni_range = 8.0
 omni_attenuation = 1.4
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 housing_casts_shadow = false
 
-[node name="Crackle" type="AudioStreamPlayer3D" parent="Lanterns/Lantern_3" unique_id=1202638833]
+[node name="Crackle" type="AudioStreamPlayer3D" parent="Lanterns/Lantern_3" unique_id=1951989594]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
-stream = ExtResource("17_23pys")
+stream = ExtResource("17_qdpbw")
 volume_db = -12.0
 unit_size = 1.5
 autoplay = true
 max_distance = 7.0
 bus = &"SFX"
 
-[node name="Chamber" type="Node3D" parent="." unique_id=1986132308]
+[node name="Chamber" type="Node3D" parent="." unique_id=1810369780]
 
-[node name="ChamberFloor" type="StaticBody3D" parent="Chamber" unique_id=2035722653]
+[node name="ChamberFloor" type="StaticBody3D" parent="Chamber" unique_id=1255157478]
 
-[node name="Mesh" type="MeshInstance3D" parent="Chamber/ChamberFloor" unique_id=669843685]
+[node name="Mesh" type="MeshInstance3D" parent="Chamber/ChamberFloor" unique_id=1657217132]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, -2.115924, 3)
-material_override = ExtResource("18_tnx7o")
-mesh = SubResource("PlaneMesh_synqs")
+material_override = ExtResource("18_jjtgy")
+mesh = SubResource("PlaneMesh_x8f67")
 
-[node name="Shape" type="CollisionShape3D" parent="Chamber/ChamberFloor" unique_id=761572440]
+[node name="Shape" type="CollisionShape3D" parent="Chamber/ChamberFloor" unique_id=2068143274]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, -2.3159237, 3)
-shape = SubResource("BoxShape3D_6j8jw")
-
-[node name="cave_ceiling_1" type="MeshInstance3D" parent="Chamber" unique_id=1704100811 instance=ExtResource("19_ycg8t")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 70.2, 2.7840762, -1.6)
-
-[node name="cave_ceiling_2" type="MeshInstance3D" parent="Chamber" unique_id=451343979 instance=ExtResource("20_qdpbw")]
-transform = Transform3D(-4.371139e-08, 0, 1, -8.742278e-08, -1, -3.821371e-15, 1, -8.742278e-08, 4.371139e-08, 70.2, 2.7840762, 3.2)
-
-[node name="cave_ceiling_3" type="MeshInstance3D" parent="Chamber" unique_id=585118167 instance=ExtResource("21_jjtgy")]
-transform = Transform3D(-1, 0, -8.742278e-08, 7.642742e-15, -1, -8.742278e-08, -8.742278e-08, -8.742278e-08, 1, 70.2, 2.7840762, 8)
-
-[node name="cave_ceiling_4" type="MeshInstance3D" parent="Chamber" unique_id=547949024 instance=ExtResource("22_c6tx1")]
-transform = Transform3D(1.1924881e-08, 0, -1, 8.742278e-08, -1, 1.0425061e-15, -1, -8.742278e-08, -1.1924881e-08, 74.6, 2.7840762, -1.6)
-
-[node name="cave_ceiling_5" type="MeshInstance3D" parent="Chamber" unique_id=1241839994 instance=ExtResource("23_qaqkq")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 74.6, 2.7840762, 3.2)
-
-[node name="cave_ceiling_6" type="MeshInstance3D" parent="Chamber" unique_id=1882777843 instance=ExtResource("24_4ehm0")]
-transform = Transform3D(-4.371139e-08, 0, 1, -8.742278e-08, -1, -3.821371e-15, 1, -8.742278e-08, 4.371139e-08, 74.6, 2.7840762, 8)
-
-[node name="cave_ceiling_7" type="MeshInstance3D" parent="Chamber" unique_id=1880574668 instance=ExtResource("19_ycg8t")]
-transform = Transform3D(-1, 0, -8.742278e-08, 7.642742e-15, -1, -8.742278e-08, -8.742278e-08, -8.742278e-08, 1, 79, 2.7840762, -1.6)
-
-[node name="cave_ceiling_8" type="MeshInstance3D" parent="Chamber" unique_id=1864587947 instance=ExtResource("20_qdpbw")]
-transform = Transform3D(1.1924881e-08, 0, -1, 8.742278e-08, -1, 1.0425061e-15, -1, -8.742278e-08, -1.1924881e-08, 79, 2.7840762, 3.2)
-
-[node name="cave_ceiling_9" type="MeshInstance3D" parent="Chamber" unique_id=2055311459 instance=ExtResource("21_jjtgy")]
-transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 79, 2.7840762, 8)
-
-[node name="cave_ceiling_10" type="MeshInstance3D" parent="Chamber" unique_id=1654723498 instance=ExtResource("22_c6tx1")]
-transform = Transform3D(-4.371139e-08, 0, 1, -8.742278e-08, -1, -3.821371e-15, 1, -8.742278e-08, 4.371139e-08, 81.2, 2.7840762, -1.6)
-
-[node name="cave_ceiling_11" type="MeshInstance3D" parent="Chamber" unique_id=1279509098 instance=ExtResource("23_qaqkq")]
-transform = Transform3D(-1, 0, -8.742278e-08, 7.642742e-15, -1, -8.742278e-08, -8.742278e-08, -8.742278e-08, 1, 81.2, 2.7840762, 3.2)
-
-[node name="cave_ceiling_12" type="MeshInstance3D" parent="Chamber" unique_id=2102878800 instance=ExtResource("24_4ehm0")]
-transform = Transform3D(1.1924881e-08, 0, -1, 8.742278e-08, -1, 1.0425061e-15, -1, -8.742278e-08, -1.1924881e-08, 81.2, 2.7840762, 8)
-
-[node name="CeilingPlane" type="MeshInstance3D" parent="Chamber" unique_id=347472161]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, 3.1840763, 3)
-material_override = ExtResource("25_rcapw")
-mesh = SubResource("PlaneMesh_goo8y")
-
-[node name="floor_patch_1" type="MeshInstance3D" parent="Chamber" unique_id=2116168242 instance=ExtResource("22_c6tx1")]
-transform = Transform3D(-0.39681634, 0, 0.917898, 0, 1, 0, -0.917898, 0, -0.39681634, 70, -2.365924, -2.8)
-
-[node name="floor_patch_2" type="MeshInstance3D" parent="Chamber" unique_id=1844339561 instance=ExtResource("23_qaqkq")]
-transform = Transform3D(0.6519, 0, -0.75830495, 0, 1, 0, 0.75830495, 0, 0.6519, 79.5, -2.365924, -3)
-
-[node name="floor_patch_3" type="MeshInstance3D" parent="Chamber" unique_id=73424966 instance=ExtResource("24_4ehm0")]
-transform = Transform3D(-0.9982134, 0, -0.05974889, 0, 1, 0, 0.05974889, 0, -0.9982134, 81.2, -2.365924, 1)
-
-[node name="floor_patch_4" type="MeshInstance3D" parent="Chamber" unique_id=1390366773 instance=ExtResource("19_ycg8t")]
-transform = Transform3D(-0.26647818, 0, -0.96384096, 0, 1, 0, 0.96384096, 0, -0.26647818, 80.6, -2.365924, 8.8)
-
-[node name="floor_patch_5" type="MeshInstance3D" parent="Chamber" unique_id=962069781 instance=ExtResource("20_qdpbw")]
-transform = Transform3D(-0.07865782, 0, -0.9969017, 0, 1, 0, 0.9969017, 0, -0.07865782, 72.5, -2.365924, 9)
-
-[node name="wall_caves_a_1" type="MeshInstance3D" parent="Chamber" unique_id=1807943040 instance=ExtResource("26_8lch2")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.3, -2.115924, -1.5)
-
-[node name="wall_caves_b_1" type="MeshInstance3D" parent="Chamber" unique_id=538414801 instance=ExtResource("27_ea17y")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.3, -2.115924, 7.5)
-
-[node name="wall_caves_c_1" type="MeshInstance3D" parent="Chamber" unique_id=877680383 instance=ExtResource("28_17iln")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 82.4, -2.115924, -1.6)
-
-[node name="wall_caves_d_1" type="MeshInstance3D" parent="Chamber" unique_id=501476343 instance=ExtResource("29_pv5pv")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 82.4, -2.115924, 3)
-
-[node name="wall_caves_a_2" type="MeshInstance3D" parent="Chamber" unique_id=1391005464 instance=ExtResource("26_8lch2")]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 82.4, -2.115924, 7.6)
-
-[node name="wall_caves_b_2" type="MeshInstance3D" parent="Chamber" unique_id=537542067 instance=ExtResource("27_ea17y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.4, -2.115924, -4.3)
-
-[node name="wall_caves_c_2" type="MeshInstance3D" parent="Chamber" unique_id=1298766229 instance=ExtResource("28_17iln")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 70.4, -2.115924, 10.3)
-
-[node name="wall_caves_d_2" type="MeshInstance3D" parent="Chamber" unique_id=180629386 instance=ExtResource("29_pv5pv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, -2.115924, -4.3)
-
-[node name="wall_caves_a_3" type="MeshInstance3D" parent="Chamber" unique_id=790471287 instance=ExtResource("26_8lch2")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 75, -2.115924, 10.3)
-
-[node name="wall_caves_b_3" type="MeshInstance3D" parent="Chamber" unique_id=1183037179 instance=ExtResource("27_ea17y")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.6, -2.115924, -4.3)
-
-[node name="wall_caves_c_3" type="MeshInstance3D" parent="Chamber" unique_id=184644174 instance=ExtResource("28_17iln")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 79.6, -2.115924, 10.3)
-
-[node name="cave_pillar_a_1" type="MeshInstance3D" parent="Chamber" unique_id=1970139388 instance=ExtResource("30_vxghn")]
-transform = Transform3D(-0.8105022, 0, 0.5857357, 0, 1, 0, -0.5857357, 0, -0.8105022, 68.3, -2.115924, -4.3)
-
-[node name="cave_pillar_a_2" type="MeshInstance3D" parent="Chamber" unique_id=1364215573 instance=ExtResource("30_vxghn")]
-transform = Transform3D(0.77615005, 0, -0.63054824, 0, 1, 0, 0.63054824, 0, 0.77615005, 82.4, -2.115924, -4.3)
-
-[node name="cave_pillar_a_3" type="MeshInstance3D" parent="Chamber" unique_id=1761618103 instance=ExtResource("30_vxghn")]
-transform = Transform3D(0.47858855, 0, 0.8780393, 0, 1, 0, -0.8780393, 0, 0.47858855, 68.3, -2.115924, 10.3)
-
-[node name="cave_pillar_a_4" type="MeshInstance3D" parent="Chamber" unique_id=1568077084 instance=ExtResource("30_vxghn")]
-transform = Transform3D(0.99713457, 0, -0.07564827, 0, 1, 0, 0.07564827, 0, 0.99713457, 82.4, -2.115924, 10.3)
-
-[node name="cave_wall_rocks_a_1" type="MeshInstance3D" parent="Chamber" unique_id=1098082283 instance=ExtResource("31_kh5oo")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.4, 0.38407624, 0.9)
-
-[node name="cave_wall_rocks_b_1" type="MeshInstance3D" parent="Chamber" unique_id=995975563 instance=ExtResource("32_whmro")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.4, 0.38407624, 5.1)
-
-[node name="cave_rocks_a_1" type="MeshInstance3D" parent="Chamber" unique_id=1296238818 instance=ExtResource("33_gm58f")]
-transform = Transform3D(0.31092572, 0, -0.9504342, 0, 1, 0, 0.9504342, 0, 0.31092572, 71, -1.9159237, -3)
-
-[node name="cave_rocks_b_1" type="MeshInstance3D" parent="Chamber" unique_id=1234789309 instance=ExtResource("34_qjc5y")]
-transform = Transform3D(0.49423152, 0, -0.86933035, 0, 1, 0, 0.86933035, 0, 0.49423152, 80.8, -1.9159237, -2.6)
-
-[node name="cave_rocks_c_1" type="MeshInstance3D" parent="Chamber" unique_id=1299813924 instance=ExtResource("35_s7av0")]
-transform = Transform3D(0.035701804, 0, -0.99936247, 0, 1, 0, 0.99936247, 0, 0.035701804, 81, -1.9159237, 8.9)
-
-[node name="cave_rocks_d_1" type="MeshInstance3D" parent="Chamber" unique_id=1223447490 instance=ExtResource("36_ewp1c")]
-transform = Transform3D(0.97186995, 0, 0.23551811, 0, 1, 0, -0.23551811, 0, 0.97186995, 70.2, -1.9159237, 9)
-
-[node name="cave_rocks_b_2" type="MeshInstance3D" parent="Chamber" unique_id=579721671 instance=ExtResource("34_qjc5y")]
-transform = Transform3D(0.11624272, 0, -0.99322087, 0, 1, 0, 0.99322087, 0, 0.11624272, 77, -1.9159237, 3.4)
-
-[node name="ChamberBounds" type="StaticBody3D" parent="Chamber" unique_id=276424550]
-
-[node name="West1" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=202999468]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7, 0.88407624, -1.6)
-shape = SubResource("BoxShape3D_nry7c")
-
-[node name="West2" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=591120526]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7, 0.88407624, 7.6)
-shape = SubResource("BoxShape3D_tv2yc")
-
-[node name="East" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=1597202401]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.6, 0.88407624, 3)
-shape = SubResource("BoxShape3D_u1fq6")
-
-[node name="North" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=756902516]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, 0.88407624, -4.6)
-shape = SubResource("BoxShape3D_x8f67")
-
-[node name="South" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=1290148121]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, 0.88407624, 10.6)
 shape = SubResource("BoxShape3D_ys4pt")
 
-[node name="Lantern_4" type="Node3D" parent="Chamber" unique_id=1783211318 instance=ExtResource("15_ib14l")]
+[node name="cave_ceiling_1" type="MeshInstance3D" parent="Chamber" unique_id=411691897 instance=ExtResource("19_c6tx1")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 70.2, 2.7840762, -1.6)
+
+[node name="cave_ceiling_2" type="MeshInstance3D" parent="Chamber" unique_id=1965006645 instance=ExtResource("20_qaqkq")]
+transform = Transform3D(-4.371139e-08, 0, 1, -8.742278e-08, -1, -3.821371e-15, 1, -8.742278e-08, 4.371139e-08, 70.2, 2.7840762, 3.2)
+
+[node name="cave_ceiling_3" type="MeshInstance3D" parent="Chamber" unique_id=1918183938 instance=ExtResource("21_4ehm0")]
+transform = Transform3D(-1, 0, -8.742278e-08, 7.642742e-15, -1, -8.742278e-08, -8.742278e-08, -8.742278e-08, 1, 70.2, 2.7840762, 8)
+
+[node name="cave_ceiling_4" type="MeshInstance3D" parent="Chamber" unique_id=1441424805 instance=ExtResource("22_rcapw")]
+transform = Transform3D(1.1924881e-08, 0, -1, 8.742278e-08, -1, 1.0425061e-15, -1, -8.742278e-08, -1.1924881e-08, 74.6, 2.7840762, -1.6)
+
+[node name="cave_ceiling_5" type="MeshInstance3D" parent="Chamber" unique_id=1423387521 instance=ExtResource("23_8lch2")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 74.6, 2.7840762, 3.2)
+
+[node name="cave_ceiling_6" type="MeshInstance3D" parent="Chamber" unique_id=615242422 instance=ExtResource("24_ea17y")]
+transform = Transform3D(-4.371139e-08, 0, 1, -8.742278e-08, -1, -3.821371e-15, 1, -8.742278e-08, 4.371139e-08, 74.6, 2.7840762, 8)
+
+[node name="cave_ceiling_7" type="MeshInstance3D" parent="Chamber" unique_id=1690758274 instance=ExtResource("19_c6tx1")]
+transform = Transform3D(-1, 0, -8.742278e-08, 7.642742e-15, -1, -8.742278e-08, -8.742278e-08, -8.742278e-08, 1, 79, 2.7840762, -1.6)
+
+[node name="cave_ceiling_8" type="MeshInstance3D" parent="Chamber" unique_id=495941375 instance=ExtResource("20_qaqkq")]
+transform = Transform3D(1.1924881e-08, 0, -1, 8.742278e-08, -1, 1.0425061e-15, -1, -8.742278e-08, -1.1924881e-08, 79, 2.7840762, 3.2)
+
+[node name="cave_ceiling_9" type="MeshInstance3D" parent="Chamber" unique_id=1811429056 instance=ExtResource("21_4ehm0")]
+transform = Transform3D(1, 0, 0, 0, -1, 8.742278e-08, 0, -8.742278e-08, -1, 79, 2.7840762, 8)
+
+[node name="cave_ceiling_10" type="MeshInstance3D" parent="Chamber" unique_id=516162592 instance=ExtResource("22_rcapw")]
+transform = Transform3D(-4.371139e-08, 0, 1, -8.742278e-08, -1, -3.821371e-15, 1, -8.742278e-08, 4.371139e-08, 81.2, 2.7840762, -1.6)
+
+[node name="cave_ceiling_11" type="MeshInstance3D" parent="Chamber" unique_id=1422886100 instance=ExtResource("23_8lch2")]
+transform = Transform3D(-1, 0, -8.742278e-08, 7.642742e-15, -1, -8.742278e-08, -8.742278e-08, -8.742278e-08, 1, 81.2, 2.7840762, 3.2)
+
+[node name="cave_ceiling_12" type="MeshInstance3D" parent="Chamber" unique_id=925393044 instance=ExtResource("24_ea17y")]
+transform = Transform3D(1.1924881e-08, 0, -1, 8.742278e-08, -1, 1.0425061e-15, -1, -8.742278e-08, -1.1924881e-08, 81.2, 2.7840762, 8)
+
+[node name="CeilingPlane" type="MeshInstance3D" parent="Chamber" unique_id=188672559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, 3.1840763, 3)
+material_override = ExtResource("25_17iln")
+mesh = SubResource("PlaneMesh_ihftr")
+
+[node name="floor_patch_1" type="MeshInstance3D" parent="Chamber" unique_id=1020098574 instance=ExtResource("22_rcapw")]
+transform = Transform3D(-0.39681634, 0, 0.917898, 0, 1, 0, -0.917898, 0, -0.39681634, 70, -2.365924, -2.8)
+
+[node name="floor_patch_2" type="MeshInstance3D" parent="Chamber" unique_id=115682562 instance=ExtResource("23_8lch2")]
+transform = Transform3D(0.6519, 0, -0.75830495, 0, 1, 0, 0.75830495, 0, 0.6519, 79.5, -2.365924, -3)
+
+[node name="floor_patch_3" type="MeshInstance3D" parent="Chamber" unique_id=1519741218 instance=ExtResource("24_ea17y")]
+transform = Transform3D(-0.9982134, 0, -0.05974889, 0, 1, 0, 0.05974889, 0, -0.9982134, 81.2, -2.365924, 1)
+
+[node name="floor_patch_4" type="MeshInstance3D" parent="Chamber" unique_id=525622020 instance=ExtResource("19_c6tx1")]
+transform = Transform3D(-0.26647818, 0, -0.96384096, 0, 1, 0, 0.96384096, 0, -0.26647818, 80.6, -2.365924, 8.8)
+
+[node name="floor_patch_5" type="MeshInstance3D" parent="Chamber" unique_id=1325851603 instance=ExtResource("20_qaqkq")]
+transform = Transform3D(-0.07865782, 0, -0.9969017, 0, 1, 0, 0.9969017, 0, -0.07865782, 72.5, -2.365924, 9)
+
+[node name="wall_caves_a_1" type="MeshInstance3D" parent="Chamber" unique_id=464291542 instance=ExtResource("26_pv5pv")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.3, -2.115924, -1.5)
+
+[node name="wall_caves_b_1" type="MeshInstance3D" parent="Chamber" unique_id=756161286 instance=ExtResource("27_vxghn")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.3, -2.115924, 7.5)
+
+[node name="wall_caves_c_1" type="MeshInstance3D" parent="Chamber" unique_id=2069811820 instance=ExtResource("28_kh5oo")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 82.4, -2.115924, -1.6)
+
+[node name="wall_caves_d_1" type="MeshInstance3D" parent="Chamber" unique_id=1168442319 instance=ExtResource("29_whmro")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 82.4, -2.115924, 3)
+
+[node name="wall_caves_a_2" type="MeshInstance3D" parent="Chamber" unique_id=967532475 instance=ExtResource("26_pv5pv")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 82.4, -2.115924, 7.6)
+
+[node name="wall_caves_b_2" type="MeshInstance3D" parent="Chamber" unique_id=2011888371 instance=ExtResource("27_vxghn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 70.4, -2.115924, -4.3)
+
+[node name="wall_caves_c_2" type="MeshInstance3D" parent="Chamber" unique_id=635415166 instance=ExtResource("28_kh5oo")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 70.4, -2.115924, 10.3)
+
+[node name="wall_caves_d_2" type="MeshInstance3D" parent="Chamber" unique_id=1026034755 instance=ExtResource("29_whmro")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, -2.115924, -4.3)
+
+[node name="wall_caves_a_3" type="MeshInstance3D" parent="Chamber" unique_id=640707573 instance=ExtResource("26_pv5pv")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 75, -2.115924, 10.3)
+
+[node name="wall_caves_b_3" type="MeshInstance3D" parent="Chamber" unique_id=513726640 instance=ExtResource("27_vxghn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 79.6, -2.115924, -4.3)
+
+[node name="wall_caves_c_3" type="MeshInstance3D" parent="Chamber" unique_id=728355063 instance=ExtResource("28_kh5oo")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 79.6, -2.115924, 10.3)
+
+[node name="cave_pillar_a_1" type="MeshInstance3D" parent="Chamber" unique_id=1389013755 instance=ExtResource("30_gm58f")]
+transform = Transform3D(-0.8105022, 0, 0.5857357, 0, 1, 0, -0.5857357, 0, -0.8105022, 68.3, -2.115924, -4.3)
+
+[node name="cave_pillar_a_2" type="MeshInstance3D" parent="Chamber" unique_id=1941919364 instance=ExtResource("30_gm58f")]
+transform = Transform3D(0.77615005, 0, -0.63054824, 0, 1, 0, 0.63054824, 0, 0.77615005, 82.4, -2.115924, -4.3)
+
+[node name="cave_pillar_a_3" type="MeshInstance3D" parent="Chamber" unique_id=664221186 instance=ExtResource("30_gm58f")]
+transform = Transform3D(0.47858855, 0, 0.8780393, 0, 1, 0, -0.8780393, 0, 0.47858855, 68.3, -2.115924, 10.3)
+
+[node name="cave_pillar_a_4" type="MeshInstance3D" parent="Chamber" unique_id=992436646 instance=ExtResource("30_gm58f")]
+transform = Transform3D(0.99713457, 0, -0.07564827, 0, 1, 0, 0.07564827, 0, 0.99713457, 82.4, -2.115924, 10.3)
+
+[node name="cave_wall_rocks_a_1" type="MeshInstance3D" parent="Chamber" unique_id=1772677763 instance=ExtResource("31_qjc5y")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.4, 0.38407624, 0.9)
+
+[node name="cave_wall_rocks_b_1" type="MeshInstance3D" parent="Chamber" unique_id=42961671 instance=ExtResource("32_s7av0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.4, 0.38407624, 5.1)
+
+[node name="cave_rocks_a_1" type="MeshInstance3D" parent="Chamber" unique_id=734661972 instance=ExtResource("33_ewp1c")]
+transform = Transform3D(0.31092572, 0, -0.9504342, 0, 1, 0, 0.9504342, 0, 0.31092572, 71, -1.9159237, -3)
+
+[node name="cave_rocks_b_1" type="MeshInstance3D" parent="Chamber" unique_id=227071169 instance=ExtResource("34_4lcrv")]
+transform = Transform3D(0.49423152, 0, -0.86933035, 0, 1, 0, 0.86933035, 0, 0.49423152, 80.8, -1.9159237, -2.6)
+
+[node name="cave_rocks_c_1" type="MeshInstance3D" parent="Chamber" unique_id=954892727 instance=ExtResource("35_phb0n")]
+transform = Transform3D(0.035701804, 0, -0.99936247, 0, 1, 0, 0.99936247, 0, 0.035701804, 81, -1.9159237, 8.9)
+
+[node name="cave_rocks_d_1" type="MeshInstance3D" parent="Chamber" unique_id=1585065608 instance=ExtResource("36_sonxb")]
+transform = Transform3D(0.97186995, 0, 0.23551811, 0, 1, 0, -0.23551811, 0, 0.97186995, 70.2, -1.9159237, 9)
+
+[node name="cave_rocks_b_2" type="MeshInstance3D" parent="Chamber" unique_id=1075911895 instance=ExtResource("34_4lcrv")]
+transform = Transform3D(0.11624272, 0, -0.99322087, 0, 1, 0, 0.99322087, 0, 0.11624272, 77, -1.9159237, 3.4)
+
+[node name="ChamberBounds" type="StaticBody3D" parent="Chamber" unique_id=1793669622]
+
+[node name="West1" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=199037030]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7, 0.88407624, -1.6)
+shape = SubResource("BoxShape3D_p8b1t")
+
+[node name="West2" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=763381017]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 67.7, 0.88407624, 7.6)
+shape = SubResource("BoxShape3D_ss7xq")
+
+[node name="East" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=248738128]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.6, 0.88407624, 3)
+shape = SubResource("BoxShape3D_5s72u")
+
+[node name="North" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=1554311419]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, 0.88407624, -4.6)
+shape = SubResource("BoxShape3D_28hpd")
+
+[node name="South" type="CollisionShape3D" parent="Chamber/ChamberBounds" unique_id=1775620755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.3, 0.88407624, 10.6)
+shape = SubResource("BoxShape3D_5fe1e")
+
+[node name="Lantern_4" type="Node3D" parent="Chamber" unique_id=557486161 instance=ExtResource("15_tnx7o")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 68.75, -0.7659238, 7)
 
-[node name="Light" type="OmniLight3D" parent="Chamber/Lantern_4" unique_id=253322438]
+[node name="Light" type="OmniLight3D" parent="Chamber/Lantern_4" unique_id=27307924]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.6
 shadow_enabled = true
 omni_range = 8.0
 omni_attenuation = 1.4
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 housing_casts_shadow = false
 
-[node name="Crackle" type="AudioStreamPlayer3D" parent="Chamber/Lantern_4" unique_id=21236565]
+[node name="Crackle" type="AudioStreamPlayer3D" parent="Chamber/Lantern_4" unique_id=345183686]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
-stream = ExtResource("17_23pys")
+stream = ExtResource("17_qdpbw")
 volume_db = -12.0
 unit_size = 1.5
 autoplay = true
 max_distance = 7.0
 bus = &"SFX"
 
-[node name="BlueIronVeins" type="Node3D" parent="." unique_id=812613619]
-script = ExtResource("37_4lcrv")
-overlay = SubResource("ShaderMaterial_ihftr")
+[node name="BlueIronVeins" type="Node3D" parent="." unique_id=138700750]
+script = ExtResource("37_u8fp1")
+overlay = SubResource("ShaderMaterial_oww1w")
 
-[node name="cave_pillar_b_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=185467748 instance=ExtResource("39_sonxb")]
+[node name="cave_pillar_b_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=348952397 instance=ExtResource("39_lhwp4")]
 transform = Transform3D(0.81915206, 0, 0.57357645, 0, 1, 0, -0.57357645, 0, 0.81915206, 75.5, -2.115924, 0.2)
 
-[node name="cave_pillar_c_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=678054865 instance=ExtResource("40_u8fp1")]
+[node name="cave_pillar_c_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=1481217462 instance=ExtResource("40_ar5el")]
 transform = Transform3D(-0.50000006, 0, 0.8660254, 0, 1, 0, -0.8660254, 0, -0.50000006, 78.2, -2.115924, 7.2)
 
-[node name="cave_wall_rocks_c_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=297930164 instance=ExtResource("41_jr6jx")]
+[node name="cave_wall_rocks_c_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=157579437 instance=ExtResource("41_ex77b")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 81.7, -0.7159238, 1.2)
 
-[node name="Interactable" type="Area3D" parent="BlueIronVeins/cave_wall_rocks_c_1" unique_id=386291286]
-script = ExtResource("14_l5ron")
+[node name="Interactable" type="Area3D" parent="BlueIronVeins/cave_wall_rocks_c_1" unique_id=1713857978]
+script = ExtResource("14_23pys")
 display_name = "Żyła błękitnego żelaza"
 description = "Przez skałę biegną cienkie żyłki, świecące na niebiesko. Metal jest ciepły, choć dookoła ziąb. Jak się dłużej przyjrzeć, światło rośnie i słabnie. Jakby ktoś oddychał."
 
-[node name="cave_wall_rocks_e_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=765781816 instance=ExtResource("42_lhwp4")]
+[node name="cave_wall_rocks_e_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=1361900509 instance=ExtResource("42_xyewh")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 81.7, -0.5159238, 5.4)
 
-[node name="cave_wall_rocks_d_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=1113047408 instance=ExtResource("43_ar5el")]
+[node name="cave_wall_rocks_d_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=1248140421 instance=ExtResource("43_kxwjv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.4, -0.81592375, -3.6)
 
-[node name="cave_wall_rocks_f_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=409486020 instance=ExtResource("44_ex77b")]
+[node name="cave_wall_rocks_f_1" type="MeshInstance3D" parent="BlueIronVeins" unique_id=436110310 instance=ExtResource("44_754dh")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 72, -0.61592376, 9.6)
 
-[node name="VeinLights" type="Node3D" parent="." unique_id=1875924576]
+[node name="VeinMark" type="Area3D" parent="BlueIronVeins" unique_id=1100248474 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("14_23pys")
+display_name = "Żyła błękitnego żelaza"
+description = "Żyła biegnie przez całą ścianę, od spągu po strop, i znika w szczelinie. Odmierzasz ją krokami i wrysowujesz na mapę dla Racibora."
+prompt_text = "Zaznacz żyłę na mapie"
+time_cost_hours = 1.0
+time_reason = "Znaczenie żyły"
+on_use_flag = "vein_east_1"
+hidden_by_flag = "vein_east_1"
+highlight_target = NodePath("../cave_wall_rocks_e_1")
+solid = false
+padding = 0.1
 
-[node name="VeinLight" type="OmniLight3D" parent="VeinLights" unique_id=143857818]
+[node name="@Area3D@2" type="Area3D" parent="BlueIronVeins" unique_id=539442447 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("14_23pys")
+display_name = "Żyła błękitnego żelaza"
+description = "Cienka, ale czysta żyła, jak nitka wszyta w skałę. Stara ekipa jej nie ruszyła. Może nie zdążyła. Zaznaczasz ją na mapie."
+prompt_text = "Zaznacz żyłę na mapie"
+time_cost_hours = 1.0
+time_reason = "Znaczenie żyły"
+on_use_flag = "vein_east_2"
+hidden_by_flag = "vein_east_2"
+highlight_target = NodePath("../cave_wall_rocks_f_1")
+solid = false
+padding = 0.1
+
+[node name="Stake_east_1" type="Node3D" parent="." unique_id=1746979679]
+script = ExtResource("45_1i540")
+material = ExtResource("46_lepoj")
+
+[node name="VeinStake_1" type="Node3D" parent="Stake_east_1" unique_id=632717869 instance=ExtResource("47_3hen4")]
+transform = Transform3D(0.097045355, 0, 1.5970542, 0, 1.6, 0, -1.5970542, 0, 0.097045355, 80.6, -2.115924, 6.2)
+
+[node name="Look" type="Area3D" parent="Stake_east_1/VeinStake_1" unique_id=818031644]
+script = ExtResource("14_23pys")
+display_name = "Twój palik"
+description = "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę."
+required_flag = "vein_east_1"
+solid = false
+padding = 0.08
+
+[node name="Stake_east_2" type="Node3D" parent="." unique_id=6381956]
+script = ExtResource("45_1i540")
+material = ExtResource("46_lepoj")
+
+[node name="VeinStake_2" type="Node3D" parent="Stake_east_2" unique_id=972972775 instance=ExtResource("47_3hen4")]
+transform = Transform3D(0.35762674, 0, -1.5595201, 0, 1.6, 0, 1.5595201, 0, 0.35762674, 72.9, -2.115924, 8.7)
+
+[node name="Look" type="Area3D" parent="Stake_east_2/VeinStake_2" unique_id=1192190785]
+script = ExtResource("14_23pys")
+display_name = "Twój palik"
+description = "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę."
+required_flag = "vein_east_2"
+solid = false
+padding = 0.08
+
+[node name="VeinLights" type="Node3D" parent="." unique_id=52941611]
+
+[node name="VeinLight" type="OmniLight3D" parent="VeinLights" unique_id=1441438465]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80.4, -0.5159238, 3.2)
 light_color = Color(0.35, 0.6, 1, 1)
 light_energy = 2.4
 shadow_enabled = true
 omni_range = 7.5
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 mode = 1
 strength = 0.35
 speed = 0.7
 
-[node name="@OmniLight3D@2" type="OmniLight3D" parent="VeinLights" unique_id=1956526744]
+[node name="@OmniLight3D@3" type="OmniLight3D" parent="VeinLights" unique_id=568017399]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.4, -0.7159238, -2.2)
 light_color = Color(0.35, 0.6, 1, 1)
 light_energy = 2.4
 shadow_enabled = true
 omni_range = 7.5
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 mode = 1
 strength = 0.35
 speed = 0.7
 
-[node name="@OmniLight3D@3" type="OmniLight3D" parent="VeinLights" unique_id=995194235]
+[node name="@OmniLight3D@4" type="OmniLight3D" parent="VeinLights" unique_id=1746112449]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 72, -0.61592376, 8.2)
 light_color = Color(0.35, 0.6, 1, 1)
 light_energy = 2.4
 shadow_enabled = true
 omni_range = 7.5
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 mode = 1
 strength = 0.35
 speed = 0.7
 
-[node name="@OmniLight3D@4" type="OmniLight3D" parent="VeinLights" unique_id=1978333885]
+[node name="@OmniLight3D@5" type="OmniLight3D" parent="VeinLights" unique_id=217252336]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 76.8, 0.08407623, 3.8)
 light_color = Color(0.35, 0.6, 1, 1)
 light_energy = 2.4
 shadow_enabled = true
 omni_range = 7.5
-script = ExtResource("16_c63je")
+script = ExtResource("16_ycg8t")
 mode = 1
 strength = 0.35
 speed = 0.7
 
-[node name="Sounds" type="Node3D" parent="." unique_id=234783754]
+[node name="Sounds" type="Node3D" parent="." unique_id=630519319]
 
-[node name="DripSlope" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1612286859]
+[node name="DripSlope" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1569797491]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 58, 2.6, 3.5)
-stream = ExtResource("45_xyewh")
+stream = ExtResource("48_sa52i")
 volume_db = -6.0
 unit_size = 3.0
 max_distance = 18.0
 bus = &"Ambience"
-script = ExtResource("46_kxwjv")
+script = ExtResource("49_synqs")
 pitch_variation = 0.2
 
-[node name="DripChamber1" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1666524452]
+[node name="DripChamber1" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1387503615]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 74, 1.8840762, -2)
-stream = ExtResource("45_xyewh")
+stream = ExtResource("48_sa52i")
 volume_db = -3.0
 unit_size = 3.0
 max_distance = 20.0
 bus = &"Ambience"
-script = ExtResource("46_kxwjv")
+script = ExtResource("49_synqs")
 min_interval = 2.5
 max_interval = 7.0
 pitch_variation = 0.25
 
-[node name="DripChamber2" type="AudioStreamPlayer3D" parent="Sounds" unique_id=940145201]
+[node name="DripChamber2" type="AudioStreamPlayer3D" parent="Sounds" unique_id=352549669]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 80, 1.8840762, 8)
-stream = ExtResource("45_xyewh")
+stream = ExtResource("48_sa52i")
 volume_db = -5.0
 unit_size = 3.0
 max_distance = 20.0
 bus = &"Ambience"
-script = ExtResource("46_kxwjv")
+script = ExtResource("49_synqs")
 min_interval = 3.5
 max_interval = 9.0
 pitch_variation = 0.25
 
-[node name="CreakNew1" type="AudioStreamPlayer3D" parent="Sounds" unique_id=511162321]
+[node name="CreakNew1" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1299010762]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54, 3.4, 3)
-stream = ExtResource("47_754dh")
+stream = ExtResource("50_6j8jw")
 volume_db = -8.0
 unit_size = 3.0
 max_distance = 20.0
 bus = &"Ambience"
-script = ExtResource("46_kxwjv")
+script = ExtResource("49_synqs")
 min_interval = 12.0
 max_interval = 26.0
 pitch_variation = 0.12
 
-[node name="CreakNew2" type="AudioStreamPlayer3D" parent="Sounds" unique_id=221098706]
+[node name="CreakNew2" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1870347268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 2, 3)
-stream = ExtResource("47_754dh")
+stream = ExtResource("50_6j8jw")
 volume_db = -7.0
 unit_size = 3.0
 max_distance = 20.0
 bus = &"Ambience"
-script = ExtResource("46_kxwjv")
+script = ExtResource("49_synqs")
 min_interval = 14.0
 max_interval = 32.0
 pitch_variation = 0.12
 
-[node name="RumbleDeep" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1684682318]
+[node name="RumbleDeep" type="AudioStreamPlayer3D" parent="Sounds" unique_id=150218752]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 78, -1.1159238, 3)
-stream = ExtResource("48_1i540")
+stream = ExtResource("51_goo8y")
 unit_size = 3.0
 max_distance = 60.0
 bus = &"Ambience"
-script = ExtResource("46_kxwjv")
+script = ExtResource("49_synqs")
 min_interval = 30.0
 max_interval = 60.0
 pitch_variation = 0.15
 
-[node name="PickTaps" type="AudioStreamPlayer3D" parent="Sounds" unique_id=1322288111]
+[node name="PickTaps" type="AudioStreamPlayer3D" parent="Sounds" unique_id=697259813]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 85.5, -1.1159238, 3)
-stream = ExtResource("49_lepoj")
+stream = ExtResource("52_nry7c")
 volume_db = -2.0
 unit_size = 3.0
 max_distance = 45.0
 bus = &"Ambience"
-script = ExtResource("46_kxwjv")
+script = ExtResource("49_synqs")
 min_interval = 35.0
 max_interval = 80.0
 pitch_variation = 0.05
 
-[node name="Props" type="Node3D" parent="." unique_id=2095047302]
+[node name="Props" type="Node3D" parent="." unique_id=1805603659]
 
-[node name="Pickaxe_Bronze_1" type="Node3D" parent="Props" unique_id=857528358 instance=ExtResource("50_3hen4")]
+[node name="Pickaxe_Bronze_1" type="Node3D" parent="Props" unique_id=857528358 instance=ExtResource("53_tv2yc")]
 transform = Transform3D(0.8253356, 0.5646425, -2.4681308e-08, 0, -4.371139e-08, -1, -0.5646425, 0.8253356, -3.6076568e-08, 73.2, -2.0459237, 5.6)
 
-[node name="Interactable" type="Area3D" parent="Props/Pickaxe_Bronze_1" unique_id=586095279]
-script = ExtResource("14_l5ron")
+[node name="Interactable" type="Area3D" parent="Props/Pickaxe_Bronze_1" unique_id=189604040]
+script = ExtResource("14_23pys")
 display_name = "Porzucony kilof"
 description = "Stary kilof z pękniętym trzonkiem. Na żeleźcu ktoś wyrył dwie skrzyżowane kreski i kropkę. Ten sam znak dziadek stawiał na swoich mapach."
 
-[node name="Scroll_2_1" type="Node3D" parent="Props" unique_id=1219969263 instance=ExtResource("51_sa52i")]
+[node name="Scroll_2_1" type="Node3D" parent="Props" unique_id=1219969263 instance=ExtResource("54_u1fq6")]
 transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, 77.6, -2.1059237, 2.9)
 
-[node name="Interactable" type="Area3D" parent="Props/Scroll_2_1" unique_id=656635606]
-script = ExtResource("14_l5ron")
+[node name="Interactable" type="Area3D" parent="Props/Scroll_2_1" unique_id=527004106]
+script = ExtResource("14_23pys")
 display_name = "Kartka z szyfrem"
 description = "Kartka zapisana rzędami liter bez ładu i składu. Dziadek tak pisał, kiedy nie chciał, żeby ktoś obcy to przeczytał. Na dole jedno zwykłe zdanie: „Nie idźcie za błękitem.”
 

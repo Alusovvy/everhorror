@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"swieca"
+display_name = "Świeca"
+name_accusative = "świecę"
+description = "Łojowa świeca. Kopci, śmierdzi i daje odrobinę spokoju."
+category = 2
+heal = 0
+sanity = 6
+cures_fever = false
+consumable = true
+use_hours = 0.5
+use_text = "Zapalasz świecę i patrzysz w płomień, aż przestają ci drżeć ręce."

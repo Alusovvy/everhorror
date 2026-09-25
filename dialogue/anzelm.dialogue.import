@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dkqopqbp3ngiq"
+path="res://.godot/imported/anzelm.dialogue-88c82ebca448eeda8ed922eb71497788.tres"
+
+[deps]
+
+source_file="res://dialogue/anzelm.dialogue"
+dest_files=["res://.godot/imported/anzelm.dialogue-88c82ebca448eeda8ed922eb71497788.tres"]
+
+[params]
+
+defaults=true

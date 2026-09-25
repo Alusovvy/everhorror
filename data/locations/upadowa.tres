@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"upadowa"
+display_name = "Upadowa"
+unknown_name = ""
+direction = "zachód, w dół"
+text = "Stromy chodnik za połamanymi stemplami. Na mapie dziadka trzy grube kreski i nic więcej."
+links = {
+"west": 1.0
+}
+requires = PackedStringArray("item:lina")
+locked = {
+"item:lina": "Za połamanymi stemplami chodnik stromo opada w ciemność. Bez liny nie zejdziesz."
+}
+entry = "UpadowaEntry"
+veins = PackedStringArray("upadowa", "upadowa_2")
+depth = 2
+map_pos = Vector2(0.08, 0.46)
+dread = 3
+arrival_text = ""

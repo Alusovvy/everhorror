@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"bandaze"
+display_name = "Bandaże"
+name_accusative = "bandaże"
+description = "Czyste płótno pocięte w pasy. Anzelm wygotowuje je we wrzątku, zanim komukolwiek da."
+category = 1
+heal = 30
+sanity = 0
+cures_fever = false
+consumable = true
+use_hours = 0.5
+use_text = "Przemywasz rany i obwiązujesz je ciasno. Piecze, aż zgrzytasz zębami, ale krew przestaje ciec."

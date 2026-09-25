@@ -7,8 +7,10 @@ extends SceneTree
 ## - east room (x 20–31, behind the wooden partition): the leader's table with the map, and the
 ##   quartermaster's stall next to the east exit,
 ## plus the barricades with exits, the west segment (grandfather's key, broken supports, blast
-## debris), the fuse box in the east chamber, and markers for spawning, travel and the NPC
-## schedule (script/camp_schedule.gd).
+## debris, a vein), the fuse box in the east chamber, and markers for spawning, travel and the
+## NPC schedule (script/camp_schedule.gd). task_05 adds Anzelm's infirmary (west end), the
+## scribe's corner (east room), places for the new people and meeting spots in the east and west
+## tunnels (FieldSchedule).
 ## WARNING: overwrites the scene. Edit this generator, not the scene.
 
 const K := "res://assets/props/kenney_survival/"
@@ -200,6 +202,8 @@ func _initialize() -> void:
 	_storage(camp, wood)
 	_command(camp, wood)
 	_supply(camp)
+	_infirmary(camp, cloth)
+	_scribe_corner(camp)
 	_barricades()
 	_west_segment()
 	_east_segment()
@@ -274,7 +278,7 @@ func _storage(camp: Node3D, wood: Node3D) -> void:
 	add(store, P + "Bag.gltf", Vector3(15.9, 0.0, 3.2), 110.0)
 	# tools on a workbench along the partition
 	var bench := add(store, P + "Workbench.gltf", Vector3(18.75, 0.0, -1.6), 90.0, 1.0, "ToolBench")
-	look(bench, "Narzędzia", "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór, choć jeszcze nikt ich tu nie użył.", true)
+	look(bench, "Narzędzia", "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór, a Wszebor co rano mówi, że to miękkie jaksarskie żelazo i szkoda osełki.", true)
 	var pick := add(store, P + "Pickaxe_Bronze.gltf", Vector3(18.75, 0.9, -1.25), 0.0, 1.0)
 	pick.basis = Basis(Vector3.UP, 0.4) * Basis(Vector3.RIGHT, PI / 2)
 	var axe := add(store, P + "Axe_Bronze.gltf", Vector3(18.6, 0.9, -2.2), 0.0, 1.0)
@@ -310,7 +314,7 @@ func _command(camp: Node3D, wood: Node3D) -> void:
 	candle(camp, P + "CandleStick_Triple.gltf", Vector3(24.45, TABLE_TOP, -2.45), 1.4, 5.0)
 	add(camp, P + "Chair_1.gltf", Vector3(26.35, 0.0, -3.5), 0.0)
 	var ledger := add(camp, P + "BookStand.gltf", Vector3(27.75, 0.0, -2.2), -60.0, 1.0, "Ledger")
-	look(ledger, "Księga zarządcy", "Równe rubryki: ludzie, zapasy, urobek. Przy urobku na razie same zera. Na ostatniej stronie, drobno: „Kniaź czeka”.", true)
+	look(ledger, "Księga zarządcy", "Równe rubryki, pisane drobnym, starannym pismem Hagiwary: ludzie, zapasy, urobek, żyły. Przy urobku na razie same zera. Na ostatniej stronie, ręką Racibora: „Kniaź czeka”.", true)
 	var banner := add(camp, P + "Banner_1.gltf", Vector3(24.0, 2.55, -4.3), 0.0, 1.0, "KniazBanner")
 	look(banner, "Chorągiew Kniazia", "Herb Jacyntów: srebrny gród na czerwonym polu. Racibor powiesił ją pierwszego dnia, zanim ktokolwiek rozpakował swoje rzeczy.")
 	var bed := add(camp, P + "Bed_Twin1.gltf", Vector3(22.0, 0.0, -3.2), 0.0, 1.0, "LeaderBed")
@@ -341,6 +345,34 @@ func _supply(camp: Node3D) -> void:
 
 #endregion
 
+#region task_05: the infirmary and the scribe's corner
+
+## Brat Anzelm's corner at the west end: a bedroll for the sick, a crate with his herbs and
+## bandages, a candle. Nasir lies here when the fever takes him.
+func _infirmary(camp: Node3D, cloth: Node3D) -> void:
+	var room := group(camp, "Infirmary")
+	add(cloth, K + "bedroll.glb", Vector3(2.3, 0.0, -3.3), 90.0, 3.2, "SickBedroll")
+	var chest := add(room, P + "Crate_Wooden.gltf", Vector3(1.0, 0.0, -4.05), 10.0, 0.85, "HerbCrate")
+	look(chest, "Skrzynka Anzelma", "Zioła w płóciennych woreczkach, każdy podpisany drobnym pismem. Bandaże wygotowane i zwinięte w równe rolki. Na wieku wyryty płomień, a przez płomień ktoś przeciągnął nożem krechę.", true)
+	add(room, P + "SmallBottles_1.gltf", Vector3(1.0, 0.72, -4.05), 20.0)
+	add(room, P + "Potion_2.gltf", Vector3(1.35, 0.72, -3.85), 0.0)
+	add(room, P + "Bucket_Wooden_1.gltf", Vector3(3.7, 0.0, -4.0), 0.0)
+	var seat := skinned(room, "SickSeat", "res://material/kenney_wood.tres")
+	add(seat, K + "box.glb", Vector3(2.35, 0.0, -2.2), 10.0, 2.0)
+	candle(room, P + "CandleStick.gltf", Vector3(1.55, 0.72, -4.25), 0.8, 4.0)
+
+## Hagiwara's corner in the east room: a stool, a crate for a table, tea and his book.
+func _scribe_corner(camp: Node3D) -> void:
+	var corner := group(camp, "ScribeCorner")
+	add(corner, P + "Stool.gltf", Vector3(30.1, 0.0, -3.75), 0.0)
+	var desk := add(corner, P + "Crate_Wooden.gltf", Vector3(30.85, 0.0, -3.05), -8.0, 0.8, "TeaCrate")
+	look(desk, "Kącik Hagiwary", "Skrzynia zamiast stołu. Na niej kubek z naparem, który Hagiwara nazywa herbatą, pędzelek, kamień do rozcierania tuszu i zeszyt z wierszami. Wiersze są krótkie. Każdy o ciemności.", true)
+	add(corner, P + "Mug.gltf", Vector3(30.75, 0.7, -2.9), 0.0)
+	add(corner, P + "Book_5.gltf", Vector3(31.0, 0.7, -3.2), 60.0)
+	candle(corner, P + "CandleStick.gltf", Vector3(30.95, 0.7, -2.75), 0.7, 3.5)
+
+#endregion
+
 #region Barricades, segments, markers
 
 func _barricades() -> void:
@@ -352,12 +384,12 @@ func _barricades() -> void:
 	flicker_light(lamp, "Light", Vector3(0, 0.6, 0.95), Color(1.0, 0.62, 0.32), 1.2, 6.0).set("housing_casts_shadow", false)
 	box_body(barricades, "EastBlock", Vector3(0.4, 4.0, 4.2), Vector3(35.2, 2.0, 3.0))
 	var east_sign := add(signs, K + "signpost-single.glb", Vector3(36.1, 0.0, 1.5), -90.0, 3.5, "EastSign")
-	interactable(east_sign, "EastExitUse", {"display_name": "Drogowskaz", "prompt_text": "Wróć do obozu · 2 h", "action": 2})
+	interactable(east_sign, "EastExitUse", {"display_name": "Drogowskaz", "prompt_text": "Dokąd dalej? (albo [M])", "action": 2})
 	var west_panel := add(barricades, M + "Panel_Wood/panel_wood_a.tscn", Vector3(-1.8, 0.0, 3.0), 90.0, 1.0, "WestBoards")
 	interactable(west_panel, "WestBoardsLook", {"display_name": "Zabity deskami chodnik", "description": "Zachodni chodnik zabity deskami. Zza nich słychać, jak co jakiś czas osypuje się żwir.\n\nNa wyprawę wyruszasz od stołu z mapą w obozie.", "solid": false})
 	box_body(barricades, "WestBlock", Vector3(0.4, 4.0, 4.2), Vector3(-1.8, 2.0, 3.0))
 	var west_sign := add(signs, K + "signpost-single.glb", Vector3(-2.7, 0.0, 1.5), 90.0, 3.5, "WestSign")
-	interactable(west_sign, "WestExitUse", {"display_name": "Drogowskaz", "prompt_text": "Wróć do obozu · 2 h", "action": 2})
+	interactable(west_sign, "WestExitUse", {"display_name": "Drogowskaz", "prompt_text": "Dokąd dalej? (albo [M])", "action": 2})
 
 func _west_segment() -> void:
 	var west := group(root3d, "WestSegment")
@@ -376,6 +408,18 @@ func _west_segment() -> void:
 	beam.rotate_object_local(Vector3.FORWARD, deg_to_rad(18.0))
 	interactable(beam, "BarrierLook", {"display_name": "Połamane stemple", "description": "Dalej chodnik stromo opada w ciemność: to upadowa z mapy dziadka. Stemple połamało jak zapałki. Bez liny nie ma tu czego szukać.\n\nZejście zaplanujesz przy stole z mapą.", "solid": false, "padding": 0.3})
 	box_body(barrier, "BarrierBlock", Vector3(1.2, 3.0, 4.4), Vector3(-17.5, Y_WEST_LOW + 1.5, 3.0))
+	# Racibor's vein in the west tunnel (task_05)
+	var veins := blue_ore(west, "Vein")
+	var vein_rock := add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_c.tscn", Vector3(-12.2, Y_WEST_LOW + 1.2, 4.75), 180.0, 1.2)
+	flicker_light(west, "VeinGlow", Vector3(-12.2, Y_WEST_LOW + 1.6, 3.6), Color(0.35, 0.6, 1.0), 1.4, 5.5, 0.35, 0.7, false).set("mode", 1)
+	interactable(west, "VeinMark_west_1", {
+		"display_name": "Żyła błękitnego żelaza", "prompt_text": "Zaznacz żyłę na mapie", "time_cost_hours": 1.0, "time_reason": "Znaczenie żyły",
+		"description": "Tuż za zawałem, na wysokości oczu. Dziadek musiał ją mijać setki razy, idąc swoją ulubioną drogą. Na jego mapie w tym miejscu jest kropka. Zaznaczasz ją po raz drugi.",
+		"on_use_flag": "vein_west_1", "hidden_by_flag": "vein_west_1", "highlight_target": vein_rock, "solid": false, "padding": 0.1,
+	})
+	var stakes := skinned(west, "Stake_west_1", "res://material/kenney_wood.tres")
+	var stake := add(stakes, K + "signpost-single.glb", Vector3(-12.0, Y_WEST_LOW, 4.0), 25.0, 1.6, "VeinStake")
+	interactable(stake, "Look", {"display_name": "Twój palik", "description": "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę.", "required_flag": "vein_west_1", "solid": false, "padding": 0.08})
 	var debris := group(west, "BlastDebris")
 	for r in [[-6.4, 1.4, "a", 0.8], [-7.2, 4.6, "c", 0.9], [-8.3, 1.6, "b", 0.7], [-5.8, 4.4, "d", 0.6], [-9.2, 4.5, "a", 0.6]]:
 		add(debris, M + "Rocks/Cave_Rocks/cave_rocks_%s.tscn" % r[2], Vector3(r[0], lerpf(0.0, Y_WEST_LOW, clampf((-r[0] - 5.0) / 4.0, 0.0, 1.0)) + 0.1, r[1]), randf() * 360.0, r[3])
@@ -418,6 +462,34 @@ func _markers() -> void:
 	marker(markers, "DobrawaLeader", Vector3(27.6, 0.0, -1.2), -134.0)
 	marker(markers, "DobrawaCarts", Vector3(8.2, 0.0, -3.2), 36.0)
 	marker(markers, "DobrawaApart", Vector3(1.4, 0.0, 0.6), -90.0)
+	# task_05. Wszebor: breakfast, the fire in the evening (by day he hews in the old working)
+	marker(markers, "WszeborEat", Vector3(14.6, 0.0, 1.9), 180.0)
+	marker(markers, "WszeborFire", Vector3(10.6, 0.0, 4.05), 180.0)
+	# Nasir: breakfast and supper, the water barrel by day, the floor by the water at night, sick
+	marker(markers, "NasirEat", Vector3(13.4, 0.0, 1.9), 180.0)
+	marker(markers, "NasirWater", Vector3(6.2, 0.0, 1.55), 0.0)
+	marker(markers, "NasirEvening", Vector3(5.0, 0.0, 0.9), 60.0)
+	marker(markers, "NasirSick", Vector3(2.35, 0.0, -2.2), 190.0)
+	# Hagiwara: breakfast and supper, the ledger by day, tea in his corner at night
+	marker(markers, "HagiwaraEat", Vector3(14.6, 0.0, 0.22), 0.0)
+	marker(markers, "HagiwaraLedger", Vector3(28.4, 0.0, -1.45), -140.0)
+	marker(markers, "HagiwaraTea", Vector3(30.1, 0.0, -3.75), -130.0)
+	# Sobek: on guard by the east exit, dice at the common table at supper
+	marker(markers, "SobekGuard", Vector3(30.0, 0.0, 0.4), -90.0)
+	marker(markers, "SobekDice", Vector3(14.6, 0.0, 1.9), 180.0)
+	# Anzelm: morning prayer, the infirmary
+	marker(markers, "AnzelmPray", Vector3(1.7, 0.0, -1.3), -90.0)
+	marker(markers, "AnzelmInfirmary", Vector3(3.3, 0.0, -2.5), -125.0)
+	# Sabina (from day 3): apart in the east room, at the ore cart, with the sick, in the evening
+	marker(markers, "SabinaApart", Vector3(21.9, 0.0, 0.6), -90.0)
+	marker(markers, "SabinaCart", Vector3(16.2, 0.0, -0.7), 40.0)
+	marker(markers, "SabinaSick", Vector3(3.8, 0.0, -1.1), -150.0)
+	marker(markers, "SabinaEvening", Vector3(2.4, 0.0, 1.6), -128.0)
+	# People met in the east corridor and the west tunnel (FieldSchedule), facing the way in
+	for i in 4:
+		marker(markers, "EastSpot%d" % (i + 1), Vector3(40.6 + i * 0.9, 0.0, 2.1 if i % 2 == 0 else 3.9), -90.0)
+		var x := -6.6 - i * 0.8
+		marker(markers, "WestSpot%d" % (i + 1), Vector3(x, lerpf(0.0, Y_WEST_LOW, clampf((-x - 5.0) / 4.0, 0.0, 1.0)), 2.1 if i % 2 == 0 else 3.9), 90.0)
 
 #endregion
 

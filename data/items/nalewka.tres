@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"nalewka"
+display_name = "Nalewka"
+name_accusative = "nalewkę"
+description = "Piersiówka mocnej nalewki na korzeniach. Na strach, na zimno i na złe sny."
+category = 1
+heal = 0
+sanity = 15
+cures_fever = false
+consumable = true
+use_hours = 0
+use_text = "Pociągasz łyk. Pali w gardle, potem rozlewa się ciepło i na chwilę ciemność robi się mniej ciemna."

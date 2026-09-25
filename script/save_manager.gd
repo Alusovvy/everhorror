@@ -7,15 +7,19 @@ extends Node
 ## root. Gameplay scenes call restore_pending(self) in _ready to apply a load.
 ## GameState (day, time, flags, NPCs…) is saved too and restored before the scene loads,
 ## so every node can read the loaded state in its own _ready.
+## Besides the slots there is a "morning" snapshot in memory, taken at the start of each day:
+## after the hero dies the player can try the day again (MECHANICS §13 pkt 3).
+## Version 3 (task_05) added the hero's health and the expedition; older saves still load.
 
 const GAME_SCENE := "res://scene/world.tscn"
 const MAIN_MENU_SCENE := "res://scene/main_menu.tscn"
 const SAVE_DIR := "user://saves"
 const SLOT_COUNT := 3
-const SAVE_VERSION := 2
+const SAVE_VERSION := 3
 const PERSIST_GROUP := "persist"
 
 var _pending: Dictionary = {}
+var _morning: Dictionary = {}
 
 func slot_path(slot: int) -> String:
 	return "%s/slot_%d.json" % [SAVE_DIR, slot]
@@ -41,6 +45,7 @@ func read_slot(slot: int) -> Dictionary:
 
 func new_game() -> void:
 	_pending = {}
+	_morning = {}
 	GameState.reset()
 	_change_scene(GAME_SCENE)
 
@@ -49,18 +54,7 @@ func go_to_main_menu() -> void:
 	_change_scene(MAIN_MENU_SCENE)
 
 func save_game(slot: int) -> bool:
-	var scene := get_tree().current_scene
-	var nodes := {}
-	for node in get_tree().get_nodes_in_group(PERSIST_GROUP):
-		if scene.is_ancestor_of(node):
-			nodes[str(scene.get_path_to(node))] = node.save_state()
-	var data := {
-		"version": SAVE_VERSION,
-		"saved_at": Time.get_unix_time_from_system(),
-		"scene": scene.scene_file_path,
-		"nodes": nodes,
-		"game_state": GameState.save_state(),
-	}
+	var data := _collect()
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 	var file := FileAccess.open(slot_path(slot), FileAccess.WRITE)
 	if file == null:
@@ -77,6 +71,37 @@ func load_game(slot: int) -> bool:
 	GameState.load_state(data.get("game_state", {}))
 	_change_scene(data["scene"])
 	return true
+
+## Remembers the current state as this morning's (the StoryDirector calls it at dawn).
+func capture_morning() -> void:
+	if get_tree().current_scene:
+		_morning = _collect()
+
+func has_morning() -> bool:
+	return not _morning.is_empty()
+
+## Starts the day again from this morning's snapshot.
+func retry_morning() -> void:
+	if _morning.is_empty():
+		go_to_main_menu()
+		return
+	_pending = _morning.duplicate(true)
+	GameState.load_state(_pending.get("game_state", {}))
+	_change_scene(_pending["scene"])
+
+func _collect() -> Dictionary:
+	var scene := get_tree().current_scene
+	var nodes := {}
+	for node in get_tree().get_nodes_in_group(PERSIST_GROUP):
+		if scene.is_ancestor_of(node):
+			nodes[str(scene.get_path_to(node))] = node.save_state()
+	return {
+		"version": SAVE_VERSION,
+		"saved_at": Time.get_unix_time_from_system(),
+		"scene": scene.scene_file_path,
+		"nodes": nodes,
+		"game_state": GameState.save_state(),
+	}
 
 ## True while a loaded save is waiting to be applied by the gameplay scene.
 func has_pending() -> bool:

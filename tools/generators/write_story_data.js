@@ -27,6 +27,7 @@ sanity_zero_effect = "${esc(o.zero)}"
 model = ExtResource("2_model")
 dialogue = ExtResource("3_dialogue")
 portrait_eye_height = ${o.eye ?? 1.62}
+female = ${o.eye === 1.57 ? "true" : "false"}
 `);
 }
 
@@ -92,6 +93,63 @@ npc({
   zero: "[ROBOCZE] Schodzi sama w głąb, żeby dotknąć źródła energii. Nie wraca.",
 });
 
+// --- task_05: five people of the camp (LoreDoc, nobody important in the world) ---
+npc({
+  id: "wszebor", display_name: "Wszebor ze Śnieżnej Przystani", dialogue_name: "Wszebor", instr: "Wszeborem", faction: 1,
+  role: "Rębacz, Hawiar z Czarnych Gór", max_sanity: 100, start_sanity: 76, eye: 1.78,
+  history: "Hawiar ze Śnieżnej Przystani, rębacz i kowal. Wielki jak drzwi do stodoły, śmieje się tak, że sypie się strop. Od kiedy w kopalni pod Przystanią zasypało jego brata Bogdala, boi się ciasnych chodników, choć za nic się do tego nie przyzna. Zjechał tu, bo Kniaź płaci potrójnie, a wdowa po bracie ma czworo dzieci.",
+  zero: "Ucieka z ciasnego chodnika i biegnie przed siebie w ciemność. Znajdują go po dwóch dniach w ślepym korytarzu. Siedzi w kącie i nuci kołysankę z Długiej Nocy.",
+});
+npc({
+  id: "nasir", display_name: "Nasir z Bakaszu", dialogue_name: "Nasir", instr: "Nasirem", faction: 2,
+  role: "Pompiarz i górnik z Sułtanatu Nerdii", max_sanity: 100, start_sanity: 72,
+  history: "Nerdyjczyk z Bakaszu. Jako chłopak trafił do sułtańskich kamieniołomów za długi ojca. Wykupił się po dwunastu latach, podpatrując waldgrosseńskich inżynierów wodnych, aż umiał wypompować wodę z każdej dziury. Mówi, że gdzie woda, tam życie, a gdzie jej za dużo, tam śmierć. Na północy marznie od pierwszego dnia. Na szyi nosi szklany paciorek, który nazywa Dalekim Klejnotem.",
+  zero: "Przestaje schodzić pod ziemię. Siada pod szybem, patrzy w kwadrat nieba i szepcze do Dżinów w swoim języku.",
+});
+npc({
+  id: "hagiwara", display_name: "Kiyoshi Hagiwara", dialogue_name: "Hagiwara", instr: "Hagiwarą", faction: 2,
+  role: "Pisarz ekspedycji, wygnaniec z Cesarstwa Czterech Wysp", max_sanity: 100, start_sanity: 80,
+  history: "Urzędnik Ministerstwa Ziemi z gałęzi pomniejszego klanu na Shihon. Prowadził księgi kopalń na Nagate, gdzie pracują Szarzy. Kiedy wpisał do raportu prawdziwe liczby zamiast tych, których oczekiwał jego pan, stracił twarz, urząd i ojczyznę. Teraz prowadzi księgi Racibora. Liczby, powtarza, nie kłamią. Kłamią ludzie, którzy je zapisują.",
+  zero: "Przestaje prowadzić księgi. Pisze za to wiersz, bez końca ten sam, na każdej kartce, jaką znajdzie.",
+});
+npc({
+  id: "sobek", display_name: "Sobek z Wielkiego Stepu", dialogue_name: "Sobek", instr: "Sobkiem", faction: 1,
+  role: "Egzarcha, najemnik, straż obozu", max_sanity: 100, start_sanity: 84,
+  history: "Egzarcha ze stepu. Przez trzy zimy jeździł z bandą Gniewomira, aż znudziło mu się uciekać przed jaksarskimi patrolami. Teraz Racibor płaci mu za pilnowanie wyjścia i zapasów. Nosi zaklęty miecz, który tnie tylko wtedy, kiedy Sobek go karmi, i gra w kości z każdym, kto ma czym zapłacić. Drudzy nazywają go półmagiem. On ich nazywa gorzej.",
+  zero: "Stwierdza, że nikt mu nie płaci za umieranie. Zabiera miecz, trochę zapasów i znika szybem na górę.",
+});
+npc({
+  id: "anzelm", display_name: "Brat Anzelm", dialogue_name: "Anzelm", instr: "Anzelmem", faction: 2,
+  role: "Felczer, były zakonnik Niebiańskiego Płomienia", max_sanity: 100, start_sanity: 64,
+  history: "Pochodzi z Kinkengardu. Wstąpił do Zakonu Niebiańskiego Płomienia, żeby bronić ludzi przed magią, i przez dwa lata służył pod Wysokim Inkwizytorem Przemirem z Łask. Odszedł po egzekucji, o której nie chce mówić. Teraz leczy górników ziołami, wrzątkiem i modlitwą. Wszyscy wciąż mówią do niego „bracie”. Magii nie znosi, ludzi kocha, a siebie ledwo znosi.",
+  zero: "Wraca do dawnej wiary w najgorszym wydaniu i próbuje wygnać z obozu wszystko, co ma w sobie magię. Zaczyna od Sabiny.",
+});
+// --- task_05: the Exitium expedition (Drudzy); Sabina stays in the camp from day 3 ---
+npc({
+  id: "sabina", display_name: "Sabina von Reuss", dialogue_name: "Sabina", instr: "Sabiną", faction: 0,
+  role: "Druga z Exitium, laborantka i uzdrowicielka", max_sanity: 60, start_sanity: 48, eye: 1.57,
+  history: "Najmłodsza w wyprawie Exitium, z waldgrosseńskiej rodziny, która oddała ją do Initium, kiedy miała sześć lat. Leczy zaklęciami drugiego kręgu i płaci za to bólem, jakby wkładała dłoń pod wrzątek. Dobra z natury i święcie przekonana, że bezmagicznym trzeba pomagać jak dzieciom. Von Brühl zostawił ją w obozie, żeby patrzyła Raciborowi na ręce.",
+  zero: "Leczy tak długo, aż ból ją przerasta. Zamyka się w sobie i przestaje odpowiadać, zapatrzona w linie, które widzi tylko ona.",
+});
+npc({
+  id: "ottokar", display_name: "Ottokar von Brühl", dialogue_name: "Ottokar", instr: "Ottokarem", faction: 0,
+  role: "Przewodniczący rozwoju w Exitium, szef wyprawy Drugich", max_sanity: 60, start_sanity: 54,
+  history: "Arystokrata z Waldgrossen, jeden z przewodniczących rozwoju w Exitium, od lat zajęty ruinami Onych. Chłodny, uprzejmy i pewny, że bezmagiczni to narzędzia, które czasem mówią. Szuka źródła błękitu, bo kto je znajdzie, zasiądzie w Wielkiej Radzie. Cofnie się tylko przed tym, co przyniosłoby mu wstyd w oczach innych magów.",
+  zero: "Schodzi coraz niżej, sam, i przestaje wracać na noc.",
+});
+npc({
+  id: "hieronim", display_name: "Hieronim z Grotthamu", dialogue_name: "Hieronim", instr: "Hieronimem", faction: 0,
+  role: "Stary Drugi z Exitium, szaleniec wyprawy", max_sanity: 60, start_sanity: 10,
+  history: "Najstarszy Drugi w Exitium. Przekroczył więcej progów bólu, niż ktokolwiek powinien, i coś w nim pękło. Nie nosi maski, bo i tak nikt go nie dotknie. Śmieje się, nuci, gada ze skałą. Najgorsze jest to, że skała czasem mu odpowiada. I często ma rację.",
+  zero: "Odchodzi w głąb, nucąc. Jego śmiech słychać jeszcze przez trzy noce, coraz niżej.",
+});
+npc({
+  id: "welf", display_name: "Welf von Hagen", dialogue_name: "Welf", instr: "Welfem", faction: 0,
+  role: "Młody Drugi z Exitium", max_sanity: 60, start_sanity: 44,
+  history: "Syn waldgrosseńskiego rodu, który ma więcej herbów niż pieniędzy. Dwa lata po Inicjacji i bardzo dumny z linii na przedramionach. Bezmagicznych uważa za gorszy gatunek ludzi, a siebie za kogoś, kogo w kopalni nic nie zaskoczy. Kopalnia ma na ten temat inne zdanie.",
+  zero: "Wpada w panikę i ciska zaklęciami na oślep, aż ból zwala go z nóg.",
+});
+
 // --- Notes ---
 note("notatka_dowodcy", "Notatka dowódcy poprzedniej ekipy",
   "Leżała na skrzyni w jaskini przy wejściu do obozu. Podpis rozmazany.\n\n„Dzień czternasty. Im niżej schodzimy, tym jaśniej świeci błękit w ścianach. Ludzie gadają przez sen, ale nie swoimi głosami. Jutro schodzimy niżej.”");
@@ -109,6 +167,11 @@ note("slowniczek", "Słowniczek sanctinu",
   "Dobrawa przepisała mi kilka znaków sanctinu, języka, którym pisali Oni. Rysuje je rękawicą, bez jednego drżenia.\n\nGwiazda: niebo, to, co w górze. Oni przyszli z gwiazd.\nOko: widzieć, patrzeć.\nPłomień: ogień, gniew.\nKamień: skała, to, co w dole. Także: więzienie.\nSen, czyli znak zamkniętego oka: spoczynek, noc.\nDłoń: dotyk, dar.\n\n„Oni zawsze piszą od góry do dołu: skąd przyszli, co zrobili i czego zakazują.”");
 note("list_dziadka", "Ostatni list dziadka",
   "Leżał w niszy za ścianą w kaplicy, owinięty w natłuszczone płótno. Pismo dziadka, tym razem bez szyfru.\n\n„Jeśli to czytasz, masz mój klucz i moją głowę do zagadek. Dobrze.\n\nWidziałem Ich. Leżą niżej, niż sięga najdłuższa lina, i śpią. Błękit to Ich oddech. Im bliżej, tym go więcej, a przy samym sercu ściany świecą jak w dzień.\n\nKniaź chce więcej. Więcej jest tylko tam, gdzie nie wolno kopać.\n\nKupiłem u Hanusza z Mirosil trzy beczki prochu. Jutro zejdę upadową i ją zasypię. Zostanę po tamtej stronie, żeby nikt nie poszedł moim śladem.\n\nKryształ zabierz stąd i nie oddawaj nikomu, kto nosi maskę albo koronę. Oni go szukają.\n\nTwój dziadek”");
+
+note("zapiski_grabca", "Zeszyt sztygara Grabca",
+  "Leżał w skrytce na końcu Przekopu Grabca, zawinięty w ceratę. Same liczby, pisane coraz krzywiej.\n\n„Dzień 9. Wozów 6.\nDzień 10. Wozów 5. Dwóch chorych.\nDzień 11. Wozów 4. Ludzie gadają przez sen. Nie swoimi głosami.\nDzień 12. Wozów 2. Przewodnik chodzi na dół sam. Mówi, że liczy. Pytam, co liczy. Nie odpowiada.\nDzień 13. Wozów 0. Przewodnik kupił proch. Nie wiem od kogo.\nDzień 14.”\n\nPo „Dniu 14” już nic. Ta sama liczba co kreski na skale w rząpiu.");
+note("wiersz_hagiwary", "Wiersz Hagiwary",
+  "Hagiwara napisał go pędzelkiem na skrawku papieru i dał mi w zamian za grzyb.\n\nPod górą, w czarnej\nziemi rośnie blade światło.\nNikt go nie sadził.\n\nMówi, że w Cesarstwie na koniec roku pali się takie kartki razem z życzeniami. Mam tego nie palić. „Tu nie ma końca roku. Tu jest tylko koniec tygodnia.”");
 
 // --- Quests ---
 quest("slady", "Ślady dziadka", "Moja sprawa", {
@@ -130,11 +193,12 @@ quest("lonty", "Lonty dla Mirosława", "Mirosław z Głuszy", {
   wysadzone: "Mirosław wysadził zawał. Zachodni chodnik jest otwarty.",
 });
 quest("zloza", "Złoża dla Kniazia", "Racibor, zarządca", {
-  start: "Racibor chce wiedzieć, gdzie jest błękit. Mam znaczyć żyły w nowych chodnikach i zdać mu raport. Za dwie żyły obiecał odpis z archiwum Kniazia.",
+  start: "Kniaź chce dwunastu żył błękitu na mapie do wieczora siódmego dnia. Mam je znaleźć i zaznaczyć. Za pierwsze dwie Racibor obiecał odpis z archiwum Kniazia.",
   rzapie: "Zaznaczyłem żyłę w rząpiu pod starym szybem.",
   upadowa: "Zaznaczyłem żyłę na dnie upadowej. Gruba jak ramię.",
   kaplica: "Zaznaczyłem żyłę w kaplicy. Cała ściana jest tam z błękitu.",
-  zdane: "Zdałem raport. Racibor dał mi odpis raportu sprzed czterdziestu lat.",
+  zdane: "Zdałem pierwszy raport. Racibor dał mi odpis raportu sprzed czterdziestu lat. Do dwunastu jeszcze daleko.",
+  norma: "Dwanaście żył. Norma Kniazia zrobiona.",
 });
 quest("towar", "Tobołek Tekli", "Tekla, kwatermistrzyni", {
   start: "Kiedy spuszczali zapasy starym szybem, Tekli urwał się tobołek i wpadł do rząpia. Mam go wyłowić i nikomu o tym nie mówić.",
@@ -149,5 +213,47 @@ quest("sciana", "Ściana w kaplicy", "Dobrawa z Initium", {
   krysztal_dobrawa: "Oddałem kryształ Dobrawie.",
   krysztal_racibor: "Oddałem kryształ Raciborowi.",
   krysztal_moj: "Kryształ zostaje u mnie. Dziadek prosił, żeby nie oddawać go nikomu.",
+});
+// --- task_05 quests: items, people, the Drudzy ---
+quest("kilof", "Kilof dla przewodnika", "Wszebor ze Śnieżnej Przystani", {
+  start: "Wszebor mówi, że obozowe kilofy to miękkie jaksarskie żelazo. Stara ekipa miała hawiarskiego kowala, więc gdzieś w chodnikach mógł zostać porządny obuch. Wszebor osadzi go na nowym trzonku.",
+  znaleziony: "W starym wyrobisku, pod wywróconym wózkiem, znalazłem obuch hawiarskiego kilofa.",
+  oddany: "Oddałem obuch Wszeborowi. Do rana ma być gotowy.",
+  gotowy: "Mam kilof. Wszebor twierdzi, że rozłupie nim nawet naciek, pod którym chowają się żyły.",
+});
+quest("pompy", "Pompy Nasira", "Nasir z Bakaszu", {
+  start: "Nasir chce uruchomić stare pompy pod rząpiem. Za nimi jest zalany chodnik, a w zalanych chodnikach, mówi, zawsze coś się kryje. Potrzebuje oleju do tłoków.",
+  olej: "Dałem Nasirowi olej. Od jutra w dzień będzie przy pompach. Mam do niego zajrzeć i pomóc przy korbie.",
+  ruszyly: "Pompy ruszyły. Woda z zalanego chodnika powoli schodzi.",
+});
+quest("goraczka", "Gorączka Nasira", "Brat Anzelm", {
+  start: "Nasir ma gorączkę. Anzelm mówi, że bez lekarstwa Nasir nie dociągnie do końca tygodnia, a lekarstwa w obozie prawie nie ma.",
+  grzyb: "Anzelm uwarzy lekarstwo ze świecącego grzyba z groty, jeśli mu go przyniosę.",
+  wyleczony: "Nasir wyzdrowiał. Przeżył północ i gorączkę, a to już dwa cuda.",
+  wywieziony: "Nasira wywieźli na górę w gorączce. Nie zdążyłem.",
+});
+quest("wiersz", "Wiersz o świetle", "Kiyoshi Hagiwara", {
+  start: "Hagiwara pisze wiersz o świetle, które rośnie w ciemności. Chciałby zobaczyć świecący grzyb z groty, o którym gadają górnicy.",
+  oddany: "Dałem Hagiwarze świecący grzyb. Napisał wiersz i dał mi w zamian lekarstwo z Czterech Wysp.",
+});
+quest("zaklad", "Zakład z Sobkiem", "Sobek z Wielkiego Stepu", {
+  start: "Sobek założył się ze mną, że do jutra wieczora nie zaznaczę trzech nowych żył. Stawką jest jego nalewka.",
+  wygrany: "Wygrałem zakład. Sobek oddał nalewkę i przez pół dnia nie mógł przestać się śmiać.",
+  przegrany: "Przegrałem zakład z Sobkiem. Na szczęście stawiał tylko on.",
+});
+quest("pokoj", "Brat i czarownica", "Anzelm i Sabina", {
+  start: "Anzelm nie znosi Sabiny, a Sabina nie rozumie, czemu on nie chce jej pomocy przy chorych. Obozowi przydałby się spokój.",
+  sabina: "Sabina obiecała, że nie będzie leczyć nikogo za plecami Anzelma.",
+  zgoda: "Anzelm i Sabina pracują razem przy chorych. Nikt nie wierzył, że to możliwe.",
+});
+quest("oferta", "Oferta z Exitium", "Ottokar von Brühl", {
+  start: "Ottokar von Brühl chce map dziadka. Albo kryształu. Za cenę, o jakiej mi się nie śniło.",
+  krysztal: "Oddałem Ottokarowi kryształ. W zamian zaznaczył mi na mapie dwie żyły, do których sam bym nie trafił.",
+  mapy: "Pokazałem Ottokarowi mapy dziadka. Przerysował je co do kreski, a w zamian zaznaczył mi jedną żyłę.",
+  odmowa: "Odmówiłem Ottokarowi. Nie wyglądał na zaskoczonego. Wyglądał na kogoś, kto ma czas.",
+});
+quest("odlamek", "Odłamek dla Sabiny", "Sabina von Reuss", {
+  start: "Sabina chce zbadać czysty błękit. Najczystszy ma być w Kryształowej galerii, najniżej na mapie.",
+  oddany: "Dałem Sabinie odłamek z galerii. Pierwszy raz widziałem, jak Druga się cieszy. Tak mi się przynajmniej wydaje, pod maską.",
 });
 console.log("data written");

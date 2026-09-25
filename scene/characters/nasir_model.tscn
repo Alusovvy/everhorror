@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Ranger.gltf" id="2_male_ranger"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Beard.gltf" id="3_beard"]
+[ext_resource type="Texture2D" path="res://assets/characters/quaternius/outfits/T_Ranger_3_BaseColor.png" id="4_ranger3"]
+
+[node name="NasirModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_male_ranger"), ExtResource("3_beard")])
+outfit_texture = ExtResource("4_ranger3")
+outfit_tint = Color(1, 0.86, 0.62, 1)
+hair_tint = Color(0.25, 0.22, 0.2, 1)
+skin_tint = Color(0.58, 0.44, 0.35, 1)

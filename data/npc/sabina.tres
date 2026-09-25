@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/sabina_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/sabina.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"sabina"
+display_name = "Sabina von Reuss"
+dialogue_name = "Sabina"
+display_name_instrumental = "Sabiną"
+faction = 0
+role = "Druga z Exitium, laborantka i uzdrowicielka"
+max_sanity = 60
+start_sanity = 48
+max_health = 100
+start_reputation = 0
+history = "Najmłodsza w wyprawie Exitium, z waldgrosseńskiej rodziny, która oddała ją do Initium, kiedy miała sześć lat. Leczy zaklęciami drugiego kręgu i płaci za to bólem, jakby wkładała dłoń pod wrzątek. Dobra z natury i święcie przekonana, że bezmagicznym trzeba pomagać jak dzieciom. Von Brühl zostawił ją w obozie, żeby patrzyła Raciborowi na ręce."
+sanity_zero_effect = "Leczy tak długo, aż ból ją przerasta. Zamyka się w sobie i przestaje odpowiadać, zapatrzona w linie, które widzi tylko ona."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.57
+female = true

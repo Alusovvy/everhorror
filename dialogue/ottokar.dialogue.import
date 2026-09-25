@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dydb0er2hfbm"
+path="res://.godot/imported/ottokar.dialogue-9c40ef8566e8aed0fc58110b5c361fcb.tres"
+
+[deps]
+
+source_file="res://dialogue/ottokar.dialogue"
+dest_files=["res://.godot/imported/ottokar.dialogue-9c40ef8566e8aed0fc58110b5c361fcb.tres"]
+
+[params]
+
+defaults=true

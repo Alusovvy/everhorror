@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"szczelina"
+display_name = "Parująca szczelina"
+unknown_name = ""
+direction = "w dół"
+text = "Szczelina, z której bucha para. Dziadek zapisał obok: „ciepło, siarka, nie siedzieć długo”."
+links = {
+"grota": 1.0,
+"przekop": 1.5
+}
+requires = PackedStringArray()
+locked = {
+
+}
+entry = "SzczelinaEntry"
+veins = PackedStringArray("szczelina_1", "szczelina_2")
+depth = 4
+map_pos = Vector2(0.68, 0.9)
+dread = 2
+arrival_text = "Gorąco. Para szczypie w oczy, a w gardle czuć siarkę."

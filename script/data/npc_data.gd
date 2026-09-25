@@ -26,3 +26,5 @@ enum Faction { DRUDZY, EKSPEDYCJA, INNA }
 @export var dialogue: DialogueResource
 ## Height of the eyes in the model, used to frame the VN portrait.
 @export var portrait_eye_height: float = 1.6
+## For Polish word forms in the notebook ("zdrowy" / "zdrowa").
+@export var female: bool = false

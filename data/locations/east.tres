@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"east"
+display_name = "Stara sztolnia"
+unknown_name = ""
+direction = "wschód"
+text = "Sztolnia po starej ekipie. Pochylnia prowadzi w dół, do jaskini. Mirosław mówił, że gdzieś tam mieli skład."
+links = {
+"oboz": 2.0,
+"wyrobisko": 1.0,
+"kaplica": 1.0
+}
+requires = PackedStringArray()
+locked = {
+
+}
+entry = "EastEntry"
+veins = PackedStringArray("east_1", "east_2")
+depth = 1
+map_pos = Vector2(0.76, 0.24)
+dread = 0
+arrival_text = ""

@@ -1,7 +1,7 @@
 # Dokumentacja gry — everhorror (v2)
 
 > Tytuł roboczy: **everhorror** (w pierwotnym GDD: „XYZ”).
-> Ostatnia aktualizacja: 2026-09-25 · Wersja dokumentacji: 2.0
+> Ostatnia aktualizacja: 2026-09-25 (po task_05) · Wersja dokumentacji: 2.2
 
 Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótkich, modułowych dokumentów. Stare dokumenty zostają bez zmian jako materiał źródłowy.
 
@@ -19,21 +19,22 @@ Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótk
 | **Całość** | [00 Jednostronicowy opis](00_jednostronicowy.md) | zespół | 🟡 szkic |
 | | [01 Wizja i filary](01_wizja.md) | Vitav | 🟡 szkic |
 | | [02 Rozgrywka](02_rozgrywka.md) | Roland | 🟡 szkic |
-| **Systemy** | [Upływ czasu](systemy/czas.md) | Roland | 🟡 szkic |
-| | [Postacie niezależne](systemy/npc.md) | Roland | 🟡 szkic |
-| | [Dialogi (tryb VN)](systemy/dialogi_vn.md) | Roland | 🟡 szkic |
-| | [Eksploracja kopalni](systemy/eksploracja_kopalni.md) | Roland | 🟡 szkic |
-| | [Interakcje z otoczeniem](systemy/interakcje.md) | Roland | 🟢 zaimplementowane (podstawa) |
-| | [Ekwipunek](systemy/ekwipunek.md) | Roland | 🔴 do ustalenia |
-| | [Questy i notes](systemy/questy.md) | Roland | 🟡 szkic |
-| | [Zapis, menu i opcje](systemy/zapis_i_opcje.md) | programista | 🟢 zaimplementowane (podstawa) |
+| **Systemy** | [Upływ czasu](systemy/czas.md) | Roland | 🟢 zaimplementowane (tydzień) |
+| | [Postacie niezależne](systemy/npc.md) | Roland | 🟢 zaimplementowane (14 postaci, spotkania w tunelach) |
+| | [Dialogi (tryb VN)](systemy/dialogi_vn.md) | Roland | 🟢 zaimplementowane (demo) |
+| | [Eksploracja kopalni](systemy/eksploracja_kopalni.md) | Roland | 🟢 zaimplementowane (15 miejsc, [M], norma) |
+| | [Interakcje z otoczeniem](systemy/interakcje.md) | Roland | 🟢 zaimplementowane |
+| | [Ekwipunek](systemy/ekwipunek.md) | Roland | 🟢 zaimplementowane ([I], 17 przedmiotów) |
+| | [Zdrowie i poczytalność bohatera](systemy/zdrowie_i_poczytalnosc.md) | Roland | 🟢 zaimplementowane |
+| | [Questy i notes](systemy/questy.md) | Roland | 🟢 zaimplementowane (demo) |
+| | [Zapis, menu i opcje](systemy/zapis_i_opcje.md) | programista | 🟢 zaimplementowane |
 | **Świat** | [Świat i lore](swiat/lore.md) | Ren | 🟡 szkic |
 | | [LoreDoc: pełny opis świata](swiat/LoreDoc.md) | Ren | 🔵 do przeglądu |
 | | [Magia](swiat/magia.md) | Ren | 🟡 szkic |
 | | [Niespójności w LoreDoc](swiat/loredoc_niespojnosci.md) | Ren | 🔵 do przeglądu |
 | | [Fabuła, prolog, zakończenia](swiat/fabula.md) | Ren / Vitav | 🟡 szkic |
-| | [Postacie](swiat/postacie.md) | zespół | 🟡 szkic |
-| **Treść** | [03 Poziomy](03_poziomy.md) | — | 🔴 do ustalenia |
+| | [Postacie](swiat/postacie.md) (+ karty w `swiat/postacie/`) | zespół | 🟡 szkic, 12 roboczych do przeglądu |
+| **Treść** | [03 Poziomy](03_poziomy.md) | — | 🟡 obóz i 15 miejsc wypraw w demie |
 | | [04 UI / UX](04_ui_ux.md) | — | 🟡 szkic |
 | | [05 Oprawa wizualna i dźwiękowa](05_oprawa.md) | — | 🟡 szkic |
 | **Technika** | [06 Dokument techniczny (TDD)](06_techniczne.md) | programista | 🟢 aktualny |

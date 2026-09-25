@@ -8,9 +8,10 @@ id = &"zloza"
 title = "Złoża dla Kniazia"
 giver = "Racibor, zarządca"
 entries = {
-"start": "Racibor chce wiedzieć, gdzie jest błękit. Mam znaczyć żyły w nowych chodnikach i zdać mu raport. Za dwie żyły obiecał odpis z archiwum Kniazia.",
+"start": "Kniaź chce dwunastu żył błękitu na mapie do wieczora siódmego dnia. Mam je znaleźć i zaznaczyć. Za pierwsze dwie Racibor obiecał odpis z archiwum Kniazia.",
 "rzapie": "Zaznaczyłem żyłę w rząpiu pod starym szybem.",
 "upadowa": "Zaznaczyłem żyłę na dnie upadowej. Gruba jak ramię.",
 "kaplica": "Zaznaczyłem żyłę w kaplicy. Cała ściana jest tam z błękitu.",
-"zdane": "Zdałem raport. Racibor dał mi odpis raportu sprzed czterdziestu lat."
+"zdane": "Zdałem pierwszy raport. Racibor dał mi odpis raportu sprzed czterdziestu lat. Do dwunastu jeszcze daleko.",
+"norma": "Dwanaście żył. Norma Kniazia zrobiona."
 }

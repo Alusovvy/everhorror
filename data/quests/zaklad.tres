@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"zaklad"
+title = "Zakład z Sobkiem"
+giver = "Sobek z Wielkiego Stepu"
+entries = {
+"start": "Sobek założył się ze mną, że do jutra wieczora nie zaznaczę trzech nowych żył. Stawką jest jego nalewka.",
+"wygrany": "Wygrałem zakład. Sobek oddał nalewkę i przez pół dnia nie mógł przestać się śmiać.",
+"przegrany": "Przegrałem zakład z Sobkiem. Na szczęście stawiał tylko on."
+}

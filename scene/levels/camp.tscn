@@ -1,82 +1,85 @@
 [gd_scene format=4]
 
-[ext_resource type="Script" path="res://script/material_applier.gd" id="1_tl6rp"]
-[ext_resource type="Material" path="res://material/kenney_wood.tres" id="2_f5wj3"]
-[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/tree-log-small.glb" id="3_f17r4"]
-[ext_resource type="Material" path="res://material/kenney_cloth.tres" id="4_8apv4"]
-[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/bedroll.glb" id="5_1w7lu"]
-[ext_resource type="Script" path="res://script/interactable.gd" id="6_5ysv0"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bag.gltf" id="7_17man"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Barrel.gltf" id="8_bftfg"]
-[ext_resource type="Material" path="res://material/cave_rock.tres" id="9_8nwca"]
-[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/campfire-pit.glb" id="10_6oii3"]
-[ext_resource type="Script" path="res://script/light_flicker.gd" id="11_pmehv"]
-[ext_resource type="AudioStream" path="res://assets/sounds/generated/lantern_crackle.wav" id="12_rfg0x"]
-[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/campfire-stand.glb" id="13_amq0b"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Cauldron.gltf" id="14_xtdax"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Barrel_Apples.gltf" id="15_4ppxv"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/FarmCrate_Carrot.gltf" id="16_rnsas"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bucket_Wooden_1.gltf" id="17_pw4cq"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pot_1.gltf" id="18_b6be6"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pot_1_Lid.gltf" id="19_73h1k"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Table_Large.gltf" id="20_15awg"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bench.gltf" id="21_j5kp7"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Stool.gltf" id="22_4mfv4"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Table_Plate.gltf" id="23_8o05h"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Mug.gltf" id="24_mkuom"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Table_Spoon.gltf" id="25_hb30c"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/CandleStick.gltf" id="26_0f3fe"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Crate_Wooden.gltf" id="27_m4h3k"]
-[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/box.glb" id="28_l27qg"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Workbench.gltf" id="29_fmc72"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pickaxe_Bronze.gltf" id="30_3tyol"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Axe_Bronze.gltf" id="31_3vr2d"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Whetstone.gltf" id="32_snx0q"]
-[ext_resource type="Script" path="res://script/overlay_applier.gd" id="33_gjajf"]
-[ext_resource type="Shader" path="res://shader/blue_iron_vein.gdshader" id="34_dvtke"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_b.tscn" id="35_mremh"]
-[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Walls_2.tres" id="36_c2tuc"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_a.tscn" id="37_njnc3"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_c.tscn" id="38_f5wmq"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Lantern_Wall.gltf" id="39_o1a8y"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Chest_Wood.gltf" id="40_40pcp"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_1.gltf" id="41_7u33d"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_2.gltf" id="42_l8005"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Book_Stack_1.gltf" id="43_e0ip5"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Coin_Pile.gltf" id="44_h116n"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/CandleStick_Triple.gltf" id="45_abalh"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Chair_1.gltf" id="46_24i5w"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/BookStand.gltf" id="47_fbm7q"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Banner_1.gltf" id="48_r0yac"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bed_Twin1.gltf" id="49_e7lt8"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Stall_Empty.gltf" id="50_chix1"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_1.gltf" id="51_a2011"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/SmallBottles_1.gltf" id="52_sqhf5"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pouch_Large.gltf" id="53_f7b1h"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_3.gltf" id="54_76g44"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_2.gltf" id="55_3cmek"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/FarmCrate_Empty.gltf" id="56_40kkm"]
-[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Shelf_Small_Bottles.gltf" id="57_adr4m"]
-[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/signpost-single.glb" id="58_mg6tm"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Panel_Wood/panel_wood_a.tscn" id="59_t6wdj"]
-[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material" id="60_1c6it"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_d.tscn" id="61_ukqkh"]
-[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/beam_a.tscn" id="62_x8kor"]
+[ext_resource type="Script" path="res://script/material_applier.gd" id="1_8apv4"]
+[ext_resource type="Material" path="res://material/kenney_wood.tres" id="2_1w7lu"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/tree-log-small.glb" id="3_5ysv0"]
+[ext_resource type="Material" path="res://material/kenney_cloth.tres" id="4_17man"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/bedroll.glb" id="5_bftfg"]
+[ext_resource type="Script" path="res://script/interactable.gd" id="6_8nwca"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bag.gltf" id="7_6oii3"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Barrel.gltf" id="8_pmehv"]
+[ext_resource type="Material" path="res://material/cave_rock.tres" id="9_rfg0x"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/campfire-pit.glb" id="10_amq0b"]
+[ext_resource type="Script" path="res://script/light_flicker.gd" id="11_xtdax"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/lantern_crackle.wav" id="12_4ppxv"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/campfire-stand.glb" id="13_rnsas"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Cauldron.gltf" id="14_pw4cq"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Barrel_Apples.gltf" id="15_b6be6"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/FarmCrate_Carrot.gltf" id="16_73h1k"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bucket_Wooden_1.gltf" id="17_15awg"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pot_1.gltf" id="18_j5kp7"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pot_1_Lid.gltf" id="19_4mfv4"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Table_Large.gltf" id="20_8o05h"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bench.gltf" id="21_mkuom"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Stool.gltf" id="22_hb30c"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Table_Plate.gltf" id="23_0f3fe"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Mug.gltf" id="24_m4h3k"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Table_Spoon.gltf" id="25_l27qg"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/CandleStick.gltf" id="26_fmc72"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Crate_Wooden.gltf" id="27_3tyol"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/box.glb" id="28_3vr2d"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Workbench.gltf" id="29_snx0q"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pickaxe_Bronze.gltf" id="30_gjajf"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Axe_Bronze.gltf" id="31_dvtke"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Whetstone.gltf" id="32_mremh"]
+[ext_resource type="Script" path="res://script/overlay_applier.gd" id="33_c2tuc"]
+[ext_resource type="Shader" path="res://shader/blue_iron_vein.gdshader" id="34_njnc3"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_b.tscn" id="35_f5wmq"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Walls_2.tres" id="36_o1a8y"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_a.tscn" id="37_40pcp"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_c.tscn" id="38_7u33d"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Lantern_Wall.gltf" id="39_l8005"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Chest_Wood.gltf" id="40_e0ip5"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_1.gltf" id="41_h116n"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_2.gltf" id="42_abalh"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Book_Stack_1.gltf" id="43_24i5w"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Coin_Pile.gltf" id="44_fbm7q"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/CandleStick_Triple.gltf" id="45_r0yac"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Chair_1.gltf" id="46_e7lt8"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/BookStand.gltf" id="47_chix1"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Banner_1.gltf" id="48_a2011"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bed_Twin1.gltf" id="49_sqhf5"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Stall_Empty.gltf" id="50_f7b1h"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_1.gltf" id="51_76g44"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/SmallBottles_1.gltf" id="52_3cmek"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Pouch_Large.gltf" id="53_40kkm"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_3.gltf" id="54_adr4m"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_2.gltf" id="55_mg6tm"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/FarmCrate_Empty.gltf" id="56_t6wdj"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Shelf_Small_Bottles.gltf" id="57_1c6it"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Potion_2.gltf" id="58_ukqkh"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Book_5.gltf" id="59_x8kor"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/signpost-single.glb" id="60_68qdq"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Panel_Wood/panel_wood_a.tscn" id="61_jo80m"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material" id="62_cnbxr"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_d.tscn" id="63_rbgy8"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/beam_a.tscn" id="64_sio62"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_c.tscn" id="65_mpfom"]
 
-[sub_resource type="Gradient" id="Gradient_68qdq"]
+[sub_resource type="Gradient" id="Gradient_sdj8f"]
 colors = PackedColorArray(1, 0.7, 0.28, 0.75, 0.8, 0.15, 0.02, 0)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_jo80m"]
-gradient = SubResource("Gradient_68qdq")
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_wfrjy"]
+gradient = SubResource("Gradient_sdj8f")
 
-[sub_resource type="Curve" id="Curve_cnbxr"]
+[sub_resource type="Curve" id="Curve_nqw55"]
 _data = [Vector2(0, 0.6), 0.0, 0.0, 0, 0, Vector2(0.3, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.1), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_rbgy8"]
-curve = SubResource("Curve_cnbxr")
+[sub_resource type="CurveTexture" id="CurveTexture_527dd"]
+curve = SubResource("Curve_nqw55")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sio62"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_375o6"]
 emission_shape = 1
 emission_sphere_radius = 0.22
 direction = Vector3(0, 1, 0)
@@ -85,580 +88,663 @@ initial_velocity_min = 0.4
 initial_velocity_max = 0.9
 gravity = Vector3(0, 0.6, 0)
 scale_min = 0.5
-scale_curve = SubResource("CurveTexture_rbgy8")
-color_ramp = SubResource("GradientTexture1D_jo80m")
+scale_curve = SubResource("CurveTexture_527dd")
+color_ramp = SubResource("GradientTexture1D_wfrjy")
 
-[sub_resource type="Gradient" id="Gradient_mpfom"]
+[sub_resource type="Gradient" id="Gradient_1t2h4"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sdj8f"]
-gradient = SubResource("Gradient_mpfom")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yokiu"]
+gradient = SubResource("Gradient_1t2h4")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(1, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wfrjy"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuok5"]
 transparency = 1
 blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = SubResource("GradientTexture2D_sdj8f")
+albedo_texture = SubResource("GradientTexture2D_yokiu")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1
 particles_anim_loop = false
 
-[sub_resource type="QuadMesh" id="QuadMesh_nqw55"]
-material = SubResource("StandardMaterial3D_wfrjy")
+[sub_resource type="QuadMesh" id="QuadMesh_kk7kr"]
+material = SubResource("StandardMaterial3D_yuok5")
 size = Vector2(0.28, 0.38)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_527dd"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_d03j5"]
 size = Vector3(1.2, 0.5, 1.2)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_375o6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3sajd"]
 render_priority = 0
-shader = ExtResource("34_dvtke")
+shader = ExtResource("34_njnc3")
 shader_parameter/vein_color = null
 shader_parameter/intensity = null
 shader_parameter/vein_scale = null
 shader_parameter/vein_width = null
 shader_parameter/pulse_speed = null
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_1t2h4"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_dnntn"]
 size = Vector3(1.84, 1, 0.93)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yokiu"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_3xghx"]
 size = Vector3(0.4, 4, 4.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_yuok5"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_cm0up"]
 size = Vector3(0.4, 4, 4.2)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_kk7kr"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_l6qkr"]
 size = Vector3(1.2, 3, 4.4)
 
-[node name="Camp" type="Node3D" unique_id=467547965]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28fvm"]
+render_priority = 0
+shader = ExtResource("34_njnc3")
+shader_parameter/vein_color = null
+shader_parameter/intensity = null
+shader_parameter/vein_scale = null
+shader_parameter/vein_width = null
+shader_parameter/pulse_speed = null
 
-[node name="CampProps" type="Node3D" parent="." unique_id=469074065]
+[node name="Camp" type="Node3D" unique_id=1465409890]
 
-[node name="Wood" type="Node3D" parent="CampProps" unique_id=1100415535]
-script = ExtResource("1_tl6rp")
-material = ExtResource("2_f5wj3")
+[node name="CampProps" type="Node3D" parent="." unique_id=1436295006]
 
-[node name="MiroslawLog" type="Node3D" parent="CampProps/Wood" unique_id=2017788031 instance=ExtResource("3_f17r4")]
+[node name="Wood" type="Node3D" parent="CampProps" unique_id=1755478773]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
+
+[node name="MiroslawLog" type="Node3D" parent="CampProps/Wood" unique_id=2017788031 instance=ExtResource("3_5ysv0")]
 transform = Transform3D(1.5300877, 0, -0.46779472, 0, 1.6, 0, 0.46779472, 0, 1.5300877, 12.55, 0, 3.45)
 
-[node name="FireLog" type="Node3D" parent="CampProps/Wood" unique_id=1620121095 instance=ExtResource("3_f17r4")]
+[node name="FireLog" type="Node3D" parent="CampProps/Wood" unique_id=1870228955 instance=ExtResource("3_5ysv0")]
 transform = Transform3D(-0.2087596, 0, 1.4854021, 0, 1.5, 0, -1.4854021, 0, -0.2087596, 10.6, 0, 4.15)
 
-[node name="Cloth" type="Node3D" parent="CampProps" unique_id=1534551652]
-script = ExtResource("1_tl6rp")
-material = ExtResource("4_8apv4")
+[node name="Cloth" type="Node3D" parent="CampProps" unique_id=900063785]
+script = ExtResource("1_8apv4")
+material = ExtResource("4_17man")
 
-[node name="Bedroll" type="Node3D" parent="CampProps/Cloth" unique_id=127369914 instance=ExtResource("5_1w7lu")]
+[node name="Bedroll" type="Node3D" parent="CampProps/Cloth" unique_id=127369914 instance=ExtResource("5_bftfg")]
 transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 7, 0, 3.75)
 
-[node name="BedUse" type="Area3D" parent="CampProps/Cloth/Bedroll" unique_id=315477665 groups=["story_use"]]
-script = ExtResource("6_5ysv0")
+[node name="BedUse" type="Area3D" parent="CampProps/Cloth/Bedroll" unique_id=1648544970 groups=["story_use"]]
+script = ExtResource("6_8nwca")
 display_name = "Posłanie"
 action = 2
 prompt_text = "Połóż się spać"
 
-[node name="BolkoBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=2049767357 instance=ExtResource("5_1w7lu")]
+[node name="BolkoBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=1523399736 instance=ExtResource("5_bftfg")]
 transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 4.55, 0, 3.8)
 
-[node name="MiroslawBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=376525268 instance=ExtResource("5_1w7lu")]
+[node name="MiroslawBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=2077499143 instance=ExtResource("5_bftfg")]
 transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 4.2, 0, -3.95)
 
-[node name="Bag_1" type="Node3D" parent="CampProps" unique_id=1464869745 instance=ExtResource("7_17man")]
+[node name="SickBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=61560811 instance=ExtResource("5_bftfg")]
+transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 2.3, 0, -3.3)
+
+[node name="Bag_1" type="Node3D" parent="CampProps" unique_id=1464869745 instance=ExtResource("7_6oii3")]
 transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 5.8, 0, 4.2)
 
-[node name="Bag_2" type="Node3D" parent="CampProps" unique_id=1072179703 instance=ExtResource("7_17man")]
+[node name="Bag_2" type="Node3D" parent="CampProps" unique_id=828847534 instance=ExtResource("7_6oii3")]
 transform = Transform3D(0.9396926, 0, -0.34202012, 0, 1, 0, 0.34202012, 0, 0.9396926, 3.15, 0, 4.05)
 
-[node name="WaterBarrel" type="Node3D" parent="CampProps" unique_id=406214766 instance=ExtResource("8_bftfg")]
+[node name="WaterBarrel" type="Node3D" parent="CampProps" unique_id=406214766 instance=ExtResource("8_pmehv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.3, 0, 2.3)
 
-[node name="Look" type="Area3D" parent="CampProps/WaterBarrel" unique_id=462634104]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/WaterBarrel" unique_id=1268007351]
+script = ExtResource("6_8nwca")
 display_name = "Beczka z wodą"
 description = "Woda spuszczona z góry w bukłakach. Pachnie żelazem. Tekla pilnuje, żeby nikt się w niej nie mył."
 
-[node name="Campfire" type="Node3D" parent="CampProps" unique_id=460296166]
+[node name="Campfire" type="Node3D" parent="CampProps" unique_id=1574256951]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.8, 0, 2.9)
 
-[node name="Stones" type="Node3D" parent="CampProps/Campfire" unique_id=1430462379]
-script = ExtResource("1_tl6rp")
-material = ExtResource("9_8nwca")
+[node name="Stones" type="Node3D" parent="CampProps/Campfire" unique_id=1811931522]
+script = ExtResource("1_8apv4")
+material = ExtResource("9_rfg0x")
 
-[node name="Pit" type="Node3D" parent="CampProps/Campfire/Stones" unique_id=2013981249 instance=ExtResource("10_6oii3")]
+[node name="Pit" type="Node3D" parent="CampProps/Campfire/Stones" unique_id=2013981249 instance=ExtResource("10_amq0b")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
-[node name="Flames" type="GPUParticles3D" parent="CampProps/Campfire" unique_id=83232756]
+[node name="Flames" type="GPUParticles3D" parent="CampProps/Campfire" unique_id=666237858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 amount = 36
 lifetime = 0.9
-process_material = SubResource("ParticleProcessMaterial_sio62")
-draw_pass_1 = SubResource("QuadMesh_nqw55")
+process_material = SubResource("ParticleProcessMaterial_375o6")
+draw_pass_1 = SubResource("QuadMesh_kk7kr")
 
-[node name="FireLight" type="OmniLight3D" parent="CampProps/Campfire" unique_id=1509780375]
+[node name="FireLight" type="OmniLight3D" parent="CampProps/Campfire" unique_id=531067929]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -0.45)
 light_color = Color(1, 0.55, 0.22, 1)
 light_energy = 2.8
 shadow_enabled = true
 omni_range = 9.5
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 strength = 0.3
 speed = 9.0
 
-[node name="FireCrackle" type="AudioStreamPlayer3D" parent="CampProps/Campfire" unique_id=1058071196]
+[node name="FireCrackle" type="AudioStreamPlayer3D" parent="CampProps/Campfire" unique_id=1690592798]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
-stream = ExtResource("12_rfg0x")
+stream = ExtResource("12_4ppxv")
 volume_db = -4.0
 unit_size = 2.0
 autoplay = true
 max_distance = 12.0
 bus = &"SFX"
 
-[node name="Stand" type="Node3D" parent="CampProps/Campfire" unique_id=793127463]
-script = ExtResource("1_tl6rp")
-material = ExtResource("2_f5wj3")
+[node name="Stand" type="Node3D" parent="CampProps/Campfire" unique_id=218673560]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
 
-[node name="Spit" type="Node3D" parent="CampProps/Campfire/Stand" unique_id=1272850474 instance=ExtResource("13_amq0b")]
+[node name="Spit" type="Node3D" parent="CampProps/Campfire/Stand" unique_id=1272850474 instance=ExtResource("13_rnsas")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
-[node name="Kettle" type="Node3D" parent="CampProps/Campfire" unique_id=952582066 instance=ExtResource("14_xtdax")]
+[node name="Kettle" type="Node3D" parent="CampProps/Campfire" unique_id=952582066 instance=ExtResource("14_pw4cq")]
 transform = Transform3D(0.4322586, 0, 0.15732926, 0, 0.46, 0, -0.15732926, 0, 0.4322586, 0, 0.46, 0)
 
-[node name="FireLook" type="Area3D" parent="CampProps/Campfire/Kettle" unique_id=1475236634]
-script = ExtResource("6_5ysv0")
+[node name="FireLook" type="Area3D" parent="CampProps/Campfire/Kettle" unique_id=1948500978]
+script = ExtResource("6_8nwca")
 display_name = "Ognisko z kociołkiem"
 description = "Tekla gotuje tu dwa razy dziennie: rano kaszę, wieczorem to samo z tym, co zostało. Pali się połamanymi stemplami. Mirosław siada tak, żeby mieć do ognia jak najdalej."
 padding = 0.1
 
-[node name="PitBlock" type="StaticBody3D" parent="CampProps/Campfire" unique_id=1099386427]
+[node name="PitBlock" type="StaticBody3D" parent="CampProps/Campfire" unique_id=1934452439]
 
-[node name="Shape" type="CollisionShape3D" parent="CampProps/Campfire/PitBlock" unique_id=550512163]
+[node name="Shape" type="CollisionShape3D" parent="CampProps/Campfire/PitBlock" unique_id=1044553863]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-shape = SubResource("BoxShape3D_527dd")
+shape = SubResource("BoxShape3D_d03j5")
 
-[node name="Barrel_Apples_1" type="Node3D" parent="CampProps" unique_id=1412209962 instance=ExtResource("15_4ppxv")]
+[node name="Barrel_Apples_1" type="Node3D" parent="CampProps" unique_id=1412209962 instance=ExtResource("15_b6be6")]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 9.05, 0, 4.05)
 
-[node name="FarmCrate_Carrot_1" type="Node3D" parent="CampProps" unique_id=1254180466 instance=ExtResource("16_rnsas")]
+[node name="FarmCrate_Carrot_1" type="Node3D" parent="CampProps" unique_id=1254180466 instance=ExtResource("16_73h1k")]
 transform = Transform3D(0.9848077, 0, -0.17364818, 0, 1, 0, 0.17364818, 0, 0.9848077, 9.25, 0, 1.7)
 
-[node name="Bucket_Wooden_1_1" type="Node3D" parent="CampProps" unique_id=1616776795 instance=ExtResource("17_pw4cq")]
+[node name="Bucket_Wooden_1_1" type="Node3D" parent="CampProps" unique_id=1616776795 instance=ExtResource("17_15awg")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.75, 0, 2.3)
 
-[node name="Pot_1_1" type="Node3D" parent="CampProps" unique_id=857381908 instance=ExtResource("18_b6be6")]
+[node name="Pot_1_1" type="Node3D" parent="CampProps" unique_id=857381908 instance=ExtResource("18_j5kp7")]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 9.7, 0, 3.65)
 
-[node name="Pot_1_Lid_1" type="Node3D" parent="CampProps" unique_id=1844532480 instance=ExtResource("19_73h1k")]
+[node name="Pot_1_Lid_1" type="Node3D" parent="CampProps" unique_id=1844532480 instance=ExtResource("19_4mfv4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.95, 0, 3.95)
 
-[node name="CommonTable" type="Node3D" parent="CampProps" unique_id=253052176 instance=ExtResource("20_15awg")]
+[node name="CommonTable" type="Node3D" parent="CampProps" unique_id=253052176 instance=ExtResource("20_8o05h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 1.05)
 
-[node name="Look" type="Area3D" parent="CampProps/CommonTable" unique_id=359084073]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/CommonTable" unique_id=270649364]
+script = ExtResource("6_8nwca")
 display_name = "Wspólny stół"
 description = "Tu się je, gra w kości i kłóci o to, kto dziś zjeżdża pierwszy. Deski lepią się od kaszy."
 
-[node name="BenchNorth" type="Node3D" parent="CampProps" unique_id=908055084 instance=ExtResource("21_j5kp7")]
+[node name="BenchNorth" type="Node3D" parent="CampProps" unique_id=908055084 instance=ExtResource("21_mkuom")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 14, 0, 0.22)
 
-[node name="BenchSouth" type="Node3D" parent="CampProps" unique_id=265215336 instance=ExtResource("21_j5kp7")]
+[node name="BenchSouth" type="Node3D" parent="CampProps" unique_id=1414586542 instance=ExtResource("21_mkuom")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 14, 0, 1.9)
 
-[node name="HeadStool" type="Node3D" parent="CampProps" unique_id=1943225754 instance=ExtResource("22_4mfv4")]
+[node name="HeadStool" type="Node3D" parent="CampProps" unique_id=1943225754 instance=ExtResource("22_hb30c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.75, 0, 1.05)
 
-[node name="Table_Plate_1" type="Node3D" parent="CampProps" unique_id=392785005 instance=ExtResource("23_8o05h")]
+[node name="Table_Plate_1" type="Node3D" parent="CampProps" unique_id=392785005 instance=ExtResource("23_0f3fe")]
 transform = Transform3D(-0.46303567, 0, 0.88633966, 0, 1, 0, -0.88633966, 0, -0.46303567, 13.2, 0.81, 0.75)
 
-[node name="Table_Plate_2" type="Node3D" parent="CampProps" unique_id=538025880 instance=ExtResource("23_8o05h")]
+[node name="Table_Plate_2" type="Node3D" parent="CampProps" unique_id=99955944 instance=ExtResource("23_0f3fe")]
 transform = Transform3D(-0.44046932, 0, 0.89776766, 0, 1, 0, -0.89776766, 0, -0.44046932, 14.6, 0.81, 0.78)
 
-[node name="Table_Plate_3" type="Node3D" parent="CampProps" unique_id=506194433 instance=ExtResource("23_8o05h")]
+[node name="Table_Plate_3" type="Node3D" parent="CampProps" unique_id=1072908994 instance=ExtResource("23_0f3fe")]
 transform = Transform3D(-0.42182428, 0, 0.9066776, 0, 1, 0, -0.9066776, 0, -0.42182428, 13.3, 0.81, 1.35)
 
-[node name="Table_Plate_4" type="Node3D" parent="CampProps" unique_id=29589011 instance=ExtResource("23_8o05h")]
+[node name="Table_Plate_4" type="Node3D" parent="CampProps" unique_id=2008981870 instance=ExtResource("23_0f3fe")]
 transform = Transform3D(-0.393995, 0, 0.91911256, 0, 1, 0, -0.91911256, 0, -0.393995, 15.1, 0.81, 1.05)
 
-[node name="Mug_1" type="Node3D" parent="CampProps" unique_id=289124524 instance=ExtResource("24_mkuom")]
+[node name="Mug_1" type="Node3D" parent="CampProps" unique_id=289124524 instance=ExtResource("24_m4h3k")]
 transform = Transform3D(0.8434211, 0, 0.537253, 0, 1, 0, -0.537253, 0, 0.8434211, 13.55, 0.81, 0.62)
 
-[node name="Mug_2" type="Node3D" parent="CampProps" unique_id=757812247 instance=ExtResource("24_mkuom")]
+[node name="Mug_2" type="Node3D" parent="CampProps" unique_id=1566699580 instance=ExtResource("24_m4h3k")]
 transform = Transform3D(0.98467135, 0, 0.17442, 0, 1, 0, -0.17442, 0, 0.98467135, 14.9, 0.81, 0.7)
 
-[node name="Mug_3" type="Node3D" parent="CampProps" unique_id=1729636699 instance=ExtResource("24_mkuom")]
+[node name="Mug_3" type="Node3D" parent="CampProps" unique_id=1093690194 instance=ExtResource("24_m4h3k")]
 transform = Transform3D(-0.5334015, 0, -0.8458622, 0, 1, 0, 0.8458622, 0, -0.5334015, 12.9, 0.81, 1.2)
 
-[node name="Table_Spoon_1" type="Node3D" parent="CampProps" unique_id=1750080209 instance=ExtResource("25_hb30c")]
+[node name="Table_Spoon_1" type="Node3D" parent="CampProps" unique_id=1750080209 instance=ExtResource("25_l27qg")]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 13.25, 0.82, 0.75)
 
-[node name="Pot_1_2" type="Node3D" parent="CampProps" unique_id=1157291578 instance=ExtResource("18_b6be6")]
+[node name="Pot_1_2" type="Node3D" parent="CampProps" unique_id=167203386 instance=ExtResource("18_j5kp7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.1, 0.81, 1.1)
 
-[node name="CandleStick_1" type="Node3D" parent="CampProps" unique_id=476793429 instance=ExtResource("26_0f3fe")]
+[node name="CandleStick_1" type="Node3D" parent="CampProps" unique_id=476793429 instance=ExtResource("26_fmc72")]
 transform = Transform3D(0.8384689, 0, 0.5449494, 0, 1, 0, -0.5449494, 0, 0.8384689, 14.75, 0.81, 1.3)
 
-[node name="CandleLight" type="OmniLight3D" parent="CampProps" unique_id=1060101707]
+[node name="CandleLight" type="OmniLight3D" parent="CampProps" unique_id=965054268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.75, 1.11, 1.3)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 0.7
 omni_range = 3.2
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 strength = 0.25
 speed = 7.0
 
-[node name="Storage" type="Node3D" parent="CampProps" unique_id=1182536930]
+[node name="Storage" type="Node3D" parent="CampProps" unique_id=291031338]
 
-[node name="Crate_Wooden_1" type="Node3D" parent="CampProps/Storage" unique_id=304031730 instance=ExtResource("27_m4h3k")]
+[node name="Crate_Wooden_1" type="Node3D" parent="CampProps/Storage" unique_id=304031730 instance=ExtResource("27_3tyol")]
 transform = Transform3D(0.9961947, 0, 0.08715574, 0, 1, 0, -0.08715574, 0, 0.9961947, 16.5, 0, 3.9)
 
-[node name="Crate_Wooden_2" type="Node3D" parent="CampProps/Storage" unique_id=468963467 instance=ExtResource("27_m4h3k")]
+[node name="Crate_Wooden_2" type="Node3D" parent="CampProps/Storage" unique_id=2118686439 instance=ExtResource("27_3tyol")]
 transform = Transform3D(0.99026805, 0, -0.1391731, 0, 1, 0, 0.1391731, 0, 0.99026805, 17.4, 0, 3.95)
 
-[node name="Crate_Wooden_3" type="Node3D" parent="CampProps/Storage" unique_id=347869911 instance=ExtResource("27_m4h3k")]
+[node name="Crate_Wooden_3" type="Node3D" parent="CampProps/Storage" unique_id=706998674 instance=ExtResource("27_3tyol")]
 transform = Transform3D(0.7881063, 0, 0.3184156, 0, 0.85, 0, -0.3184156, 0, 0.7881063, 16.95, 0.88, 3.95)
 
-[node name="Boxes" type="Node3D" parent="CampProps/Storage" unique_id=651697113]
-script = ExtResource("1_tl6rp")
-material = ExtResource("2_f5wj3")
+[node name="Boxes" type="Node3D" parent="CampProps/Storage" unique_id=1644833953]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
 
-[node name="box_1" type="Node3D" parent="CampProps/Storage/Boxes" unique_id=40961391 instance=ExtResource("28_l27qg")]
+[node name="box_1" type="Node3D" parent="CampProps/Storage/Boxes" unique_id=40961391 instance=ExtResource("28_3vr2d")]
 transform = Transform3D(2.3475544, 0, 0.4989881, 0, 2.4, 0, -0.4989881, 0, 2.3475544, 18.45, 0, 3.95)
 
-[node name="box_2" type="Node3D" parent="CampProps/Storage/Boxes" unique_id=1684948219 instance=ExtResource("28_l27qg")]
+[node name="box_2" type="Node3D" parent="CampProps/Storage/Boxes" unique_id=616796405 instance=ExtResource("28_3vr2d")]
 transform = Transform3D(1.5320889, 0, 1.2855752, 0, 2, 0, -1.2855752, 0, 1.5320889, 18.4, 0.6, 3.9)
 
-[node name="Barrel_1" type="Node3D" parent="CampProps/Storage" unique_id=1507234022 instance=ExtResource("8_bftfg")]
+[node name="Barrel_1" type="Node3D" parent="CampProps/Storage" unique_id=1723981318 instance=ExtResource("8_pmehv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.95, 0, 3.95)
 
-[node name="Bag_3" type="Node3D" parent="CampProps/Storage" unique_id=117677071 instance=ExtResource("7_17man")]
+[node name="Bag_3" type="Node3D" parent="CampProps/Storage" unique_id=1546424555 instance=ExtResource("7_6oii3")]
 transform = Transform3D(-0.34202012, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, -0.34202012, 15.9, 0, 3.2)
 
-[node name="ToolBench" type="Node3D" parent="CampProps/Storage" unique_id=58918402 instance=ExtResource("29_fmc72")]
+[node name="ToolBench" type="Node3D" parent="CampProps/Storage" unique_id=58918402 instance=ExtResource("29_snx0q")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.75, 0, -1.6)
 
-[node name="Look" type="Area3D" parent="CampProps/Storage/ToolBench" unique_id=646516788]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/Storage/ToolBench" unique_id=319149527]
+script = ExtResource("6_8nwca")
 display_name = "Narzędzia"
-description = "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór, choć jeszcze nikt ich tu nie użył."
+description = "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór, a Wszebor co rano mówi, że to miękkie jaksarskie żelazo i szkoda osełki."
 
-[node name="Pickaxe_Bronze_1" type="Node3D" parent="CampProps/Storage" unique_id=857528358 instance=ExtResource("30_3tyol")]
+[node name="Pickaxe_Bronze_1" type="Node3D" parent="CampProps/Storage" unique_id=857528358 instance=ExtResource("30_gjajf")]
 transform = Transform3D(0.921061, 0.38941833, -1.7022016e-08, 0, -4.371139e-08, -1, -0.38941833, 0.921061, -4.0260854e-08, 18.75, 0.9, -1.25)
 
-[node name="Axe_Bronze_1" type="Node3D" parent="CampProps/Storage" unique_id=1798551966 instance=ExtResource("31_3vr2d")]
+[node name="Axe_Bronze_1" type="Node3D" parent="CampProps/Storage" unique_id=1798551966 instance=ExtResource("31_dvtke")]
 transform = Transform3D(0.3623577, 0.9320391, -4.0740723e-08, 0, -4.371139e-08, -1, -0.9320391, 0.3623577, -1.5839158e-08, 18.6, 0.9, -2.2)
 
-[node name="Whetstone_1" type="Node3D" parent="CampProps/Storage" unique_id=1427440708 instance=ExtResource("32_snx0q")]
+[node name="Whetstone_1" type="Node3D" parent="CampProps/Storage" unique_id=1427440708 instance=ExtResource("32_mremh")]
 transform = Transform3D(-3.4969112e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-08, 19.05, 0, 0.35)
 
-[node name="CartOre" type="Node3D" parent="CampProps/Storage" unique_id=203612563]
-script = ExtResource("33_gjajf")
-overlay = SubResource("ShaderMaterial_375o6")
+[node name="CartOre" type="Node3D" parent="CampProps/Storage" unique_id=1304372564]
+script = ExtResource("33_c2tuc")
+overlay = SubResource("ShaderMaterial_3sajd")
 
-[node name="cave_rocks_b_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=16407175 instance=ExtResource("35_mremh")]
+[node name="cave_rocks_b_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=1947079588 instance=ExtResource("35_f5wmq")]
 transform = Transform3D(0.007944439, 0, -0.31990138, 0, 0.32, 0, 0.31990138, 0, 0.007944439, 16.75, 0.62, 0.05)
 
-[node name="Look" type="Area3D" parent="CampProps/Storage/CartOre/cave_rocks_b_1" unique_id=1004252654]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/Storage/CartOre/cave_rocks_b_1" unique_id=1020856570]
+script = ExtResource("6_8nwca")
 display_name = "Wózek z urobkiem"
 description = "Urobek po starej ekipie. Stał tu czterdzieści lat i dalej świeci. Bolko przebiera go kamień po kamieniu i odkłada najlepsze kawałki na bok."
 solid = false
 padding = 0.2
 
-[node name="cave_rocks_a_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=194954324 instance=ExtResource("37_njnc3")]
+[node name="cave_rocks_a_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=1467066803 instance=ExtResource("37_40pcp")]
 transform = Transform3D(-0.013043419, 0, 0.27969605, 0, 0.28, 0, -0.27969605, 0, -0.013043419, 17.05, 0.6, -0.1)
 
-[node name="cave_rocks_c_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=75544175 instance=ExtResource("38_f5wmq")]
+[node name="cave_rocks_c_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=2133840422 instance=ExtResource("38_7u33d")]
 transform = Transform3D(-0.24005052, 0, 0.069826536, 0, 0.25, 0, -0.069826536, 0, -0.24005052, 16.95, 0.66, 0.2)
 
-[node name="CartsLantern" type="Node3D" parent="CampProps" unique_id=1062626669 instance=ExtResource("39_o1a8y")]
+[node name="CartsLantern" type="Node3D" parent="CampProps" unique_id=1062626669 instance=ExtResource("39_l8005")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.3, 1.45, -4.35)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/CartsLantern" unique_id=208649754]
+[node name="Light" type="OmniLight3D" parent="CampProps/CartsLantern" unique_id=687294166]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 0.8
 omni_range = 6.0
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 housing_casts_shadow = false
 
-[node name="Powder" type="Node3D" parent="CampProps" unique_id=356614947]
+[node name="Powder" type="Node3D" parent="CampProps" unique_id=103825867]
 
-[node name="Barrel_2" type="Node3D" parent="CampProps/Powder" unique_id=1136694222 instance=ExtResource("8_bftfg")]
+[node name="Barrel_2" type="Node3D" parent="CampProps/Powder" unique_id=1453361909 instance=ExtResource("8_pmehv")]
 transform = Transform3D(0.99412024, 0, -0.10828186, 0, 1, 0, 0.10828186, 0, 0.99412024, 16.1, 0, -3.9)
 
-[node name="Look" type="Area3D" parent="CampProps/Powder/Barrel_2" unique_id=463243335]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/Powder/Barrel_2" unique_id=1945253934]
+script = ExtResource("6_8nwca")
 display_name = "Beczki z prochem"
 description = "Proch Mirosława. Trzyma go jak najdalej od ogniska i od ludzi. Na wieku jednej beczki ktoś wydrapał nożem: NIE PALIĆ."
 
-[node name="Barrel_3" type="Node3D" parent="CampProps/Powder" unique_id=1094802706 instance=ExtResource("8_bftfg")]
+[node name="Barrel_3" type="Node3D" parent="CampProps/Powder" unique_id=1064744464 instance=ExtResource("8_pmehv")]
 transform = Transform3D(-0.49138927, 0, 0.87094, 0, 1, 0, -0.87094, 0, -0.49138927, 16.85, 0, -3.95)
 
-[node name="Barrel_4" type="Node3D" parent="CampProps/Powder" unique_id=958722041 instance=ExtResource("8_bftfg")]
+[node name="Barrel_4" type="Node3D" parent="CampProps/Powder" unique_id=1171180561 instance=ExtResource("8_pmehv")]
 transform = Transform3D(-0.34713116, 0, -0.9378166, 0, 1, 0, 0.9378166, 0, -0.34713116, 16.45, 0, -3.25)
 
-[node name="FuseChest" type="Node3D" parent="CampProps/Powder" unique_id=162045958 instance=ExtResource("40_40pcp")]
+[node name="FuseChest" type="Node3D" parent="CampProps/Powder" unique_id=162045958 instance=ExtResource("40_e0ip5")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 15.3, 0, -3.95)
 
-[node name="Look" type="Area3D" parent="CampProps/Powder/FuseChest" unique_id=2127450920]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/Powder/FuseChest" unique_id=66463058]
+script = ExtResource("6_8nwca")
 display_name = "Skrzynia z lontami"
 description = "Zamknięta na kłódkę. Klucz Mirosław nosi na szyi."
 
-[node name="MapTable" type="Node3D" parent="CampProps" unique_id=138244149 instance=ExtResource("20_15awg")]
+[node name="MapTable" type="Node3D" parent="CampProps" unique_id=1852725129 instance=ExtResource("20_8o05h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, -2.2)
 
-[node name="MapTableUse" type="Area3D" parent="CampProps/MapTable" unique_id=705042639 groups=["story_use"]]
-script = ExtResource("6_5ysv0")
+[node name="MapTableUse" type="Area3D" parent="CampProps/MapTable" unique_id=718197976 groups=["story_use"]]
+script = ExtResource("6_8nwca")
 display_name = "Stół z mapą"
 action = 2
 prompt_text = "Zaplanuj wyprawę"
 
-[node name="Scroll_1_1" type="Node3D" parent="CampProps" unique_id=1084067585 instance=ExtResource("41_7u33d")]
+[node name="Scroll_1_1" type="Node3D" parent="CampProps" unique_id=1084067585 instance=ExtResource("41_h116n")]
 transform = Transform3D(0.27783716, 0, 1.5756924, 0, 1.6, 0, -1.5756924, 0, 0.27783716, 25.3, 0.81, -2.15)
 
-[node name="Scroll_2_1" type="Node3D" parent="CampProps" unique_id=1219969263 instance=ExtResource("42_l8005")]
+[node name="Scroll_2_1" type="Node3D" parent="CampProps" unique_id=1219969263 instance=ExtResource("42_abalh")]
 transform = Transform3D(1.1817694, 0, 0.20837782, 0, 1.2, 0, -0.20837782, 0, 1.1817694, 26.2, 0.81, -2.3)
 
-[node name="Book_Stack_1_1" type="Node3D" parent="CampProps" unique_id=2085440897 instance=ExtResource("43_e0ip5")]
+[node name="Book_Stack_1_1" type="Node3D" parent="CampProps" unique_id=2085440897 instance=ExtResource("43_24i5w")]
 transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 26.65, 0.81, -2.5)
 
-[node name="Coin_Pile_1" type="Node3D" parent="CampProps" unique_id=370068828 instance=ExtResource("44_h116n")]
+[node name="Coin_Pile_1" type="Node3D" parent="CampProps" unique_id=370068828 instance=ExtResource("44_fbm7q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 0.81, -1.9)
 
-[node name="CandleStick_Triple_1" type="Node3D" parent="CampProps" unique_id=1946591906 instance=ExtResource("45_abalh")]
+[node name="CandleStick_Triple_1" type="Node3D" parent="CampProps" unique_id=1946591906 instance=ExtResource("45_r0yac")]
 transform = Transform3D(0.5418668, 0, 0.8404644, 0, 1, 0, -0.8404644, 0, 0.5418668, 24.45, 0.81, -2.45)
 
-[node name="@OmniLight3D@2" type="OmniLight3D" parent="CampProps" unique_id=2133454331]
+[node name="@OmniLight3D@2" type="OmniLight3D" parent="CampProps" unique_id=358874210]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.45, 1.11, -2.45)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 1.4
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 strength = 0.25
 speed = 7.0
 
-[node name="Chair_1_1" type="Node3D" parent="CampProps" unique_id=217458253 instance=ExtResource("46_24i5w")]
+[node name="Chair_1_1" type="Node3D" parent="CampProps" unique_id=217458253 instance=ExtResource("46_e7lt8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.35, 0, -3.5)
 
-[node name="Ledger" type="Node3D" parent="CampProps" unique_id=923650203 instance=ExtResource("47_fbm7q")]
+[node name="Ledger" type="Node3D" parent="CampProps" unique_id=923650203 instance=ExtResource("47_chix1")]
 transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, 27.75, 0, -2.2)
 
-[node name="Look" type="Area3D" parent="CampProps/Ledger" unique_id=1374607979]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/Ledger" unique_id=894515641]
+script = ExtResource("6_8nwca")
 display_name = "Księga zarządcy"
-description = "Równe rubryki: ludzie, zapasy, urobek. Przy urobku na razie same zera. Na ostatniej stronie, drobno: „Kniaź czeka”."
+description = "Równe rubryki, pisane drobnym, starannym pismem Hagiwary: ludzie, zapasy, urobek, żyły. Przy urobku na razie same zera. Na ostatniej stronie, ręką Racibora: „Kniaź czeka”."
 
-[node name="KniazBanner" type="Node3D" parent="CampProps" unique_id=639269548 instance=ExtResource("48_r0yac")]
+[node name="KniazBanner" type="Node3D" parent="CampProps" unique_id=639269548 instance=ExtResource("48_a2011")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 2.55, -4.3)
 
-[node name="Look" type="Area3D" parent="CampProps/KniazBanner" unique_id=666911268]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/KniazBanner" unique_id=1365866840]
+script = ExtResource("6_8nwca")
 display_name = "Chorągiew Kniazia"
 description = "Herb Jacyntów: srebrny gród na czerwonym polu. Racibor powiesił ją pierwszego dnia, zanim ktokolwiek rozpakował swoje rzeczy."
 solid = false
 
-[node name="LeaderBed" type="Node3D" parent="CampProps" unique_id=457769127 instance=ExtResource("49_e7lt8")]
+[node name="LeaderBed" type="Node3D" parent="CampProps" unique_id=457769127 instance=ExtResource("49_sqhf5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -3.2)
 
-[node name="Look" type="Area3D" parent="CampProps/LeaderBed" unique_id=1879849238]
-script = ExtResource("6_5ysv0")
+[node name="Look" type="Area3D" parent="CampProps/LeaderBed" unique_id=561863749]
+script = ExtResource("6_8nwca")
 display_name = "Łóżko zarządcy"
 description = "Prawdziwe łóżko, zniesione z góry w częściach. Jedyne w obozie."
 
-[node name="PayChest" type="Node3D" parent="CampProps" unique_id=532660005 instance=ExtResource("40_40pcp")]
+[node name="PayChest" type="Node3D" parent="CampProps" unique_id=429593156 instance=ExtResource("40_e0ip5")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 27.5, 0, -4)
 
-[node name="GuardSeat" type="Node3D" parent="CampProps" unique_id=1262925966]
-script = ExtResource("1_tl6rp")
-material = ExtResource("2_f5wj3")
+[node name="GuardSeat" type="Node3D" parent="CampProps" unique_id=1120605836]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
 
-[node name="box_3" type="Node3D" parent="CampProps/GuardSeat" unique_id=1998349695 instance=ExtResource("28_l27qg")]
+[node name="box_3" type="Node3D" parent="CampProps/GuardSeat" unique_id=132009745 instance=ExtResource("28_3vr2d")]
 transform = Transform3D(1.9032462, 0, 0.8874983, 0, 2.1, 0, -0.8874983, 0, 1.9032462, 21.4, 0, -1.3)
 
-[node name="CommandLantern" type="Node3D" parent="CampProps" unique_id=1205047638 instance=ExtResource("39_o1a8y")]
+[node name="CommandLantern" type="Node3D" parent="CampProps" unique_id=461944309 instance=ExtResource("39_l8005")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 20.2, 1.35, -1.6)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/CommandLantern" unique_id=14805998]
+[node name="Light" type="OmniLight3D" parent="CampProps/CommandLantern" unique_id=1545144580]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.6
 shadow_enabled = true
 omni_range = 8.0
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 housing_casts_shadow = false
 
-[node name="CommandLantern2" type="Node3D" parent="CampProps" unique_id=633304797 instance=ExtResource("39_o1a8y")]
+[node name="CommandLantern2" type="Node3D" parent="CampProps" unique_id=1120393442 instance=ExtResource("39_l8005")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.4, 1.35, -4.35)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/CommandLantern2" unique_id=725926398]
+[node name="Light" type="OmniLight3D" parent="CampProps/CommandLantern2" unique_id=1240886527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.3
 omni_range = 7.0
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 housing_casts_shadow = false
 
-[node name="SupplyStall" type="Node3D" parent="CampProps" unique_id=1033190074 instance=ExtResource("50_chix1")]
+[node name="SupplyStall" type="Node3D" parent="CampProps" unique_id=1033190074 instance=ExtResource("50_f7b1h")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 24.6, 0, 3.35)
 
-[node name="StallBlock" type="StaticBody3D" parent="CampProps" unique_id=138108055]
+[node name="StallBlock" type="StaticBody3D" parent="CampProps" unique_id=2024178250]
 
-[node name="Shape" type="CollisionShape3D" parent="CampProps/StallBlock" unique_id=127169500]
+[node name="Shape" type="CollisionShape3D" parent="CampProps/StallBlock" unique_id=2025035299]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.6, 0.5, 3.35)
-shape = SubResource("BoxShape3D_1t2h4")
+shape = SubResource("BoxShape3D_dnntn")
 
-[node name="Rope_1_1" type="Node3D" parent="CampProps" unique_id=1357812292 instance=ExtResource("51_a2011")]
+[node name="Rope_1_1" type="Node3D" parent="CampProps" unique_id=1357812292 instance=ExtResource("51_76g44")]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 24.1, 0.93, 3.3)
 
-[node name="SmallBottles_1_1" type="Node3D" parent="CampProps" unique_id=1210676944 instance=ExtResource("52_sqhf5")]
+[node name="SmallBottles_1_1" type="Node3D" parent="CampProps" unique_id=1210676944 instance=ExtResource("52_3cmek")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0.93, 3.2)
 
-[node name="Pouch_Large_1" type="Node3D" parent="CampProps" unique_id=1300940719 instance=ExtResource("53_f7b1h")]
+[node name="Pouch_Large_1" type="Node3D" parent="CampProps" unique_id=1300940719 instance=ExtResource("53_40kkm")]
 transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, 25.35, 0.93, 3.4)
 
-[node name="CandleStick_2" type="Node3D" parent="CampProps" unique_id=1644977807 instance=ExtResource("26_0f3fe")]
+[node name="CandleStick_2" type="Node3D" parent="CampProps" unique_id=1521278788 instance=ExtResource("26_fmc72")]
 transform = Transform3D(0.93591094, 0, -0.35223672, 0, 1, 0, 0.35223672, 0, 0.93591094, 24.65, 0.93, 3.45)
 
-[node name="@OmniLight3D@3" type="OmniLight3D" parent="CampProps" unique_id=1467322707]
+[node name="@OmniLight3D@3" type="OmniLight3D" parent="CampProps" unique_id=1403451812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.65, 1.23, 3.45)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 0.7
 omni_range = 3.5
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 strength = 0.25
 speed = 7.0
 
-[node name="Rope_3_1" type="Node3D" parent="CampProps" unique_id=863834313 instance=ExtResource("54_76g44")]
+[node name="Rope_3_1" type="Node3D" parent="CampProps" unique_id=863834313 instance=ExtResource("54_adr4m")]
 transform = Transform3D(0.9848077, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.9848077, 22.7, 0, 3.95)
 
-[node name="Rope_2_1" type="Node3D" parent="CampProps" unique_id=1996346884 instance=ExtResource("55_3cmek")]
+[node name="Rope_2_1" type="Node3D" parent="CampProps" unique_id=1996346884 instance=ExtResource("55_mg6tm")]
 transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, 22.6, 0.1, 3.9)
 
-[node name="Barrel_5" type="Node3D" parent="CampProps" unique_id=172565568 instance=ExtResource("8_bftfg")]
+[node name="Barrel_5" type="Node3D" parent="CampProps" unique_id=1423409896 instance=ExtResource("8_pmehv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.55, 0, 3.95)
 
-[node name="Barrel_6" type="Node3D" parent="CampProps" unique_id=13479337 instance=ExtResource("8_bftfg")]
+[node name="Barrel_6" type="Node3D" parent="CampProps" unique_id=1789919132 instance=ExtResource("8_pmehv")]
 transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, 27.3, 0, 4)
 
-[node name="Crate_Wooden_4" type="Node3D" parent="CampProps" unique_id=2064541832 instance=ExtResource("27_m4h3k")]
+[node name="Crate_Wooden_4" type="Node3D" parent="CampProps" unique_id=1100658225 instance=ExtResource("27_3tyol")]
 transform = Transform3D(0.9781476, 0, -0.2079117, 0, 1, 0, 0.2079117, 0, 0.9781476, 28.2, 0, 3.9)
 
-[node name="FarmCrate_Empty_1" type="Node3D" parent="CampProps" unique_id=90066023 instance=ExtResource("56_40kkm")]
+[node name="FarmCrate_Empty_1" type="Node3D" parent="CampProps" unique_id=90066023 instance=ExtResource("56_t6wdj")]
 transform = Transform3D(0.9961947, 0, 0.08715574, 0, 1, 0, -0.08715574, 0, 0.9961947, 28.15, 0.93, 3.9)
 
-[node name="Bag_4" type="Node3D" parent="CampProps" unique_id=1739434336 instance=ExtResource("7_17man")]
+[node name="Bag_4" type="Node3D" parent="CampProps" unique_id=1452401659 instance=ExtResource("7_6oii3")]
 transform = Transform3D(-0.9396926, 0, -0.34202015, 0, 1, 0, 0.34202015, 0, -0.9396926, 23.05, 0, 3.35)
 
-[node name="Shelf_Small_Bottles_1" type="Node3D" parent="CampProps" unique_id=782849687 instance=ExtResource("57_adr4m")]
+[node name="Shelf_Small_Bottles_1" type="Node3D" parent="CampProps" unique_id=782849687 instance=ExtResource("57_1c6it")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 26.95, 1.45, 4.35)
 
-[node name="SupplyLantern" type="Node3D" parent="CampProps" unique_id=125908609 instance=ExtResource("39_o1a8y")]
+[node name="SupplyLantern" type="Node3D" parent="CampProps" unique_id=432975681 instance=ExtResource("39_l8005")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 25.8, 1.35, 4.4)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/SupplyLantern" unique_id=1812620319]
+[node name="Light" type="OmniLight3D" parent="CampProps/SupplyLantern" unique_id=2135166471]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 shadow_enabled = true
 omni_range = 6.5
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 housing_casts_shadow = false
 
-[node name="Barricades" type="Node3D" parent="." unique_id=1725023230]
+[node name="Infirmary" type="Node3D" parent="CampProps" unique_id=429044832]
 
-[node name="Signs" type="Node3D" parent="Barricades" unique_id=900406818]
-script = ExtResource("1_tl6rp")
-material = ExtResource("2_f5wj3")
+[node name="HerbCrate" type="Node3D" parent="CampProps/Infirmary" unique_id=790263001 instance=ExtResource("27_3tyol")]
+transform = Transform3D(0.8370866, 0, 0.14760095, 0, 0.85, 0, -0.14760095, 0, 0.8370866, 1, 0, -4.05)
 
-[node name="EastSign" type="Node3D" parent="Barricades/Signs" unique_id=632717869 instance=ExtResource("58_mg6tm")]
+[node name="Look" type="Area3D" parent="CampProps/Infirmary/HerbCrate" unique_id=1422470037]
+script = ExtResource("6_8nwca")
+display_name = "Skrzynka Anzelma"
+description = "Zioła w płóciennych woreczkach, każdy podpisany drobnym pismem. Bandaże wygotowane i zwinięte w równe rolki. Na wieku wyryty płomień, a przez płomień ktoś przeciągnął nożem krechę."
+
+[node name="SmallBottles_1_2" type="Node3D" parent="CampProps/Infirmary" unique_id=761817216 instance=ExtResource("52_3cmek")]
+transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 1, 0.72, -4.05)
+
+[node name="Potion_2_1" type="Node3D" parent="CampProps/Infirmary" unique_id=419164212 instance=ExtResource("58_ukqkh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.35, 0.72, -3.85)
+
+[node name="Bucket_Wooden_1_2" type="Node3D" parent="CampProps/Infirmary" unique_id=2048730414 instance=ExtResource("17_15awg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7, 0, -4)
+
+[node name="SickSeat" type="Node3D" parent="CampProps/Infirmary" unique_id=2015373740]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
+
+[node name="box_4" type="Node3D" parent="CampProps/Infirmary/SickSeat" unique_id=170021369 instance=ExtResource("28_3vr2d")]
+transform = Transform3D(1.9696155, 0, 0.34729636, 0, 2, 0, -0.34729636, 0, 1.9696155, 2.35, 0, -2.2)
+
+[node name="CandleStick_3" type="Node3D" parent="CampProps/Infirmary" unique_id=1777689414 instance=ExtResource("26_fmc72")]
+transform = Transform3D(-0.20159823, 0, 0.9794683, 0, 1, 0, -0.9794683, 0, -0.20159823, 1.55, 0.72, -4.25)
+
+[node name="CandleLight" type="OmniLight3D" parent="CampProps/Infirmary" unique_id=2132895445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.55, 1.02, -4.25)
+light_color = Color(1, 0.7, 0.4, 1)
+light_energy = 0.8
+omni_range = 4.0
+omni_attenuation = 1.3
+script = ExtResource("11_xtdax")
+strength = 0.25
+speed = 7.0
+
+[node name="ScribeCorner" type="Node3D" parent="CampProps" unique_id=1323146837]
+
+[node name="Stool_1" type="Node3D" parent="CampProps/ScribeCorner" unique_id=1166717530 instance=ExtResource("22_hb30c")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1, 0, -3.75)
+
+[node name="TeaCrate" type="Node3D" parent="CampProps/ScribeCorner" unique_id=1534841847 instance=ExtResource("27_3tyol")]
+transform = Transform3D(0.79221445, 0, -0.11133849, 0, 0.8, 0, 0.11133849, 0, 0.79221445, 30.85, 0, -3.05)
+
+[node name="Look" type="Area3D" parent="CampProps/ScribeCorner/TeaCrate" unique_id=2018014136]
+script = ExtResource("6_8nwca")
+display_name = "Kącik Hagiwary"
+description = "Skrzynia zamiast stołu. Na niej kubek z naparem, który Hagiwara nazywa herbatą, pędzelek, kamień do rozcierania tuszu i zeszyt z wierszami. Wiersze są krótkie. Każdy o ciemności."
+
+[node name="Mug_4" type="Node3D" parent="CampProps/ScribeCorner" unique_id=1772406415 instance=ExtResource("24_m4h3k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.75, 0.7, -2.9)
+
+[node name="Book_5_1" type="Node3D" parent="CampProps/ScribeCorner" unique_id=41544066 instance=ExtResource("59_x8kor")]
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 31, 0.7, -3.2)
+
+[node name="CandleStick_4" type="Node3D" parent="CampProps/ScribeCorner" unique_id=255877797 instance=ExtResource("26_fmc72")]
+transform = Transform3D(-0.99321556, 0, -0.11628779, 0, 1, 0, 0.11628779, 0, -0.99321556, 30.95, 0.7, -2.75)
+
+[node name="CandleLight" type="OmniLight3D" parent="CampProps/ScribeCorner" unique_id=2032811851]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.95, 1, -2.75)
+light_color = Color(1, 0.7, 0.4, 1)
+light_energy = 0.7
+omni_range = 3.5
+omni_attenuation = 1.3
+script = ExtResource("11_xtdax")
+strength = 0.25
+speed = 7.0
+
+[node name="Barricades" type="Node3D" parent="." unique_id=1111520707]
+
+[node name="Signs" type="Node3D" parent="Barricades" unique_id=1559592006]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
+
+[node name="EastSign" type="Node3D" parent="Barricades/Signs" unique_id=632717869 instance=ExtResource("60_68qdq")]
 transform = Transform3D(-1.5298986e-07, 0, -3.5, 0, 3.5, 0, 3.5, 0, -1.5298986e-07, 36.1, 0, 1.5)
 
-[node name="EastExitUse" type="Area3D" parent="Barricades/Signs/EastSign" unique_id=1582071561 groups=["story_use"]]
-script = ExtResource("6_5ysv0")
+[node name="EastExitUse" type="Area3D" parent="Barricades/Signs/EastSign" unique_id=213963775 groups=["story_use"]]
+script = ExtResource("6_8nwca")
 display_name = "Drogowskaz"
 action = 2
-prompt_text = "Wróć do obozu · 2 h"
+prompt_text = "Dokąd dalej? (albo [M])"
 
-[node name="WestSign" type="Node3D" parent="Barricades/Signs" unique_id=1681556048 instance=ExtResource("58_mg6tm")]
+[node name="WestSign" type="Node3D" parent="Barricades/Signs" unique_id=737469671 instance=ExtResource("60_68qdq")]
 transform = Transform3D(-1.5298986e-07, 0, 3.5, 0, 3.5, 0, -3.5, 0, -1.5298986e-07, -2.7, 0, 1.5)
 
-[node name="WestExitUse" type="Area3D" parent="Barricades/Signs/WestSign" unique_id=1635068863 groups=["story_use"]]
-script = ExtResource("6_5ysv0")
+[node name="WestExitUse" type="Area3D" parent="Barricades/Signs/WestSign" unique_id=1557234339 groups=["story_use"]]
+script = ExtResource("6_8nwca")
 display_name = "Drogowskaz"
 action = 2
-prompt_text = "Wróć do obozu · 2 h"
+prompt_text = "Dokąd dalej? (albo [M])"
 
-[node name="EastBoards" type="MeshInstance3D" parent="Barricades" unique_id=1813411242 instance=ExtResource("59_t6wdj")]
+[node name="EastBoards" type="MeshInstance3D" parent="Barricades" unique_id=1798397299 instance=ExtResource("61_jo80m")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 35.2, 0, 3)
 
-[node name="EastBoardsLook" type="Area3D" parent="Barricades/EastBoards" unique_id=920155604]
-script = ExtResource("6_5ysv0")
+[node name="EastBoardsLook" type="Area3D" parent="Barricades/EastBoards" unique_id=662677554]
+script = ExtResource("6_8nwca")
 display_name = "Zabite deskami zejście"
 description = "Chodnik zabity deskami. Ktoś napisał na nich kredą: „STARA SZTOLNIA”.
 
 Na wyprawę wyruszasz od stołu z mapą w obozie."
 solid = false
 
-[node name="EastLantern" type="Node3D" parent="Barricades" unique_id=391246044 instance=ExtResource("39_o1a8y")]
+[node name="EastLantern" type="Node3D" parent="Barricades" unique_id=283783836 instance=ExtResource("39_l8005")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 34, 1.35, 4.45)
 
-[node name="Light" type="OmniLight3D" parent="Barricades/EastLantern" unique_id=106666507]
+[node name="Light" type="OmniLight3D" parent="Barricades/EastLantern" unique_id=2007670052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.2
 shadow_enabled = true
 omni_range = 6.0
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 housing_casts_shadow = false
 
-[node name="EastBlock" type="StaticBody3D" parent="Barricades" unique_id=1223059901]
+[node name="EastBlock" type="StaticBody3D" parent="Barricades" unique_id=414614037]
 
-[node name="Shape" type="CollisionShape3D" parent="Barricades/EastBlock" unique_id=2121443102]
+[node name="Shape" type="CollisionShape3D" parent="Barricades/EastBlock" unique_id=1855226269]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.2, 2, 3)
-shape = SubResource("BoxShape3D_yokiu")
+shape = SubResource("BoxShape3D_3xghx")
 
-[node name="WestBoards" type="MeshInstance3D" parent="Barricades" unique_id=140809404 instance=ExtResource("59_t6wdj")]
+[node name="WestBoards" type="MeshInstance3D" parent="Barricades" unique_id=1340675608 instance=ExtResource("61_jo80m")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.8, 0, 3)
 
-[node name="WestBoardsLook" type="Area3D" parent="Barricades/WestBoards" unique_id=1686897519]
-script = ExtResource("6_5ysv0")
+[node name="WestBoardsLook" type="Area3D" parent="Barricades/WestBoards" unique_id=1464404722]
+script = ExtResource("6_8nwca")
 display_name = "Zabity deskami chodnik"
 description = "Zachodni chodnik zabity deskami. Zza nich słychać, jak co jakiś czas osypuje się żwir.
 
 Na wyprawę wyruszasz od stołu z mapą w obozie."
 solid = false
 
-[node name="WestBlock" type="StaticBody3D" parent="Barricades" unique_id=1439103459]
+[node name="WestBlock" type="StaticBody3D" parent="Barricades" unique_id=710827490]
 
-[node name="Shape" type="CollisionShape3D" parent="Barricades/WestBlock" unique_id=1376979860]
+[node name="Shape" type="CollisionShape3D" parent="Barricades/WestBlock" unique_id=1487132582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 2, 3)
-shape = SubResource("BoxShape3D_yuok5")
+shape = SubResource("BoxShape3D_cm0up")
 
-[node name="WestSegment" type="Node3D" parent="." unique_id=1067060730]
+[node name="WestSegment" type="Node3D" parent="." unique_id=232592611]
 
-[node name="KeyWood" type="Node3D" parent="WestSegment" unique_id=744483914]
-script = ExtResource("1_tl6rp")
-material = ExtResource("2_f5wj3")
+[node name="KeyWood" type="Node3D" parent="WestSegment" unique_id=469169940]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
 
-[node name="KeyBoard" type="Node3D" parent="WestSegment/KeyWood" unique_id=1097530907 instance=ExtResource("58_mg6tm")]
+[node name="KeyBoard" type="Node3D" parent="WestSegment/KeyWood" unique_id=335803869 instance=ExtResource("60_68qdq")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -14.5, -2, 1.45)
 
-[node name="KeyBoardLook" type="Area3D" parent="WestSegment/KeyWood/KeyBoard" unique_id=1001336235]
-script = ExtResource("6_5ysv0")
+[node name="KeyBoardLook" type="Area3D" parent="WestSegment/KeyWood/KeyBoard" unique_id=1987150678]
+script = ExtResource("6_8nwca")
 display_name = "Deska z wyrytymi znakami"
 description = "Deska przybita do stempla. Ktoś wyrył na niej alfabet w dwóch rzędach, dolny przesunięty o siedem liter. W rogu znak dziadka: dwie skrzyżowane kreski i kropka.
 
@@ -668,35 +754,35 @@ on_use_note = &"klucz"
 on_use_quest = &"slady"
 on_use_quest_entry = "klucz"
 
-[node name="KeyGlow" type="OmniLight3D" parent="WestSegment" unique_id=584437859]
+[node name="KeyGlow" type="OmniLight3D" parent="WestSegment" unique_id=1874446916]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 0.2, 2.4)
 light_color = Color(0.55, 0.65, 1, 1)
 light_energy = 0.5
 omni_range = 3.5
 omni_attenuation = 1.3
-script = ExtResource("11_pmehv")
+script = ExtResource("11_xtdax")
 strength = 0.3
 speed = 0.8
 
-[node name="FarBarrier" type="Node3D" parent="WestSegment" unique_id=1705207855]
+[node name="FarBarrier" type="Node3D" parent="WestSegment" unique_id=241413731]
 
-[node name="cave_rocks_b_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=2135277950 instance=ExtResource("35_mremh")]
-transform = Transform3D(-0.24191788, 0, 1.175362, 0, 1.2, 0, -1.175362, 0, -0.24191788, -17.4, -1.7, 1.5)
+[node name="cave_rocks_b_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=540209443 instance=ExtResource("35_f5wmq")]
+transform = Transform3D(-1.1505978, 0, -0.34077114, 0, 1.2, 0, 0.34077114, 0, -1.1505978, -17.4, -1.7, 1.5)
 
-[node name="cave_rocks_c_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=1352918582 instance=ExtResource("38_f5wmq")]
-transform = Transform3D(-1.3905017, 0, -0.1628029, 0, 1.4, 0, 0.1628029, 0, -1.3905017, -17.6, -1.7, 2.8)
+[node name="cave_rocks_c_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=1233876593 instance=ExtResource("38_7u33d")]
+transform = Transform3D(-1.0278382, 0, 0.9505516, 0, 1.4, 0, -0.9505516, 0, -1.0278382, -17.6, -1.7, 2.8)
 
-[node name="cave_rocks_a_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=503607208 instance=ExtResource("37_njnc3")]
-transform = Transform3D(-1.0547146, 0, -0.31237352, 0, 1.1, 0, 0.31237352, 0, -1.0547146, -17.3, -1.7, 4.3)
+[node name="cave_rocks_a_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=1821551059 instance=ExtResource("37_40pcp")]
+transform = Transform3D(-0.8137528, 0, -0.7401395, 0, 1.1, 0, 0.7401395, 0, -0.8137528, -17.3, -1.7, 4.3)
 
-[node name="cave_rocks_d_1" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=247301342 instance=ExtResource("61_ukqkh")]
-transform = Transform3D(-0.7341702, 0, 0.67896545, 0, 1, 0, -0.67896545, 0, -0.7341702, -17.9, -1.7, 3.6)
+[node name="cave_rocks_d_1" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=980573855 instance=ExtResource("63_rbgy8")]
+transform = Transform3D(-0.6647419, 0, 0.7470731, 0, 1, 0, -0.7470731, 0, -0.6647419, -17.9, -1.7, 3.6)
 
-[node name="BrokenBeam" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=1546854887 instance=ExtResource("62_x8kor")]
+[node name="BrokenBeam" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=1645841004 instance=ExtResource("64_sio62")]
 transform = Transform3D(-4.1572e-08, -1.3507562e-08, 1, -0.309017, 0.95105654, 0, -0.95105654, -0.309017, -4.371139e-08, -17, -1.1, 3)
 
-[node name="BarrierLook" type="Area3D" parent="WestSegment/FarBarrier/BrokenBeam" unique_id=1260910078]
-script = ExtResource("6_5ysv0")
+[node name="BarrierLook" type="Area3D" parent="WestSegment/FarBarrier/BrokenBeam" unique_id=1625543964]
+script = ExtResource("6_8nwca")
 display_name = "Połamane stemple"
 description = "Dalej chodnik stromo opada w ciemność: to upadowa z mapy dziadka. Stemple połamało jak zapałki. Bez liny nie ma tu czego szukać.
 
@@ -704,36 +790,82 @@ Zejście zaplanujesz przy stole z mapą."
 solid = false
 padding = 0.3
 
-[node name="BarrierBlock" type="StaticBody3D" parent="WestSegment/FarBarrier" unique_id=1188899888]
+[node name="BarrierBlock" type="StaticBody3D" parent="WestSegment/FarBarrier" unique_id=1381877362]
 
-[node name="Shape" type="CollisionShape3D" parent="WestSegment/FarBarrier/BarrierBlock" unique_id=1334283922]
+[node name="Shape" type="CollisionShape3D" parent="WestSegment/FarBarrier/BarrierBlock" unique_id=1334472391]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, -0.5, 3)
-shape = SubResource("BoxShape3D_kk7kr")
+shape = SubResource("BoxShape3D_l6qkr")
 
-[node name="BlastDebris" type="Node3D" parent="WestSegment" unique_id=1294179024]
+[node name="Vein" type="Node3D" parent="WestSegment" unique_id=1907274978]
+script = ExtResource("33_c2tuc")
+overlay = SubResource("ShaderMaterial_28fvm")
 
-[node name="cave_rocks_a_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=1197282020 instance=ExtResource("37_njnc3")]
-transform = Transform3D(-0.5918202, 0, -0.5382833, 0, 0.8, 0, 0.5382833, 0, -0.5918202, -6.4, -0.6, 1.4)
+[node name="cave_wall_rocks_c_1" type="MeshInstance3D" parent="WestSegment/Vein" unique_id=1967709245 instance=ExtResource("65_mpfom")]
+transform = Transform3D(-1.2, 0, -1.04907336e-07, 0, 1.2, 0, 1.04907336e-07, 0, -1.2, -12.2, -0.8, 4.75)
 
-[node name="cave_rocks_c_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=625899203 instance=ExtResource("38_f5wmq")]
-transform = Transform3D(-0.5982677, 0, 0.6723658, 0, 0.9, 0, -0.6723658, 0, -0.5982677, -7.2, -1, 4.6)
+[node name="VeinGlow" type="OmniLight3D" parent="WestSegment" unique_id=2137621504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2, -0.4, 3.6)
+light_color = Color(0.35, 0.6, 1, 1)
+light_energy = 1.4
+omni_range = 5.5
+omni_attenuation = 1.3
+script = ExtResource("11_xtdax")
+mode = 1
+strength = 0.35
+speed = 0.7
 
-[node name="cave_rocks_b_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=474014009 instance=ExtResource("35_mremh")]
-transform = Transform3D(-0.56993884, 0, -0.40641075, 0, 0.7, 0, 0.40641075, 0, -0.56993884, -8.3, -1.55, 1.6)
+[node name="VeinMark_west_1" type="Area3D" parent="WestSegment" unique_id=958614469 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("6_8nwca")
+display_name = "Żyła błękitnego żelaza"
+description = "Tuż za zawałem, na wysokości oczu. Dziadek musiał ją mijać setki razy, idąc swoją ulubioną drogą. Na jego mapie w tym miejscu jest kropka. Zaznaczasz ją po raz drugi."
+prompt_text = "Zaznacz żyłę na mapie"
+time_cost_hours = 1.0
+time_reason = "Znaczenie żyły"
+on_use_flag = "vein_west_1"
+hidden_by_flag = "vein_west_1"
+highlight_target = NodePath("../Vein/cave_wall_rocks_c_1")
+solid = false
+padding = 0.1
 
-[node name="cave_rocks_d_2" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=234107927 instance=ExtResource("61_ukqkh")]
-transform = Transform3D(-0.59654135, 0, -0.06433043, 0, 0.6, 0, 0.06433043, 0, -0.59654135, -5.8, -0.3, 4.4)
+[node name="Stake_west_1" type="Node3D" parent="WestSegment" unique_id=1034888545]
+script = ExtResource("1_8apv4")
+material = ExtResource("2_1w7lu")
 
-[node name="cave_rocks_a_4" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=1090093507 instance=ExtResource("37_njnc3")]
-transform = Transform3D(0.4073346, 0, -0.44054347, 0, 0.6, 0, 0.44054347, 0, 0.4073346, -9.2, -1.9, 4.5)
+[node name="VeinStake" type="Node3D" parent="WestSegment/Stake_west_1" unique_id=710745486 instance=ExtResource("60_68qdq")]
+transform = Transform3D(1.4500924, 0, 0.67618924, 0, 1.6, 0, -0.67618924, 0, 1.4500924, -12, -2, 4)
 
-[node name="EastSegment" type="Node3D" parent="." unique_id=601928244]
+[node name="Look" type="Area3D" parent="WestSegment/Stake_west_1/VeinStake" unique_id=1458691339]
+script = ExtResource("6_8nwca")
+display_name = "Twój palik"
+description = "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę."
+required_flag = "vein_west_1"
+solid = false
+padding = 0.08
 
-[node name="FuseBox" type="Node3D" parent="EastSegment" unique_id=1711972744 instance=ExtResource("40_40pcp")]
+[node name="BlastDebris" type="Node3D" parent="WestSegment" unique_id=198276886]
+
+[node name="cave_rocks_a_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=712234851 instance=ExtResource("37_40pcp")]
+transform = Transform3D(-0.6513587, 0, -0.46446943, 0, 0.8, 0, 0.46446943, 0, -0.6513587, -6.4, -0.6, 1.4)
+
+[node name="cave_rocks_c_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=1581719667 instance=ExtResource("38_7u33d")]
+transform = Transform3D(-0.894812, 0, -0.096495636, 0, 0.9, 0, 0.096495636, 0, -0.894812, -7.2, -1, 4.6)
+
+[node name="cave_rocks_b_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=2108997688 instance=ExtResource("35_f5wmq")]
+transform = Transform3D(0.47522366, 0, -0.51396734, 0, 0.7, 0, 0.51396734, 0, 0.47522366, -8.3, -1.55, 1.6)
+
+[node name="cave_rocks_d_2" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=761302816 instance=ExtResource("63_rbgy8")]
+transform = Transform3D(-0.04623973, 0, -0.5982156, 0, 0.6, 0, 0.5982156, 0, -0.04623973, -5.8, -0.3, 4.4)
+
+[node name="cave_rocks_a_4" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=1299941047 instance=ExtResource("37_40pcp")]
+transform = Transform3D(0.01071168, 0, -0.5999044, 0, 0.6, 0, 0.5999044, 0, 0.01071168, -9.2, -1.9, 4.5)
+
+[node name="EastSegment" type="Node3D" parent="." unique_id=281417996]
+
+[node name="FuseBox" type="Node3D" parent="EastSegment" unique_id=1192295458 instance=ExtResource("40_e0ip5")]
 transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, 70.4, -2.116, 7.4)
 
-[node name="FuseBoxPickup" type="Area3D" parent="EastSegment/FuseBox" unique_id=1415465954]
-script = ExtResource("6_5ysv0")
+[node name="FuseBoxPickup" type="Area3D" parent="EastSegment/FuseBox" unique_id=811727203]
+script = ExtResource("6_8nwca")
 display_name = "Skrzynka z lontami"
 description = "Skrzynka po starej ekipie. W środku, w natłuszczonym płótnie, leżą lonty. Suche. Ktoś się postarał, żeby przetrwały.
 
@@ -745,64 +877,139 @@ on_use_quest_entry = "znalezione"
 quest_only_if_active = true
 remove_after_use = true
 
-[node name="Markers" type="Node3D" parent="." unique_id=17716006]
+[node name="Markers" type="Node3D" parent="." unique_id=1997358274]
 
-[node name="SpawnBed" type="Marker3D" parent="Markers" unique_id=1166118434]
+[node name="SpawnBed" type="Marker3D" parent="Markers" unique_id=2007576064]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 8.4, 0, 3.3)
 
-[node name="CampReturn" type="Marker3D" parent="Markers" unique_id=1149640508]
+[node name="CampReturn" type="Marker3D" parent="Markers" unique_id=1088090254]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18.3, 0, 2.4)
 
-[node name="EastEntry" type="Marker3D" parent="Markers" unique_id=2132898613]
+[node name="EastEntry" type="Marker3D" parent="Markers" unique_id=995861932]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37.2, 0, 3)
 
-[node name="WestEntry" type="Marker3D" parent="Markers" unique_id=456488022]
+[node name="WestEntry" type="Marker3D" parent="Markers" unique_id=202531671]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.4, 0, 3)
 
-[node name="MiroslawFire" type="Marker3D" parent="Markers" unique_id=1441459121]
+[node name="MiroslawFire" type="Marker3D" parent="Markers" unique_id=897330933]
 transform = Transform3D(-0.29237175, 0, -0.9563047, 0, 1, 0, 0.9563047, 0, -0.29237175, 12.4, 0, 3.4)
 
-[node name="MiroslawPowder" type="Marker3D" parent="Markers" unique_id=397068385]
+[node name="MiroslawPowder" type="Marker3D" parent="Markers" unique_id=282416229]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 16.5, 0, -2.5)
 
-[node name="MiroslawCorner" type="Marker3D" parent="Markers" unique_id=1905570246]
+[node name="MiroslawCorner" type="Marker3D" parent="Markers" unique_id=83000734]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, -3.85)
 
-[node name="BolkoEat" type="Marker3D" parent="Markers" unique_id=101190868]
+[node name="BolkoEat" type="Marker3D" parent="Markers" unique_id=54711416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3, 0, 0.22)
 
-[node name="BolkoStorage" type="Marker3D" parent="Markers" unique_id=1207611066]
+[node name="BolkoStorage" type="Marker3D" parent="Markers" unique_id=1397305788]
 transform = Transform3D(-0.89100647, 0, -0.45399058, 0, 1, 0, 0.45399058, 0, -0.89100647, 17.4, 0, 1)
 
-[node name="BolkoEvening" type="Marker3D" parent="Markers" unique_id=1995393403]
+[node name="BolkoEvening" type="Marker3D" parent="Markers" unique_id=904652702]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.4, 0, 2.9)
 
-[node name="BolkoBed" type="Marker3D" parent="Markers" unique_id=1954021786]
+[node name="BolkoBed" type="Marker3D" parent="Markers" unique_id=803037397]
 transform = Transform3D(0.58778524, 0, -0.809017, 0, 1, 0, 0.809017, 0, 0.58778524, 8.6, 0, 2.6)
 
-[node name="BolkoAway" type="Marker3D" parent="Markers" unique_id=1613656295]
+[node name="BolkoAway" type="Marker3D" parent="Markers" unique_id=479618758]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.3, 0, 1.2)
 
-[node name="RaciborEat" type="Marker3D" parent="Markers" unique_id=741260942]
+[node name="RaciborEat" type="Marker3D" parent="Markers" unique_id=1425503198]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 15.75, 0, 1.05)
 
-[node name="RaciborTable" type="Marker3D" parent="Markers" unique_id=1502140912]
+[node name="RaciborTable" type="Marker3D" parent="Markers" unique_id=220645504]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.5, 0, -3.25)
 
-[node name="TeklaCook" type="Marker3D" parent="Markers" unique_id=412258412]
+[node name="TeklaCook" type="Marker3D" parent="Markers" unique_id=1677588632]
 transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, 9.55, 0, 2.55)
 
-[node name="TeklaCounter" type="Marker3D" parent="Markers" unique_id=1215361540]
+[node name="TeklaCounter" type="Marker3D" parent="Markers" unique_id=669840306]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 24.6, 0, 4.08)
 
-[node name="TeklaGuarded" type="Marker3D" parent="Markers" unique_id=1453003152]
+[node name="TeklaGuarded" type="Marker3D" parent="Markers" unique_id=664891725]
 transform = Transform3D(0.90630776, 0, 0.42261827, 0, 1, 0, -0.42261827, 0, 0.90630776, 21.4, 0, -1.3)
 
-[node name="DobrawaLeader" type="Marker3D" parent="Markers" unique_id=1253133118]
+[node name="DobrawaLeader" type="Marker3D" parent="Markers" unique_id=1612197840]
 transform = Transform3D(-0.69465846, 0, -0.7193397, 0, 1, 0, 0.7193397, 0, -0.69465846, 27.6, 0, -1.2)
 
-[node name="DobrawaCarts" type="Marker3D" parent="Markers" unique_id=1174901750]
+[node name="DobrawaCarts" type="Marker3D" parent="Markers" unique_id=1904100538]
 transform = Transform3D(0.809017, 0, 0.58778524, 0, 1, 0, -0.58778524, 0, 0.809017, 8.2, 0, -3.2)
 
-[node name="DobrawaApart" type="Marker3D" parent="Markers" unique_id=260042949]
+[node name="DobrawaApart" type="Marker3D" parent="Markers" unique_id=101348232]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.4, 0, 0.6)
+
+[node name="WszeborEat" type="Marker3D" parent="Markers" unique_id=1317066955]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.6, 0, 1.9)
+
+[node name="WszeborFire" type="Marker3D" parent="Markers" unique_id=476887430]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10.6, 0, 4.05)
+
+[node name="NasirEat" type="Marker3D" parent="Markers" unique_id=886190719]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 13.4, 0, 1.9)
+
+[node name="NasirWater" type="Marker3D" parent="Markers" unique_id=1339804084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 0, 1.55)
+
+[node name="NasirEvening" type="Marker3D" parent="Markers" unique_id=911282695]
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 5, 0, 0.9)
+
+[node name="NasirSick" type="Marker3D" parent="Markers" unique_id=1758707807]
+transform = Transform3D(-0.9848077, 0, -0.17364822, 0, 1, 0, 0.17364822, 0, -0.9848077, 2.35, 0, -2.2)
+
+[node name="HagiwaraEat" type="Marker3D" parent="Markers" unique_id=1992887560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.6, 0, 0.22)
+
+[node name="HagiwaraLedger" type="Marker3D" parent="Markers" unique_id=1254481061]
+transform = Transform3D(-0.76604444, 0, -0.64278764, 0, 1, 0, 0.64278764, 0, -0.76604444, 28.4, 0, -1.45)
+
+[node name="HagiwaraTea" type="Marker3D" parent="Markers" unique_id=1536326487]
+transform = Transform3D(-0.64278764, 0, -0.76604444, 0, 1, 0, 0.76604444, 0, -0.64278764, 30.1, 0, -3.75)
+
+[node name="SobekGuard" type="Marker3D" parent="Markers" unique_id=1855623471]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30, 0, 0.4)
+
+[node name="SobekDice" type="Marker3D" parent="Markers" unique_id=1781793693]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14.6, 0, 1.9)
+
+[node name="AnzelmPray" type="Marker3D" parent="Markers" unique_id=1542187971]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.7, 0, -1.3)
+
+[node name="AnzelmInfirmary" type="Marker3D" parent="Markers" unique_id=1795361776]
+transform = Transform3D(-0.57357645, 0, -0.819152, 0, 1, 0, 0.819152, 0, -0.57357645, 3.3, 0, -2.5)
+
+[node name="SabinaApart" type="Marker3D" parent="Markers" unique_id=1335428708]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 21.9, 0, 0.6)
+
+[node name="SabinaCart" type="Marker3D" parent="Markers" unique_id=1462426075]
+transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, 16.2, 0, -0.7)
+
+[node name="SabinaSick" type="Marker3D" parent="Markers" unique_id=657010363]
+transform = Transform3D(-0.8660254, 0, -0.50000006, 0, 1, 0, 0.50000006, 0, -0.8660254, 3.8, 0, -1.1)
+
+[node name="SabinaEvening" type="Marker3D" parent="Markers" unique_id=1461810262]
+transform = Transform3D(-0.61566144, 0, -0.7880108, 0, 1, 0, 0.7880108, 0, -0.61566144, 2.4, 0, 1.6)
+
+[node name="EastSpot1" type="Marker3D" parent="Markers" unique_id=617189463]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40.6, 0, 2.1)
+
+[node name="WestSpot1" type="Marker3D" parent="Markers" unique_id=428005397]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.6, -0.8, 2.1)
+
+[node name="EastSpot2" type="Marker3D" parent="Markers" unique_id=254358257]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 41.5, 0, 3.9)
+
+[node name="WestSpot2" type="Marker3D" parent="Markers" unique_id=1448369114]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.4, -1.2, 3.9)
+
+[node name="EastSpot3" type="Marker3D" parent="Markers" unique_id=790962148]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 42.4, 0, 2.1)
+
+[node name="WestSpot3" type="Marker3D" parent="Markers" unique_id=1494622201]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.2, -1.6, 2.1)
+
+[node name="EastSpot4" type="Marker3D" parent="Markers" unique_id=383799450]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 43.3, 0, 3.9)
+
+[node name="WestSpot4" type="Marker3D" parent="Markers" unique_id=1180901402]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, -2, 3.9)

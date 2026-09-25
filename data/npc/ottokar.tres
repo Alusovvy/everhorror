@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/ottokar_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/ottokar.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"ottokar"
+display_name = "Ottokar von Brühl"
+dialogue_name = "Ottokar"
+display_name_instrumental = "Ottokarem"
+faction = 0
+role = "Przewodniczący rozwoju w Exitium, szef wyprawy Drugich"
+max_sanity = 60
+start_sanity = 54
+max_health = 100
+start_reputation = 0
+history = "Arystokrata z Waldgrossen, jeden z przewodniczących rozwoju w Exitium, od lat zajęty ruinami Onych. Chłodny, uprzejmy i pewny, że bezmagiczni to narzędzia, które czasem mówią. Szuka źródła błękitu, bo kto je znajdzie, zasiądzie w Wielkiej Radzie. Cofnie się tylko przed tym, co przyniosłoby mu wstyd w oczach innych magów."
+sanity_zero_effect = "Schodzi coraz niżej, sam, i przestaje wracać na noc."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62
+female = false

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"wyrobisko"
+display_name = "Stare wyrobisko"
+unknown_name = ""
+direction = "wschód"
+text = "Wyrobisko za jaskinią. Dziadek zaznaczył je krzyżykiem: wybrane do cna. Tyle że wtedy nikt nie szukał błękitu."
+links = {
+"east": 1.0,
+"grota": 1.5,
+"przekop": 1.0
+}
+requires = PackedStringArray()
+locked = {
+
+}
+entry = "WyrobiskoEntry"
+veins = PackedStringArray("wyrobisko_1", "wyrobisko_2")
+depth = 2
+map_pos = Vector2(0.68, 0.47)
+dread = 0
+arrival_text = "Filary zostawione przez starą ekipę trzymają strop chyba tylko z przyzwyczajenia."

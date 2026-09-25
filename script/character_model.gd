@@ -22,12 +22,18 @@ const LOOPED_WORK_ANIMATIONS: Array[StringName] = [&"Fixing_Kneeling", &"Interac
 @export var hidden_meshes: PackedStringArray = []
 ## Scenes attached to the head bone (e.g. the iron mask), placed in the bone's space.
 @export var head_attachments: Array[PackedScene] = []
+## Scenes held in a hand (a mage's staff, a guard's sword), in the hand bone's space.
+@export var hand_attachments: Array[PackedScene] = []
+## The hand that holds them. Idle_Torch raises the left fist (a staff held upright).
+@export_enum("RightHand", "LeftHand") var hand_bone: String = "RightHand"
 ## Replaces the outfit's base colour texture (e.g. T_Peasant_2_BaseColor for a variant).
 @export var outfit_texture: Texture2D
 ## Multiplies the outfit colour (dirt, soot).
 @export var outfit_tint: Color = Color.WHITE
 ## Multiplies the hair colour (grey for older characters).
 @export var hair_tint: Color = Color.WHITE
+## Multiplies the skin colour (people from the desert, a sun-starved scribe).
+@export var skin_tint: Color = Color.WHITE
 ## Animation played on start: Idle, Idle_Talking, Sitting_Idle, Sitting_Talking, Idle_Torch, …
 @export var animation: StringName = &"Idle"
 
@@ -54,15 +60,20 @@ func _ready() -> void:
 		if hidden:
 			hidden.visible = false
 	for scene in head_attachments:
-		var attachment := BoneAttachment3D.new()
-		attachment.bone_name = "Head"
-		skeleton.add_child(attachment)
-		attachment.add_child(scene.instantiate())
+		_attach(scene, "Head")
+	for scene in hand_attachments:
+		_attach(scene, hand_bone)
 	anim_player = AnimationPlayer.new()
 	anim_player.name = "AnimationPlayer"
 	body.add_child(anim_player)
 	anim_player.add_animation_library(&"", _get_library())
 	play(animation)
+
+func _attach(scene: PackedScene, bone: String) -> void:
+	var attachment := BoneAttachment3D.new()
+	attachment.bone_name = bone
+	skeleton.add_child(attachment)
+	attachment.add_child(scene.instantiate())
 
 ## Plays an animation by name (blended over 0.3 s).
 func play(anim_name: StringName) -> void:
@@ -92,6 +103,10 @@ func _customise_meshes(root: Node) -> void:
 ## Returns a recoloured copy of the part's material, or null to keep the original.
 func _customise(material: StandardMaterial3D) -> StandardMaterial3D:
 	var material_name := material.resource_name.to_lower()
+	if "superhero" in material_name and skin_tint != Color.WHITE:
+		var skin := material.duplicate() as StandardMaterial3D
+		skin.albedo_color = skin.albedo_color * skin_tint
+		return skin
 	if "hair" in material_name and hair_tint != Color.WHITE:
 		var hair := material.duplicate() as StandardMaterial3D
 		hair.albedo_color = hair.albedo_color * hair_tint

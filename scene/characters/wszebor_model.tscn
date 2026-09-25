@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Peasant.gltf" id="2_male_peasant"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Long.gltf" id="3_hair_long"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Beard.gltf" id="4_beard"]
+
+[node name="WszeborModel" type="Node3D"]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 0, 0, 0)
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_male_peasant"), ExtResource("3_hair_long"), ExtResource("4_beard")])
+outfit_tint = Color(0.62, 0.5, 0.4, 1)
+hair_tint = Color(1.35, 1, 0.62, 1)

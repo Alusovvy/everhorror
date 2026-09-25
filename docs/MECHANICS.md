@@ -22,7 +22,7 @@ Gra dzieli się na dni. Jeden dzień wygląda tak **[GDD, sekcja 1]**:
 
 Cele trzeba osiągać **w wyznaczonym czasie** **[GDD]**, więc każda decyzja o tym, jak spędzić czas, ma swoją cenę (zob. rozdział 4).
 
-❓ Czy gracz może nie wrócić na noc, np. utknąć w tunelach? Jaka jest wtedy konsekwencja?
+✅ **Gracz zawsze wraca na noc do obozu**, ale może przy tym zmarnować dużo czasu (odpowiedź w §13 pkt 8). W demie powrót z wyprawy jest możliwy nawet po 22:00.
 
 ## 2. Tryby gry
 
@@ -64,7 +64,14 @@ Czas płynie więc tylko wtedy, gdy gracz podejmuje decyzję, a nie w czasie rze
 
 **[propozycja] Jednostka czasu:** dzień dzieli się na określoną liczbę **godzin**, np. 16 godzin aktywności. Każda akcja ma koszt w godzinach, a gdy godziny się skończą, gracz musi iść spać (albo ponosi karę). Czas widać na zegarku lub świecy w obozie oraz w interfejsie VN.
 
-❓ Ile trwa dzień i ile kosztują poszczególne akcje?
+**Stan w demie (task_03–04):**
+- dzień trwa 16 h (06:00–22:00),
+- rozmowa kosztuje 1 h,
+- podróż kosztuje 2 h (Stara sztolnia, zachodni chodnik, rząpie) albo 3 h (upadowa, kaplica), a powrót tyle samo,
+- wysadzenie zawału kosztuje 4 h, zaznaczenie żyły 1 h, błędna próba przy ścianie w kaplicy 1 h,
+- demo trwa 3 dni.
+
+Szczegóły: [docs_v2/systemy/czas.md](../docs_v2/systemy/czas.md).
 ❓ Jakie są terminy? Jeden globalny (np. dostawa dla Kniazia), czy osobne dla questów?
 ❓ Co się dzieje, gdy termin minie? Przegrana, gorsze zakończenie, czy utrata questu?
 
@@ -83,13 +90,13 @@ Kopalnia → jaskinie → Świątynia Onych. Im niżej, tym groźniej. Każdy po
 ### 5.3 Wydobycie
 Gracz wydobywa błękitne żelazo i znajduje notatki dowódcy poprzedniej ekipy **[GDD]**.
 
-❓ Po co wydobywać? Czy to waluta, reputacja w Ekspedycji, dzienna norma, czy tylko fabuła?
+✅ Szef wyprawy wymaga szukania złóż. Kto to długo ignoruje, dostaje upomnienia, a na końcu wyprawa wyjeżdża bez niego (§13 pkt 2). **Stan w demie:** Racibor zleca zaznaczenie żył (1 h każda, trzy w demie). Upomnień i tego zakończenia jeszcze nie ma.
 
 ### 5.4 Zagadki
 Proste zagadki logiczne w pomieszczeniach **[GDD]**. Dziadek był kryptografem, więc naturalne są zagadki oparte na szyfrach i mapach **[propozycja]**.
 
 ### 5.5 Zagrożenie
-❓ Czy w tunelach jest bezpośrednie zagrożenie w FPP (pościg, śmierć gracza), czy horror opiera się na atmosferze i konsekwencjach w VN? Brak takiego zagrożenia w FPP pasuje do zasady, że eksploracja 3D nie zajmuje czasu.
+✅ Gracz może zginąć, ale raczej przy ranach albo niskiej poczytalności, kiedy jakaś interakcja źle na niego wpłynie (§13 pkt 3). **Stan w demie:** brak śmierci gracza i ran.
 
 ## 6. Ekwipunek
 
@@ -125,18 +132,20 @@ Przed wyprawą gracz wybiera, co bierze ze sobą **[GDD]**, np. paliwo do lampy 
   - górnik (szablon z GDD): ucieka z kopalni,
   - Mirosław z Głuszy: wysadza się z beczką prochu w tunelu. Z nim znika możliwość wysadzenia 2–3 dodatkowych tuneli.
 
-❓ Co obniża i co podnosi poczytalność (eventy, wyprawy, rozmowy z graczem, śmierć innych NPC)? Czy gracz widzi pasek, czy tylko objawy w dialogach? **[propozycja]** Tylko objawy, bo to bardziej horror.
+✅ Poczytalność zmieniają wydarzenia, przedmioty i postęp w głąb, u każdego trochę inaczej. Gracz nie widzi paska: w notatkach o NPC ma osobne opisy zdrowia i poczytalności („wygląda na zdrowego”, „ostatnio nerwowo się zachowuje”) (§13 pkt 4). **Stan w demie:** objawy w dialogach i miejscu postaci. Zakładka „Ludzie” w notesie jest do zrobienia.
 
 ### 7.3 Zdrowie, rany, śmierć **[GDD]**
 - NPC mogą odnosić rany, a gracz może próbować je leczyć.
 - NPC mogą umrzeć.
 
-❓ Czym się leczy (przedmioty, czas, NPC o roli medyka)? Czy leczenie może się nie udać?
+✅ Bandaże i NPC, który może pomóc. Ryzyko do ustalenia później (§13 pkt 5). Jeszcze nie zaimplementowane.
 
 ### 7.4 Obecność w obozie **[GDD]**
 NPC mogą pojawiać się w obozie i znikać z niego (wyprawy, ucieczka, śmierć, przybycie nowych).
 
 **[propozycja]** Każdy NPC ma stan: *w obozie / w tunelach / zaginiony / uciekł / martwy*.
+
+**Stan w demie:** każdy NPC ma **rozkład dnia**: rano śniadanie, 8–18 praca w swojej strefie obozu, 18–20 kolacja, potem wieczór. Stan fabuły ma pierwszeństwo, np. Mirosław na krawędzi siedzi w kącie, a wydana Tekla pod strażą. Dobrawa przyjeżdża w dniu 2 i znika w tunelach w południe. Zob. [docs_v2/systemy/npc.md](../docs_v2/systemy/npc.md#rozkład-dnia).
 
 ### 7.5 Pomoc NPC w pomieszczeniach **[GDD]**
 Niektóre pomieszczenia wymagają specjalisty. Gracz nie idzie z nim fizycznie. W panelu VN wybiera opcję typu *[Poproś XYZ o pomoc, bo się na tym zna]*. To kosztuje dużo czasu, bo trzeba po niego pójść i wrócić.
@@ -146,7 +155,7 @@ Opcja jest dostępna tylko wtedy, gdy NPC o danej roli żyje, jest w obozie i (*
 ### 7.6 Reputacja
 Przychylność części towarzyszy trzeba sobie zasłużyć, bo gracz jest równorzędnym członkiem ekspedycji, a nie dowódcą **[GDD]**. Reputacja odblokowuje informacje, opcje dialogowe i pomoc.
 
-❓ Czy jest też reputacja u frakcji, czy tylko u poszczególnych NPC?
+✅ Tylko u poszczególnych NPC, nie u frakcji (§13 pkt 6). Zaimplementowane: −100..100, start 0.
 
 ## 8. Dialogi (tryb VN) **[GDD]**
 
@@ -192,19 +201,19 @@ Systemy i ich kolejność. Każdy krok da się zagrać i sprawdzić osobno.
 | # | System | Forma w Godot | Stan |
 |---|---|---|---|
 | 1 | Kontroler FPP | `player.gd` | ✅ WASD, skok, kroki |
-| 2 | Interakcja (raycast + `Interactable`) | komponent / `Area3D` + podpowiedź w UI | ✅ podświetlenie, [E] opis |
-| 3 | Tryb VN (dialog, opcje) | scena UI + dane dialogów jako `Resource` | 🟡 prototyp UI w `visual_interaction.tscn` |
-| 4 | Stan gry (flagi, czas, dzień) | autoload `GameState` | ⬜ |
-| 5 | Upływ czasu i sen | w `GameState` + sygnały | ⬜ |
-| 6 | NPC (dane, reputacja, poczytalność, zdrowie, stan) | `NpcData` (`Resource`) + autoload/rejestr | ⬜ |
-| 7 | Warunki i efekty opcji dialogowych | w danych dialogów, wykonywane przez `GameState` | ⬜ |
-| 8 | Notes questów | `QuestData` + UI | ⬜ |
-| 9 | Mapa kopalni i podróż | graf pomieszczeń + UI stołu z mapą, ładowanie scen segmentów | ⬜ |
-| 10 | Ekwipunek na wyprawę | `ItemData` + UI | ⬜ |
-| 11 | Zapis / odczyt | `SaveManager` + grupa `persist` | 🟡 3 sloty, zapis pozycji gracza; stan gry dojdzie z krokiem 4 |
-| 12 | Menu główne, pauza, opcje | `main_menu.tscn`, `pause_menu.tscn` | ✅ |
+| 2 | Interakcja (raycast + `Interactable`) | `Area3D` + podpowiedź w HUD | ✅ opis, rozmowa, użycie, koszt czasu, przedmioty, flagi |
+| 3 | Tryb VN (dialog, opcje) | Dialogue Manager + `vn_balloon.tscn`, portrety 3D | ✅ |
+| 4 | Stan gry (flagi, czas, dzień) | autoload `GameState` | ✅ |
+| 5 | Upływ czasu i sen | `GameState` + `StoryDirector` (rozliczenie nocy, sny) | ✅ |
+| 6 | NPC (dane, reputacja, poczytalność, zdrowie, stan) | `NpcData`, `Npc`, `CharacterModel`, rozkład dnia `CampSchedule` | ✅ 5 postaci. ⬜ efekty przy 0%, rany |
+| 7 | Warunki i efekty opcji dialogowych | w plikach `.dialogue`, wykonywane przez `GameState` | ✅ |
+| 8 | Notes questów | `QuestData`, `NoteData`, notes [J] | ✅ ⬜ zakładka „Ludzie” |
+| 9 | Mapa kopalni i podróż | `MapScreen`, miejsca w `locations.tscn` / `mine_deep.tscn` | ✅ 5 celów z warunkami. 🟡 rysunek mapy |
+| 10 | Ekwipunek na wyprawę | `ItemData` + UI | 🟡 przedmioty-klucze, bez ekranu wyboru |
+| 11 | Zapis / odczyt | `SaveManager` + grupa `persist` + `GameState` | ✅ cały stan gry |
+| 12 | Menu główne, pauza, opcje | `main_menu.tscn`, `pause_menu.tscn` | ✅ + gwara śląska |
 
-**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. Chodzimy po obozie, rozmawiamy z NPC w VN (co zajmuje czas), idziemy spać, a następnego dnia widać zmianę.
+**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. ✅ Zrobiony w task_03 i rozbudowany w task_04 do demo na 3 dni (obóz ze strefami, 5 NPC, 5 miejsc wypraw, zagadka ściany). Opis: [task_04](ai-tasks/task_04.md).
 
 ## 13. Otwarte pytania (zbiorczo)
 

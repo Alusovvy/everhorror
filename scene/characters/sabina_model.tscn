@@ -1,0 +1,21 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/base/Superhero_Female_FullBody.gltf" id="2_female_base"]
+[ext_resource type="ArrayMesh" path="res://assets/characters/quaternius/base/head_female.res" id="3_female_head"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Female_Ranger.gltf" id="4_female_ranger"]
+[ext_resource type="PackedScene" path="res://scene/characters/mask_bronze.tscn" id="5_mask_bronze"]
+[ext_resource type="PackedScene" path="res://scene/characters/staff_pale.tscn" id="6_staff_pale"]
+[ext_resource type="Texture2D" path="res://assets/characters/quaternius/outfits/T_Ranger_3_BaseColor.png" id="7_ranger3"]
+
+[node name="SabinaModel" type="Node3D"]
+script = ExtResource("1_model")
+base_scene = ExtResource("2_female_base")
+head_mesh = ExtResource("3_female_head")
+parts = Array[PackedScene]([ExtResource("4_female_ranger")])
+head_attachments = Array[PackedScene]([ExtResource("5_mask_bronze")])
+hand_attachments = Array[PackedScene]([ExtResource("6_staff_pale")])
+outfit_texture = ExtResource("7_ranger3")
+outfit_tint = Color(0.82, 0.86, 1, 1)
+hand_bone = "LeftHand"
+animation = &"Idle_Torch"

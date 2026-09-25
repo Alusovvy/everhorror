@@ -4,17 +4,17 @@ extends "res://tools/tests/test_base.gd"
 
 func _setup() -> void:
 	gs.set_flag("intro_done")
-	gs.hour = 18.0
+	gs.hour = 17.0
 
 func scenario() -> void:
-	step("start: day 1, 18:00")
+	step("start: day 1, 17:00")
 	await start_world(_setup)
 
 	step("Racibor: the deposits quest (1 h)")
 	await converse("Racibor", ["Znam mapy dziadka.", "Muszę iść."])
 	check(gs.quest_state(&"zloza") == "active" and gs.has_item("kwit"), "deposits quest, rope permit")
 
-	step("the sump (2 h): bundle, vein (1 h)")
+	step("the sump (2 h + 1 h scouting): bundle, vein (1 h)")
 	await travel("rzapie")
 	check(is_equal_approx(gs.hour, 21.0), "21:00 in the sump (%s)" % gs.clock_text())
 	await use(world.get_node("Locations/Rzapie/Bundle/BundlePickup"))
@@ -27,6 +27,5 @@ func scenario() -> void:
 	check(world.get_node("Locations/Rzapie/Stake/VeinStake").visible, "stake appears at the marked vein")
 
 	step("back to the camp (2 h, allowed after 22:00)")
-	await use(world.get_node("Locations/Rzapie/Sign/ExitSign/RzapieExitUse"))
-	await wait_idle()
+	await go_on("oboz")
 	check(gs.is_day_over() and String(gs.get_flag("location", "")) == "", "back in the camp, day over (%s)" % gs.clock_text())

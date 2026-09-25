@@ -21,3 +21,4 @@ sanity_zero_effect = "W jednym z tuneli detonuje beczkę prochu razem ze sobą. 
 model = ExtResource("2_model")
 dialogue = ExtResource("3_dialogue")
 portrait_eye_height = 1.62
+female = false

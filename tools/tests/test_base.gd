@@ -4,6 +4,8 @@ extends SceneTree
 ## GameState (no need to replay earlier days), prints every step as it starts, and ends with one
 ## line: "RESULT: ALL PASSED", "RESULT: n FAILED" or "RESULT: TIMEOUT in step '…'".
 ## Every wait is limited in time, and a watchdog quits the whole scenario after `timeout_s`.
+## No class_name types here (Npc, Interactable…): typing with them compiles those scripts before
+## the autoloads exist, and they fail on GameState / VN.
 
 ## Seconds before the watchdog gives up on the whole scenario.
 var timeout_s := 90.0
@@ -76,10 +78,13 @@ func _on_timeout() -> void:
 
 #region Acting like the player
 
-func npc(npc_name: String) -> Npc:
+## Text of the last expedition summary closed by wait_idle().
+var last_summary := ""
+
+func npc(npc_name: String) -> Node:
 	return world.get_node("NPCs/" + npc_name)
 
-func talk(npc_name: String) -> Interactable:
+func talk(npc_name: String) -> Node:
 	return world.get_node("NPCs/%s/Talk" % npc_name)
 
 ## Uses an interactable the way the player does.
@@ -97,23 +102,37 @@ func converse(npc_name: String, choices: Array) -> void:
 	await drive(choices)
 	await wait_idle()
 
-## Opens the map at the table, chooses a destination and waits for the trip.
+## Opens the map at the table, chooses a destination, presses "WYRUSZ" and waits for the trip.
 func travel(destination_id: String) -> void:
 	await use(world.get_node("Camp/CampProps/MapTable/MapTableUse"))
+	await _map_go(destination_id)
+
+## In the field: [M], a neighbouring place (or "oboz" to go back), "IDŹ DALEJ" / "WRACAJ".
+func go_on(destination_id: String) -> void:
+	var map_screen = world.get_node("MapScreen")
+	map_screen.open_field()
+	await _map_go(destination_id)
+
+func _map_go(destination_id: String) -> void:
 	var map_screen = world.get_node("MapScreen")
 	check(map_screen.visible, "map open for %s" % destination_id)
-	map_screen._choose(destination_id)
+	map_screen._select(StringName(destination_id))
+	check(not map_screen.go_button.disabled, "can go to %s (%s)" % [destination_id, map_screen.details.text.get_slice("
+", 0)])
+	map_screen._go()
 	await wait_idle()
 
-func find_interactable(under: String, display_name: String) -> Interactable:
+func find_interactable(under: String, display_name: String) -> Node:
 	for node in world.get_node(under).find_children("*", "Area3D", true, false):
-		if node is Interactable and node.display_name == display_name:
+		if node.has_method("interact") and node.get("display_name") == display_name:
 			return node
 	check(false, "interactable '%s' under %s" % [display_name, under])
 	return null
 
 ## Clicks through the open dialogue, choosing responses that start with the given texts.
-func drive(choices: Array, max_s := 30.0) -> void:
+## `auto` (used by wait_idle): an unexpected question fails once and gets the first answer, so a
+## scenario never loops on it.
+func drive(choices: Array, max_s := 30.0, auto := false) -> void:
 	await frames(2)
 	var deadline := Time.get_ticks_msec() + int(max_s * 1000)
 	while vn.is_active():
@@ -130,6 +149,13 @@ func drive(choices: Array, max_s := 30.0) -> void:
 				if r.is_allowed and choices.size() > 0 and r.text.begins_with(choices[0]):
 					pick = r
 					break
+			if pick == null and auto and choices.is_empty():
+				check(false, "unexpected question %s, answering the first" % [balloon.dialogue_line.responses.map(func(r): return r.text)])
+				for r in balloon.dialogue_line.responses:
+					if r.is_allowed:
+						pick = r
+						break
+				choices.append("")
 			if pick == null:
 				check(false, "response %s among %s" % [choices.slice(0, 1), balloon.dialogue_line.responses.map(func(r): return r.text)])
 				return
@@ -153,12 +179,16 @@ func wait_for_vn(max_s := 15.0) -> void:
 func wait_idle(max_s := 20.0) -> void:
 	await frames(5)
 	var deadline := Time.get_ticks_msec() + int(max_s * 1000)
-	while world.get_node("Story")._busy or vn.is_active():
+	var summary = world.get_node("ExpeditionSummary")
+	while world.get_node("Story")._busy or vn.is_active() or summary.visible:
 		if Time.get_ticks_msec() > deadline:
 			check(false, "story idle within %.0f s" % max_s)
 			return
 		if vn.is_active():
-			await drive([])
+			await drive([], 30.0, true)
+		elif summary.visible:
+			last_summary = summary.body.text
+			summary._close()
 		await frames(1)
 	await frames(3)
 

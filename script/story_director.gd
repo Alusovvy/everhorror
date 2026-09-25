@@ -1,19 +1,35 @@
 extends Node
 class_name StoryDirector
 
-## Runs the demo in the world scene: intro, the camp schedule (who is where), travel from the
-## map table and back, Mirosław's blast, the nights (sanity, dreams, deciphering), Racibor's
-## announcement on the last morning and the end of the demo. Story state lives in GameState;
+## Runs the week in the world scene (docs_v2/systemy/czas.md, eksploracja_kopalni.md): the intro,
+## the camp schedule (who is where), expeditions (the map table, [M] in the field, the way back
+## and its summary), meetings in the tunnels (the Drudzy from Exitium), Mirosław's blast, the
+## nights (sanity, fever, departures, dreams), the mornings (announcements, Racibor's reminders)
+## and the end of the week, plus the hero's death and breakdown. Story state lives in GameState;
 ## this node only acts on it.
 
 const SYSTEM_DIALOGUE := preload("res://dialogue/system.dialogue")
 const RACIBOR_DIALOGUE := preload("res://dialogue/racibor.dialogue")
+const DRUDZY_DIALOGUE := preload("res://dialogue/drudzy.dialogue")
 const BLAST_HOURS := 4.0
+## After the meeting on day 3, the chance to run into one of the Drudzy on arrival (once a day).
+const DRUDZY_CHANCE := 0.4
+## Seconds between whispers while the hero is on the edge in the tunnels.
+const WHISPER_SECONDS := Vector2(40.0, 80.0)
+const WHISPERS: Array[String] = [
+	"Ktoś wymawia twoje imię. Za plecami nikogo nie ma.",
+	"Przez chwilę słyszysz oddech ściany. Równy, powolny.",
+	"Lampa przygasa, choć oleju jest pełno.",
+	"„Niżej”, szepcze coś z wnętrza skały. „Jeszcze niżej”.",
+	"Amulet dziadka robi się ciepły. Potem gorący. Potem znowu zimny.",
+	"Masz wrażenie, że ktoś idzie za tobą krok w krok. Kiedy stajesz, on też staje.",
+]
 
 @onready var world: Node3D = get_parent()
 @onready var player: Player = $"../Player"
 @onready var fade: ScreenFade = $"../ScreenFade"
 @onready var map_screen: MapScreen = $"../MapScreen"
+@onready var summary: ExpeditionSummary = $"../ExpeditionSummary"
 @onready var markers: Node3D = $"../Camp/Markers"
 @onready var location_markers: Node3D = $"../Locations/Markers"
 @onready var blast_sound: AudioStreamPlayer = $"../Sounds/BlastSound"
@@ -24,6 +40,7 @@ var npcs: Dictionary = {}
 ## Actions requested by dialogue ("sleep", "blast"); run once the dialogue has closed.
 var _pending_actions: Array[String] = []
 var _busy := false
+var _whisper_timer: Timer
 
 func _ready() -> void:
 	for node in $"../NPCs".get_children():
@@ -31,10 +48,17 @@ func _ready() -> void:
 		npcs[npc.data.id] = npc
 	GameState.action_requested.connect(func(action): _pending_actions.append(action))
 	GameState.time_advanced.connect(_on_time_advanced)
+	GameState.player_died.connect(_on_player_died)
+	GameState.player_broke.connect(_on_player_broke)
 	VN.finished.connect(_on_dialogue_finished)
-	map_screen.destination_chosen.connect(_travel)
+	map_screen.destination_chosen.connect(_on_destination)
 	for node in get_tree().get_nodes_in_group(&"story_use"):
 		(node as Interactable).used.connect(_on_used)
+	_whisper_timer = Timer.new()
+	_whisper_timer.one_shot = true
+	_whisper_timer.timeout.connect(_whisper)
+	add_child(_whisper_timer)
+	_whisper_timer.start(randf_range(WHISPER_SECONDS.x, WHISPER_SECONDS.y))
 
 ## Called by the world scene after it restored a save (or started a new game).
 func begin(is_new_game: bool) -> void:
@@ -44,8 +68,10 @@ func begin(is_new_game: bool) -> void:
 		if not GameState.has_flag("intro_done"):
 			GameState.set_flag("intro_done")
 			_intro()
+			return
 	else:
 		fade.fade_in(0.6)
+	SaveManager.capture_morning()
 
 func _intro() -> void:
 	_busy = true
@@ -53,27 +79,43 @@ func _intro() -> void:
 	await fade.show_card("Dzień 1", "Obóz ekspedycji w starej hali górniczej")
 	await fade.fade_in(1.0)
 	await VN.play(SYSTEM_DIALOGUE, "intro")
-	GameState.message.emit("[E] rozmowa i badanie   ·   [J] notes   ·   [Esc] pauza")
+	GameState.message.emit("[E] rozmowa i badanie   ·   [J] notes   ·   [I] ekwipunek   ·   [M] mapa w chodnikach   ·   [Esc] pauza")
+	SaveManager.capture_morning()
 	_busy = false
 
-#region Camp state
+#region Camp and field state
 
-## Places NPCs by the camp schedule and shows story changes in the world.
+## Places NPCs by the camp schedule (or in the tunnels where the hero is) and shows story
+## changes in the world.
 func apply_world_state() -> void:
+	var here := GameState.current_place()
 	for id in npcs:
 		var npc: Npc = npcs[id]
 		var spot := CampSchedule.placement(id)
-		if spot.is_empty():
+		if spot.is_empty() and GameState.is_away():
+			spot = FieldSchedule.placement(id, here)
+		var marker := _marker(String(spot.get("marker", "")))
+		if spot.is_empty() or marker == null:
 			npc.set_present(false)
 			GameState.places[id] = ""
 			continue
 		npc.set_present(true)
 		if npc.marker_name != spot["marker"] or npc.pose != spot["pose"]:
-			npc.place(markers.get_node(spot["marker"]), spot["pose"])
+			npc.place(marker, spot["pose"])
 		GameState.places[id] = spot["place"]
 	west_debris.visible = GameState.has_flag("west_blasted")
 
-## True if applying the schedule now would move someone to another spot.
+func _marker(marker_name: String) -> Node3D:
+	if marker_name == "":
+		return null
+	if markers.has_node(marker_name):
+		return markers.get_node(marker_name)
+	if location_markers.has_node(marker_name):
+		return location_markers.get_node(marker_name)
+	push_warning("Marker '%s' not found." % marker_name)
+	return null
+
+## True if applying the schedule now would move someone to another spot in the camp.
 func _camp_will_change() -> bool:
 	for id in npcs:
 		var npc: Npc = npcs[id]
@@ -83,15 +125,12 @@ func _camp_will_change() -> bool:
 			return true
 	return false
 
-func _is_player_in_camp() -> bool:
-	return String(GameState.get_flag("location", "")) == ""
-
 ## Time moved on: people go to their next place. A short blink hides the jump when the
 ## player is looking at the camp; while a dialogue or a scripted sequence runs, it waits.
 func _refresh_camp() -> void:
 	if VN.is_active() or _busy:
 		return
-	if _is_player_in_camp() and _camp_will_change():
+	if not GameState.is_away() and _camp_will_change():
 		_busy = true
 		await fade.fade_out(0.15)
 		apply_world_state()
@@ -113,18 +152,13 @@ func _on_used(interactable: Interactable) -> void:
 	var use_name := String(interactable.name)
 	match use_name:
 		"MapTableUse":
-			if GameState.day >= GameState.LAST_DAY:
-				_end_demo()
-			else:
-				map_screen.open()
+			map_screen.open_table()
 		"BedUse":
-			if GameState.day >= GameState.LAST_DAY:
-				_end_demo()
-			else:
-				VN.start(SYSTEM_DIALOGUE, "sleep")
+			VN.start(SYSTEM_DIALOGUE, "sleep")
 		_:
+			# Signposts in the tunnels open the field map: onwards or back to the camp.
 			if use_name.ends_with("ExitUse"):
-				_return_to_camp()
+				map_screen.open_field()
 
 func _on_dialogue_finished(_npc_id: StringName) -> void:
 	while not _pending_actions.is_empty():
@@ -138,46 +172,76 @@ func _on_dialogue_finished(_npc_id: StringName) -> void:
 
 #endregion
 
-#region Travel
+#region Expeditions
 
-func _travel(destination_id: String) -> void:
-	var destination := MapScreen.destination(destination_id)
+func _on_destination(place_id: StringName) -> void:
+	if _busy:
+		return
+	if not GameState.is_away():
+		GameState.begin_expedition()
+		await _arrive(place_id, Expeditions.path(Expeditions.CAMP, place_id), "Wyprawa: %s" % Expeditions.display_name(place_id))
+	elif place_id == Expeditions.CAMP:
+		await _return_to_camp()
+	else:
+		await _arrive(place_id, Expeditions.path(GameState.current_place(), place_id), "Droga: %s" % Expeditions.display_name(place_id))
+
+func _arrive(place_id: StringName, route: Array[StringName], reason: String) -> void:
+	var data := Expeditions.place(place_id)
+	var first_visit := not Expeditions.is_visited(place_id)
+	var hours := Expeditions.trip_hours(route)
 	_busy = true
 	GameState.push_modal()
 	await fade.fade_out(0.7)
-	GameState.advance_time(destination["hours"], "Wyprawa: %s" % destination["name"])
-	GameState.set_flag("visited_%s" % destination_id)
-	GameState.set_flag("location", destination_id)
-	_place_player(_entry_marker(destination["entry"]))
+	_leave_encounter()
+	GameState.advance_time(hours, reason)
+	GameState.set_flag("visited_%s" % place_id)
+	GameState.set_flag("location", String(place_id))
+	GameState.note_expedition_place(place_id)
+	if place_id == &"zalany":
+		GameState.mark_today("soaked")
+	_roll_encounter(place_id)
+	_place_player(_marker(data.entry))
 	apply_world_state()
-	await fade.show_card(destination["name"], GameState.clock_text(), 1.2)
+	await fade.show_card(data.display_name, GameState.clock_text(), 1.2)
 	await fade.fade_in(0.7)
 	GameState.pop_modal()
 	_busy = false
-
-func _entry_marker(marker_name: String) -> Node3D:
-	if markers.has_node(marker_name):
-		return markers.get_node(marker_name)
-	return location_markers.get_node(marker_name)
+	if first_visit:
+		if data.arrival_text != "":
+			GameState.message.emit(data.arrival_text)
+		if data.dread > 0:
+			GameState.change_player_sanity(-data.dread, "To miejsce cię przygniata")
+	await _meet_drudzy_if_due(place_id)
 
 func _return_to_camp() -> void:
-	var from := String(GameState.get_flag("location", ""))
-	var hours: float = MapScreen.destination(from).get("hours", 2.0) if from != "" else 2.0
+	var route := Expeditions.path(GameState.current_place(), Expeditions.CAMP)
+	var hours := Expeditions.walk_hours(route)
 	_busy = true
 	GameState.push_modal()
 	await fade.fade_out(0.7)
-	# Coming back is always possible, even late: the day may run over.
+	_leave_encounter()
+	# Coming back is always possible, even late: the day may run over (MECHANICS §13 pkt 8).
 	GameState.clear_flag("location")
-	GameState.hour += hours
-	GameState.time_advanced.emit(hours, "Powrót do obozu")
+	GameState.advance_time(hours, "Powrót do obozu")
+	if GameState.has_flag("drudzy_met") and not GameState.has_flag("sabina_joined"):
+		GameState.set_flag("sabina_joined")
 	_place_player(markers.get_node("CampReturn"))
 	apply_world_state()
 	await fade.show_card("Obóz", GameState.clock_text(), 1.0)
 	await fade.fade_in(0.7)
 	GameState.pop_modal()
+	await summary.present(GameState.end_expedition())
 	_busy = false
+	if GameState.is_day_over():
+		GameState.change_player_sanity(-3, "Wracasz po nocy")
+		GameState.message.emit("Noc. Ledwo trzymasz się na nogach, pora na posłanie.")
+	if GameState.has_flag("sabina_joined") and not GameState.has_flag("sabina_arrival_seen"):
+		GameState.set_flag("sabina_arrival_seen")
+		GameState.message.emit("W obozie czeka już Sabina z Exitium. Racibor nie wygląda na zachwyconego.")
 
 func _place_player(marker: Node3D) -> void:
+	if marker == null:
+		return
 	player.global_position = marker.global_position + Vector3(0, 1.05, 0)
 	player.rotation = Vector3(0, marker.global_rotation.y, 0)
 	player.head.rotation = Vector3.ZERO
@@ -186,7 +250,68 @@ func _place_player(marker: Node3D) -> void:
 
 #endregion
 
-#region Blast and nights
+#region Drudzy in the tunnels
+
+## Decides who from the Exitium expedition is at this place (kept until the hero leaves).
+func _roll_encounter(place_id: StringName) -> void:
+	var met: Array[String] = []
+	if GameState.day >= 3 and not GameState.has_flag("drudzy_met"):
+		for id in FieldSchedule.DRUDZY:
+			if npcs.has(id):
+				met.append(String(id))
+	elif GameState.has_flag("drudzy_met") and not GameState.done_today("drudzy_seen"):
+		var rng := RandomNumberGenerator.new()
+		rng.seed = hash("%d-%s-%d" % [GameState.day, place_id, int(GameState.hour * 2.0)])
+		if rng.randf() < DRUDZY_CHANCE:
+			var candidates := _roaming_drudzy(place_id)
+			if not candidates.is_empty():
+				met.append(candidates[rng.randi_range(0, candidates.size() - 1)])
+	if met.is_empty():
+		return
+	GameState.set_flag("encounter_place", String(place_id))
+	GameState.set_flag("encounter_npcs", met)
+	if GameState.has_flag("drudzy_met"):
+		GameState.mark_today("drudzy_seen")
+
+## Who of the three roaming mages can turn up here.
+func _roaming_drudzy(place_id: StringName) -> Array[String]:
+	var result: Array[String] = []
+	var deep := Expeditions.place(place_id).depth >= 3 or place_id in [&"kaplica", &"upadowa"]
+	if npcs.has(&"hieronim") and not GameState.has_flag("hieronim_gone"):
+		result.append("hieronim")
+	if npcs.has(&"ottokar") and deep:
+		result.append("ottokar")
+	if npcs.has(&"welf") and not GameState.has_flag("welf_lost"):
+		if not GameState.has_flag("welf_wounded") and deep:
+			# His one bad day: burnt and alone, he needs someone with bandages.
+			GameState.set_flag("welf_wounded")
+			GameState.set_flag("welf_wounded_day", GameState.day)
+			return ["welf"]
+		if GameState.has_flag("welf_helped"):
+			result.append("welf")
+	return result
+
+func _leave_encounter() -> void:
+	if GameState.has_flag("encounter_place"):
+		# Nobody helped the wounded mage while you were there: he crawls away on his own.
+		if "welf" in GameState.get_flag("encounter_npcs", []) and GameState.has_flag("welf_wounded") and not GameState.has_flag("welf_helped"):
+			GameState.set_flag("welf_lost")
+		GameState.clear_flag("encounter_place")
+		GameState.clear_flag("encounter_npcs")
+
+## The first meeting with the Exitium expedition (day 3 or the first trip after it).
+func _meet_drudzy_if_due(place_id: StringName) -> void:
+	if GameState.has_flag("drudzy_met") or String(GameState.get_flag("encounter_place", "")) != String(place_id):
+		return
+	GameState.set_flag("drudzy_met")
+	GameState.set_flag("drudzy_met_at", String(place_id))
+	GameState.mark_today("drudzy_seen")
+	GameState.note_event("Spotkałeś wyprawę Drugich z Exitium. Jedna z nich ma zamieszkać w obozie.")
+	await VN.play(DRUDZY_DIALOGUE, "meeting", &"ottokar")
+
+#endregion
+
+#region Blast, nights and mornings
 
 func _blast() -> void:
 	_busy = true
@@ -209,87 +334,260 @@ func _sleep() -> void:
 	_busy = true
 	GameState.push_modal()
 	await fade.fade_out(1.2)
-	_resolve_night()
+	var news := _resolve_night()
 	GameState.pop_modal()
 	await VN.play(SYSTEM_DIALOGUE, "dream")
 	GameState.push_modal()
 	GameState.start_next_day()
+	if GameState.day >= GameState.LAST_DAY:
+		GameState.pop_modal()
+		await _week_end()
+		return
 	apply_world_state()
 	_place_player(markers.get_node("SpawnBed"))
-	await fade.show_card("Dzień %d" % GameState.day, _morning_subtitle(), 2.6)
+	await fade.show_card("Dzień %d" % GameState.day, news if news != "" else _morning_subtitle(), 2.6)
 	await fade.fade_in(1.2)
 	GameState.pop_modal()
-	if GameState.day >= GameState.LAST_DAY:
-		await VN.play(RACIBOR_DIALOGUE, "announcement", &"racibor")
-		GameState.set_flag("announcement_done")
-		GameState.message.emit("Ostatni poranek wersji demo. Porozmawiaj z kim chcesz, a kiedy skończysz, podejdź do stołu z mapą.")
-	else:
-		GameState.message.emit("Nowy dzień. Ludzie są tam, gdzie zwykle o tej porze: rano przy śniadaniu, potem przy robocie.")
+	SaveManager.capture_morning()
+	await _morning_events()
 	_busy = false
 
-## Night resolution (docs_v2/systemy/czas.md, zasada 5): sanity, departures, deciphering.
-func _resolve_night() -> void:
+## Night resolution (docs_v2/systemy/czas.md, zasada 5): sanity, fever, departures, deciphering.
+## Returns news for the morning card ("" = nothing special).
+func _resolve_night() -> String:
 	var night := GameState.day
-	var miroslaw_loss := 6
+	var news := ""
+	# Mirosław: the week wears him down; an evening in company holds him together.
+	var miroslaw_loss := 4
 	if GameState.has_flag("west_blasted") and not GameState.has_flag("mir_night_blast_done"):
 		GameState.set_flag("mir_night_blast_done")
-		miroslaw_loss += 4 if GameState.has_flag("mir_comforted") else 12
+		miroslaw_loss += 3 if GameState.has_flag("mir_comforted") else 10
 	if night >= 2 and GameState.has_flag("mir_saw_charge"):
-		miroslaw_loss += 4
-	GameState.change_sanity(&"miroslaw", -miroslaw_loss)
-	GameState.change_sanity(&"bolko", -2 if not GameState.has_flag("bolko_knows_fate") else -6)
-	GameState.change_sanity(&"racibor", -4)
+		miroslaw_loss += 2
+	if GameState.done_today("mir_company"):
+		miroslaw_loss -= 4
+	if GameState.npc_status(&"miroslaw") != "dead":
+		GameState.change_sanity(&"miroslaw", -miroslaw_loss)
+		if GameState.sanity(&"miroslaw") <= 0:
+			news = _miroslaw_breaks()
+	GameState.change_sanity(&"bolko", -2 if not GameState.has_flag("bolko_knows_fate") else -5)
+	GameState.change_sanity(&"racibor", -4 if GameState.quota_met() or night < 5 else -7)
 	GameState.change_sanity(&"tekla", -10 if GameState.has_flag("tekla_reported") else -2)
-	if night >= 2:
-		GameState.change_sanity(&"dobrawa", -8)
-	if GameState.has_flag("dobrawa_leaving"):
+	if night >= 2 and not GameState.has_flag("dobrawa_left"):
+		GameState.change_sanity(&"dobrawa", -5)
+		if GameState.sanity(&"dobrawa") <= 0 and not GameState.has_flag("dobrawa_leaving"):
+			GameState.set_flag("dobrawa_leaving")
+			GameState.set_flag("dobrawa_went_down")
+	if GameState.has_flag("dobrawa_leaving") and not GameState.has_flag("dobrawa_left"):
 		GameState.set_flag("dobrawa_left")
 		GameState.set_npc_status(&"dobrawa", "gone")
+		if news == "":
+			news = "Dobrawa zeszła sama w głąb. Nie wróciła." if GameState.has_flag("dobrawa_went_down") else "Dobrawy nie ma. Zniknęła przed świtem, razem z kryształem."
+	_resolve_new_people(night)
+	# The fifth night the ground shakes (Wszebor calls it the Day of the Bloody Sky).
+	if night == 5:
+		GameState.set_flag("tremor_seen")
+		GameState.change_player_sanity(-3)
+		for id in GameState.npcs:
+			if GameState.npc_status(id) in ["camp", "field"]:
+				GameState.change_sanity(id, -2)
+	if GameState.has_flag("welf_wounded") and not GameState.has_flag("welf_helped"):
+		GameState.set_flag("welf_lost")
+	# The hero: bad dreams, rest, the fever (it never kills in his sleep).
+	GameState.change_player_sanity(-3)
+	if GameState.done_today("soaked") and not GameState.player_fever:
+		GameState.set_fever(true)
+	if GameState.player_fever:
+		GameState.player_health = maxi(GameState.player_health - 12, 5)
+		GameState.change_player_sanity(-3)
+		GameState.player_changed.emit()
+	else:
+		GameState.heal_player(8)
 	if GameState.has_note(&"szyfr") and GameState.has_note(&"klucz") and not GameState.has_flag("deciphered"):
 		GameState.add_note(&"odszyfrowana")
 		GameState.quest_log(&"slady", "odszyfrowane")
 		GameState.set_flag("deciphered")
 		GameState.set_flag("kaplica_known")
+	return news
+
+## The camp people added in task_05: nightly wear, Nasir's fever from the third night.
+func _resolve_new_people(night: int) -> void:
+	for id in [&"wszebor", &"hagiwara", &"sobek", &"anzelm", &"nasir", &"sabina"]:
+		if GameState.npcs.has(id):
+			GameState.change_sanity(id, -2)
+	if GameState.npcs.has(&"anzelm") and GameState.has_flag("sabina_joined") and not GameState.has_flag("anzelm_sabina_peace"):
+		GameState.change_sanity(&"anzelm", -2)
+	if not GameState.npcs.has(&"nasir") or GameState.npc_status(&"nasir") == "gone":
+		return
+	if night == 3 and not GameState.has_flag("nasir_fever_started"):
+		GameState.set_flag("nasir_fever_started")
+		GameState.set_flag("fever_nasir")
+	if GameState.has_fever(&"nasir"):
+		GameState.change_npc_health(&"nasir", -18)
+		if GameState.npc_health(&"nasir") <= 10:
+			# Too weak to stay: Racibor has him hauled up the shaft in the night.
+			GameState.set_npc_status(&"nasir", "gone")
+			GameState.set_flag("nasir_carried_up")
+	else:
+		GameState.change_npc_health(&"nasir", 10)
+
+## GDD: at zero sanity Mirosław blows himself up in a tunnel and closes it for good.
+func _miroslaw_breaks() -> String:
+	GameState.set_npc_status(&"miroslaw", "dead")
+	GameState.set_flag("mir_dead")
+	GameState.clear_flag("west_blasted")
+	return "W nocy huk w zachodnim chodniku. Mirosław zabrał beczkę prochu i już nie wrócił."
 
 func _morning_subtitle() -> String:
-	if GameState.has_flag("dobrawa_left"):
-		return "Dobrawy nie ma. Zniknęła przed świtem, razem z kryształem."
-	if GameState.sanity_band(&"miroslaw") in ["na_krawedzi", "zalamany"]:
+	if GameState.sanity_band(&"miroslaw") in ["na_krawedzi", "zalamany"] and GameState.npc_status(&"miroslaw") != "dead":
 		return "Mirosława nie ma przy ognisku."
 	if GameState.day == 2:
 		return "Nocą szybem zjechał ktoś nowy."
+	if GameState.day == 4 and GameState.has_fever(&"nasir"):
+		return "Nasir kaszle od świtu. Anzelm kręci głową."
+	if GameState.day == 6:
+		return "W nocy ziemia drżała. Ze sklepienia sypał się żwir, a nikt nie spał."
+	if GameState.day == GameState.QUOTA_DAY:
+		return "Ostatni dzień. Wieczorem Racibor liczy żyły."
 	return "Obóz budzi się powoli. Ogień ledwo się tli."
+
+## Announcements at breakfast: the plans on day 3, Racibor's reminders when the quota lags.
+func _morning_events() -> void:
+	if GameState.day == 3 and not GameState.has_flag("announcement_done"):
+		await VN.play(RACIBOR_DIALOGUE, "announcement", &"racibor")
+		GameState.set_flag("announcement_done")
+		GameState.message.emit("Do wieczora dnia %d Kniaź chce %d żył. Zaznaczonych masz %d." % [GameState.QUOTA_DAY, GameState.QUOTA, GameState.veins_mapped()])
+		return
+	if GameState.day >= 4 and GameState.day <= GameState.QUOTA_DAY and _quota_lags() and GameState.npc_status(&"racibor") == "camp":
+		GameState.set_flag("reminder_day", GameState.day)
+		await VN.play(RACIBOR_DIALOGUE, "reminder", &"racibor")
+		GameState.change_rep(&"racibor", -2)
+		return
+	GameState.message.emit("Dzień %d. %s." % [GameState.day, GameState.quota_text()])
+
+## Behind the pace the Kniaź expects (about QUOTA/7 a day, with a little slack), or the last day.
+func _quota_lags() -> bool:
+	if GameState.quota_met():
+		return false
+	var expected := int(floor(GameState.QUOTA * (GameState.day - 1) / 7.0)) - 1
+	return GameState.veins_mapped() < expected or GameState.day == GameState.QUOTA_DAY
 
 #endregion
 
-#region End
+#region The hero falls
 
-func _end_demo() -> void:
+func _on_player_died(reason: String) -> void:
+	if VN.is_active():
+		await VN.finished
 	_busy = true
+	var lines: Array[String] = []
+	lines.append(reason + "." if reason != "" else "Ostatnia rana była o jedną za dużo.")
+	lines.append("")
+	lines.append("Dzień %d, %s. %s." % [GameState.day, GameState.time_text(GameState.hour), Expeditions.display_name(GameState.current_place())])
+	lines.append("Kopalnia zabiera tych, którzy schodzą do niej poranieni.")
+	await fade.show_end("\n".join(lines), "Nie żyjesz", SaveManager.retry_morning)
+
+## Sanity at zero: the hero runs blindly, someone brings him back, the day is lost.
+func _on_player_broke(_reason: String) -> void:
+	if VN.is_active():
+		await VN.finished
+	if _busy:
+		return
+	_busy = true
+	GameState.push_modal()
+	await fade.fade_out(0.5)
+	await fade.show_card("Ciemność", "Uciekasz przed czymś, czego nie ma. Nie pamiętasz drogi. Budzisz się na posłaniu, ktoś cię przyniósł.", 3.2)
+	_leave_encounter()
+	if GameState.is_away():
+		GameState.note_event("Straciłeś głowę i ktoś odniósł cię do obozu.")
+		GameState.clear_flag("location")
+		GameState.end_expedition()
+	GameState.player_sanity = 20
+	GameState.player_changed.emit()
+	GameState.hour = maxf(GameState.hour, GameState.DAY_START_HOUR + GameState.DAY_LENGTH_HOURS)
+	_place_player(markers.get_node("SpawnBed"))
+	apply_world_state()
+	GameState.pop_modal()
+	_busy = false
+	await _sleep()
+
+func _whisper() -> void:
+	_whisper_timer.start(randf_range(WHISPER_SECONDS.x, WHISPER_SECONDS.y))
+	if GameState.is_away() and GameState.mind_band() == "na_krawedzi" and not GameState.is_modal():
+		GameState.message.emit(WHISPERS[randi() % WHISPERS.size()])
+
+#endregion
+
+#region End of the week
+
+## The morning of day 8: Racibor counts the veins. Short of the quota, the expedition leaves at
+## dawn without the hero (MECHANICS §13 pkt 2).
+func _week_end() -> void:
+	_busy = true
+	var success := GameState.quota_met()
+	if success:
+		apply_world_state()
+		_place_player(markers.get_node("SpawnBed"))
+		await fade.show_card("Dzień %d" % GameState.day, "Ranek po tygodniu. Racibor siedzi nad mapą od świtu.", 2.4)
+		await fade.fade_in(1.0)
+		await VN.play(RACIBOR_DIALOGUE, "reckoning", &"racibor")
+	else:
+		await fade.show_card("Dzień %d" % GameState.day, "Budzi cię cisza.", 2.4)
+		await VN.play(SYSTEM_DIALOGUE, "left_behind")
+	await fade.show_end(_end_summary(success), "Koniec tygodnia" if success else "Zostałeś sam")
+
+func _end_summary(success: bool) -> String:
 	var band := {"spokojny": "spokojny", "niespokojny": "niespokojny", "na_krawedzi": "na krawędzi", "zalamany": "załamany"}
 	var lines: Array[String] = []
-	lines.append("Przetrwałeś trzy dni w kopalni. Tu kończy się wersja demo.")
+	if success:
+		lines.append("Przetrwałeś tydzień w kopalni. Kniaź dostanie swoje żyły. Tu kończy się wersja demo.")
+	else:
+		lines.append("Wyprawa odjechała bez ciebie. Zostałeś w kopalni sam, z lampą, mapą dziadka i szeptami. Tu kończy się wersja demo.")
 	lines.append("")
-	lines.append("Zachodni chodnik: %s" % ("wysadzony" if GameState.has_flag("west_blasted") else "wciąż zawalony"))
-	lines.append("Żyły błękitu zaznaczone dla Racibora: %d z %d" % [GameState.veins_mapped(), GameState.VEINS.size()])
+	lines.append("Żyły błękitu: %d z %d wymaganych" % [GameState.veins_mapped(), GameState.QUOTA])
 	lines.append("Wiadomość dziadka: %s" % ("odczytana" if GameState.has_flag("deciphered") else ("szyfr bez klucza" if GameState.has_note(&"szyfr") else "nieodnaleziona")))
 	lines.append("Ściana w kaplicy: %s" % ("otwarta, list dziadka przeczytany" if GameState.has_flag("wall_open") else "nierozwiązana"))
 	lines.append("Kryształ: %s" % _crystal_summary())
+	lines.append("Upadowa: %s" % _upadowa_summary(success))
 	lines.append("")
-	lines.append("Mirosław: %s" % band.get(GameState.sanity_band(&"miroslaw"), "?"))
+	lines.append("Mirosław: %s" % ("nie żyje, zabrał ze sobą zachodni chodnik" if GameState.npc_status(&"miroslaw") == "dead" else band.get(GameState.sanity_band(&"miroslaw"), "?")))
 	var trust := GameState.rep(&"bolko")
 	lines.append("Bolko: %s" % ("ufa ci" if trust >= 10 else ("nie ufa ci" if trust < 0 else "ostrożny")))
 	lines.append("Tekla: %s" % _tekla_summary())
 	lines.append("Racibor: %s" % ("liczy na ciebie" if GameState.rep(&"racibor") >= 10 else ("ma cię na oku" if GameState.rep(&"racibor") < 0 else "zdystansowany")))
+	for line in _new_people_summary():
+		lines.append(line)
 	lines.append("")
 	lines.append("Dziękujemy za grę.")
-	await fade.show_end("\n".join(lines))
+	return "\n".join(lines)
+
+func _upadowa_summary(success: bool) -> String:
+	if not GameState.has_flag("plan_upadowa"):
+		return "nikt jej nie rusza"
+	if GameState.has_flag("racibor_doubts"):
+		return "Racibor się waha, list dziadka zrobił swoje"
+	return "Racibor każe ją otworzyć" if success else "otworzą ją bez ciebie"
+
+func _new_people_summary() -> Array[String]:
+	var result: Array[String] = []
+	if GameState.npcs.has(&"nasir"):
+		if GameState.has_flag("nasir_carried_up"):
+			result.append("Nasir: wywieziony na górę w gorączce")
+		elif GameState.has_flag("nasir_fever_started") and not GameState.has_fever(&"nasir"):
+			result.append("Nasir: wyzdrowiał")
+	if GameState.npcs.has(&"sabina") and GameState.has_flag("sabina_joined"):
+		result.append("Sabina z Exitium: %s" % ("zostaje w obozie" if GameState.npc_status(&"sabina") != "gone" else "odeszła"))
+	if GameState.has_flag("welf_wounded"):
+		result.append("Welf z Exitium: %s" % ("żyje dzięki twoim bandażom" if GameState.has_flag("welf_helped") else "przepadł w chodnikach"))
+	return result
 
 func _crystal_summary() -> String:
 	if GameState.has_flag("crystal_to_dobrawa"):
 		return "u Dobrawy, w drodze do Initium"
 	if GameState.has_flag("crystal_to_racibor"):
 		return "u Racibora, dla Kniazia"
+	if GameState.has_flag("crystal_to_ottokar"):
+		return "u Ottokara, w Exitium"
 	if GameState.has_item("krysztal"):
 		return "zostaje u ciebie"
 	return "nieodnaleziony"

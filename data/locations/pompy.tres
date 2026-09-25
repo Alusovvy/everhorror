@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="LocationData" format=3]
+
+[ext_resource type="Script" path="res://script/data/location_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"pompy"
+display_name = "Komora pomp"
+unknown_name = ""
+direction = "północ, w dół"
+text = "Komora, w której stara ekipa trzymała pompy. Dopóki chodziły, rząpie było suche."
+links = {
+"rzapie": 1.0,
+"zalany": 1.0,
+"przekop": 1.5
+}
+requires = PackedStringArray()
+locked = {
+
+}
+entry = "PompyEntry"
+veins = PackedStringArray("pompy_1")
+depth = 2
+map_pos = Vector2(0.5, 0.55)
+dread = 0
+arrival_text = "Pompy stoją. Drewno spuchło od wilgoci, ale żelazo jeszcze się trzyma."

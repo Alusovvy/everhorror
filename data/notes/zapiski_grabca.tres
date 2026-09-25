@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"zapiski_grabca"
+title = "Zeszyt sztygara Grabca"
+text = "Leżał w skrytce na końcu Przekopu Grabca, zawinięty w ceratę. Same liczby, pisane coraz krzywiej.\n\n„Dzień 9. Wozów 6.\nDzień 10. Wozów 5. Dwóch chorych.\nDzień 11. Wozów 4. Ludzie gadają przez sen. Nie swoimi głosami.\nDzień 12. Wozów 2. Przewodnik chodzi na dół sam. Mówi, że liczy. Pytam, co liczy. Nie odpowiada.\nDzień 13. Wozów 0. Przewodnik kupił proch. Nie wiem od kogo.\nDzień 14.”\n\nPo „Dniu 14” już nic. Ta sama liczba co kreski na skale w rząpiu."
