@@ -32,7 +32,7 @@ use_text = "${esc(o.use ?? "")}"
 
 // --- Items ---
 item({ id: "amulet", name: "Amulet dziadka", acc: "amulet dziadka", cat: "valuable", consumable: false,
-  text: "Mosiężny krążek na rzemieniu, z wyrytą gwiazdą przeciętą kreską. Dziadek nigdy go nie zdejmował. Nagrzewa się przy błękicie, a czasem wtedy, kiedy nie powinien." });
+  text: "Złoty amulet z osadzonym kawałkiem błękitnej stali, na odwrocie wyryta gwiazda przecięta kreską. Dziadek nigdy go nie zdejmował. Nagrzewa się przy błękicie, a czasem wtedy, kiedy nie powinien." });
 item({ id: "lonty", name: "Suche lonty", acc: "lonty", cat: "quest",
   text: "Lonty ze składu starej ekipy, owinięte w natłuszczone płótno. Suche. Mirosław na nie czeka." });
 item({ id: "lina", name: "Lina", acc: "linę", cat: "tool", consumable: false,

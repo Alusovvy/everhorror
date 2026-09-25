@@ -1,4 +1,4 @@
-EVERHORROR - wersja testowa (demo 0.2)
+EVERHORROR - wersja testowa (demo 0.3)
 ======================================
 
 JAK URUCHOMIĆ
@@ -13,24 +13,45 @@ Wymagania: Windows 10 lub 11 (64-bit), karta graficzna z DirectX 12 albo Vulkane
 STEROWANIE
   W A S D ......... chodzenie
   mysz ............ rozglądanie się
-  E ............... rozmowa, oglądanie przedmiotów
-  J ............... notes (zadania i znalezione zapiski)
+  E ............... rozmowa, oglądanie i branie rzeczy
+  I ............... ekwipunek (leki, narzędzia, stan bohatera)
+  J ............... notes (zadania, zapiski, ludzie)
+  M ............... mapa w chodnikach: dalej w głąb albo z powrotem do obozu
   Esc ............. pauza (zapis, wczytanie, opcje)
   Spacja / Enter .. dalej w rozmowie (albo kliknij myszką)
 
 O CO CHODZI
-Jesteś członkiem ekspedycji górniczej. Twój dziadek przepadł w tej kopalni
-czterdzieści lat temu. Masz trzy dni: pogadaj z ludźmi w obozie, przy stole
-z mapą w kwaterze zarządcy wybierz, dokąd idziesz, a wieczorem wróć na posłanie.
-Każda rozmowa i każda wyprawa zabiera czas, więc wszystkiego nie zdążysz.
+Bohater dołącza do ekspedycji górniczej. Jego dziadek przepadł w tej kopalni
+czterdzieści lat temu. Zarządca daje tydzień: do wieczora siódmego dnia Kniaź
+chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano zarządca je policzy.
 
-W obozie mieszka pięć osób i każda ma swój rozkład dnia: rano śniadanie przy
-wspólnym stole, w dzień każdy przy swojej robocie, wieczorem wszyscy wracają
-do ognia. Jak kogoś nie ma tam, gdzie zwykle, poszukaj go gdzie indziej
-albo wróć później.
+Wyprawy planuje się przy stole z mapą w kwaterze zarządcy (przycisk WYRUSZ).
+W chodnikach klawisz M (albo drogowskaz przy wejściu) prowadzi dalej w głąb
+albo z powrotem do obozu. Po powrocie gra podsumowuje wyprawę.
+Każda rozmowa, droga i zaznaczona żyła zabiera czas, więc wszystkiego
+nie da się zdążyć.
 
-Demo kończy się rano trzeciego dnia, przy stole z mapą.
-Przejście zajmuje mniej więcej 40-60 minut.
+W obozie mieszkają ludzie z różnych stron świata: górnicy, kucharka, pisarz,
+najemnik, felczer. Każdy ma swój rozkład dnia i swoje sprawy, a niektórzy
+w dzień pracują w chodnikach. Trzeciego dnia w tunelach czeka ktoś jeszcze.
+
+Kopalnia zabiera zdrowie i rozum także bohaterowi. Leki i świece są
+w ekwipunku (I). Kto schodzi na dół poraniony, może nie wrócić. Po śmierci
+dzień da się powtórzyć od rana (RETRY FROM MORNING).
+
+Cały tydzień to mniej więcej 2-3 godziny grania. Grę zapisuje się pod Esc
+(3 miejsca na zapis).
+
+CO NOWEGO W 0.3
+- tydzień zamiast trzech dni, norma 12 żył i rozliczenie ósmego dnia rano
+- stół z mapą, wyprawy dalej w głąb pod M, podsumowanie każdej wyprawy
+- 10 nowych miejsc i 25 żył do znalezienia
+- 9 nowych postaci: pięć osób w obozie i wyprawa Drugich z Exitium
+- ekwipunek (I): leki, narzędzia, rzeczy, które przydadzą się innym
+- zdrowie, rany, gorączka i poczytalność bohatera
+- nowa zakładka "Ludzie" w notesie
+- poprawka: E zamyka okienko z opisem i nie zabiera drugi raz czasu
+- zapisy z wersji 0.2 dalej się wczytują
 
 GWARA
 Górnicy (Mirosław i Bolko) godają z elementami gwary śląskiej.
@@ -38,10 +59,11 @@ Wolisz zwykłą polszczyznę? OPTIONS (w menu głównym albo pod Esc)
 i wyłącz "Silesian dialect (miners)".
 
 JAK POMÓC
-Zapisuj wszystko, co się zepsuło albo było niejasne: gdzie utknąłeś, czego nie
-mogłeś znaleźć, co dziwnie brzmi w dialogach (także w gwarze), gdzie było
-za ciemno.
-Zrzut ekranu (Win + Shift + S) bardzo pomaga.
+Zapisuj wszystko, co się zepsuło albo było niejasne: gdzie gra się zacięła,
+czego nie dało się znaleźć, co dziwnie brzmi w dialogach (także w gwarze),
+gdzie było za ciemno, czy tydzień był za krótki albo za długi.
+Zrzut ekranu (Win + Shift + S) bardzo pomaga. Przy błędzie podaj dzień
+i godzinę z zegara w grze.
 
 Zapisy gry i ustawienia leżą w:
   %APPDATA%\Godot\app_userdata\Everhorror

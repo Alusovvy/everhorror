@@ -1,6 +1,6 @@
 # Dobrawa z Initium [ROBOCZE]
 
-> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_04) · Aktualizacja: 2026-09-25 · Lore: [Magia](../magia.md)
+> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_04–05) · Aktualizacja: 2026-09-25 (task_05) · Lore: [Magia](../magia.md)
 
 | Pole | Wartość |
 |---|---|
@@ -26,6 +26,7 @@ Urodziła się w Jaksarze, ale od dziecka należy do Initium. Przeszła przemian
 | Kaplica z archiwum Initium, słowniczek sanctinu | pytanie „Czego tu szukasz?” |
 | Kryształ to nośnik jak w Maszynie | gracz ma kryształ |
 | Co się stanie, gdy ktoś zacznie kopać przy sercu | gracz ma list dziadka |
+| Exitium to „córka, która uciekła z domu”, von Brühl rozbiera rzeczy na części. O Sabinie: „Za dobra na Exitium” | po spotkaniu z Drugimi |
 
 ## Przedmioty
 | Przedmiot | Jak zdobyć |
@@ -44,10 +45,11 @@ Urodziła się w Jaksarze, ale od dziecka należy do Initium. Przeszła przemian
   - 9–12 przy starych wózkach z urobkiem (gest magii),
   - 12–16 schodzi sama w tunele (nie ma jej w obozie),
   - od 16:00 stoi na uboczu przy ciemnym zachodnim wyjściu.
-- **Dzień 3:** rano przy Raciborze, potem przy wózkach. Jeśli dostała kryształ, już jej nie ma.
+- **Dzień 3 i dalej:** rano przy Raciborze, potem przy wózkach. Jeśli dostała kryształ, już jej nie ma.
+- **Poczytalność:** od drugiej nocy −5 co noc.
 
 ## Co robi przy 0% poczytalności [ROBOCZE]
-Schodzi sama w głąb, żeby dotknąć źródła energii. Nie wraca.
+Schodzi sama w głąb, żeby dotknąć źródła energii. Nie wraca. ✅ Działa w demie (task_05): rano plansza „Dobrawa zeszła sama w głąb. Nie wróciła.”
 
 ## Śmierć
 Initium traci oczy w kopalni. ❓ Czy przysyła następnych Drugich (zakończenie z Drugimi z GDD)?

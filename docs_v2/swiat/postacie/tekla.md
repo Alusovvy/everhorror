@@ -1,6 +1,6 @@
 # Tekla, kwatermistrzyni [ROBOCZE]
 
-> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_04) · Aktualizacja: 2026-09-25
+> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_04–05) · Aktualizacja: 2026-09-25 (task_05)
 
 | Pole | Wartość |
 |---|---|
@@ -28,6 +28,9 @@ Córka Hanusza, kupca z Mirosil. Konfraternia kupiecka zaopatruje ekspedycję, a
 | Przedmiot | Jak zdobyć |
 |---|---|
 | Lina | za kwit od Racibora albo za oddany tobołek |
+| Świeca | jedna dziennie („Dziennie jedna na głowę, takie są zasady”) |
+| Olej do lampy | raz, gdy ma u gracza dług albo zaufanie ≥ 10 |
+| Lekarstwo (jedyna buteleczka) | raz, przy gorączce Nasira albo bohatera: za dług albo w zamian za Daleki Klejnot lub nalewkę |
 
 ## Zadania
 | Zadanie | Nagroda | Koszt czasu |
@@ -36,6 +39,8 @@ Córka Hanusza, kupca z Mirosil. Konfraternia kupiecka zaopatruje ekspedycję, a
 
 ## Rozkład dnia (demo)
 Rano i 18–20 krząta się przy kociołku, w dzień i wieczorem stoi za ladą. Wydana Raciborowi siedzi pod strażą na skrzyni przy jego stole.
+
+Poczytalność: −2 co noc, pod strażą −10.
 
 ## Co robi przy 0% poczytalności [ROBOCZE]
 Nocą zabiera zapasy i ucieka szybem. Obóz zostaje bez jedzenia i oleju do lamp.

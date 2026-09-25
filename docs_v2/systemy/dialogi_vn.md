@@ -1,6 +1,6 @@
 # Dialogi (tryb Visual Novel)
 
-> Status: 🟢 zaimplementowane (demo) · Właściciel: Roland · Aktualizacja: 2026-09-25 · Filary: 2, 3
+> Status: 🟢 zaimplementowane (demo) · Właściciel: Roland · Aktualizacja: 2026-09-25 (task_05) · Filary: 2, 3
 
 ## Cel
 Główny nośnik fabuły, relacji i decyzji. Tryb VN pozwala opowiadać gęsto (monologi, opisy zmysłowe), czego w FPP nie da się zrobić tanio.
@@ -21,7 +21,7 @@ Rozmowa jest wyborem z kosztem, a nie przerwą w grze. Gracz widzi, że wcześni
 6. **Mówcy, którzy nie są postacią, mogą mieć statyczny portret** (ściana w kaplicy: świecące znaki sanctinu) ✅.
 7. **Gwara śląska górników:**
    - Mirosław i Bolko mówią z elementami gwary, także w scenach innych postaci ✅.
-   - Oryginały zostają w plikach `.dialogue`, a wersje śląskie są w `dialogue/gwara_slaska.json` (78 linii).
+   - Oryginały zostają w plikach `.dialogue`, a wersje śląskie są w `dialogue/gwara_slaska.json` (92 kwestie).
    - Przełącznik jest w opcjach: „Silesian dialect (miners)”.
    - Test pilnuje, żeby każda linia górnika miała wersję śląską.
 
@@ -50,7 +50,7 @@ Kaplica, [Poziomy](../03_poziomy.md#kaplica-wschód-w-dół). Plik: `dialogue/sc
 |---|---|---|
 | Koszt rozmowy | 1 h | zob. [Czas](czas.md#dane-i-strojenie) |
 | Tempo tekstu | tempo Dialogue Manager, pomijalne kliknięciem lub [Spacja] | |
-| Pliki dialogów | `dialogue/*.dialogue`: miroslaw, bolko, racibor, tekla, dobrawa, sciana, system | edycja w zakładce Dialogue edytora |
+| Pliki dialogów | `dialogue/*.dialogue`: miroslaw, bolko, racibor, tekla, dobrawa, wszebor, nasir, hagiwara, sobek, anzelm, sabina, ottokar, hieronim, welf, drudzy (spotkanie z Exitium), sciana, system (wstęp, sny, poranki, zakończenia) | edycja w zakładce Dialogue edytora |
 
 ## Zależności
 [NPC](npc.md) (reputacja, poczytalność, miejsce), [Czas](czas.md), [Questy](questy.md), [Ekwipunek](ekwipunek.md), stan gry (flagi).

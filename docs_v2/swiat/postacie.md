@@ -14,7 +14,7 @@
 ## Dziadek
 Przewodnik i kryptograf. Latami potajemnie wynosił błękitne żelazo i nigdy go nie złapano. Zaginął na szychcie 40 lat temu **[GDD]**. Jego szkielet i notatki mogą prowadzić do [prostego zakończenia](fabula.md#zakończenia) **[GDD]**.
 
-[propozycja, zaimplementowane w demie] Dziadek widział Onych. Kupił u Hanusza z Mirosil (ojca Tekli) trzy beczki prochu, sam wysadził zejście do upadowej i został po tamtej stronie, żeby nikt nie poszedł jego śladem. W kaplicy zostawił list i kryształ ukryte za zagadką. Szczegóły w [Fabule](fabula.md#demo-trzy-dni-task_04).
+[propozycja, zaimplementowane w demie] Dziadek widział Onych. Kupił u Hanusza z Mirosil (ojca Tekli) trzy beczki prochu, sam wysadził zejście do upadowej i został po tamtej stronie, żeby nikt nie poszedł jego śladem. W kaplicy zostawił list i kryształ ukryte za zagadką. Szczegóły w [Fabule](fabula.md#demo-tydzień-task_04-i-task_05).
 
 ## Obsada dema
 | Postać | Frakcja | Rola | Od dnia | Karta |

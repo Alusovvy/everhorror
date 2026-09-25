@@ -64,16 +64,16 @@ Czas płynie więc tylko wtedy, gdy gracz podejmuje decyzję, a nie w czasie rze
 
 **[propozycja] Jednostka czasu:** dzień dzieli się na określoną liczbę **godzin**, np. 16 godzin aktywności. Każda akcja ma koszt w godzinach, a gdy godziny się skończą, gracz musi iść spać (albo ponosi karę). Czas widać na zegarku lub świecy w obozie oraz w interfejsie VN.
 
-**Stan w demie (task_03–04):**
+**Stan w demie (task_05):**
 - dzień trwa 16 h (06:00–22:00),
 - rozmowa kosztuje 1 h,
-- podróż kosztuje 2 h (Stara sztolnia, zachodni chodnik, rząpie) albo 3 h (upadowa, kaplica), a powrót tyle samo,
-- wysadzenie zawału kosztuje 4 h, zaznaczenie żyły 1 h, błędna próba przy ścianie w kaplicy 1 h,
-- demo trwa 3 dni.
+- podróż idzie po grafie miejsc: 2 h z obozu do sąsiednich miejsc, 1–1,5 h dalej, +1 h rozpoznania przy pierwszej wizycie, +1 h na każdy odcinek, gdy bohater jest ranny,
+- wysadzenie zawału kosztuje 4 h, zaznaczenie żyły 1 h (spod nacieku 2 h), błędna próba przy ścianie w kaplicy 1 h, praca przy pompach 2 h, bandaże i świeca 0,5 h,
+- demo trwa tydzień (7 dni), rozliczenie jest rano w dniu 8.
 
 Szczegóły: [docs_v2/systemy/czas.md](../docs_v2/systemy/czas.md).
-❓ Jakie są terminy? Jeden globalny (np. dostawa dla Kniazia), czy osobne dla questów?
-❓ Co się dzieje, gdy termin minie? Przegrana, gorsze zakończenie, czy utrata questu?
+✅ Terminy (odpowiedź w §13 pkt 2): w demie jest jeden termin, norma Kniazia (12 żył do wieczora dnia 7). Kiedy się spóźnia, Racibor upomina, a bez normy wyprawa wyjeżdża bez gracza.
+❓ Czy w pełnej grze są też osobne terminy questów?
 
 ## 5. Eksploracja kopalni
 
@@ -87,16 +87,31 @@ Kopalnia → jaskinie → Świątynia Onych. Im niżej, tym groźniej. Każdy po
 
 **[propozycja]** Mapa to graf pomieszczeń. Każde pomieszczenie ma stan (nieznane / widoczna odnoga / odkryte / zablokowane) i koszt podróży w godzinach. Kolejne pomieszczenia odblokowuje eksploracja, notatki dziadka (jego mapy gracz zna „na pamięć”) albo pomoc NPC (np. wysadzenie zawaliska).
 
+**Stan w demie (task_05):**
+- stół z mapą: graf 15 miejsc z trasą, licznik żył wobec normy, przycisk WYRUSZ,
+- w tunelach mapa [M]: dalej do sąsiedniego miejsca albo powrót do obozu,
+- po powrocie podsumowanie wyprawy.
+
+Zob. [docs_v2/systemy/eksploracja_kopalni.md](../docs_v2/systemy/eksploracja_kopalni.md).
+
 ### 5.3 Wydobycie
 Gracz wydobywa błękitne żelazo i znajduje notatki dowódcy poprzedniej ekipy **[GDD]**.
 
-✅ Szef wyprawy wymaga szukania złóż. Kto to długo ignoruje, dostaje upomnienia, a na końcu wyprawa wyjeżdża bez niego (§13 pkt 2). **Stan w demie:** Racibor zleca zaznaczenie żył (1 h każda, trzy w demie). Upomnień i tego zakończenia jeszcze nie ma.
+✅ Szef wyprawy wymaga szukania złóż. Kto to długo ignoruje, dostaje upomnienia, a na końcu wyprawa wyjeżdża bez niego (§13 pkt 2). **Stan w demie (task_05):**
+- 25 żył w 15 miejscach, norma 12 do wieczora dnia 7,
+- upomnienia Racibora rano w dniach 4–7,
+- rozliczenie rano w dniu 8: z normą „Koniec tygodnia”, bez normy „Zostałeś sam”.
 
 ### 5.4 Zagadki
 Proste zagadki logiczne w pomieszczeniach **[GDD]**. Dziadek był kryptografem, więc naturalne są zagadki oparte na szyfrach i mapach **[propozycja]**.
 
 ### 5.5 Zagrożenie
-✅ Gracz może zginąć, ale raczej przy ranach albo niskiej poczytalności, kiedy jakaś interakcja źle na niego wpłynie (§13 pkt 3). **Stan w demie:** brak śmierci gracza i ran.
+✅ Gracz może zginąć, ale raczej przy ranach albo niskiej poczytalności, kiedy jakaś interakcja źle na niego wpłynie (§13 pkt 3). **Stan w demie (task_05):**
+- rany (para w szczelinie, upadek z półki w szybie) i gorączka po zalanym chodniku,
+- śmierć tylko wtedy, gdy bohater był już ranny, z przyciskiem „RETRY FROM MORNING”,
+- załamanie przy zerze poczytalności.
+
+Zob. [docs_v2/systemy/zdrowie_i_poczytalnosc.md](../docs_v2/systemy/zdrowie_i_poczytalnosc.md).
 
 ## 6. Ekwipunek
 
@@ -108,6 +123,15 @@ Przed wyprawą gracz wybiera, co bierze ze sobą **[GDD]**, np. paliwo do lampy 
 - Przedmioty są kluczami do pomieszczeń i zagadek (lina → zejście w szyb).
 
 ❓ Czy przedmioty się zużywają? Czy jest amulet z błękitną stalą i czy ma działanie mechaniczne (sny, wizje, podpowiedzi)?
+
+**Stan w demie (task_05):**
+- ekwipunek [I] bez limitu, 17 przedmiotów,
+- leki działają na bohatera i na NPC,
+- przedmioty-klucze do miejsc (lina, olej) i obiektów (łom, kilof),
+- zużywają się leki, świece i nalewka, narzędzia nie,
+- amulet nie ma działania mechanicznego.
+
+Zob. [docs_v2/systemy/ekwipunek.md](../docs_v2/systemy/ekwipunek.md).
 
 ## 7. Postacie niezależne (NPC)
 
@@ -132,20 +156,36 @@ Przed wyprawą gracz wybiera, co bierze ze sobą **[GDD]**, np. paliwo do lampy 
   - górnik (szablon z GDD): ucieka z kopalni,
   - Mirosław z Głuszy: wysadza się z beczką prochu w tunelu. Z nim znika możliwość wysadzenia 2–3 dodatkowych tuneli.
 
-✅ Poczytalność zmieniają wydarzenia, przedmioty i postęp w głąb, u każdego trochę inaczej. Gracz nie widzi paska: w notatkach o NPC ma osobne opisy zdrowia i poczytalności („wygląda na zdrowego”, „ostatnio nerwowo się zachowuje”) (§13 pkt 4). **Stan w demie:** objawy w dialogach i miejscu postaci. Zakładka „Ludzie” w notesie jest do zrobienia.
+✅ Poczytalność zmieniają wydarzenia, przedmioty i postęp w głąb, u każdego trochę inaczej. Gracz nie widzi paska: w notatkach o NPC ma osobne opisy zdrowia i poczytalności („wygląda na zdrowego”, „ostatnio nerwowo się zachowuje”) (§13 pkt 4). **Stan w demie:** objawy w dialogach i miejscu postaci. Zakładka „Ludzie” w notesie opisuje słowami zdrowie, głowę i stosunek do bohatera (task_05).
 
 ### 7.3 Zdrowie, rany, śmierć **[GDD]**
 - NPC mogą odnosić rany, a gracz może próbować je leczyć.
 - NPC mogą umrzeć.
 
-✅ Bandaże i NPC, który może pomóc. Ryzyko do ustalenia później (§13 pkt 5). Jeszcze nie zaimplementowane.
+✅ Bandaże i NPC, który może pomóc. Ryzyko do ustalenia później (§13 pkt 5).
+
+**Stan w demie (task_05):**
+- bandaże i lekarstwo,
+- Anzelm opatruje ziołami raz dziennie,
+- Sabina leczy magią, a płaci za to poczytalnością,
+- gorączka Nasira od trzeciej nocy,
+- ranny Welf w tunelach,
+- Mirosław może zginąć (§7.2).
 
 ### 7.4 Obecność w obozie **[GDD]**
 NPC mogą pojawiać się w obozie i znikać z niego (wyprawy, ucieczka, śmierć, przybycie nowych).
 
 **[propozycja]** Każdy NPC ma stan: *w obozie / w tunelach / zaginiony / uciekł / martwy*.
 
-**Stan w demie:** każdy NPC ma **rozkład dnia**: rano śniadanie, 8–18 praca w swojej strefie obozu, 18–20 kolacja, potem wieczór. Stan fabuły ma pierwszeństwo, np. Mirosław na krawędzi siedzi w kącie, a wydana Tekla pod strażą. Dobrawa przyjeżdża w dniu 2 i znika w tunelach w południe. Zob. [docs_v2/systemy/npc.md](../docs_v2/systemy/npc.md#rozkład-dnia).
+**Stan w demie:** każdy NPC ma **rozkład dnia**: rano śniadanie, 8–18 praca w swojej strefie obozu, 18–20 kolacja, potem wieczór. Stan fabuły ma pierwszeństwo, np. Mirosław na krawędzi siedzi w kącie, a wydana Tekla pod strażą. Dobrawa przyjeżdża w dniu 2 i znika w tunelach w południe.
+
+Od task_05:
+- 14 postaci,
+- górnicy pracują za dnia w miejscach wypraw,
+- Drudzy z Exitium spotykani w tunelach,
+- Sabina dołącza do obozu w dniu 3.
+
+Zob. [docs_v2/systemy/npc.md](../docs_v2/systemy/npc.md#rozkład-dnia).
 
 ### 7.5 Pomoc NPC w pomieszczeniach **[GDD]**
 Niektóre pomieszczenia wymagają specjalisty. Gracz nie idzie z nim fizycznie. W panelu VN wybiera opcję typu *[Poproś XYZ o pomoc, bo się na tym zna]*. To kosztuje dużo czasu, bo trzeba po niego pójść i wrócić.
@@ -205,15 +245,16 @@ Systemy i ich kolejność. Każdy krok da się zagrać i sprawdzić osobno.
 | 3 | Tryb VN (dialog, opcje) | Dialogue Manager + `vn_balloon.tscn`, portrety 3D | ✅ |
 | 4 | Stan gry (flagi, czas, dzień) | autoload `GameState` | ✅ |
 | 5 | Upływ czasu i sen | `GameState` + `StoryDirector` (rozliczenie nocy, sny) | ✅ |
-| 6 | NPC (dane, reputacja, poczytalność, zdrowie, stan) | `NpcData`, `Npc`, `CharacterModel`, rozkład dnia `CampSchedule` | ✅ 5 postaci. ⬜ efekty przy 0%, rany |
+| 6 | NPC (dane, reputacja, poczytalność, zdrowie, stan) | `NpcData`, `Npc`, `CharacterModel`, rozkład dnia `CampSchedule` i `FieldSchedule` | ✅ 14 postaci (10 w obozie, 4 Drugich z Exitium), rany i gorączka, efekty przy 0% u Mirosława i Dobrawy. ⬜ efekty przy 0% u pozostałych |
 | 7 | Warunki i efekty opcji dialogowych | w plikach `.dialogue`, wykonywane przez `GameState` | ✅ |
-| 8 | Notes questów | `QuestData`, `NoteData`, notes [J] | ✅ ⬜ zakładka „Ludzie” |
-| 9 | Mapa kopalni i podróż | `MapScreen`, miejsca w `locations.tscn` / `mine_deep.tscn` | ✅ 5 celów z warunkami. 🟡 rysunek mapy |
-| 10 | Ekwipunek na wyprawę | `ItemData` + UI | 🟡 przedmioty-klucze, bez ekranu wyboru |
+| 8 | Notes questów | `QuestData`, `NoteData`, notes [J] | ✅ z zakładką „Ludzie” |
+| 9 | Mapa kopalni i podróż | `LocationData`, `Expeditions`, `MapScreen`, miejsca w `locations.tscn` / `mine_deep.tscn` | ✅ graf 15 miejsc, stół z mapą (WYRUSZ), [M] w terenie, rysunek mapy, podsumowanie wyprawy |
+| 10 | Ekwipunek na wyprawę | `ItemData` + ekran [I] | ✅ ekran [I], 17 przedmiotów. ⬜ wybór rzeczy przed wyprawą (limit) |
 | 11 | Zapis / odczyt | `SaveManager` + grupa `persist` + `GameState` | ✅ cały stan gry |
 | 12 | Menu główne, pauza, opcje | `main_menu.tscn`, `pause_menu.tscn` | ✅ + gwara śląska |
+| 13 | Zdrowie i poczytalność bohatera | `GameState`, HUD, ekwipunek, ekran końca | ✅ rany, gorączka, śmierć z „od rana”, załamanie |
 
-**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. ✅ Zrobiony w task_03 i rozbudowany w task_04 do demo na 3 dni (obóz ze strefami, 5 NPC, 5 miejsc wypraw, zagadka ściany). Opis: [task_04](ai-tasks/task_04.md).
+**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. ✅ Zrobiony w task_03 i rozbudowany w task_04 do demo na 3 dni (obóz ze strefami, 5 NPC, 5 miejsc wypraw, zagadka ściany). Opis: [task_04](ai-tasks/task_04.md). W task_05 demo urosło do tygodnia: 15 miejsc, 14 postaci, ekwipunek i norma żył ([task_05](ai-tasks/task_05.md)).
 
 ## 13. Otwarte pytania (zbiorczo)
 

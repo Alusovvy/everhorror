@@ -8,7 +8,7 @@
 2. **Informacja w świecie przed interfejsem:** czas pokazany świecą lub zegarkiem, stan NPC widoczny w zachowaniu, mapa na stole.
 3. **Spójny styl:** ciemne panele, ciepły bursztynowy akcent (jak światło lampy). Wspólny motyw: `theme/ui_theme.tres`.
 4. **Pełna obsługa klawiaturą:** każde menu ma fokus na pierwszym przycisku, strzałki i Enter działają, a [Esc] zawsze cofa.
-5. **Języki:** menu po angielsku, tekst w świecie i VN po polsku (zob. [dziennik decyzji](decyzje.md)). ❓ Docelowe wersje językowe gry.
+5. **Języki:** menu po angielsku, tekst w świecie i VN po polsku (zob. dziennik decyzji w specyfikacji, `09_produkcja.md`). ❓ Docelowe wersje językowe gry.
 
 ## Ekrany
 

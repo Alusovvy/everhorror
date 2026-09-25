@@ -1,6 +1,6 @@
 # Mirosław z Głuszy
 
-> Status: 🟡 szkic · Autor: GDD (historia), task_03–04 (demo) · Aktualizacja: 2026-09-25
+> Status: 🟡 szkic · Autor: GDD (historia), task_03–05 (demo) · Aktualizacja: 2026-09-25 (task_05)
 
 | Pole | Wartość |
 |---|---|
@@ -25,9 +25,10 @@ Urodzony w 1490 roku. Jako dziesięciolatek jedyny przeżył rzeź, którą Pier
 | Głusza i piwnica | pytanie „Skąd jesteś?” |
 | Zdanie o Raciborze | po poznaniu Racibora |
 | Zawał w upadowej zrobił ładunek, nie strop | gracz obejrzał zawał (flaga `saw_charge`) |
+| Trzy beczki, które liczy w kółko | na krawędzi, od dnia 3 |
 
 ## Przedmioty
-Proch i lonty trzyma w składzie. Graczowi niczego nie daje.
+Proch i lonty trzyma w składzie. Graczowi niczego nie daje. Sam chętnie przyjmie nalewkę („Pali. Dobrze, że pali”).
 
 ## Zadania
 | Zadanie | Nagroda | Koszt czasu |
@@ -43,13 +44,18 @@ Rano i wieczorem siedzi przy ognisku, w dzień kuca w składzie prochu. Na kraw�
 ## Poczytalność w demie
 | Zdarzenie | Zmiana |
 |---|---|
-| Wysadzenie zawału | −4 od razu, w nocy dodatkowo −12 (−4, jeśli z nim posiedziałeś) |
-| Każda noc | −6 |
-| Rozmowa o ładunku w upadowej | −3, w drugą noc dodatkowo −4 |
-| „Posiedzę z tobą” | +8 (dzień 1), +5 (dzień 2) |
+| Wysadzenie zawału | −4 od razu, a w pierwszą noc po wybuchu dodatkowo −10 (tylko −3, jeśli bohater zapytał „Jak się trzymasz?”) |
+| „Jak się trzymasz?” po wybuchu | +8 |
+| Każda noc | −4 |
+| Prawda o ładunku w upadowej | −3 od razu, a od drugiej nocy −2 więcej co noc |
+| Na krawędzi w dniu 2: „Posiedzę z tobą” | +5 (raz) |
+| „Posiedzę z tobą” (1 h), przy ognisku albo w kącie | +3 przy ognisku, +4 w kącie, a tej nocy spadek jest o 4 mniejszy |
+| Nalewka | +15 |
 
 ## Co robi przy 0% poczytalności **[GDD]**
-W jednym z tuneli detonuje beczkę prochu razem ze sobą. Jego śmierć zamyka dostęp do 2–3 tuneli, które trzeba odblokować wybuchem. ⬜ W demie jeszcze nie działa.
+W jednym z tuneli detonuje beczkę prochu razem ze sobą. Jego śmierć zamyka dostęp do 2–3 tuneli, które trzeba odblokować wybuchem.
+
+✅ W demie (task_05): w nocy, w której jego poczytalność spada do zera, bierze beczkę prochu i wysadza się w zachodnim chodniku. Poranna plansza: „W nocy huk w zachodnim chodniku…”. Chodnik zamyka się na zawsze. Upadowa przepada, a do kuźni i ślepego szybu da się zejść już tylko od dołu, przez galerię.
 
 ## Śmierć
 Ekspedycja traci jedynego specjalistę od prochu.

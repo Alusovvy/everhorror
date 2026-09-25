@@ -181,7 +181,7 @@ Miejsca układają się w graf na czterech poziomach głębokości (zob. `docs_v
 |---|---|---|
 | **Wszebor ze Śnieżnej Przystani** | Hawiar, rębacz, wielki i głośny | brat Bogdal zasypany pod Przystanią, Noc Onych i wypalony pierścień, Długa Noc i Wultany, Dzień Krwawego Nieba |
 | **Nasir z Bakaszu** | pompiarz z Sułtanatu Nerdii, były niewolnik z kamieniołomów | rinust, który zabija, Gorejąca Palada, bazary Lajihar, Dżiny, „Daleki Klejnot” z Kinkenheimu |
-| **Kiyoshi Hagiwara** | wygnaniec z Cesarstwa, prowadzi księgi Racibora | Nagate i Szarzy, Dzień Morza, życzenia z krwawym kciukiem, Sutāto. Stracił ojczyznę za prawdziwe liczby i drugi raz ich nie sfałszuje |
+| **Kiyoshi Hagiwara** | wygnaniec z Cesarstwa, prowadzi księgi Racibora | Nagate i Szarzy, Dzień Morza, życzenia z krwawym kciukiem, Sutāto. Stracił ojczyznę, bo nie chciał fałszować liczb, i tutaj też ich nie sfałszuje |
 | **Sobek z Wielkiego Stepu** | Egzarcha, najemnik, straż obozu | zaklęty miecz („ja płacę mrówkami, oni płacą bólem”), banda Gniewomira, Exitium i jego Miecze |
 | **Brat Anzelm** | felczer, były zakonnik Niebiańskiego Płomienia | służba pod Przemirem z Łask i dziewięcioletnia dziewczynka spalona na rynku w Bakaszu. Leczy, a magii nie znosi |
 
@@ -224,6 +224,7 @@ Wszyscy patrzą z góry na „bezmagicznych”.
 - Rozmowy trzeciego dnia (Mirosław, Bolko, Tekla, Dobrawa, Racibor) kończyły się pożegnaniem dema. Teraz mają powitania na kolejne dni i wracają do zwykłej rozmowy.
 - Liczby w tekstach mają polską odmianę („mam 2 żyły”, „został jeden dzień”).
 - Nowe kwestie Mirosława i Bolka mają wersję śląską (92 kwestie, test pokrycia przechodzi).
+- Opis amuletu dziadka jest zgodny z GDD. Wcześniej był „mosiężnym krążkiem”, teraz jest złoty, z kawałkiem błękitnej stali.
 - **Nowa zakładka „Ludzie” w notesie** opisuje słowami zdrowie, głowę i stosunek do bohatera (MECHANICS §13 pkt 4).
 
 ### Dokumentacja i narzędzia
@@ -232,6 +233,8 @@ Wszyscy patrzą z góry na „bezmagicznych”.
   - nowy system `zdrowie_i_poczytalnosc.md`,
   - poprawione: zadania, interakcje, zapis, poziomy, jednostronicowy opis, rozgrywka, fabuła, UI, oprawa, README (wersja 2.2),
   - 9 nowych kart postaci w `swiat/postacie/`.
+- **`MECHANICS.md`:** notatki „Stan w demie” i tabela z §12 opisują stan po task_05. Odpowiedzi zespołu z §13 są bez zmian.
+- **Karty postaci z task_03–04** (Mirosław, Bolko, Racibor, Tekla, Dobrawa) mają dopisane zmiany z task_05 i obecne liczby.
 - **CLAUDE.md i `tools/README.md`** zaktualizowane.
 - **Nowe narzędzia:**
   - `tools/character_preview.gd` (modele postaci obok siebie),
@@ -256,7 +259,7 @@ Wszyscy patrzą z góry na „bezmagicznych”.
 ## Czego potrzebuję od Ciebie
 1. **Factcheck:** przejść [factcheck-test-05](../human-tasks/factcheck-test-05.md) (skrócony tydzień to ok. 2–3 h).
 2. **Balans normy:** czy 12 z 25 żył to dobra wartość? Czy upomnienia nie są za rzadkie albo za częste?
-3. **Build 0.3:** dać znać, jeśli ma powstać (0.2 nie ma niczego z task_05).
+3. **Build 0.3 jest gotowy:** `build/Everhorror-demo-0.3-windows.zip` (113 MB, `Everhorror.exe` i `CZYTAJ_MNIE.txt` z nowym sterowaniem i listą zmian). Sprawdziłem go na tym komputerze: nowa gra startuje, świat i wszystkie nowe ekrany wczytują się bez błędów.
 4. **Ren:** przegląd 9 nowych kart postaci i wyprawy z Exitium (to robocze postacie, oznaczone [ROBOCZE]).
 5. **Limit ekwipunku:** czy w pełnej grze ma być wybór rzeczy przed wyprawą (GDD)? W demie limitu nie ma.
 
@@ -271,7 +274,7 @@ Wszyscy patrzą z góry na „bezmagicznych”.
   - bez liny Kryształowa galeria wychodziła zablokowana przez Ślepy szyb, choć droga przez pompy była otwarta,
   - po śmierci Mirosława powrót mógł prowadzić przez zasypany chodnik.
 
-  Teraz `Expeditions.path()` szuka najpierw drogi przez otwarte miejsca. Scenariusz `expedition` sprawdza to trzema nowymi punktami. Po poprawce scenariusze z mapą (`expedition`, `drudzy`, `week`, `day1`, `rzapie`, `kaplica`) przechodzą, w dwóch porcjach.
+  Teraz `Expeditions.path()` szuka najpierw drogi przez otwarte miejsca. Scenariusz `expedition` sprawdza to trzema nowymi punktami. Po poprawce scenariusze z mapą (`expedition`, `drudzy`, `week`, `day1`, `rzapie`, `kaplica`) przechodzą, w dwóch porcjach. Po zmianie opisu amuletu test dialogów też przechodzi.
 - **Zrzuty ekranu:**
   - wszystkie nowe miejsca, obóz o czterech porach dnia, ekrany mapy, ekwipunku, notesu i podsumowania, nowe postacie,
   - poprawki wyglądu: latarnia na wysokości oczu, skały sterczące w szczelinie, naciek wyglądający jak jasny kwadrat, zbyt ciemna kostnica, nachodzące na siebie podpisy na mapie.
@@ -284,4 +287,4 @@ Demo trwa teraz tydzień.
 - Obóz ma pięć nowych, barwnych postaci z LoreDoc. W dniu 3 przychodzi wyprawa Drugich z Exitium: Sabina zostaje w obozie, a Ottokar, Hieronim i Welf krążą po tunelach.
 - Wszystkie scenariusze testowe przechodzą.
 
-Czekam na wyniki factchecku i decyzję o buildzie 0.3.
+Czekam na wyniki factchecku. Build 0.3 jest gotowy do wysłania testerom.

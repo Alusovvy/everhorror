@@ -5,7 +5,7 @@ Working title "everhorror" (the GDD still calls the game "XYZ"). The logo `asset
 ## Docs (in Polish)
 - [docs/GDD.md](docs/GDD.md) — the game design document, owned by the team. Sections and owners: concept, start and ending (Vitav), main plot (Ren), mechanics (Roland), NPC stories. Don't rewrite it unless asked.
 - [docs/MECHANICS.md](docs/MECHANICS.md) — mechanics spec derived from GDD §4 and expanded for implementation. **This is the current focus.** Keep it in sync when mechanics change.
-- [docs_v2/](docs_v2/README.md) — modular game documentation (v2, Polish): one-pager, vision, gameplay, one file per system, world (lore, `LoreDoc.md` 1.2 MB with embedded images — search it, don't read it whole; `magia.md`, `loredoc_niespojnosci.md`, NPC cards in `swiat/postacie/`), levels, UI, art and audio (asset register with licences). The TDD (`docs_v2/06_techniczne.md`) and the production, decisions, glossary and changelog files are still to be written. Keep implementation status (✅/🟡/⬜) in docs_v2 in sync with the code. User decisions answered in `docs/MECHANICS.md` §13 are marked **[decyzja 2026-09-25]** in docs_v2.
+- [docs_v2/](docs_v2/README.md) — modular game documentation (v2, Polish): one-pager, vision, gameplay, one file per system, world (lore, `LoreDoc.md` 1.2 MB with embedded images — search it, don't read it whole; `magia.md`, `loredoc_niespojnosci.md`, NPC cards in `swiat/postacie/`), levels, UI, art and audio (asset register with licences). The TDD (`docs_v2/06_techniczne.md`) is still to be written. The decisions log, the open questions, the glossary and the milestones live in the specification (see below), not in docs_v2. Keep implementation status (✅/🟡/⬜) in docs_v2 in sync with the code. User decisions answered in `docs/MECHANICS.md` §13 are marked **[decyzja 2026-09-25]** in docs_v2.
 - **[docs/ai-tasks/](docs/ai-tasks/INFO.md) — tasks for the agent.** The user drops `task_NN.md` files there. Workflow (from `INFO.md`):
   - Keep the **Requierments** section exactly as the user wrote it (typos included). Never edit it.
   - Below it, add sections as needed (e.g. what was done, decisions, what I need from the user).
@@ -14,6 +14,24 @@ Working title "everhorror" (the GDD still calls the game "XYZ"). The logo `asset
   - New tasks follow `docs/ai-tasks/task_template.md`. Write reports in the language the task is written in (task_02+ are in Polish).
   - Report back in the task file itself, and in chat briefly.
 - Docs for the team are written in Polish. Code, identifiers and code comments are in English.
+
+## Specification (`../specification`, separate repo)
+- `C:\dev\gamedev\everhorror\specification`, next to this repo. **The design source of truth**, in Polish. The user pushes it to GitHub as its own project, the team edits it there, and I pull it locally (`git pull` in that folder). Version 1.0 was written from docs_v2 and the code after task_05. Start with its `README.md`.
+- **Workflow when asked to sync:**
+  1. `git pull`.
+  2. `git diff <commit from WDROZENIA.md>..HEAD`, plus new files in `zgloszenia/`.
+  3. Plan and questions. Implement, then tests and a factcheck (in this repo).
+  4. Update the spec: markers ⬜→✅, anything I had to decide marked [ROBOCZE], and an entry in `WDROZENIA.md`.
+  5. Commit the spec only when asked, with the prefix `[agent]`.
+- **Markers:**
+  - ✅ in the game, 🟡 partial, ⬜ decided and waiting (the order in `WDROZENIA.md` → "Czeka na wdrożenie" is the priority),
+  - 💡 proposal and ❓ open question: don't implement,
+  - ❌ remove from the game, then from the spec.
+- **IDs:**
+  - Rule IDs (`CZAS-3`, `WYP-4`, …) and content IDs (= game IDs: `lina`, `rzapie`, `miroslaw`) never change.
+  - Numbers live in `07_balans.md`, and each system file ends with a "Dla agenta" section pointing to the code.
+- **Changes from anywhere else** (ai-tasks, bug fixes): update the spec too, and log the change in `WDROZENIA.md` → "Zmiany agenta poza specyfikacją". Keep docs_v2 in sync as well until the user decides whether docs_v2 is retired.
+- **Requests** go in `zgloszenia/`. Answer inside the file ("Odpowiedź agenta", "Pytania agenta").
 
 ### Glossary (PL → meaning)
 - **błękitne żelazo** — "blue iron": the ore being mined. It is ordinary metal improved by centuries of radiation from an artifact.
@@ -64,7 +82,7 @@ Working title "everhorror" (the GDD still calls the game "XYZ"). The logo `asset
 - **Audio**: `default_bus_layout.tres` has buses Ambience and SFX, both with reverb. `random_sound_emitter.gd` (AudioStreamPlayer3D) replays a sound at random intervals. Placeholder SFX in `assets/sounds/generated/` come from `tools/generators/synth_sfx.js`. The `cave_ambient.mp3` bed is non-positional and looped.
 - `visual_interaction.tscn`: an early VN prototype, unused (the VN balloon replaced it).
 - **Dev tools**: see [tools/README.md](tools/README.md): screenshots (lets me SEE the game, which the MCP can't; supports `day`/`hour`/`flags`), `character_preview.gd` (character models side by side), test scenarios, generators.
-- **Build**: `--export-release "Windows Desktop" build/windows/Everhorror.exe` (embedded PCK; `tools/*`, `docs*`, `build/*`, `assets/Sewer/*` excluded; `dialogue/*.json` included), then zip with `tools/release/CZYTAJ_MNIE.txt` as `build/Everhorror-demo-<version>-windows.zip`. Current: 0.2. The main menu starts a new game with the user arg `--new-game` (smoke tests).
+- **Build**: `--export-release "Windows Desktop" build/windows/Everhorror.exe` (embedded PCK; `tools/*`, `docs*`, `build/*`, `assets/Sewer/*` excluded; `dialogue/*.json` included), then zip with `tools/release/CZYTAJ_MNIE.txt` as `build/Everhorror-demo-<version>-windows.zip`. Current: 0.3 (2026-09-25, task_05). The main menu starts a new game with the user arg `--new-game` (smoke tests).
 
 ## Conventions
 - Static typing (`var x: Type`, `-> void`), `@onready` node references, `class_name` for reusable types.

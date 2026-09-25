@@ -39,4 +39,4 @@ Filary to kryteria, według których oceniamy każdą funkcję. Jeśli funkcja n
 [propozycja]
 - **Najpierw pionowy wycinek:** obóz + jeden poziom tuneli + 2–3 NPC + jeden pełny dzień → noc → dzień. Dopiero potem poszerzamy grę.
 - **Kolejność cięcia przy braku czasu:** najpierw liczba pomieszczeń, potem liczba NPC, potem liczba zakończeń. Pętli dnia, czasu i poczytalności **nie tniemy**, bo to filary.
-- **Nowa funkcja** wchodzi tylko wtedy, gdy wspiera co najmniej jeden filar i mieści się w bieżącym kamieniu milowym ([07 Produkcja](07_produkcja.md)).
+- **Nowa funkcja** wchodzi tylko wtedy, gdy wspiera co najmniej jeden filar i mieści się w bieżącym kamieniu milowym (specyfikacja, `09_produkcja.md`).

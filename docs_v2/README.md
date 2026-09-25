@@ -5,6 +5,8 @@
 
 Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótkich, modułowych dokumentów. Stare dokumenty zostają bez zmian jako materiał źródłowy.
 
+> **Od 2026-09-25 źródłem prawdy o projekcie jest specyfikacja gry**: osobne repozytorium `specification` obok repozytorium gry (`C:\dev\gamedev\everhorror\specification`). Zespół zmienia ją na GitHubie, a agent wdraża zmiany. Ten folder opisuje stan implementacji i jest aktualizowany razem z grą. Dziennik decyzji, zbiorcze pytania, słowniczek i kamienie milowe są już tylko w specyfikacji.
+
 ## Jak czytać
 
 1. Zacznij od **[jednostronicowego opisu](00_jednostronicowy.md)**. To cała gra na jednej stronie.
@@ -37,11 +39,11 @@ Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótk
 | **Treść** | [03 Poziomy](03_poziomy.md) | — | 🟡 obóz i 15 miejsc wypraw w demie |
 | | [04 UI / UX](04_ui_ux.md) | — | 🟡 szkic |
 | | [05 Oprawa wizualna i dźwiękowa](05_oprawa.md) | — | 🟡 szkic |
-| **Technika** | [06 Dokument techniczny (TDD)](06_techniczne.md) | programista | 🟢 aktualny |
-| **Produkcja** | [07 Produkcja i roadmapa](07_produkcja.md) | zespół | 🟡 szkic |
-| | [Dziennik decyzji](decyzje.md) | zespół | 🟢 prowadzony |
-| | [Słownik](glosariusz.md) | zespół | 🟢 prowadzony |
-| | [Historia zmian](CHANGELOG.md) | zespół | 🟢 prowadzony |
+| **Technika** | 06 Dokument techniczny (TDD) | programista | 🔴 do napisania (skrót: specyfikacja, `08_technika.md`, i `CLAUDE.md`) |
+| **Produkcja** | Produkcja i roadmapa | zespół | w specyfikacji (`09_produkcja.md`) |
+| | Dziennik decyzji | zespół | w specyfikacji (`09_produkcja.md`) |
+| | Słownik | zespół | w specyfikacji (`01_swiat/slowniczek.md`) |
+| | Historia zmian | zespół | raporty w [docs/ai-tasks](../docs/ai-tasks/INFO.md) i `WDROZENIA.md` w specyfikacji |
 | **Szablony** | [Szablon systemu](szablony/system.md), [Szablon NPC](szablony/npc.md) | — | — |
 
 ## Oznaczenia
@@ -50,8 +52,8 @@ Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótk
 
 **W treści:**
 - **[GDD]** — pochodzi z pierwotnego GDD, czyli jest ustalone przez zespół.
-- **[propozycja]** — sugestia, która czeka na akceptację. Nie jest wiążąca, dopóki nie trafi do [dziennika decyzji](decyzje.md).
-- **❓** — otwarte pytanie. Zbiorcza lista jest w [07 Produkcja](07_produkcja.md#otwarte-pytania).
+- **[propozycja]** — sugestia, która czeka na akceptację. Nie jest wiążąca, dopóki nie trafi do dziennika decyzji (specyfikacja, `09_produkcja.md`).
+- **❓** — otwarte pytanie. Zbiorcza lista jest w specyfikacji (`09_produkcja.md`, „Otwarte pytania”).
 - **✅ / 🟡 / ⬜** — stan implementacji: gotowe / częściowo / nie zaczęte.
 
 ## Zasady prowadzenia dokumentacji
@@ -60,6 +62,6 @@ Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótk
 2. **Jeden temat, jeden plik.** Plik systemu ma najwyżej 2–3 ekrany. Jeśli rośnie, dzielimy go.
 3. **Najpierw „po co”, potem „jak”.** Każdy system zaczyna się od celu i doświadczenia gracza.
 4. **Liczby w jednym miejscu.** Wartości do balansu trzymamy w sekcji „Dane i strojenie” danego systemu, a w grze w plikach `Resource`, nie w kodzie.
-5. **Decyzje zapisujemy.** Gdy propozycja zostaje przyjęta albo odrzucona, dopisujemy wpis w [dzienniku decyzji](decyzje.md) i usuwamy znacznik [propozycja].
+5. **Decyzje zapisujemy.** Gdy propozycja zostaje przyjęta albo odrzucona, dopisujemy wpis w dzienniku decyzji (specyfikacja, `09_produkcja.md`) i usuwamy znacznik [propozycja].
 6. **Nowe systemy i postacie** zaczynamy od [szablonów](szablony/).
 7. **Język:** dokumentacja po polsku. Kod, nazwy w kodzie i komentarze po angielsku.

@@ -26,7 +26,7 @@ Z jakimi systemami się łączy i co od nich bierze lub im daje.
 Co się dzieje, gdy… (brak zasobu, NPC nie żyje, zapis w trakcie, itd.)
 
 ## Implementacja
-Stan (✅ / 🟡 / ⬜), pliki, sceny. Szczegóły techniczne w [TDD](../06_techniczne.md).
+Stan (✅ / 🟡 / ⬜), pliki, sceny. Szczegóły techniczne: `CLAUDE.md` i specyfikacja (`08_technika.md`).
 
 ## Otwarte pytania
 - ❓ …

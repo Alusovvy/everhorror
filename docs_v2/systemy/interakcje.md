@@ -16,11 +16,11 @@ Podchodzę bliżej, przedmiot delikatnie się rozjarza (ciepłe światło jak od
    - **rozmowa VN** (NPC, ściana w kaplicy),
    - **użycie** (stół z mapą, posłanie, drogowskazy w miejscach wypraw, które otwierają mapę [M]).
 4. **Efekty przy użyciu** ✅: flaga, notatka, przedmiot (także kilka naraz: `bandaze:2,swieca`), wpis zadania, koszt czasu (w podpowiedzi „· 1 h”), zniknięcie po podniesieniu, rana (`wound`), zmiana poczytalności (`sanity_change`) i wpis do podsumowania wyprawy (`expedition_event`). Rana i poczytalność działają tylko przy pierwszym użyciu, jeśli obiekt ma flagę.
-9. **Wymagany przedmiot** ✅ (`required_item`): podpowiedź dopisuje „(potrzebny: łom)”, a [E] bez przedmiotu tylko mówi, czego brakuje (`missing_text`). Nie kosztuje wtedy czasu i nie otwiera opisu. Przedmiot może się zużyć (`consume_item`).
 5. **Panel opisu zamyka [E] albo odwrócenie wzroku** ✅. Przy otwartym opisie [E] tylko zamyka panel i nigdy nie używa obiektu drugi raz, więc nie ma podwójnego kosztu czasu. Opis przedmiotu, który znika po użyciu (podniesienie, zaznaczona żyła), jest przypięty na 12 s albo do [E] **[poprawka po zgłoszeniu, 2026-09-25]**.
 6. **Dostępność** ✅: obiekt może pojawić się dopiero po fladze (np. palik przy zaznaczonej żyle, nisza w kaplicy) albo zniknąć po niej (np. ściana z zagadką po rozwiązaniu). Kod może też wyłączyć obiekt, np. NPC, którego nie ma w obozie.
 7. **Obóz się zmienia** **[GDD]**: postacie zmieniają miejsca według pory dnia, pojawiają się i znikają przedmioty (tobołek, kryształ, palik).
 8. **Nie dajemy opisu [E] rekwizytom, za którymi albo przy których stoi postać** (lada Tekli, stół z mapą zasłania tylko do wysokości blatu). Opis przechwytuje celowanie i utrudnia rozmowę **[uwaga z testu, 2026-09-25]**. Taki rekwizyt dostaje samą kolizję.
+9. **Wymagany przedmiot** ✅ (`required_item`): podpowiedź dopisuje „(potrzebny: łom)”, a [E] bez przedmiotu tylko mówi, czego brakuje (`missing_text`). Nie kosztuje wtedy czasu i nie otwiera opisu. Przedmiot może się zużyć (`consume_item`).
 
 ## Dane i strojenie
 | Parametr | Wartość | Gdzie |

@@ -36,7 +36,7 @@ Urzędnik Ministerstwa Ziemi z gałęzi pomniejszego klanu na Shihon. Prowadził
 | Zadanie | Nagroda | Koszt czasu |
 |---|---|---|
 | „Wiersz o świetle”: pokaż mu świecący grzyb z groty | wiersz (notatka), lekarstwo, +12 zaufania | wyprawa do groty |
-| Prośba o dopisanie żył (dzień 6+, brak normy) | odmowa, −2 zaufania. Nie oszuka ksiąg drugi raz | rozmowa |
+| Prośba o dopisanie żył (dzień 6+, brak normy) | odmowa, −2 zaufania. Kiedyś stracił ojczyznę, bo nie chciał fałszować ksiąg, i teraz też nie sfałszuje | rozmowa |
 
 ## Rozkład dnia (demo)
 Rano i 18–20 przy wspólnym stole (pałeczki z drzazgi), za dnia przy pulpicie z księgą zarządcy, wieczorem w swoim kącie z herbatą.

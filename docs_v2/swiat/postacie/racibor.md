@@ -1,6 +1,6 @@
 # Racibor, zarządca [ROBOCZE]
 
-> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_04) · Aktualizacja: 2026-09-25
+> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_04–05) · Aktualizacja: 2026-09-25 (task_05)
 
 | Pole | Wartość |
 |---|---|
@@ -15,7 +15,7 @@ Były porucznik straży kniaziowskiej. Od dziesięciu lat pilnuje kopalń w Wąw
 
 ## Osobowość i głos
 - Krótkie, rzeczowe zdania, liczby i terminy. Sucha ironia („Klątwy nie wpisujemy do ksiąg”).
-- Szef wyprawy, który **wymaga szukania złóż**. Tak ustaliłeś w MECHANICS §13 pkt 2: jeśli gracz to ignoruje, dostaje upomnienia, a w końcu wyprawa wyjeżdża bez niego (⬜ upomnienia jeszcze nie są zrobione).
+- Szef wyprawy, który **wymaga szukania złóż** (MECHANICS §13 pkt 2). Jeśli gracz to ignoruje, dostaje upomnienia, a w końcu wyprawa wyjeżdża bez niego. ✅ Od task_05: norma, upomnienia i rozliczenie.
 - Druga z Initium to dla niego polityka, nie magia: „Na razie nam po drodze”.
 
 ## Informacje do przekazania
@@ -24,6 +24,8 @@ Były porucznik straży kniaziowskiej. Od dziesięciu lat pilnuje kopalń w Wąw
 | Po co wyprawa, termin Kniazia | pytanie |
 | Kim jest Dobrawa, ostrzeżenie przed dotykiem | dzień 2+ |
 | Odpis raportu sztygara sprzed 40 lat (okopcone kamienie, brak trzech beczek prochu) | zdany raport o 2 żyłach |
+| Stan normy („Idzie. Za wolno, ale idzie”) | raz dziennie, po pierwszym raporcie |
+| Exitium i von Brühl („patrzy na ludzi jak na narzędzia”) | po spotkaniu z Drugimi |
 
 ## Przedmioty
 | Przedmiot | Jak zdobyć |
@@ -34,12 +36,15 @@ Były porucznik straży kniaziowskiej. Od dziesięciu lat pilnuje kopalń w Wąw
 ## Zadania
 | Zadanie | Nagroda | Koszt czasu |
 |---|---|---|
-| „Złoża dla Kniazia”: zaznacz 2 żyły błękitu | odpis z archiwum, reputacja +10 | znaczenie żyły 1 h |
+| „Złoża dla Kniazia”: zaznacz 2 żyły błękitu, potem norma 12 żył do wieczora dnia 7 | odpis z archiwum, reputacja +10. Rano w dniu 8 rozliczenie: z normą gracz zostaje, bez niej wyprawa wyjeżdża bez niego | znaczenie żyły 1 h |
 | Donos na Teklę (tobołek z listem Konfraterni) | reputacja +8, lina. Tekla trafia pod straż | rozmowa |
 | Kryształ z kaplicy dla Kniazia | reputacja +10 | rozmowa |
 
-## Dzień 3
-Przy śniadaniu ogłasza, że za tydzień idzie pierwsza dostawa. Jeśli gracz zaznaczył żyłę w upadowej, każe Mirosławowi szykować ładunki, żeby otworzyć upadową. Gracz, który przeczytał list dziadka, może zaprotestować. Przy reputacji ≥ 10 Racibor zaczyna wątpić.
+## Dzień 3 i dalej
+- **Dzień 3, śniadanie:** ogłasza normę Kniazia: 12 żył do wieczora dnia 7. Jeśli gracz zaznaczył żyłę w upadowej, chce ją otworzyć, „jak policzymy żyły”. Gracz, który przeczytał list dziadka, może zaprotestować. Przy reputacji ≥ 10 Racibor zaczyna wątpić.
+- **Dni 4–7, śniadanie:** upomina, jeśli żył przybywa za wolno, a w dniu 7 zawsze, gdy normy nie ma. Każde upomnienie to −2 reputacji.
+- **Dzień 8, rano:** liczy kreski na mapie („Koniec tygodnia”). Bez normy wyprawa odjeżdża bez gracza („Zostałeś sam”).
+- **Poczytalność:** −4 co noc, od piątej nocy bez normy −7.
 
 ## Rozkład dnia (demo)
 Rano i 18–20 siedzi u szczytu wspólnego stołu. W dzień i wieczorem stoi przy stole z mapą w swojej kwaterze.

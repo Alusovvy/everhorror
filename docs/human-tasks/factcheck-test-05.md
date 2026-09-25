@@ -1,7 +1,7 @@
 # Factcheck test 05: ekwipunek, wyprawy z [M], 25 żył i norma, 10 nowych miejsc, 9 nowych postaci, tydzień
 
 > Zadanie: [task_05](../ai-tasks/task_05.md) · Przygotowano: 2026-09-25
-> Uruchom: VS Code **F5** („Godot: main scene”) → START. Buildu 0.3 jeszcze nie ma (na Twoje życzenie).
+> Uruchom: VS Code **F5** („Godot: main scene”) → START. Albo build 0.3: `build/Everhorror-demo-0.3-windows.zip` (rozpakuj, uruchom `Everhorror.exe`).
 > Wpisz w kolumnie **Wynik**: ✅ OK / ❌ błąd / 💬 propozycja zmiany i dopisz uwagi.
 
 ## Co zostało dodane
@@ -43,7 +43,7 @@
 
 | # | Co sprawdzić | Jak | Oczekiwany wynik | Wynik | Uwagi |
 |---|---|---|---|---|---|
-| 1 | Ekwipunek | [I] w obozie i w chodnikach | Okno z listą, opisem i stanem bohatera słowami. [I] albo [Esc] zamyka. Amulet dziadka jest od początku | | |
+| 1 | Ekwipunek | [I] w obozie i w chodnikach | Okno z listą, opisem i stanem bohatera słowami. [I] albo [Esc] zamyka. Amulet dziadka (złoty, z kawałkiem błękitnej stali) jest od początku | | |
 | 2 | Użycie przedmiotu | Zraniony (np. para w szczelinie) → [I] → Bandaże → UŻYJ | −0,5 h, opis opatrywania, stan się poprawia. Przy pełnym zdrowiu UŻYJ jest wyłączone z podpowiedzią | | |
 | 3 | Stół z mapą | Stół w kwaterze Racibora | Rysunek grafu, trasa czerwonym atramentem, licznik „Żyły błękitu: X z 12 · termin…”, lista z czasem i „nowe”/„żyły 1/2”, **WYRUSZ** | | |
 | 4 | Pierwsza wizyta | WYRUSZ do nowego miejsca | Droga + 1 h rozpoznania, plansza z nazwą, zdanie o miejscu. Straszne miejsca obniżają poczytalność | | |

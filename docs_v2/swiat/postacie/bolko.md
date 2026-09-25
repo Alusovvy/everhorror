@@ -1,6 +1,6 @@
 # Stary Bolko [ROBOCZE]
 
-> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_03–04) · Aktualizacja: 2026-09-25
+> Status: 🔵 do przeglądu (Ren) · Autor: agent (task_03–05) · Aktualizacja: 2026-09-25 (task_05)
 
 | Pole | Wartość |
 |---|---|
@@ -26,6 +26,8 @@ Kopał w tej kopalni czterdzieści lat temu razem z dziadkiem bohatera i pamięt
 | Droga do kaplicy | dzień 2+, zaufanie ≥ 5 |
 | Zdanie o Tekli i o Dobrawie | po ich poznaniu / dzień 2+ |
 | Reakcja na los dziadka | gracz ma list z kaplicy |
+| Zdanie o Wszeborze („Kopie za trzech, gada za pięciu”) | po poznaniu Wszebora |
+| Zdanie o Sabinie („Jedna czarownica w obozie to był znak. Dwie to już zwyczaj”) | Sabina w obozie |
 
 ## Przedmioty
 Brak.
@@ -36,6 +38,7 @@ Nie ma własnego zadania. Wspiera „Ślady dziadka”.
 ## Rozkład dnia (demo)
 - Rano i 18–20 przy wspólnym stole, w dzień klęczy przy wózku z urobkiem, po 20 przy swoim posłaniu.
 - Dzień 2+: przy zaufaniu ≥ 10 czeka rano przy posłaniu gracza. Przy zaufaniu < 0 stoi odwrócony plecami.
+- Poczytalność: −2 co noc, po prawdzie o dziadku −5.
 
 ## Co robi przy 0% poczytalności [ROBOCZE]
 Przestaje odróżniać przeszłość od teraźniejszości: bierze bohatera za jego dziadka i prowadzi go w głąb.

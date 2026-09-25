@@ -10,12 +10,12 @@ Standardowe funkcje, których gracz oczekuje: start, wczytanie, pauza, ustawieni
 2. **Pauza** pod [Esc] w trakcie gry: RESUME, SAVE GAME, LOAD GAME, OPTIONS, MAIN MENU, EXIT. Świat stoi, kursor jest uwolniony. [Esc] w podmenu wraca poziom wyżej, a na głównej liście pauzy wznawia grę. ✅
 3. **Zapis ręczny w 3 slotach.** Slot pokazuje datę i godzinę zapisu, zapis nadpisuje slot bez pytania. ✅
 4. **Co jest zapisywane:** scena, pozycja gracza z kierunkiem patrzenia i cały `GameState`: dzień, godzina, flagi (w tym miejsce wyprawy, spotkanie w tunelach, otwarta ściana, zabrane przedmioty), przedmioty, notatki, zadania, stan NPC (poczytalność, zdrowie, reputacja, status), zdrowie, poczytalność i gorączka bohatera, trwająca wyprawa. ✅ Rozstawienie postaci liczy się po wczytaniu od nowa z pory dnia.
-9. **Poranek w pamięci** ✅: na początku każdego dnia (i po wczytaniu) `SaveManager` zapamiętuje stan. Po śmierci ekran końca ma przycisk „RETRY FROM MORNING”, który wraca do tego stanu. To nie jest slot na dysku.
-10. **Wersja zapisu 3** (task_05) ✅. Zapisy z wersji 2 wczytują się: bohater zdrowy, bez wyprawy, amulet dopisany.
 5. **Opcje:** czułość myszy, głośność ogólna, pełny ekran, **gwara śląska górników** (domyślnie włączona). Zapamiętywane między sesjami. ✅
 6. [propozycja] **Autozapis na początku każdego dnia** (po śnie) do osobnego slotu na dysku. W pamięci już jest (pkt 9).
 7. [propozycja] Zapis tylko w FPP, nie w trakcie scen VN.
-8. Język UI menu: angielski (decyzja zespołu, zob. [dziennik](../decyzje.md)). Tekst w świecie: polski.
+8. Język UI menu: angielski (decyzja zespołu, zob. dziennik decyzji w specyfikacji). Tekst w świecie: polski.
+9. **Poranek w pamięci** ✅: na początku każdego dnia (i po wczytaniu) `SaveManager` zapamiętuje stan. Po śmierci ekran końca ma przycisk „RETRY FROM MORNING”, który wraca do tego stanu. To nie jest slot na dysku.
+10. **Wersja zapisu 3** (task_05) ✅. Zapisy z wersji 2 wczytują się: bohater zdrowy, bez wyprawy, amulet dopisany.
 
 ## Dane i strojenie
 | Parametr | Wartość | Gdzie |
@@ -30,7 +30,7 @@ Standardowe funkcje, których gracz oczekuje: start, wczytanie, pauza, ustawieni
 - Zapis z nowszej wersji gry → ❓ pole `version` już istnieje, migracje do zaplanowania.
 
 ## Implementacja
-✅ Zob. [TDD: zapis i ustawienia](../06_techniczne.md#zapis-gry).
+✅ Autoloady `SaveManager` i `Settings` (zob. `CLAUDE.md`, sekcja Systems).
 
 ## Otwarte pytania
 - ❓ Potwierdzenie nadpisania slotu?
