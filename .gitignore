@@ -1,0 +1,33 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Godot editor leftovers
+*.tmp
+*.translation
+
+# Unused duplicate formats from asset packs (the project imports only glTF,
+# which ships its own textures). Each folder also has a local .gdignore so
+# Godot skips importing it.
+assets/prop_pack/Exports/FBX/
+assets/prop_pack/Exports/OBJ/
+assets/prop_pack/Textures/
+
+# Blender source files (Blender import is disabled in project settings)
+*.blend
+*.blend1
+
+# Exports / builds
+/build/
+/export/
+*.pck
+*.exe
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/

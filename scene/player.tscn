@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b0r2qf2ey262w"]
+
+[ext_resource type="Script" uid="uid://cihebd2so5gb4" path="res://script/player.gd" id="1_hjaqi"]
+[ext_resource type="AudioStream" uid="uid://dcg5jndvwl5ky" path="res://assets/sounds/steps.mp3" id="2_fvtld"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_s0y64"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4xowi"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1742980102]
+script = ExtResource("1_hjaqi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1105301679]
+shape = SubResource("CylinderShape3D_s0y64")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1623923425]
+mesh = SubResource("CylinderMesh_4xowi")
+
+[node name="Head" type="Node3D" parent="." unique_id=468548846]
+
+[node name="EyeCamera" type="Camera3D" parent="Head" unique_id=1462409449]
+current = true
+
+[node name="PlayerWalkingSound" type="AudioStreamPlayer3D" parent="." unique_id=1840385700]
+stream = ExtResource("2_fvtld")
+max_distance = 1.0

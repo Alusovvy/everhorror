@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cr3kk787rbwr8"]
+
+[ext_resource type="Script" uid="uid://bk6rfq211tap7" path="res://script/world.gd" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://b0r2qf2ey262w" path="res://scene/player.tscn" id="2_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://cdquc2ay7103" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/TestLevel/TestLevel.tscn" id="4_m5mgf"]
+[ext_resource type="PackedScene" uid="uid://cspjlynxkeumw" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/post_reinforced_d.tscn" id="5_emkrx"]
+[ext_resource type="PackedScene" uid="uid://cpuwovwfbkarq" path="res://assets/prop_pack/Exports/glTF/Bag.gltf" id="6_y3jn2"]
+[ext_resource type="PackedScene" uid="uid://eur6ul4xbasy" path="res://assets/prop_pack/Exports/glTF/Banner_1.gltf" id="7_yur6x"]
+[ext_resource type="PackedScene" uid="uid://cpxv34lurhlj" path="res://assets/prop_pack/Exports/glTF/Barrel.gltf" id="8_7ghph"]
+[ext_resource type="AudioStream" uid="uid://bv86hwpkpt3n" path="res://assets/sounds/cave_ambient.mp3" id="16_2u3nc"]
+
+[node name="World" type="Node3D" unique_id=295581419]
+script = ExtResource("1_fj7yv")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1797782470]
+transform = Transform3D(0.51958203, 0.37182495, -0.76927286, 1.5639491e-09, 0.90034455, 0.43517792, 0.85442054, -0.22611064, 0.46780285, -26.302917, 6.7674184, 6.9124756)
+fov = 112.49999
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1629214843]
+transform = Transform3D(1, 0, 0, 0, -0.84363204, 0.53692174, 0, -0.53692174, -0.84363204, 0.7623768, 21.697859, 3.9761949)
+light_energy = 1.396
+
+[node name="Player" parent="." unique_id=1742980102 instance=ExtResource("2_fj7yv")]
+transform = Transform3D(-0.9978015, 0, -0.06627387, 0, 1, 0, 0.06627387, 0, -0.9978015, -4.0588894, 2.3853235, -34.065636)
+
+[node name="CaveSound" type="AudioStreamPlayer3D" parent="." unique_id=1167087797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0010242, 3.5764742, -24.329798)
+stream = ExtResource("16_2u3nc")
+autoplay = true
+
+[node name="Modular_Mine_Set" parent="." unique_id=1441076964 instance=ExtResource("4_m5mgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012459278, -0.014464617, -0.0062503815)
+
+[node name="Post_Reinforced_D" parent="." unique_id=1760973182 instance=ExtResource("5_emkrx")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -0.65913284, -0.31039843, -12.789545)
+
+[node name="Bag2" parent="." unique_id=1464869745 instance=ExtResource("6_y3jn2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.9262638, 0.94156253, -36.214256)
+
+[node name="Banner_12" parent="." unique_id=639269548 instance=ExtResource("7_yur6x")]
+transform = Transform3D(-0.1667687, 0, -0.98599607, 0, 1, 0, 0.98599607, 0, -0.1667687, -6.5605125, 2.884065, -35.71497)
+
+[node name="Barrel2" parent="." unique_id=406214766 instance=ExtResource("8_7ghph")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7229028, 1.0734754, -34.03761)
