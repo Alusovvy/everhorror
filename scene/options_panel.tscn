@@ -34,6 +34,22 @@ max_value = 20.0
 step = 0.5
 value = 5.0
 
+[node name="BrightnessLabel" type="Label" parent="Grid"]
+layout_mode = 2
+tooltip_text = "Gra jest ciemna. Podnieś, jeśli nic nie widzisz."
+mouse_filter = 1
+text = "Brightness"
+
+[node name="BrightnessSlider" type="HSlider" parent="Grid"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.6
+max_value = 1.4
+step = 0.05
+value = 1.0
+
 [node name="VolumeLabel" type="Label" parent="Grid"]
 layout_mode = 2
 text = "Master volume"
@@ -46,6 +62,32 @@ size_flags_vertical = 4
 max_value = 1.0
 step = 0.01
 value = 0.8
+
+[node name="AmbienceLabel" type="Label" parent="Grid"]
+layout_mode = 2
+text = "Ambience volume"
+
+[node name="AmbienceSlider" type="HSlider" parent="Grid"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SfxLabel" type="Label" parent="Grid"]
+layout_mode = 2
+text = "Sound effects volume"
+
+[node name="SfxSlider" type="HSlider" parent="Grid"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
 
 [node name="FullscreenLabel" type="Label" parent="Grid"]
 layout_mode = 2

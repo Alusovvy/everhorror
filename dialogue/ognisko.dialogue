@@ -1,0 +1,90 @@
+using GameState
+
+~ start
+$> mark_today("campfire")
+Siadasz na skrzyni przy ogniu. Ciepło łapie cię za ręce, zanim zdążysz je wyciągnąć.
+if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
+	Po drugiej stronie hali, w ciemnym kącie, Mirosław liczy coś szeptem. Do ognia nie podchodzi. Ogień to jego fach i jego wróg.
+elif npc_status("miroslaw") == "camp"
+	$> mark_today("mir_company")
+	$> change_sanity("miroslaw", 2)
+	Mirosław siedzi po drugiej stronie, dalej od płomienia niż wszyscy. Ale siedzi.
+if day >= 7
+	=> ostatni
+elif day == 6
+	=> po_wstrzasie
+elif day == 5
+	=> piesn
+=> gawedy
+
+~ gawedy
+if npc_status("wszebor") == "camp"
+	Wszebor dokłada do ognia, ostrożnie, jakby karmił zwierzę.
+	Wszebor: U nas w Przystani mówią, że ogień to gość. Karm go, to zostanie. Głodź, to pójdzie. A potem wróci po ciebie.
+	if npc_status("sobek") == "camp"
+		Sobek: U nas na stepie mówi się krócej. Kto zaśnie przy zimnym ogniu, ten się nie budzi.
+		Wszebor: No i po co to ludziom na noc, stepowy?
+if npc_status("nasir") == "camp" and not has_fever("nasir")
+	Nasir: W Bakaszu pali się ogniska na dachach, żeby Rinust widział, gdzie mieszkają żywi.
+	Nasir: Tu chyba pali się po to, żeby to, co na dole, wiedziało, gdzie nie schodzić.
+	if npc_status("sobek") == "camp"
+		Sobek: Dzięki, Nasir. Zaraz się wszyscy ogrzejemy tym pocieszeniem.
+if npc_status("tekla") == "camp"
+	Tekla: Dość strachów. Kto ma kubek, dostanie wrzątku z igliwiem. Kto nie ma, niech się grzeje opowieściami.
+Przez chwilę hala jest tylko halą, ogień tylko ogniem, a ludzie tylko ludźmi.
+$> change_player_sanity(5)
+=> END
+
+~ piesn
+if npc_status("wszebor") != "camp"
+	Ogień trzaska. Bez Wszebora nikt nie śpiewa. Siedzicie w ciszy, która też jest jakąś pieśnią.
+	$> change_player_sanity(3)
+	=> END
+Wszebor grzebie kijem w ogniu, aż iskry idą pod strop.
+Wszebor: U nas dziś zaczyna się Długa Noc. Osiemnaście godzin ciemności. To zaśpiewam wam to, co się śpiewa, żeby ją przespać.
+Wszebor śpiewa nisko i powoli, jakby kołysał całą halę.
+Wszebor: Śpij, bo za progiem noc bez dna, śnieg zasypuje próg i drzwi. Kto śpi, ten w chacie do dnia trwa, kto czuwa, tego biorą sny.
+Wszebor: Śpij, bo pod śniegiem chodzi głód, a z głodem chodzą Wultany. Do rana pilnują nas piec i lód, do rana wszyscyśmy wyspani.
+if npc_status("bolko") == "camp"
+	Bolko: Stara ekipa też to śpiewała. Inne słowa, ta sama nuta. Skąd ją znasz?
+	Wszebor: Nie wiem. Ona zawsze była.
+Nikt długo nic nie mówi. Ogień dogasa do żaru, a żar oddycha.
+$> change_player_sanity(6)
+$> change_sanity("wszebor", 2)
+=> END
+
+~ po_wstrzasie
+Nikt dziś nie siedzi daleko od ognia. Nawet Sobek przyniósł swój pieniek bliżej.
+if npc_status("wszebor") == "camp"
+	Wszebor: Gadajcie, co chcecie, ale to nie było tąpnięcie. Tąpnięcie znam. To było, jakby się kto przeciągnął.
+if npc_status("hagiwara") == "camp"
+	Hagiwara: U nas po trzęsieniu ziemi pisze się wiersz i przybija na drzwiach. Żeby dom wiedział, że się go nie boimy.
+	if has_note("wiersz_hagiwary")
+		Hagiwara wyjmuje skrawek papieru i czyta powoli, wyraźnie, żeby wszyscy zrozumieli. O świetle pod górą, którego nikt nie sadził.
+		if npc_status("sobek") == "camp"
+			Sobek: I to ma pomóc?
+		Hagiwara: Nie. Ale teraz boimy się razem, a nie osobno. To duża różnica.
+	else
+		Hagiwara: Tutaj jeszcze żadnego nie napisałem. Może już czas.
+if npc_status("tekla") == "camp"
+	Tekla dolewa wszystkim wrzątku, nie pytając. Dziś nie liczy kubków.
+Strop nad wami trzeszczy raz, cicho, jak deska pod znajomym krokiem. Wszyscy udają, że nie słyszą.
+$> change_player_sanity(4)
+=> END
+
+~ ostatni
+Ostatni wieczór. Ogień pali się wysoko, bo nikt już nie oszczędza drewna.
+if npc_status("tekla") == "camp"
+	Tekla: Jutro pierwszy wóz. Jak wjadę na górę, sprzedam wszystko, co zostało, i pół roku nie chcę widzieć beczki.
+if npc_status("wszebor") == "camp"
+	Wszebor: Ja jadę do Przystani. Wdowa po bracie dostanie potrójną wypłatę, a dzieciaki po kilofie. No co? U nas to prezent.
+if npc_status("nasir") == "camp" and not has_fever("nasir")
+	Nasir: Ja poszukam kopalni, w której jest sucho. Mówią, że takich nie ma. Będę szukał długo, habibi.
+if npc_status("sobek") == "camp"
+	Sobek: A ja wracam tam, gdzie płacą. Czyli pewnie tu. Kniaź tak łatwo błękitu nie odpuści.
+if quota_met()
+	O jutrzejszym liczeniu nikt nie mówi, bo nie trzeba. Norma jest. Można gadać o wszystkim innym.
+else
+	O jutrzejszym liczeniu nie mówi nikt. Milczenie siedzi przy ogniu razem z wami, na najlepszym miejscu.
+$> change_player_sanity(4)
+=> END

@@ -14,11 +14,11 @@
 
 | Ekran | Zawartość | Stan |
 |---|---|---|
-| **HUD (FPP)** | celownik (biały, a na obiekcie bursztynowy), podpowiedź „[E] nazwa · koszt (potrzebny: …)”, panel opisu na dole ekranu, zegar „Dzień N · GG:MM”, pod nim stan bohatera tylko gdy coś jest nie tak („ranny · gorączka”), komunikaty (czas, przedmioty, notatki, zadania, żyły, szepty) | ✅ |
+| **HUD (FPP)** | celownik (biały, a na obiekcie bursztynowy), podpowiedź „[E] nazwa · koszt (potrzebny: …)”, panel opisu na dole ekranu, zegar „Dzień N · GG:MM”, pod nim stan bohatera tylko gdy coś jest nie tak („ranny · gorączka”), komunikaty (czas, przedmioty, notatki, zadania, żyły, szepty), winieta na brzegach przy „na krawędzi” | ✅ |
 | **Menu główne** | tytuł EVERHORROR, START / OPTIONS / LOAD GAME / EXIT | ✅ |
 | **Pauza** | przyciemnienie, RESUME / SAVE GAME / LOAD GAME / OPTIONS / MAIN MENU / EXIT | ✅ |
-| **Opcje** | czułość myszy, głośność, pełny ekran, gwara śląska górników, BACK | ✅ |
-| **Sloty zapisu** | 3 sloty z datą, komunikat o zapisie | ✅ |
+| **Opcje** | czułość myszy, jasność, głośność ogólna + osobno tło i efekty, pełny ekran, gwara śląska górników, BACK | ✅ |
+| **Sloty zapisu** | rząd AUTO (świt, tylko wczytanie) + 3 sloty ręczne z datą | ✅ |
 | **Ekran VN** | rozmyte tło gry, portret 3D postaci (albo statyczny obraz, np. ściana Onych), imię, tekst, opcje, zegar | ✅ |
 | **Stół z mapą** | rysunek grafu dróg (trasa, gdzie jesteś, kreski żył), licznik żył i termin, lista znanych miejsc z kosztem, opis, powód blokady, WYRUSZ | ✅ |
 | **Mapa w terenie [M]** | ten sam ekran: sąsiednie miejsca i powrót do obozu, IDŹ DALEJ / WRACAJ DO OBOZU / ZOSTAŃ TUTAJ | ✅ |
@@ -40,4 +40,4 @@ Menu główne ──START──▶ Gra (FPP) ◀──RESUME── Pauza
 ```
 
 ## Dostępność
-[propozycja] Do dodania w opcjach: suwak jasności lub gammy (ciemna gra), rozmiar tekstu VN, tempo tekstu, odwrócenie osi Y, osobne głośności (muzyka, efekty, ambient), zmiana przypisania klawiszy.
+✅ Jasność i osobne głośności tła/efektów są (task_06). [propozycja] Do dodania: rozmiar i tempo tekstu VN, odwrócenie osi Y, zmiana przypisania klawiszy.

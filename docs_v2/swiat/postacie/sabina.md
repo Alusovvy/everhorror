@@ -25,6 +25,7 @@ Najmłodsza w wyprawie Exitium, z waldgrosseńskiej rodziny, która oddała ją 
 | Po co Exitium przyszło: artefakt, który od tysięcy lat zmienia metal | zawsze |
 | Gdzie jeszcze są żyły (czuje je) | raz dziennie |
 | Gorączki magią się nie leczy | Nasir chory |
+| Scena z Dobrawą (Initium vs Exitium, ból; obie czują kryształ) | wieczór, dzień 4+, raz (task_06) |
 
 ## Przedmioty
 | Przedmiot | Jak zdobyć |

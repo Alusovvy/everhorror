@@ -77,6 +77,7 @@ const QUESTS: Dictionary = {
 	&"pokoj": preload("res://data/quests/pokoj.tres"),
 	&"oferta": preload("res://data/quests/oferta.tres"),
 	&"odlamek": preload("res://data/quests/odlamek.tres"),
+	&"czternasty": preload("res://data/quests/czternasty.tres"),
 }
 const ITEMS: Dictionary = {
 	&"amulet": preload("res://data/items/amulet.tres"),
@@ -96,6 +97,7 @@ const ITEMS: Dictionary = {
 	&"grzyb": preload("res://data/items/grzyb.tres"),
 	&"odlamek": preload("res://data/items/odlamek.tres"),
 	&"klejnot": preload("res://data/items/klejnot.tres"),
+	&"lampa": preload("res://data/items/lampa.tres"),
 }
 ## Places of the expedition map (Expeditions). The camp itself is "oboz".
 const LOCATIONS: Dictionary = {
@@ -234,8 +236,19 @@ func clear_flag(flag_name: String) -> void:
 	flags.erase(flag_name)
 	flags_changed.emit()
 
+## True when the flag is set. Flags may carry a payload (a day number, a place id, a list:
+## "encounter_place", "nasir_at_pumps"…) — any non-empty payload counts as set.
 func has_flag(flag_name: String) -> bool:
-	return bool(flags.get(flag_name, false))
+	var value: Variant = flags.get(flag_name, false)
+	if value is bool:
+		return value
+	if value is String or value is StringName:
+		return String(value) != ""
+	if value is Array:
+		return not value.is_empty()
+	if value is int or value is float:
+		return value != 0
+	return value != null
 
 func get_flag(flag_name: String, default: Variant = null) -> Variant:
 	return flags.get(flag_name, default)
@@ -561,6 +574,20 @@ func start_quest(quest_id: StringName) -> void:
 		return
 	quests[quest_id] = {"state": "active", "entries": []}
 	quest_log(quest_id, "start")
+
+## The "Czternaście kresek" observations (quest `czternasty`). At four or more, someone
+## below answers with a gift in the night (StoryDirector._resolve_night).
+const FOURTEENTH_CLUES: Array[String] = [
+	"saw_marks_rzapie", "saw_marks_pillar", "opened_grabiec_cache",
+	"saw_bread", "saw_lamp", "saw_niches", "saw_medal",
+]
+
+func fourteenth_clues() -> int:
+	var count := 0
+	for flag in FOURTEENTH_CLUES:
+		if has_flag(flag):
+			count += 1
+	return count
 
 func quest_log(quest_id: StringName, entry_id: String) -> void:
 	start_quest(quest_id)

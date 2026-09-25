@@ -15,7 +15,8 @@ Bohater jest wnukiem górnika, przewodnika i kryptografa, który latami po cichu
 3. Kaplica ze ścianą Onych: zagadka i nisza. Ostatni list dziadka mówi, że widział Onych, którzy śpią, że błękit to Ich oddech, że przy samym sercu nie wolno kopać, że sam zasypał upadową i został po tamtej stronie, i że kryształu nie wolno oddać nikomu, „kto nosi maskę albo koronę”.
 4. Dzień 3: Racibor ogłasza normę Kniazia (12 żył do wieczora dnia 7) i chce po liczeniu otworzyć upadową, bo tam jest najgrubsza żyła. Czyli dokładnie to, przed czym dziadek ostrzegał.
 5. Dzień 3 w tunelach: wyprawa Drugich z Exitium (Ottokar, Sabina, Hieronim, Welf). Ottokar chce map dziadka albo kryształu. Sabina zostaje w obozie jako obserwatorka.
-6. Dni 4–7: norma, upomnienia, gorączka Nasira, wstrząs w piątą noc, Drudzy w głębinach (ranny Welf, szalony Hieronim, który mówi, że „ona śpi do góry nogami”).
+6. Dni 4–7: norma, upomnienia, gorączka Nasira, wstrząs w piątą noc (od task_06 zostawia ślady w chodnikach), Drudzy w głębinach (ranny Welf, szalony Hieronim, który mówi, że „ona śpi do góry nogami”).
+6a. **„Czternaście kresek”** (task_06, [ROBOCZE]): kreski, zeszyt Grabca, chleb, lampka, pusta nisza i medalik składają się w quest. Przy ≥ 4 śladach ktoś nocą zostawia bohaterowi starą lampę przewodnika. Demo nie mówi, kim jest — to zaczepka pod fabułę główną (❓ Ren: kto liczy do czternastu?).
 7. Rano w dniu 8 Racibor liczy żyły. Z normą gracz zostaje, a upadowa zostanie otwarta, chyba że list dziadka przekonał Racibora. Bez normy wyprawa wyjeżdża bez gracza: pusta hala, lina wciągnięta do połowy, stukanie zza skały.
 
 **Wybory i ich skutki w demie:**
@@ -27,6 +28,7 @@ Bohater jest wnukiem górnika, przewodnika i kryptografa, który latami po cichu
 | Kryształ oddać Dobrawie, Raciborowi albo zatrzymać | Dobrawa wyjeżdża przed świtem albo kryształ idzie do Kniazia albo zostaje u gracza |
 | Powiedzieć Bolkowi prawdę o dziadku | Bolko w dniu 3 staje przeciw Raciborowi |
 | Zaprotestować na ogłoszeniu w dniu 3 | przy zaufaniu Racibora ≥ 10 zarządca przeczyta list i odłoży otwarcie upadowej |
+| Podać list dziadka przy rozliczeniu (ostatnia szansa, jeśli nie było protestu) | Racibor wstrzymuje upadową do decyzji Kniazia |
 | Lekarstwo dla Nasira albo dla siebie | Nasir żyje i daje Klejnot albo wywożą go na górę (pompy stają) |
 | Kryształ dla Ottokara | 2 żyły do normy, ale amulet dziadka stygnie |
 | Bandaże dla rannego Welfa | Welf żyje, oddaje dług lekarstwem i ostrzega przed mistrzem |

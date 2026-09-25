@@ -13,6 +13,12 @@ if not has_flag("met_bolko")
 
 ~ hub
 Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
+- W nocy ziemia drżała. [if has_flag("tremor_seen") and not has_flag("bolko_tremor") /]
+	$> set_flag("bolko_tremor")
+	Bolko: Drżała. Czterdzieści lat temu też tak drżała. Tydzień przed tym, jak się wszystko posypało.
+	Bolko: Stary Grabiec mówił wtedy: góra się przewraca na drugi bok. Śmialiśmy się z niego. Potem żeśmy się już nie śmiali.
+	$> change_player_sanity(-2)
+	=> hub
 - Co myślisz o Wszeborze? [if has_flag("met_wszebor") and not has_flag("bolko_on_wszebor") /]
 	$> set_flag("bolko_on_wszebor")
 	Bolko: Hawiar. Kopie za trzech, gada za pięciu, a śpiewa za całą Przystań. Dobry chłop.
@@ -89,7 +95,7 @@ Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
 	$> change_rep("bolko", 10)
 	$> change_sanity("bolko", -4)
 	=> hub
-- Pójdę już.
+- Pójdę już. [#leave]
 	Bolko: Idź. I patrz na strop, nie pod nogi.
 	=> END
 

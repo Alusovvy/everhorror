@@ -88,7 +88,30 @@ Dobrawa: [[Słucham.|Tak?|Mów krótko. To miejsce boli.]]
 	if has_flag("sabina_joined")
 		Dobrawa: Sabina jest dobra. Za dobra na Exitium. Tam dobro szybko się zużywa.
 	=> hub
-- Muszę iść.
+- Stoicie tu z Sabiną co wieczór i milczycie. [if has_flag("sabina_joined") and npc_status("sabina") == "camp" and part_of_day() == "wieczor" and not has_flag("dwie_drugie") /]
+	$> set_flag("dwie_drugie")
+	Dobrawa i Sabina stoją trzy kroki od siebie, obie zwrócone twarzami do ciemnej ściany hali. Dwie maski, dwa kostury. Milczenie, które ma temperaturę.
+	Sabina: My nie milczymy, kochanie. My rozmawiamy. Wy tego po prostu nie słyszycie.
+	Dobrawa: Nie rozmawiamy. Ona nadaje. Ja nie odbieram.
+	Sabina: Widzisz? Odpowiedziała. W Exitium to by już uchodziło za przyjaźń.
+	Dobrawa: Exitium. Dziecko, które uciekło z domu i zamieszkało w ruinach, bo w ruinach nikt nie każe sprzątać.
+	Sabina: A Initium to dom, w którym nie wolno dotykać ścian, mebli ani pytań. Wiem coś o tym. Wychowałam się w nim.
+	Dobrawa: I dlatego poszłaś do von Brühla?
+	Sabina: Poszłam do pytań, na które wolno szukać odpowiedzi. Von Brühl tylko podpisuje rachunki.
+	Przez dłuższą chwilę żadna nic nie mówi. Płomień lampy kładzie im się na maskach.
+	Dobrawa: ...Boli cię dziś?
+	Sabina: Jak zawsze. Tu, na dole, wszystko jest głośniejsze. A ciebie?
+	Dobrawa: Jak zawsze.
+	To najdłuższa rozmowa, jaką między nimi słyszałeś. I chyba najszczersza.
+	if has_item("krysztal")
+		Obie głowy odwracają się do ciebie w tej samej chwili, jakby ktoś pociągnął za jeden sznurek.
+		Dobrawa: Nosisz go przy sobie. Cały czas.
+		Sabina: Śpiewa. Cichutko, jak czajnik, który dopiero się rozgrzewa.
+		Dobrawa: Trzymaj go z dala od ognia. I od nas obu.
+	$> change_rep("dobrawa", 2)
+	$> change_rep("sabina", 2)
+	=> hub
+- Muszę iść. [#leave]
 	Dobrawa: Idź. I nie noś amuletu na gołej skórze. Ciągnie cię za sobą w dół.
 	=> END
 

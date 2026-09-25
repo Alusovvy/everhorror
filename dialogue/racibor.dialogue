@@ -132,7 +132,7 @@ Racibor: [[Mów.|Słucham.|Do rzeczy.]]
 		$> change_rep("racibor", -5)
 		Racibor: Twoja wola. Na razie.[wait=0.3] Tylko pamiętaj, czyja to kopalnia.
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	if day >= 5 and not quota_met()
 		Racibor: Idź. I wróć z kreskami na mapie, nie z opowieściami.
 	else
@@ -214,6 +214,14 @@ if has_flag("plan_upadowa") and not has_flag("racibor_doubts")
 		Racibor: Prochu nie ma kto odpalić. Znajdę kogoś. Zawsze się ktoś znajdzie.
 	else
 		Mirosław patrzy w ogień i nic nie mówi. Ręce trzęsą mu się tak, że rozlewa kaszę.
+	if has_note("list_dziadka") and not has_flag("protested_upadowa")
+		Racibor: No. Chyba że ktoś ma coś do dodania do raportu.
+		- Przeczytaj to, zanim ją otworzysz. Podajesz mu list dziadka.
+			$> set_flag("racibor_doubts")
+			Racibor czyta. Raz szybko, raz wolno, przesuwając palcem po literach, jak po kreskach na mapie.
+			Racibor: Czterdzieści lat pod ziemią, a papier jak nowy... Dobrze, przewodniku. Upadowa poczeka, aż to przeczyta Kniaź. Niech to będzie jego decyzja. Ja podpisuję się tylko pod liczbami.
+		- Nic nie mówisz.
+			List dziadka ciąży ci w kieszeni. Ale norma jest, wóz czeka, a ty milczysz.
 elif has_flag("racibor_doubts")
 	Racibor: Upadowej nie ruszamy. Na razie. Twój dziadek miał swoje powody. Ja mam swoje.
 Racibor: Dobra robota, przewodniku. Nie przyzwyczajaj się do tych słów.

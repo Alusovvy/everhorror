@@ -11,6 +11,14 @@ if not has_flag("met_hagiwara")
 		Przy stole szczupły mężczyzna je powoli, pałeczkami wystruganymi z drzazgi. Nikt się już temu nie dziwi.
 	Hagiwara odkłada wszystko i kłania się lekko. Dokładnie tak nisko, jak wypada.
 	Hagiwara: Kiyoshi Hagiwara. Prowadzę księgi pana zarządcy. Pan jest przewodnikiem, jak mniemam. Pański dziadek ma w księgach Kniazia bardzo porządny wpis. Ostatni.
+elif not done_today("hag_hello")
+	$> mark_today("hag_hello")
+	if quota_met()
+		Hagiwara: [[Pan przewodnik. Rubryki pełne. Pan zarządca dziś prawie się uśmiechnął, co również odnotowałem.|Dzień dobry. Z pełną księgą prowadzi się o wiele przyjemniejsze rozmowy.]]
+	elif day >= 6
+		Hagiwara: [[Pan przewodnik. Termin się kurczy. Papier jest cierpliwy, pan zarządca mniej.|Dzień dobry. O ile to właściwe słowo w tym miejscu.]]
+	else
+		Hagiwara: [[Pan przewodnik. Proszę wybaczyć, atrament gęstnieje od zimna.|Dzień dobry. Herbata jest już tylko z nazwy, ale mogę zaproponować.]]
 => hub
 
 ~ hub
@@ -76,7 +84,7 @@ Hagiwara: [[Słucham pana.|Czym mogę służyć?|Proszę mówić.]]
 	Hagiwara: U nas magów robi Maszyna na Sutāto. Pierwszy Cesarz użył jej, żeby zjednoczyć klany. Tych, którzy się nie zgodzili, już nie ma.
 	Hagiwara: Dlatego kiedy ktoś z maską na twarzy mówi mi, że przyszedł tylko popatrzeć, zapisuję to w księdze. I datę. Na wszelki wypadek.
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	Hagiwara: Proszę uważać na siebie. Księga nie ma rubryki na zaginionych, a nie chciałbym jej zakładać.
 	=> END
 

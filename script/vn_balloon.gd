@@ -173,6 +173,7 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 		next(dialogue_line.next_id)
 
 func _on_response_selected(response: DialogueResponse) -> void:
+	VN.response_picked(response)
 	next(response.next_id)
 
 #endregion

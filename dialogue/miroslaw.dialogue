@@ -116,7 +116,7 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 	Mirosław: Jak Pierwsi przyszli do Głuszy, to magowie przyjechali trzy dni później. Obejrzeli, co zostało, zapisali coś w księgach i pojechali.
 	Mirosław: Mnie z tej piwnicy wyciągnęła baba spod Mirosila, co wiozła rzepę na targ. Nie mag.
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	Mirosław: To idź. Tylko nie zabłądź.
 	=> END
 
@@ -129,7 +129,7 @@ if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalam
 		$> set_flag("mir_day2_comfort")
 		$> change_sanity("miroslaw", 5)
 		Mirosław: ...[wait=0.5] Jeszcze chwilę. Potem wrócę do roboty.
-	- Muszę iść.
+	- Muszę iść. [#leave]
 		Mirosław nie odpowiada.
 	=> END
 elif has_flag("west_blasted")
@@ -156,7 +156,7 @@ if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalam
 		$> give_to_npc("nalewka", "miroslaw")
 		Mirosław pije łapczywie, połowa ścieka mu po brodzie.
 		Mirosław: Pali. Dobrze, że pali. Jak pali, to znaczy, że jeszcze coś czuję.
-	- Zostawiam cię.
+	- Zostawiam cię. [#leave]
 		Mirosław nie odpowiada.
 	=> END
 if not done_today("mir_greet")

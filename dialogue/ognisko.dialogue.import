@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://jfsn51q7qh7d"
+path="res://.godot/imported/ognisko.dialogue-bde54a2420f656a0e3017164e90677e8.tres"
+
+[deps]
+
+source_file="res://dialogue/ognisko.dialogue"
+dest_files=["res://.godot/imported/ognisko.dialogue-bde54a2420f656a0e3017164e90677e8.tres"]
+
+[params]
+
+defaults=true

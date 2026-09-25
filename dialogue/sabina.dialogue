@@ -8,6 +8,14 @@ if not has_flag("met_sabina_camp")
 	Sabina stoi z dala od wszystkich, z kosturem opartym o ramię. Mosiężna maska odbija płomień lampy, więc wygląda, jakby zamiast twarzy miała ogień.
 	Sabina: O, przewodnik! Ten spod ściany. Nie bój się, nie gryzę. Po prostu stój tam, gdzie stoisz.
 	Sabina: Mam tu mieszkać, dopóki von Brühl nie uzna, że wiem dość. Czyli długo. On nigdy nie uznaje, że ktoś wie dość.
+elif not done_today("sab_hello")
+	$> mark_today("sab_hello")
+	if is_badly_hurt()
+		Sabina: Kochanie, ty się rozpadasz. Widzę to bez dotykania. Przyjdź do mnie, zanim będzie co zszywać.
+	elif day >= 6
+		Sabina: [[O, przewodnik. Wasza góra dziś śpi płycej. Czuję to przez podeszwy.|Jesteś. To dobrze. Liczę tu wszystkich co wieczór. Zawodowe zboczenie.]]
+	else
+		Sabina: [[O, przewodnik! Nadal cały. Brawo my.|Tak, kochanie? Przepraszam. Nawyk.]]
 => hub
 
 ~ field
@@ -83,6 +91,6 @@ Sabina: [[Tak, kochanie?|Słucham cię.|Mów, mów, nie wstydź się.]]
 	Sabina: Gorączki nie zaleczę. Drugi krąg składa ciało, a nie przepędza tego, co w nim siedzi. Gdybym spróbowała, zabiłabym go szybciej niż ta gorączka.
 	Sabina: Potrzebuje lekarstwa. Zwykłego, gorzkiego, bezmagicznego lekarstwa. Czasem wasze sposoby są lepsze od naszych. Nie mów nikomu, że tak powiedziałam.
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	Sabina: Idź. Tylko wracaj przed nocą, dobrze? Nie lubię, kiedy ktoś ginie na mojej zmianie.
 	=> END

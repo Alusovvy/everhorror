@@ -33,7 +33,6 @@ Przejście FPP → VN następuje po interakcji z NPC lub przedmiotem albo po eve
 |---|---|---|
 | Ruch | W / A / S / D, strzałki | `move_forward`, `move_back`, `move_left`, `move_right` |
 | Rozglądanie | mysz (pion: 40° w górę, 70° w dół) | — |
-| Skok | Spacja | `jump` |
 | Interakcja / zamknij opis | E | `interact` |
 | Notes | J | `notebook` |
 | Ekwipunek | I | `inventory` |
@@ -41,7 +40,7 @@ Przejście FPP → VN następuje po interakcji z NPC lub przedmiotem albo po eve
 | Dalej w rozmowie | Spacja / Enter / kliknięcie | `ui_accept`, `interact` |
 | Pauza / wstecz w menu | Esc | `ui_cancel` |
 
-❓ Czy skok zostaje? W grze bez walki i platformówki może pozwalać wychodzić poza zaplanowane ścieżki. [propozycja] Zamienić go na kucanie lub usunąć.
+✅ Skok usunięty **[decyzja 2026-09-25, task_06]**: gra bez walki nie pozwala wychodzić poza ścieżki. Spacja zostaje jako „dalej” w rozmowie.
 
 ## Warunki porażki
 - ✅ **Minięcie normy:** rano w dniu 8 wyprawa wyjeżdża bez gracza („Zostałeś sam”) **[decyzja 2026-09-25, MECHANICS §13 pkt 2]**.

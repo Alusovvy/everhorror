@@ -27,6 +27,8 @@ Kopał w tej kopalni czterdzieści lat temu razem z dziadkiem bohatera i pamięt
 | Zdanie o Tekli i o Dobrawie | po ich poznaniu / dzień 2+ |
 | Reakcja na los dziadka | gracz ma list z kaplicy |
 | Zdanie o Wszeborze („Kopie za trzech, gada za pięciu”) | po poznaniu Wszebora |
+| Wstrząs sprzed 40 lat („góra się przewraca na drugi bok”) | po wstrząsie (dzień 6+) |
+| Melodia starej ekipy przy pieśni Wszebora | wieczór przy ognisku, dzień 5 |
 | Zdanie o Sabinie („Jedna czarownica w obozie to był znak. Dwie to już zwyczaj”) | Sabina w obozie |
 
 ## Przedmioty

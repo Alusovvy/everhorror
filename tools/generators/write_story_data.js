@@ -252,6 +252,17 @@ quest("oferta", "Oferta z Exitium", "Ottokar von Brühl", {
   mapy: "Pokazałem Ottokarowi mapy dziadka. Przerysował je co do kreski, a w zamian zaznaczył mi jedną żyłę.",
   odmowa: "Odmówiłem Ottokarowi. Nie wyglądał na zaskoczonego. Wyglądał na kogoś, kto ma czas.",
 });
+quest("czternasty", "Czternaście kresek", "Moja sprawa", {
+  start: "Czternaście kresek, wydrapanych w skale. Stara ekipa liczyła coś do czternastu i przestała. Chcę wiedzieć dlaczego.",
+  kreski_rzapie: "Kreski w rząpiu: czternaście, grupami po pięć. Pod nimi zaczęte imię, urwane po trzech literach.",
+  kreski_filar: "Na filarze w starym wyrobisku ten sam rachunek. Czternaście. Tyle dni kopali. Albo tylu ich było.",
+  zeszyt: "Zeszyt sztygara Grabca kończy się na Dniu 14. Dalej są puste kartki. Papieru mu nie zabrakło.",
+  chleb: "Ktoś zostawia zmarłym w kostnicy świeży chleb. Zmarli nie jedzą. Więc kto tu je?",
+  lampka: "Lampka w kaplicy pali się, choć nikt z nas jej nie zapalał. Knot przycięty, olej świeży.",
+  nisza: "W kostnicy jest czternaście nisz. Ostatnia jest pusta i podpisana imieniem, którego nie umiem przeczytać.",
+  medalik: "Wstrząs otworzył szczelinę w Przekopie. W środku medalik starej ekipy, wypolerowany od dotyku. Ktoś go nosił długo po tym, jak przestali liczyć dni.",
+  podarunek: "W nocy ktoś zostawił przy moim posłaniu starą górniczą lampę ze znakiem dziadka. Na szkle czternaście kresek. Nie przyszła tu z góry.",
+});
 quest("odlamek", "Odłamek dla Sabiny", "Sabina von Reuss", {
   start: "Sabina chce zbadać czysty błękit. Najczystszy ma być w Kryształowej galerii, najniżej na mapie.",
   oddany: "Dałem Sabinie odłamek z galerii. Pierwszy raz widziałem, jak Druga się cieszy. Tak mi się przynajmniej wydaje, pod maską.",

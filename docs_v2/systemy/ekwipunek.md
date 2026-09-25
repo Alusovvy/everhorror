@@ -45,6 +45,7 @@ Przedmioty rzadko są „do wszystkiego”. Każdy ma zwykle jednego, dwóch ch�
 | Świecący grzyb | grota (2 sztuki) | Hagiwara (wiersz i lekarstwo) albo Anzelm (lekarstwo) |
 | Odłamek błękitu | Kryształowa galeria | Sabina (lekarstwo, jej zaufanie) |
 | Daleki Klejnot | Nasir po wyleczeniu | wymiana u Tekli na lekarstwo |
+| Stara lampa przewodnika | podarunek „Czternastego” (quest, task_06) | fabularnie; wraca w zakończeniu „Zostałeś sam” |
 
 ## Dane i strojenie
 | Parametr | Wartość | Gdzie |

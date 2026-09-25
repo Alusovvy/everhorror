@@ -6,7 +6,6 @@ class_name Npc
 ## stands, which pose it uses and whether it is in the camp at all (CampSchedule).
 
 ## How long a conversation takes (GDD: "Rozmowa z NPC przesuwa czas").
-const TALK_HOURS := 1.0
 
 @export var data: NpcData
 ## Idle animation: Idle, Sitting_Idle, Crouch_Idle, Fixing_Kneeling…
@@ -42,8 +41,9 @@ func _ready() -> void:
 	talk.display_name = data.display_name
 	talk.action = Interactable.Action.DIALOGUE
 	talk.prompt_text = "Porozmawiaj z %s" % data.display_name_instrumental
-	talk.time_cost_hours = TALK_HOURS
-	talk.time_reason = "Rozmowa z %s" % data.display_name_instrumental
+	# Opening a conversation is free; the VN charges VN.TALK_HOURS at the first response
+	# that isn't a farewell ([#leave] in the .dialogue files). Task_06, user decision.
+	talk.time_cost_hours = 0.0
 	talk.dialogue = data.dialogue
 	talk.speaker_npc = data.id
 	talk.highlight_target = model

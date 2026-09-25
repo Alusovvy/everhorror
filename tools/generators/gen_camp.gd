@@ -244,6 +244,13 @@ func _kitchen(camp: Node3D, wood: Node3D) -> void:
 	var kettle := add(fire, P + "Cauldron.gltf", Vector3(0.0, 0.46, 0.0), 20.0, 0.46, "Kettle")
 	interactable(kettle, "FireLook", {"display_name": "Ognisko z kociołkiem", "description": "Tekla gotuje tu dwa razy dziennie: rano kaszę, wieczorem to samo z tym, co zostało. Pali się połamanymi stemplami. Mirosław siada tak, żeby mieć do ognia jak najdalej.", "solid": true, "padding": 0.1})
 	box_body(fire, "PitBlock", Vector3(1.2, 0.5, 1.2), Vector3(0, 0.25, 0))
+	# Evening group scene at the fire (dialogue/ognisko.dialogue). The StoryDirector enables
+	# it from 20:00, once a day; see apply_world_state().
+	interactable(fire, "SeatUse", {
+		"display_name": "Usiądź przy ogniu",
+		"action": 1, "dialogue": load("res://dialogue/ognisko.dialogue"), "dialogue_cue": "start",
+		"time_cost_hours": 1.0, "time_reason": "Wieczór przy ogniu",
+		"keep_parent_visible": true, "padding": 0.45})
 	add(wood, K + "tree-log-small.glb", Vector3(12.55, 0.0, 3.45), -17.0, 1.6, "MiroslawLog")
 	add(wood, K + "tree-log-small.glb", Vector3(10.6, 0.0, 4.15), 98.0, 1.5, "FireLog")
 	# the cook's corner

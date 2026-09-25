@@ -104,6 +104,10 @@ func apply_world_state() -> void:
 			npc.place(marker, spot["pose"])
 		GameState.places[id] = spot["place"]
 	west_debris.visible = GameState.has_flag("west_blasted")
+	# The evening seat at the campfire (dialogue/ognisko.dialogue): 20:00+, once a day.
+	var fire_seat := world.get_node_or_null(^"Camp/CampProps/Campfire/SeatUse")
+	if fire_seat:
+		fire_seat.set_enabled(not GameState.is_away() and GameState.hour >= 20.0 and not GameState.done_today("campfire"))
 
 func _marker(marker_name: String) -> Node3D:
 	if marker_name == "":
@@ -403,6 +407,15 @@ func _resolve_night() -> String:
 		GameState.player_changed.emit()
 	else:
 		GameState.heal_player(8)
+	# "Czternaście kresek": once the hero has read enough of the traces, whoever leaves the
+	# bread and trims the lamp answers in kind. No word on who they are; the demo keeps that.
+	if night >= 5 and GameState.quest_state(&"czternasty") == "active" and GameState.fourteenth_clues() >= 4 and not GameState.has_flag("fourteenth_gift"):
+		GameState.set_flag("fourteenth_gift")
+		GameState.give_item("lampa")
+		GameState.quest_log(&"czternasty", "podarunek")
+		GameState.complete_quest(&"czternasty")
+		if news == "":
+			news = "Przy twoim posłaniu stoi stara górnicza lampa. Pali się. Nikt się nie przyznaje."
 	if GameState.has_note(&"szyfr") and GameState.has_note(&"klucz") and not GameState.has_flag("deciphered"):
 		GameState.add_note(&"odszyfrowana")
 		GameState.quest_log(&"slady", "odszyfrowane")
@@ -428,6 +441,9 @@ func _resolve_new_people(night: int) -> void:
 			# Too weak to stay: Racibor has him hauled up the shaft in the night.
 			GameState.set_npc_status(&"nasir", "gone")
 			GameState.set_flag("nasir_carried_up")
+			if GameState.quest_state(&"goraczka") == "active":
+				GameState.quest_log(&"goraczka", "wywieziony")
+				GameState.fail_quest(&"goraczka")
 	else:
 		GameState.change_npc_health(&"nasir", 10)
 
@@ -549,6 +565,8 @@ func _end_summary(success: bool) -> String:
 	lines.append("Ściana w kaplicy: %s" % ("otwarta, list dziadka przeczytany" if GameState.has_flag("wall_open") else "nierozwiązana"))
 	lines.append("Kryształ: %s" % _crystal_summary())
 	lines.append("Upadowa: %s" % _upadowa_summary(success))
+	if GameState.quest_state(&"czternasty") != "":
+		lines.append("Czternasty: %s" % ("ktoś odpowiedział ci lampą" if GameState.has_flag("fourteenth_gift") else "%d śladów, odpowiedzi brak" % GameState.fourteenth_clues()))
 	lines.append("")
 	lines.append("Mirosław: %s" % ("nie żyje, zabrał ze sobą zachodni chodnik" if GameState.npc_status(&"miroslaw") == "dead" else band.get(GameState.sanity_band(&"miroslaw"), "?")))
 	var trust := GameState.rep(&"bolko")

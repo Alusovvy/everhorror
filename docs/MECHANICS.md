@@ -66,7 +66,7 @@ Czas płynie więc tylko wtedy, gdy gracz podejmuje decyzję, a nie w czasie rze
 
 **Stan w demie (task_05):**
 - dzień trwa 16 h (06:00–22:00),
-- rozmowa kosztuje 1 h,
+- rozmowa kosztuje 0,5 h, naliczane przy pierwszej odpowiedzi innej niż pożegnanie (otwarcie i „Muszę iść” za darmo; task_06),
 - podróż idzie po grafie miejsc: 2 h z obozu do sąsiednich miejsc, 1–1,5 h dalej, +1 h rozpoznania przy pierwszej wizycie, +1 h na każdy odcinek, gdy bohater jest ranny,
 - wysadzenie zawału kosztuje 4 h, zaznaczenie żyły 1 h (spod nacieku 2 h), błędna próba przy ścianie w kaplicy 1 h, praca przy pompach 2 h, bandaże i świeca 0,5 h,
 - demo trwa tydzień (7 dni), rozliczenie jest rano w dniu 8.

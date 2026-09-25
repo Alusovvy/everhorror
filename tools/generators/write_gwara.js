@@ -194,6 +194,13 @@ const gwara = {
     "Widzioł żech. Jedna czarownica w łobozie to boł znak. Dwie to już zwyk.",
   "Ta nowa przynajmniej mówi „dzień dobry”. Jak do psa, ale mówi.":
     "Ta nowo przinajmnij godo „dziyń dobry”. Jak do psa, ale godo.",
+  // --- task_06: the tremor and the campfire evenings (Bolko) ---
+  "Drżała. Czterdzieści lat temu też tak drżała. Tydzień przed tym, jak się wszystko posypało.":
+    "Drgała. Czterdzieści lot tymu tyż tak drgała. Tydziyń przed tym, jak sie wszystko posuło.",
+  "Stary Grabiec mówił wtedy: góra się przewraca na drugi bok. Śmialiśmy się z niego. Potem żeśmy się już nie śmiali.":
+    "Stary Grabiec godoł wtynczos: góra sie przewraco na drugi bok. Śmioli my sie z niego. Potym już my sie niy śmioli.",
+  "Stara ekipa też to śpiewała. Inne słowa, ta sama nuta. Skąd ją znasz?":
+    "Staro ekipa tyż to śpiywała. Insze słowa, ta samo nuta. Skond jom znosz?",
   "Ostatni dzień przed liczeniem. Racibor chodzi jak struty. Znam to. Twój dziadek też miał taki dzień. Ostatni.":
     "Ostatni dziyń przed rachowaniym. Racibor łazi jak struty. Znom to. Twój starzik tyż mioł taki dziyń. Ostatni.",
   "[[Żyjesz jeszcze? To dobrze.|Nie łaź dziś za daleko, coś mi w kościach strzyka.|Znowu ty. Siadaj, jak chcesz.]]":

@@ -8,6 +8,16 @@ if not has_flag("met_anzelm")
 	else
 		Chudy mężczyzna w wypłowiałym habicie zwija bandaże w równe rolki. Na piersi nosi płomień z brązu, przecięty ciemną rysą.
 	Anzelm: Anzelm. Wszyscy mówią do mnie „bracie”, choć bratem już nie jestem. Leczę tu, co się da wyleczyć. Resztę opatruję i się modlę.
+elif not done_today("anz_hello")
+	$> mark_today("anz_hello")
+	if player_fever
+		Anzelm: Synu, ty masz gorączkę. Widzę po oczach. Usiądź, zanim upadniesz, i nie kłóć się z felczerem.
+	elif is_badly_hurt()
+		Anzelm: Krwawisz mi na czystą podłogę, synu. Siadaj. Rany same się nie zamkną, choćbyś nie wiem jak udawał.
+	elif day >= 5
+		Anzelm: [[Niech Oni mają cię w opiece. Ostatnio mówię to częściej niż zwykle.|Modliłem się za ciebie rano. Na zapas.]]
+	else
+		Anzelm: [[Cały? To dobrze. Tu to rzadkość.|Pokaż ręce. Dobrze. Idź, nie przeszkadzaj chorym chorować.]]
 => hub
 
 ~ hub
@@ -82,7 +92,7 @@ Anzelm: [[Mów, synu.|Słucham.|Czym mogę pomóc?]]
 	else
 		Anzelm: Jeszcze się warzy. Jutro rano.
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	Anzelm: Niech Oni mają cię w opiece. A jak nie Oni, to chociaż bandaże.
 	=> END
 

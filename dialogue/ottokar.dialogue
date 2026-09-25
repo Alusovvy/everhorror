@@ -58,7 +58,7 @@ if has_item("krysztal")
 		Ottokar unosi dłoń w rękawicy. Nie dotyka cię. Nie musi. Nagle robi ci się zimno ze strachu, zwyczajnie, jak dziecku w ciemnym pokoju, i nie wiesz dlaczego.
 		Ottokar: To był drugi krąg. Wywoływanie cudzych uczuć. Chciałem, żebyś wiedział, co tracisz, odmawiając uprzejmym ludziom.
 		$> change_player_sanity(-8)
-	- Jeszcze się zastanowię.
+	- Jeszcze się zastanowię. [#leave]
 		Ottokar: Zastanawiaj się. Tylko nie za długo. Kryształy lubią zmieniać właścicieli.
 else
 	Ottokar: Mapy twojego dziadka. Pokaż mi je. Tylko pokaż. Przerysuję, co trzeba, i oddam. W zamian wskażę ci żyłę, której twój zarządca nie znajdzie do końca świata.
@@ -78,6 +78,6 @@ else
 		$> fail_quest("oferta")
 		$> change_rep("ottokar", -5)
 		Ottokar: Jak chcesz. Przerysuję je i tak, kiedy umrzesz. W tej kopalni to kwestia czasu.
-	- Jeszcze się zastanowię.
+	- Jeszcze się zastanowię. [#leave]
 		Ottokar: Zastanawiaj się. Ja poczekam. Umiem czekać.
 => END

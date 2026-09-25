@@ -10,10 +10,13 @@ Dev tools run from the command line (project root). Not used by the game and exc
 | Tool | What it does | Command |
 |---|---|---|
 | `run_tests.sh` | Runs the scenarios below, one `RESULT` line each; full logs in `reports/tests/<name>.log`. | `tools/run_tests.sh` (all) or `tools/run_tests.sh day1 kaplica` |
+| `unit_test.gd` | Pure logic, no world (~2 s): the expedition graph with the closed-route regression, Polish plurals (`plural`, `veins_acc`, `days_left_text`, `hours_text`), the hero's bands and the wound floor, payload flags, `fourteenth_clues`. | `tools/run_tests.sh unit` |
+| `data_lint.gd` | Static cross-checks (~2 s): ids used in dialogues, generators and the StoryDirector vs the GameState registries (items, quests + entries both ways, notes, NPCs, veins), and the `[#leave]` farewell in every camp NPC dialogue. Run after adding any content id. | `tools/run_tests.sh lint` |
 | `dialogue_test.gd` | Plays every dialogue without UI: dialect coverage and switch, all NPCs' branches, quests, the wall riddle, the crystal, the day-3 announcement; task_05: the new people and their item quests, the Exitium meeting, Ottokar's offer, Hieronim, Welf, Tekla's stall, Racibor's reminder and reckoning, the "left alone" ending. | `GODOT --headless --path . --script res://tools/dialogue_test.gd` |
 | `tests/test_day1.gd` | Day 1 in the real world scene: intro, schedule, trip east (signpost opens the field map, the summary), blast, comforting Mirosław. | `tools/run_tests.sh day1` |
 | `tests/test_expedition.gd` | The map table and WYRUSZ, scouting, [M] onwards, Wszebor at work, a vein, the pickaxe head, the way back and the summary, bandages from the inventory. | `tools/run_tests.sh expedition` |
 | `tests/test_drudzy.gd` | The Exitium meeting on day 3, Sabina joins, who can turn up where, the wounded Welf saved with bandages. | `tools/run_tests.sh drudzy` |
+| `tests/test_schedule.gd` | The whole week's camp schedule: 7 days × 5 hours × 5 story states resolve to real markers with no two NPCs on one; plus the miners' field posts and an encounter spot. | `tools/run_tests.sh schedule` |
 | `tests/test_week.gd` | Night 3 (Nasir's fever), Racibor's reminder, the hero's death and "retry from morning", the end of the week without the quota. | `tools/run_tests.sh week` |
 | `tests/test_save_load.gd` | Save in the evening, take the bundle in the sump, load: hour, items, pickup, schedule restored. | `tools/run_tests.sh save_load` |
 | `tests/test_rzapie.gd` | Racibor's quest, the sump (bundle, vein, stake), return after 22:00. | `tools/run_tests.sh rzapie` |

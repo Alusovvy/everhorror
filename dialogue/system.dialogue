@@ -70,6 +70,8 @@ Budzisz się zlany potem. Amulet jest ciepły, choć leżał na zimnej ziemi.
 ~ dream4
 Leżysz na dnie galerii, której nigdy nie widziałeś. Ściany świecą tak jasno, że przez powieki widzisz żyły we własnych dłoniach.
 Po drugiej stronie skały coś bardzo dużego obraca się we śnie. Przez chwilę śni o tobie.
+if quest_state("czternasty") == "active" or has_flag("fourteenth_gift")
+	Ktoś siedzi na skraju twojego snu i liczy szeptem. Dochodzi do czternastu, milknie i zaczyna od nowa. Czekasz na piętnaście. Nigdy nie pada.
 if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
 	Gdzieś obok ktoś płacze przez sen. Poznajesz głos Mirosława, choć Mirosław nigdy nie płacze.
 Budzisz się i przez dłuższą chwilę nie wiesz, po której stronie skały jesteś.
@@ -99,5 +101,7 @@ Posłania są zwinięte. Ze stołu zarządcy zniknęła mapa. Została tylko wyp
 Idziesz do szybu. Lina wisi wysoko, poza zasięgiem ręki, wciągnięta do połowy. Ktoś na górze o tobie zapomniał albo nie chciał pamiętać. Nie wiesz, co gorsze.
 Wołasz. Echo wraca trzy razy. Za trzecim razem nie twoim głosem.
 Siadasz pod szybem, w kwadracie szarego światła. Amulet dziadka jest ciepły. Coraz cieplejszy.
+if has_flag("fourteenth_gift")
+	U twoich stóp stoi stara lampa ze znakiem dziadka. Dolana po brzegi. Ktoś zadbał, żeby ci starczyło światła na długo.
 Gdzieś niżej ktoś cierpliwie stuka w skałę. Jakby czekał, aż zejdziesz.
 => END

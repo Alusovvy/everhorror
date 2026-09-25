@@ -161,7 +161,8 @@ func drive(choices: Array, max_s := 30.0, auto := false) -> void:
 				return
 			choices.pop_front()
 			print("   > %s" % pick.text)
-			balloon.next(pick.next_id)
+			# Go through the same path as a real click, so the talk cost is charged.
+			balloon._on_response_selected(pick)
 		elif balloon.is_waiting_for_input:
 			balloon.next(balloon.dialogue_line.next_id)
 		await frames(2)

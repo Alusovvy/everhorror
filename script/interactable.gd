@@ -137,7 +137,9 @@ func interact() -> void:
 	_apply_effects()
 	match action:
 		Action.DIALOGUE:
-			VN.start(dialogue, dialogue_cue, speaker_npc)
+			# Only real NPC talks charge the deferred talk cost; scene dialogues
+			# (the wall, the bed, the campfire) price themselves.
+			VN.start(dialogue, dialogue_cue, speaker_npc, speaker_npc != &"")
 		Action.USE:
 			used.emit(self)
 	if remove_after_use:

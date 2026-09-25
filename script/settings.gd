@@ -11,6 +11,11 @@ const GWARA_PATH := "res://dialogue/gwara_slaska.json"
 var mouse_sensitivity: float = 0.001
 ## Linear 0..1, applied to the Master bus.
 var master_volume: float = 0.8
+## Linear 0..1, applied to the Ambience / SFX buses (music-less game: these two cover it).
+var ambience_volume: float = 1.0
+var sfx_volume: float = 1.0
+## 0.6..1.4, applied as the WorldEnvironment adjustment (the game is dark; see world.gd).
+var brightness: float = 1.0
 var fullscreen: bool = false
 ## Miners (Mirosław, Bolko) speak with Silesian dialect elements. Off = the original lines
 ## from the .dialogue files.
@@ -30,11 +35,18 @@ func _exit_tree() -> void:
 
 func apply() -> void:
 	AudioServer.set_bus_volume_db(0, linear_to_db(master_volume))
+	_apply_bus("Ambience", ambience_volume)
+	_apply_bus("SFX", sfx_volume)
 	var mode := DisplayServer.WINDOW_MODE_FULLSCREEN if fullscreen else DisplayServer.WINDOW_MODE_WINDOWED
 	if DisplayServer.window_get_mode() != mode:
 		DisplayServer.window_set_mode(mode)
 	_apply_dialect()
 	changed.emit()
+
+func _apply_bus(bus_name: String, volume: float) -> void:
+	var index := AudioServer.get_bus_index(bus_name)
+	if index >= 0:
+		AudioServer.set_bus_volume_db(index, linear_to_db(volume))
 
 ## The .dialogue files keep the original lines. The Silesian versions are registered as a
 ## translation, which Dialogue Manager looks up by line text (context "dialogue").
@@ -64,6 +76,9 @@ func save_settings() -> void:
 	var config := ConfigFile.new()
 	config.set_value("controls", "mouse_sensitivity", mouse_sensitivity)
 	config.set_value("audio", "master_volume", master_volume)
+	config.set_value("audio", "ambience_volume", ambience_volume)
+	config.set_value("audio", "sfx_volume", sfx_volume)
+	config.set_value("video", "brightness", brightness)
 	config.set_value("video", "fullscreen", fullscreen)
 	config.set_value("dialogue", "silesian_dialect", silesian_dialect)
 	var err := config.save(PATH)
@@ -76,5 +91,8 @@ func load_settings() -> void:
 		return
 	mouse_sensitivity = config.get_value("controls", "mouse_sensitivity", mouse_sensitivity)
 	master_volume = config.get_value("audio", "master_volume", master_volume)
+	ambience_volume = config.get_value("audio", "ambience_volume", ambience_volume)
+	sfx_volume = config.get_value("audio", "sfx_volume", sfx_volume)
+	brightness = config.get_value("video", "brightness", brightness)
 	fullscreen = config.get_value("video", "fullscreen", fullscreen)
 	silesian_dialect = config.get_value("dialogue", "silesian_dialect", silesian_dialect)

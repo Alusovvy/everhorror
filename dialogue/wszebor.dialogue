@@ -15,6 +15,19 @@ elif npc_place("wszebor") == "teren" and not done_today("wsz_field")
 	$> mark_today("wsz_field")
 	Wszebor ociera pot z czoła i opiera kilof o ścianę.
 	Wszebor: Hej, przewodniku! Nie łaź mi za plecami, bo jak się zamachnę, to cię wyślę na górę bez liny.
+elif not done_today("wsz_hello")
+	$> mark_today("wsz_hello")
+	if quota_met() and not has_flag("wsz_quota_cheer")
+		$> set_flag("wsz_quota_cheer")
+		Wszebor: Hej! Słyszałem, norma jest! Jak wyjedziemy na górę, ty stawiasz pierwszą kolejkę, a ja trzy następne.
+	elif day == 6
+		Wszebor: Spałeś co? Bo ja nie. Jak ziemia gada, Hawiar nie śpi. Hawiar liczy stemple nad głową.
+	elif day >= 7
+		Wszebor: Ostatni dzień szychty, przewodniku. U nas się mówi, że ostatni dzień jest najdłuższy.
+	elif day >= 4
+		Wszebor: [[Hej, przewodniku! Kilof się kłania.|O, żyw jeszcze! To dobrze, dobrze.|Hej! Coś mi dziś strop nisko wisi.]]
+	else
+		Wszebor: [[Hej! Jak tam chodniki?|Hej, przewodniku!]]
 => hub
 
 ~ hub
@@ -99,6 +112,6 @@ Wszebor: [[Gadaj, gadaj.|No?|Czego ci trza?]]
 	$> change_sanity("miroslaw", 3)
 	$> change_sanity("wszebor", 3)
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	Wszebor: Idź, idź. Tylko łeb trzymaj nisko, strop jest niżej, niż myślisz.
 	=> END

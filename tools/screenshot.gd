@@ -26,11 +26,15 @@ func _load_scene() -> void:
 			game_state.day = int(cfg["day"])
 		if cfg.has("hour"):
 			game_state.hour = float(cfg["hour"])
+		if cfg.has("player_sanity"):
+			game_state.player_sanity = int(cfg["player_sanity"])
+			game_state.player_changed.emit()
 	var scene: Node = load(cfg["scene"]).instantiate()
 	root.add_child(scene)
 	for n in ["HUD", "PauseMenu"]:
 		if scene.has_node(n):
-			scene.get_node(n).visible = false
+			# "keep_hud": true leaves the HUD on (e.g. to check the sanity vignette).
+			scene.get_node(n).visible = cfg.get("keep_hud", false) and n == "HUD"
 	if scene.has_node("Player"):
 		scene.get_node("Player").process_mode = Node.PROCESS_MODE_DISABLED
 		scene.get_node("Player/MeshInstance3D").visible = false

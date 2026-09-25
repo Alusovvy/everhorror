@@ -159,6 +159,7 @@ func _run() -> void:
 	_check("sleep" in _requests, "sleep requested")
 
 	await _task05()
+	await _task06()
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit()
@@ -296,6 +297,98 @@ func _task05() -> void:
 	_check(gs.quest_state("zloza") == "done", "zloza done at the reckoning")
 	await _talk(system, "left_behind", [])
 	_check(_seen.back().contains("stuka w skałę"), "left alone ending text")
+
+## task_06: day greetings, the campfire evenings, the fourteenth, the last-chance letter.
+func _task06() -> void:
+	var wszebor: Resource = load("res://dialogue/wszebor.dialogue")
+	var dobrawa: Resource = load("res://dialogue/dobrawa.dialogue")
+	var bolko: Resource = load("res://dialogue/bolko.dialogue")
+	var ognisko: Resource = load("res://dialogue/ognisko.dialogue")
+	var racibor: Resource = load("res://dialogue/racibor.dialogue")
+	var system: Resource = load("res://dialogue/system.dialogue")
+
+	print("--- Day greetings: once a day")
+	gs.reset()
+	gs.set_flag("met_wszebor")
+	gs.day = 4
+	await _talk(wszebor, "start", ["Muszę iść."])
+	_check(gs.done_today("wsz_hello"), "Wszebor greets once a day")
+
+	print("--- The farewell tag parses ([#leave])")
+	gs.reset()
+	gs.set_flag("met_wszebor")
+	var walk = await dm.get_next_dialogue_line(wszebor, "start")
+	var walk_guard := 0
+	while walk != null and walk.responses.is_empty() and walk_guard < 20:
+		walk_guard += 1
+		walk = await dm.get_next_dialogue_line(wszebor, walk.next_id)
+	var leave = null
+	for r in walk.responses:
+		if r.text.begins_with("Muszę iść"):
+			leave = r
+	_check(leave != null and leave.tags.has("leave") and not leave.text.contains("#"), "farewell has the leave tag, text stays clean")
+
+	print("--- The campfire: tales, the song, after the tremor, the last evening")
+	gs.reset()
+	gs.day = 2
+	gs.player_sanity = 50
+	await _talk(ognisko, "start", [])
+	_check(gs.player_sanity == 55 and gs.done_today("campfire"), "tales give +5, once a day")
+	_check(gs.done_today("mir_company"), "Mirosław sat at the fire")
+	gs.reset()
+	gs.day = 5
+	gs.player_sanity = 50
+	await _talk(ognisko, "start", [])
+	_check(_seen.any(func(l): return l.contains("Wultany")), "night 5: the Long Night song")
+	_check(gs.player_sanity == 56, "the song gives +6")
+	gs.reset()
+	gs.day = 6
+	gs.add_note(&"wiersz_hagiwary")
+	await _talk(ognisko, "start", [])
+	_check(_seen.any(func(l): return l.contains("boimy się razem")), "day 6: Hagiwara reads the poem")
+	gs.reset()
+	gs.day = 7
+	await _talk(ognisko, "start", [])
+	_check(_seen.any(func(l): return l.contains("Milczenie siedzi przy ogniu")), "day 7 without the quota")
+
+	print("--- Bolko about the tremor")
+	gs.reset()
+	gs.set_flag("tremor_seen")
+	await _talk(bolko, "start", ["W nocy ziemia drżała.", "Pójdę już."])
+	_check(gs.has_flag("bolko_tremor"), "Bolko remembers the last tremor")
+
+	print("--- The fourteenth: the clues, the counting dream, the lamp when left alone")
+	gs.reset()
+	gs.quest_log(&"czternasty", "kreski_rzapie")
+	_check(gs.quest_state("czternasty") == "active", "the tally starts the quest")
+	for f in ["saw_marks_rzapie", "saw_marks_pillar", "opened_grabiec_cache", "saw_bread"]:
+		gs.set_flag(f)
+	_check(gs.fourteenth_clues() == 4, "four clues counted")
+	gs.day = 6
+	await _talk(system, "dream", [])
+	_check(_seen.any(func(l): return l.contains("Dochodzi do czternastu")), "the counting dream")
+	gs.set_flag("fourteenth_gift")
+	await _talk(system, "left_behind", [])
+	_check(_seen.any(func(l): return l.contains("znakiem dziadka")), "the lamp in the left-alone ending")
+
+	print("--- The reckoning: the last chance to show the letter")
+	gs.reset()
+	for vein in gs.vein_ids().slice(0, 12):
+		gs.set_flag("vein_" + vein)
+	gs.set_flag("plan_upadowa")
+	gs.add_note(&"list_dziadka")
+	await _talk(racibor, "reckoning", ["Przeczytaj to, zanim ją otworzysz."])
+	_check(gs.has_flag("racibor_doubts"), "the letter stops the decline plan")
+
+	print("--- The two Drugie in the evening")
+	gs.reset()
+	gs.day = 4
+	gs.hour = 20.0
+	gs.set_flag("sabina_joined")
+	gs.give_item("krysztal")
+	await _talk(dobrawa, "start", ["Stoicie tu z Sabiną co wieczór i milczycie.", "Muszę iść."])
+	_check(gs.has_flag("dwie_drugie"), "the scene plays once")
+	_check(_seen.any(func(l): return l.contains("czajnik")), "they feel the crystal")
 
 ## Runs a conversation, choosing responses whose text starts with the given strings, in order.
 func _talk(resource: Resource, cue: String, choices: Array) -> void:

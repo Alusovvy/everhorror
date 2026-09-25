@@ -15,7 +15,7 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
 | Akcja | Kosztuje czas? |
 |---|---|
 | Chodzenie po obozie i po miejscu wyprawy | nie |
-| Rozmowa z NPC | **tak** |
+| Rozmowa z NPC | **tak: 0,5 h** przy pierwszej odpowiedzi innej niż pożegnanie; zagadać i wyjść — za darmo **[decyzja 2026-09-25, task_06]** |
 | Podróż do miejsca, dalej przez [M] i z powrotem | **tak** |
 | Pierwsze rozpoznanie nowego miejsca | **tak** |
 | Badanie niektórych rzeczy, znaczenie żył | **czasami** |
@@ -23,9 +23,9 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
 | Pomoc NPC (wysadzenie, praca przy pompach, opatrywanie) | **tak, dużo** |
 | Sen | **tak**, kończy dzień |
 
-3. **Dzień ma budżet 16 godzin** (06:00–22:00). ✅ Gdy godzin brakuje, rozmowy, dalsze wyprawy i znaczenie żył są niedostępne z podpowiedzią „(za późno)”.
+3. **Dzień ma budżet 16 godzin** (06:00–22:00). ✅ Gdy godzin brakuje, dalsze wyprawy i znaczenie żył są niedostępne z podpowiedzią „(za późno)”. Rozmowę można zacząć zawsze; jej koszt widać toastem przy naliczeniu.
 4. **Gracz zawsze wraca na noc do obozu**, ale może przy tym zmarnować dużo czasu **[decyzja 2026-09-25, MECHANICS §13 pkt 8]**. ✅ Powrót jest możliwy nawet po 22:00, kosztuje wtedy trochę poczytalności.
-5. **Koszt jest widoczny przed akcją** („[E] Porozmawiaj z Teklą · 1 h”, na mapie: droga, rozpoznanie i godzina przybycia). ✅
+5. **Koszt jest widoczny przed akcją** („[E] Zaznacz żyłę na mapie · 1 h”, na mapie: droga, rozpoznanie i godzina przybycia), a przy rozmowach toastem „−0,5 h · Rozmowa z…” w chwili naliczenia. ✅
 6. **Tydzień.** ✅ Gra trwa 7 dni. Rano ósmego dnia Racibor liczy żyły ([Eksploracja](eksploracja_kopalni.md#złoża-i-norma)):
    - co najmniej 12 żył: zakończenie „Koniec tygodnia”,
    - mniej: wyprawa wyjeżdża bez gracza, a on zostaje sam w kopalni („Zostałeś sam”) **[decyzja 2026-09-25, MECHANICS §13 pkt 2]**.
@@ -36,19 +36,20 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
    - wstrząs w piątą noc,
    - stan bohatera: −3 poczytalności co noc, odpoczynek +8 zdrowia albo gorączka −12 zdrowia (zob. [Zdrowie i poczytalność](zdrowie_i_poczytalnosc.md)),
    - odszyfrowanie wiadomości dziadka, jeśli gracz ma szyfr i klucz,
+   - podarunek „Czternastego” (od 5. nocy, przy ≥ 4 śladach questu): lampa przy posłaniu,
    - sen bohatera: inny w noce 1, 2, 3–4, 5–6 i 7, a w gorączce z dodatkiem.
 8. **Poranki** ✅:
    - plansza z nowiną nocy („Nasir kaszle od świtu”, „W nocy ziemia drżała”),
    - zapis stanu poranka (do „spróbuj od rana” po śmierci),
    - w dniu 3 ogłoszenie Racibora,
    - w dniach 4–7 upomnienie, jeśli norma się spóźnia.
-9. **Rytm dnia w obozie** ✅: rano (do 8:00) śniadanie, 8–18 praca, 18–20 kolacja, potem wieczór. Postacie zmieniają miejsca, gdy mija pora (zob. [NPC](npc.md#rozkład-dnia)).
+9. **Rytm dnia w obozie** ✅: rano (do 8:00) śniadanie, 8–18 praca, 18–20 kolacja, potem wieczór. Od 20:00 przy ognisku scena zbiorowa „Usiądź przy ogniu” (1 h, raz dziennie, treść wg dnia; task_06). Postacie zmieniają miejsca, gdy mija pora (zob. [NPC](npc.md#rozkład-dnia)).
 
 ## Dane i strojenie
 | Parametr | Wartość | Gdzie |
 |---|---|---|
 | Godziny w dniu | 16 (06:00–22:00) | `GameState.DAY_START_HOUR`, `DAY_LENGTH_HOURS` |
-| Rozmowa z NPC | 1 h | `Npc.TALK_HOURS` |
+| Rozmowa z NPC | 0,5 h przy pierwszej odpowiedzi innej niż pożegnanie (`[#leave]` w plikach dialogów) | `VN.TALK_HOURS` |
 | Podróż | wg grafu miejsc: 2 h obóz ↔ sąsiednie, 1–1,5 h dalej | `data/locations/*.tres` (`links`) |
 | Rozpoznanie nowego miejsca | +1 h | `Expeditions.SCOUTING_HOURS` |
 | Ciężko ranny / ranny | +1 h na każdy odcinek drogi | `Expeditions.WOUNDED_EXTRA_HOURS` |

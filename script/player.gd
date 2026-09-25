@@ -12,7 +12,6 @@ signal interacted(target: Interactable)
 @onready var player_walking_sound: AudioStreamPlayer3D = $PlayerWalkingSound
 
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
 ## Camera pitch limits in degrees.
 const MAX_LOOK_UP = 40.0
 const MAX_LOOK_DOWN = 70.0
@@ -28,9 +27,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor() and not GameState.is_modal():
-		velocity.y = JUMP_VELOCITY
+	# No jump: a horror game without combat has no business letting the player
+	# hop over ledges, ropes and water (team decision, 2026-09-25).
 
 	# Get the input direction and handle the movement/deceleration.
 	# Head only yaws, so moving forward keeps full speed regardless of camera pitch.

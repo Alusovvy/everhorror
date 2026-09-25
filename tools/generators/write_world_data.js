@@ -67,6 +67,8 @@ item({ id: "grzyb", name: "Świecący grzyb", acc: "świecący grzyb", cat: "que
   text: "Blady grzyb z groty, z niebieską poświatą pod kapeluszem. Anzelm mówił, że z takich warzy się lekarstwo. Hagiwara chciałby go zobaczyć." });
 item({ id: "odlamek", name: "Odłamek błękitu", acc: "odłamek błękitu", cat: "valuable",
   text: "Odłamek z Kryształowej galerii, czysty błękit bez grama skały. Buczy cicho, kiedy przyłożysz go do ucha. Sabina bardzo chciała taki mieć." });
+item({ id: "lampa", name: "Stara lampa przewodnika", acc: "starą lampę", cat: "valuable", consumable: false,
+  text: "Górnicza lampa oliwna, okopcona i pogięta, ze znakiem dziadka wybitym w denku. Na szkle wydrapano czternaście kresek. Ktoś zostawił ją przy twoim posłaniu, kiedy spałeś. Pali się równo i jakoś nie chce zgasnąć." });
 item({ id: "klejnot", name: "Daleki Klejnot", acc: "Daleki Klejnot", cat: "valuable", consumable: false,
   text: "Szklany paciorek w mosiężnej oprawce. Na bazarach w Lajihar sprzedają takie jako kawałek planety Kinkenheim. Nasir twierdzi, że ten jest prawdziwy." });
 

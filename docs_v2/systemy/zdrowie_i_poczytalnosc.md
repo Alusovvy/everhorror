@@ -37,7 +37,8 @@ Nie ma pasków ani liczb. HUD dopisuje pod zegarem „ranny” czy „gorączka�
    - rozmowy (Hieronim, Ottokar, prawda Anzelma),
    - każda noc −3, powrót po nocy −3, wstrząs w piątą noc −3.
 8. **Co ją przywraca** ✅: nalewka +15, świeca +6, pieśń Wszebora +6, kości z Sobkiem +5, opowieść o Długiej Nocy +3, wiersz Hagiwary +4, wieczór przy ognisku z Mirosławem +2.
-9. **Załamanie** ✅ (poczytalność 0): „Uciekasz przed czymś, czego nie ma”. Ktoś przynosi bohatera do obozu, reszta dnia przepada, poczytalność wraca do 20.
+9. **Winieta** ✅ **[decyzja 2026-09-25, task_06]**: na pasmie „na krawędzi” brzegi ekranu ciemnieją i powoli pulsują (siła 0,3–0,7, im mniej poczytalności, tym mocniej). Znika w rozmowach i na ekranach. Bez drżenia kamery.
+10. **Załamanie** ✅ (poczytalność 0): „Uciekasz przed czymś, czego nie ma”. Ktoś przynosi bohatera do obozu, reszta dnia przepada, poczytalność wraca do 20.
 
 ## Dane i strojenie
 | Parametr | Wartość | Gdzie |
@@ -61,12 +62,11 @@ Nie ma pasków ani liczb. HUD dopisuje pod zegarem „ranny” czy „gorączka�
   - `player_health`, `player_sanity`, `player_fever`,
   - `hurt_player`, `heal_player`, `change_player_sanity`, `set_fever`,
   - sygnały `player_died`, `player_broke`,
-- HUD `Condition` pod zegarem,
+- HUD `Condition` pod zegarem i winieta (`Vignette` + `shader/sanity_vignette.gdshader`),
 - ekwipunek (opis stanu),
 - `StoryDirector` (`_on_player_died`, `_on_player_broke`, szepty),
 - `SaveManager.capture_morning()` / `retry_morning()`,
 - `ScreenFade.show_end(summary, title, retry)`.
 
 ## Otwarte pytania
-- ❓ Czy przy niskiej poczytalności zmieniać też obraz (winieta, drżenie)?
 - ❓ Czy śmierć powinna mieć więcej przyczyn (Drudzy, zawały), czy zostać rzadka?

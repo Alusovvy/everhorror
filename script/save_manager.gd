@@ -7,14 +7,18 @@ extends Node
 ## root. Gameplay scenes call restore_pending(self) in _ready to apply a load.
 ## GameState (day, time, flags, NPCs…) is saved too and restored before the scene loads,
 ## so every node can read the loaded state in its own _ready.
-## Besides the slots there is a "morning" snapshot in memory, taken at the start of each day:
-## after the hero dies the player can try the day again (MECHANICS §13 pkt 3).
+## Besides the slots there is a "morning" snapshot, taken at the start of each day:
+## after the hero dies the player can try the day again (MECHANICS §13 pkt 3). The same
+## snapshot also goes to disk as the AUTO slot (slot 0), so a crash or quitting the game
+## loses at most the current day. Manual saves never overwrite it.
 ## Version 3 (task_05) added the hero's health and the expedition; older saves still load.
 
 const GAME_SCENE := "res://scene/world.tscn"
 const MAIN_MENU_SCENE := "res://scene/main_menu.tscn"
 const SAVE_DIR := "user://saves"
 const SLOT_COUNT := 3
+## The dawn autosave, load-only in the UI.
+const AUTO_SLOT := 0
 const SAVE_VERSION := 3
 const PERSIST_GROUP := "persist"
 
@@ -22,13 +26,15 @@ var _pending: Dictionary = {}
 var _morning: Dictionary = {}
 
 func slot_path(slot: int) -> String:
+	if slot == AUTO_SLOT:
+		return "%s/auto.json" % SAVE_DIR
 	return "%s/slot_%d.json" % [SAVE_DIR, slot]
 
 func has_save(slot: int) -> bool:
 	return FileAccess.file_exists(slot_path(slot))
 
 func has_any_save() -> bool:
-	for slot in range(1, SLOT_COUNT + 1):
+	for slot in range(0, SLOT_COUNT + 1):
 		if has_save(slot):
 			return true
 	return false
@@ -54,7 +60,9 @@ func go_to_main_menu() -> void:
 	_change_scene(MAIN_MENU_SCENE)
 
 func save_game(slot: int) -> bool:
-	var data := _collect()
+	return _write(slot, _collect())
+
+func _write(slot: int, data: Dictionary) -> bool:
 	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 	var file := FileAccess.open(slot_path(slot), FileAccess.WRITE)
 	if file == null:
@@ -72,10 +80,12 @@ func load_game(slot: int) -> bool:
 	_change_scene(data["scene"])
 	return true
 
-## Remembers the current state as this morning's (the StoryDirector calls it at dawn).
+## Remembers the current state as this morning's (the StoryDirector calls it at dawn)
+## and autosaves it to disk (the AUTO slot).
 func capture_morning() -> void:
 	if get_tree().current_scene:
 		_morning = _collect()
+		_write(AUTO_SLOT, _morning)
 
 func has_morning() -> bool:
 	return not _morning.is_empty()

@@ -1,5 +1,5 @@
-EVERHORROR - wersja testowa (demo 0.3)
-======================================
+EVERHORROR - wersja testowa (demo 0.4.1)
+========================================
 
 JAK URUCHOMIĆ
 1. Rozpakuj cały ZIP do jakiegoś folderu (nie odpalaj gry prosto z ZIP-a).
@@ -11,7 +11,7 @@ JAK URUCHOMIĆ
 Wymagania: Windows 10 lub 11 (64-bit), karta graficzna z DirectX 12 albo Vulkanem.
 
 STEROWANIE
-  W A S D ......... chodzenie
+  W A S D ......... chodzenie  (skoku nie ma: to kopalnia, nie plac zabaw)
   mysz ............ rozglądanie się
   E ............... rozmowa, oglądanie i branie rzeczy
   I ............... ekwipunek (leki, narzędzia, stan bohatera)
@@ -42,7 +42,23 @@ dzień da się powtórzyć od rana (RETRY FROM MORNING).
 Cały tydzień to mniej więcej 2-3 godziny grania. Grę zapisuje się pod Esc
 (3 miejsca na zapis).
 
-CO NOWEGO W 0.3
+CO NOWEGO W 0.4.1 (poprawki)
+- komunikat o upływie czasu nie ma już podwójnego "h" (było: "−0,5 h h")
+- gdy Nasira wywiozą bez lekarstwa, zadanie "Gorączka Nasira" kończy się
+  jako nieudane, z wpisem w notesie (wcześniej wisiało jako aktywne)
+
+CO NOWEGO W 0.4
+- wieczory przy ognisku: usiądź przy ogniu po 20:00 (opowieści, pieśń o Długiej Nocy, wieczór po wstrząsie)
+- nowa zagadka do wytropienia: ktoś w tej kopalni liczy do czternastu
+- ludzie w obozie witają się inaczej każdego dnia, a nocny wstrząs zostawia ślady w chodnikach
+- autozapis każdego świtu (slot AUTO w LOAD GAME)
+- opcje: jasność obrazu, osobna głośność tła i efektów
+- kiedy bohaterowi pęka głowa, widać to na brzegach ekranu
+- usunięty skok
+- rozmowy zabierają pół godziny zamiast godziny i tylko wtedy, gdy naprawdę rozmawiasz;
+  zagadać kogoś i od razu pójść dalej można za darmo
+
+CO BYŁO NOWE W 0.3
 - tydzień zamiast trzech dni, norma 12 żył i rozliczenie ósmego dnia rano
 - stół z mapą, wyprawy dalej w głąb pod M, podsumowanie każdej wyprawy
 - 10 nowych miejsc i 25 żył do znalezienia

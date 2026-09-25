@@ -93,7 +93,7 @@ Każdy NPC ma swoje miejsce zależne od pory dnia (`script/camp_schedule.gd`). S
 ## Implementacja
 ✅
 - `NpcData` (karta), rejestr i stan w `GameState` (poczytalność, zdrowie, reputacja, status, miejsce, gorączka `fever_<id>`),
-- `Npc` (model, kolizja, rozmowa za 1 h, pozy),
+- `Npc` (model, kolizja, rozmowa naliczana przez VN: 0,5 h przy pierwszej realnej odpowiedzi, pozy),
 - `CharacterModel`:
   - części Quaterniusa na wspólnym szkielecie, kobiece i męskie ciało,
   - kolor skóry,

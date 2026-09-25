@@ -27,6 +27,7 @@ Urodziła się w Jaksarze, ale od dziecka należy do Initium. Przeszła przemian
 | Kryształ to nośnik jak w Maszynie | gracz ma kryształ |
 | Co się stanie, gdy ktoś zacznie kopać przy sercu | gracz ma list dziadka |
 | Exitium to „córka, która uciekła z domu”, von Brühl rozbiera rzeczy na części. O Sabinie: „Za dobra na Exitium” | po spotkaniu z Drugimi |
+| Scena z Sabiną (Initium vs Exitium, ból; obie czują kryształ) | wieczór, dzień 4+, raz (task_06) |
 
 ## Przedmioty
 | Przedmiot | Jak zdobyć |

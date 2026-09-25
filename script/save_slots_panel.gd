@@ -23,16 +23,25 @@ func open(new_mode: Mode) -> void:
 	status.text = ""
 	_rebuild()
 	show()
-	var first := slot_list.get_child(0) as Button
-	if first and not first.disabled:
-		first.grab_focus()
-	else:
-		back_button.grab_focus()
+	for child in slot_list.get_children():
+		var button := child as Button
+		if button and not button.disabled:
+			button.grab_focus()
+			return
+	back_button.grab_focus()
 
 func _rebuild() -> void:
 	for child in slot_list.get_children():
 		slot_list.remove_child(child)
 		child.queue_free()
+	# The dawn autosave is load-only; manual saves cannot touch it.
+	if mode == Mode.LOAD:
+		var auto := SaveManager.read_slot(SaveManager.AUTO_SLOT)
+		var auto_button := Button.new()
+		auto_button.text = "AUTO     —   %s" % _describe(auto)
+		auto_button.disabled = auto.is_empty()
+		auto_button.pressed.connect(_on_slot_pressed.bind(SaveManager.AUTO_SLOT))
+		slot_list.add_child(auto_button)
 	for slot in range(1, SaveManager.SLOT_COUNT + 1):
 		var data := SaveManager.read_slot(slot)
 		var button := Button.new()

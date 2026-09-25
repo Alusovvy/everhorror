@@ -14,6 +14,16 @@ if not has_flag("met_nasir")
 elif has_flag("nasir_fever_started") and not has_flag("nas_thanked_health")
 	$> set_flag("nas_thanked_health")
 	Nasir: Żyję, habibi. Ręce jeszcze mi się trzęsą, ale żyję. W Nerdii długi pamięta się dłużej niż krzywdy. Nie zapomnę.
+elif not done_today("nas_hello")
+	$> mark_today("nas_hello")
+	if player_fever
+		Nasir: Habibi, ty się trzęsiesz. Znam to trzęsienie od środka. Pij ciepłe i nie właź do zimnej wody, słyszysz?
+	elif has_flag("pump_running")
+		Nasir: [[Słyszysz pompy, habibi? Biją jak serce. Póki biją, żyjemy.|Woda schodzi. Powoli, ale schodzi. Jak wszystko w tym kraju.]]
+	elif day >= 5
+		Nasir: [[Zimno dziś, habibi. Czyli jak co dzień, tylko bardziej.|W Bakaszu o tej porze dojrzewają daktyle. Tu dojrzewa tylko ciemność.]]
+	else
+		Nasir: [[Habibi.|I znowu ty. To dobrze. Stałych rzeczy jest tu mało.]]
 => hub
 
 ~ hub
@@ -72,7 +82,7 @@ Nasir: [[Mów, habibi.|Słucham.|Tak?]]
 	Nasir: Daleki Klejnot. Kawałek planety Kinkenheim. W Lajihar sprzedają takie na każdym rogu i wszystkie są fałszywe.
 	Nasir: Oprócz tego. Ten jest prawdziwy. Kupiłem go za pierwsze srebro po wykupie. Wiem, że to szkło. Ale kto płaci wolnym srebrem, ten kupuje prawdziwe rzeczy.
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	Nasir: Idź w pokoju. I nie pij wody z rząpia, nawet jak bardzo chce ci się pić.
 	=> END
 
@@ -96,6 +106,6 @@ Anzelm patrzy na ciebie znad miski z wodą i nic nie mówi.
 	if not has_item("klejnot")
 		Nasir zdejmuje z szyi szklany paciorek i wciska ci go w dłoń. Nie przyjmuje odmowy.
 		$> give_item("klejnot")
-- Trzymaj się.
+- Trzymaj się. [#leave]
 	Nasir: Trzymam się... czego mogę.
 => END

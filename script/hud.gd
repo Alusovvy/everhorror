@@ -3,6 +3,7 @@ class_name Hud
 
 ## In-game HUD: crosshair, interaction prompt, description panel, clock and short messages.
 
+@onready var vignette: ColorRect = $Vignette
 @onready var crosshair: ColorRect = $Crosshair
 @onready var prompt: Label = $Prompt
 @onready var description_panel: PanelContainer = $DescriptionPanel
@@ -43,6 +44,7 @@ func _process(_delta: float) -> void:
 	crosshair.visible = not modal
 	clock.visible = not modal
 	condition.visible = not modal
+	vignette.visible = not modal and _vignette_strength() > 0.0
 	if modal:
 		prompt.hide()
 		description_panel.hide()
@@ -107,8 +109,8 @@ func _on_interacted(target: Interactable) -> void:
 
 func _on_time_advanced(hours: float, reason: String) -> void:
 	_update_clock()
-	var amount := str(int(hours)) if is_equal_approx(hours, floor(hours)) else "%.1f" % hours
-	show_toast("−%s h · %s" % [amount, reason] if reason != "" else "−%s h" % amount)
+	var amount := GameState.hours_text(hours)
+	show_toast("−%s · %s" % [amount, reason] if reason != "" else "−%s" % amount)
 	if GameState.is_day_over():
 		show_toast("Robi się późno. Pora wracać na posłanie.")
 
@@ -128,6 +130,20 @@ func _update_condition() -> void:
 	if GameState.player_fever:
 		parts.append("gorączka")
 	condition.text = "  ·  ".join(parts)
+	_update_vignette()
+
+## A subtle dark vignette when the hero's mind frays: none while calm or uneasy,
+## creeping in and slowly pulsing on the edge, strongest just before the breakdown.
+func _vignette_strength() -> float:
+	if GameState.mind_band() != "na_krawedzi":
+		return 0.0
+	return lerpf(0.3, 0.7, 1.0 - float(GameState.player_sanity) / 35.0)
+
+func _update_vignette() -> void:
+	var strength := _vignette_strength()
+	var material := vignette.material as ShaderMaterial
+	material.set_shader_parameter("strength", strength)
+	material.set_shader_parameter("pulse_amount", 1.0 if strength > 0.0 else 0.0)
 
 func _refresh() -> void:
 	crosshair.color = CROSSHAIR_FOCUSED if _focused else CROSSHAIR_IDLE

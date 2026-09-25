@@ -27,7 +27,7 @@ Stara hala górnicza (x 0–32, z −5–4,5) jest podzielona drewnianą ściank
 | Strefa | Sala | Co tam jest | Kto i kiedy |
 |---|---|---|---|
 | Posłania | zachodnia | posłania gracza, Bolka i Mirosława, worki, beczka z wodą | Bolko wieczorem, gracz śpi |
-| Kuchnia i wspólny stół | zachodnia | ognisko z rożnem i kociołkiem, kącik kucharki, długi stół z ławami, talerze, świeca | śniadanie (do 8:00) i kolacja (18–20) |
+| Kuchnia i wspólny stół | zachodnia | ognisko z rożnem i kociołkiem („Usiądź przy ogniu” po 20:00, scena wg dnia), kącik kucharki, długi stół z ławami, talerze, świeca | śniadanie (do 8:00), kolacja (18–20), wieczór przy ogniu |
 | Magazyn | zachodnia | skrzynie, beczki, stół z narzędziami, osełka, wózek ze starym urobkiem (świeci) | Bolko w dzień, Dobrawa 9–12 przy starych wózkach |
 | Skład prochu | zachodnia, kąt | beczki z prochem, skrzynia z lontami, jak najdalej od ognia | Mirosław w dzień |
 | Stół dowódcy | wschodnia | stół z mapą (**wyprawy**), świecznik, księga zarządcy, chorągiew Kniazia, łóżko | Racibor w dzień i wieczorem, Dobrawa rano w dniu 2 |
@@ -102,7 +102,8 @@ Dane: `data/locations/*.tres` (generator `tools/generators/write_world_data.js`)
 
 ### Stare wyrobisko (wschód, poziom 2)
 - Droga: Stara sztolnia 1 h
-- Zawartość: niska komora na trzech filarach (na jednym czternaście kresek), wywrócony wózek, szyny, obuch hawiarskiego kilofa w gruzie, 2 żyły
+- Zawartość: niska komora na trzech filarach (na jednym czternaście kresek — ślad „Czternastu kresek”), wywrócony wózek, szyny, obuch hawiarskiego kilofa w gruzie, 2 żyły
+- Zmiany: po wstrząsie (dzień 6+) środkowy filar jest pęknięty i „oddycha” pyłem
 - Ludzie: za dnia kopie tu Wszebor
 - Odnogi: → Grzybowa grota, → Przekop Grabca
 
@@ -126,6 +127,7 @@ Dane: `data/locations/*.tres` (generator `tools/generators/write_world_data.js`)
 ### Przekop Grabca (poziom 3)
 - Droga: stare wyrobisko 1 h albo komora pomp 1,5 h
 - Zawartość: prosty chodnik 24 m z odrzwiami i szynami, tabliczka sztygara, wózek, na końcu zabita deskami skrytka (łom: olej i zeszyt Grabca), 1 żyła
+- Zmiany: po wstrząsie szczelina przy spągu odsłania zgnieciony medalik starej ekipy (ślad „Czternastu kresek”)
 - Odnogi: → Parująca szczelina
 
 ### Zalany chodnik (północ, poziom 3)
@@ -145,6 +147,7 @@ Dane: `data/locations/*.tres` (generator `tools/generators/write_world_data.js`)
 ### Parująca szczelina (poziom 4)
 - Droga: grota 1 h albo przekop 1,5 h
 - Zawartość: wysoka, wąska szczelina, dwa wyloty pary z siarką i czerwonym żarem, 2 żyły (druga przy wylocie: oparzenie)
+- Zmiany: po wstrząsie nowa, „oddychająca” szczelina o ostrych brzegach
 
 ### Kryształowa galeria (poziom 4, najniżej)
 - Droga: zalany chodnik albo ślepy szyb 1,5 h · wymaga oleju do lampy · groza 6 · bez latarni

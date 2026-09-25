@@ -9,6 +9,14 @@ if not has_flag("met_sobek")
 		Przy wyjściu na wschód stoi brodaty mężczyzna z gołym mieczem opuszczonym ku ziemi. Obraca w palcach dwie kości do gry.
 	Sobek: Stój, kto idzie! Żartuję. Widziałem cię przy śniadaniu.
 	Sobek: Sobek, z Wielkiego Stepu. Pilnuję, żeby nikt nie wyniósł zapasów. I żeby nic nie wlazło tu z ciemności.
+elif not done_today("sob_hello")
+	$> mark_today("sob_hello")
+	if quest_state("zaklad") == "active"
+		Sobek: O, mój dłużnik idzie. Znaczy się, przyszły dłużnik. Kości już się cieszą.
+	elif day >= 6
+		Sobek: [[Nuda, przewodniku. Na stepie przynajmniej wiało.|Stoję, patrzę w ciemność. Ciemność patrzy na mnie. Na razie remis.]]
+	elif day >= 3
+		Sobek: [[Stój, kto idzie! A, ty. Szkoda.|No proszę, żywy. Właśnie przegrałem sam ze sobą zakład.]]
 => hub
 
 ~ hub
@@ -77,6 +85,6 @@ Sobek: [[No?|Mów, byle krótko.|Słucham, przewodniku.]]
 	$> advance_time(1, "Kości z Sobkiem")
 	$> change_player_sanity(5)
 	=> hub
-- Muszę iść.
+- Muszę iść. [#leave]
 	Sobek: Idź. A jakby coś za tobą lazło z ciemności, to biegnij tutaj. Ja i miecz dawno się nie ruszaliśmy.
 	=> END

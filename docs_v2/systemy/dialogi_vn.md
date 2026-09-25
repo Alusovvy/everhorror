@@ -17,7 +17,7 @@ Rozmowa jest wyborem z kosztem, a nie przerwą w grze. Gracz widzi, że wcześni
    - przedmioty, notatki, wpisy zadań, flagi,
    - czas (`advance_time`),
    - akcje świata po rozmowie („sleep”, „blast”) ✅.
-5. **Koszt czasu liczy się raz, przy wejściu w rozmowę** (1 h). Wyjątki mają swój koszt: wysadzenie 4 h, błędna próba przy ścianie 1 h ✅.
+5. **Koszt rozmowy: 0,5 h, liczone raz, przy pierwszej odpowiedzi, która nie jest pożegnaniem** (pożegnania mają w plikach znacznik `[#leave]`). Zagadać i wyjść można za darmo. Sceny fabularne nie naliczają tego kosztu; ich wyjątki mają własne ceny: wysadzenie 4 h, pompy 2 h, błędna próba przy ścianie 1 h ✅ **[decyzja 2026-09-25, task_06]**.
 6. **Mówcy, którzy nie są postacią, mogą mieć statyczny portret** (ściana w kaplicy: świecące znaki sanctinu) ✅.
 7. **Gwara śląska górników:**
    - Mirosław i Bolko mówią z elementami gwary, także w scenach innych postaci ✅.

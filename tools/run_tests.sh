@@ -11,19 +11,29 @@ mkdir -p "$LOGS"
 
 tests=("$@")
 if [ ${#tests[@]} -eq 0 ]; then
-	tests=(dialogue day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
+	tests=(unit lint dialogue schedule day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
 fi
 
 failed=0
 for name in "${tests[@]}"; do
 	script="res://tools/tests/test_${name}.gd"
 	[ "$name" = "dialogue" ] && script="res://tools/dialogue_test.gd"
+	[ "$name" = "unit" ] && script="res://tools/unit_test.gd"
+	[ "$name" = "lint" ] && script="res://tools/data_lint.gd"
 	start=$(date +%s)
 	timeout 180 "$GODOT" --headless --path . --script "$script" > "$LOGS/$name.log" 2>&1
 	code=$?
 	result=$(grep -m1 "^RESULT" "$LOGS/$name.log")
 	[ -z "$result" ] && result="no RESULT line (exit $code), see $LOGS/$name.log"
-	case "$result" in *"ALL PASSED"*) ;; *) failed=$((failed + 1)) ;; esac
+	ok=1
+	case "$result" in *"ALL PASSED"*) ;; *) ok=0 ;; esac
+	# A scenario that "passes" while the engine logs script errors is not a pass.
+	errors=$(grep -c "SCRIPT ERROR" "$LOGS/$name.log")
+	if [ "$errors" -gt 0 ]; then
+		ok=0
+		result="$result  +$errors SCRIPT ERROR(s), see $LOGS/$name.log"
+	fi
+	[ "$ok" -eq 0 ] && failed=$((failed + 1))
 	printf "%-10s %4ss  %s\n" "$name" "$(( $(date +%s) - start ))" "$result"
 done
 exit $failed

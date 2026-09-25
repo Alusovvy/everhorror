@@ -20,14 +20,16 @@ func scenario() -> void:
 	step("start: day 2, 06:00")
 	await start_world(_setup)
 
-	step("Tekla: the bundle back (1 h)")
+	step("Tekla: the bundle back (0.5 h)")
 	await converse("Tekla", ["Mam twój tobołek.", "Nikomu nie powiem.", "Muszę iść."])
 	check(gs.has_item("lina") and gs.quest_state(&"towar") == "done", "rope from Tekla, bundle quest done")
 
-	step("Dobrawa: the chapel and the glossary (1 h)")
+	step("Dobrawa: the chapel and the glossary (0.5 h)")
 	await converse("Dobrawa", ["Jesteś z Drugich?", "Czego tu właściwie szukasz?", "Pod jaskinią", "Muszę iść."])
 	check(gs.has_flag("kaplica_known") and gs.has_note(&"slowniczek"), "chapel known, glossary")
-	check(is_equal_approx(gs.hour, 8.0), "08:00 (%s)" % gs.clock_text())
+	check(is_equal_approx(gs.hour, 7.0), "two talks, 07:00 (%s)" % gs.clock_text())
+	gs.advance_time(1.0, "Śniadanie się przeciąga")
+	await wait_idle()
 
 	step("the decline (3 h + 1 h scouting): collapse, vein (1 h), back (3 h)")
 	await travel("upadowa")
@@ -40,7 +42,7 @@ func scenario() -> void:
 	check(is_equal_approx(gs.hour, 16.0), "16:00 back (%s)" % gs.clock_text())
 	check(npc("Dobrawa").present and gs.npc_place(&"dobrawa") == "na_uboczu", "Dobrawa back from the tunnels, standing apart")
 
-	step("Racibor: report two veins (1 h)")
+	step("Racibor: report two veins (0.5 h)")
 	await converse("Racibor", ["Mam zaznaczone żyły.", "Muszę iść."])
 	check(gs.has_flag("rac_first_report") and gs.has_note(&"raport_archiwum") and gs.quest_state(&"zloza") == "active", "first report accepted, archive note, the quota goes on")
 	check(gs.has_flag("racibor_wants_upadowa"), "Racibor wants the decline")

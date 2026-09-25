@@ -392,7 +392,8 @@ func _rzapie() -> void:
 	tally_mat.albedo_texture = load("res://assets/textures/tally_marks.png")
 	tally_mat.roughness = 1.0
 	var tally := quad(g, "Tally", Vector2(0.8, 0.4), Transform3D(Basis(Vector3.UP, PI), Vector3(1.4, 1.5, 3.98)), tally_mat)
-	look(tally, "Kreski na skale", "Ktoś wydrapał w skale kreski, grupami po pięć. Czternaście. Pod spodem zaczęte słowo, może imię. Urywa się po trzech literach.", {"padding": 0.12})
+	look(tally, "Kreski na skale", "Ktoś wydrapał w skale kreski, grupami po pięć. Czternaście. Pod spodem zaczęte słowo, może imię. Urywa się po trzech literach.", {
+		"padding": 0.12, "on_use_flag": "saw_marks_rzapie", "on_use_quest": &"czternasty", "on_use_quest_entry": "kreski_rzapie"})
 	# the vein for Racibor
 	var veins := vein_group(g, "Vein")
 	var vein_rock := add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_c.tscn", Vector3(3.3, 1.2, -3.85), 0.0, 1.2)
@@ -663,7 +664,8 @@ func _chapel_props(g: Node3D, y0: float) -> void:
 	add(g, P + "Mug.gltf", Vector3(15.35, top, 2.9), 0.0)
 	var lamp := add(g, P + "Candle_2.gltf", Vector3(15.2, top, 3.15), 0.0, 1.0, "OilLamp")
 	light(lamp, "Flame", Vector3(0.0, 0.25, 0.0), Color(1.0, 0.66, 0.35), 0.9, 4.0, false, 0.3, 8.0)
-	look(lamp, "Lampka", "Mała lampka oliwna. Pali się. Knot przycięty, olej świeży. Ktoś tu bywa.", {"on_use_flag": "saw_lamp"})
+	look(lamp, "Lampka", "Mała lampka oliwna. Pali się. Knot przycięty, olej świeży. Ktoś tu bywa.", {
+		"on_use_flag": "saw_lamp", "on_use_quest": &"czternasty", "on_use_quest_entry": "lampka", "quest_only_if_active": true})
 	add(g, P + "Bench.gltf", Vector3(12.6, y0, 0.0), 90.0, 0.9, "PrayerBench")
 	look(g.get_node("PrayerBench"), "Ławka", "Ławka z tych samych desek co stemple. Wytarta do połysku przez setki kolan i tyłków. Górnicy siadali tu przed szychtą.", {"solid": true})
 
@@ -902,7 +904,13 @@ func _wyrobisko() -> void:
 	stub(g, "wyrobisko", WYROBISKO)
 	for pl in [["a", Vector3(4.6, 0.0, -1.9)], ["b", Vector3(8.2, 0.0, 2.1)], ["c", Vector3(10.6, 0.0, -2.3)]]:
 		add(g, M + "Rocks/Cave_Rocks/cave_pillar_%s.tscn" % pl[0], pl[1], randf() * 360.0, 1.0, "Pillar_" + pl[0])
-	look(g.get_node("Pillar_a"), "Filar", "Filar zostawiony przez starą ekipę, żeby trzymał strop. Ktoś wyrył na nim rząd kresek. Czternaście. Tyle dni tu kopali. Albo tylu ich tu zostało.", {"padding": 0.1})
+	look(g.get_node("Pillar_a"), "Filar", "Filar zostawiony przez starą ekipę, żeby trzymał strop. Ktoś wyrył na nim rząd kresek. Czternaście. Tyle dni tu kopali. Albo tylu ich tu zostało.", {
+		"padding": 0.1, "on_use_flag": "saw_marks_pillar", "on_use_quest": &"czternasty", "on_use_quest_entry": "kreski_filar"})
+	# After the night-5 tremor the middle pillar splits (Faza 2: the world shows the quake).
+	interactable(g.get_node("Pillar_b"), "TremorLook", {
+		"display_name": "Pęknięty filar", "required_flag": "tremor_seen",
+		"description": "Po nocnym wstrząsie przez filar biegnie świeże pęknięcie, szerokie na palec. Sypie się z niego miałki pył, równo, jakby filar oddychał. Strop trzyma się już chyba tylko z przyzwyczajenia.",
+		"on_use_flag": "saw_cracked_pillar", "sanity_change": -2, "sanity_reason": "Strop wisi ci nad głową", "padding": 0.12})
 	reliefs(g, [["a", Vector3(2.0, 1.1, -4.9), 0.0, 1.1], ["g", Vector3(11.5, 1.2, -4.9), 0.0, 1.0], ["b", Vector3(13.9, 1.2, -3.0), -90.0, 1.1],
 		["e", Vector3(3.5, 1.0, 4.9), 180.0, 1.1], ["f", Vector3(9.8, 1.2, 4.9), 180.0, 1.0]])
 	rubble(g, [["b", Vector3(12.2, 0.2, 3.9), 1.1], ["d", Vector3(1.6, 0.2, 3.6), 0.9], ["a", Vector3(6.0, 0.15, -4.0), 0.8]])
@@ -1022,6 +1030,7 @@ func _kostnica() -> void:
 		var floor_candle := add(niches, P + "Candle_2.gltf", c, 0.0)
 		light(floor_candle, "Flame", Vector3(0.0, 0.25, 0.0), Color(1.0, 0.64, 0.33), 0.9, 4.5, false, 0.3, 8.0)
 	look(niches.get_child(1), "Nisze z czaszkami", "Stara ekipa chowała tu swoich. Pod każdą czaszką wydrapane imię. Dwóch Grabców. Trzech Wojsławów. Jedna nisza jest pusta i podpisana, ale imienia nie umiesz przeczytać, choć litery są wyraźne.", {
+		"on_use_quest": &"czternasty", "on_use_quest_entry": "nisza", "quest_only_if_active": true,
 		"on_use_flag": "saw_niches", "sanity_change": -2, "sanity_reason": "Czaszki", "padding": 0.2})
 	# the altar with bread and candles that someone keeps lit
 	slab(g, "Altar", Vector3(0.8, 0.8, 1.6), Vector3(8.6, 0.4, 0.0), rock)
@@ -1033,6 +1042,7 @@ func _kostnica() -> void:
 	bread_mat.roughness = 0.9
 	var bread := mesh(g, "Bread", loaf, Vector3(8.6, 0.88, -0.4), bread_mat)
 	look(bread, "Chleb", "Bochenek chleba. Świeży, jeszcze pachnie. Tak w Jaksarze karmi się zmarłych w Święto Przodków, tylko że do Święta Przodków daleko. Ktoś tu schodzi. Regularnie.", {
+		"on_use_quest": &"czternasty", "on_use_quest_entry": "chleb", "quest_only_if_active": true,
 		"on_use_flag": "saw_bread", "sanity_change": -3, "sanity_reason": "Ktoś tu bywa", "padding": 0.12})
 	for c in [Vector3(8.4, 0.8, 0.5), Vector3(8.8, 0.8, 0.6)]:
 		var stick := add(g, P + "CandleStick.gltf", c, 0.0)
@@ -1128,9 +1138,17 @@ func _przekop() -> void:
 		"required_item": "lom", "missing_text": "Deski przybite na głucho. Gołymi rękami ich nie oderwiesz. Przydałby się łom.",
 		"description": "Deski puszczają z jękiem. W środku skrzynka: bańka oleju, zeszyt w ceracie i garść zardzewiałych gwoździ. Zeszyt jest pełen liczb, a na ostatniej stronie liczby się urywają.\n\nZabierasz olej i zeszyt.",
 		"on_use_item": "olej", "on_use_note": &"zapiski_grabca", "on_use_flag": "opened_grabiec_cache", "remove_after_use": true,
+		"on_use_quest": &"czternasty", "on_use_quest_entry": "zeszyt",
 		"expedition_event": "Otworzyłeś skrytkę sztygara Grabca.", "padding": 0.1,
 	})
 	vein(g, "przekop_1", "d", Vector3(12.5, 1.3, -1.7), 0.0, "Przekop idzie prosto przez żyłę, jakby Grabiec jej nie zauważył. Albo zauważył i kopał dalej, bo miał rozkaz iść prosto. Zaznaczasz ją.", Vector3(12.3, 0.0, -0.9))
+	# The tremor splits the floor by the wall and gives back something of the old crew's.
+	var tremor_crack := slab(g, "TremorCrack", Vector3(1.3, 0.04, 0.4), Vector3(9.2, 0.02, 1.4), charred, false)
+	look(tremor_crack, "Świeże pęknięcie", "Wstrząs rozstąpił skałę przy samym spągu. W szczelinie coś błyska: zgnieciony blaszany medalik, jakie stara ekipa dostawała od Kniazia za pełny rok szychty. Wypolerowany od dotyku.
+
+Ktoś nosił go jeszcze długo po tym, jak przestali liczyć dni.", {
+		"required_flag": "tremor_seen", "on_use_flag": "saw_medal", "sanity_change": -2, "sanity_reason": "Wypolerowany od dotyku",
+		"on_use_quest": &"czternasty", "on_use_quest_entry": "medalik", "quest_only_if_active": true, "padding": 0.15})
 	for x in [6.5, 16.5]:
 		light(g, "Glow", Vector3(x, 2.8, 0.0), Color(1.0, 0.6, 0.3), 0.5, 7.0, true, 0.12, 4.0)
 	spots("przekop", PRZEKOP, [Vector3(3.8, 0.0, -0.8), Vector3(4.6, 0.0, 0.8), Vector3(6.2, 0.0, -0.8), Vector3(7.0, 0.0, 0.8)])
@@ -1175,6 +1193,11 @@ func _szczelina() -> void:
 			first_stain = stain
 		light(g, "Heat", v + Vector3(0.0, 0.4, 0.0), Color(1.0, 0.42, 0.18), 1.2, 4.5, false, 0.35, 5.0)
 	look(first_stain, "Para", "Z pęknięcia bucha para, gorąca jak z kotła. Śmierdzi zgniłymi jajami. Dziadek miał rację: nie siedzieć tu długo.", {"padding": 0.3})
+	var fresh_crack := slab(g, "FreshCrack", Vector3(1.1, 0.04, 0.5), Vector3(8.8, 0.02, 0.3), sulphur, false)
+	look(fresh_crack, "Nowa szczelina", "Ta szczelina jest nowa. Brzegi ostre, nieokopcone, siarka nie zdążyła ich zażółcić. Wstrząs otworzył ją jak list.
+
+Ze środka idzie ciepło. I bardzo powolny, równy oddech pary.", {
+		"required_flag": "tremor_seen", "on_use_flag": "saw_fresh_crack", "sanity_change": -1, "sanity_reason": "Oddech spod skały", "padding": 0.15})
 	vein(g, "szczelina_1", "e", Vector3(4.4, 1.4, -1.75), 0.0, "Wąska żyła w pęknięciu skały, ciepła jak piec. Zaznaczasz ją, zanim zdążysz się spocić.", Vector3(4.0, 0.0, -0.8), 1.0)
 	vein(g, "szczelina_2", "b", Vector3(11.2, 1.3, 1.75), 180.0, "Żyła biegnie tuż nad wylotem pary. Kiedy się nad nią pochylasz, para bucha ci prosto w twarz. Parzy, ale kończysz rysunek.", Vector3(11.4, 0.0, 0.9), 1.0, {
 		"wound": 10, "wound_reason": "Poparzyła cię para"})
