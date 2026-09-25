@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"notatka_dowodcy"
+title = "Notatka dowódcy poprzedniej ekipy"
+text = "Leżała na skrzyni w jaskini przy wejściu do obozu. Podpis rozmazany.\n\n„Dzień czternasty. Im niżej schodzimy, tym jaśniej świeci błękit w ścianach. Ludzie gadają przez sen, ale nie swoimi głosami. Jutro schodzimy niżej.”"

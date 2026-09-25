@@ -1,0 +1,96 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/pause_menu.gd" id="1_pause"]
+[ext_resource type="Theme" path="res://theme/ui_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://scene/options_panel.tscn" id="3_opt"]
+[ext_resource type="PackedScene" path="res://scene/save_slots_panel.tscn" id="4_slots"]
+[ext_resource type="Texture2D" uid="uid://dt73aok5lw8al" path="res://assets/logo.png" id="5_logo"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 10
+script = ExtResource("1_pause")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+
+[node name="Dim" type="ColorRect" parent="Root"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.65)
+
+[node name="Center" type="CenterContainer" parent="Root"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="Root/Center"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="Logo" type="TextureRect" parent="Root/Center/Content"]
+custom_minimum_size = Vector2(330, 141)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("5_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Root/Center/Content"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.72, 0.38, 1)
+theme_override_font_sizes/font_size = 28
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="MainButtons" type="VBoxContainer" parent="Root/Center/Content"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="ResumeButton" type="Button" parent="Root/Center/Content/MainButtons"]
+layout_mode = 2
+text = "RESUME"
+
+[node name="SaveButton" type="Button" parent="Root/Center/Content/MainButtons"]
+layout_mode = 2
+text = "SAVE GAME"
+
+[node name="LoadButton" type="Button" parent="Root/Center/Content/MainButtons"]
+layout_mode = 2
+text = "LOAD GAME"
+
+[node name="OptionsButton" type="Button" parent="Root/Center/Content/MainButtons"]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="MainMenuButton" type="Button" parent="Root/Center/Content/MainButtons"]
+layout_mode = 2
+text = "MAIN MENU"
+
+[node name="ExitButton" type="Button" parent="Root/Center/Content/MainButtons"]
+layout_mode = 2
+text = "EXIT"
+
+[node name="OptionsPanel" parent="Root/Center/Content" instance=ExtResource("3_opt")]
+visible = false
+layout_mode = 2
+
+[node name="SaveSlotsPanel" parent="Root/Center/Content" instance=ExtResource("4_slots")]
+visible = false
+layout_mode = 2

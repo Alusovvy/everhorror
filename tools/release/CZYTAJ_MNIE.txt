@@ -1,0 +1,36 @@
+EVERHORROR - wersja testowa (demo 0.1)
+======================================
+
+JAK URUCHOMIĆ
+1. Rozpakuj cały ZIP do jakiegoś folderu (nie odpalaj gry prosto z ZIP-a).
+2. Uruchom Everhorror.exe.
+3. Jeśli Windows pokaże "System Windows ochronił ten komputer", kliknij
+   "Więcej informacji", a potem "Uruchom mimo to". Gra nie jest podpisana
+   certyfikatem, stąd ten komunikat.
+
+Wymagania: Windows 10 lub 11 (64-bit), karta graficzna z DirectX 12 albo Vulkanem.
+
+STEROWANIE
+  W A S D ......... chodzenie
+  mysz ............ rozglądanie się
+  E ............... rozmowa, oglądanie przedmiotów
+  J ............... notes (zadania i znalezione zapiski)
+  Esc ............. pauza (zapis, wczytanie, opcje)
+  Spacja / Enter .. dalej w rozmowie (albo kliknij myszką)
+
+O CO CHODZI
+Jesteś członkiem ekspedycji górniczej. Twój dziadek przepadł w tej kopalni
+czterdzieści lat temu. Masz jeden dzień: pogadaj z ludźmi w obozie, przy stole
+z mapą wybierz, dokąd idziesz, a wieczorem wróć na posłanie. Każda rozmowa
+i każda wyprawa zabiera czas, więc wszystkiego nie zdążysz.
+
+Demo kończy się rano drugiego dnia, przy stole z mapą.
+Przejście zajmuje mniej więcej 15-25 minut.
+
+JAK POMÓC
+Zapisuj wszystko, co się zepsuło albo było niejasne: gdzie utknąłeś, czego nie
+mogłeś znaleźć, co dziwnie brzmi w dialogach, gdzie było za ciemno.
+Zrzut ekranu (Win + Shift + S) bardzo pomaga.
+
+Zapisy gry i ustawienia leżą w:
+  %APPDATA%\Godot\app_userdata\Everhorror

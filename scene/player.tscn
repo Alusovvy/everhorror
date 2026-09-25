@@ -1,26 +1,49 @@
 [gd_scene format=3 uid="uid://b0r2qf2ey262w"]
 
 [ext_resource type="Script" uid="uid://cihebd2so5gb4" path="res://script/player.gd" id="1_hjaqi"]
+[ext_resource type="Script" path="res://script/light_flicker.gd" id="3_flicker"]
 [ext_resource type="AudioStream" uid="uid://dcg5jndvwl5ky" path="res://assets/sounds/steps.mp3" id="2_fvtld"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_s0y64"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s0y64"]
+radius = 0.35
+height = 2.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_4xowi"]
 
 [node name="Player" type="CharacterBody3D" unique_id=1742980102]
+floor_max_angle = 0.9599311
+floor_snap_length = 0.3
 script = ExtResource("1_hjaqi")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1105301679]
-shape = SubResource("CylinderShape3D_s0y64")
+shape = SubResource("CapsuleShape3D_s0y64")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1623923425]
 mesh = SubResource("CylinderMesh_4xowi")
 
 [node name="Head" type="Node3D" parent="." unique_id=468548846]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 
 [node name="EyeCamera" type="Camera3D" parent="Head" unique_id=1462409449]
 current = true
 
+[node name="InteractRay" type="RayCast3D" parent="Head/EyeCamera"]
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 3
+collide_with_areas = true
+
+
+[node name="Lamp" type="OmniLight3D" parent="Head/EyeCamera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.35, -0.2)
+light_color = Color(1, 0.66, 0.38, 1)
+light_energy = 0.75
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 1.6
+script = ExtResource("3_flicker")
+strength = 0.08
+
 [node name="PlayerWalkingSound" type="AudioStreamPlayer3D" parent="." unique_id=1840385700]
 stream = ExtResource("2_fvtld")
 max_distance = 1.0
+bus = &"SFX"

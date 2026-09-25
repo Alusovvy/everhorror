@@ -1,0 +1,14 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Peasant.gltf" id="2_outfit"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Buzzed.gltf" id="3_hair"]
+[ext_resource type="Texture2D" path="res://assets/characters/quaternius/outfits/T_Peasant_2_BaseColor.png" id="4_tex"]
+
+[node name="MiroslawModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_outfit"), ExtResource("3_hair")])
+outfit_texture = ExtResource("4_tex")
+outfit_tint = Color(0.72, 0.68, 0.64, 1)
+hair_tint = Color(0.55, 0.5, 0.46, 1)
+animation = &"Sitting_Idle"

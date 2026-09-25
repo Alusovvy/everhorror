@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dl5gk8xpcy6ki"
+path="res://.godot/imported/bolko.dialogue-f39f252ba81bdc3e817192bf60d02ba4.tres"
+
+[deps]
+
+source_file="res://dialogue/bolko.dialogue"
+dest_files=["res://.godot/imported/bolko.dialogue-f39f252ba81bdc3e817192bf60d02ba4.tres"]
+
+[params]
+
+defaults=true

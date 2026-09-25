@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" uid="uid://da4i0uds7oqx0" path="res://assets/LoafbrrAssets/MineAndCavesSet/Textures/MineWalls2/Mine_Walls_1k_Diffuse.png" id="1_albedo"]
+[ext_resource type="Texture2D" uid="uid://ceg5477n2b2sc" path="res://assets/LoafbrrAssets/MineAndCavesSet/Textures/MineWalls2/Mine_Walls_1k_Normal.png" id="2_normal"]
+
+[resource]
+resource_name = "CaveRock"
+albedo_texture = ExtResource("1_albedo")
+roughness = 0.95
+normal_enabled = true
+normal_texture = ExtResource("2_normal")
+uv1_scale = Vector3(0.25, 0.25, 0.25)
+uv1_triplanar = true
+uv1_world_triplanar = true

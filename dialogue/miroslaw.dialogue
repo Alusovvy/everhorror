@@ -1,0 +1,93 @@
+using GameState
+
+~ start
+if day == 2
+	=> day2
+if not has_flag("met_miroslaw")
+	$> set_flag("met_miroslaw")
+	Mirosław siedzi przy ognisku, ale odsunięty, jakby ogień mógł go ugryźć.
+	Mirosław: Ty nowy? Siadaj, jak chcesz. Byle mi nad głową nie stać.
+	Mirosław: Mirosław jestem. Z Głuszy. Robię przy prochu, więc jak trzeba coś rozwalić, to do mnie.
+elif sanity_band("miroslaw") == "na_krawedzi"
+	Mirosław nawet nie podnosi głowy. Ręce mu się trzęsą, więc chowa je między kolanami.
+elif sanity_band("miroslaw") == "niespokojny"
+	Mirosław co chwilę zerka w ciemny chodnik, jakby czekał, aż ktoś z niego wyjdzie.
+=> hub
+
+~ hub
+Mirosław: [[No?|Czego?|Gadaj.]]
+- Co się stało z zachodnim chodnikiem? [if not has_flag("mir_asked_collapse") /]
+	$> set_flag("mir_asked_collapse")
+	Mirosław: Zawaliło się. Ze czterdzieści lat temu. Stemple były do niczego, albo i żadnych nie postawili.
+	Mirosław: Rozwaliłbym to w parę godzin, tylko czym? Lonty mi zamokły, jak nas spuszczali szybem. Wszystkie co do jednego.
+	Mirosław: Stara ekipa miała skład w Starej sztolni, na wschodzie. Może coś tam zostało. Jak znajdziesz suche lonty, to przynieś.
+	$> start_quest("lonty")
+	if has_item("lonty")
+		Mirosław: Czekaj no... A to co ci z torby wystaje? Lonty?
+	=> hub
+- Mam dla ciebie lonty. Suche. [if has_item("lonty") and has_flag("mir_asked_collapse") /]
+	$> take_item("lonty")
+	$> quest_log("lonty", "oddane")
+	$> change_rep("miroslaw", 10)
+	$> set_flag("fuses_delivered")
+	Mirosław: Pokaż.[wait=0.4] No proszę. Stare, ale suche. Ktoś je porządnie zawinął.
+	Mirosław: Z tym to mogę ten zawał wysadzić. Tylko trochę to potrwa i huknie tak, że wszystkim w uszach zadzwoni.
+	=> hub
+- Wysadź zawał na zachodzie. (4 h) [if has_flag("fuses_delivered") and not has_flag("west_blasted") /]
+	if can_afford(4)
+		Mirosław: Teraz?[wait=0.4] Niech będzie. Tylko trzymaj się z daleka. I od ognia też.
+		$> request("blast")
+		=> END
+	else
+		Mirosław: Dzisiaj już nie. Po ciemku z prochem się nie baluje. Jutro z rana.
+		=> hub
+- Skąd jesteś? [if not has_flag("mir_asked_past") /]
+	$> set_flag("mir_asked_past")
+	Mirosław: Z Głuszy. Tyle że Głuszy już nie ma. Pierwsi przyszli, jak miałem dziesięć lat.
+	Mirosław: Dwa miesiące przesiedziałem w piwnicy pod karczmą. Jadłem, co się dało złapać. Nie pytaj co.
+	- Przykro mi.
+		$> change_rep("miroslaw", 3)
+		Mirosław: Mnie też. Dawno to było.
+	- I po czymś takim zająłeś się prochem?
+		Mirosław: A czym miałem? Proch przynajmniej robi, co mu każesz. Z ludźmi bywa różnie.
+	=> hub
+- Jak się trzymasz? [if has_flag("west_blasted") and not has_flag("mir_comforted") and not has_flag("mir_scolded") /]
+	if sanity_band("miroslaw") == "na_krawedzi"
+		Mirosław: Ten huk... Ciągle go słyszę. Jakbym znowu siedział w tej piwnicy.
+	else
+		Mirosław: Żyję. W uszach mi dzwoni, ale żyję.
+	- Posiedzę z tobą chwilę.
+		$> set_flag("mir_comforted")
+		$> change_sanity("miroslaw", 8)
+		$> change_rep("miroslaw", 5)
+		Siedzicie przy ogniu i nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
+		Mirosław: ...Dzięki.
+	- Weź się w garść, robota czeka.
+		$> set_flag("mir_scolded")
+		$> change_rep("miroslaw", -5)
+		Mirosław: Jasne. Robota.
+	=> hub
+- Muszę iść.
+	Mirosław: To idź. Tylko nie zabłądź.
+	=> END
+
+~ day2
+if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
+	Mirosław siedzi skulony w ciemnym kącie hali, z dala od ogniska. Chyba w ogóle nie spał.
+	Mirosław: Nie podchodź z tą lampą. Proszę cię.
+	Mirosław: Całą noc słyszałem wybuchy. Jeden za drugim. A przecież był tylko jeden.
+	- Posiedzę z tobą. [if not has_flag("mir_day2_comfort") /]
+		$> set_flag("mir_day2_comfort")
+		$> change_sanity("miroslaw", 5)
+		Mirosław: ...[wait=0.5] Jeszcze chwilę. Potem wrócę do roboty.
+	- Muszę iść.
+		Mirosław nie odpowiada.
+elif has_flag("west_blasted")
+	Mirosław: No i proszę, zachodni chodnik stoi otworem. Mówiłem, że dam radę.
+	if has_flag("mir_comforted")
+		Mirosław: I... dzięki za wczoraj. Że posiedziałeś.
+elif has_flag("fuses_delivered")
+	Mirosław: Lonty mam. Powiedz tylko słowo, a zawał pójdzie w powietrze.
+else
+	Mirosław: Mówiłem ci, bez suchych lontów nic nie wysadzę. Szukaj w Starej sztolni.
+=> END

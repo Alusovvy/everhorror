@@ -2,33 +2,75 @@
 
 [ext_resource type="Script" uid="uid://bk6rfq211tap7" path="res://script/world.gd" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://b0r2qf2ey262w" path="res://scene/player.tscn" id="2_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://cdquc2ay7103" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/TestLevel/TestLevel.tscn" id="4_m5mgf"]
+[ext_resource type="PackedScene" path="res://scene/levels/mine.tscn" id="4_m5mgf"]
 [ext_resource type="PackedScene" uid="uid://cspjlynxkeumw" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/post_reinforced_d.tscn" id="5_emkrx"]
 [ext_resource type="PackedScene" uid="uid://cpuwovwfbkarq" path="res://assets/prop_pack/Exports/glTF/Bag.gltf" id="6_y3jn2"]
 [ext_resource type="PackedScene" uid="uid://eur6ul4xbasy" path="res://assets/prop_pack/Exports/glTF/Banner_1.gltf" id="7_yur6x"]
 [ext_resource type="PackedScene" uid="uid://cpxv34lurhlj" path="res://assets/prop_pack/Exports/glTF/Barrel.gltf" id="8_7ghph"]
+[ext_resource type="PackedScene" path="res://scene/hud.tscn" id="9_hud"]
+[ext_resource type="Script" path="res://script/interactable.gd" id="10_inter"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Crate_Wooden.gltf" id="11_crate"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_1.gltf" id="12_scroll"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bucket_Wooden_1.gltf" id="13_bucket"]
+[ext_resource type="PackedScene" path="res://scene/pause_menu.tscn" id="14_pause"]
+[ext_resource type="PackedScene" path="res://scene/levels/mine_deep.tscn" id="15_deep"]
+[ext_resource type="Script" path="res://script/light_flicker.gd" id="16_flicker"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Lantern_Wall.gltf" id="17_lantern"]
+[ext_resource type="Script" path="res://script/random_sound_emitter.gd" id="18_emitter"]
+[ext_resource type="PackedScene" path="res://scene/levels/camp.tscn" id="23_camp"]
+[ext_resource type="Script" path="res://script/npc.gd" id="24_npc"]
+[ext_resource type="Resource" path="res://data/npc/miroslaw.tres" id="25_mir"]
+[ext_resource type="Resource" path="res://data/npc/bolko.tres" id="26_bolko"]
+[ext_resource type="PackedScene" path="res://scene/ui/map_screen.tscn" id="27_map"]
+[ext_resource type="PackedScene" path="res://scene/ui/notebook.tscn" id="28_notebook"]
+[ext_resource type="PackedScene" path="res://scene/ui/screen_fade.tscn" id="29_fade"]
+[ext_resource type="Script" path="res://script/story_director.gd" id="30_story"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/blast.wav" id="31_blast"]
+[ext_resource type="AudioStream" uid="uid://d2xwsdouss0cl" path="res://assets/sounds/generated/drip.wav" id="19_drip"]
+[ext_resource type="AudioStream" uid="uid://oxoqr63krlw3" path="res://assets/sounds/generated/creak.wav" id="20_creak"]
+[ext_resource type="AudioStream" uid="uid://df0icmk14v0kh" path="res://assets/sounds/generated/rumble.wav" id="21_rumble"]
+[ext_resource type="AudioStream" uid="uid://bpivt1rlet3yp" path="res://assets/sounds/generated/lantern_crackle.wav" id="22_crackle"]
 [ext_resource type="AudioStream" uid="uid://bv86hwpkpt3n" path="res://assets/sounds/cave_ambient.mp3" id="16_2u3nc"]
+
+[sub_resource type="Environment" id="Environment_mine"]
+background_mode = 1
+background_color = Color(0, 0, 0, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.36, 0.34, 0.4, 1)
+ambient_light_energy = 0.14
+tonemap_mode = 3
+tonemap_exposure = 1.1
+ssao_enabled = true
+ssao_radius = 1.5
+ssao_intensity = 2.5
+ssil_enabled = true
+glow_enabled = true
+glow_intensity = 0.9
+glow_bloom = 0.05
+glow_hdr_threshold = 0.9
+fog_enabled = true
+fog_light_color = Color(0.04, 0.035, 0.03, 1)
+fog_density = 0.03
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.02
+volumetric_fog_albedo = Color(0.9, 0.85, 0.78, 1)
+volumetric_fog_length = 32.0
+adjustment_enabled = true
+adjustment_saturation = 0.85
 
 [node name="World" type="Node3D" unique_id=295581419]
 script = ExtResource("1_fj7yv")
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1797782470]
-transform = Transform3D(0.51958203, 0.37182495, -0.76927286, 1.5639491e-09, 0.90034455, 0.43517792, 0.85442054, -0.22611064, 0.46780285, -26.302917, 6.7674184, 6.9124756)
-fov = 112.49999
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1629214843]
-transform = Transform3D(1, 0, 0, 0, -0.84363204, 0.53692174, 0, -0.53692174, -0.84363204, 0.7623768, 21.697859, 3.9761949)
-light_energy = 1.396
-
 [node name="Player" parent="." unique_id=1742980102 instance=ExtResource("2_fj7yv")]
 transform = Transform3D(-0.9978015, 0, -0.06627387, 0, 1, 0, 0.06627387, 0, -0.9978015, -4.0588894, 2.3853235, -34.065636)
 
-[node name="CaveSound" type="AudioStreamPlayer3D" parent="." unique_id=1167087797]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.0010242, 3.5764742, -24.329798)
+[node name="CaveSound" type="AudioStreamPlayer" parent="." unique_id=1167087797]
 stream = ExtResource("16_2u3nc")
+volume_db = -8.0
 autoplay = true
+bus = &"Ambience"
 
-[node name="Modular_Mine_Set" parent="." unique_id=1441076964 instance=ExtResource("4_m5mgf")]
+[node name="Mine" parent="." unique_id=1441076964 instance=ExtResource("4_m5mgf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.012459278, -0.014464617, -0.0062503815)
 
 [node name="Post_Reinforced_D" parent="." unique_id=1760973182 instance=ExtResource("5_emkrx")]
@@ -42,3 +84,226 @@ transform = Transform3D(-0.1667687, 0, -0.98599607, 0, 1, 0, 0.98599607, 0, -0.1
 
 [node name="Barrel2" parent="." unique_id=406214766 instance=ExtResource("8_7ghph")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7229028, 1.0734754, -34.03761)
+
+[node name="Interactable" type="Area3D" parent="Bag2"]
+script = ExtResource("10_inter")
+display_name = "Worek z prowiantem"
+description = "Płócienny worek zawiązany na supeł. W środku suchary, kawał słoniny i garść suszonych jabłek. Starczy na dzień, może dwa."
+
+[node name="Interactable" type="Area3D" parent="Barrel2"]
+script = ExtResource("10_inter")
+display_name = "Beczka"
+description = "Dębowa beczka okuta żelazem. Śmierdzi siarką i saletrą. Z lampą lepiej się do niej nie zbliżać."
+
+[node name="Crate" parent="." instance=ExtResource("11_crate")]
+transform = Transform3D(0.9659, 0, -0.2588, 0, 1, 0, 0.2588, 0, 0.9659, -5, 1.04, -32.7)
+
+[node name="Interactable" type="Area3D" parent="Crate"]
+script = ExtResource("10_inter")
+display_name = "Skrzynia z zapasami"
+description = "Skrzynia zabita gwoździami, z wypalonym znakiem Kniazia Jaksaru. Wieko ani drgnie, bez łomu nie ma co próbować."
+
+[node name="Note" parent="." instance=ExtResource("12_scroll")]
+transform = Transform3D(0.866, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866, -4.95, 1.92, -32.75)
+
+[node name="Interactable" type="Area3D" parent="Note"]
+script = ExtResource("10_inter")
+display_name = "Zwinięta notatka"
+on_use_note = &"notatka_dowodcy"
+description = "Pożółkła kartka zapisana drobnym, nerwowym pismem:
+
+„Dzień czternasty. Im niżej schodzimy, tym jaśniej świeci błękit w ścianach. Ludzie gadają przez sen, ale nie swoimi głosami. Jutro schodzimy niżej.”
+
+Przepisujesz to do notesu."
+solid = false
+padding = 0.12
+
+[node name="Bucket" parent="." instance=ExtResource("13_bucket")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 1.1, -31.5)
+
+[node name="Interactable" type="Area3D" parent="Bucket"]
+script = ExtResource("10_inter")
+display_name = "Wiadro"
+description = "Drewniane wiadro, do połowy pełne mętnej wody. Na dnie coś słabo połyskuje na niebiesko."
+
+[node name="HUD" parent="." instance=ExtResource("9_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("14_pause")]
+
+[node name="MineDeep" parent="." instance=ExtResource("15_deep")]
+
+[node name="Environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mine")
+
+[node name="Lighting" type="Node3D" parent="."]
+
+[node name="SpawnCaveLight" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 3, -31.7)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 1.4
+shadow_enabled = true
+omni_range = 8
+omni_attenuation = 1.4
+script = ExtResource("16_flicker")
+
+[node name="HallLight1" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 3, 1.1)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 1.8
+shadow_enabled = true
+omni_range = 10
+omni_attenuation = 1.4
+script = ExtResource("16_flicker")
+
+[node name="HallLight2" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, 3, 0.33)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 1.8
+shadow_enabled = true
+omni_range = 10
+omni_attenuation = 1.4
+script = ExtResource("16_flicker")
+
+[node name="WestTunnelLight" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.6, -0.9, 2.4)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 1.4
+shadow_enabled = true
+omni_range = 8
+omni_attenuation = 1.4
+script = ExtResource("16_flicker")
+
+[node name="EastLantern" parent="Lighting" instance=ExtResource("17_lantern")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 38, 1.35, 4.45)
+
+[node name="Light" type="OmniLight3D" parent="Lighting/EastLantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 1.6
+shadow_enabled = true
+omni_range = 8
+omni_attenuation = 1.4
+script = ExtResource("16_flicker")
+housing_casts_shadow = false
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="DripSpawn" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 3.2, -27.5)
+stream = ExtResource("19_drip")
+volume_db = -4
+unit_size = 3.0
+max_distance = 18
+bus = &"Ambience"
+script = ExtResource("18_emitter")
+min_interval = 3
+max_interval = 8
+pitch_variation = 0.2
+
+[node name="DripArm" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 3.2, -18.5)
+stream = ExtResource("19_drip")
+volume_db = -6
+unit_size = 3.0
+max_distance = 18
+bus = &"Ambience"
+script = ExtResource("18_emitter")
+min_interval = 4
+max_interval = 11
+pitch_variation = 0.2
+
+[node name="DripHall" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 3.5, -3.5)
+stream = ExtResource("19_drip")
+volume_db = -6
+unit_size = 3.0
+max_distance = 18
+bus = &"Ambience"
+script = ExtResource("18_emitter")
+min_interval = 5
+max_interval = 12
+pitch_variation = 0.2
+
+[node name="CreakHall1" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.6, 0.5)
+stream = ExtResource("20_creak")
+volume_db = -8
+unit_size = 3.0
+max_distance = 22
+bus = &"Ambience"
+script = ExtResource("18_emitter")
+min_interval = 12
+max_interval = 28
+pitch_variation = 0.12
+
+[node name="CreakHall2" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 3.6, 2)
+stream = ExtResource("20_creak")
+volume_db = -8
+unit_size = 3.0
+max_distance = 22
+bus = &"Ambience"
+script = ExtResource("18_emitter")
+min_interval = 15
+max_interval = 35
+pitch_variation = 0.12
+
+[node name="CreakCorridor" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 3.6, 3)
+stream = ExtResource("20_creak")
+volume_db = -8
+unit_size = 3.0
+max_distance = 20
+bus = &"Ambience"
+script = ExtResource("18_emitter")
+min_interval = 14
+max_interval = 30
+pitch_variation = 0.12
+
+[node name="RumbleWest" type="AudioStreamPlayer3D" parent="Sounds"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 1, 3)
+stream = ExtResource("21_rumble")
+volume_db = -2
+unit_size = 3.0
+max_distance = 60
+bus = &"Ambience"
+script = ExtResource("18_emitter")
+min_interval = 35
+max_interval = 75
+pitch_variation = 0.15
+
+[node name="Crackle" type="AudioStreamPlayer3D" parent="Lighting/EastLantern"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
+stream = ExtResource("22_crackle")
+volume_db = -12.0
+unit_size = 1.5
+max_distance = 7.0
+autoplay = true
+bus = &"SFX"
+
+[node name="Camp" parent="." instance=ExtResource("23_camp")]
+
+[node name="NPCs" type="Node3D" parent="."]
+
+[node name="Miroslaw" type="Node3D" parent="NPCs"]
+script = ExtResource("24_npc")
+data = ExtResource("25_mir")
+pose = &"Sitting_Idle"
+
+[node name="Bolko" type="Node3D" parent="NPCs"]
+script = ExtResource("24_npc")
+data = ExtResource("26_bolko")
+
+[node name="BlastSound" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("31_blast")
+volume_db = -2.0
+bus = &"Ambience"
+
+[node name="MapScreen" parent="." instance=ExtResource("27_map")]
+
+[node name="Notebook" parent="." instance=ExtResource("28_notebook")]
+
+[node name="ScreenFade" parent="." instance=ExtResource("29_fade")]
+
+[node name="Story" type="Node" parent="."]
+script = ExtResource("30_story")

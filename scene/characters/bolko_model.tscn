@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Peasant.gltf" id="2_outfit"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_SimpleParted.gltf" id="3_hair"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Beard.gltf" id="4_beard"]
+
+[node name="BolkoModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_outfit"), ExtResource("3_hair"), ExtResource("4_beard")])
+outfit_tint = Color(0.85, 0.8, 0.74, 1)
+hair_tint = Color(1.1, 1.08, 1.05, 1)
+animation = &"Idle"

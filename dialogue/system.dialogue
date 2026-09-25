@@ -1,0 +1,37 @@
+using GameState
+
+~ sleep
+if is_day_over()
+	Ledwo trzymasz się na nogach. Posłanie jest twarde i śmierdzi stęchlizną, ale teraz nic cię to nie obchodzi.
+else
+	Posłanie jest twarde i śmierdzi stęchlizną. Do wieczora zostało jeszcze {{hours_left_text()}}.
+Kładziesz się?
+- Tak, idę spać (koniec dnia {{day}}).
+	$> request("sleep")
+- Jeszcze nie.
+=> END
+
+~ dream
+Śnisz.
+if has_flag("visited_east")
+	Idziesz tunelem, którego nie znasz. Ściany świecą błękitem i powoli, miarowo przygasają, jakby oddychały.
+	Przed tobą ktoś idzie z lampą dziadka. Wołasz go, ale się nie odwraca.
+else
+	Stoisz na dnie szybu. Wysoko nad tobą, w kwadracie nieba, ktoś trzyma lampę i patrzy w dół.
+I znowu te myśli. Nie twoje. Ciekawskie, łapczywe, jakby ktoś bardzo chciał zobaczyć, co jest niżej.
+if has_flag("west_blasted")
+	Gdzieś daleko coś huka. Echo długo nie cichnie, tłucze się po chodnikach.
+Budzisz się z amuletem zaciśniętym w garści. Metal jest ciepły.
+if has_note("odszyfrowana")
+	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
+=> END
+
+~ too_late
+Robi się późno. Na dziś wystarczy, pora wracać na posłanie.
+=> END
+
+~ intro
+Zeszliście szybem wczoraj po zmroku. Lina skrzypiała przez całą drogę w dół, a na górze został tylko pusty wóz.
+Obóz rozbito w starej hali górniczej. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
+Masz dzień, zanim ekspedycja ruszy głębiej. Pogadaj z ludźmi, a dokąd iść, zdecydujesz przy stole z mapą. Wieczorem wróć na posłanie.
+=> END

@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://b6c5vrvv4kohd"
+path="res://.godot/imported/miroslaw.dialogue-d61cf668b52ed9c25ca70e10b157f8ca.tres"
+
+[deps]
+
+source_file="res://dialogue/miroslaw.dialogue"
+dest_files=["res://.godot/imported/miroslaw.dialogue-d61cf668b52ed9c25ca70e10b157f8ca.tres"]
+
+[params]
+
+defaults=true

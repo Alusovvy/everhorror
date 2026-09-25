@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" uid="uid://b240jn6joq0dc" path="res://assets/LoafbrrAssets/MineAndCavesSet/Textures/MineWalls/Mine_Walls_1k_Diffuse.png" id="1_albedo"]
+[ext_resource type="Texture2D" uid="uid://d2h01mcsn1gyn" path="res://assets/LoafbrrAssets/MineAndCavesSet/Textures/MineWalls/Mine_Walls_1k_Normal.png" id="2_normal"]
+
+[resource]
+resource_name = "KenneyWood"
+albedo_color = Color(0.85, 0.78, 0.7, 1)
+albedo_texture = ExtResource("1_albedo")
+roughness = 0.9
+normal_enabled = true
+normal_texture = ExtResource("2_normal")
+uv1_scale = Vector3(1.2, 1.2, 1.2)
+uv1_triplanar = true

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"lonty"
+title = "Lonty dla Mirosława"
+giver = "Mirosław z Głuszy"
+entries = {
+"start": "Mirosław może wysadzić zawał na zachodzie, tylko że zamokły mu lonty. Stara ekipa miała skład w Starej sztolni.",
+"znalezione": "W Starej sztolni znalazłem skrzynkę suchych lontów.",
+"oddane": "Oddałem lonty Mirosławowi. Może wysadzić zawał, kiedy tylko zechcę, ale zejdzie mu na tym ze cztery godziny.",
+"wysadzone": "Mirosław wysadził zawał. Zachodni chodnik jest otwarty."
+}

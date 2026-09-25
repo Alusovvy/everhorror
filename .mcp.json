@@ -7,6 +7,27 @@
       "env": {
         "GODOT_PATH": "C:/dev/gamedev/Godot_v4.7.2-stable_win64_console.exe"
       }
+    },
+    "godot-editor": {
+      "type": "stdio",
+      "command": "C:/Users/grups/.local/bin/godot-editor-mcp.exe",
+      "args": []
+    },
+    "blender": {
+      "type": "stdio",
+      "command": "C:/Users/grups/.local/bin/mcp-for-blender.exe",
+      "args": [],
+      "env": {
+        "DISABLE_TELEMETRY": "true"
+      }
+    },
+    "freesound": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["C:/dev/tools/freesound-mcp-server/dist/index.js"],
+      "env": {
+        "FREESOUND_API_KEY": "${FREESOUND_API_KEY:-}"
+      }
     }
   }
 }

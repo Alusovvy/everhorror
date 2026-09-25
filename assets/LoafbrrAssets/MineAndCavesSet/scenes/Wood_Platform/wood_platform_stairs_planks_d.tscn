@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dh0vxl5ai214c"]
 
-[ext_resource type="Material" uid="uid://ba6dvnpjd80mw" path="res://Assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material" id="1_t3035"]
+[ext_resource type="Material" uid="uid://ba6dvnpjd80mw" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material" id="1_t3035"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_4an8x"]
 _surfaces = [{

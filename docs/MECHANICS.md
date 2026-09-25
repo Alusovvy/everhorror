@@ -191,8 +191,8 @@ Systemy i ich kolejność. Każdy krok da się zagrać i sprawdzić osobno.
 
 | # | System | Forma w Godot | Stan |
 |---|---|---|---|
-| 1 | Kontroler FPP | `player.gd` | ✅ jest (do poprawy: własne akcje wejścia, kierunek ruchu) |
-| 2 | Interakcja (raycast + `Interactable`) | komponent / `Area3D` + podpowiedź w UI | ⬜ |
+| 1 | Kontroler FPP | `player.gd` | ✅ WASD, skok, kroki |
+| 2 | Interakcja (raycast + `Interactable`) | komponent / `Area3D` + podpowiedź w UI | ✅ podświetlenie, [E] opis |
 | 3 | Tryb VN (dialog, opcje) | scena UI + dane dialogów jako `Resource` | 🟡 prototyp UI w `visual_interaction.tscn` |
 | 4 | Stan gry (flagi, czas, dzień) | autoload `GameState` | ⬜ |
 | 5 | Upływ czasu i sen | w `GameState` + sygnały | ⬜ |
@@ -201,17 +201,19 @@ Systemy i ich kolejność. Każdy krok da się zagrać i sprawdzić osobno.
 | 8 | Notes questów | `QuestData` + UI | ⬜ |
 | 9 | Mapa kopalni i podróż | graf pomieszczeń + UI stołu z mapą, ładowanie scen segmentów | ⬜ |
 | 10 | Ekwipunek na wyprawę | `ItemData` + UI | ⬜ |
-| 11 | Zapis / odczyt | serializacja `GameState` | ⬜ |
+| 11 | Zapis / odczyt | `SaveManager` + grupa `persist` | 🟡 3 sloty, zapis pozycji gracza; stan gry dojdzie z krokiem 4 |
+| 12 | Menu główne, pauza, opcje | `main_menu.tscn`, `pause_menu.tscn` | ✅ |
 
 **Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. Chodzimy po obozie, rozmawiamy z NPC w VN (co zajmuje czas), idziemy spać, a następnego dnia widać zmianę.
 
 ## 13. Otwarte pytania (zbiorczo)
 
-1. Jednostka czasu, długość dnia, koszty akcji. Terminy i kara za ich przekroczenie.
-2. Rola wydobycia błękitnego żelaza w mechanice.
-3. Zagrożenie w FPP: czy gracz może zginąć?
-4. Co zmienia poczytalność NPC i czy gracz widzi pasek?
-5. Leczenie ran: czym i z jakim ryzykiem.
-6. Reputacja: u poszczególnych NPC czy także u frakcji?
+Na część dostarczono odpowiedz 25.09.2029
+1. Jednostka czasu, długość dnia, koszty akcji. Terminy i kara za ich przekroczenie. 
+2. Rola wydobycia błękitnego żelaza w mechanice. Znajdowanie złóż które później beda wydobywane jest wymagane przez szefa wyprawy, jezeli gracz za dlugo to ignoruje, to ma upomnienia, a finalnie endgame ze wyprawa wychodzi a on zostaje sam w jaskiniach i wariuje czy cos takeigo.
+3. Zagrożenie w FPP: czy gracz może zginąć? Tak, ale to raczej jak juz ma jakies rany albo niska poczytalnosc i interakcja z jakims przedmiotem/innym obiektem na niego zle wplynie.
+4. Co zmienia poczytalność NPC i czy gracz widzi pasek? Wydarzenia, przedmioty, postep wglab jaskiń, u kazdeog moze troche inaczej. Gracz ma miec w notatkach o NPCach inforamcje z ich zdrowiem oraz poczytalnoscia jako osobne takie sekcje z notatkami na zasdazie "wygląda na zdrowego" a w poczytalnosc "ostatnio nerwowo sie zachowuje" etc. 
+5. Leczenie ran: czym i z jakim ryzykiem. -Bandaże, NPC ktory moze pomoc, ryzyko do ustalenia pozniej.
+6. Reputacja: u poszczególnych NPC czy także u frakcji? U npc, u frkacji nie
 7. Limity ekwipunku, zużywanie się przedmiotów, działanie amuletu.
-8. Czy gracz może nie wrócić do obozu na noc?
+8. Czy gracz może nie wrócić do obozu na noc? Nie, zawsze wróci, ale może zmarnować dużo czasu.

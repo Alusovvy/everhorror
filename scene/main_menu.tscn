@@ -1,0 +1,77 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/main_menu.gd" id="1_menu"]
+[ext_resource type="Theme" path="res://theme/ui_theme.tres" id="2_theme"]
+[ext_resource type="PackedScene" path="res://scene/options_panel.tscn" id="3_opt"]
+[ext_resource type="PackedScene" path="res://scene/save_slots_panel.tscn" id="4_slots"]
+[ext_resource type="Texture2D" uid="uid://dt73aok5lw8al" path="res://assets/logo.png" id="5_logo"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.025, 0.02, 0.018, 1)
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Content" type="VBoxContainer" parent="Center"]
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[node name="Logo" type="TextureRect" parent="Center/Content"]
+custom_minimum_size = Vector2(640, 274)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+texture = ExtResource("5_logo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MainButtons" type="VBoxContainer" parent="Center/Content"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+
+[node name="StartButton" type="Button" parent="Center/Content/MainButtons"]
+layout_mode = 2
+text = "START"
+
+[node name="OptionsButton" type="Button" parent="Center/Content/MainButtons"]
+layout_mode = 2
+text = "OPTIONS"
+
+[node name="LoadButton" type="Button" parent="Center/Content/MainButtons"]
+layout_mode = 2
+text = "LOAD GAME"
+
+[node name="ExitButton" type="Button" parent="Center/Content/MainButtons"]
+layout_mode = 2
+text = "EXIT"
+
+[node name="OptionsPanel" parent="Center/Content" instance=ExtResource("3_opt")]
+visible = false
+layout_mode = 2
+
+[node name="SaveSlotsPanel" parent="Center/Content" instance=ExtResource("4_slots")]
+visible = false
+layout_mode = 2

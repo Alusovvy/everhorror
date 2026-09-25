@@ -1,0 +1,65 @@
+using GameState
+
+~ start
+if day == 2
+	=> day2
+if not has_flag("met_bolko")
+	$> set_flag("met_bolko")
+	Bolko: Hę? Aaa, to ty jesteś ten wnuk. Poznałbym cię wszędzie, oczy masz po nim.
+	Bolko: Bolko jestem. Fedrowałem tu, jak ciebie jeszcze na świecie nie było. Z twoim dziadkiem też.
+=> hub
+
+~ hub
+Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
+- Jaki był mój dziadek? [if not has_flag("bolko_asked_grandpa") /]
+	$> set_flag("bolko_asked_grandpa")
+	Bolko: Cichy. Za cichy jak na przewodnika. Wszystko zapisywał, ale tak, że nikt poza nim nie umiał tego przeczytać.
+	Bolko: Mówił, że to dla bezpieczeństwa. Czyjego, tego już nie powiedział.
+	- Pewnie miał swoje powody.
+		$> change_rep("bolko", 5)
+		Bolko: Miał. Tylko zabrał je ze sobą.
+	- Brzmi, jakby coś ukrywał.
+		$> change_rep("bolko", -5)
+		Bolko: Uważaj, co gadasz. To on cię wykarmił, chłopcze.
+	=> hub
+- Po co Kniaź znowu otworzył kopalnię? [if not has_flag("bolko_asked_why") /]
+	$> set_flag("bolko_asked_why")
+	Bolko: Bo następca tronu szykuje się do wojny, a na wojnę trzeba błękitnego żelaza. Ostrze z błękitu latami się nie tępi.
+	Bolko: Starzy gadali, że błękit nie rośnie w skale sam z siebie. Że coś go robi. Gdzieś głęboko pod nami.
+	- Wierzysz w to?
+		Bolko: Ja wierzę w porządny stempel nad głową. Reszta to bajki z Wąwozu.
+	- Bajki.
+		Bolko: Pewnie. Bajki.
+	=> hub
+- Znalazłem kartkę zapisaną szyfrem dziadka. [if has_note("szyfr") and not has_flag("bolko_hint") /]
+	if rep("bolko") >= 5
+		Bolko: Dawaj.[wait=0.4] Jego ręka, nie ma dwóch zdań.
+		Bolko: Klucz zawsze chował gdzie indziej niż wiadomość. Mawiał: wiadomość idzie w głąb, klucz zostaje przy drodze.
+		Bolko: Skoro kartka była na wschodzie, klucza szukaj na zachodzie. Za zawałem. O ile go do reszty nie zasypało.
+		$> set_flag("bolko_hint")
+		$> quest_log("slady", "wskazowka_bolka")
+		$> change_rep("bolko", 3)
+	else
+		Bolko: Nie wiem, o czym mówisz.
+		Bolko odwraca się do stołu. Najwyraźniej nie ma zamiaru ci się zwierzać.
+	=> hub
+- Mirosław chce wysadzić zawał. [if has_flag("mir_asked_collapse") and not has_flag("bolko_asked_blast") /]
+	$> set_flag("bolko_asked_blast")
+	Bolko: Mirosław wysadziłby i samego Kniazia, gdyby mu dać dość prochu.[wait=0.3] Porządny z niego chłop, tylko z ogniem ma na pieńku.
+	Bolko: Jak już huknie, posiedź z nim potem trochę. Wiem, co mówię.
+	=> hub
+- Pójdę już.
+	Bolko: Idź. I patrz na strop, nie pod nogi.
+	=> END
+
+~ day2
+if rep("bolko") >= 10
+	Bolko: Wstałeś? To dobrze. Całą noc oka nie zmrużyłem, dziadek twój mi po głowie chodził.
+	Bolko: Ostatniego dnia, zanim zszedł, powiedział mi: jak wnuk tu kiedyś trafi, niech za błękitem nie idzie. Myślałem, że żartuje.
+	$> set_flag("bolko_day2_secret")
+elif rep("bolko") < 0
+	Bolko stoi do ciebie plecami i udaje, że nie słyszy.
+	Bolko: Nie mam ci nic do powiedzenia.
+else
+	Bolko: Nowy dzień, ta sama dziura. Uważaj dziś na siebie.
+=> END

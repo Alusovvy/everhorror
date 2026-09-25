@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b7huufl4ryaif"]
 
-[ext_resource type="Material" uid="uid://mnpwlc0stujg" path="res://Assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material" id="1_hemvc"]
-[ext_resource type="Material" uid="uid://b2233iujb5cfq" path="res://Assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Walls_2.tres" id="2_1d8mj"]
+[ext_resource type="Material" uid="uid://mnpwlc0stujg" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material" id="1_hemvc"]
+[ext_resource type="Material" uid="uid://b2233iujb5cfq" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Walls_2.tres" id="2_1d8mj"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8dg5b"]
 _surfaces = [{

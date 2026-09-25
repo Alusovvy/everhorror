@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"slady"
+title = "Ślady dziadka"
+giver = "Moja sprawa"
+entries = {
+"start": "Dziadek przepadł w tej kopalni czterdzieści lat temu. Jego mapy znam na pamięć. Muszę się dowiedzieć, co się z nim stało.",
+"szyfr": "W jaskini za Starą sztolnią znalazłem kartkę zapisaną jego szyfrem. Bez klucza nic z niej nie wyczytam.",
+"wskazowka_bolka": "Bolko mówi, że dziadek zostawiał klucz „przy drodze”, a wiadomość „w głąb”. Skoro kartka była na wschodzie, klucz może być na zachodzie, za zawałem.",
+"klucz": "Za zawałem znalazłem deskę z wyrytym alfabetem. To chyba klucz do szyfru.",
+"odszyfrowane": "Odczytałem wiadomość dziadka. Pisze o Nich, o błękicie i o tym, że zszedł niżej."
+}

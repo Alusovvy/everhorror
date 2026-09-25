@@ -42,13 +42,13 @@ materials/extract_path=""
 _subresources={
 "materials": {
 "@MATERIAL:4": {
-"use_external/path": "res://Assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material"
+"use_external/path": "res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material"
 },
 "@MATERIAL:5": {
-"use_external/path": "res://Assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material"
+"use_external/path": "res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material"
 },
 "@MATERIAL:6": {
-"use_external/path": "res://Assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material"
+"use_external/path": "res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Grounds.material"
 },
 "Mine_Carts": {
 "use_external/enabled": true,

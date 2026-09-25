@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"klucz"
+title = "Deska z wyrytymi znakami"
+text = "Deska przybita do stempla w zachodnim chodniku, zaraz za zawałem.\n\nKtoś wyrył na niej alfabet w dwóch rzędach, dolny przesunięty o siedem liter. W rogu znak dziadka: dwie skrzyżowane kreski i kropka."

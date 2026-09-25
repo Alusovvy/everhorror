@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/bolko_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/bolko.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"bolko"
+display_name = "Stary Bolko"
+dialogue_name = "Bolko"
+display_name_instrumental = "Bolkiem"
+faction = 1
+role = "Górnik (najstarszy w ekspedycji)"
+max_sanity = 100
+start_sanity = 80
+max_health = 100
+start_reputation = 0
+history = "[ROBOCZE, do poprawki przez Rena] Najstarszy górnik w ekspedycji. Kopał w tej kopalni czterdzieści lat temu razem z dziadkiem bohatera i pamięta jego zwyczaje: szyfry, milczenie, samotne zejścia. Nieufny wobec nowych, ale lojalny wobec tych, którzy okażą szacunek."
+sanity_zero_effect = "[ROBOCZE] Przestaje odróżniać przeszłość od teraźniejszości: bierze bohatera za jego dziadka i prowadzi go w głąb."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62

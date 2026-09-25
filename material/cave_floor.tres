@@ -1,0 +1,14 @@
+[gd_resource type="StandardMaterial3D" format=3]
+
+[ext_resource type="Texture2D" uid="uid://b5155ksicqyxw" path="res://assets/LoafbrrAssets/MineAndCavesSet/Textures/MinesGround/Mines_Ground_1k_Diffuse.png" id="1_albedo"]
+[ext_resource type="Texture2D" uid="uid://cobrjnlgq5j26" path="res://assets/LoafbrrAssets/MineAndCavesSet/Textures/MinesGround/Mines_Ground_1k_Normal.png" id="2_normal"]
+
+[resource]
+resource_name = "CaveFloor"
+albedo_texture = ExtResource("1_albedo")
+roughness = 0.92
+normal_enabled = true
+normal_texture = ExtResource("2_normal")
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+uv1_world_triplanar = true

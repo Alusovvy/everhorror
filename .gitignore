@@ -30,4 +30,9 @@ assets/prop_pack/Textures/
 .DS_Store
 Thumbs.db
 desktop.ini
-.vscode/
+.vscode/*
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# GdUnit4 test reports
+/reports/

@@ -1,0 +1,107 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/notebook.gd" id="1_script"]
+[ext_resource type="Theme" path="res://theme/ui_theme.tres" id="2_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+content_margin_left = 26.0
+content_margin_top = 22.0
+content_margin_right = 26.0
+content_margin_bottom = 22.0
+bg_color = Color(0.06, 0.048, 0.038, 0.96)
+border_width_left = 1
+border_width_top = 2
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 0.72, 0.38, 0.55)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="Notebook" type="CanvasLayer"]
+layer = 6
+script = ExtResource("1_script")
+
+[node name="Root" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_theme")
+
+[node name="Dim" type="ColorRect" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Center" type="CenterContainer" parent="Root"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="Root/Center"]
+custom_minimum_size = Vector2(900, 540)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="Margin" type="MarginContainer" parent="Root/Center/Panel"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Root/Center/Panel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Header" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.72, 0.38, 1)
+theme_override_font_sizes/font_size = 24
+text = "Notes"
+
+[node name="Tabs" type="TabContainer" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Zadania" type="RichTextLabel" parent="Root/Center/Panel/Margin/VBox/Tabs"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.9, 0.86, 0.8, 1)
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "Zadania"
+metadata/_tab_index = 0
+
+[node name="Notatki" type="HBoxContainer" parent="Root/Center/Panel/Margin/VBox/Tabs"]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+metadata/_tab_index = 1
+
+[node name="List" type="ItemList" parent="Root/Center/Panel/Margin/VBox/Tabs/Notatki"]
+custom_minimum_size = Vector2(340, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+
+[node name="Text" type="RichTextLabel" parent="Root/Center/Panel/Margin/VBox/Tabs/Notatki"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/default_color = Color(0.9, 0.86, 0.8, 1)
+theme_override_font_sizes/normal_font_size = 17
+bbcode_enabled = true
+text = "Notatka"
+
+[node name="Hint" type="Label" parent="Root/Center/Panel/Margin/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.56, 0.5, 1)
+theme_override_font_sizes/font_size = 13
+text = "[J] / [Esc] zamknij"
+horizontal_alignment = 2
