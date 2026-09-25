@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"slowniczek"
+title = "Słowniczek sanctinu"
+text = "Dobrawa przepisała mi kilka znaków sanctinu, języka, którym pisali Oni. Rysuje je rękawicą, bez jednego drżenia.\n\nGwiazda: niebo, to, co w górze. Oni przyszli z gwiazd.\nOko: widzieć, patrzeć.\nPłomień: ogień, gniew.\nKamień: skała, to, co w dole. Także: więzienie.\nSen, czyli znak zamkniętego oka: spoczynek, noc.\nDłoń: dotyk, dar.\n\n„Oni zawsze piszą od góry do dołu: skąd przyszli, co zrobili i czego zakazują.”"

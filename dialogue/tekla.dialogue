@@ -1,0 +1,138 @@
+using GameState
+
+~ start
+if has_flag("tekla_reported")
+	=> guarded
+if day >= 3
+	=> day3
+if not has_flag("met_tekla")
+	$> set_flag("met_tekla")
+	if npc_place("tekla") == "kuchnia"
+		Tekla miesza w kociołku i nawet nie odwraca się od ognia.
+		Tekla: Jak jesteś głodny, to siadaj. Jak nie, to nie stój mi nad kaszą.
+	else
+		Tekla liczy świece na ladzie i wpisuje coś do grubej księgi. Pióro skrzypi.
+		Tekla: Najpierw powiedz, czego chcesz. Potem zobaczymy, czy mam.
+	Tekla: Tekla. Karmię was, liczę wam świece i pilnuję, żeby nikt nie wynosił lin na własną rękę.
+=> hub
+
+~ hub
+Tekla: [[No?|Co tam?|Czego ci trzeba?]]
+- Potrzebuję liny. [if not has_item("lina") /]
+	if has_item("kwit")
+		$> take_item("kwit")
+		$> give_item("lina")
+		$> set_flag("got_rope")
+		Tekla: Kwit od Racibora. No proszę, jaki porządny.[wait=0.3] Masz. Dwadzieścia sążni konopnej. Oddasz całą albo zapłacisz.
+	else
+		Tekla: Liny wydaję za kwitem od Racibora. Takie są zasady, nie ja je wymyśliłam.
+		if not has_flag("tekla_asked_favor")
+			Tekla: Chyba że...[wait=0.4] Chodź bliżej. Mam sprawę, tylko nie przy wszystkich.
+			=> favor
+	=> hub
+- Masz dla mnie jakąś robotę? [if not has_flag("tekla_asked_favor") /]
+	=> favor
+- Mam twój tobołek. [if has_item("tobolek") /]
+	=> bundle
+- Znałaś może mojego dziadka? [if quest_state("towar") == "done" and not has_flag("tekla_reported") and not has_flag("tekla_father") /]
+	$> set_flag("tekla_father")
+	Tekla: Ja nie. Mój ojciec, Hanusz. Handlował z jednym przewodnikiem z Wąwozu. Ten zawsze stawiał taki znak, dwie kreski na krzyż i kropkę.
+	Tekla: Przynosił błękit w kieszeniach płaszcza. Ojciec płacił srebrem i o nic nie pytał.
+	Tekla: Ostatni raz przyszedł bez błękitu. Chciał prochu. Trzy beczki. Ojciec się zdziwił, ale sprzedał. Tydzień później kopalnię zamknęli.
+	$> quest_log("slady", "proch")
+	- To był mój dziadek.
+		Tekla: Tak myślałam. Ojciec mówił, że dziwny był z niego człowiek. Nigdy nie mówił, co mu chodzi po głowie.
+		Tekla: Całkiem jak ty.
+	- Po co mu był proch?
+		Tekla: Ojciec też o to pytał. Przewodnik powiedział tylko, że czasem trzeba coś zamknąć porządnie.
+	=> hub
+- Co dziś gotujesz? [if npc_place("tekla") == "kuchnia" and not has_flag("tekla_asked_food") /]
+	$> set_flag("tekla_asked_food")
+	Tekla: Kaszę. Wczoraj też była kasza. Jutro, jak dobrze pójdzie, będzie kasza ze słoniną.
+	Tekla: Ale nie narzekaj. W kopalniach Sułtanatu karmią ludzi tym, co spadnie z wozu.
+	=> hub
+- Co sądzisz o tej kobiecie w masce? [if day >= 2 and not has_flag("tekla_asked_dobrawa") /]
+	$> set_flag("tekla_asked_dobrawa")
+	Tekla: Nie je, nie pije, nie siada. Wczoraj przez godzinę stała przy starych wózkach i mówiła coś do kamieni.
+	Tekla: Kupcy mają takie powiedzenie. Kiedy Drudzy przychodzą do miasta, ceny idą w górę. Kiedy wychodzą, zostają same długi.
+	=> hub
+- Muszę iść.
+	Tekla: Idź, idź. Tylko wróć na kolację, bo drugi raz nie będę grzać.
+	=> END
+
+~ favor
+$> set_flag("tekla_asked_favor")
+Tekla: Kiedy spuszczali nasze rzeczy starym szybem, urwał mi się tobołek. Poleciał do rząpia, na sam dół.
+Tekla: Nic wielkiego, rzeczy osobiste. Tylko że wolałabym, żeby nikt w nich nie grzebał. Zwłaszcza Racibor.
+Tekla: Przyniesiesz mi go, dostaniesz linę bez żadnego kwitu. I będę pamiętać.
+- Dobrze, przyniosę.
+	$> start_quest("towar")
+	Tekla: Wiedziałam, że się dogadamy.[wait=0.3] I pamiętaj. Po cichu.
+- Co jest w środku?
+	Tekla: Moje rzeczy. Nie twoje.[wait=0.4] Przyniesiesz czy nie?
+	- Przyniosę.
+		$> start_quest("towar")
+		Tekla: No i widzisz. Po cichu, dobrze?
+	- Zastanowię się.
+		Tekla: Zastanawiaj się szybko. Woda w rząpiu rośnie.
+=> hub
+
+~ bundle
+Tekla chwyta tobołek oburącz i od razu sprawdza, czy sakiewka jest na miejscu.
+if has_note("list_konfraterni")
+	Tekla: Czytałeś.[wait=0.4] Nie pytam. Widzę po tobie.
+else
+	Tekla: Nie zaglądałeś do środka? Rzadko spotyka się takich ludzi.
+- Nikomu nie powiem.
+	$> take_item("tobolek")
+	$> quest_log("towar", "oddany")
+	$> complete_quest("towar")
+	$> change_rep("tekla", 15)
+	$> set_flag("tekla_owes")
+	Tekla oddycha głęboko, pierwszy raz odkąd zaczęliście rozmawiać.
+	if not has_item("lina")
+		$> give_item("lina")
+		$> set_flag("got_rope")
+		Tekla: Masz. Lina, jak obiecałam. Najlepsza, jaką mam.
+	Tekla: A jak będziesz czegoś potrzebował, a Racibor nie będzie patrzył, to przychodź do mnie.
+- Konfraternia skupuje błękit na lewo. Za to się wisi.
+	Tekla: Za to się wisi, jeśli ktoś doniesie.[wait=0.5] Doniesiesz?
+	- Nie. Masz swój tobołek.
+		$> take_item("tobolek")
+		$> quest_log("towar", "oddany")
+		$> complete_quest("towar")
+		$> change_rep("tekla", 10)
+		$> set_flag("tekla_owes")
+		if not has_item("lina")
+			$> give_item("lina")
+			$> set_flag("got_rope")
+		Tekla: Zapamiętam ci to. Masz linę.
+	- Jeszcze nie wiem.
+		Tekla: To się namyśl. Tylko pamiętaj, kto cię tu karmi.
+		$> change_rep("tekla", -5)
+=> hub
+
+~ guarded
+Tekla siedzi na skrzyni obok stołu Racibora. Nawet nie podnosi głowy.
+Tekla: Przyszedłeś popatrzeć? Patrz. Za darmo.
+- Przykro mi.
+	Tekla: Nie jest ci przykro. Jest ci wygodnie.
+- Sama się o to prosiłaś.
+	Tekla: Jak my wszyscy tutaj.
+- Kto teraz gotuje?
+	Tekla: Bolko. Módlcie się do Onych, żeby nie przypalił.
+=> END
+
+~ day3
+if has_flag("tekla_owes")
+	Tekla odciąga cię na bok, za beczki z olejem.
+	if has_flag("plan_upadowa") and has_flag("tekla_father")
+		Tekla: Racibor chce otwierać upadową. To ten zawał, na który mój ojciec sprzedał twojemu dziadkowi proch, prawda? Dziadek wiedział, co zamyka.
+	elif has_flag("plan_upadowa")
+		Tekla: Racibor chce otwierać stary zawał. Ludzie już się boją, a on liczy wozy.
+	else
+		Tekla: Za trzy dni zaczną kopać na całego. Wtedy nikt nie będzie liczył, ile błękitu wyjeżdża w workach po kaszy.
+	Tekla: Ja wyjeżdżam na górę z pierwszym koszem. Tobie radzę to samo.
+else
+	Tekla: Kasza jest, tylko zimna. Jak ci się nie podoba, to idź się poskarżyć zarządcy.
+=> END

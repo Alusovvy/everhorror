@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://d052sluv7ficl"
+path="res://.godot/imported/sciana.dialogue-b9ffe9ebae91cb0bdc5d900cd8025ce6.tres"
+
+[deps]
+
+source_file="res://dialogue/sciana.dialogue"
+dest_files=["res://.godot/imported/sciana.dialogue-b9ffe9ebae91cb0bdc5d900cd8025ce6.tres"]
+
+[params]
+
+defaults=true

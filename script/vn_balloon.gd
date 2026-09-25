@@ -8,6 +8,10 @@ extends CanvasLayer
 const NEXT_ACTIONS: Array[StringName] = [&"ui_accept", &"interact"]
 const PORTRAIT_IDLE := &"Idle"
 const PORTRAIT_TALK := &"Idle_Talking"
+## Speakers that are not NPCs but still get a picture (the carved wall in the chapel).
+const STATIC_PORTRAITS := {
+	"Ściana": preload("res://assets/textures/sanctin_portrait.png"),
+}
 
 @onready var balloon: Control = %Balloon
 @onready var character_label: Label = %CharacterLabel
@@ -116,7 +120,16 @@ func _update_portrait(speaker: String) -> void:
 		return
 	portrait_rect.modulate = Color.WHITE
 	var npc := GameState.npc_by_dialogue_name(speaker)
-	if npc == _portrait_npc:
+	if npc == null and STATIC_PORTRAITS.has(speaker):
+		_portrait_npc = null
+		if is_instance_valid(_portrait_model):
+			_portrait_model.queue_free()
+			_portrait_model = null
+		portrait_rect.texture = STATIC_PORTRAITS[speaker]
+		portrait_rect.show()
+		return
+	portrait_rect.texture = portrait_viewport.get_texture()
+	if npc == _portrait_npc and portrait_rect.visible:
 		return
 	_portrait_npc = npc
 	if is_instance_valid(_portrait_model):

@@ -1,0 +1,13 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Male_Ranger.gltf" id="2_outfit"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_SimpleParted.gltf" id="3_hair"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Beard.gltf" id="4_beard"]
+
+[node name="RaciborModel" type="Node3D"]
+script = ExtResource("1_model")
+parts = Array[PackedScene]([ExtResource("2_outfit"), ExtResource("3_hair"), ExtResource("4_beard")])
+hidden_meshes = PackedStringArray("Male_Ranger_Head_Hood")
+outfit_tint = Color(0.62, 0.6, 0.58, 1)
+hair_tint = Color(0.38, 0.33, 0.3, 1)

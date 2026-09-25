@@ -24,6 +24,8 @@ func _load_scene() -> void:
 			game_state.set_flag(key, cfg["flags"][key])
 		if cfg.has("day"):
 			game_state.day = int(cfg["day"])
+		if cfg.has("hour"):
+			game_state.hour = float(cfg["hour"])
 	var scene: Node = load(cfg["scene"]).instantiate()
 	root.add_child(scene)
 	for n in ["HUD", "PauseMenu"]:

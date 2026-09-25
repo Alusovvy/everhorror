@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/racibor_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/racibor.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"racibor"
+display_name = "Racibor, zarządca"
+dialogue_name = "Racibor"
+display_name_instrumental = "Raciborem"
+faction = 1
+role = "Zarządca ekspedycji z nadania Kniazia"
+max_sanity = 100
+start_sanity = 72
+max_health = 100
+start_reputation = 0
+history = "[ROBOCZE] Były porucznik straży kniaziowskiej. Od dziesięciu lat pilnuje kopalń w Wąwozie w imieniu Kniazia. Dostał rozkaz: pierwsza dostawa błękitu za miesiąc. Nie wierzy w legendy. Wierzy w rozkazy, liczby i porządne stemple. Najbardziej boi się tego, co powie Kniaź, jeśli wróci z pustymi rękami."
+sanity_zero_effect = "[ROBOCZE] Zabiera raport i ucieka szybem na górę, zostawiając ekspedycję samą sobie. Bez niego nikt nie pilnuje zapasów ani nie śle wieści do Kniazia."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.62

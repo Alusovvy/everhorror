@@ -13,6 +13,7 @@
 - Noc: sen, rozliczenie poczytalności, odszyfrowanie wiadomości dziadka, „Dzień 2” ze zmianami w obozie, plansza końca demo.
 - Poprawki z testu 01: podłoga i ściany jaskini.
 - Build dla znajomych (Windows, 97 MB).
+- Gwara śląska w dialogach górników, z przełącznikiem w opcjach.
 
 ## Scenariusz „pełne przejście” (ok. 20 min)
 Porozmawiaj z Mirosławem (zapytaj o zawał) → mapa: Stara sztolnia → w jaskini skrzynka z lontami i kartka z szyfrem → drogowskaz: powrót → oddaj lonty Mirosławowi i poproś o wysadzenie → „Jak się trzymasz?” → Bolko: zapytaj o dziadka (z szacunkiem), pokaż kartkę → mapa: zachód → deska z kluczem → powrót → posłanie → dzień 2 → stół z mapą.
@@ -45,6 +46,8 @@ Porozmawiaj z Mirosławem (zapytaj o zawał) → mapa: Stara sztolnia → w jask
 | 22 | Zapis/odczyt | Zapisz w środku dnia (Esc), wczytaj | Godzina, notes, stan zawału i zabrane przedmioty wracają | | |
 | 23 | Inna ścieżka | Nowa gra: nic nie rób, idź od razu spać | Dzień 2 wygląda inaczej, demo działa bez błędów | | |
 | 24 | Build | Rozpakuj ZIP na innym komputerze (albo u znajomego) | Gra się uruchamia, plik CZYTAJ_MNIE.txt jest zrozumiały | | |
+| 25 | Gwara śląska | Porozmawiaj z Mirosławem i Bolkiem (gwara jest domyślnie włączona) | Obaj mówią z elementami gwary (Bolko mocniej). Da się ich zrozumieć bez słownika. Narracja i Twoje odpowiedzi są w zwykłej polszczyźnie | | |
+| 26 | Przełącznik gwary | Esc → OPTIONS → wyłącz „Silesian dialect (miners)”, porozmawiaj jeszcze raz | Wracają oryginalne dialogi. Po ponownym uruchomieniu gry ustawienie jest zapamiętane | | |
 
 ## Twoje uwagi / propozycje
 

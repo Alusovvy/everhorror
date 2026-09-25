@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"zloza"
+title = "Złoża dla Kniazia"
+giver = "Racibor, zarządca"
+entries = {
+"start": "Racibor chce wiedzieć, gdzie jest błękit. Mam znaczyć żyły w nowych chodnikach i zdać mu raport. Za dwie żyły obiecał odpis z archiwum Kniazia.",
+"rzapie": "Zaznaczyłem żyłę w rząpiu pod starym szybem.",
+"upadowa": "Zaznaczyłem żyłę na dnie upadowej. Gruba jak ramię.",
+"kaplica": "Zaznaczyłem żyłę w kaplicy. Cała ściana jest tam z błękitu.",
+"zdane": "Zdałem raport. Racibor dał mi odpis raportu sprzed czterdziestu lat."
+}

@@ -20,24 +20,42 @@ signal action_requested(action: String)
 
 const DAY_START_HOUR := 6.0
 const DAY_LENGTH_HOURS := 16.0
+## The demo ends on the morning of this day.
+const LAST_DAY := 3
 
 const NPCS: Dictionary = {
 	&"miroslaw": preload("res://data/npc/miroslaw.tres"),
 	&"bolko": preload("res://data/npc/bolko.tres"),
+	&"racibor": preload("res://data/npc/racibor.tres"),
+	&"tekla": preload("res://data/npc/tekla.tres"),
+	&"dobrawa": preload("res://data/npc/dobrawa.tres"),
 }
 const NOTES: Dictionary = {
 	&"notatka_dowodcy": preload("res://data/notes/notatka_dowodcy.tres"),
 	&"szyfr": preload("res://data/notes/szyfr.tres"),
 	&"klucz": preload("res://data/notes/klucz.tres"),
 	&"odszyfrowana": preload("res://data/notes/odszyfrowana.tres"),
+	&"raport_archiwum": preload("res://data/notes/raport_archiwum.tres"),
+	&"list_konfraterni": preload("res://data/notes/list_konfraterni.tres"),
+	&"slowniczek": preload("res://data/notes/slowniczek.tres"),
+	&"list_dziadka": preload("res://data/notes/list_dziadka.tres"),
 }
 const QUESTS: Dictionary = {
 	&"slady": preload("res://data/quests/slady.tres"),
 	&"lonty": preload("res://data/quests/lonty.tres"),
+	&"zloza": preload("res://data/quests/zloza.tres"),
+	&"towar": preload("res://data/quests/towar.tres"),
+	&"sciana": preload("res://data/quests/sciana.tres"),
 }
 const ITEM_NAMES: Dictionary = {
 	"lonty": "Suche lonty",
+	"lina": "Lina",
+	"kwit": "Kwit od Racibora",
+	"tobolek": "Tobołek Tekli",
+	"krysztal": "Kryształ z kaplicy",
 }
+## Blue iron veins the player can mark for Racibor (flag "vein_<id>").
+const VEINS: Array[String] = ["rzapie", "upadowa", "kaplica"]
 
 var day: int = 1
 var hour: float = DAY_START_HOUR
@@ -48,6 +66,9 @@ var notes: Array[StringName] = []
 var quests: Dictionary = {}
 ## npc id → {"sanity", "health", "reputation", "status"}
 var npcs: Dictionary = {}
+## npc id → where the NPC is right now ("" = not in the camp). Set by the StoryDirector from
+## CampSchedule; not saved, it is recomputed from the day, hour and flags.
+var places: Dictionary = {}
 
 ## Open modal screens (dialogue, map, notebook…). While > 0 the player can't move.
 var _modal_count := 0
@@ -63,6 +84,7 @@ func reset() -> void:
 	notes = []
 	quests = {}
 	npcs = {}
+	places = {}
 	for id in NPCS:
 		var data: NpcData = NPCS[id]
 		npcs[id] = {"sanity": data.start_sanity, "health": data.max_health, "reputation": data.start_reputation, "status": "camp"}
@@ -105,6 +127,14 @@ func clock_text() -> String:
 	var m := int(round((hour - floor(hour)) * 60.0)) % 60
 	return "Dzień %d · %02d:%02d" % [day, h, m]
 
+## "rano" (breakfast, before 8), "dzien" (work, 8–18) or "wieczor" (supper and after).
+func part_of_day() -> String:
+	if hour < 8.0:
+		return "rano"
+	if hour < 18.0:
+		return "dzien"
+	return "wieczor"
+
 #endregion
 
 #region Flags and items
@@ -139,6 +169,14 @@ func take_item(item_id: String, count: int = 1) -> bool:
 
 func has_item(item_id: String) -> bool:
 	return int(items.get(item_id, 0)) > 0
+
+## How many blue iron veins the player has marked (Racibor's quest).
+func veins_mapped() -> int:
+	var count := 0
+	for vein in VEINS:
+		if has_flag("vein_" + vein):
+			count += 1
+	return count
 
 #endregion
 
@@ -223,6 +261,13 @@ func npc_status(npc_id: StringName) -> String:
 func set_npc_status(npc_id: StringName, status: String) -> void:
 	npcs[npc_id]["status"] = status
 	npc_changed.emit(npc_id)
+
+## Where the NPC is in the camp right now, e.g. "ognisko", "proch", "lada" ("" = away).
+func npc_place(npc_id: StringName) -> String:
+	return String(places.get(npc_id, ""))
+
+func is_in_camp(npc_id: StringName) -> bool:
+	return npc_place(npc_id) != ""
 
 #endregion
 

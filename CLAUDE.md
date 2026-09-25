@@ -57,6 +57,7 @@ Working title "everhorror" (the GDD still calls the game "XYZ"). The logo `asset
 - Tabs for indentation (Godot default). UTF-8 (`.editorconfig`).
 - New `class_name` scripts only register after an editor scan. Run `Godot_v4.7.2-stable_win64_console.exe --headless --path . --import` before a headless or MCP run.
 - Game UI text: menus are in English (START, OPTIONS…). In-world text (descriptions, dialogue) is in Polish.
+- Miner lines (Mirosław, Bolko) have a Silesian-dialect version. The option is on by default. The `.dialogue` files keep the originals. The Silesian text lives in `tools/generators/write_gwara.js`, which generates `dialogue/gwara_slaska.json`, keyed by the exact original line. `Settings` registers it as a Dialogue Manager translation. After changing a miner line, update its key and rerun the generator. `tools/dialogue_test.gd` fails if a line has no Silesian version.
 - Prefer data as `Resource` (`.tres`) for NPCs, items, quests and dialogues, so designers can edit it in the inspector.
 
 ## MCP servers ([.mcp.json](.mcp.json))
@@ -83,6 +84,7 @@ Machine-specific paths. uv tools live in `C:/Users/grups/.local/bin`. Windows **
 
 ### Our own tools (`tools/`)
 - `tools/screenshot.gd` renders views to PNG, which works without the editor. Headless tests: `nav_walk_test.gd`, `interact_test.gd`. Still ask the user to playtest game feel.
+- **Tests (user rule, 2026-09-25):** the demo is tested by short scenarios in `tools/tests/` (each starts from a prepared GameState, prints its steps, has a watchdog) plus `tools/dialogue_test.gd`. `tools/run_tests.sh` runs them and prints one `RESULT` line per scenario; full logs go to `reports/tests/`. **Run the full suite only after the user approves it. Never start it automatically.** Without approval, run at most a single short scenario to check a change. Never pipe a long Godot run through `grep`/`head`; write the log to a file and read the `RESULT` lines.
 
 ## Godot addons (`addons/`, third-party: don't edit, update by replacing the folder)
 | Addon | Version | Use | Autoload |

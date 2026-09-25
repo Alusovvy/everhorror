@@ -1,0 +1,92 @@
+using GameState
+
+~ start
+if day >= 3
+	=> day3
+if not has_flag("met_dobrawa")
+	$> set_flag("met_dobrawa")
+	Kobieta w żelaznej masce odwraca się, zanim zdążysz się odezwać. Przez szczeliny widać oczy. Spokojne, jakby już wiedziała, co powiesz.
+	Dobrawa: Nie podchodź bliżej niż na długość ramienia. To nie jest nieuprzejmość.
+	Dobrawa: Dobrawa. Z Initium. Zjechałam w nocy, kiedy spaliście.
+	- Jesteś z Drugich?
+		Dobrawa: Tak mówicie. My mówimy, że przeszłam przemianę. Na jedno wychodzi.
+	- Czemu nie wolno cię dotykać?
+		Dobrawa: Bo twoja aura i moja nie lubią się spotykać. Tobie zaszkodziłoby to bardziej niż mnie.
+=> hub
+
+~ hub
+Dobrawa: [[Słucham.|Tak?|Mów krótko. To miejsce boli.]]
+- Po co Initium przysłało tu Drugą? [if not has_flag("dob_asked_why") /]
+	$> set_flag("dob_asked_why")
+	Dobrawa: Błękit nie rośnie w skale sam z siebie. Coś go robi. Coś, co świeci od setek lat i zmienia metal wokół siebie.
+	Dobrawa: Initium chce wiedzieć, co to jest, zanim Kniaź przetopi to na miecze.
+	Dobrawa: I zanim obudzi się ktoś, kto pilnuje tego dłużej niż my.
+	=> hub
+- Mówiłaś, że to miejsce boli. [if not has_flag("dob_asked_pain") /]
+	$> set_flag("dob_asked_pain")
+	Dobrawa: Każdy Drugi płaci bólem za to, co potrafi. Tu energii jest tyle, że płacę, nawet kiedy nic nie robię.
+	Dobrawa: Jak przy piecu, tylko że tu piec jest wszędzie.
+	=> hub
+- Czego szukasz przy tych wózkach? [if npc_place("dobrawa") == "wozki" and not has_flag("dob_asked_carts") /]
+	$> set_flag("dob_asked_carts")
+	Dobrawa: Słucham kamieni. Urobek sprzed czterdziestu lat pamięta, skąd go wzięto.
+	Dobrawa: Ten tutaj pochodzi z głębi. Z miejsca, gdzie ktoś pisał na ścianach.
+	=> hub
+- Czego tu właściwie szukasz? [if quest_state("sciana") == "" /]
+	Dobrawa: W archiwum Initium jest wzmianka o kaplicy pod tą kopalnią. Górnicy postawili ją przy ścianie, której nie wykuł żaden człowiek. Na ścianie jest napis w sanctinie.
+	Dobrawa: Znasz mapy przewodnika. Jest na nich coś pod jaskinią za Starą sztolnią?
+	- Pod jaskinią dziadek narysował znak zapytania.
+		Dobrawa: Znak zapytania to dobry początek.
+	- Nie wiem, czy powinienem ci mówić.
+		Dobrawa: Rozsądnie. Tyle że pod jaskinią i tak jest tylko jedno miejsce, gdzie można zejść. Twój dziadek narysował tam coś, prawda? Na przykład znak zapytania.
+	$> set_flag("kaplica_known")
+	$> start_quest("sciana")
+	$> add_note("slowniczek")
+	$> quest_log("sciana", "slownik")
+	Dobrawa: Weź to. Przepisałam kilka znaków sanctinu. Jeśli ta ściana coś mówi, to w tym języku.
+	Dobrawa: I pamiętaj. Oni zawsze piszą od góry do dołu. Skąd przyszli, co zrobili i czego zakazują.
+	=> hub
+- Ściana w kaplicy się otworzyła. [if has_flag("wall_open") and not has_flag("dob_told_wall") /]
+	$> set_flag("dob_told_wall")
+	Dobrawa milczy tak długo, że zaczynasz się zastanawiać, czy w ogóle usłyszała.
+	Dobrawa: Czterdzieści lat nikt tego nie dokonał. Twój dziadek zostawił zagadkę, którą mógł rozwiązać tylko ktoś, kto myśli jak on.
+	if has_item("krysztal")
+		Dobrawa: Czuję go stąd. W niszy był kryształ, prawda?
+	=> hub
+- Znalazłem w kaplicy kryształ. [if has_item("krysztal") and not has_flag("dob_asked_crystal") /]
+	$> set_flag("dob_asked_crystal")
+	Dobrawa: Nie podawaj mi go do ręki. Połóż tutaj, na skrzyni.
+	Pochyla się nad kryształem. Błękitna iskra w środku przesuwa się w jej stronę, jakby ją poznawała.
+	Dobrawa: To nośnik. Takie same siedzą w Maszynie w Initium. Ktoś coś w nim zapisał. Ustawienie albo ostrzeżenie.
+	Dobrawa: Oddaj mi go. W Initium ktoś go odczyta. Tu przyniesie wam tylko nieszczęście. Zabiorę go na górę jeszcze przed świtem.
+	- Weź go.
+		$> take_item("krysztal")
+		$> set_flag("crystal_to_dobrawa")
+		$> set_flag("dobrawa_leaving")
+		$> change_rep("dobrawa", 15)
+		if quest_state("sciana") == "active"
+			$> quest_log("sciana", "krysztal_dobrawa")
+			$> complete_quest("sciana")
+		Dobrawa owija kryształ w kawałek skóry, nie dotykając go palcami.
+		Dobrawa: Dziękuję. Initium tego nie zapomni. Ja też nie.
+	- Dziadek kazał go nikomu nie oddawać.
+		$> change_rep("dobrawa", -5)
+		if quest_state("sciana") == "active"
+			$> quest_log("sciana", "krysztal_moj")
+			$> complete_quest("sciana")
+		Dobrawa: Mądry człowiek.[wait=0.4] Tylko że prędzej czy później ktoś go od ciebie weźmie. Lepiej, żeby wiedział, co trzyma w ręku.
+	=> hub
+- Dziadek pisał, że Oni śpią. [if has_note("list_dziadka") and not has_flag("dob_asked_sleep") /]
+	$> set_flag("dob_asked_sleep")
+	Dobrawa: Wszystko, co tu jest, albo śpi, albo nie żyje. Energia płynie wolno i równo, jak oddech kogoś pogrążonego we śnie.
+	Dobrawa: Pytanie, co się stanie, kiedy ktoś zacznie kopać przy samym sercu.
+	=> hub
+- Muszę iść.
+	Dobrawa: Idź. I nie noś amuletu na gołej skórze. Ciągnie cię za sobą w dół.
+	=> END
+
+~ day3
+Dobrawa: Czuję, że coś się zmieniło w nocy. Energia płynie szybciej. Jakby ktoś po drugiej stronie przewrócił się na drugi bok.
+if has_item("krysztal")
+	Dobrawa: I wciąż masz kryształ. Pilnuj go.
+=> END

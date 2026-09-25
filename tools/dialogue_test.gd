@@ -1,31 +1,56 @@
 extends SceneTree
 ## Usage: godot --headless --path . --script res://tools/dialogue_test.gd
-## Plays through the slice's dialogues without UI (picks responses by text) and checks the state.
+## Plays the demo's dialogues without UI (picks responses by text) and checks the state:
+## the dialect switch, Mirosław and Bolko (day 1), the new NPCs and their quests, the riddle
+## wall, the crystal, the night texts and Racibor's announcement on the last morning.
 
 var _failures := 0
 var _requests: Array[String] = []
+## Every line shown by _talk, as the player would read it.
+var _seen: Array[String] = []
+var gs
+var dm
 
 func _initialize() -> void:
 	# Autoloads are only available after the first frame.
 	process_frame.connect(_run, CONNECT_ONE_SHOT)
 
 func _run() -> void:
-	var gs = root.get_node("GameState")
-	var dm = root.get_node("DialogueManager")
+	gs = root.get_node("GameState")
+	dm = root.get_node("DialogueManager")
 	gs.action_requested.connect(func(a): _requests.append(a))
 	var mir: Resource = load("res://dialogue/miroslaw.dialogue")
 	var bolko: Resource = load("res://dialogue/bolko.dialogue")
 	var system: Resource = load("res://dialogue/system.dialogue")
+	var racibor: Resource = load("res://dialogue/racibor.dialogue")
+	var tekla: Resource = load("res://dialogue/tekla.dialogue")
+	var dobrawa: Resource = load("res://dialogue/dobrawa.dialogue")
+	var wall: Resource = load("res://dialogue/sciana.dialogue")
+
+	print("--- Silesian dialect switch")
+	var settings = root.get_node("Settings")
+	_check_gwara_coverage()
+	settings.silesian_dialect = false
+	settings.apply()
+	var plain: String = await _first_line_of(mir, "Mirosław")
+	gs.reset()  # the intro sets met_miroslaw
+	settings.silesian_dialect = true
+	settings.apply()
+	var gwara: String = await _first_line_of(mir, "Mirosław")
+	_check(plain == "Ty nowy? Siadaj, jak chcesz. Byle mi nad głową nie stać.", "original line with the dialect off (got '%s')" % plain)
+	_check(gwara == "Ty nowy? Siadej, jak chcesz. Ino mi nad gowom niy stój.", "Silesian line with the dialect on (got '%s')" % gwara)
+	gs.reset()
 
 	print("--- Mirosław: first talk, ask about the collapse")
-	await _talk(dm, mir, "start", ["Co się stało z zachodnim chodnikiem?", "Muszę iść."])
+	await _talk(mir, "start", ["Co się stało z zachodnim chodnikiem?", "Muszę iść."])
 	_check(gs.has_flag("met_miroslaw"), "met_miroslaw set")
 	_check(gs.quest_state("lonty") == "active", "quest lonty started")
 
 	print("--- Mirosław: deliver fuses, then ask to blast")
 	gs.give_item("lonty")
-	await _talk(dm, mir, "start", ["Mam dla ciebie lonty", "Wysadź zawał na zachodzie. (4 h)"])
+	await _talk(mir, "start", ["Mam dla ciebie lonty", "Wysadź zawał na zachodzie. (4 h)"])
 	_check(not gs.has_item("lonty"), "fuses taken")
+	_check("Mirosław: Pokoż. No, gryfnie. Stare, ale suche. Ftoś je porządnie zawinął." in _seen, "Silesian line with [wait] resolves")
 	_check(gs.has_flag("fuses_delivered"), "fuses_delivered set")
 	_check(gs.rep("miroslaw") == 10, "Mirosław rep +10 (got %d)" % gs.rep("miroslaw"))
 	_check("blast" in _requests, "blast requested")
@@ -33,42 +58,117 @@ func _run() -> void:
 	print("--- Mirosław: too late for blasting")
 	gs.hour = 20.0
 	_requests.clear()
-	await _talk(dm, mir, "start", ["Wysadź zawał na zachodzie. (4 h)", "Muszę iść."])
+	await _talk(mir, "start", ["Wysadź zawał na zachodzie. (4 h)", "Muszę iść."])
 	_check(not ("blast" in _requests), "no blast when out of time")
 	gs.hour = 8.0
 
 	print("--- Bolko: cipher before trust, then after")
 	gs.add_note(&"szyfr")
-	await _talk(dm, bolko, "start", ["Znalazłem kartkę zapisaną szyfrem dziadka.", "Pójdę już."])
+	await _talk(bolko, "start", ["Znalazłem kartkę zapisaną szyfrem dziadka.", "Pójdę już."])
 	_check(not gs.has_flag("bolko_hint"), "no hint without trust")
-	await _talk(dm, bolko, "start", ["Jaki był mój dziadek?", "Pewnie miał swoje powody.", "Znalazłem kartkę zapisaną szyfrem dziadka.", "Pójdę już."])
+	await _talk(bolko, "start", ["Jaki był mój dziadek?", "Pewnie miał swoje powody.", "Znalazłem kartkę zapisaną szyfrem dziadka.", "Pójdę już."])
 	_check(gs.has_flag("bolko_hint"), "hint with trust (rep %d)" % gs.rep("bolko"))
 
-	print("--- Sleep prompt and dream")
-	_requests.clear()
-	await _talk(dm, system, "sleep", ["Tak, idę spać"])
-	_check("sleep" in _requests, "sleep requested")
-	gs.set_flag("visited_east")
-	await _talk(dm, system, "dream", [])
+	print("--- Racibor: the deposits quest, the rope permit")
+	gs.set_flag("vein_rzapie")   # a vein marked before the quest is logged when it starts
+	await _talk(racibor, "start", ["Znam mapy dziadka.", "Muszę iść."])
+	_check(gs.quest_state("zloza") == "active", "quest zloza started")
+	_check(gs.has_item("kwit"), "got Racibor's permit")
+	_check("rzapie" in gs.quests[&"zloza"]["entries"], "earlier vein logged when the quest starts")
+	await _talk(racibor, "start", ["Mam zaznaczone żyły.", "Muszę iść."])
+	_check(gs.quest_state("zloza") == "active", "one vein is not enough")
+	gs.set_flag("vein_upadowa")
+	await _talk(racibor, "start", ["Mam zaznaczone żyły.", "Muszę iść."])
+	_check(gs.quest_state("zloza") == "done" and gs.has_note(&"raport_archiwum"), "report accepted, archive note given")
+	_check(gs.has_flag("racibor_wants_upadowa"), "Racibor wants the decline")
 
-	print("--- Day 2 variants")
+	print("--- Tekla: the rope for the permit, the bundle, her father")
+	await _talk(tekla, "start", ["Potrzebuję liny.", "Muszę iść."])
+	_check(gs.has_item("lina") and not gs.has_item("kwit"), "rope for the permit")
+	await _talk(tekla, "start", ["Masz dla mnie jakąś robotę?", "Dobrze, przyniosę.", "Muszę iść."])
+	_check(gs.quest_state("towar") == "active", "quest towar started")
+	gs.give_item("tobolek")
+	gs.add_note(&"list_konfraterni")
+	await _talk(tekla, "start", ["Mam twój tobołek.", "Nikomu nie powiem.", "Znałaś może mojego dziadka?", "To był mój dziadek.", "Muszę iść."])
+	_check(gs.quest_state("towar") == "done" and not gs.has_item("tobolek"), "bundle returned")
+	_check(gs.has_flag("tekla_owes") and gs.rep("tekla") == 15, "Tekla owes you (rep %d)" % gs.rep("tekla"))
+	_check("proch" in gs.quests[&"slady"]["entries"], "Tekla told about the gunpowder")
+
+	print("--- Mirosław: the charge in the decline")
+	gs.set_flag("met_racibor")
+	gs.set_flag("saw_charge")
+	var mir_sanity: int = gs.sanity(&"miroslaw")
+	await _talk(mir, "start", ["Byłem na dnie upadowej.", "Dziadek miał trzy beczki prochu.", "Muszę iść."])
+	_check("ladunek" in gs.quests[&"slady"]["entries"], "Mirosław recognised the charge")
+	_check(gs.sanity(&"miroslaw") == mir_sanity - 3, "the talk costs him sanity")
+
+	print("--- Day 2: Dobrawa, the chapel, the glossary")
 	gs.start_next_day()
-	gs.set_flag("west_blasted")
-	gs.npcs[&"miroslaw"]["sanity"] = 12
-	await _talk(dm, mir, "start", ["Posiedzę z tobą."])
-	_check(gs.sanity(&"miroslaw") == 17, "day-2 comfort +5 (got %d)" % gs.sanity(&"miroslaw"))
-	await _talk(dm, bolko, "start", [])
+	await _talk(dobrawa, "start", ["Jesteś z Drugich?", "Czego tu właściwie szukasz?", "Pod jaskinią", "Muszę iść."])
+	_check(gs.has_flag("kaplica_known") and gs.has_note(&"slowniczek"), "chapel known, glossary given")
+	_check(gs.quest_state("sciana") == "active", "quest sciana started")
+
+	print("--- The riddle wall: wrong answers cost time, then the right one")
+	var hour_before: float = gs.hour
+	await _talk(wall, "start", ["Gwiazda.", "Płomień.", "Oko.", "Spróbuję jeszcze raz.", "Gwiazda.", "Kamień.", "Zamknięte oko."])
+	_check(is_equal_approx(gs.hour, hour_before + 1.0), "one wrong try costs 1 h (%.1f → %.1f)" % [hour_before, gs.hour])
+	_check(gs.has_flag("wall_open"), "wall opened")
+	_check("otwarta" in gs.quests[&"sciana"]["entries"], "quest entry for the open wall")
+	_check("Ściana: Zeszliśmy z ___ i daliśmy wam oczy." in _seen, "translated inscription with the glossary")
+
+	print("--- The crystal goes to Dobrawa")
+	gs.give_item("krysztal")
+	gs.add_note(&"list_dziadka")
+	await _talk(dobrawa, "start", ["Znalazłem w kaplicy kryształ.", "Weź go.", "Muszę iść."])
+	_check(gs.has_flag("dobrawa_leaving") and not gs.has_item("krysztal"), "Dobrawa takes the crystal and will leave")
+	_check(gs.quest_state("sciana") == "done", "quest sciana done")
+
+	print("--- Bolko: the chapel hint and the grandfather's fate")
+	gs.set_flag("met_tekla")
+	await _talk(bolko, "start", ["Dziadek sam zasypał upadową.", "Pójdę już."])
+	_check(gs.has_flag("bolko_knows_fate"), "Bolko knows what happened")
+
+	print("--- Night 2 dream, then Racibor's announcement on day 3")
+	gs.set_flag("took_crystal")
+	await _talk(system, "dream", [])
+	_check(_seen.any(func(l): return l.contains("przycina lont")), "second-night dream with the crystal")
+	gs.start_next_day()
+	await _talk(racibor, "announcement", ["Dziadek sam zasypał upadową."])
+	_check(gs.has_flag("plan_upadowa"), "Racibor plans to open the decline")
+	_check(_seen.any(func(l): return l.begins_with("Bolko: Nad grobym")), "Bolko protests (in dialect)")
+
+	print("--- Reporting Tekla instead (fresh state)")
+	gs.reset()
+	gs.give_item("tobolek")
+	await _talk(racibor, "start", ["Tekla ukrywa coś przed tobą.", "Muszę iść."])
+	_check(gs.has_flag("tekla_reported") and gs.has_item("lina"), "Tekla under watch, rope from Racibor")
+	await _talk(tekla, "start", ["Kto teraz gotuje?"])
+	_check(_seen.back().begins_with("Tekla: Bolko."), "Tekla talks from under watch")
+
+	print("--- Bolko tells about the chapel on day 2")
+	gs.reset()
+	gs.change_rep("bolko", 5)
+	gs.start_next_day()
+	await _talk(bolko, "start", ["Była tu kiedyś jakaś kaplica?", "Pójdę już."])
+	_check(gs.has_flag("kaplica_known"), "chapel known from Bolko")
+
+	print("--- Sleep prompt")
+	_requests.clear()
+	await _talk(system, "sleep", ["Tak, idę spać"])
+	_check("sleep" in _requests, "sleep requested")
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit()
 
 ## Runs a conversation, choosing responses whose text starts with the given strings, in order.
-func _talk(dm, resource: Resource, cue: String, choices: Array) -> void:
+func _talk(resource: Resource, cue: String, choices: Array) -> void:
 	var line = await dm.get_next_dialogue_line(resource, cue)
 	var guard := 0
-	while line != null and guard < 60:
+	while line != null and guard < 80:
 		guard += 1
-		print("   %s%s" % ["%s: " % line.character if line.character != "" else "", line.text])
+		var shown := "%s%s" % ["%s: " % line.character if line.character != "" else "", _strip_bbcode(line.text)]
+		_seen.append(shown)
+		print("   " + shown)
 		if line.responses.size() > 0:
 			var allowed: Array = line.responses.filter(func(r): return r.is_allowed)
 			var pick = null
@@ -86,6 +186,41 @@ func _talk(dm, resource: Resource, cue: String, choices: Array) -> void:
 			line = await dm.get_next_dialogue_line(resource, pick.next_id)
 		else:
 			line = await dm.get_next_dialogue_line(resource, line.next_id)
+
+func _strip_bbcode(text: String) -> String:
+	var re := RegEx.create_from_string("\\[/?[a-z]+[^\\]]*\\]")
+	return re.sub(text, "", true)
+
+## Text of the first line spoken by the given character from the "start" cue.
+func _first_line_of(resource: Resource, character: String) -> String:
+	var line = await dm.get_next_dialogue_line(resource, "start")
+	var guard := 0
+	while line != null and guard < 20:
+		guard += 1
+		if line.character == character:
+			return line.text
+		if line.responses.size() > 0:
+			return ""
+		line = await dm.get_next_dialogue_line(resource, line.next_id)
+	return ""
+
+## Every miner line in the .dialogue files has a Silesian version and every Silesian key still
+## matches a line (a changed original silently falls back to the standard Polish text).
+func _check_gwara_coverage() -> void:
+	var gwara: Dictionary = JSON.parse_string(FileAccess.get_file_as_string("res://dialogue/gwara_slaska.json"))
+	var lines := {}
+	for file in DirAccess.get_files_at("res://dialogue"):
+		if not file.ends_with(".dialogue"):
+			continue
+		for raw in FileAccess.get_file_as_string("res://dialogue/" + file).split("\n"):
+			var s: String = raw.strip_edges()
+			for who in ["Mirosław: ", "Bolko: "]:
+				if s.begins_with(who):
+					lines[s.substr(who.length())] = true
+	var missing: Array = lines.keys().filter(func(l): return not gwara.has(l))
+	var unknown: Array = gwara.keys().filter(func(k): return not lines.has(k))
+	_check(missing.is_empty(), "every miner line has a Silesian version %s" % [missing])
+	_check(unknown.is_empty(), "every Silesian key matches a dialogue line %s" % [unknown])
 
 func _check(ok: bool, what: String) -> void:
 	print("   [%s] %s" % ["OK" if ok else "FAIL", what])

@@ -21,6 +21,10 @@
 [ext_resource type="Script" path="res://script/npc.gd" id="24_npc"]
 [ext_resource type="Resource" path="res://data/npc/miroslaw.tres" id="25_mir"]
 [ext_resource type="Resource" path="res://data/npc/bolko.tres" id="26_bolko"]
+[ext_resource type="Resource" path="res://data/npc/racibor.tres" id="40_racibor"]
+[ext_resource type="Resource" path="res://data/npc/tekla.tres" id="41_tekla"]
+[ext_resource type="Resource" path="res://data/npc/dobrawa.tres" id="42_dobrawa"]
+[ext_resource type="PackedScene" path="res://scene/levels/locations.tscn" id="43_locations"]
 [ext_resource type="PackedScene" path="res://scene/ui/map_screen.tscn" id="27_map"]
 [ext_resource type="PackedScene" path="res://scene/ui/notebook.tscn" id="28_notebook"]
 [ext_resource type="PackedScene" path="res://scene/ui/screen_fade.tscn" id="29_fade"]
@@ -283,6 +287,8 @@ bus = &"SFX"
 
 [node name="Camp" parent="." instance=ExtResource("23_camp")]
 
+[node name="Locations" parent="." instance=ExtResource("43_locations")]
+
 [node name="NPCs" type="Node3D" parent="."]
 
 [node name="Miroslaw" type="Node3D" parent="NPCs"]
@@ -293,6 +299,18 @@ pose = &"Sitting_Idle"
 [node name="Bolko" type="Node3D" parent="NPCs"]
 script = ExtResource("24_npc")
 data = ExtResource("26_bolko")
+
+[node name="Racibor" type="Node3D" parent="NPCs"]
+script = ExtResource("24_npc")
+data = ExtResource("40_racibor")
+
+[node name="Tekla" type="Node3D" parent="NPCs"]
+script = ExtResource("24_npc")
+data = ExtResource("41_tekla")
+
+[node name="Dobrawa" type="Node3D" parent="NPCs"]
+script = ExtResource("24_npc")
+data = ExtResource("42_dobrawa")
 
 [node name="BlastSound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("31_blast")

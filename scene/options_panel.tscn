@@ -55,6 +55,20 @@ text = "Fullscreen"
 layout_mode = 2
 size_flags_horizontal = 0
 
+[node name="DialectLabel" type="Label" parent="Grid"]
+layout_mode = 2
+tooltip_text = "Mirosław i Bolko mówią z elementami gwary śląskiej.
+Wyłącz, żeby wrócić do oryginalnych dialogów."
+mouse_filter = 1
+text = "Silesian dialect (miners)"
+
+[node name="DialectToggle" type="CheckButton" parent="Grid"]
+layout_mode = 2
+size_flags_horizontal = 0
+tooltip_text = "Mirosław i Bolko mówią z elementami gwary śląskiej.
+Wyłącz, żeby wrócić do oryginalnych dialogów."
+button_pressed = true
+
 [node name="BackButton" type="Button" parent="."]
 layout_mode = 2
 text = "BACK"

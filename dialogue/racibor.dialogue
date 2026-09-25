@@ -1,0 +1,150 @@
+using GameState
+
+~ start
+if day >= 3
+	=> day3
+if not has_flag("met_racibor")
+	$> set_flag("met_racibor")
+	if npc_place("racibor") == "stol"
+		Racibor je szybko i w milczeniu, jakby śniadanie też miało swój termin.
+	else
+		Racibor stoi nad mapą i wodzi po niej palcem, jakby liczył każdy sążeń.
+	Racibor: Ty jesteś wnuk przewodnika. Bolko mówił.
+	Racibor: Racibor. Zarządzam tą ekspedycją z nadania Kniazia. Wszystko, co tu robisz, i tak do mnie dotrze. Wolę usłyszeć to od ciebie.
+elif day == 2 and not has_flag("rac_day2")
+	$> set_flag("rac_day2")
+	Racibor: Wstałeś. Dobrze. Mamy gościa z Initium, jeśli jeszcze nie zauważyłeś.
+=> hub
+
+~ hub
+Racibor: [[Mów.|Słucham.|Do rzeczy.]]
+- Po co właściwie tu jesteśmy? [if not has_flag("rac_asked_why") /]
+	$> set_flag("rac_asked_why")
+	Racibor: Po błękit. Następca tronu szykuje się do wojny, a z błękitu kuje się ostrza, które nie tępią się latami.
+	Racibor: Kniaź dał mi miesiąc na pierwszą dostawę. Nie dwa. Miesiąc.
+	Racibor: Kiedy ktoś mi opowiada o klątwach i szeptach w ścianach, pytam go, ile wozów urobku wywiózł. Zwykle wtedy milknie.
+	=> hub
+- Znam mapy dziadka. Mogę szukać dla ciebie żył. [if quest_state("zloza") == "" /]
+	$> start_quest("zloza")
+	$> give_item("kwit")
+	Racibor: Na to liczyłem. Twój dziadek znał tę kopalnię lepiej niż ktokolwiek żywy.
+	Racibor: Każdą żyłę, na jaką trafisz, znacz na mapie. Dwie wystarczą, żebym mógł wysłać Kniaziowi pierwszy raport.
+	Racibor: W zamian dostaniesz odpis z archiwum. Raport sprzed czterdziestu lat, z czasów twojego dziadka. Wiem, że tego szukasz.
+	Racibor: I weź ten kwit. Tekla wyda ci za niego linę. Bez liny w stare chodniki nie ma co włazić.
+	if has_flag("vein_rzapie")
+		$> quest_log("zloza", "rzapie")
+	if has_flag("vein_upadowa")
+		$> quest_log("zloza", "upadowa")
+	if has_flag("vein_kaplica")
+		$> quest_log("zloza", "kaplica")
+	=> hub
+- Mam zaznaczone żyły. [if quest_state("zloza") == "active" and veins_mapped() >= 1 /]
+	if veins_mapped() >= 2
+		Racibor bierze od ciebie mapę i długo patrzy na twoje kreski.
+		if has_flag("vein_upadowa")
+			Racibor: Upadowa. Tak myślałem. Najgrubsza żyła siedzi za starym zawałem.
+			$> set_flag("racibor_wants_upadowa")
+		else
+			Racibor: Nie jest źle. Na pierwszy raport starczy.
+		Racibor: Umowa to umowa.[wait=0.4] Masz. Odpis raportu sztygara sprzed czterdziestu lat. Czytaj uważnie. Ja przeczytałem trzy razy.
+		$> add_note("raport_archiwum")
+		$> quest_log("slady", "archiwum")
+		$> quest_log("zloza", "zdane")
+		$> complete_quest("zloza")
+		$> change_rep("racibor", 10)
+	else
+		Racibor: Jedna żyła to za mało, żeby zawracać Kniaziowi głowę. Przynieś drugą.
+	=> hub
+- Tekla ukrywa coś przed tobą. [if has_item("tobolek") and not has_flag("tekla_reported") /]
+	Racibor: Mów.
+	Kładziesz na stole tobołek. Racibor wysypuje sakiewkę, czyta list z pieczęcią i pierwszy raz widzisz, jak zaciska szczęki.
+	Racibor: Konfraternia. Skupują błękit za plecami Kniazia. Za to się wisi.
+	Racibor: Nie powieszę jej. Kucharki nie mam drugiej. Ale od dziś Tekla siedzi tam, gdzie ją widzę, a liny wydaję ja.
+	$> take_item("tobolek")
+	$> set_flag("tekla_reported")
+	$> quest_log("towar", "wydany")
+	$> complete_quest("towar")
+	$> change_rep("racibor", 8)
+	$> change_rep("tekla", -30)
+	if not has_item("lina")
+		$> give_item("lina")
+		$> set_flag("got_rope")
+		Racibor: Masz linę. Należy ci się.
+	=> hub
+- Kim jest ta kobieta w masce? [if day >= 2 and not has_flag("rac_asked_dobrawa") /]
+	$> set_flag("rac_asked_dobrawa")
+	Racibor: Druga z Initium. Nazywa się Dobrawa. Kniaź nie pytał mnie o zdanie.
+	Racibor: Initium chce wiedzieć, skąd się bierze błękit. Ja chcę, żeby go było dużo. Na razie nam po drodze.
+	Racibor: I jeszcze jedno. Nie dotykaj jej. Nawet przez rękawicę. Widziałem, co zostaje z człowieka.
+	=> hub
+- Znalazłem w kaplicy kryształ. [if has_item("krysztal") and not has_flag("rac_saw_crystal") /]
+	$> set_flag("rac_saw_crystal")
+	Racibor obraca kryształ w palcach pod światło świecy. Błękitna iskra w środku przesuwa się za jego ręką.
+	Racibor: Za coś takiego Kniaź zapłaci więcej niż za wóz błękitu. Pójdzie na górę z pierwszą dostawą.
+	- Weź go.
+		$> take_item("krysztal")
+		$> set_flag("crystal_to_racibor")
+		$> change_rep("racibor", 10)
+		if quest_state("sciana") == "active"
+			$> quest_log("sciana", "krysztal_racibor")
+			$> complete_quest("sciana")
+		Racibor: Mądra decyzja. Zapiszę, że to twoje znalezisko.
+	- Zostanie u mnie.
+		$> change_rep("racibor", -5)
+		Racibor: Twoja wola. Na razie.[wait=0.3] Tylko pamiętaj, czyja to kopalnia.
+	=> hub
+- Muszę iść.
+	Racibor: Idź. I nie marnuj dnia, mamy ich mniej, niż myślisz.
+	=> END
+
+~ day3
+if has_flag("tekla_reported")
+	Racibor: Pilnuję Tekli, pilnuję ludzi, pilnuję czasu. Mów szybko.
+else
+	Racibor: Słyszałeś, co mówiłem przy śniadaniu. Nie zmieniam zdania.
+if has_flag("plan_upadowa") and has_note("list_dziadka") and rep("racibor") >= 10
+	Racibor: Ale pokaż mi jeszcze raz ten list. Tylko tak, żeby nikt nie widział.
+	Racibor czyta długo. Potem składa kartkę na czworo i oddaje ci ją, nie patrząc w oczy.
+	Racibor: Do jutra nic nie wysadzamy. Muszę pomyśleć.
+	$> set_flag("racibor_doubts")
+=> END
+
+~ announcement
+Racibor wstaje od stołu i stuka kubkiem w deski, aż wszyscy podnoszą głowy.
+Racibor: Słuchajcie. Za tydzień idzie na górę pierwsza dostawa dla Kniazia. Za trzy dni kończy się rozpoznanie i zaczynamy kopać.
+if has_flag("racibor_wants_upadowa")
+	Racibor: Najgrubsza żyła siedzi na dnie upadowej, za starym zawałem. Nasz przewodnik ją widział.
+	Racibor: Mirosław, szykuj ładunki. Jutro z rana otwieramy upadową.
+	$> set_flag("plan_upadowa")
+else
+	Racibor: Na razie mamy strzępy. Dziś każdy, kto nie gotuje, szuka błękitu. Kto znajdzie porządną żyłę, ten je pierwszy.
+if has_flag("plan_upadowa") and has_note("list_dziadka")
+	Wszyscy patrzą na Racibora. Ty patrzysz na kieszeń, w której nosisz list dziadka.
+	- Dziadek sam zasypał upadową. Nie wolno tam kopać.
+		Racibor: Twój dziadek był przewodnikiem, nie sztygarem. I od czterdziestu lat nie żyje.
+		if rep("racibor") >= 10
+			Racibor: ...Przyjdź do mnie po śniadaniu. Z tym swoim listem.
+		else
+			$> change_rep("racibor", -5)
+			Racibor: Następnym razem, jak zechcesz mi przerwać, przynieś wóz błękitu.
+	- Nic nie mówisz.
+		Milczysz. List dziadka ciąży ci w kieszeni jak kamień.
+if has_flag("plan_upadowa")
+	if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
+		Mirosław wstaje bez słowa i odchodzi w ciemny kąt hali. Nikt go nie zatrzymuje.
+	elif has_flag("mir_saw_charge")
+		Mirosław: Wysadzić zawał, który ktoś już raz wysadził, żeby nikt tam nie wlazł? Wysadzę. Ale nie mówcie potem, że nikt was nie ostrzegał.
+	else
+		Mirosław: Jak trzeba, to wysadzę. Tylko niech mi nikt z ogniem nie łazi koło beczek.
+	if has_flag("bolko_knows_fate")
+		Bolko: Nad grobem przewodnika kopać nie będziesz, panie zarządco. Po moim trupie.
+		Racibor: Jeśli trzeba będzie, to i po twoim, Bolko.
+if has_flag("tekla_reported")
+	Tekla siedzi na skrzyni obok stołu zarządcy i nie podnosi wzroku.
+if has_flag("dobrawa_left")
+	Miejsce przy starych wózkach, gdzie zwykle stała Dobrawa, jest puste.
+elif has_flag("plan_upadowa")
+	Dobrawa: Jeśli otworzycie upadową, obudzicie to, co przewodnik uśpił. Initium wam wtedy nie pomoże.
+	Racibor: Initium nie zarządza tą kopalnią.
+Racibor: To wszystko. Do roboty.
+=> END

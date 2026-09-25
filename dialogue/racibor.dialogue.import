@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://dv1jbbheuhh12"
+path="res://.godot/imported/racibor.dialogue-eb12a4e0659b30cc1bd2c18a2cb68281.tres"
+
+[deps]
+
+source_file="res://dialogue/racibor.dialogue"
+dest_files=["res://.godot/imported/racibor.dialogue-eb12a4e0659b30cc1bd2c18a2cb68281.tres"]
+
+[params]
+
+defaults=true

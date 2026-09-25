@@ -1,11 +1,16 @@
 using GameState
 
 ~ start
+if day >= 3
+	=> day3
 if day == 2
 	=> day2
 if not has_flag("met_miroslaw")
 	$> set_flag("met_miroslaw")
-	Mirosław siedzi przy ognisku, ale odsunięty, jakby ogień mógł go ugryźć.
+	if npc_place("miroslaw") == "proch"
+		Mirosław klęczy przy beczkach z prochem i coś przy nich poprawia. Kiedy podchodzisz, odruchowo zasłania je plecami.
+	else
+		Mirosław siedzi przy ognisku, ale odsunięty, jakby ogień mógł go ugryźć.
 	Mirosław: Ty nowy? Siadaj, jak chcesz. Byle mi nad głową nie stać.
 	Mirosław: Mirosław jestem. Z Głuszy. Robię przy prochu, więc jak trzeba coś rozwalić, to do mnie.
 elif sanity_band("miroslaw") == "na_krawedzi"
@@ -60,12 +65,36 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 		$> set_flag("mir_comforted")
 		$> change_sanity("miroslaw", 8)
 		$> change_rep("miroslaw", 5)
-		Siedzicie przy ogniu i nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
+		if npc_place("miroslaw") == "ognisko"
+			Siedzicie przy ogniu i nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
+		else
+			Siadasz obok niego na skrzyni. Długo nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
 		Mirosław: ...Dzięki.
 	- Weź się w garść, robota czeka.
 		$> set_flag("mir_scolded")
 		$> change_rep("miroslaw", -5)
 		Mirosław: Jasne. Robota.
+	=> hub
+- Co myślisz o Raciborze? [if has_flag("met_racibor") and not has_flag("mir_asked_racibor") /]
+	$> set_flag("mir_asked_racibor")
+	Mirosław: Zarządca jak zarządca. Liczy wozy. Ludzi liczy dopiero wtedy, jak któregoś brakuje.
+	Mirosław: Ale proch mi dał porządny. To już coś.
+	=> hub
+- Byłem na dnie upadowej. [if has_flag("saw_charge") and not has_flag("mir_saw_charge") /]
+	Mirosław: I co tam?
+	Opowiadasz mu o zawale. O sadzy na kamieniach, o klepkach z beczki, o stemplach, które stoją całe.
+	Mirosław: Okopcone, mówisz. A stemple całe.
+	Mirosław: To nie strop. Ktoś tam odpalił ładunek. I znał się na rzeczy, postawił go tak, żeby zasypało zejście, a stropu nie ruszyło.
+	Mirosław: Czterdzieści lat temu mało kto tak umiał.
+	$> set_flag("mir_saw_charge")
+	$> quest_log("slady", "ladunek")
+	$> change_sanity("miroslaw", -3)
+	if has_flag("tekla_father") or has_note("raport_archiwum")
+		Myślisz o tym, co już wiesz o dziadku. O trzech beczkach prochu.
+		- Dziadek miał trzy beczki prochu.
+			Mirosław: Trzy beczki, dobrze położone... To by się zgadzało. Twój dziadek nie był zwykłym przewodnikiem, co?
+		- Nic nie mówisz.
+			Mirosław: Coś wiesz. Widzę po tobie. Ale nie moja sprawa.
 	=> hub
 - Muszę iść.
 	Mirosław: To idź. Tylko nie zabłądź.
@@ -82,6 +111,7 @@ if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalam
 		Mirosław: ...[wait=0.5] Jeszcze chwilę. Potem wrócę do roboty.
 	- Muszę iść.
 		Mirosław nie odpowiada.
+	=> END
 elif has_flag("west_blasted")
 	Mirosław: No i proszę, zachodni chodnik stoi otworem. Mówiłem, że dam radę.
 	if has_flag("mir_comforted")
@@ -90,4 +120,19 @@ elif has_flag("fuses_delivered")
 	Mirosław: Lonty mam. Powiedz tylko słowo, a zawał pójdzie w powietrze.
 else
 	Mirosław: Mówiłem ci, bez suchych lontów nic nie wysadzę. Szukaj w Starej sztolni.
+=> hub
+
+~ day3
+if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
+	Mirosław kuli się w kącie i kiwa w przód i w tył. Szepcze coś pod nosem.
+	Mirosław: Trzy beczki. Liczę i liczę, i zawsze wychodzą trzy.
+	=> END
+if has_flag("plan_upadowa")
+	Mirosław: Słyszałeś Racibora. Jutro mam wysadzić upadową.
+	if has_flag("mir_saw_charge")
+		Mirosław: Ktoś już raz ją wysadził, żeby nikt tamtędy nie przeszedł. A my ją otworzymy. Mądrzy ludzie.
+	else
+		Mirosław: Proch jest, lonty są. Tylko ręce mi się jakoś nie chcą rwać do tej roboty.
+else
+	Mirosław: Ostatni dzień rozpoznania. Od jutra fedrujemy na całego.
 => END

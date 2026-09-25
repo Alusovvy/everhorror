@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/dobrawa_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/dobrawa.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"dobrawa"
+display_name = "Dobrawa z Initium"
+dialogue_name = "Dobrawa"
+display_name_instrumental = "Dobrawą"
+faction = 0
+role = "Druga z Initium, badaczka energii"
+max_sanity = 60
+start_sanity = 52
+max_health = 100
+start_reputation = 0
+history = "[ROBOCZE] Urodziła się w Jaksarze, ale od dziecka należy do Initium. Przeszła przemianę w Maszynie, więc nosi żelazną maskę i rękawice: dotyk żywego człowieka jest dla niej niebezpieczny. Initium przysłało ją, kiedy doszły wieści o błękicie. Błękit nie powstaje sam, więc gdzieś pod kopalnią musi być artefakt. Dobrawa ma go znaleźć, zanim zrobi to ktoś inny."
+sanity_zero_effect = "[ROBOCZE] Schodzi sama w głąb, żeby dotknąć źródła energii. Nie wraca."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.57

@@ -13,6 +13,8 @@ Kładziesz się?
 
 ~ dream
 Śnisz.
+if day >= 2
+	=> dream2
 if has_flag("visited_east")
 	Idziesz tunelem, którego nie znasz. Ściany świecą błękitem i powoli, miarowo przygasają, jakby oddychały.
 	Przed tobą ktoś idzie z lampą dziadka. Wołasz go, ale się nie odwraca.
@@ -26,6 +28,19 @@ if has_note("odszyfrowana")
 	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
 
+~ dream2
+if has_flag("took_crystal")
+	Kryształ świeci ci w pięści, choć zaciskasz ją z całych sił.
+	Widzisz dziadka. Młodszego, niż go pamiętasz. Klęczy przy trzech beczkach na dnie upadowej i starannie przycina lont nożem.
+	Odwraca się, jakby wiedział, że patrzysz, i kładzie palec na ustach.
+elif has_flag("saw_charge")
+	Idziesz upadową w dół. Z każdym krokiem jest cieplej. Na dnie zawał, a za zawałem ktoś stuka kilofem. Równo, cierpliwie, od czterdziestu lat.
+else
+	Stoisz przed gładką ścianą. Znaki przesuwają się po niej jak robaki pod skórą. Jeden ma twój kształt.
+I znowu te myśli, nie twoje. Tym razem spokojne. Ktoś, kto bardzo długo śpi, przewraca się na drugi bok.
+Budzisz się z ręką na amulecie. Metal jest gorący.
+=> END
+
 ~ too_late
 Robi się późno. Na dziś wystarczy, pora wracać na posłanie.
 => END
@@ -33,5 +48,6 @@ Robi się późno. Na dziś wystarczy, pora wracać na posłanie.
 ~ intro
 Zeszliście szybem wczoraj po zmroku. Lina skrzypiała przez całą drogę w dół, a na górze został tylko pusty wóz.
 Obóz rozbito w starej hali górniczej. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
-Masz dzień, zanim ekspedycja ruszy głębiej. Pogadaj z ludźmi, a dokąd iść, zdecydujesz przy stole z mapą. Wieczorem wróć na posłanie.
+Zarządca Racibor daje wam trzy dni na rozpoznanie. Potem zaczyna się prawdziwe kopanie.
+Pogadaj z ludźmi. Dokąd iść, zdecydujesz przy stole z mapą w kwaterze zarządcy, za drewnianą ścianką. Wieczorem wróć na posłanie.
 => END

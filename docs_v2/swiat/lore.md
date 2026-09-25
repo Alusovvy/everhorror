@@ -4,6 +4,8 @@
 
 Ten dokument zbiera **tylko to, co już ustalono w GDD**, żeby nic się nie rozjechało między autorami. Nowe fakty dopisujemy tu, zanim trafią do dialogów.
 
+Pełny opis świata jest w [LoreDoc](LoreDoc.md). Streszczenie magii znajdziesz w [magia.md](magia.md), a sprzeczności w LoreDoc i rozjazdy z GDD (m.in. historia kopalni) w [loredoc_niespojnosci.md](loredoc_niespojnosci.md).
+
 ## Miejsce
 - **Wąwóz Pierwszych**: region kopalni. Krążą o nim legendy, przez które nikt nie próbował dotrzeć do zawalonych tuneli.
 - **Kopalnia błękitnego żelaza**: miejsce akcji. Pod nią leżą **jaskinie**, a na samym dnie **Świątynia Onych**.

@@ -28,6 +28,9 @@ Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótk
 | | [Questy i notes](systemy/questy.md) | Roland | 🟡 szkic |
 | | [Zapis, menu i opcje](systemy/zapis_i_opcje.md) | programista | 🟢 zaimplementowane (podstawa) |
 | **Świat** | [Świat i lore](swiat/lore.md) | Ren | 🟡 szkic |
+| | [LoreDoc: pełny opis świata](swiat/LoreDoc.md) | Ren | 🔵 do przeglądu |
+| | [Magia](swiat/magia.md) | Ren | 🟡 szkic |
+| | [Niespójności w LoreDoc](swiat/loredoc_niespojnosci.md) | Ren | 🔵 do przeglądu |
 | | [Fabuła, prolog, zakończenia](swiat/fabula.md) | Ren / Vitav | 🟡 szkic |
 | | [Postacie](swiat/postacie.md) | zespół | 🟡 szkic |
 | **Treść** | [03 Poziomy](03_poziomy.md) | — | 🔴 do ustalenia |

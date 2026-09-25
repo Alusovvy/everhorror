@@ -68,6 +68,8 @@ var _meshes: Array[MeshInstance3D] = []
 var _previous_overlays: Dictionary = {}
 var _solid_body: StaticBody3D
 var _active := true
+## Switched off by code (e.g. an NPC who is away), on top of the flag conditions.
+var _enabled := true
 
 func _ready() -> void:
 	collision_layer = 1 << (INTERACTABLE_LAYER - 1)
@@ -111,8 +113,12 @@ func interact() -> void:
 func is_active() -> bool:
 	return _active
 
+func set_enabled(on: bool) -> void:
+	_enabled = on
+	refresh_from_state()
+
 func refresh_from_state() -> void:
-	var active := true
+	var active := _enabled
 	if required_flag != "" and not GameState.has_flag(required_flag):
 		active = false
 	if hidden_by_flag != "" and GameState.has_flag(hidden_by_flag):

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"sciana"
+title = "Ściana w kaplicy"
+giver = "Dobrawa z Initium"
+entries = {
+"start": "Dobrawa szuka kaplicy, o której pisze archiwum Initium. Na mapie dziadka pod jaskinią jest znak zapytania. To pewnie tam.",
+"slownik": "Dobrawa przepisała mi kilka znaków sanctinu. Mówi, że Oni piszą od góry do dołu.",
+"otwarta": "Rozwiązałem zagadkę ściany. W niszy leżał list dziadka i kryształ.",
+"krysztal_dobrawa": "Oddałem kryształ Dobrawie.",
+"krysztal_racibor": "Oddałem kryształ Raciborowi.",
+"krysztal_moj": "Kryształ zostaje u mnie. Dziadek prosił, żeby nie oddawać go nikomu."
+}

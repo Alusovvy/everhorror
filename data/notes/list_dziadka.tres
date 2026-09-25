@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"list_dziadka"
+title = "Ostatni list dziadka"
+text = "Leżał w niszy za ścianą w kaplicy, owinięty w natłuszczone płótno. Pismo dziadka, tym razem bez szyfru.\n\n„Jeśli to czytasz, masz mój klucz i moją głowę do zagadek. Dobrze.\n\nWidziałem Ich. Leżą niżej, niż sięga najdłuższa lina, i śpią. Błękit to Ich oddech. Im bliżej, tym go więcej, a przy samym sercu ściany świecą jak w dzień.\n\nKniaź chce więcej. Więcej jest tylko tam, gdzie nie wolno kopać.\n\nKupiłem u Hanusza z Mirosil trzy beczki prochu. Jutro zejdę upadową i ją zasypię. Zostanę po tamtej stronie, żeby nikt nie poszedł moim śladem.\n\nKryształ zabierz stąd i nie oddawaj nikomu, kto nosi maskę albo koronę. Oni go szukają.\n\nTwój dziadek”"

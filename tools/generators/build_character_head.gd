@@ -1,17 +1,26 @@
 extends SceneTree
 ## Usage: godot --headless --path . --script res://tools/generators/build_character_head.gd
-## Cuts the head (and neck) out of the Quaternius base body so clothing can go on top without
+## Cuts the head (and neck) out of the Quaternius base bodies so clothing can go on top without
 ## the bare body clipping through. Keeps triangles whose vertices are mostly driven by the
-## Head/Neck bones. Writes res://assets/characters/quaternius/base/head_male.res.
+## Head/Neck bones. Writes head_male.res and head_female.res next to the base bodies, and prints
+## the eye height of each body (for NpcData.portrait_eye_height).
 
-const BASE := "res://assets/characters/quaternius/base/Superhero_Male_FullBody.gltf"
-const OUT := "res://assets/characters/quaternius/base/head_male.res"
+const DIR := "res://assets/characters/quaternius/base/"
+const BASES := {
+	"Superhero_Male_FullBody.gltf": "head_male.res",
+	"Superhero_Female_FullBody.gltf": "head_female.res",
+}
 const KEEP_BONES := ["Head", "Neck"]
 
 func _initialize() -> void:
-	var scene: Node = load(BASE).instantiate()
-	var body := scene.find_child("SuperHero_Male", true, false) as MeshInstance3D
+	for source_file in BASES:
+		_build(DIR + source_file, DIR + BASES[source_file])
+	quit()
+
+func _build(source_path: String, out_path: String) -> void:
+	var scene: Node = load(source_path).instantiate()
 	var skeleton := scene.find_child("GeneralSkeleton", true, false) as Skeleton3D
+	var body := _find_body(scene)
 	var skin := body.skin
 	var source := body.mesh as ArrayMesh
 	var arrays := source.surface_get_arrays(0)
@@ -40,14 +49,27 @@ func _initialize() -> void:
 		if count >= 1:
 			kept.append_array([indices[t], indices[t + 1], indices[t + 2]])
 	arrays[Mesh.ARRAY_INDEX] = kept
+	# Custom channels (the female body has one) would need their format flags; the head doesn't use them.
+	for channel in [Mesh.ARRAY_CUSTOM0, Mesh.ARRAY_CUSTOM1, Mesh.ARRAY_CUSTOM2, Mesh.ARRAY_CUSTOM3]:
+		arrays[channel] = null
 
 	var head := ArrayMesh.new()
 	var flags := Mesh.ARRAY_FLAG_USE_8_BONE_WEIGHTS if per_vertex == 8 else 0
 	head.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays, [], {}, flags)
-	var material := body.get_active_material(0)
-	head.surface_set_material(0, material)
-	head.resource_name = "HeadMale"
-	var err := ResourceSaver.save(head, OUT)
-	print("head mesh: kept %d of %d triangles, bones/vertex=%d, saved err=%d" % [kept.size() / 3, indices.size() / 3, per_vertex, err])
+	head.surface_set_material(0, body.get_active_material(0))
+	head.resource_name = out_path.get_file().get_basename().to_pascal_case()
+	var err := ResourceSaver.save(head, out_path)
+	var head_bone := skeleton.find_bone("Head")
+	var head_y := skeleton.get_bone_global_rest(head_bone).origin.y
+	print("%s: body node '%s', kept %d of %d triangles, bones/vertex=%d, head bone y=%.3f, saved err=%d" % [
+		out_path.get_file(), body.name, kept.size() / 3, indices.size() / 3, per_vertex, head_y, err])
 	scene.free()
-	quit()
+
+## The skin mesh of the base body (its material is MI_Superhero_*), not the eyes or eyebrows.
+static func _find_body(scene: Node) -> MeshInstance3D:
+	for node in scene.find_children("*", "MeshInstance3D", true, false):
+		var mesh := node as MeshInstance3D
+		var material := mesh.get_active_material(0)
+		if material and material.resource_name.to_lower().contains("superhero"):
+			return mesh
+	return null

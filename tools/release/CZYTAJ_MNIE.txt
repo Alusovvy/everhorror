@@ -1,4 +1,4 @@
-EVERHORROR - wersja testowa (demo 0.1)
+EVERHORROR - wersja testowa (demo 0.2)
 ======================================
 
 JAK URUCHOMIĆ
@@ -20,16 +20,27 @@ STEROWANIE
 
 O CO CHODZI
 Jesteś członkiem ekspedycji górniczej. Twój dziadek przepadł w tej kopalni
-czterdzieści lat temu. Masz jeden dzień: pogadaj z ludźmi w obozie, przy stole
-z mapą wybierz, dokąd idziesz, a wieczorem wróć na posłanie. Każda rozmowa
-i każda wyprawa zabiera czas, więc wszystkiego nie zdążysz.
+czterdzieści lat temu. Masz trzy dni: pogadaj z ludźmi w obozie, przy stole
+z mapą w kwaterze zarządcy wybierz, dokąd idziesz, a wieczorem wróć na posłanie.
+Każda rozmowa i każda wyprawa zabiera czas, więc wszystkiego nie zdążysz.
 
-Demo kończy się rano drugiego dnia, przy stole z mapą.
-Przejście zajmuje mniej więcej 15-25 minut.
+W obozie mieszka pięć osób i każda ma swój rozkład dnia: rano śniadanie przy
+wspólnym stole, w dzień każdy przy swojej robocie, wieczorem wszyscy wracają
+do ognia. Jak kogoś nie ma tam, gdzie zwykle, poszukaj go gdzie indziej
+albo wróć później.
+
+Demo kończy się rano trzeciego dnia, przy stole z mapą.
+Przejście zajmuje mniej więcej 40-60 minut.
+
+GWARA
+Górnicy (Mirosław i Bolko) godają z elementami gwary śląskiej.
+Wolisz zwykłą polszczyznę? OPTIONS (w menu głównym albo pod Esc)
+i wyłącz "Silesian dialect (miners)".
 
 JAK POMÓC
 Zapisuj wszystko, co się zepsuło albo było niejasne: gdzie utknąłeś, czego nie
-mogłeś znaleźć, co dziwnie brzmi w dialogach, gdzie było za ciemno.
+mogłeś znaleźć, co dziwnie brzmi w dialogach (także w gwarze), gdzie było
+za ciemno.
 Zrzut ekranu (Win + Shift + S) bardzo pomaga.
 
 Zapisy gry i ustawienia leżą w:

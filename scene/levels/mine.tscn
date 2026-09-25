@@ -61,9 +61,6 @@
 [ext_resource type="PackedScene" uid="uid://d2o2hn53xxx2q" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Mound/ground_mound_a.tscn" id="108_l284y"]
 [ext_resource type="PackedScene" uid="uid://dst113wck31te" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Mound/ground_mound_c.tscn" id="110_ex2sk"]
 [ext_resource type="PackedScene" uid="uid://d4rnxsyjujq" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ground/Ground_Mound/ground_mound_d.tscn" id="111_nkpil"]
-[ext_resource type="PackedScene" uid="uid://dkprqyqnrh5pt" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wood_Platform/wood_platform_a.tscn" id="130_jscd6"]
-[ext_resource type="PackedScene" uid="uid://bni6p47hun3nw" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Wood_Platform/wood_platform_stairs_b.tscn" id="155_rdtc4"]
-
 [node name="Mine" type="Node3D"]
 
 [node name="TestLevel" type="Node3D" parent="." unique_id=1807861932]
@@ -1512,15 +1509,3 @@ transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, -16.8, -0.
 
 [node name="Ground_Mound_D3" parent="TestLevel/Ground_mound" unique_id=1995095627 instance=ExtResource("111_nkpil")]
 transform = Transform3D(0.258819, 0.482963, 0.836516, -0.836516, 0.545085, -0.0558857, -0.482963, -0.685295, 0.545085, -17.7, 1.2, 70.9)
-
-[node name="Wood_Platform" type="Node3D" parent="TestLevel" unique_id=175504491]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 56, 0, -93)
-
-[node name="Wood_Platform_A2" parent="TestLevel/Wood_Platform" unique_id=1507369052 instance=ExtResource("130_jscd6")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -30, 1, 90.6)
-
-[node name="Wood_Platform_A3" parent="TestLevel/Wood_Platform" unique_id=566984009 instance=ExtResource("130_jscd6")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -34, 1, 90.6)
-
-[node name="Wood_Platform_Stairs_B2" parent="TestLevel/Wood_Platform" unique_id=1139130465 instance=ExtResource("155_rdtc4")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26, 0, 90.6)

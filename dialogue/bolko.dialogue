@@ -1,6 +1,8 @@
 using GameState
 
 ~ start
+if day >= 3
+	=> day3
 if day == 2
 	=> day2
 if not has_flag("met_bolko")
@@ -31,6 +33,11 @@ Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
 	- Bajki.
 		Bolko: Pewnie. Bajki.
 	=> hub
+- A co starzy mówili o Pierwszych? [if has_flag("bolko_asked_why") and not has_flag("bolko_asked_first") /]
+	$> set_flag("bolko_asked_first")
+	Bolko: Że siedzą w skale. Zamknięci jak chleb w piecu, co się nigdy nie dopiecze.
+	Bolko: I że jak ich kto obudzi, to lepiej, żeby był już daleko stąd.
+	=> hub
 - Znalazłem kartkę zapisaną szyfrem dziadka. [if has_note("szyfr") and not has_flag("bolko_hint") /]
 	if rep("bolko") >= 5
 		Bolko: Dawaj.[wait=0.4] Jego ręka, nie ma dwóch zdań.
@@ -48,6 +55,30 @@ Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
 	Bolko: Mirosław wysadziłby i samego Kniazia, gdyby mu dać dość prochu.[wait=0.3] Porządny z niego chłop, tylko z ogniem ma na pieńku.
 	Bolko: Jak już huknie, posiedź z nim potem trochę. Wiem, co mówię.
 	=> hub
+- Była tu kiedyś jakaś kaplica? [if day >= 2 and rep("bolko") >= 5 and not has_flag("bolko_told_chapel") /]
+	$> set_flag("bolko_told_chapel")
+	$> set_flag("kaplica_known")
+	Bolko: Była. Pod jaskinią za Starą sztolnią, za wąskim przejściem. Chodziło się tam zapalić lampkę przed szychtą.
+	Bolko: Twój dziadek chodził częściej niż inni. Mówił, że ściana w kaplicy gada. Myślałem, że żartuje.
+	=> hub
+- Co sądzisz o Tekli? [if has_flag("met_tekla") and not has_flag("bolko_asked_tekla") /]
+	$> set_flag("bolko_asked_tekla")
+	Bolko: Dobra baba. Kaszę gotuje taką, że łyżka w niej stoi. Tylko wszystko liczy dwa razy, a sprzedaje trzy.
+	=> hub
+- Co sądzisz o tej z Initium? [if day >= 2 and not has_flag("bolko_asked_dobrawa") /]
+	$> set_flag("bolko_asked_dobrawa")
+	Bolko: Maska, rękawice, a oczy jak u topielca. Drudzy w kopalni to nigdy nic dobrego.
+	Bolko: Nie podchodź do niej, synek. I nie dawaj jej niczego, co znajdziesz na dole.
+	=> hub
+- Dziadek sam zasypał upadową. [if has_note("list_dziadka") and not has_flag("bolko_knows_fate") /]
+	Bolko: Co ty gadasz?
+	Czytasz mu list. Bolko słucha z zamkniętymi oczami. Przy słowach o prochu zaciska ręce na kolanach.
+	Bolko: Czterdzieści lat myślałem, że to przez mój stempel. Że źle go postawiłem i strop go przygniótł.
+	Bolko: A on sam... Stary głupiec. Stary, mądry głupiec.
+	$> set_flag("bolko_knows_fate")
+	$> change_rep("bolko", 10)
+	$> change_sanity("bolko", -4)
+	=> hub
 - Pójdę już.
 	Bolko: Idź. I patrz na strop, nie pod nogi.
 	=> END
@@ -60,6 +91,19 @@ if rep("bolko") >= 10
 elif rep("bolko") < 0
 	Bolko stoi do ciebie plecami i udaje, że nie słyszy.
 	Bolko: Nie mam ci nic do powiedzenia.
+	=> END
 else
 	Bolko: Nowy dzień, ta sama dziura. Uważaj dziś na siebie.
+=> hub
+
+~ day3
+if rep("bolko") < 0
+	Bolko stoi do ciebie plecami i udaje, że nie słyszy.
+	=> END
+if has_flag("bolko_knows_fate")
+	Bolko: Całą noc myślałem o twoim dziadku. Zapalę mu lampkę w kaplicy. Tak się kiedyś robiło.
+if has_flag("plan_upadowa")
+	Bolko: Upadową chcą otwierać. Stare chodniki powinny spać, ale kto by słuchał starego.
+else
+	Bolko: Trzeci dzień. Jak tak dalej pójdzie, to się tu zestarzeję drugi raz.
 => END

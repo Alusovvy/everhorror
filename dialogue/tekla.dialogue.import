@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://fs6s71ujx7ef"
+path="res://.godot/imported/tekla.dialogue-3b44740d9f2bdec8cad218e64271f0c4.tres"
+
+[deps]
+
+source_file="res://dialogue/tekla.dialogue"
+dest_files=["res://.godot/imported/tekla.dialogue-3b44740d9f2bdec8cad218e64271f0c4.tres"]
+
+[params]
+
+defaults=true

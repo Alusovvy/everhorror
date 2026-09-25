@@ -1,0 +1,16 @@
+[remap]
+
+importer="dialogue_manager"
+importer_version=18
+type="Resource"
+uid="uid://co2wf2vwudsrq"
+path="res://.godot/imported/dobrawa.dialogue-08a9e2997cc35e14028fee2b8443f12d.tres"
+
+[deps]
+
+source_file="res://dialogue/dobrawa.dialogue"
+dest_files=["res://.godot/imported/dobrawa.dialogue-08a9e2997cc35e14028fee2b8443f12d.tres"]
+
+[params]
+
+defaults=true

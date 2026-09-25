@@ -1,0 +1,79 @@
+using GameState
+
+~ start
+if not has_flag("wall_seen")
+	$> set_flag("wall_seen")
+	Ściana jest gładka jak wypolerowany kamień, tylko zimniejsza. Ani śladu dłuta. Znaki świecą tym samym błękitem co żyły w skale i przygasają w rytmie, którego nie potrafisz złapać.
+	Amulet pod koszulą robi się ciepły.
+	Pod napisem są trzy kamienne kręgi. Każdym da się obrócić. Na każdym wyryto te same znaki, proste jak obrazki. Gwiazda, oko, płomień, kamień, zamknięte oko, dłoń.
+	Z boku ktoś wydrapał nożem, krzywo, po ludzku, dwie skrzyżowane kreski i kropkę. Znak dziadka. Pod spodem dwa słowa. NIE BUDZIĆ.
+else
+	Znowu stoisz przed ścianą. Amulet grzeje jak węgielek.
+if has_note("slowniczek")
+	Ze słowniczkiem Dobrawy składasz napis znak po znaku. Trzy wiersze, od góry do dołu. W każdym brakuje jednego słowa.
+	Ściana: [i]Zeszliśmy z ___ i daliśmy wam oczy.[/i]
+	Ściana: [i]Tych, którzy nie słuchali, oddaliśmy ___.[/i]
+	Ściana: [i]Kto zejdzie do nich, niech nie przerywa ich ___.[/i]
+else
+	Napisu nie umiesz przeczytać. Kiedy wodzisz po nim wzrokiem, słowa same układają ci się w głowie, obce i śpiewne. W każdym wierszu jedno miejsce jest puste.
+	Ściana: [i]Esar dunem ex ___, dari vobis oculem.[/i]
+	Ściana: [i]Priori, qui non audire, dari ad ___.[/i]
+	Ściana: [i]Qui descendat ad illos, ne rumpat ___ illorum.[/i]
+	W środkowym wierszu jedno słowo brzmi znajomo. Priori. Ktoś z Initium wiedziałby, co znaczy.
+=> rings
+
+~ rings
+Pierwszy krąg, pod pierwszym wierszem.
+- Gwiazda.
+	$> set_flag("ring1", "gwiazda")
+- Oko.
+	$> set_flag("ring1", "oko")
+- Płomień.
+	$> set_flag("ring1", "plomien")
+- Dłoń.
+	$> set_flag("ring1", "dlon")
+Krąg obraca się ciężko i staje ze zgrzytem. Drugi krąg.
+- Płomień.
+	$> set_flag("ring2", "plomien")
+- Kamień.
+	$> set_flag("ring2", "kamien")
+- Zamknięte oko.
+	$> set_flag("ring2", "sen")
+- Dłoń.
+	$> set_flag("ring2", "dlon")
+Drugi krąg staje. Został ostatni.
+- Oko.
+	$> set_flag("ring3", "oko")
+- Gwiazda.
+	$> set_flag("ring3", "gwiazda")
+- Zamknięte oko.
+	$> set_flag("ring3", "sen")
+- Płomień.
+	$> set_flag("ring3", "plomien")
+if get_flag("ring1") == "gwiazda" and get_flag("ring2") == "kamien" and get_flag("ring3") == "sen"
+	=> solved
+=> wrong
+
+~ wrong
+$> advance_time(1, "Obracanie kręgów")
+$> set_flag("wall_fails", get_flag("wall_fails", 0) + 1)
+Kręgi zgrzytają i same wracają na miejsca. Amulet parzy przez koszulę, aż syczysz z bólu.
+Przez głowę przemyka ci myśl, która nie jest twoja. [i]Jeszcze nie.[/i]
+if get_flag("wall_fails", 0) >= 2
+	Patrzysz jeszcze raz na znak dziadka. NIE BUDZIĆ. Czyli ktoś tu śpi. I nikt nie powinien mu tego przerywać.
+if get_flag("wall_fails", 0) >= 3
+	Przypomina ci się modlitewnik na ołtarzu. Postacie bez twarzy, z gwiazdami zamiast oczu.
+Minęła godzina. Świeca na ołtarzu wyraźnie się skróciła.
+- Spróbuję jeszcze raz. [if can_afford(1) /]
+	=> rings
+- Na razie wystarczy.
+	=> END
+
+~ solved
+$> set_flag("wall_open")
+if quest_state("sciana") == "active"
+	$> quest_log("sciana", "otwarta")
+Ostatni krąg wskakuje na miejsce z suchym trzaskiem. Znaki na ścianie gasną jeden po drugim, jak lampy w długim chodniku.
+Pod kręgami zgrzyta kamień. Coś ciężkiego osuwa się w posadzkę.
+Amulet stygnie. Pierwszy raz od tygodni masz w głowie ciszę.
+=> END

@@ -1,0 +1,2068 @@
+[gd_scene format=4]
+
+[ext_resource type="Material" path="res://material/cave_floor.tres" id="1_g17kb"]
+[ext_resource type="Material" path="res://material/cave_rock.tres" id="2_atxte"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_a.tscn" id="3_f06v5"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mine_Walls_2.tres" id="4_s7qx4"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_d.tscn" id="5_up8wq"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_b.tscn" id="6_qmhml"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_f.tscn" id="7_dhbjl"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_e.tscn" id="8_f668h"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_g.tscn" id="9_gayea"]
+[ext_resource type="Shader" path="res://shader/water.gdshader" id="10_efiht"]
+[ext_resource type="Material" path="res://material/kenney_wood.tres" id="11_qayn5"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Ladder/ladder_tall.tscn" id="12_wfjdh"]
+[ext_resource type="Material" path="res://assets/LoafbrrAssets/MineAndCavesSet/material/Mines_Trim.material" id="13_4ru2n"]
+[ext_resource type="Script" path="res://script/interactable.gd" id="14_hhr7g"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_a.tscn" id="15_aobop"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_c.tscn" id="16_pahgu"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/post_f.tscn" id="17_nmdff"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Lantern_Wall.gltf" id="18_mfbne"]
+[ext_resource type="Script" path="res://script/light_flicker.gd" id="19_1387u"]
+[ext_resource type="Script" path="res://script/material_applier.gd" id="20_4bcsm"]
+[ext_resource type="PackedScene" path="res://assets/props/kenney_survival/signpost-single.glb" id="21_8is1m"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bag.gltf" id="22_m674k"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_2.gltf" id="23_yf586"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Crate_Wooden.gltf" id="24_qw51s"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Barrel.gltf" id="25_6jcn5"]
+[ext_resource type="Texture2D" path="res://assets/textures/tally_marks.png" id="26_6l3hp"]
+[ext_resource type="Script" path="res://script/overlay_applier.gd" id="27_5bb5w"]
+[ext_resource type="Shader" path="res://shader/blue_iron_vein.gdshader" id="28_6pdag"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Wall_Rocks/cave_wall_rocks_c.tscn" id="29_slecc"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/drip.wav" id="30_tolvy"]
+[ext_resource type="Script" path="res://script/random_sound_emitter.gd" id="31_1ojre"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/rumble.wav" id="32_3frep"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Posts/beam_a.tscn" id="33_1a1y1"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Mine_Rails/rail_a.tscn" id="34_mtqn8"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Mine_Rails/rail_falloff_a.tscn" id="35_gtv4a"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Rope_3.gltf" id="36_ssm5x"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_b.tscn" id="37_0y8cn"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_rocks_d.tscn" id="38_fnggc"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/creak.wav" id="39_2dks8"]
+[ext_resource type="AudioStream" path="res://assets/sounds/generated/pick_taps.wav" id="40_wjyr5"]
+[ext_resource type="PackedScene" path="res://assets/LoafbrrAssets/MineAndCavesSet/scenes/Rocks/Cave_Rocks/cave_pillar_a.tscn" id="41_f6owa"]
+[ext_resource type="Script" path="res://script/riddle_wall.gd" id="42_ootwm"]
+[ext_resource type="Shader" path="res://shader/sanctin_wall.gdshader" id="43_c2nmx"]
+[ext_resource type="Texture2D" path="res://assets/textures/sanctin_wall.png" id="44_y2x62"]
+[ext_resource type="Resource" path="res://dialogue/sciana.dialogue" id="45_76tya"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Scroll_2.gltf" id="46_srb8v"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/CandleStick.gltf" id="47_8hxed"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Candle_1.gltf" id="48_o2yrh"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Chalice.gltf" id="49_3o1sn"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Book_Simplified_Single.gltf" id="50_aoepb"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Mug.gltf" id="51_q2acm"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Candle_2.gltf" id="52_8kh7l"]
+[ext_resource type="PackedScene" path="res://assets/prop_pack/Exports/glTF/Bench.gltf" id="53_nny4h"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3q710"]
+size = Vector3(10.6, 0.4, 8.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_obt5v"]
+size = Vector3(10.6, 0.4, 8.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0sex4"]
+size = Vector3(10.8, 4.9, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_y5pa4"]
+size = Vector3(10.8, 4.9, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t3jft"]
+size = Vector3(10.8, 4.9, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bbpm6"]
+size = Vector3(10.8, 4.9, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_g5bw7"]
+size = Vector3(0.4, 4.9, 8.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eomni"]
+size = Vector3(0.4, 4.9, 8.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_aojp2"]
+size = Vector3(0.4, 4.9, 3.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1umja"]
+size = Vector3(0.4, 4.9, 3.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_5fpcu"]
+size = Vector3(0.4, 4.9, 3.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vawsa"]
+size = Vector3(0.4, 4.9, 3.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qa4nm"]
+size = Vector3(0.4, 1.6, 2.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3br1x"]
+size = Vector3(0.4, 1.6, 2.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jnqe5"]
+size = Vector3(6.7, 0.4, 8.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vuo62"]
+size = Vector3(6.7, 0.4, 8.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_k7183"]
+size = Vector3(1.5, 0.4, 8.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5tvvq"]
+size = Vector3(1.5, 0.4, 8.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p1nqw"]
+size = Vector3(2.6, 0.4, 3.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_joyju"]
+size = Vector3(2.6, 0.4, 3.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lfb3b"]
+size = Vector3(2.6, 0.4, 3.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwqcl"]
+size = Vector3(2.6, 0.4, 3.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kf6b4"]
+size = Vector3(0.4, 10, 3.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2i48p"]
+size = Vector3(0.4, 10, 3.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3b60p"]
+size = Vector3(2.6, 10, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2pgg4"]
+size = Vector3(2.6, 10, 0.4)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1m4f8"]
+seed = 3
+frequency = 0.02
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_rg4hk"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_1m4f8")
+seamless = true
+as_normal_map = true
+bump_strength = 6.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_n0tx4"]
+seed = 9
+frequency = 0.035
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xghqr"]
+width = 256
+height = 256
+noise = SubResource("FastNoiseLite_n0tx4")
+seamless = true
+as_normal_map = true
+bump_strength = 6.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tlljm"]
+render_priority = 0
+shader = ExtResource("10_efiht")
+shader_parameter/color = null
+shader_parameter/ripples_a = SubResource("NoiseTexture2D_rg4hk")
+shader_parameter/ripples_b = SubResource("NoiseTexture2D_xghqr")
+shader_parameter/tiling = null
+shader_parameter/drift = null
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_3aapw"]
+size = Vector2(10.4, 8.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gvm8x"]
+size = Vector3(6.6, 0.1, 1.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bi0p8"]
+size = Vector3(6.6, 0.1, 1.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_tupbb"]
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yf8nd"]
+size = Vector3(3, 0.1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uvfmn"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2ufxu"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ndn5w"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ksbs6"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_27k7w"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qgcs4"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2y0s4"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gg3wy"]
+size = Vector3(0.12, 0.35, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_77f14"]
+albedo_color = Color(0.36, 0.27, 0.17, 1)
+roughness = 0.95
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lhl7t"]
+top_radius = 0.025
+bottom_radius = 0.025
+height = 13.0500965
+radial_segments = 8
+
+[sub_resource type="BoxMesh" id="BoxMesh_17v13"]
+size = Vector3(3.6, 0.4, 2.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g4l03"]
+size = Vector3(3.6, 0.4, 2.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_a71r0"]
+size = Vector3(3.6, 3.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_53i0h"]
+size = Vector3(3.6, 3.4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v6tg6"]
+size = Vector3(3.6, 3.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l5p6w"]
+size = Vector3(3.6, 3.4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x5jtx"]
+size = Vector3(3.6, 0.4, 3.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ebabt"]
+size = Vector3(3.6, 0.4, 3.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3rbu"]
+size = Vector3(0.4, 3.4, 2.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l63k4"]
+size = Vector3(0.4, 3.4, 2.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c7cpx"]
+transparency = 1
+albedo_texture = ExtResource("26_6l3hp")
+
+[sub_resource type="QuadMesh" id="QuadMesh_23npu"]
+size = Vector2(0.8, 0.4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_umhmd"]
+render_priority = 0
+shader = ExtResource("28_6pdag")
+shader_parameter/vein_color = null
+shader_parameter/intensity = null
+shader_parameter/vein_scale = null
+shader_parameter/vein_width = null
+shader_parameter/pulse_speed = null
+
+[sub_resource type="BoxMesh" id="BoxMesh_vmwdy"]
+size = Vector3(4.4, 0.4, 4.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qgbyf"]
+size = Vector3(4.4, 0.4, 4.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3lwkn"]
+size = Vector3(17.026844, 0.4, 4.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oy44t"]
+size = Vector3(17.026844, 0.4, 4.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l21uw"]
+size = Vector3(8.6, 0.4, 4.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_upd42"]
+size = Vector3(8.6, 0.4, 4.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jn61e"]
+size = Vector3(4.4, 0.4, 4.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_0n7ll"]
+size = Vector3(17.026844, 0.4, 4.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_lyin5"]
+size = Vector3(8.6, 0.4, 4.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_31aab"]
+size = Vector3(29.2, 11.5, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f0ip8"]
+size = Vector3(29.2, 11.5, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wb5hm"]
+size = Vector3(29.2, 11.5, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ot7qa"]
+size = Vector3(29.2, 11.5, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jvd3y"]
+size = Vector3(0.4, 4.6, 4.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_axtue"]
+size = Vector3(0.4, 4.6, 4.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d3cya"]
+size = Vector3(0.4, 5, 4.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pwyag"]
+size = Vector3(0.4, 5, 4.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s5t62"]
+albedo_color = Color(0.36, 0.27, 0.17, 1)
+roughness = 0.95
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1jsja"]
+top_radius = 0.03
+bottom_radius = 0.03
+height = 18.267298
+radial_segments = 8
+
+[sub_resource type="Gradient" id="Gradient_5wk35"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eh6xy"]
+gradient = SubResource("Gradient_5wk35")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7760w"]
+transparency = 1
+albedo_color = Color(0.02, 0.02, 0.02, 0.85)
+albedo_texture = SubResource("GradientTexture2D_eh6xy")
+
+[sub_resource type="QuadMesh" id="QuadMesh_o57e5"]
+size = Vector2(3.2, 3.6)
+
+[sub_resource type="QuadMesh" id="QuadMesh_mq3i2"]
+size = Vector2(3.8, 3.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_trqhr"]
+size = Vector3(2, 4, 4.4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pgo44"]
+render_priority = 0
+shader = ExtResource("28_6pdag")
+shader_parameter/vein_color = null
+shader_parameter/intensity = null
+shader_parameter/vein_scale = null
+shader_parameter/vein_width = null
+shader_parameter/pulse_speed = null
+
+[sub_resource type="BoxMesh" id="BoxMesh_8rky4"]
+size = Vector3(1.6, 0.4, 2.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wvkco"]
+size = Vector3(1.6, 0.4, 2.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vrdg5"]
+size = Vector3(6.462198, 0.2, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ush8l"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_owt5r"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6jk2t"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nycaf"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bud3a"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6th4e"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_s6m2n"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_vm0yr"]
+size = Vector3(0.75, 0.3, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ip3r8"]
+size = Vector3(7.8, 6, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rh83i"]
+size = Vector3(7.8, 6, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nhurw"]
+size = Vector3(7.8, 6, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3srd7"]
+size = Vector3(7.8, 6, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p4jbs"]
+size = Vector3(7.8, 0.4, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ks4hk"]
+size = Vector3(0.4, 3.6, 2.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_58ylf"]
+size = Vector3(0.4, 3.6, 2.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2t7at"]
+size = Vector3(10.4, 0.4, 10.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_w0140"]
+size = Vector3(10.4, 0.4, 10.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ni6ld"]
+size = Vector3(0.4, 5.4, 3.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d5h61"]
+size = Vector3(0.4, 5.4, 3.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d7utr"]
+size = Vector3(0.4, 5.4, 3.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0jiln"]
+size = Vector3(0.4, 5.4, 3.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qng3h"]
+size = Vector3(0.4, 2.4, 2.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bwujp"]
+size = Vector3(0.4, 2.4, 2.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_44xhd"]
+size = Vector3(10.8, 5.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5inot"]
+size = Vector3(10.8, 5.4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_l52gh"]
+size = Vector3(10.8, 5.4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1exg3"]
+size = Vector3(10.8, 5.4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v8oxd"]
+size = Vector3(0.4, 5.4, 10.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v6shn"]
+size = Vector3(0.4, 5.4, 10.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ul2je"]
+size = Vector3(10.8, 0.4, 10.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1p8bq"]
+albedo_color = Color(0.24, 0.25, 0.29, 1)
+metallic = 0.35
+roughness = 0.35
+
+[sub_resource type="BoxMesh" id="BoxMesh_jxhyr"]
+size = Vector3(0.5, 3.05, 6.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_fjyn6"]
+size = Vector3(0.5, 3.05, 6.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_d6dql"]
+size = Vector3(0.5, 0.85, 2.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k47xi"]
+size = Vector3(0.5, 0.85, 2.75)
+
+[sub_resource type="BoxMesh" id="BoxMesh_60k7d"]
+size = Vector3(0.5, 0.85, 2.75)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ex43"]
+size = Vector3(0.5, 0.85, 2.75)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vua44"]
+albedo_color = Color(0.04, 0.04, 0.05, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mdvln"]
+size = Vector3(0.1, 0.85, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wbha1"]
+size = Vector3(0.1, 0.85, 0.9)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tmob1"]
+render_priority = 0
+shader = ExtResource("43_c2nmx")
+shader_parameter/glyphs = ExtResource("44_y2x62")
+shader_parameter/stone = null
+shader_parameter/glow = null
+shader_parameter/energy = null
+shader_parameter/pulse_speed = null
+
+[sub_resource type="QuadMesh" id="QuadMesh_7yh5t"]
+size = Vector2(6.2, 2.25)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_m3rsu"]
+top_radius = 0.36
+bottom_radius = 0.36
+height = 0.1
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gvayx"]
+albedo_color = Color(0.1, 0.15, 0.25, 1)
+emission_enabled = true
+emission = Color(0.35, 0.6, 1, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_4tx4e"]
+size = Vector3(0.06, 0.04, 0.24)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_px0uu"]
+top_radius = 0.36
+bottom_radius = 0.36
+height = 0.1
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uxxde"]
+albedo_color = Color(0.1, 0.15, 0.25, 1)
+emission_enabled = true
+emission = Color(0.35, 0.6, 1, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_3k4py"]
+size = Vector3(0.06, 0.04, 0.24)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rnysj"]
+top_radius = 0.36
+bottom_radius = 0.36
+height = 0.1
+radial_segments = 32
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mydb"]
+albedo_color = Color(0.1, 0.15, 0.25, 1)
+emission_enabled = true
+emission = Color(0.35, 0.6, 1, 1)
+emission_energy_multiplier = 1.6
+
+[sub_resource type="BoxMesh" id="BoxMesh_35n4i"]
+size = Vector3(0.06, 0.04, 0.24)
+
+[sub_resource type="BoxMesh" id="BoxMesh_283ci"]
+size = Vector3(0.12, 0.85, 0.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_okt7j"]
+size = Vector3(0.12, 0.85, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2bv6g"]
+transparency = 1
+albedo_color = Color(0.6, 0.8, 1, 0.7)
+metallic = 0.2
+roughness = 0.1
+emission_enabled = true
+emission = Color(0.35, 0.65, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t1kki"]
+top_radius = 0.0
+bottom_radius = 0.05
+height = 0.24
+radial_segments = 6
+
+[sub_resource type="BoxMesh" id="BoxMesh_78wn0"]
+size = Vector3(0.8, 0.9, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_00rl4"]
+size = Vector3(0.8, 0.9, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_y8s5k"]
+size = Vector3(0.8, 0.9, 1.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yxv6g"]
+size = Vector3(0.8, 0.9, 1.4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xmbof"]
+render_priority = 0
+shader = ExtResource("28_6pdag")
+shader_parameter/vein_color = null
+shader_parameter/intensity = null
+shader_parameter/vein_scale = null
+shader_parameter/vein_width = null
+shader_parameter/pulse_speed = null
+
+[node name="Locations" type="Node3D" unique_id=1018212922]
+
+[node name="Markers" type="Node3D" parent="." unique_id=1775903654]
+
+[node name="RzapieEntry" type="Marker3D" parent="Markers" unique_id=1265024326]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -62.3, 0.12, 70)
+
+[node name="UpadowaEntry" type="Marker3D" parent="Markers" unique_id=226001608]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -58.8, 0, 110)
+
+[node name="KaplicaEntry" type="Marker3D" parent="Markers" unique_id=1971006886]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 60.6, 0, 110)
+
+[node name="Rzapie" type="Node3D" parent="." unique_id=915938161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 70)
+
+[node name="Floor" type="MeshInstance3D" parent="Rzapie" unique_id=140982797]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.2, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_3q710")
+
+[node name="FloorBody" type="StaticBody3D" parent="Rzapie" unique_id=773072230]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.2, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/FloorBody" unique_id=764237135]
+shape = SubResource("BoxShape3D_obt5v")
+
+[node name="WallNorth" type="MeshInstance3D" parent="Rzapie" unique_id=259716805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.25, -4.2)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_0sex4")
+
+[node name="WallNorthBody" type="StaticBody3D" parent="Rzapie" unique_id=2039004322]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.25, -4.2)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/WallNorthBody" unique_id=457583037]
+shape = SubResource("BoxShape3D_y5pa4")
+
+[node name="WallSouth" type="MeshInstance3D" parent="Rzapie" unique_id=501656653]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.25, 4.2)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_t3jft")
+
+[node name="WallSouthBody" type="StaticBody3D" parent="Rzapie" unique_id=2108647559]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2.25, 4.2)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/WallSouthBody" unique_id=1819065766]
+shape = SubResource("BoxShape3D_bbpm6")
+
+[node name="WallEast" type="MeshInstance3D" parent="Rzapie" unique_id=1043161916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 2.25, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_g5bw7")
+
+[node name="WallEastBody" type="StaticBody3D" parent="Rzapie" unique_id=1547386014]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2, 2.25, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/WallEastBody" unique_id=787780907]
+shape = SubResource("BoxShape3D_eomni")
+
+[node name="WallWestN" type="MeshInstance3D" parent="Rzapie" unique_id=1177661914]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 2.25, -2.75)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_aojp2")
+
+[node name="WallWestNBody" type="StaticBody3D" parent="Rzapie" unique_id=1083546790]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 2.25, -2.75)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/WallWestNBody" unique_id=1301623008]
+shape = SubResource("BoxShape3D_1umja")
+
+[node name="WallWestS" type="MeshInstance3D" parent="Rzapie" unique_id=312490220]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 2.25, 2.75)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_5fpcu")
+
+[node name="WallWestSBody" type="StaticBody3D" parent="Rzapie" unique_id=1457811347]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 2.25, 2.75)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/WallWestSBody" unique_id=1404064284]
+shape = SubResource("BoxShape3D_vawsa")
+
+[node name="WallWestTop" type="MeshInstance3D" parent="Rzapie" unique_id=99972861]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 3.9, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_qa4nm")
+
+[node name="WallWestTopBody" type="StaticBody3D" parent="Rzapie" unique_id=871236903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 3.9, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/WallWestTopBody" unique_id=1027034084]
+shape = SubResource("BoxShape3D_3br1x")
+
+[node name="CeilingWest" type="MeshInstance3D" parent="Rzapie" unique_id=743259908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95, 4.7, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_jnqe5")
+
+[node name="CeilingWestBody" type="StaticBody3D" parent="Rzapie" unique_id=1889361043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.95, 4.7, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/CeilingWestBody" unique_id=27596313]
+shape = SubResource("BoxShape3D_vuo62")
+
+[node name="CeilingEast" type="MeshInstance3D" parent="Rzapie" unique_id=1091993588]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.65, 4.7, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_k7183")
+
+[node name="CeilingEastBody" type="StaticBody3D" parent="Rzapie" unique_id=1037077038]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.65, 4.7, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/CeilingEastBody" unique_id=1988892239]
+shape = SubResource("BoxShape3D_5tvvq")
+
+[node name="CeilingNorth" type="MeshInstance3D" parent="Rzapie" unique_id=370154464]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 4.7, -2.85)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_p1nqw")
+
+[node name="CeilingNorthBody" type="StaticBody3D" parent="Rzapie" unique_id=78389495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 4.7, -2.85)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/CeilingNorthBody" unique_id=491273090]
+shape = SubResource("BoxShape3D_joyju")
+
+[node name="CeilingSouth" type="MeshInstance3D" parent="Rzapie" unique_id=1099794688]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 4.7, 2.85)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_lfb3b")
+
+[node name="CeilingSouthBody" type="StaticBody3D" parent="Rzapie" unique_id=991163929]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 4.7, 2.85)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/CeilingSouthBody" unique_id=1886170631]
+shape = SubResource("BoxShape3D_gwqcl")
+
+[node name="ShaftWest" type="MeshInstance3D" parent="Rzapie" unique_id=1694337166]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1, 9.5, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_kf6b4")
+
+[node name="ShaftEast" type="MeshInstance3D" parent="Rzapie" unique_id=637944877]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.1, 9.5, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_2i48p")
+
+[node name="ShaftNorth" type="MeshInstance3D" parent="Rzapie" unique_id=880908188]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 9.5, -1.5)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_3b60p")
+
+[node name="ShaftSouth" type="MeshInstance3D" parent="Rzapie" unique_id=1384426879]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 9.5, 1.5)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_2pgg4")
+
+[node name="ShaftLight" type="SpotLight3D" parent="Rzapie" unique_id=1333554436]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 7.6, 14.2, 0)
+light_color = Color(0.72, 0.8, 0.92, 1)
+light_energy = 9.0
+shadow_enabled = true
+spot_range = 18.0
+spot_attenuation = 0.6
+spot_angle = 17.0
+
+[node name="cave_wall_rocks_a_1" type="MeshInstance3D" parent="Rzapie" unique_id=604937357 instance=ExtResource("3_f06v5")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 1.4, 1, -3.95)
+
+[node name="cave_wall_rocks_d_1" type="MeshInstance3D" parent="Rzapie" unique_id=2078630753 instance=ExtResource("5_up8wq")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 6.2, 1.3, -3.95)
+
+[node name="cave_wall_rocks_b_1" type="MeshInstance3D" parent="Rzapie" unique_id=813943287 instance=ExtResource("6_qmhml")]
+transform = Transform3D(-4.8082526e-08, 0, -1.1, 0, 1.1, 0, 1.1, 0, -4.8082526e-08, 9.9, 1.2, -2.2)
+
+[node name="cave_wall_rocks_f_1" type="MeshInstance3D" parent="Rzapie" unique_id=338600167 instance=ExtResource("7_dhbjl")]
+transform = Transform3D(-5.2453668e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.2453668e-08, 9.9, 1, 2.6)
+
+[node name="cave_wall_rocks_e_1" type="MeshInstance3D" parent="Rzapie" unique_id=1946470061 instance=ExtResource("8_f668h")]
+transform = Transform3D(-1.1, 0, -9.616505e-08, 0, 1.1, 0, 9.616505e-08, 0, -1.1, 3.2, 1.1, 3.95)
+
+[node name="cave_wall_rocks_g_1" type="MeshInstance3D" parent="Rzapie" unique_id=2013839836 instance=ExtResource("9_gayea")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 7.8, 1, 3.95)
+
+[node name="Water" type="MeshInstance3D" parent="Rzapie" unique_id=845537979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0.06, 0)
+material_override = SubResource("ShaderMaterial_tlljm")
+mesh = SubResource("PlaneMesh_3aapw")
+
+[node name="Walkway" type="MeshInstance3D" parent="Rzapie" unique_id=443322971]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.07, 0)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_gvm8x")
+
+[node name="WalkwayBody" type="StaticBody3D" parent="Rzapie" unique_id=1627801961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0.07, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/WalkwayBody" unique_id=414579976]
+shape = SubResource("BoxShape3D_bi0p8")
+
+[node name="Landing" type="MeshInstance3D" parent="Rzapie" unique_id=1870016402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 0.07, 0)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_tupbb")
+
+[node name="LandingBody" type="StaticBody3D" parent="Rzapie" unique_id=43506970]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 0.07, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/LandingBody" unique_id=135509267]
+shape = SubResource("BoxShape3D_yf8nd")
+
+[node name="Post" type="MeshInstance3D" parent="Rzapie" unique_id=596808664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.1, -0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_uvfmn")
+
+[node name="@MeshInstance3D@2" type="MeshInstance3D" parent="Rzapie" unique_id=1876843403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, -0.1, 0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_2ufxu")
+
+[node name="@MeshInstance3D@3" type="MeshInstance3D" parent="Rzapie" unique_id=596307248]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, -0.1, -0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_ndn5w")
+
+[node name="@MeshInstance3D@4" type="MeshInstance3D" parent="Rzapie" unique_id=363081044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, -0.1, 0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_ksbs6")
+
+[node name="@MeshInstance3D@5" type="MeshInstance3D" parent="Rzapie" unique_id=640364090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, -0.1, -0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_27k7w")
+
+[node name="@MeshInstance3D@6" type="MeshInstance3D" parent="Rzapie" unique_id=1169455808]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, -0.1, 0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_qgcs4")
+
+[node name="@MeshInstance3D@7" type="MeshInstance3D" parent="Rzapie" unique_id=1406207973]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, -0.1, -0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_2y0s4")
+
+[node name="@MeshInstance3D@8" type="MeshInstance3D" parent="Rzapie" unique_id=270073563]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, -0.1, 0.6)
+material_override = ExtResource("11_qayn5")
+mesh = SubResource("BoxMesh_gg3wy")
+
+[node name="BrokenLadder" type="MeshInstance3D" parent="Rzapie" unique_id=1167498664 instance=ExtResource("12_wfjdh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 0.12, -1.2)
+
+[node name="Look" type="Area3D" parent="Rzapie/BrokenLadder" unique_id=26384319]
+script = ExtResource("14_hhr7g")
+display_name = "Drabina"
+description = "Drabina w szybie urywa się w połowie. Wyżej już tylko mokra skała i daleki, szary kwadrat nieba."
+solid = false
+padding = 0.08
+
+[node name="OldRope" type="MeshInstance3D" parent="Rzapie" unique_id=1625659624]
+transform = Transform3D(0.99999267, 0.003831404, 0, 0.003831404, -0.99999267, 0, 0, 0, -1, 8.725, 6.6749997, 1.05)
+material_override = SubResource("StandardMaterial3D_77f14")
+mesh = SubResource("CylinderMesh_lhl7t")
+
+[node name="Look" type="Area3D" parent="Rzapie/OldRope" unique_id=49338865]
+script = ExtResource("14_hhr7g")
+display_name = "Urwana lina"
+description = "Lina, na której spuszczano zapasy. Tekla mówi, że przetarła się o krawędź szybu. Tylko że koniec jest równy, jakby ktoś go przeciął nożem."
+solid = false
+padding = 0.15
+
+[node name="Tunnel" type="Node3D" parent="Rzapie" unique_id=1733772594]
+
+[node name="Floor" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=350175710]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, -0.08, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_17v13")
+
+[node name="FloorBody" type="StaticBody3D" parent="Rzapie/Tunnel" unique_id=1082286495]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, -0.08, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/Tunnel/FloorBody" unique_id=840222304]
+shape = SubResource("BoxShape3D_g4l03")
+
+[node name="WallN" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=343184947]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.6, -1.4)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_a71r0")
+
+[node name="WallNBody" type="StaticBody3D" parent="Rzapie/Tunnel" unique_id=725201438]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.6, -1.4)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/Tunnel/WallNBody" unique_id=335521816]
+shape = SubResource("BoxShape3D_53i0h")
+
+[node name="WallS" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=954001792]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.6, 1.4)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_v6tg6")
+
+[node name="WallSBody" type="StaticBody3D" parent="Rzapie/Tunnel" unique_id=1101545274]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.6, 1.4)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/Tunnel/WallSBody" unique_id=1172622690]
+shape = SubResource("BoxShape3D_l5p6w")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=1665387102]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.3, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_x5jtx")
+
+[node name="CeilingBody" type="StaticBody3D" parent="Rzapie/Tunnel" unique_id=624089113]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 3.3, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/Tunnel/CeilingBody" unique_id=947294662]
+shape = SubResource("BoxShape3D_ebabt")
+
+[node name="End" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=397684252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 1.6, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_o3rbu")
+
+[node name="EndBody" type="StaticBody3D" parent="Rzapie/Tunnel" unique_id=745916732]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7, 1.6, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Rzapie/Tunnel/EndBody" unique_id=414203487]
+shape = SubResource("BoxShape3D_l63k4")
+
+[node name="cave_rocks_a_1" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=2000484573 instance=ExtResource("15_aobop")]
+transform = Transform3D(0.3876108, 0, -1.0294455, 0, 1.1, 0, 1.0294455, 0, 0.3876108, -3.2, 0.3, -0.6)
+
+[node name="cave_rocks_c_1" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=338111042 instance=ExtResource("16_pahgu")]
+transform = Transform3D(-0.9809683, 0, 0.19416797, 0, 1, 0, -0.19416797, 0, -0.9809683, -3.3, 0.3, 0.7)
+
+[node name="post_f_1" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=284698855 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.35, 0.12, -1.1)
+
+[node name="post_f_2" type="MeshInstance3D" parent="Rzapie/Tunnel" unique_id=1729600431 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.35, 0.12, 1.1)
+
+[node name="Lantern" type="Node3D" parent="Rzapie/Tunnel" unique_id=1062626669 instance=ExtResource("18_mfbne")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.9, 1.35, 1.2)
+
+[node name="Light" type="OmniLight3D" parent="Rzapie/Tunnel/Lantern" unique_id=145788082]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 1.1
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+housing_casts_shadow = false
+
+[node name="Sign" type="Node3D" parent="Rzapie" unique_id=344854881]
+script = ExtResource("20_4bcsm")
+material = ExtResource("11_qayn5")
+
+[node name="ExitSign" type="Node3D" parent="Rzapie/Sign" unique_id=632717869 instance=ExtResource("21_8is1m")]
+transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, -1.2, 0.12, -0.95)
+
+[node name="RzapieExitUse" type="Area3D" parent="Rzapie/Sign/ExitSign" unique_id=1482243390 groups=["story_use"]]
+script = ExtResource("14_hhr7g")
+display_name = "Droga powrotna"
+action = 2
+prompt_text = "Wróć do obozu · 2 h"
+
+[node name="Bundle" type="Node3D" parent="Rzapie" unique_id=1464869745 instance=ExtResource("22_m674k")]
+transform = Transform3D(0.60621774, 0, 0.35, 0, 0.7, 0, -0.35, 0, 0.60621774, 8.35, 0.12, 0.8)
+
+[node name="BundlePickup" type="Area3D" parent="Rzapie/Bundle" unique_id=1933747017]
+script = ExtResource("14_hhr7g")
+display_name = "Tobołek"
+description = "Tobołek z grubego płótna, zawiązany na podwójny węzeł. Na szmatce wyszyte: T. Całkiem suchy, choć leżał tuż nad wodą.
+
+W środku ciężka sakiewka srebra i list z pieczęcią. Zabierasz wszystko."
+on_use_flag = "took_bundle"
+on_use_note = &"list_konfraterni"
+on_use_item = "tobolek"
+on_use_quest = &"towar"
+on_use_quest_entry = "znaleziony"
+quest_only_if_active = true
+remove_after_use = true
+padding = 0.15
+
+[node name="Rope_2_1" type="Node3D" parent="Rzapie" unique_id=1996346884 instance=ExtResource("23_yf586")]
+transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, 6.9, 0.12, 1)
+
+[node name="Crate_Wooden_1" type="Node3D" parent="Rzapie" unique_id=304031730 instance=ExtResource("24_qw51s")]
+transform = Transform3D(0.7794228, 0.13905765, 0.42797545, 0, 0.8559509, -0.2781153, -0.45, 0.2408549, 0.7412752, 5.2, -0.25, 3.3)
+
+[node name="Barrel_1" type="Node3D" parent="Rzapie" unique_id=406214766 instance=ExtResource("25_6jcn5")]
+transform = Transform3D(0.742802, 0.50817823, -2.2213177e-08, 0, -3.934025e-08, -0.9, -0.50817823, 0.742802, -3.246891e-08, 8.9, 0.1, -3)
+
+[node name="Tally" type="MeshInstance3D" parent="Rzapie" unique_id=1660950872]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.4, 1.5, 3.98)
+material_override = SubResource("StandardMaterial3D_c7cpx")
+mesh = SubResource("QuadMesh_23npu")
+
+[node name="Look" type="Area3D" parent="Rzapie/Tally" unique_id=1598599732]
+script = ExtResource("14_hhr7g")
+display_name = "Kreski na skale"
+description = "Ktoś wydrapał w skale kreski, grupami po pięć. Czternaście. Pod spodem zaczęte słowo, może imię. Urywa się po trzech literach."
+solid = false
+padding = 0.12
+
+[node name="Vein" type="Node3D" parent="Rzapie" unique_id=1073509257]
+script = ExtResource("27_5bb5w")
+overlay = SubResource("ShaderMaterial_umhmd")
+
+[node name="cave_wall_rocks_c_1" type="MeshInstance3D" parent="Rzapie/Vein" unique_id=1067785379 instance=ExtResource("29_slecc")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 3.3, 1.2, -3.85)
+
+[node name="cave_wall_rocks_e_2" type="MeshInstance3D" parent="Rzapie/Vein" unique_id=864514839 instance=ExtResource("8_f668h")]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 4.6, 0.6, -3.9)
+
+[node name="VeinLight" type="OmniLight3D" parent="Rzapie" unique_id=613033440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.7, 1.6, -2.3)
+light_color = Color(0.35, 0.6, 1, 1)
+light_energy = 1.2
+shadow_enabled = true
+omni_range = 5.5
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+mode = 1
+strength = 0.35
+speed = 0.7
+
+[node name="VeinMark" type="Area3D" parent="Rzapie" unique_id=1346744439 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("14_hhr7g")
+display_name = "Żyła błękitnego żelaza"
+description = "Wąska żyła biegnie ukosem przez skałę i znika pod wodą. Odmierzasz ją krokami i wrysowujesz na mapę dla Racibora."
+prompt_text = "Zaznacz żyłę na mapie"
+time_cost_hours = 1.0
+time_reason = "Znaczenie żyły"
+on_use_flag = "vein_rzapie"
+on_use_quest = &"zloza"
+on_use_quest_entry = "rzapie"
+quest_only_if_active = true
+hidden_by_flag = "vein_rzapie"
+highlight_target = NodePath("../Vein/cave_wall_rocks_c_1")
+solid = false
+padding = 0.1
+
+[node name="Stake" type="Node3D" parent="Rzapie" unique_id=1912238531]
+script = ExtResource("20_4bcsm")
+material = ExtResource("11_qayn5")
+
+[node name="VeinStake" type="Node3D" parent="Rzapie/Stake" unique_id=491034829 instance=ExtResource("21_8is1m")]
+transform = Transform3D(-0.9078333, 0, 1.3175124, 0, 1.6, 0, -1.3175124, 0, -0.9078333, 2.9, 0, -3.3)
+
+[node name="Look" type="Area3D" parent="Rzapie/Stake/VeinStake" unique_id=504589026]
+script = ExtResource("14_hhr7g")
+display_name = "Twój palik"
+description = "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę."
+required_flag = "vein_rzapie"
+solid = false
+padding = 0.08
+
+[node name="LandingGlow" type="OmniLight3D" parent="Rzapie" unique_id=1571441425]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 1.4, 0)
+light_color = Color(0.7, 0.78, 0.9, 1)
+light_energy = 0.7
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+strength = 0.05
+speed = 0.5
+
+[node name="DripShaft" type="AudioStreamPlayer3D" parent="Rzapie" unique_id=2143035087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6, 4.2, 0.4)
+stream = ExtResource("30_tolvy")
+volume_db = -4.0
+unit_size = 3.0
+max_distance = 16.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 1.8
+max_interval = 5.0
+pitch_variation = 0.25
+
+[node name="DripCorner" type="AudioStreamPlayer3D" parent="Rzapie" unique_id=737001084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 4, -3)
+stream = ExtResource("30_tolvy")
+volume_db = -7.0
+unit_size = 3.0
+max_distance = 14.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 3.0
+max_interval = 8.0
+pitch_variation = 0.3
+
+[node name="Rumble" type="AudioStreamPlayer3D" parent="Rzapie" unique_id=412579959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 2, 0)
+stream = ExtResource("32_3frep")
+volume_db = -6.0
+unit_size = 3.0
+max_distance = 40.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 30.0
+max_interval = 70.0
+pitch_variation = 0.15
+
+[node name="Upadowa" type="Node3D" parent="." unique_id=1227386860]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60, 0, 110)
+
+[node name="FloorTop" type="MeshInstance3D" parent="Upadowa" unique_id=1385271522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.2, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_vmwdy")
+
+[node name="FloorTopBody" type="StaticBody3D" parent="Upadowa" unique_id=299365675]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.2, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/FloorTopBody" unique_id=1993704240]
+shape = SubResource("BoxShape3D_qgbyf")
+
+[node name="FloorSlope" type="MeshInstance3D" parent="Upadowa" unique_id=1387942386]
+transform = Transform3D(0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0, 1, 11.931596, -3.0997002, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_3lwkn")
+
+[node name="FloorSlopeBody" type="StaticBody3D" parent="Upadowa" unique_id=1332638923]
+transform = Transform3D(0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0, 1, 11.931596, -3.0997002, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/FloorSlopeBody" unique_id=1736447361]
+shape = SubResource("BoxShape3D_oy44t")
+
+[node name="FloorBottom" type="MeshInstance3D" parent="Upadowa" unique_id=157453215]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3, -6.023524, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_l21uw")
+
+[node name="FloorBottomBody" type="StaticBody3D" parent="Upadowa" unique_id=234084531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3, -6.023524, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/FloorBottomBody" unique_id=1141289475]
+shape = SubResource("BoxShape3D_upd42")
+
+[node name="CeilingTop" type="MeshInstance3D" parent="Upadowa" unique_id=1072239423]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 4.2, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_jn61e")
+
+[node name="CeilingSlope" type="MeshInstance3D" parent="Upadowa" unique_id=712273148]
+transform = Transform3D(0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0, 1, 13.436484, 1.0349472, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_0n7ll")
+
+[node name="CeilingBottom" type="MeshInstance3D" parent="Upadowa" unique_id=1408801723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3, -1.6235237, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_lyin5")
+
+[node name="Wall" type="MeshInstance3D" parent="Upadowa" unique_id=805838161]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2, -1.4, -2.3)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_31aab")
+
+[node name="WallBody" type="StaticBody3D" parent="Upadowa" unique_id=1088451908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2, -1.4, -2.3)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/WallBody" unique_id=1618752579]
+shape = SubResource("BoxShape3D_f0ip8")
+
+[node name="@MeshInstance3D@9" type="MeshInstance3D" parent="Upadowa" unique_id=962339512]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2, -1.4, 2.3)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_wb5hm")
+
+[node name="@StaticBody3D@10" type="StaticBody3D" parent="Upadowa" unique_id=525899778]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.2, -1.4, 2.3)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/@StaticBody3D@10" unique_id=620468703]
+shape = SubResource("BoxShape3D_ot7qa")
+
+[node name="WallTop" type="MeshInstance3D" parent="Upadowa" unique_id=850295475]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 2, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_jvd3y")
+
+[node name="WallTopBody" type="StaticBody3D" parent="Upadowa" unique_id=925504238]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 2, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/WallTopBody" unique_id=2112142044]
+shape = SubResource("BoxShape3D_axtue")
+
+[node name="WallEnd" type="MeshInstance3D" parent="Upadowa" unique_id=82027986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6, -3.6235237, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_d3cya")
+
+[node name="WallEndBody" type="StaticBody3D" parent="Upadowa" unique_id=1445495709]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.6, -3.6235237, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/WallEndBody" unique_id=1754849897]
+shape = SubResource("BoxShape3D_pwyag")
+
+[node name="Frames" type="Node3D" parent="Upadowa" unique_id=1450872700]
+
+[node name="post_f_3" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1963182699 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, -1.95)
+
+[node name="post_f_4" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=651097655 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.6, 0, 1.95)
+
+[node name="beam_a_1" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=278975577 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.6, 3.75, 0)
+
+[node name="post_f_5" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1335802997 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, -0.43676427, -1.95)
+
+[node name="post_f_6" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1549805356 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 5.2, -0.43676427, 1.95)
+
+[node name="beam_a_2" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=749134268 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 5.2, 3.3132358, 0)
+
+[node name="post_f_7" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=617382183 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7, -1.7106601, -1.95)
+
+[node name="post_f_8" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=636276000 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 8.7, -1.7106601, 1.95)
+
+[node name="beam_a_3" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=13211341 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 8.7, 2.0393398, 0)
+
+[node name="post_f_9" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=2082962378 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, -2.984556, -1.95)
+
+[node name="post_f_10" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=743276613 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 12.2, -2.984556, 1.95)
+
+[node name="beam_a_4" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1392345136 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 12.2, 0.7654441, 0)
+
+[node name="post_f_11" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1168175799 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7, -4.258452, -1.95)
+
+[node name="post_f_12" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=943722163 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 15.7, -4.258452, 1.95)
+
+[node name="beam_a_5" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=69681943 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 15.7, -0.50845176, 0)
+
+[node name="post_f_13" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=493450163 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.2, -5.5323477, -1.95)
+
+[node name="post_f_14" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1185576022 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.2, -5.5323477, 1.95)
+
+[node name="beam_a_6" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=190995422 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 19.2, -1.7823476, 0)
+
+[node name="post_f_15" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=153447814 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.7, -5.8235235, -1.95)
+
+[node name="post_f_16" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1976208925 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 22.7, -5.8235235, 1.95)
+
+[node name="beam_a_7" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1112531393 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 22.7, -2.0735238, 0)
+
+[node name="post_f_17" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=2010691746 instance=ExtResource("17_nmdff")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -5.8235235, -1.95)
+
+[node name="Look" type="Area3D" parent="Upadowa/Frames/post_f_17" unique_id=463409722]
+script = ExtResource("14_hhr7g")
+display_name = "Znak na stemplu"
+description = "Na stemplu tuż przy zawale wyryto znak dziadka: dwie skrzyżowane kreski i kropkę. Pod spodem, głębiej i krzywo, jakby w pośpiechu: NIE KOPAĆ."
+on_use_flag = "saw_grandpa_mark"
+solid = false
+padding = 0.08
+
+[node name="post_f_18" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=2146582577 instance=ExtResource("17_nmdff")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 26, -5.8235235, 1.95)
+
+[node name="beam_a_8" type="MeshInstance3D" parent="Upadowa/Frames" unique_id=1023576724 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 26, -2.0735238, 0)
+
+[node name="rail_a_1" type="MeshInstance3D" parent="Upadowa" unique_id=1800309990 instance=ExtResource("34_mtqn8")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 0.02, 0)
+
+[node name="rail_a_2" type="MeshInstance3D" parent="Upadowa" unique_id=1132685650 instance=ExtResource("34_mtqn8")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 22, -5.8035235, 0)
+
+[node name="rail_falloff_a_1" type="MeshInstance3D" parent="Upadowa" unique_id=76689544 instance=ExtResource("35_gtv4a")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 25.6, -5.8035235, 0)
+
+[node name="DescentRope" type="MeshInstance3D" parent="Upadowa" unique_id=684979287]
+transform = Transform3D(0.35165244, 0.9360991, 0.0076869386, 0.93613064, -0.3516406, -0.002887557, 0, 0.008211395, -0.9999663, 11.849999, -2.261762, -1.675)
+material_override = SubResource("StandardMaterial3D_s5t62")
+mesh = SubResource("CylinderMesh_1jsja")
+
+[node name="Rope_3_1" type="Node3D" parent="Upadowa" unique_id=863834313 instance=ExtResource("36_ssm5x")]
+transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 2.6, 0, -1.3)
+
+[node name="Lantern" type="Node3D" parent="Upadowa" unique_id=1244674895 instance=ExtResource("18_mfbne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 1.4, -2.05)
+
+[node name="Light" type="OmniLight3D" parent="Upadowa/Lantern" unique_id=1466556919]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 1.3
+shadow_enabled = true
+omni_range = 7.5
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+housing_casts_shadow = false
+
+[node name="@Node3D@11" type="Node3D" parent="Upadowa" unique_id=759631046 instance=ExtResource("18_mfbne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.7, -0.2106601, -2.05)
+
+[node name="Light" type="OmniLight3D" parent="Upadowa/@Node3D@11" unique_id=1653730531]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 0.7
+shadow_enabled = true
+omni_range = 5.5
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+housing_casts_shadow = false
+
+[node name="@Node3D@12" type="Node3D" parent="Upadowa" unique_id=1102021143 instance=ExtResource("18_mfbne")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.7, -2.7584517, -2.05)
+
+[node name="Light" type="OmniLight3D" parent="Upadowa/@Node3D@12" unique_id=459992987]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
+light_color = Color(1, 0.62, 0.32, 1)
+light_energy = 0.7
+shadow_enabled = true
+omni_range = 5.5
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+housing_casts_shadow = false
+
+[node name="Sign" type="Node3D" parent="Upadowa" unique_id=2102784168]
+script = ExtResource("20_4bcsm")
+material = ExtResource("11_qayn5")
+
+[node name="ExitSign" type="Node3D" parent="Upadowa/Sign" unique_id=1470098166 instance=ExtResource("21_8is1m")]
+transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 0.8, 0, 1.4)
+
+[node name="UpadowaExitUse" type="Area3D" parent="Upadowa/Sign/ExitSign" unique_id=1350710472 groups=["story_use"]]
+script = ExtResource("14_hhr7g")
+display_name = "Droga powrotna"
+action = 2
+prompt_text = "Wróć do obozu · 3 h"
+
+[node name="Collapse" type="Node3D" parent="Upadowa" unique_id=294132643]
+
+[node name="cave_rocks_a_2" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=684288348 instance=ExtResource("15_aobop")]
+transform = Transform3D(-2.165396, 0, 0.38866526, 0, 2.2, 0, -0.38866526, 0, -2.165396, 27.2, -5.2235236, -1.3)
+
+[node name="Look" type="Area3D" parent="Upadowa/Collapse/cave_rocks_a_2" unique_id=636174917]
+script = ExtResource("14_hhr7g")
+display_name = "Zawał"
+description = "Zawał od spągu po strop. Kamienie przy samym dole są czarne od sadzy, a między nimi leżą klepki z beczki i okucia. Stemple dookoła stoją całe. Tak nie wygląda zwykłe tąpnięcie."
+on_use_flag = "saw_charge"
+on_use_quest = &"slady"
+on_use_quest_entry = "zawal"
+solid = false
+padding = 0.3
+
+[node name="cave_rocks_c_2" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=436805705 instance=ExtResource("16_pahgu")]
+transform = Transform3D(0.4090874, 0, -2.364878, 0, 2.4, 0, 2.364878, 0, 0.4090874, 27.5, -5.1235237, 1.2)
+
+[node name="cave_rocks_b_1" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=1645747661 instance=ExtResource("37_0y8cn")]
+transform = Transform3D(-1.075456, 0, -1.1846495, 0, 1.6, 0, 1.1846495, 0, -1.075456, 26.7, -5.523524, 0.1)
+
+[node name="cave_rocks_d_1" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=1271501859 instance=ExtResource("38_fnggc")]
+transform = Transform3D(-0.21597528, 0, -1.9883045, 0, 2, 0, 1.9883045, 0, -0.21597528, 27.8, -3.6235237, 0.2)
+
+[node name="cave_rocks_a_3" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=1127436750 instance=ExtResource("15_aobop")]
+transform = Transform3D(-0.1427011, 0, 1.0907046, 0, 1.1, 0, -1.0907046, 0, -0.1427011, 26.4, -5.6235237, 1.7)
+
+[node name="cave_rocks_c_3" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=1552282011 instance=ExtResource("16_pahgu")]
+transform = Transform3D(1.5839052, 0, -0.61744976, 0, 1.7, 0, 0.61744976, 0, 1.5839052, 27.9, -2.6235237, -1)
+
+[node name="CharredBeam0" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=741777596 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(0.8471007, 0.18005681, 0.5, -0.2079117, 0.9781476, 0, -0.4890738, -0.10395585, 0.8660254, 25.9, -5.4735236, -0.8)
+
+[node name="CharredBeam1" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=1970682579 instance=ExtResource("33_1a1y1")]
+transform = Transform3D(-0.17195825, 0.024167158, 0.9848077, 0.1391731, 0.99026805, 0, -0.97522366, 0.13705875, -0.1736482, 25.3, -5.273524, 0.6)
+
+[node name="Staves" type="Node3D" parent="Upadowa/Collapse" unique_id=706216420]
+
+[node name="Barrel_2" type="Node3D" parent="Upadowa/Collapse/Staves" unique_id=674792106 instance=ExtResource("25_6jcn5")]
+transform = Transform3D(0.4662075, 0.39166346, -2.5680231e-08, 0, -2.1855694e-08, -0.75, -0.5874952, 0.310805, -2.0378575e-08, 25.2, -5.523524, 0.9)
+
+[node name="Barrel_3" type="Node3D" parent="Upadowa/Collapse/Staves" unique_id=1408860065 instance=ExtResource("25_6jcn5")]
+transform = Transform3D(-0.24246716, 0.47315004, -3.1023067e-08, 0, -2.1855694e-08, -0.75, -0.7097251, -0.16164477, 1.0598576e-08, 25.9, -5.523524, -0.8)
+
+[node name="Soot" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=1598899589]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 25.8, -5.8035235, 0)
+material_override = SubResource("StandardMaterial3D_7760w")
+mesh = SubResource("QuadMesh_o57e5")
+
+[node name="SootWall" type="MeshInstance3D" parent="Upadowa/Collapse" unique_id=263599247]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 26.3, -4.2235236, 0)
+material_override = SubResource("StandardMaterial3D_7760w")
+mesh = SubResource("QuadMesh_mq3i2")
+
+[node name="Block" type="StaticBody3D" parent="Upadowa/Collapse" unique_id=413152836]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.4, -3.8235238, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Upadowa/Collapse/Block" unique_id=715258206]
+shape = SubResource("BoxShape3D_trqhr")
+
+[node name="Vein" type="Node3D" parent="Upadowa" unique_id=774522732]
+script = ExtResource("27_5bb5w")
+overlay = SubResource("ShaderMaterial_pgo44")
+
+[node name="cave_wall_rocks_b_2" type="MeshInstance3D" parent="Upadowa/Vein" unique_id=1020717817 instance=ExtResource("6_qmhml")]
+transform = Transform3D(-1.3, 0, -1.13649605e-07, 0, 1.3, 0, 1.13649605e-07, 0, -1.3, 23.6, -4.523524, 2.05)
+
+[node name="cave_wall_rocks_d_2" type="MeshInstance3D" parent="Upadowa/Vein" unique_id=243600000 instance=ExtResource("5_up8wq")]
+transform = Transform3D(-1.2, 0, -1.04907336e-07, 0, 1.2, 0, 1.04907336e-07, 0, -1.2, 25.2, -4.8235235, 2.05)
+
+[node name="cave_wall_rocks_f_2" type="MeshInstance3D" parent="Upadowa/Vein" unique_id=732751948 instance=ExtResource("7_dhbjl")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 21.9, -4.2235236, -2.05)
+
+[node name="VeinLight" type="OmniLight3D" parent="Upadowa" unique_id=1127093445]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, -4.423524, 1.1)
+light_color = Color(0.35, 0.6, 1, 1)
+light_energy = 3.2
+shadow_enabled = true
+omni_range = 7.5
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+mode = 1
+strength = 0.35
+speed = 0.7
+
+[node name="@OmniLight3D@13" type="OmniLight3D" parent="Upadowa" unique_id=280863249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.4, -4.8235235, -0.2)
+light_color = Color(0.35, 0.6, 1, 1)
+light_energy = 2.0
+shadow_enabled = true
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+mode = 1
+strength = 0.35
+speed = 0.7
+
+[node name="VeinMark" type="Area3D" parent="Upadowa" unique_id=758211880 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("14_hhr7g")
+display_name = "Żyła błękitnego żelaza"
+description = "Najgrubsza żyła, jaką widziałeś. Gruba jak ramię. Świeci też przez szczeliny w zawale, jakby po tamtej stronie było jej jeszcze więcej.
+
+Zaznaczasz ją na mapie dla Racibora."
+prompt_text = "Zaznacz żyłę na mapie"
+time_cost_hours = 1.0
+time_reason = "Znaczenie żyły"
+on_use_flag = "vein_upadowa"
+on_use_quest = &"zloza"
+on_use_quest_entry = "upadowa"
+quest_only_if_active = true
+hidden_by_flag = "vein_upadowa"
+highlight_target = NodePath("../Vein/cave_wall_rocks_b_2")
+solid = false
+padding = 0.1
+
+[node name="Stake" type="Node3D" parent="Upadowa" unique_id=1992465862]
+script = ExtResource("20_4bcsm")
+material = ExtResource("11_qayn5")
+
+[node name="VeinStake" type="Node3D" parent="Upadowa/Stake" unique_id=558724958 instance=ExtResource("21_8is1m")]
+transform = Transform3D(-1.2802327, 0, 0.95968974, 0, 1.6, 0, -0.95968974, 0, -1.2802327, 22.8, -5.8235235, 1.3)
+
+[node name="Look" type="Area3D" parent="Upadowa/Stake/VeinStake" unique_id=1051320607]
+script = ExtResource("14_hhr7g")
+display_name = "Twój palik"
+description = "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę."
+required_flag = "vein_upadowa"
+solid = false
+padding = 0.08
+
+[node name="Creak" type="AudioStreamPlayer3D" parent="Upadowa" unique_id=6365534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, -1, 0)
+stream = ExtResource("39_2dks8")
+volume_db = -6.0
+unit_size = 3.0
+max_distance = 22.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 12.0
+max_interval = 28.0
+pitch_variation = 0.12
+
+[node name="Pebbles" type="AudioStreamPlayer3D" parent="Upadowa" unique_id=570715264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, -2, 1)
+stream = ExtResource("30_tolvy")
+volume_db = -8.0
+unit_size = 3.0
+max_distance = 18.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+max_interval = 11.0
+pitch_variation = 0.4
+
+[node name="BehindCollapse" type="AudioStreamPlayer3D" parent="Upadowa" unique_id=1147532050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30, -4.8235235, 0)
+stream = ExtResource("40_wjyr5")
+volume_db = -4.0
+unit_size = 3.0
+max_distance = 30.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 25.0
+max_interval = 60.0
+pitch_variation = 0.05
+
+[node name="RumbleDeep" type="AudioStreamPlayer3D" parent="Upadowa" unique_id=1940538271]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -5.8235235, 0)
+stream = ExtResource("32_3frep")
+volume_db = -2.0
+unit_size = 3.0
+max_distance = 40.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 35.0
+max_interval = 80.0
+pitch_variation = 0.15
+
+[node name="Kaplica" type="Node3D" parent="." unique_id=613137136]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 60, 0, 110)
+
+[node name="EntryFloor" type="MeshInstance3D" parent="Kaplica" unique_id=638864441]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.2, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_8rky4")
+
+[node name="EntryFloorBody" type="StaticBody3D" parent="Kaplica" unique_id=2138856183]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, -0.2, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/EntryFloorBody" unique_id=1466900410]
+shape = SubResource("BoxShape3D_wvkco")
+
+[node name="Ramp" type="StaticBody3D" parent="Kaplica" unique_id=294753834]
+transform = Transform3D(0.9284767, 0.37139067, 0, -0.37139067, 0.9284767, 0, 0, 0, 1, 4.2, -1.42, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/Ramp" unique_id=1580444289]
+shape = SubResource("BoxShape3D_vrdg5")
+
+[node name="Steps" type="Node3D" parent="Kaplica" unique_id=713239315]
+
+[node name="Step0" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=1760527160]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.575, -0.45, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_ush8l")
+
+[node name="Step1" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=1271928253]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.325, -0.75, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_owt5r")
+
+[node name="Step2" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=596370420]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.075, -1.05, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_6jk2t")
+
+[node name="Step3" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=942587549]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.825, -1.35, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_nycaf")
+
+[node name="Step4" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=1883679567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.575, -1.65, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_bud3a")
+
+[node name="Step5" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=767420061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.325, -1.95, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_6th4e")
+
+[node name="Step6" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=1666369642]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.075, -2.25, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_s6m2n")
+
+[node name="Step7" type="MeshInstance3D" parent="Kaplica/Steps" unique_id=379561414]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.825, -2.55, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_vm0yr")
+
+[node name="PassageN" type="MeshInstance3D" parent="Kaplica" unique_id=1731337935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.2, -1.3)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_ip3r8")
+
+[node name="PassageNBody" type="StaticBody3D" parent="Kaplica" unique_id=1493879345]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.2, -1.3)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/PassageNBody" unique_id=1286677236]
+shape = SubResource("BoxShape3D_rh83i")
+
+[node name="PassageS" type="MeshInstance3D" parent="Kaplica" unique_id=1148642228]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.2, 1.3)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_nhurw")
+
+[node name="PassageSBody" type="StaticBody3D" parent="Kaplica" unique_id=1798183432]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0.2, 1.3)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/PassageSBody" unique_id=1451832997]
+shape = SubResource("BoxShape3D_3srd7")
+
+[node name="PassageTop" type="MeshInstance3D" parent="Kaplica" unique_id=1460447593]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 3, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_p4jbs")
+
+[node name="PassageBack" type="MeshInstance3D" parent="Kaplica" unique_id=1227445390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.2, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_ks4hk")
+
+[node name="PassageBackBody" type="StaticBody3D" parent="Kaplica" unique_id=1125529028]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4, 1.2, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/PassageBackBody" unique_id=167412865]
+shape = SubResource("BoxShape3D_58ylf")
+
+[node name="Floor" type="MeshInstance3D" parent="Kaplica" unique_id=385432316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, -2.6, 0)
+material_override = ExtResource("1_g17kb")
+mesh = SubResource("BoxMesh_2t7at")
+
+[node name="FloorBody" type="StaticBody3D" parent="Kaplica" unique_id=342366989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, -2.6, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/FloorBody" unique_id=1017366553]
+shape = SubResource("BoxShape3D_w0140")
+
+[node name="WallWestN" type="MeshInstance3D" parent="Kaplica" unique_id=701817063]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.3, -3.05)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_ni6ld")
+
+[node name="WallWestNBody" type="StaticBody3D" parent="Kaplica" unique_id=99312332]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.3, -3.05)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallWestNBody" unique_id=1796296407]
+shape = SubResource("BoxShape3D_d5h61")
+
+[node name="WallWestS" type="MeshInstance3D" parent="Kaplica" unique_id=828326424]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.3, 3.05)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_d7utr")
+
+[node name="WallWestSBody" type="StaticBody3D" parent="Kaplica" unique_id=1148609521]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0.3, 3.05)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallWestSBody" unique_id=1691256885]
+shape = SubResource("BoxShape3D_0jiln")
+
+[node name="WallWestTop" type="MeshInstance3D" parent="Kaplica" unique_id=161968526]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.4, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_qng3h")
+
+[node name="WallWestTopBody" type="StaticBody3D" parent="Kaplica" unique_id=868489731]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 2.4, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallWestTopBody" unique_id=1592330167]
+shape = SubResource("BoxShape3D_bwujp")
+
+[node name="WallNorth" type="MeshInstance3D" parent="Kaplica" unique_id=959444325]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 0.3, -5.2)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_44xhd")
+
+[node name="WallNorthBody" type="StaticBody3D" parent="Kaplica" unique_id=215990984]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 0.3, -5.2)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallNorthBody" unique_id=1808627322]
+shape = SubResource("BoxShape3D_5inot")
+
+[node name="WallSouth" type="MeshInstance3D" parent="Kaplica" unique_id=1447532542]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 0.3, 5.2)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_l52gh")
+
+[node name="WallSouthBody" type="StaticBody3D" parent="Kaplica" unique_id=311524297]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 0.3, 5.2)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallSouthBody" unique_id=1205726547]
+shape = SubResource("BoxShape3D_1exg3")
+
+[node name="WallEast" type="MeshInstance3D" parent="Kaplica" unique_id=2003365358]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6, 0.3, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_v8oxd")
+
+[node name="WallEastBody" type="StaticBody3D" parent="Kaplica" unique_id=1383641634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.6, 0.3, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallEastBody" unique_id=818668223]
+shape = SubResource("BoxShape3D_v6shn")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Kaplica" unique_id=280014582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.2, 2.8, 0)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_ul2je")
+
+[node name="cave_wall_rocks_a_2" type="MeshInstance3D" parent="Kaplica" unique_id=895867617 instance=ExtResource("3_f06v5")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 8.6, -1.2, -4.95)
+
+[node name="cave_wall_rocks_d_3" type="MeshInstance3D" parent="Kaplica" unique_id=516852932 instance=ExtResource("5_up8wq")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, 14.6, -1, -4.95)
+
+[node name="cave_wall_rocks_g_2" type="MeshInstance3D" parent="Kaplica" unique_id=975115212 instance=ExtResource("9_gayea")]
+transform = Transform3D(-1.1, 0, -9.616505e-08, 0, 1.1, 0, 9.616505e-08, 0, -1.1, 8.8, -1.3, 4.95)
+
+[node name="cave_wall_rocks_b_3" type="MeshInstance3D" parent="Kaplica" unique_id=331619198 instance=ExtResource("6_qmhml")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 16.1, -1.1, 4.95)
+
+[node name="cave_pillar_a_1" type="MeshInstance3D" parent="Kaplica" unique_id=37962209 instance=ExtResource("41_f6owa")]
+transform = Transform3D(0.32818845, 0, -0.83802885, 0, 0.9, 0, 0.83802885, 0, 0.32818845, 7.4, -2.4, -4.9)
+
+[node name="cave_pillar_a_2" type="MeshInstance3D" parent="Kaplica" unique_id=1048842650 instance=ExtResource("41_f6owa")]
+transform = Transform3D(0.7935398, 0, 0.42461097, 0, 0.9, 0, -0.42461097, 0, 0.7935398, 7.4, -2.4, 4.9)
+
+[node name="cave_pillar_a_3" type="MeshInstance3D" parent="Kaplica" unique_id=1687231931 instance=ExtResource("41_f6owa")]
+transform = Transform3D(0.35327867, 0, -0.8277646, 0, 0.9, 0, 0.8277646, 0, 0.35327867, 17, -2.4, -4.9)
+
+[node name="cave_pillar_a_4" type="MeshInstance3D" parent="Kaplica" unique_id=1830567352 instance=ExtResource("41_f6owa")]
+transform = Transform3D(-0.73367006, 0, 0.52127564, 0, 0.9, 0, -0.52127564, 0, -0.73367006, 17, -2.4, 4.9)
+
+[node name="Sign" type="Node3D" parent="Kaplica" unique_id=1575231863]
+script = ExtResource("20_4bcsm")
+material = ExtResource("11_qayn5")
+
+[node name="ExitSign" type="Node3D" parent="Kaplica/Sign" unique_id=859859368 instance=ExtResource("21_8is1m")]
+transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 0.5, 0, 0.85)
+
+[node name="KaplicaExitUse" type="Area3D" parent="Kaplica/Sign/ExitSign" unique_id=595662248 groups=["story_use"]]
+script = ExtResource("14_hhr7g")
+display_name = "Droga powrotna"
+action = 2
+prompt_text = "Wróć do obozu · 3 h"
+
+[node name="WallUpper" type="MeshInstance3D" parent="Kaplica" unique_id=1104550264]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, -0.025, 0)
+material_override = SubResource("StandardMaterial3D_1p8bq")
+mesh = SubResource("BoxMesh_jxhyr")
+
+[node name="WallUpperBody" type="StaticBody3D" parent="Kaplica" unique_id=254498762]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, -0.025, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallUpperBody" unique_id=1328483771]
+shape = SubResource("BoxShape3D_fjyn6")
+
+[node name="WallLowerN" type="MeshInstance3D" parent="Kaplica" unique_id=2109213266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, -1.975, -1.825)
+material_override = SubResource("StandardMaterial3D_1p8bq")
+mesh = SubResource("BoxMesh_d6dql")
+
+[node name="WallLowerNBody" type="StaticBody3D" parent="Kaplica" unique_id=407024210]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, -1.975, -1.825)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallLowerNBody" unique_id=120646505]
+shape = SubResource("BoxShape3D_k47xi")
+
+[node name="WallLowerS" type="MeshInstance3D" parent="Kaplica" unique_id=981205755]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, -1.975, 1.825)
+material_override = SubResource("StandardMaterial3D_1p8bq")
+mesh = SubResource("BoxMesh_60k7d")
+
+[node name="WallLowerSBody" type="StaticBody3D" parent="Kaplica" unique_id=1799882989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, -1.975, 1.825)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/WallLowerSBody" unique_id=945992680]
+shape = SubResource("BoxShape3D_8ex43")
+
+[node name="NicheBack" type="MeshInstance3D" parent="Kaplica" unique_id=1937717429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1, -1.975, 0)
+material_override = SubResource("StandardMaterial3D_vua44")
+mesh = SubResource("BoxMesh_mdvln")
+
+[node name="NicheBackBody" type="StaticBody3D" parent="Kaplica" unique_id=1636386883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.1, -1.975, 0)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/NicheBackBody" unique_id=1376024815]
+shape = SubResource("BoxShape3D_wbha1")
+
+[node name="RiddleWall" type="Node3D" parent="Kaplica" unique_id=882274695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.6, -2.4, 0)
+script = ExtResource("42_ootwm")
+
+[node name="Glyphs" type="MeshInstance3D" parent="Kaplica/RiddleWall" unique_id=888474761]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.04, 2.775, 0)
+material_override = SubResource("ShaderMaterial_tmob1")
+mesh = SubResource("QuadMesh_7yh5t")
+
+[node name="Pivot1" type="Node3D" parent="Kaplica/RiddleWall" unique_id=1351681760]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.25, -1.35)
+
+[node name="Ring1" type="MeshInstance3D" parent="Kaplica/RiddleWall/Pivot1" unique_id=1233855142]
+material_override = SubResource("StandardMaterial3D_1p8bq")
+mesh = SubResource("CylinderMesh_m3rsu")
+
+[node name="Notch" type="MeshInstance3D" parent="Kaplica/RiddleWall/Pivot1/Ring1" unique_id=1468649390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0.2)
+material_override = SubResource("StandardMaterial3D_gvayx")
+mesh = SubResource("BoxMesh_4tx4e")
+
+[node name="Pivot2" type="Node3D" parent="Kaplica/RiddleWall" unique_id=1834894769]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.25, 0)
+
+[node name="Ring2" type="MeshInstance3D" parent="Kaplica/RiddleWall/Pivot2" unique_id=5731381]
+material_override = SubResource("StandardMaterial3D_1p8bq")
+mesh = SubResource("CylinderMesh_px0uu")
+
+[node name="Notch" type="MeshInstance3D" parent="Kaplica/RiddleWall/Pivot2/Ring2" unique_id=88875427]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0.2)
+material_override = SubResource("StandardMaterial3D_uxxde")
+mesh = SubResource("BoxMesh_3k4py")
+
+[node name="Pivot3" type="Node3D" parent="Kaplica/RiddleWall" unique_id=149527712]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.25, 1.35)
+
+[node name="Ring3" type="MeshInstance3D" parent="Kaplica/RiddleWall/Pivot3" unique_id=648029319]
+material_override = SubResource("StandardMaterial3D_1p8bq")
+mesh = SubResource("CylinderMesh_rnysj")
+
+[node name="Notch" type="MeshInstance3D" parent="Kaplica/RiddleWall/Pivot3/Ring3" unique_id=145661805]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0.2)
+material_override = SubResource("StandardMaterial3D_7mydb")
+mesh = SubResource("BoxMesh_35n4i")
+
+[node name="Slab" type="MeshInstance3D" parent="Kaplica/RiddleWall" unique_id=1900847524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12, 0.425, 0)
+material_override = SubResource("StandardMaterial3D_1p8bq")
+mesh = SubResource("BoxMesh_283ci")
+
+[node name="Body" type="StaticBody3D" parent="Kaplica/RiddleWall/Slab" unique_id=693318628]
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/RiddleWall/Slab/Body" unique_id=369191801]
+shape = SubResource("BoxShape3D_okt7j")
+
+[node name="NicheLight" type="OmniLight3D" parent="Kaplica/RiddleWall" unique_id=71821189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.35, 0)
+light_color = Color(0.4, 0.65, 1, 1)
+light_energy = 1.2
+omni_range = 2.5
+
+[node name="Grind" type="AudioStreamPlayer3D" parent="Kaplica/RiddleWall" unique_id=1420413051]
+stream = ExtResource("32_3frep")
+volume_db = 2.0
+pitch_scale = 1.6
+bus = &"SFX"
+
+[node name="WallRiddle" type="Area3D" parent="Kaplica/RiddleWall" unique_id=2035128577 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("14_hhr7g")
+display_name = "Ściana ze znakami"
+action = 1
+prompt_text = "Przyjrzyj się ścianie"
+dialogue = ExtResource("45_76tya")
+hidden_by_flag = "wall_open"
+highlight_target = NodePath("../Glyphs")
+solid = false
+padding = 0.1
+
+[node name="WallLook" type="Area3D" parent="Kaplica/RiddleWall" unique_id=2114871076 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("14_hhr7g")
+display_name = "Ściana ze znakami"
+description = "Kręgi stoją tak, jak je ustawiłeś. Znaki przygasły, jakby ściana znowu zasnęła."
+required_flag = "wall_open"
+highlight_target = NodePath("../Glyphs")
+solid = false
+padding = 0.1
+
+[node name="Letter" type="Node3D" parent="Kaplica" unique_id=1219969263 instance=ExtResource("46_srb8v")]
+transform = Transform3D(0.4104242, 0, 1.1276312, 0, 1.2, 0, -1.1276312, 0, 0.4104242, 16.9, -2.38, -0.2)
+
+[node name="LetterPickup" type="Area3D" parent="Kaplica/Letter" unique_id=1056696865]
+script = ExtResource("14_hhr7g")
+display_name = "List dziadka"
+description = "List owinięty w natłuszczone płótno. Pismo dziadka, tym razem bez szyfru. Czytasz go przy świetle kryształu, dwa razy.
+
+Przepisujesz każde słowo do notesu."
+on_use_flag = "read_letter"
+on_use_note = &"list_dziadka"
+on_use_quest = &"slady"
+on_use_quest_entry = "list"
+remove_after_use = true
+required_flag = "wall_open"
+padding = 0.12
+
+[node name="Crystal" type="MeshInstance3D" parent="Kaplica" unique_id=1887080535]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.85, -2.26, 0.22)
+material_override = SubResource("StandardMaterial3D_2bv6g")
+mesh = SubResource("CylinderMesh_t1kki")
+
+[node name="CrystalPickup" type="Area3D" parent="Kaplica/Crystal" unique_id=1471200738]
+script = ExtResource("14_hhr7g")
+display_name = "Kryształ"
+description = "Kryształ długości palca, przejrzysty, z błękitnym światłem w środku. Jest ciepły. Kiedy bierzesz go do ręki, amulet dziadka też robi się ciepły."
+on_use_flag = "took_crystal"
+on_use_item = "krysztal"
+remove_after_use = true
+required_flag = "wall_open"
+padding = 0.1
+
+[node name="GlyphGlow" type="OmniLight3D" parent="Kaplica" unique_id=803333360]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0.2, 0)
+light_color = Color(0.35, 0.6, 1, 1)
+light_energy = 1.6
+shadow_enabled = true
+omni_range = 8.5
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+mode = 1
+strength = 0.3
+speed = 0.55
+
+[node name="Altar" type="MeshInstance3D" parent="Kaplica" unique_id=270677088]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, -1.95, -2.7)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_78wn0")
+
+[node name="AltarBody" type="StaticBody3D" parent="Kaplica" unique_id=366524107]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, -1.95, -2.7)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/AltarBody" unique_id=1926141092]
+shape = SubResource("BoxShape3D_00rl4")
+
+[node name="@MeshInstance3D@14" type="MeshInstance3D" parent="Kaplica" unique_id=1593136753]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, -1.95, 2.7)
+material_override = ExtResource("2_atxte")
+mesh = SubResource("BoxMesh_y8s5k")
+
+[node name="@StaticBody3D@15" type="StaticBody3D" parent="Kaplica" unique_id=1305335489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, -1.95, 2.7)
+
+[node name="Shape" type="CollisionShape3D" parent="Kaplica/@StaticBody3D@15" unique_id=2127299285]
+shape = SubResource("BoxShape3D_yxv6g")
+
+[node name="CandleStick_1" type="Node3D" parent="Kaplica" unique_id=476793429 instance=ExtResource("47_8hxed")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.1, -1.5, -2.3)
+
+[node name="Candle_1_1" type="Node3D" parent="Kaplica" unique_id=1786361558 instance=ExtResource("48_o2yrh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.3, -1.5, -3)
+
+[node name="Chalice_1" type="Node3D" parent="Kaplica" unique_id=1487187861 instance=ExtResource("49_3o1sn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.25, -1.5, -2.6)
+
+[node name="PrayerBook" type="Node3D" parent="Kaplica" unique_id=285731693 instance=ExtResource("50_aoepb")]
+transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 15.1, -1.5, 2.4)
+
+[node name="Look" type="Area3D" parent="Kaplica/PrayerBook" unique_id=702597109]
+script = ExtResource("14_hhr7g")
+display_name = "Modlitewnik"
+description = "Górniczy modlitewnik, spuchnięty od wilgoci. Na obrazkach zamiast świętych postacie bez twarzy, z gwiazdami zamiast oczu. Na marginesach dopiski różnymi rękami. Wszystkie o tym samym: żeby wrócić na górę."
+solid = false
+padding = 0.08
+
+[node name="Mug_1" type="Node3D" parent="Kaplica" unique_id=289124524 instance=ExtResource("51_q2acm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.35, -1.5, 2.9)
+
+[node name="OilLamp" type="Node3D" parent="Kaplica" unique_id=1896181416 instance=ExtResource("52_8kh7l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.2, -1.5, 3.15)
+
+[node name="Flame" type="OmniLight3D" parent="Kaplica/OilLamp" unique_id=27393009]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+light_color = Color(1, 0.66, 0.35, 1)
+light_energy = 0.9
+omni_range = 4.0
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+strength = 0.3
+speed = 8.0
+
+[node name="Look" type="Area3D" parent="Kaplica/OilLamp" unique_id=507667921]
+script = ExtResource("14_hhr7g")
+display_name = "Lampka"
+description = "Mała lampka oliwna. Pali się. Knot przycięty, olej świeży. Ktoś tu bywa."
+on_use_flag = "saw_lamp"
+solid = false
+padding = 0.08
+
+[node name="PrayerBench" type="Node3D" parent="Kaplica" unique_id=908055084 instance=ExtResource("53_nny4h")]
+transform = Transform3D(-3.934025e-08, 0, 0.9, 0, 0.9, 0, -0.9, 0, -3.934025e-08, 12.6, -2.4, 0)
+
+[node name="Look" type="Area3D" parent="Kaplica/PrayerBench" unique_id=1692315241]
+script = ExtResource("14_hhr7g")
+display_name = "Ławka"
+description = "Ławka z tych samych desek co stemple. Wytarta do połysku przez setki kolan i tyłków. Górnicy siadali tu przed szychtą."
+padding = 0.08
+
+[node name="Vein" type="Node3D" parent="Kaplica" unique_id=2075059335]
+script = ExtResource("27_5bb5w")
+overlay = SubResource("ShaderMaterial_xmbof")
+
+[node name="cave_wall_rocks_c_2" type="MeshInstance3D" parent="Kaplica/Vein" unique_id=1338932024 instance=ExtResource("29_slecc")]
+transform = Transform3D(-1.3, 0, -1.13649605e-07, 0, 1.3, 0, 1.13649605e-07, 0, -1.3, 12.4, -1.1, 4.95)
+
+[node name="cave_wall_rocks_e_3" type="MeshInstance3D" parent="Kaplica/Vein" unique_id=917634967 instance=ExtResource("8_f668h")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 11.4, -0.8, -4.95)
+
+[node name="VeinLight" type="OmniLight3D" parent="Kaplica" unique_id=1571604516]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.4, -0.8, 4)
+light_color = Color(0.35, 0.6, 1, 1)
+light_energy = 2.2
+shadow_enabled = true
+omni_range = 6.5
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+mode = 1
+strength = 0.35
+speed = 0.7
+
+[node name="@OmniLight3D@16" type="OmniLight3D" parent="Kaplica" unique_id=1013235997]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4, -0.6, -4)
+light_color = Color(0.35, 0.6, 1, 1)
+light_energy = 1.8
+shadow_enabled = true
+omni_range = 6.0
+omni_attenuation = 1.3
+script = ExtResource("19_1387u")
+mode = 1
+strength = 0.35
+speed = 0.7
+
+[node name="VeinMark" type="Area3D" parent="Kaplica" unique_id=357880570 node_paths=PackedStringArray("highlight_target")]
+script = ExtResource("14_hhr7g")
+display_name = "Żyła błękitnego żelaza"
+description = "Tu nie trzeba szukać. Błękit biegnie przez całe ściany, a im bliżej wyrytych znaków, tym jaśniej świeci. Zaznaczasz go na mapie dla Racibora."
+prompt_text = "Zaznacz żyłę na mapie"
+time_cost_hours = 1.0
+time_reason = "Znaczenie żyły"
+on_use_flag = "vein_kaplica"
+on_use_quest = &"zloza"
+on_use_quest_entry = "kaplica"
+quest_only_if_active = true
+hidden_by_flag = "vein_kaplica"
+highlight_target = NodePath("../Vein/cave_wall_rocks_c_2")
+solid = false
+padding = 0.1
+
+[node name="Stake" type="Node3D" parent="Kaplica" unique_id=761473007]
+script = ExtResource("20_4bcsm")
+material = ExtResource("11_qayn5")
+
+[node name="VeinStake" type="Node3D" parent="Kaplica/Stake" unique_id=240495182 instance=ExtResource("21_8is1m")]
+transform = Transform3D(1.5208765, 0, 0.49692526, 0, 1.6, 0, -0.49692526, 0, 1.5208765, 12.1, -2.4, 4.2)
+
+[node name="Look" type="Area3D" parent="Kaplica/Stake/VeinStake" unique_id=42192464]
+script = ExtResource("14_hhr7g")
+display_name = "Twój palik"
+description = "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę."
+required_flag = "vein_kaplica"
+solid = false
+padding = 0.08
+
+[node name="Drip" type="AudioStreamPlayer3D" parent="Kaplica" unique_id=1217627498]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.1, -2)
+stream = ExtResource("30_tolvy")
+volume_db = -6.0
+unit_size = 3.0
+max_distance = 18.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 3.0
+max_interval = 9.0
+pitch_variation = 0.25
+
+[node name="Hum" type="AudioStreamPlayer3D" parent="Kaplica" unique_id=319857316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, -1.4, 0)
+stream = ExtResource("32_3frep")
+volume_db = -10.0
+unit_size = 3.0
+max_distance = 25.0
+bus = &"Ambience"
+script = ExtResource("31_1ojre")
+min_interval = 20.0
+max_interval = 45.0
+pitch_variation = 0.3

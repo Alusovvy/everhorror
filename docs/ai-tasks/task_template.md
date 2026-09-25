@@ -4,7 +4,7 @@ Reszta pliku należy do agenta: dopisuje swoje sekcje pod wymaganiami i kończy 
 Zasady pracy z folderem: zob. INFO.md.
 -->
 
-Requirements:
+Wymagania:
 1. <co ma być zrobione — jedno zadanie w punkcie, konkretnie>
 2. <...>
 

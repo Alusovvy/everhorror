@@ -1,0 +1,15 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://script/character_model.gd" id="1_model"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/base/Superhero_Female_FullBody.gltf" id="2_base"]
+[ext_resource type="ArrayMesh" path="res://assets/characters/quaternius/base/head_female.res" id="3_head"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/outfits/Female_Peasant.gltf" id="4_outfit"]
+[ext_resource type="PackedScene" path="res://assets/characters/quaternius/hair/Hair_Buns.gltf" id="5_hair"]
+
+[node name="TeklaModel" type="Node3D"]
+script = ExtResource("1_model")
+base_scene = ExtResource("2_base")
+head_mesh = ExtResource("3_head")
+parts = Array[PackedScene]([ExtResource("4_outfit"), ExtResource("5_hair")])
+outfit_tint = Color(0.85, 0.78, 0.7, 1)
+hair_tint = Color(0.72, 0.42, 0.28, 1)

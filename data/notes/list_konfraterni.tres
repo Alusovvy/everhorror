@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"list_konfraterni"
+title = "List z pieczęcią Konfraterni"
+text = "Był w tobołku Tekli, razem z ciężką sakiewką srebra.\n\n„Tekla, kupuj od górników błękit po dwa grosze za łut, nie drożej. Płać srebrem z sakiewki i nigdy przy zarządcy. Jeśli ktoś się dowie, nie znamy cię.”\n\nPod spodem pieczęć Konfraterni kupieckiej z Mirosil."

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="NoteData" format=3]
+
+[ext_resource type="Script" path="res://script/data/note_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"raport_archiwum"
+title = "Odpis z archiwum Kniazia"
+text = "Racibor dał mi go za raport o złożach. Stary papier, przepisany ręką kancelisty.\n\n„Raport sztygara Wita Grabca dla kancelarii Kniazia. Dostawy błękitu z dolnych chodników ustały. Czternastego dnia zeszliśmy sprawdzić, co się stało. Zejście do upadowej zasypane na kilka sążni. Strop nad zawałem cały, stemple całe. Kamienie okopcone jak od prochu. W składzie brakuje trzech beczek. Z ludzi brakuje tylko przewodnika. Górnicy mówią, że dzień wcześniej zszedł sam i już nie wrócił. Gadają o klątwie i nie chcą zjeżdżać. Wstrzymuję wydobycie do odwołania.”\n\nNa marginesie, ręką Racibora: „Klątwy nie wpisujemy do ksiąg.”"

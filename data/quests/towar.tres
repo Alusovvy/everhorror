@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"towar"
+title = "Tobołek Tekli"
+giver = "Tekla, kwatermistrzyni"
+entries = {
+"start": "Kiedy spuszczali zapasy starym szybem, Tekli urwał się tobołek i wpadł do rząpia. Mam go wyłowić i nikomu o tym nie mówić.",
+"znaleziony": "Wyłowiłem tobołek. W środku sakiewka i list z pieczęcią Konfraterni kupieckiej. Tekla ma skupować błękit na lewo.",
+"oddany": "Oddałem Tekli tobołek. Racibor o niczym nie wie.",
+"wydany": "Oddałem tobołek Raciborowi. Tekla ma przez to kłopoty."
+}
