@@ -54,7 +54,7 @@ Hala jest podzielona drewnianą ścianką na dwie sale. Obóz generuje `tools/ge
 - Kiedy godzina się zmienia, postacie przechodzą na swoje miejsca podczas krótkiego mrugnięcia ekranu. Dialogi mogą pytać, gdzie ktoś jest, i kwestia na powitanie zależy od miejsca.
 
 ### 2. Trzy nowe postacie ✅
-Karty są w `data/npc/*.tres`, oznaczone jako robocze, do przeglądu przez Rena.
+Karty są w `data/npc/*.tres`, oznaczone jako robocze, do przeglądu przez Ren.
 
 | Postać | Frakcja | Rola | Zadanie |
 |---|---|---|---|
@@ -164,14 +164,14 @@ Nie zrobione (zob. „Czego potrzebuję”):
   - posłania, kuchnia, magazyn i proch są w zachodniej sali,
   - dowództwo i zaopatrzenie są we wschodniej sali, przy wyjściu na wyprawy.
 - **Zmiany postaci w czasie.** Postacie „przeskakują” na nowe miejsca podczas mrugnięcia ekranu. Nie ma chodzenia po obozie, bo przy tej skali przejście z animacją byłoby dużą pracą na małą wartość.
-- **Zwrot fabularny.** Dziadek sam wysadził zejście do upadowej i został po tamtej stronie. To moja propozycja do przeglądu przez Rena. Pasuje do LoreDoc, gdzie górnicy sami zawalili szyb, żeby coś uwięzić (zob. [niespójności LoreDoc, pkt 18](../../docs_v2/swiat/loredoc_niespojnosci.md)).
+- **Zwrot fabularny.** Dziadek sam wysadził zejście do upadowej i został po tamtej stronie. To moja propozycja do przeglądu przez Ren. Pasuje do LoreDoc, gdzie górnicy sami zawalili szyb, żeby coś uwięzić (zob. [niespójności LoreDoc, pkt 18](../../../docs_v2/swiat/loredoc_niespojnosci.md)).
 - **Zagadka** ma trzy kroki po cztery opcje. Błąd kosztuje czas, nie życie, więc można próbować do skutku, dopóki starcza godzin.
 - **Koszty podróży.** Do „głębszych” miejsc (upadowa, kaplica) podróż trwa 3 h, do reszty 2 h. Powrót kosztuje tyle samo co droga tam i jest możliwy nawet po 22:00, zgodnie z Twoją odpowiedzią „zawsze wróci, ale może zmarnować dużo czasu”.
 - **Podest z poziomu testowego** usunąłem z naszej kopii `scene/levels/mine.tscn`. Plików paczki nie ruszałem.
 
 ## Czego potrzebuję od Ciebie
 1. **Zgody na pełny zestaw testów** (`tools/run_tests.sh`, ok. 5–8 min, jedna linia wyniku na scenariusz). Scenariusze są gotowe, ale jeszcze ich nie uruchamiałem. Stary, długi test się zawiesił i nie wiem jeszcze dlaczego, więc w przebiegu gry może siedzieć błąd.
-2. **Zagraj** według [factcheck-test-04](../human-tasks/factcheck-test-04.md) i wpisz wyniki.
+2. **Zagraj** według [factcheck-test-04](../../human-tasks/done/factcheck-test-04.md) i wpisz wyniki.
 3. **Ren:** przejrzyj karty i dialogi Racibora, Tekli i Dobrawy oraz zwrot z dziadkiem. Są też do rozstrzygnięcia niespójności z LoreDoc, przede wszystkim punkt 18 (w którym roku dzieje się gra).
 4. **Następne kroki zgodne z Twoimi odpowiedziami w `MECHANICS.md` §13.** Mogę je zrobić w kolejnym zadaniu:
    - zakładka „Ludzie” w notesie z opisem zdrowia i poczytalności („ostatnio nerwowo się zachowuje”),
@@ -181,7 +181,7 @@ Nie zrobione (zob. „Czego potrzebuję”):
 5. **Dźwięki:** nadal potrzebny klucz Freesound albo paczka Sonniss.
 
 ## Test
-Lista do sprawdzenia: [docs/human-tasks/factcheck-test-04.md](../human-tasks/factcheck-test-04.md). Jest tam 33 punkty i proponowana kolejność przejścia na trzy dni.
+Lista do sprawdzenia: [docs/human-tasks/factcheck-test-04.md](../../human-tasks/done/factcheck-test-04.md). Jest tam 33 punkty i proponowana kolejność przejścia na trzy dni.
 
 Automatycznie:
 - `tools/dialogue_test.gd` przechodzi (49 sprawdzeń: gwara, wszystkie nowe dialogi, zagadka, kryształ, ogłoszenie, obie ścieżki Tekli).

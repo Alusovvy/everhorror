@@ -35,6 +35,23 @@ func _load_scene() -> void:
 		if scene.has_node(n):
 			# "keep_hud": true leaves the HUD on (e.g. to check the sanity vignette).
 			scene.get_node(n).visible = cfg.get("keep_hud", false) and n == "HUD"
+	# "hide": ["Camp/Cave/Vault", …] hides nodes (e.g. a ceiling, for a top view).
+	for path in cfg.get("hide", []):
+		if scene.has_node(path):
+			scene.get_node(path).visible = false
+	# "bright": true lights the level flat from above without fog (layout checks, not looks).
+	if cfg.get("bright", false):
+		for env_node in scene.find_children("*", "WorldEnvironment", true, false):
+			var env: Environment = (env_node as WorldEnvironment).environment
+			env.fog_enabled = false
+			env.volumetric_fog_enabled = false
+			env.ambient_light_source = Environment.AMBIENT_SOURCE_COLOR
+			env.ambient_light_color = Color.WHITE
+			env.ambient_light_energy = 1.2
+		var sun := DirectionalLight3D.new()
+		sun.rotation_degrees = Vector3(-70, 30, 0)
+		sun.light_energy = 1.5
+		scene.add_child(sun)
 	if scene.has_node("Player"):
 		scene.get_node("Player").process_mode = Node.PROCESS_MODE_DISABLED
 		scene.get_node("Player/MeshInstance3D").visible = false

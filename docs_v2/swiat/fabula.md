@@ -17,7 +17,7 @@ Bohater jest wnukiem górnika, przewodnika i kryptografa, który latami po cichu
 5. Dzień 3 w tunelach: wyprawa Drugich z Exitium (Ottokar, Sabina, Hieronim, Welf). Ottokar chce map dziadka albo kryształu. Sabina zostaje w obozie jako obserwatorka.
 6. Dni 4–7: norma, upomnienia, gorączka Nasira, wstrząs w piątą noc (od task_06 zostawia ślady w chodnikach), Drudzy w głębinach (ranny Welf, szalony Hieronim, który mówi, że „ona śpi do góry nogami”).
 6a. **„Czternaście kresek”** (task_06, [ROBOCZE]): kreski, zeszyt Grabca, chleb, lampka, pusta nisza i medalik składają się w quest. Przy ≥ 4 śladach ktoś nocą zostawia bohaterowi starą lampę przewodnika. Demo nie mówi, kim jest — to zaczepka pod fabułę główną (❓ Ren: kto liczy do czternastu?).
-7. Rano w dniu 8 Racibor liczy żyły. Z normą gracz zostaje, a upadowa zostanie otwarta, chyba że list dziadka przekonał Racibora. Bez normy wyprawa wyjeżdża bez gracza: pusta hala, lina wciągnięta do połowy, stukanie zza skały.
+7. Rano w dniu 8 Racibor liczy żyły. Z normą gracz zostaje, a upadowa zostanie otwarta, chyba że list dziadka przekonał Racibora. Bez normy wyprawa wyjeżdża bez gracza: pusta jaskinia, lina wciągnięta do połowy, stukanie zza skały.
 
 **Wybory i ich skutki w demie:**
 

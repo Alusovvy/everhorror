@@ -162,7 +162,7 @@ if has_flag("plan_upadowa") and has_note("list_dziadka")
 		Milczysz. List dziadka ciąży ci w kieszeni jak kamień.
 if has_flag("plan_upadowa")
 	if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
-		Mirosław wstaje bez słowa i odchodzi w ciemny kąt hali. Nikt go nie zatrzymuje.
+		Mirosław wstaje bez słowa i odchodzi w ciemny kąt jaskini. Nikt go nie zatrzymuje.
 	elif has_flag("mir_saw_charge")
 		Mirosław: Wysadzić zawał, który ktoś już raz wysadził, żeby nikt tam nie wlazł? Wysadzę. Ale nie mówcie potem, że nikt was nie ostrzegał.
 	else

@@ -15,7 +15,7 @@ Urodzony w 1490 roku. Jako dziesięciolatek jedyny przeżył rzeź, którą Pier
 
 ## Osobowość i głos
 - Mrukliwy, szorstki, mówi krótko. W wersji z gwarą mówi lżejszą śląszczyzną.
-- Ogień i huk to jego trauma i jednocześnie zawód. Siada jak najdalej od ogniska, a proch trzyma w najdalszym kącie hali.
+- Ogień i huk to jego trauma i jednocześnie zawód. Siada jak najdalej od ogniska, a proch trzyma w najdalszym kącie jaskini.
 - Ludziom ufa mniej niż prochowi („Proch przynajmniej robi, co mu każesz”).
 
 ## Informacje do przekazania
@@ -39,7 +39,7 @@ Proch i lonty trzyma w składzie. Graczowi niczego nie daje. Sam chętnie przyjm
 Wysadzanie zawałów. W demie zachodni chodnik. W dniu 3 Racibor chce, żeby Mirosław otworzył upadową.
 
 ## Rozkład dnia (demo)
-Rano i wieczorem siedzi przy ognisku, w dzień kuca w składzie prochu. Na krawędzi (dzień 2+) siedzi skulony w ciemnym kącie hali.
+Rano i wieczorem siedzi przy ognisku, w dzień kuca w składzie prochu. Na krawędzi (dzień 2+) siedzi skulony w ciemnym kącie jaskini.
 
 ## Poczytalność w demie
 | Zdarzenie | Zmiana |

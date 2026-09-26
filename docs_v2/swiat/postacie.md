@@ -34,7 +34,7 @@ Przewodnik i kryptograf. Latami potajemnie wynosił błękitne żelazo i nigdy g
 | **Hieronim z Grotthamu** | Drudzy (Exitium) | stary Drugi, szaleniec | 3, w tunelach | [hieronim.md](postacie/hieronim.md) [ROBOCZE] |
 | **Welf von Hagen** | Drudzy (Exitium) | młody, wyniosły Drugi | 3, w tunelach | [welf.md](postacie/welf.md) [ROBOCZE] |
 
-[ROBOCZE] oznacza postać wymyśloną na potrzeby dema. Czeka na przegląd Rena. Dane w grze: `data/npc/*.tres` (generuje `tools/generators/write_story_data.js`), dialogi: `dialogue/*.dialogue`.
+[ROBOCZE] oznacza postać wymyśloną na potrzeby dema. Czeka na przegląd Ren. Dane w grze: `data/npc/*.tres` (generuje `tools/generators/write_story_data.js`), dialogi: `dialogue/*.dialogue`.
 
 **Jak wątki się łączą (demo):**
 - Mirosław otwiera zachodni chodnik i rozpoznaje, że zawał w upadowej zrobił ładunek.

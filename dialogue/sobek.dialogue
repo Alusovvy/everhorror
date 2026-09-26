@@ -56,7 +56,7 @@ Sobek: [[No?|Mów, byle krótko.|Słucham, przewodniku.]]
 		Sobek: Tchórz. Rozsądny, ale tchórz.
 	=> hub
 - Wygrałem zakład. [if quest_state("zaklad") == "active" and veins_mapped() >= get_flag("bet_target", 99) /]
-	Sobek liczy na palcach, potem jeszcze raz, potem klnie tak, że Hagiwara na drugim końcu hali podnosi wzrok znad księgi.
+	Sobek liczy na palcach, potem jeszcze raz, potem klnie tak, że Hagiwara na drugim końcu jaskini podnosi wzrok znad księgi.
 	Sobek: Na stepowe konie... Dobra. Umowa to umowa. Masz, ale wypij ze mną, zanim zabierzesz.
 	$> give_item("nalewka")
 	$> quest_log("zaklad", "wygrany")

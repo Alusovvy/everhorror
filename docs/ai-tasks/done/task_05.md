@@ -257,14 +257,14 @@ Wszyscy patrzą z góry na „bezmagicznych”.
 - **Modele magów:** paczka strojów Quaterniusa ma tylko wieśniaka i zwiadowcę. Magów odróżnia kolor płaszcza, maski (srebrna, brązowa, ciemna) i kostury trzymane w pozie z pochodnią.
 
 ## Czego potrzebuję od Ciebie
-1. **Factcheck:** przejść [factcheck-test-05](../human-tasks/factcheck-test-05.md) (skrócony tydzień to ok. 2–3 h).
+1. **Factcheck:** przejść [factcheck-test-05](../../human-tasks/done/factcheck-test-05.md) (skrócony tydzień to ok. 2–3 h).
 2. **Balans normy:** czy 12 z 25 żył to dobra wartość? Czy upomnienia nie są za rzadkie albo za częste?
 3. **Build 0.3 jest gotowy:** `build/Everhorror-demo-0.3-windows.zip` (113 MB, `Everhorror.exe` i `CZYTAJ_MNIE.txt` z nowym sterowaniem i listą zmian). Sprawdziłem go na tym komputerze: nowa gra startuje, świat i wszystkie nowe ekrany wczytują się bez błędów.
 4. **Ren:** przegląd 9 nowych kart postaci i wyprawy z Exitium (to robocze postacie, oznaczone [ROBOCZE]).
 5. **Limit ekwipunku:** czy w pełnej grze ma być wybór rzeczy przed wyprawą (GDD)? W demie limitu nie ma.
 
 ## Test
-- Instrukcja: [factcheck-test-05](../human-tasks/factcheck-test-05.md) (33 wiersze).
+- Instrukcja: [factcheck-test-05](../../human-tasks/done/factcheck-test-05.md) (33 wiersze).
 - **Automatycznie (pełny zestaw uruchomiony za zgodą, w trzech porcjach):**
   - Wszystkie 11 scenariuszy przechodzi: `dialogue`, `day1`, `save_load`, `rzapie`, `night1`, `day2`, `kaplica`, `day3`, `expedition`, `drudzy`, `week`.
   - Zanim zestaw przeszedł w całości, poprawiłem dwa błędy w samych testach: `kaplica` miał zły próg zjazdu płyty, a `day3` złą kolejność czekania na rozmowy.

@@ -17,6 +17,8 @@ Dev tools run from the command line (project root). Not used by the game and exc
 | `tests/test_expedition.gd` | The map table and WYRUSZ, scouting, [M] onwards, Wszebor at work, a vein, the pickaxe head, the way back and the summary, bandages from the inventory. | `tools/run_tests.sh expedition` |
 | `tests/test_drudzy.gd` | The Exitium meeting on day 3, Sabina joins, who can turn up where, the wounded Welf saved with bandages. | `tools/run_tests.sh drudzy` |
 | `tests/test_schedule.gd` | The whole week's camp schedule: 7 days × 5 hours × 5 story states resolve to real markers with no two NPCs on one; plus the miners' field posts and an encounter spot. | `tools/run_tests.sh schedule` |
+| `tests/test_places.gd` | task_08: every camp marker is a sane place to stand: flat floor at its height, a person-sized capsule touches no rock or solid prop (seated/crouching markers: upper body only), not inside a rock (mesh-core check: pack rocks are hollow trimeshes), not facing the rock (except praying/sulking), inside the cave. Control probes (a body in the pillar, a ray at the wall) keep the test honest. | `tools/run_tests.sh places` |
+| `tests/test_camp_walk.gd` | task_08: bakes a player-sized navmesh of the camp and walks the real player (physics + the `move_forward` action, steering the head) from the bed to the fire, the map table in the pen, Tekla's stall, Hagiwara's corner, the east barricade, the corridor to the old entrance, the west boards and back. Fails on stuck or late. | `tools/run_tests.sh camp_walk` |
 | `tests/test_week.gd` | Night 3 (Nasir's fever), Racibor's reminder, the hero's death and "retry from morning", the end of the week without the quota. | `tools/run_tests.sh week` |
 | `tests/test_save_load.gd` | Save in the evening, take the bundle in the sump, load: hour, items, pickup, schedule restored. | `tools/run_tests.sh save_load` |
 | `tests/test_rzapie.gd` | Racibor's quest, the sump (bundle, vein, stake), return after 22:00. | `tools/run_tests.sh rzapie` |
@@ -32,14 +34,15 @@ Writing scenarios: extend `res://tools/tests/test_base.gd`, implement `scenario(
 
 | Tool | What it does | Command |
 |---|---|---|
-| `screenshot.gd` | Renders the scene from camera positions in a JSON file to PNGs (real GPU window, not headless). JSON may set `flags`, `day` and `hour` (the camp is laid out for that time). | `GODOT --path . --resolution 1280x720 --script res://tools/screenshot.gd -- tools/views_tour.json <out_dir>` |
+| `screenshot.gd` | Renders the scene from camera positions in a JSON file to PNGs (real GPU window, not headless). JSON may set `flags`, `day` and `hour` (the camp is laid out for that time), `hide` (node paths to hide, e.g. `["Camp/Cave/Vault", "Camp/Cave/Backing/Vault"]` for a top view under the vault) and `bright: true` (flat light from above, no fog: layout checks). | `GODOT --path . --resolution 1280x720 --script res://tools/screenshot.gd -- tools/views_tour.json <out_dir>` |
+| `level_probe.gd` | Prints every instanced piece of a level (path, source scene, global position, yaw, world AABB) as TSV, or with `measure` the local AABB of given piece scenes. For planning geometry edits. | `GODOT --headless --path . --script res://tools/level_probe.gd -- res://scene/levels/mine.tscn > probe.log` or `-- measure res://…/wall_caves_a.tscn …` |
 | `character_preview.gd` | Character model scenes side by side (animation, camera: front, face, side, right). Good for checking outfits, masks and what the hands hold. | `GODOT --path . --resolution 1400x700 --script res://tools/character_preview.gd -- <out.png> sobek,sabina Idle_Torch front` |
 
 ## Generators (they overwrite their output: edit the generator, not the result)
 
 | Tool | Output | Command |
 |---|---|---|
-| `generators/gen_camp.gd` | `scene/levels/camp.tscn`: camp areas, barricades, west/east segments, all markers (spawn, travel, NPC schedule). | `GODOT --headless --path . --script res://tools/generators/gen_camp.gd` |
+| `generators/gen_camp.gd` | `scene/levels/camp.tscn`: the camp cave (floor, `Wall_Cave` walls, a vault of face-down wall pieces, rock backing, pillar, ledges, door frames), its areas and wooden structures (Racibor's pen, the storage scaffold, the old track with carts, lantern posts), barricades, west/east segments, all markers (spawn, travel, NPC schedule; working NPCs face what they work at via `face()`). | `GODOT --headless --path . --script res://tools/generators/gen_camp.gd` |
 | `generators/gen_locations.gd` | `scene/levels/locations.tscn`: the sump, the decline, the chapel (riddle wall) and the ten task_05 places (template `chamber()` + `stub()`), veins (also under flowstone), pickups, hazards, entry/spot/work markers. Needs the sanctin textures. | `... --script res://tools/generators/gen_locations.gd` |
 | `generators/gen_sanctin_textures.gd` | `assets/textures/`: wall glyph mask, VN portrait of the wall, scratches. Run `--import` afterwards. | `... --script res://tools/generators/gen_sanctin_textures.gd` |
 | `generators/gen_mine_deep.gd` | `scene/levels/mine_deep.tscn`: east corridor, slope, cave chamber (with the two east veins). | `... --script res://tools/generators/gen_mine_deep.gd` |

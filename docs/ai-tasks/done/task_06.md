@@ -17,7 +17,7 @@ Factchecki 03–05 były puste, więc plan powstał z przeglądu kodu, dialogów
 5. Poza ogłoszeniem i Exitium **nie było scen zbiorowych**.
 6. **QoL:** brak suwaka jasności w ciemnym horrorze, jedna wspólna głośność, poranek do powtórki tylko w pamięci (wyjście z gry = strata dnia), skok pozwalał psuć sekwencje, poczytalność bez śladu na obrazie.
 
-Zatwierdzone decyzje (2026-09-25): finał tajemnicy zagadkowy (bez zdradzania, kto liczy — kanon dla Rena), skok usunięty, autozapis świtu na dysk, winieta poczytalności.
+Zatwierdzone decyzje (2026-09-25): finał tajemnicy zagadkowy (bez zdradzania, kto liczy — kanon dla Ren), skok usunięty, autozapis świtu na dysk, winieta poczytalności.
 
 ## Co zostało zrobione
 
@@ -52,20 +52,20 @@ Zatwierdzone decyzje (2026-09-25): finał tajemnicy zagadkowy (bez zdradzania, k
 13. `CZYTAJ_MNIE.txt` opisuje sterowanie bez skoku i zmiany przyszłego builda 0.4.
 
 ## Decyzje i założenia
-- **Finał „Czternastego” niczego nie przesądza.** Lampa, liczenie w snach i dolana oliwa mówią tylko: ktoś tam jest i liczy. Czy to dziadek, ktoś ze starej ekipy, czy coś innego — zostaje dla Rena (fabuła główna). Wszystkie nowe teksty mają [ROBOCZE].
+- **Finał „Czternastego” niczego nie przesądza.** Lampa, liczenie w snach i dolana oliwa mówią tylko: ktoś tam jest i liczy. Czy to dziadek, ktoś ze starej ekipy, czy coś innego — zostaje dla Ren (fabuła główna). Wszystkie nowe teksty mają [ROBOCZE].
 - **Ognisko daje mniej poczytalności niż osobne rytuały** (+4…+6 wobec pieśni +6 i kości +5), ale kosztuje tylko godzinę i działa co wieczór — to „tani rytuał wieczorny”, nie zamiennik rozmów.
 - **Autozapis nie jest slotem ręcznym:** nie da się go nadpisać z pauzy, żeby nikt nie stracił świtu przez odruch „SAVE”.
 - **Winieta jest celowo subtelna** (bez drżenia kamery i dźwięków) — horror gry siedzi w tekstach, obraz tylko dopowiada.
 - **Skok wyleciał razem z akcją wejścia**, nie tylko z obsługą — żaden pad/klawisz go nie przywoła.
 
 ## Czego potrzebuję od Ciebie
-1. **Factcheck:** [factcheck-test-06](../human-tasks/factcheck-test-06.md) (ok. 1–1,5 h, można łączyć z factcheckiem 05).
+1. **Factcheck:** [factcheck-test-06](../../human-tasks/done/factcheck-test-06.md) (ok. 1–1,5 h, można łączyć z factcheckiem 05).
 2. **Ren:** przegląd questu „Czternaście kresek” i sceny Dobrawa × Sabina (oba [ROBOCZE], oba dotykają kanonu).
 3. **Build 0.4 jest gotowy:** `build/Everhorror-demo-0.4-windows.zip` (113 MB). Uruchomiony na tym komputerze: nowa gra startuje bez błędów.
 4. Otwarte z task_05 bez zmian: balans normy, limit ekwipunku, klucz Freesound do prawdziwych dźwięków.
 
 ## Test
-- Instrukcja: [factcheck-test-06](../human-tasks/factcheck-test-06.md).
+- Instrukcja: [factcheck-test-06](../../human-tasks/done/factcheck-test-06.md).
 - **Test dialogów:** 84 sprawdzenia (nowe: powitania, cztery wieczory przy ognisku, Bolko o wstrząsie, quest „Czternaście kresek” ze snem i lampą, ostatnia szansa z listem, scena dwóch Drugich z kryształem). Przechodzi.
 - **Rozmowy 0,5 h:** `day1` sprawdza wprost, że dwie rozmowy = 1 h i że zagadnięcie Sobka z samym „Muszę iść.” nic nie kosztuje; test dialogów sprawdza, że znacznik `[#leave]` się parsuje, a tekst opcji zostaje czysty. `drive()` w testach przechodzi teraz przez tę samą ścieżkę co klik gracza.
 - **Scenariusz `week`** rozszerzony: autozapis na dysku po świcie, trzy ślady wstrząsu aktywne w świecie, siedzisko przy ogniu włącza się o 20:00 i znika po scenie, prawdziwe rozegranie wieczoru (+5 poczytalności, −1 h), lampa i wiersz „Czternasty” w zakończeniu „Zostałeś sam”. Przechodzi.
@@ -75,4 +75,4 @@ Zatwierdzone decyzje (2026-09-25): finał tajemnicy zagadkowy (bez zdradzania, k
 ## Podsumowanie
 Środek tygodnia przestał być pusty: co wieczór jest dokąd usiąść, ludzie witają się po swojemu, wstrząs zostawia ślady, a najciekawsza tajemnica dema — kto zostawia chleb zmarłym i liczy do czternastu — jest teraz questem z cichym, zagadkowym finałem. Rozliczenie tygodnia domyka wątek upadowej ostatnią szansą z listem dziadka. Do tego cztery rzeczy, o które prosili testerzy zanim zdążyli poprosić: jasność, osobne głośności, autozapis świtu i czytelny na ekranie stan głowy. Skoku nie ma.
 
-Czekam na factcheck (05 i 06 można przejść razem) i na przegląd Rena. Build 0.4 leży w `build/` i jest gotowy do wysłania testerom (przebudowany po zmianie kosztu rozmów i poprawce `has_flag`).
+Czekam na factcheck (05 i 06 można przejść razem) i na przegląd Ren. Build 0.4 leży w `build/` i jest gotowy do wysłania testerom (przebudowany po zmianie kosztu rozmów i poprawce `has_flag`).

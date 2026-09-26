@@ -21,20 +21,21 @@
 5. **Budujemy z modułowych zestawów** (Mine & Caves, prop_pack, Kenney) i własnych brył z materiałem skały. Nie edytujemy plików zestawów.
 6. **Generujemy sceny skryptami** (`tools/generators/`), więc układ da się zmienić i odtworzyć. Poprawki robimy w generatorze, nie w scenie.
 
-## Obóz (hala, `scene/levels/camp.tscn`)
-Stara hala górnicza (x 0–32, z −5–4,5) jest podzielona drewnianą ścianką z drzwiami przy południowej ścianie.
+## Obóz (jaskinia, `scene/levels/camp.tscn`)
+Naturalna jaskinia ok. 32 × 16 m ze sklepieniem ok. 6 m (x 0–32, z −9–7), w miejscu dawnej hali obitej deskami (task_08, [decyzja 2026-09-26]). Skała na ścianach i sklepieniu, drewno tylko jako konstrukcje: zagroda Racibora, rusztowanie nad magazynem, odrzwia przy wyjściach, słupy z latarniami. Wyjścia są tam, gdzie były: na zachodniej ścianie zachodni chodnik i korytarz do starego wejścia, na wschodniej korytarz, którym do obozu wjeżdża jedyny stary tor. Strefy w dawnej kolejności z zachodu na wschód, luźniej, a ognisko stoi w środku.
 
-| Strefa | Sala | Co tam jest | Kto i kiedy |
+| Strefa | Część jaskini | Co tam jest | Kto i kiedy |
 |---|---|---|---|
-| Posłania | zachodnia | posłania gracza, Bolka i Mirosława, worki, beczka z wodą | Bolko wieczorem, gracz śpi |
-| Kuchnia i wspólny stół | zachodnia | ognisko z rożnem i kociołkiem („Usiądź przy ogniu” po 20:00, scena wg dnia), kącik kucharki, długi stół z ławami, talerze, świeca | śniadanie (do 8:00), kolacja (18–20), wieczór przy ogniu |
-| Magazyn | zachodnia | skrzynie, beczki, stół z narzędziami, osełka, wózek ze starym urobkiem (świeci) | Bolko w dzień, Dobrawa 9–12 przy starych wózkach |
-| Skład prochu | zachodnia, kąt | beczki z prochem, skrzynia z lontami, jak najdalej od ognia | Mirosław w dzień |
-| Stół dowódcy | wschodnia | stół z mapą (**wyprawy**), świecznik, księga zarządcy, chorągiew Kniazia, łóżko | Racibor w dzień i wieczorem, Dobrawa rano w dniu 2 |
-| Zaopatrzenie | wschodnia, przy wyjściu | stragan z linami i olejem, beczki, półka z butelkami | Tekla w dzień i wieczorem |
-| Izba chorych | zachodnia, kąt przy ścianie | posłanie dla chorych, skrzynka Anzelma z ziołami i bandażami, świeca, skrzynka do siedzenia | Anzelm cały dzień, chory Nasir, Sabina przy chorych |
-| Kącik pisarza | wschodnia, kąt | stołek, skrzynia z kubkiem, pędzelkiem i zeszytem wierszy | Hagiwara wieczorem (w dzień przy księdze zarządcy) |
-| Wyjście na wschód | wschodnia | Sobek z mieczem | Sobek cały dzień, oprócz kolacji |
+| Izba chorych | północny zachód | posłanie dla chorych, skrzynka Anzelma z ziołami i bandażami, świeca, skrzynka do siedzenia | Anzelm cały dzień, chory Nasir, Sabina przy chorych |
+| Posłania | południowy zachód | posłania gracza i Bolka, namiot, worki, beczka z wodą; posłanie Mirosława osobno pod północną ścianą, filar skalny między nimi a izbą chorych | Bolko wieczorem, Nasir, Sabina i Dobrawa wieczorem przy zachodnich wyjściach, gracz śpi |
+| Ognisko i kuchnia | środek | ognisko z rożnem i kociołkiem („Usiądź przy ogniu” po 20:00, scena wg dnia), kłody do siedzenia z każdej strony, kącik kucharki | Tekla rano i wieczorem, Mirosław i Wszebor wieczorem |
+| Wspólny stół | środek, na północ od ogniska | długi stół z ławami, talerze, świeca | śniadanie (do 8:00) i kolacja (18–20) |
+| Magazyn | południowa ściana, pod drewnianym rusztowaniem | skrzynie, beczki, stół z narzędziami, osełka; koniec starego toru z dwoma wózkami, w jednym stary urobek (świeci) | Bolko w dzień, Sabina, Dobrawa 9–12 przy wózkach |
+| Skład prochu | północna ściana, jak najdalej od ognia | beczki z prochem, skrzynia z lontami | Mirosław w dzień |
+| Zagroda dowódcy | północny wschód: drewniana palisada ok. 2 m bez dachu, z bramą od strony obozu | **stół z mapą** (wyprawy), świecznik, księga zarządcy, chorągiew Kniazia na poprzeczce, łóżko, skrzynia z żołdem | Racibor, Hagiwara w dzień przy księdze, Dobrawa rano w dniu 2, Tekla pod strażą |
+| Zaopatrzenie | południowy wschód, przy torze | stragan z linami i olejem, beczki, latarnia na słupie | Tekla w dzień i wieczorem |
+| Kącik pisarza | wschód, między zagrodą a ścianą | stołek, skrzynia z kubkiem, pędzelkiem i zeszytem wierszy | Hagiwara wieczorem |
+| Wyjście na wschód | wschodnia ściana, tor wjeżdża w korytarz | — | Sobek z mieczem cały dzień, oprócz kolacji |
 
 W jaskini przy starym wejściu stoi zabita skrzynia z zapasami ze znakiem Kniazia. Łom otwiera ją raz: bandaże, świece, nalewka.
 
@@ -170,4 +171,4 @@ Dane: `data/locations/*.tres` (generator `tools/generators/write_world_data.js`)
 - ❓ Co jest za zawałem w upadowej (pełna gra: szkielet dziadka, głębsze chodniki, Świątynia Onych)?
 - ❓ Czy miejsca wypraw mają się zmieniać między dniami (np. woda w rząpiu rośnie, wstrząs zasypuje przejście)?
 - ❓ Czy 10 prostych miejsc z task_05 ma zostać w pełnej grze, czy to wypełniacz tygodnia?
-- ✅ Obóz: jedna scena w starej hali, strefy jak wyżej.
+- ✅ Obóz: jedna scena w jaskini (task_08: dawniej hala z desek), strefy jak wyżej.

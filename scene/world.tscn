@@ -177,20 +177,20 @@ omni_attenuation = 1.4
 script = ExtResource("16_flicker")
 
 [node name="HallLight1" type="OmniLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4, 3, 1.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 3.8, -0.5)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.8
 shadow_enabled = true
-omni_range = 10
+omni_range = 12
 omni_attenuation = 1.4
 script = ExtResource("16_flicker")
 
 [node name="HallLight2" type="OmniLight3D" parent="Lighting"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.9, 3, 0.33)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 3.8, 0)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.8
 shadow_enabled = true
-omni_range = 10
+omni_range = 12
 omni_attenuation = 1.4
 script = ExtResource("16_flicker")
 
@@ -243,7 +243,7 @@ max_interval = 11
 pitch_variation = 0.2
 
 [node name="DripHall" type="AudioStreamPlayer3D" parent="Sounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 3.5, -3.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 5, -5)
 stream = ExtResource("19_drip")
 volume_db = -6
 unit_size = 3.0
@@ -255,7 +255,7 @@ max_interval = 12
 pitch_variation = 0.2
 
 [node name="CreakHall1" type="AudioStreamPlayer3D" parent="Sounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 3.6, 0.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2, 3, 4.7)
 stream = ExtResource("20_creak")
 volume_db = -8
 unit_size = 3.0
@@ -267,7 +267,7 @@ max_interval = 28
 pitch_variation = 0.12
 
 [node name="CreakHall2" type="AudioStreamPlayer3D" parent="Sounds"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 3.6, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1, 2.5, -5)
 stream = ExtResource("20_creak")
 volume_db = -8
 unit_size = 3.0

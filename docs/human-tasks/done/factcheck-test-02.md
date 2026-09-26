@@ -1,6 +1,6 @@
 # Factcheck test 02: logo w menu i pauzie
 
-> Zadanie: [task_02](../ai-tasks/task_02.md) · Przygotowano: 2026-09-25
+> Zadanie: [task_02](../../ai-tasks/done/task_02.md) · Przygotowano: 2026-09-25
 > Uruchom grę w VS Code (F5 → „Godot: main scene”) albo z edytora Godot.
 > Wpisz w kolumnie **Wynik**: ✅ OK / ❌ błąd / 💬 propozycja zmiany i dopisz uwagi.
 

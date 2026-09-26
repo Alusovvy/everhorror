@@ -11,7 +11,7 @@ mkdir -p "$LOGS"
 
 tests=("$@")
 if [ ${#tests[@]} -eq 0 ]; then
-	tests=(unit lint dialogue schedule day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
+	tests=(unit lint dialogue schedule places camp_walk day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
 fi
 
 failed=0

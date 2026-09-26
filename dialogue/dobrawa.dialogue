@@ -90,7 +90,7 @@ Dobrawa: [[Słucham.|Tak?|Mów krótko. To miejsce boli.]]
 	=> hub
 - Stoicie tu z Sabiną co wieczór i milczycie. [if has_flag("sabina_joined") and npc_status("sabina") == "camp" and part_of_day() == "wieczor" and not has_flag("dwie_drugie") /]
 	$> set_flag("dwie_drugie")
-	Dobrawa i Sabina stoją trzy kroki od siebie, obie zwrócone twarzami do ciemnej ściany hali. Dwie maski, dwa kostury. Milczenie, które ma temperaturę.
+	Dobrawa i Sabina stoją trzy kroki od siebie, obie zwrócone twarzami do ciemnej skały. Dwie maski, dwa kostury. Milczenie, które ma temperaturę.
 	Sabina: My nie milczymy, kochanie. My rozmawiamy. Wy tego po prostu nie słyszycie.
 	Dobrawa: Nie rozmawiamy. Ona nadaje. Ja nie odbieram.
 	Sabina: Widzisz? Odpowiedziała. W Exitium to by już uchodziło za przyjaźń.

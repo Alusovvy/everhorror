@@ -7,7 +7,7 @@ Requierements:
 
 ## 1. Szablon zadania
 
-Dodałem [task_template.md](task_template.md). Zawiera:
+Dodałem [task_template.md](../task_template.md). Zawiera:
 - **Requirements**: jedyna obowiązkowa sekcja, którą wypełniasz ty,
 - opcjonalnie: kontekst, kryteria akceptacji („po czym poznam, że jest dobrze”), „poza zakresem”, priorytet,
 - pod kreską: sekcje, które wypełniam ja (co zrobione, decyzje, czego potrzebuję, link do testu, podsumowanie).
@@ -184,7 +184,7 @@ Pliki: `scene/main_menu.tscn`, `scene/pause_menu.tscn`, `script/main_menu.gd`.
 
 ## Test
 
-Lista do sprawdzenia: [docs/human-tasks/factcheck-test-02.md](../human-tasks/factcheck-test-02.md). Przygotowałem też [factcheck-test-01.md](../human-tasks/factcheck-test-01.md) dla zadania 1, bo było w nim dużo implementacji, a nowa zasada z INFO.md jeszcze wtedy nie obowiązywała.
+Lista do sprawdzenia: [docs/human-tasks/factcheck-test-02.md](../../human-tasks/done/factcheck-test-02.md). Przygotowałem też [factcheck-test-01.md](../../human-tasks/done/factcheck-test-01.md) dla zadania 1, bo było w nim dużo implementacji, a nowa zasada z INFO.md jeszcze wtedy nie obowiązywała.
 
 ## Podsumowanie
 

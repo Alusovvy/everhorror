@@ -122,7 +122,7 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 
 ~ day2
 if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
-	Mirosław siedzi skulony w ciemnym kącie hali, z dala od ogniska. Chyba w ogóle nie spał.
+	Mirosław siedzi skulony w ciemnym kącie jaskini, z dala od ogniska. Chyba w ogóle nie spał.
 	Mirosław: Nie podchodź z tą lampą. Proszę cię.
 	Mirosław: Całą noc słyszałem wybuchy. Jeden za drugim. A przecież był tylko jeden.
 	- Posiedzę z tobą. [if not has_flag("mir_day2_comfort") /]

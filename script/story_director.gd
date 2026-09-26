@@ -76,7 +76,7 @@ func begin(is_new_game: bool) -> void:
 func _intro() -> void:
 	_busy = true
 	await fade.fade_out(0.01)
-	await fade.show_card("Dzień 1", "Obóz ekspedycji w starej hali górniczej")
+	await fade.show_card("Dzień 1", "Obóz ekspedycji w jaskini pod starą kopalnią")
 	await fade.fade_in(1.0)
 	await VN.play(SYSTEM_DIALOGUE, "intro")
 	GameState.message.emit("[E] rozmowa i badanie   ·   [J] notes   ·   [I] ekwipunek   ·   [M] mapa w chodnikach   ·   [Esc] pauza")

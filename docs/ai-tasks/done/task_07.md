@@ -47,11 +47,21 @@ Stan przed zadaniem (ok. 1500 linii w `tools/`):
 
 ## Czego potrzebuję od Ciebie
 1. **Restart sesji Claude Code**, żeby `godot-runtime` się połączył — wtedy mogę zrobić pierwszy dymny test wejścia (np. „M otwiera mapę w chodnikach”).
-2. Factcheck: [factcheck-test-07](../human-tasks/factcheck-test-07.md) (4 wiersze, ~15 min).
+2. Factcheck: [factcheck-test-07](../../human-tasks/done/factcheck-test-07.md) (4 wiersze, ~15 min).
 
 ## Test
 - `unit`: 29/29 · `lint`: 5/5 (po naprawie znalezisk) · `schedule`: 5/5 · `week` (rozszerzony o wywiezienie Nasira): przechodzi · `drudzy`: przechodzi. Pozostałych scenariuszy ta zmiana nie dotyka (mechanika gry bez zmian poza logowaniem `wywieziony`); pełny zestaw — przy następnej okazji za zgodą.
 - Konfiguracja `.mcp.json` zwalidowana, paczka `godot-mcp-runtime` uruchomiona na stdio i zamknięta czysto.
+
+## Test serwera godot-runtime (2026-09-26, po restarcie)
+Pierwsza próba (25.09) padła: klient VS Code nie umie pokazać okna zgody MCP, więc serwer sam odrzucał `run_project`. Po ustawieniu `GODOT_MCP_DISABLE_ELICITATION=true` i restarcie test przeszedł, w trybie tła (okno poza ekranem, mysz i klawiatura użytkownika wolne):
+- START kliknięty w menu → świat się wczytuje, wstęp przewija się Spacją, HUD wraca,
+- Spacja w świecie nic nie robi (skoku nie ma),
+- **M w obozie**: mapa się nie otwiera, tylko podpowiedź „[M] działa w chodnikach”,
+- wyprawa do Starej sztolni (wywołanie jak z WYRUSZ) → dzień 1, 09:00,
+- **M w chodniku**: mapa terenowa „Dokąd dalej?” z sąsiadami i czasem drogi; drugie M ją zamyka,
+- I i J otwierają i zamykają ekwipunek i notes,
+- log: zero błędów skryptów (tylko znane ostrzeżenia UID z zestawu kopalni); po zamknięciu serwer usunął swój autoload z `project.godot`.
 
 ## Build 0.4.1
 Po zadaniu zbudowany **`build/Everhorror-demo-0.4.1-windows.zip`** (113 MB) z dwiema poprawkami znalezionymi przez nowe testy: komunikat czasu bez podwójnego „h” i nieudane zadanie „Gorączka Nasira” z wpisem w notesie po wywiezieniu. Test dymny exe: świat się wczytuje, zero błędów skryptów. 0.4 zostaje obok.

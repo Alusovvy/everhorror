@@ -4,7 +4,7 @@ using GameState
 if not has_flag("met_anzelm")
 	$> set_flag("met_anzelm")
 	if npc_place("anzelm") == "modlitwa"
-		W zachodnim kącie hali klęczy chudy mężczyzna w wypłowiałym habicie i szepcze do ściany, na której nic nie ma. Wstaje powoli, jakby kolana miały mu jeszcze coś do powiedzenia.
+		W zachodnim kącie jaskini klęczy chudy mężczyzna w wypłowiałym habicie i szepcze do ściany, na której nic nie ma. Wstaje powoli, jakby kolana miały mu jeszcze coś do powiedzenia.
 	else
 		Chudy mężczyzna w wypłowiałym habicie zwija bandaże w równe rolki. Na piersi nosi płomień z brązu, przecięty ciemną rysą.
 	Anzelm: Anzelm. Wszyscy mówią do mnie „bracie”, choć bratem już nie jestem. Leczę tu, co się da wyleczyć. Resztę opatruję i się modlę.

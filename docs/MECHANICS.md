@@ -254,7 +254,7 @@ Systemy i ich kolejność. Każdy krok da się zagrać i sprawdzić osobno.
 | 12 | Menu główne, pauza, opcje | `main_menu.tscn`, `pause_menu.tscn` | ✅ + gwara śląska |
 | 13 | Zdrowie i poczytalność bohatera | `GameState`, HUD, ekwipunek, ekran końca | ✅ rany, gorączka, śmierć z „od rana”, załamanie |
 
-**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. ✅ Zrobiony w task_03 i rozbudowany w task_04 do demo na 3 dni (obóz ze strefami, 5 NPC, 5 miejsc wypraw, zagadka ściany). Opis: [task_04](ai-tasks/task_04.md). W task_05 demo urosło do tygodnia: 15 miejsc, 14 postaci, ekwipunek i norma żył ([task_05](ai-tasks/task_05.md)).
+**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. ✅ Zrobiony w task_03 i rozbudowany w task_04 do demo na 3 dni (obóz ze strefami, 5 NPC, 5 miejsc wypraw, zagadka ściany). Opis: [task_04](ai-tasks/done/task_04.md). W task_05 demo urosło do tygodnia: 15 miejsc, 14 postaci, ekwipunek i norma żył ([task_05](ai-tasks/done/task_05.md)).
 
 ## 13. Otwarte pytania (zbiorczo)
 

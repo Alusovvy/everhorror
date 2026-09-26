@@ -15,7 +15,7 @@ Kontekst:
 Założenia (zaakceptowane):
 - Dzień 16 h; rozmowa 1 h, podróż 2 h, pomoc NPC 4 h; po wyczerpaniu godzin trzeba iść spać.
 - Poczytalność niewidoczna jako liczba — tylko objawy w dialogach.
-- Teksty gry po polsku; imię i historia drugiego NPC robocze, do poprawki przez Rena.
+- Teksty gry po polsku; imię i historia drugiego NPC robocze, do poprawki przez Ren.
 - Brak śmierci gracza w FPP.
 - Darmowe assety tylko z licencją CC0 lub równoważną (wpis do `docs_v2/05_oprawa.md`).
 
@@ -78,7 +78,7 @@ Priorytet: wysoki
 - **Obóz:** posłanie, ognisko (płomienie, migoczące światło, trzask), pnie do siedzenia, stół z mapą ze świecą, skrzynie z zapasami. Rekwizyty Kenney *Survival Kit* (CC0) dostały tekstury z zestawu kopalni, żeby nie wyglądały jak plastik.
 - Nowy dźwięk: huk wybuchu (generowany, jak pozostałe).
 - ❌ **Prawdziwych nagrań CC0 zamiast generowanych dźwięków nie zrobiłem.** Freesound wymaga Twojego klucza API, a paczkę Sonniss trzeba ręcznie pobrać (kilka GB). Wygenerowane dźwięki zostają na razie.
-- [factcheck-test-03](../human-tasks/factcheck-test-03.md) jest gotowy.
+- [factcheck-test-03](../../human-tasks/done/factcheck-test-03.md) jest gotowy.
 
 ### Dodatkowo (na Twoją prośbę w trakcie)
 - **Build do wysłania znajomym:** `build/Everhorror-demo-0.1-windows.zip` (97 MB). W środku jest `Everhorror.exe` (jeden plik) i `CZYTAJ_MNIE.txt` z instrukcją. Build sprawdziłem na tym komputerze (menu i nowa gra uruchamiają się bez błędów).
@@ -92,7 +92,7 @@ Priorytet: wysoki
   - Build i `CZYTAJ_MNIE.txt` są zaktualizowane.
 
 ## Decyzje i założenia
-- **Fabuła wycinka** to moja propozycja do przejrzenia przez Rena i Vitava: szyfr dziadka na wschodzie, klucz na zachodzie, odszyfrowana wiadomość o „Nich” i błękicie. Bolko to postać robocza.
+- **Fabuła wycinka** to moja propozycja do przejrzenia przez Ren i Vitava: szyfr dziadka na wschodzie, klucz na zachodzie, odszyfrowana wiadomość o „Nich” i błękicie. Bolko to postać robocza.
 - **Obóz** to południowa część hali. Wyprawy są możliwe tylko przez mapę (deski na przejściach).
 - **Poczytalność** ma pasma: spokojny ≥ 40, niespokojny ≥ 20, na krawędzi > 0. Gracz nie widzi liczby, tylko objawy w tekście i zachowaniu.
 - **Portret VN** renderuje się z modelu 3D, więc na razie nie potrzeba żadnych rysunków 2D.
@@ -101,13 +101,13 @@ Priorytet: wysoki
 - Menu nadal jest po angielsku (START, OPTIONS…), a cały tekst w grze po polsku, zgodnie z wcześniejszą decyzją.
 
 ## Czego potrzebuję od Ciebie
-1. **Zagraj** według [factcheck-test-03](../human-tasks/factcheck-test-03.md) i daj build znajomym.
+1. **Zagraj** według [factcheck-test-03](../../human-tasks/done/factcheck-test-03.md) i daj build znajomym.
 2. **Wysyłka buildu:** ZIP ma 97 MB, więc Discord go nie przyjmie (limit 10 MB). Użyj Google Drive albo WeTransfer, albo wróćmy do automatycznych buildów z task_02 (itch.io lub GitHub Releases).
 3. **Ren i Vitav:** przejrzyjcie Bolka i wątek szyfru. Teksty łatwo zmienić w `dialogue/*.dialogue` i `tools/generators/write_story_data.js`.
 4. **Dźwięki:** klucz Freesound (`setx FREESOUND_API_KEY "..."`) albo pobrana paczka Sonniss. Wtedy podmienię wygenerowane dźwięki na prawdziwe.
 
 ## Test
-Lista do sprawdzenia: [docs/human-tasks/factcheck-test-03.md](../human-tasks/factcheck-test-03.md) (26 punktów plus scenariusz pełnego przejścia).
+Lista do sprawdzenia: [docs/human-tasks/factcheck-test-03.md](../../human-tasks/done/factcheck-test-03.md) (26 punktów plus scenariusz pełnego przejścia).
 
 ## Podsumowanie
 Vertical slice jest grywalny od początku do końca, w około 20 minutach:

@@ -61,7 +61,7 @@ if has_flag("drudzy_met")
 	Stoisz w białym, zimnym świetle. Ktoś w żelaznej masce kładzie ci dłoń na twarzy i nic się nie dzieje.
 	A potem dzieje się wszystko naraz. Widzisz linie. Biegną przez skałę, przez ludzi w obozie, przez ciebie. Wszystkie w dół.
 else
-	Widzisz obóz z góry, jakby sklepienie hali było ze szkła. Wszyscy śpią. Tylko Racibor siedzi nad mapą i liczy na palcach.
+	Widzisz obóz z góry, jakby sklepienie jaskini było ze szkła. Wszyscy śpią. Tylko Racibor siedzi nad mapą i liczy na palcach.
 	Liczy i liczy, a palców ciągle mu brakuje.
 Z bardzo daleka ktoś odpowiada na twój oddech swoim. Wolniejszym.
 Budzisz się zlany potem. Amulet jest ciepły, choć leżał na zimnej ziemi.
@@ -81,7 +81,7 @@ Budzisz się i przez dłuższą chwilę nie wiesz, po której stronie skały jes
 Śnisz dziadka. Siedzi przy ognisku jak wtedy, kiedy byłeś mały, i struga coś nożem.
 Nie podnosi wzroku. Pyta tylko, czy policzyłeś.
 Chcesz zapytać, co miał policzyć, ale ogień gaśnie, a on razem z nim.
-Budzisz się przed świtem. W hali jest cicho, jakby wszyscy wstrzymali oddech.
+Budzisz się przed świtem. W jaskini jest cicho, jakby wszyscy wstrzymali oddech.
 => END
 
 ~ too_late
@@ -90,7 +90,7 @@ Robi się późno. Na dziś wystarczy, pora wracać na posłanie.
 
 ~ intro
 Zeszliście szybem wczoraj po zmroku. Lina skrzypiała przez całą drogę w dół, a na górze został tylko pusty wóz.
-Obóz rozbito w starej hali górniczej. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
+Obóz rozbito w wielkiej jaskini na końcu starej kopalni. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
 Zarządca Racibor dał wam tydzień. Do wieczora siódmego dnia Kniaź chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano przyjdzie po raport wóz.
 Pogadaj z ludźmi. Wyprawy planujesz przy stole z mapą w kwaterze zarządcy, za drewnianą ścianką. W chodnikach mapa [M] pokaże ci drogę dalej albo z powrotem. Na noc wracasz na posłanie.
 => END

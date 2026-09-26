@@ -4,7 +4,7 @@ using GameState
 $> mark_today("campfire")
 Siadasz na skrzyni przy ogniu. Ciepło łapie cię za ręce, zanim zdążysz je wyciągnąć.
 if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
-	Po drugiej stronie hali, w ciemnym kącie, Mirosław liczy coś szeptem. Do ognia nie podchodzi. Ogień to jego fach i jego wróg.
+	Po drugiej stronie jaskini, w ciemnym kącie, Mirosław liczy coś szeptem. Do ognia nie podchodzi. Ogień to jego fach i jego wróg.
 elif npc_status("miroslaw") == "camp"
 	$> mark_today("mir_company")
 	$> change_sanity("miroslaw", 2)
@@ -31,7 +31,7 @@ if npc_status("nasir") == "camp" and not has_fever("nasir")
 		Sobek: Dzięki, Nasir. Zaraz się wszyscy ogrzejemy tym pocieszeniem.
 if npc_status("tekla") == "camp"
 	Tekla: Dość strachów. Kto ma kubek, dostanie wrzątku z igliwiem. Kto nie ma, niech się grzeje opowieściami.
-Przez chwilę hala jest tylko halą, ogień tylko ogniem, a ludzie tylko ludźmi.
+Przez chwilę jaskinia jest tylko jaskinią, ogień tylko ogniem, a ludzie tylko ludźmi.
 $> change_player_sanity(5)
 => END
 
@@ -42,7 +42,7 @@ if npc_status("wszebor") != "camp"
 	=> END
 Wszebor grzebie kijem w ogniu, aż iskry idą pod strop.
 Wszebor: U nas dziś zaczyna się Długa Noc. Osiemnaście godzin ciemności. To zaśpiewam wam to, co się śpiewa, żeby ją przespać.
-Wszebor śpiewa nisko i powoli, jakby kołysał całą halę.
+Wszebor śpiewa nisko i powoli, jakby kołysał całą jaskinię.
 Wszebor: Śpij, bo za progiem noc bez dna, śnieg zasypuje próg i drzwi. Kto śpi, ten w chacie do dnia trwa, kto czuwa, tego biorą sny.
 Wszebor: Śpij, bo pod śniegiem chodzi głód, a z głodem chodzą Wultany. Do rana pilnują nas piec i lód, do rana wszyscyśmy wyspani.
 if npc_status("bolko") == "camp"
@@ -68,7 +68,7 @@ if npc_status("hagiwara") == "camp"
 		Hagiwara: Tutaj jeszcze żadnego nie napisałem. Może już czas.
 if npc_status("tekla") == "camp"
 	Tekla dolewa wszystkim wrzątku, nie pytając. Dziś nie liczy kubków.
-Strop nad wami trzeszczy raz, cicho, jak deska pod znajomym krokiem. Wszyscy udają, że nie słyszą.
+Gdzieś w sklepieniu trzeszczy raz, cicho, jak stary stempel pod ciężarem. Wszyscy udają, że nie słyszą.
 $> change_player_sanity(4)
 => END
 

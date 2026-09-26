@@ -19,7 +19,7 @@ Każdy zewnętrzny zasób musi mieć tu wpis ze źródłem i licencją **zanim**
 
 | Zasób | Folder | Źródło | Licencja | Użyty? |
 |---|---|---|---|---|
-| Mine & Caves Set (Loafbrr) | `assets/LoafbrrAssets` | [loafbrr.itch.io](https://loafbrr.itch.io/) | **CC0** (plik README) | ✅ hala, tunele, skały, stemple |
+| Mine & Caves Set (Loafbrr) | `assets/LoafbrrAssets` | [loafbrr.itch.io](https://loafbrr.itch.io/) | **CC0** (plik README) | ✅ jaskinia obozu, tunele, skały, stemple |
 | Fantasy Props MegaKit (Standard) | `assets/prop_pack` | [Quaternius](https://quaternius.com) | **CC0** (`LICENSE_FantasyPropsMegaKit.txt`) | ✅ rekwizyty obozu i lokacji |
 | Survival Kit | `assets/props/kenney_survival` | [Kenney](https://kenney.nl) | **CC0** (`License.txt`) | ✅ posłania, ognisko, rożen, drogowskazy, skrzynki (z teksturami z Mine & Caves) |
 | Universal Base Characters | `assets/characters/quaternius/base`, `hair` | [Quaternius](https://quaternius.com/packs/universalbasecharacters.html) | **CC0** (`LICENSE_UniversalBaseCharacters.txt`) | ✅ ciała męskie i kobiece, fryzury |

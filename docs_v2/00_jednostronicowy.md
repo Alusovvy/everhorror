@@ -43,4 +43,4 @@ Grywalne demo (task_03–task_05):
 - **ekwipunek [I]** z przedmiotami do użycia i do oddania NPC; zdrowie, poczytalność i gorączka bohatera, śmierć z „od rana”,
 - zadania i notes (z zakładką „Ludzie”), szyfr dziadka, ściana z zagadką, zapis całego stanu gry.
 
-Nie ma jeszcze prologu na powierzchni ani zakończeń pełnej gry. Szczegóły w [task_05](../docs/ai-tasks/task_05.md).
+Nie ma jeszcze prologu na powierzchni ani zakończeń pełnej gry. Szczegóły w [task_05](../docs/ai-tasks/done/task_05.md).
