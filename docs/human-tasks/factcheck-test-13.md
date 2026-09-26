@@ -1,6 +1,6 @@
 # Factcheck test 13: sny po odszyfrowaniu, kreski w noc 7, ryba bez pomp i bandaż dla Wszebora
 
-Zadanie: [task_13](../ai-tasks/task_13.md) (ze specyfikacji `8d8c550`, zgłoszenie z wyrównania). Gałąź: `spec/2026-09-26-task13`.
+Zadanie: [task_13](../ai-tasks/done/task_13.md) (ze specyfikacji `8d8c550`, zgłoszenie z wyrównania). Gałąź: `spec/2026-09-26-task13`.
 
 ## Co zostało dodane
 - **Sen z listem dziadka** kończy sen pierwszej nocy po odszyfrowaniu — także po dniu 3–4, 5–6 i 7 (wcześniej tylko po nocach 1–2). Raz na grę.
