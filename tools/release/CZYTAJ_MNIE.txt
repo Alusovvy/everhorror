@@ -1,4 +1,4 @@
-EVERHORROR - wersja testowa (demo 0.5.1)
+EVERHORROR - wersja testowa (demo 0.5.2)
 ==========================================
 
 JAK URUCHOMIĆ
@@ -42,6 +42,16 @@ dzień da się powtórzyć od rana (RETRY FROM MORNING).
 
 Cały tydzień to mniej więcej 2-3 godziny grania. Grę zapisuje się pod Esc
 (3 miejsca na zapis).
+
+CO NOWEGO W 0.5.2 (poprawki)
+- staw w zalanym chodniku jest pod wodą, dopóki nie ruszą pompy, więc łowić
+  da się dopiero potem. Jest za to inny sposób na rybę: zapytaj Wszebora
+  (i miej przy sobie bandaż)
+- sen po odszyfrowaniu wiadomości dziadka przychodzi zawsze, niezależnie od
+  tego, którego dnia zdobędziesz szyfr i klucz (wcześniej tylko po dniu 1 i 2)
+- sen ostatniej nocy ma swoją końcówkę dla tych, którzy liczyli kreski
+- "Muszę iść." u przybysza z Exitium nie zabiera już 5 minut
+- zapisy z 0.5.1 działają
 
 CO NOWEGO W 0.5.1
 - pierwszy dzień: w obozie są tylko zarządca, kwatermistrzyni i dwaj górnicy;
