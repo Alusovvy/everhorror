@@ -8,7 +8,7 @@
 | **Rola** | pisarz ekspedycji, wygnaniec z Cesarstwa |
 | **Poczytalność (max)** | 100 (start 80) |
 | **Zdrowie (max)** | 100 |
-| **Pojawia się** | od dnia 1 |
+| **Pojawia się** | od dnia 1: w dniu 1 na szychcie w losowym pomieszczeniu pierwszego poziomu (zob. [NPC](../../systemy/npc.md#rozkład-dnia)), od dnia 2 w obozie |
 | **Wygląd w grze** | szczupły, krótkie czarne włosy, jaśniejsza cera, prosty strój w szarości |
 
 ## Historia

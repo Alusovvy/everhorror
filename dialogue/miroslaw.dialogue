@@ -1,14 +1,18 @@
 using GameState
 
 ~ start
-if day >= 3
-	=> day3
-if day == 2
-	=> day2
+# task_11: whoever meets him first on day 2 or 3 still gets his introduction.
+if has_flag("met_miroslaw")
+	if day >= 3
+		=> day3
+	if day == 2
+		=> day2
 if not has_flag("met_miroslaw")
 	$> set_flag("met_miroslaw")
 	if npc_place("miroslaw") == "proch"
 		Mirosław klęczy przy beczkach z prochem i coś przy nich poprawia. Kiedy podchodzisz, odruchowo zasłania je plecami.
+	elif npc_place("miroslaw") == "kat"
+		W ciemnym kącie jaskini siedzi skulony mężczyzna i liczy coś szeptem na palcach. Na twój widok milknie i chowa dłonie pod pachy.
 	else
 		Mirosław siedzi przy ognisku, ale odsunięty, jakby ogień mógł go ugryźć.
 	Mirosław: Ty nowy? Siadaj, jak chcesz. Byle mi nad głową nie stać.

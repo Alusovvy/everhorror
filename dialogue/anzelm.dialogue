@@ -5,9 +5,20 @@ if not has_flag("met_anzelm")
 	$> set_flag("met_anzelm")
 	if npc_place("anzelm") == "modlitwa"
 		W zachodnim kącie jaskini klęczy chudy mężczyzna w wypłowiałym habicie i szepcze do ściany, na której nic nie ma. Wstaje powoli, jakby kolana miały mu jeszcze coś do powiedzenia.
+	elif npc_place("anzelm") == "teren"
+		Pod ścianą klęczy chudy mężczyzna w wypłowiałym habicie i zeskrobuje nożykiem mech ze skały do woreczka. Na piersi nosi płomień z brązu, przecięty ciemną rysą.
 	else
 		Chudy mężczyzna w wypłowiałym habicie zwija bandaże w równe rolki. Na piersi nosi płomień z brązu, przecięty ciemną rysą.
 	Anzelm: Anzelm. Wszyscy mówią do mnie „bracie”, choć bratem już nie jestem. Leczę tu, co się da wyleczyć. Resztę opatruję i się modlę.
+	if npc_place("anzelm") == "teren"
+		if current_place() == "east"
+			Anzelm: Tu rośnie mech, który tamuje krew. Stara ekipa też go zbierała, widać po ścianie.
+		elif current_place() == "rzapie"
+			Anzelm: Woda z rząpia do picia się nie nadaje. Powiedz to każdemu, kogo spotkasz, zanim ja będę musiał.
+		elif current_place() == "west"
+			Pytasz, jak przeszli przez zawał. Pokazują szparę pod stropem, przez którą przeciśnie się człowiek bez plecaka. Wrócą nią dopiero po szychcie.
+			Anzelm: Za zawałem powietrze jest ciężkie. Oddychaj płytko, synu, i nie siedź tu dłużej, niż musisz.
+		Anzelm: Zszedłem z ludźmi na szychtę. Jak ktoś rozbije sobie głowę, lepiej, żebym był blisko. W obozie będę jutro.
 elif not done_today("anz_hello")
 	$> mark_today("anz_hello")
 	if player_fever

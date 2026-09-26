@@ -5,12 +5,24 @@ if not has_flag("met_wszebor")
 	$> set_flag("met_wszebor")
 	if npc_place("wszebor") == "ognisko"
 		Olbrzym przy ognisku śpiewa coś niskim głosem, a Tekla udaje, że jej to nie przeszkadza. Na twój widok urywa w pół słowa.
+	elif npc_place("wszebor") == "teren" and day == 1
+		W głębi chodnika ktoś wali kilofem tak, że ze stropu sypie się pył. Olbrzym z jasną brodą odwraca się na dźwięk twoich kroków, z kilofem wciąż w górze.
 	elif npc_place("wszebor") == "teren"
 		W głębi wyrobiska ktoś wali kilofem tak, że ze stropu sypie się pył. Olbrzym z jasną brodą odwraca się na dźwięk twoich kroków.
 	else
 		Przy stole siedzi olbrzym z jasną brodą i je za trzech. Ława ugina się pod nim jak pod dwoma.
 	Wszebor: Hej! Ty żeś ten wnuk przewodnika? Wszebor jestem, ze Śnieżnej Przystani. Rębacz. A jak trza, to i kowal.
-	Wszebor: Siadaj, siadaj. Pod ziemią ino dwie rzeczy grzeją, ogień i gadanie.
+	if npc_place("wszebor") == "teren" and day == 1
+		if current_place() == "east"
+			Wszebor: Ta sztolnia to robota starych. Stemple stoją jak kolumny w świątyni, aż żal obok rąbać.
+		elif current_place() == "rzapie"
+			Wszebor: Woda mi po kostki. Rębacz w wodzie to jak kowal bez ognia, ino się moczy i klnie.
+		elif current_place() == "west"
+			Pytasz, jak przeszli przez zawał. Pokazują szparę pod stropem, przez którą przeciśnie się człowiek bez plecaka. Wrócą nią dopiero po szychcie.
+			Wszebor: Przez tę szparę przelazłem ino na wydechu. Z powrotem chyba będę musiał schudnąć.
+		Wszebor: Zeszlim tu przed świtem, cała szychta, i do rana nie wychodzim. Jutro przy ogniu pogadamy. Dziś możesz najwyżej lampę potrzymać.
+	else
+		Wszebor: Siadaj, siadaj. Pod ziemią ino dwie rzeczy grzeją, ogień i gadanie.
 elif npc_place("wszebor") == "teren" and not done_today("wsz_field")
 	$> mark_today("wsz_field")
 	Wszebor ociera pot z czoła i opiera kilof o ścianę.

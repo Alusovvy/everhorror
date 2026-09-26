@@ -8,7 +8,7 @@
 | **Rola** | felczer, były zakonnik Niebiańskiego Płomienia |
 | **Poczytalność (max)** | 100 (start 64) |
 | **Zdrowie (max)** | 100 |
-| **Pojawia się** | od dnia 1 |
+| **Pojawia się** | od dnia 1: w dniu 1 na szychcie w losowym pomieszczeniu pierwszego poziomu (zob. [NPC](../../systemy/npc.md#rozkład-dnia)), od dnia 2 w obozie |
 | **Wygląd w grze** | chudy, jasny wypłowiały strój, siwe włosy |
 
 ## Historia

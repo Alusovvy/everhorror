@@ -1,14 +1,15 @@
 using GameState
 
 ~ start
-if day >= 3
-	=> day3
-if day == 2
-	=> day2
 if not has_flag("met_bolko")
 	$> set_flag("met_bolko")
 	Bolko: Hę? Aaa, to ty jesteś ten wnuk. Poznałbym cię wszędzie, oczy masz po nim.
 	Bolko: Bolko jestem. Fedrowałem tu, jak ciebie jeszcze na świecie nie było. Z twoim dziadkiem też.
+	=> hub
+if day >= 3
+	=> day3
+if day == 2
+	=> day2
 => hub
 
 ~ hub

@@ -121,6 +121,9 @@ func _update_condition() -> void:
 		parts.append(GameState.mind_text())
 	if GameState.player_fever:
 		parts.append("gorączka")
+	# task_12: fatigue only once it matters (75%+), in words.
+	if GameState.fatigue_text() != "":
+		parts.append(GameState.fatigue_text())
 	condition.text = "  ·  ".join(parts)
 	_update_vignette()
 

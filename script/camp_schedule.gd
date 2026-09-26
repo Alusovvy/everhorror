@@ -14,6 +14,9 @@ class_name CampSchedule
 static func placement(npc_id: StringName) -> Dictionary:
 	if GameState.npcs.has(npc_id) and GameState.npc_status(npc_id) in ["gone", "dead"]:
 		return {}
+	# task_10: on day 1 five of them are on a shift in the first-level rooms (FieldSchedule).
+	if GameState.away_first_day(npc_id):
+		return {}
 	match npc_id:
 		&"miroslaw":
 			return _miroslaw()

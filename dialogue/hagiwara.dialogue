@@ -7,10 +7,21 @@ if not has_flag("met_hagiwara")
 		Szczupły mężczyzna stoi przy pulpicie z księgą i pisze pędzelkiem, drobno i równo, jakby każdy znak kosztował go srebro.
 	elif npc_place("hagiwara") == "herbata"
 		W kącie, na stołku przy skrzyni, siedzi szczupły mężczyzna z kubkiem w obu dłoniach i patrzy w ciemność, jak inni patrzą w ogień.
+	elif npc_place("hagiwara") == "teren"
+		Przy samej latarni stoi szczupły mężczyzna z księgą opartą o przedramię i przerysowuje coś ze ściany, drobno i równo, jakby każdy znak kosztował go srebro.
 	else
 		Przy stole szczupły mężczyzna je powoli, pałeczkami wystruganymi z drzazgi. Nikt się już temu nie dziwi.
 	Hagiwara odkłada wszystko i kłania się lekko. Dokładnie tak nisko, jak wypada.
 	Hagiwara: Kiyoshi Hagiwara. Prowadzę księgi pana zarządcy. Pan jest przewodnikiem, jak mniemam. Pański dziadek ma w księgach Kniazia bardzo porządny wpis. Ostatni.
+	if npc_place("hagiwara") == "teren"
+		if current_place() == "east"
+			Hagiwara: Stara ekipa znaczyła stemple nacięciami. Przepisuję je. Pan zarządca lubi, kiedy przeszłość ma rubryki.
+		elif current_place() == "rzapie"
+			Hagiwara: Wilgoć niszczy papier szybciej niż ogień. Piszę więc szybko i drobno.
+		elif current_place() == "west"
+			Pytasz, jak przeszli przez zawał. Pokazują szparę pod stropem, przez którą przeciśnie się człowiek bez plecaka. Wrócą nią dopiero po szychcie.
+			Hagiwara: Przejście było niegodne. Ściany tutaj wynagradzają to jednak wyjątkową wymownością.
+		Hagiwara: Pan zarządca życzy sobie spisu wszystkiego, co stara ekipa zostawiła na ścianach. Wrócę do obozu jutro. Ściany, w przeciwieństwie do ludzi, nie uciekają, ale bywają nieczytelne.
 elif not done_today("hag_hello")
 	$> mark_today("hag_hello")
 	if quota_met()

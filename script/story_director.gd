@@ -198,11 +198,17 @@ func _arrive(place_id: StringName, route: Array[StringName], reason: String) -> 
 	var data := Expeditions.place(place_id)
 	var first_visit := not Expeditions.is_visited(place_id)
 	var hours := Expeditions.trip_hours(route)
+	var walked := Expeditions.walk_hours(route)
 	_busy = true
 	GameState.push_modal()
 	await fade.fade_out(0.7)
 	_leave_encounter()
+	# task_12: the walk tires like the tunnels, and half of it is the price of the way back.
+	GameState.travelling = true
 	GameState.advance_time(hours, reason)
+	GameState.travelling = false
+	if not GameState.expedition.is_empty():
+		GameState.expedition["outbound_hours"] = float(GameState.expedition.get("outbound_hours", 0.0)) + walked
 	GameState.set_flag("visited_%s" % place_id)
 	GameState.set_flag("location", String(place_id))
 	GameState.note_expedition_place(place_id)
@@ -231,8 +237,8 @@ func _arrival_subtitle(route: Array[StringName]) -> String:
 	return "%s\nprzez: %s" % [GameState.clock_text(), ", ".join(passed)]
 
 func _return_to_camp() -> void:
-	var route := Expeditions.path(GameState.current_place(), Expeditions.CAMP)
-	var hours := Expeditions.walk_hours(route)
+	# task_12: half of the walking done since leaving the camp, never doubled by fatigue.
+	var hours := Expeditions.return_hours()
 	_busy = true
 	# On the way back, before the walk: Hrapek, or what is left of him.
 	await _hrapek_on_the_way_back()
@@ -241,7 +247,9 @@ func _return_to_camp() -> void:
 	_leave_encounter()
 	# Coming back is always possible, even late: the day may run over (MECHANICS §13 pkt 8).
 	GameState.clear_flag("location")
+	GameState.travelling = true
 	GameState.advance_time(hours, "Powrót do obozu")
+	GameState.travelling = false
 	if GameState.has_flag("drudzy_met") and not GameState.has_flag("sabina_joined"):
 		GameState.set_flag("sabina_joined")
 	_place_player(markers.get_node("CampReturn"))

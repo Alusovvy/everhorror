@@ -1,7 +1,7 @@
 # Decyzje do task 10: pierwsze spotkania w pomieszczeniach
 
-> Zadanie: [task_10](../ai-tasks/task_10.md) · Przygotowano: 2026-09-26
-> **Status: czeka na odpowiedzi.** Wpisz wybór w ostatniej kolumnie albo odpowiedz w czacie („wszystko wg rekomendacji” też wystarczy).
+> Zadanie: [task_10](../../ai-tasks/done/task_10.md) · Przygotowano: 2026-09-26
+> **Status: rozstrzygnięte 2026-09-26.** Odpowiedzi w tabeli, wpisane do zadania.
 
 **Kontekst:** pierwszego dnia w obozie są tylko Mirosław, Bolko, Tekla i Racibor. Pozostałą piątkę (Wszebor, Nasir, Hagiwara, Sobek, brat Anzelm) gracz spotyka losowo w pomieszczeniach, najwyżej dwie osoby w jednym.
 
@@ -18,4 +18,4 @@
 - **Losowanie** odbywa się raz, na starcie nowej gry. Ziarno jest zapisywane w stanie gry, więc wczytanie gry nie przestawia ludzi.
 - **Po rozmowie** postać zostaje w pomieszczeniu do końca wizyty.
 - **Dobrawa i Sabina** bez zmian (dzień 2 i Exitium).
-- **Pierwsze powitania w terenie** robię w tym zadaniu w minimalnej wersji. Pełny przegląd tekstów pierwszego spotkania to [task_11](../ai-tasks/task_11.md).
+- **Pierwsze powitania w terenie** robię w tym zadaniu w minimalnej wersji. Pełny przegląd tekstów pierwszego spotkania to [task_11](../../ai-tasks/done/task_11.md).

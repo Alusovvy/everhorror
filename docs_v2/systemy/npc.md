@@ -49,6 +49,8 @@ Ekspedycja to drugi, obok czasu, zasób gry. Towarzysze dają informacje, przedm
 ## Rozkład dnia
 Każdy NPC ma swoje miejsce zależne od pory dnia (`script/camp_schedule.gd`). Stan fabuły ma pierwszeństwo.
 
+**Pierwszy dzień** ✅ **[decyzja 2026-09-26]** (task_10): w obozie są tylko Mirosław, Bolko, Tekla i Racibor. Wszebor, Nasir, Hagiwara, Sobek i brat Anzelm są na szychcie w pomieszczeniach pierwszego poziomu (Stara sztolnia, Rząpie, Zawalony chodnik), losowo na starcie nowej gry, najwyżej dwoje w jednym. Kto trafi za zawał, czeka na wybuch. Zostają tam przez cały dzień 1, a wieczorem w obozie ich nie ma. Od rana w dniu 2 obowiązuje zwykły rozkład niżej. Kod: `GameState.roll_first_rooms()`, `away_first_day()`, `FieldSchedule.FIRST_DAY_POSES`. Pierwsze powitanie na szychcie ma zdanie zależne od pomieszczenia (task_11); lint pilnuje, żeby każde miejsce z rozkładu dnia miało pasujące powitanie.
+
 | NPC | Rano (do 8) | Dzień (8–18) | 18–20 | Wieczór (20+) | Wyjątki |
 |---|---|---|---|---|---|
 | Mirosław | ognisko (siedzi) | skład prochu (kuca) | ognisko | ognisko | na krawędzi (dzień 2+): ciemny kąt; martwy: nie ma go |

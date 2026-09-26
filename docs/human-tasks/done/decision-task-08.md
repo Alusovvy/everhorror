@@ -1,6 +1,6 @@
 # Decyzje do task 08: obóz jako jaskinia
 
-> Zadanie: [task_08](../../ai-tasks/task_08.md) · Przygotowano: 2026-09-26
+> Zadanie: [task_08](../../ai-tasks/done/task_08.md) · Przygotowano: 2026-09-26
 > **Status: rozstrzygnięte 2026-09-26** (odpowiedzi w czacie, wszystkie zgodne z rekomendacją). Prace ruszyły.
 
 ## Stan obecny (z przeglądu i zrzutów)

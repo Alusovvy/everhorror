@@ -1,7 +1,7 @@
 # Decyzje do task 12: zmęczenie i powrót za pół drogi
 
-> Zadanie: [task_12](../ai-tasks/task_12.md) · Przygotowano: 2026-09-26
-> **Status: czeka na odpowiedzi.** Wpisz wybór w ostatniej kolumnie albo odpowiedz w czacie („wszystko wg rekomendacji” też wystarczy).
+> Zadanie: [task_12](../../ai-tasks/done/task_12.md) · Przygotowano: 2026-09-26
+> **Status: rozstrzygnięte 2026-09-26.** Odpowiedzi w tabeli, wpisane do zadania.
 > Wszystkie liczby trafią do `07_balans.md` i łatwo je potem zmienić. Tu chodzi o zasadę.
 
 ## Decyzje

@@ -8,7 +8,7 @@
 | **Rola** | rębacz i kowal, Hawiar |
 | **Poczytalność (max)** | 100 (start 76) |
 | **Zdrowie (max)** | 100 |
-| **Pojawia się** | od dnia 1 |
+| **Pojawia się** | od dnia 1: w dniu 1 na szychcie w losowym pomieszczeniu pierwszego poziomu (zob. [NPC](../../systemy/npc.md#rozkład-dnia)), od dnia 2 w obozie |
 | **Wygląd w grze** | wielki (skala 1,1), jasne długie włosy i broda, wieśniaczy strój w brązach |
 
 ## Historia

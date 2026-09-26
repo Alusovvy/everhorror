@@ -1,7 +1,7 @@
 # Decyzje do task 11: dialogi pierwszego spotkania
 
-> Zadanie: [task_11](../ai-tasks/task_11.md) · Przygotowano: 2026-09-26
-> **Status: czeka na odpowiedzi.** Wpisz wybór w ostatniej kolumnie albo odpowiedz w czacie.
+> Zadanie: [task_11](../../ai-tasks/done/task_11.md) · Przygotowano: 2026-09-26
+> **Status: rozstrzygnięte 2026-09-26.** Odpowiedzi w tabeli, wpisane do zadania.
 
 ## Decyzje
 

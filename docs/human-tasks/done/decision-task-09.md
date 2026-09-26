@@ -1,7 +1,7 @@
 # Decyzje do task 09: Hrapek, zegar w notesie, wyszarzone opcje
 
-> Zadanie: [task_09](../../ai-tasks/task_09.md) · Przygotowano: 2026-09-26 · Źródło: specyfikacja `54898e8` → `bccb0d9`
-> **Status: rozstrzygnięte 2026-09-26.** Wszystkie 7 decyzji zgodnie z rekomendacją. Odpowiedzi na pytania do zespołu są w tekście. Wpisane do [task_09](../../ai-tasks/task_09.md).
+> Zadanie: [task_09](../../ai-tasks/done/task_09.md) · Przygotowano: 2026-09-26 · Źródło: specyfikacja `54898e8` → `bccb0d9`
+> **Status: rozstrzygnięte 2026-09-26.** Wszystkie 7 decyzji zgodnie z rekomendacją. Odpowiedzi na pytania do zespołu są w tekście. Wpisane do [task_09](../../ai-tasks/done/task_09.md).
 
 ## Decyzje
 

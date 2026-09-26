@@ -32,7 +32,7 @@ func scenario() -> void:
 	gs.advance_time(1.0, "Śniadanie się przeciąga")
 	await wait_idle()
 
-	step("the decline (3 h + 1 h scouting): collapse, vein (1 h), back (3 h)")
+	step("the decline (3 h + 1 h scouting): collapse, vein (1 h), back (task_12: half of 3 h)")
 	await travel("upadowa")
 	check(is_equal_approx(gs.hour, 11.0 + 25.0 / 60.0), "11:25 at the decline (%s)" % gs.clock_text())
 	await use(find_interactable("Locations/Upadowa", "Zawał"))
@@ -40,7 +40,10 @@ func scenario() -> void:
 	await use(world.get_node("Locations/Upadowa/VeinMark"))
 	check(gs.has_flag("vein_upadowa"), "decline vein marked")
 	await go_on("oboz")
-	check(is_equal_approx(gs.hour, 15.0 + 25.0 / 60.0), "15:25 back (%s)" % gs.clock_text())
+	check(is_equal_approx(gs.hour, 13.0 + 55.0 / 60.0), "13:55 back, 1 h 30 min (%s)" % gs.clock_text())
+	check(not npc("Dobrawa").present, "Dobrawa is still in the tunnels (12-16)")
+	gs.advance_time(16.0 - gs.hour, "Popołudnie w obozie")
+	await wait_idle()
 	check(npc("Dobrawa").present and gs.npc_place(&"dobrawa") == "na_uboczu", "Dobrawa back from the tunnels, standing apart")
 
 	step("Racibor: report two veins (5 min)")

@@ -1,6 +1,6 @@
 # Factcheck test 09: Hrapek, ryba, zegar w notesie, wyszarzone opcje, 5 minut za opcję
 
-> Zadanie: [task_09](../ai-tasks/task_09.md) · Decyzje: [decision-task-09](done/decision-task-09.md) · Przygotowano: 2026-09-26 · Czas: ~40 min
+> Zadanie: [task_09](../ai-tasks/done/task_09.md) · Decyzje: [decision-task-09](done/decision-task-09.md) · Przygotowano: 2026-09-26 · Czas: ~40 min
 > Graj z edytora (F5) albo z builda (build tylko na Twoją prośbę). Najszybciej: nowa gra, dzień 1 lonty i wybuch u Mirosława, potem kilka powrotów z tuneli w dniach 3–6.
 
 ## Co się zmieniło

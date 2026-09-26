@@ -26,7 +26,7 @@ Wymagania:
 
 Kontekst:
 - Diff specyfikacji `54898e8..bccb0d9`: nowa karta `02_postacie/hrapek.md` (autor: Roland), nowy wiersz w `04_tresc/przedmioty.md` i `04_tresc/zadania.md`, odpowiedzi dopisane do „Otwartych pytań” w `03_mechaniki/czas.md`, `dialogi.md`, `ekwipunek.md`, `interakcje.md`, `wyprawy.md`, oraz dopisek do reguły DIA-2.
-- Pełna analiza i plan są niżej. Decyzje (podjęte 2026-09-26): [decision-task-09](../human-tasks/done/decision-task-09.md).
+- Pełna analiza i plan są niżej. Decyzje (podjęte 2026-09-26): [decision-task-09](../../human-tasks/done/decision-task-09.md).
 
 Kryteria akceptacji:
 - W dniu 3, przy pierwszym powrocie z tunelu po wysadzeniu zawału, bohater spotyka Hrapka. Do końca dnia 5 spotyka go co najmniej dwa razy. W dniu 6 wraca i znajduje ciało.
@@ -168,7 +168,7 @@ Priorytet: średni (do potwierdzenia) · Termin: po zamknięciu task_08 (obóz),
 - Pełny zestaw tylko za Twoją zgodą. Na koniec factcheck `docs/human-tasks/factcheck-test-09.md`.
 
 ## Co zostało zrobione
-Przygotowanie (wcześniej): analiza zmian, plan i [plik decyzji](../human-tasks/done/decision-task-09.md). Przed startem (2026-09-26) ustaliliśmy w czacie:
+Przygotowanie (wcześniej): analiza zmian, plan i [plik decyzji](../../human-tasks/done/decision-task-09.md). Przed startem (2026-09-26) ustaliliśmy w czacie:
 - najpierw commit task_08 (zrobiony: `d39bbb9`),
 - kwestie Hrapka piszę sam jako [ROBOCZE],
 - uruchamiam tylko unit, lint, dialogi i nowy scenariusz Hrapka.
@@ -240,7 +240,7 @@ Lint specyfikacji (`node dashboard/cli.ts lint`): 0 błędów, 0 uwag. Docs_v2 z
 ## Czego potrzebuję od Ciebie
 - **Zgody na trzy scenariusze** `day1`, `day2`, `rzapie`: przeliczyłem w nich godziny na 5 minut za opcję (np. dzień 1: 06:15 zamiast 07:00), ale ich nie uruchamiałem. Najlepiej od razu cały zestaw w porcjach, bo nowy koszt dotyka każdej rozmowy.
 - **Rolanda i Ren:** przejrzenie kwestii Hrapka (wiersze) i tego, co mówi o NIM i o dziadku.
-- Przejście [factcheck-test-09](../human-tasks/factcheck-test-09.md).
+- Przejście [factcheck-test-09](../../human-tasks/factcheck-test-09.md).
 - Build tylko na prośbę (proponuję 0.5 razem z obozem z task_08).
 
 ## Test
@@ -252,7 +252,7 @@ Lint specyfikacji (`node dashboard/cli.ts lint`): 0 błędów, 0 uwag. Docs_v2 z
   
   Wszystkie przechodzą.
 - Nie uruchomione (czekają na zgodę): pełny zestaw, w tym przeliczone `day1`, `day2`, `rzapie`.
-- Ręczne: [factcheck-test-09](../human-tasks/factcheck-test-09.md) (22 punkty, ok. 40 min).
+- Ręczne: [factcheck-test-09](../../human-tasks/factcheck-test-09.md) (22 punkty, ok. 40 min).
 
 ## Podsumowanie
 Wszystkie sześć punktów jest zrobionych:

@@ -17,7 +17,7 @@ Rano przy stole z mapą planujesz trasę. W chodnikach mapa [M] pyta „Dokąd d
    - licznik żył wobec normy,
    - przycisk **WYRUSZ** („Onward”). Gracz idzie najkrótszą drogą przez miejsca, które są teraz otwarte. Bez liny do galerii prowadzi droga przez pompy, a nie przez Ślepy szyb. Po śmierci Mirosława do kuźni i szybu da się zejść tylko od dołu, przez galerię. Jeśli każda droga jest zamknięta, mapa podaje, co stoi po drodze.
 4. **Mapa w terenie [M]** ✅ (także drogowskaz przy wejściu do każdego miejsca):
-   - sąsiednie miejsca („IDŹ DALEJ”) i powrót do obozu najkrótszą otwartą drogą („WRACAJ DO OBOZU”),
+   - sąsiednie miejsca („IDŹ DALEJ”) i powrót do obozu („WRACAJ DO OBOZU”),
    - „ZOSTAŃ TUTAJ” zamyka mapę,
    - w obozie [M] podpowiada, że wyprawy planuje się przy stole.
 5. **Znane miejsca** ✅: widać te, które graniczą z obozem albo z odwiedzonym miejscem, i te, o których ktoś opowiedział (spełniony warunek `flag:`). Zablokowane mają powód („Bez liny nie zejdziesz”), a nieznane mogą mieć nazwę zastępczą („Znak zapytania”, „Przekreślona gwiazda”).
@@ -25,6 +25,8 @@ Rano przy stole z mapą planujesz trasę. W chodnikach mapa [M] pyta „Dokąd d
    - suma krawędzi,
    - +1 h rozpoznania przy pierwszej wizycie,
    - +1 h na odcinek, gdy bohater jest ranny,
+   - przy zmęczeniu 100% każdy odcinek ×2 (zob. [zdrowie](zdrowie_i_poczytalnosc.md)),
+   - ✅ **[decyzja 2026-09-26, task_12]** powrót do obozu kosztuje połowę drogi przebytej od wyjścia z obozu (bez rozpoznania), w górę do 5 minut, nigdy ×2 (`Expeditions.return_hours()`),
    - powrót zawsze możliwy, także po 22:00.
 7. **Podsumowanie wyprawy** ✅ po powrocie:
    - godziny wyjścia i powrotu, odwiedzone miejsca,

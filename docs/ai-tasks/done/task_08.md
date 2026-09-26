@@ -14,7 +14,7 @@ Wymagania:
 ## Plan (przed startem)
 **Stan:** obóz to długi, niski korytarz z desek (ok. 32 × 9,5 m, strop ok. 4 m, 110 słupów, szyny przez środek). Hala jest w `mine.tscn`, a rekwizyty i postacie ustawia `gen_camp.gd`.
 
-**Decyzje do podjęcia przed startem:** [decision-task-08](../human-tasks/done/decision-task-08.md) (skala przebudowy, wielkość, kwatera Racibora, szyny, układ stref).
+**Decyzje do podjęcia przed startem:** [decision-task-08](../../human-tasks/done/decision-task-08.md) (skala przebudowy, wielkość, kwatera Racibora, szyny, układ stref).
 
 **Plan w wariancie rekomendowanym:**
 1. Nowa jaskinia obozu budowana w `gen_camp.gd`: skalne ściany i reliefy z zestawu, sklepienie ok. 6 m, szerokość ok. 16 m. Drewno tylko jako konstrukcje: zagroda Racibora, rusztowania, podesty, odrzwia przy wyjściach. Stara hala zostaje usunięta z `mine.tscn`, a wyjścia na wschód i zachód oraz korytarz do starego wejścia zostają w tych samych miejscach.
@@ -31,7 +31,7 @@ Wymagania:
 ## Co zostało zrobione
 
 ### 1. Obóz w jaskini, więcej przestrzeni, weryfikacja ustawienia postaci
-Decyzje: wszystkie w wariancie rekomendowanym ([decision-task-08](../human-tasks/done/decision-task-08.md), 2026-09-26).
+Decyzje: wszystkie w wariancie rekomendowanym ([decision-task-08](../../human-tasks/done/decision-task-08.md), 2026-09-26).
 
 **Przebudowa**
 - Ze starej kopii poziomu (`scene/levels/mine.tscn`) usunąłem całą halę: 209 elementów (19 ścian obitych deskami, 98 słupów i belek, 24 panele, 48 płyt podłogi i stropu, 14 szyn, 5 wózków, 1 kamień). Zostały odrzwia przy wyjściach i wszystkie korytarze.
@@ -82,12 +82,12 @@ Nazwy węzłów, których używa gra (`MapTable/MapTableUse`, `Cloth/Bedroll/Bed
 - **„Hala” → „jaskinia”** w narracji to moja decyzja (w specyfikacji oznaczona [ROBOCZE]). Nie użyłem słowa „grota”, żeby obozu nie mylić z Grzybową grotą.
 
 ## Czego potrzebuję od Ciebie
-- Przejdź [factcheck-test-08](../human-tasks/factcheck-test-08.md), szczególnie punkty o wrażeniu przestrzeni, świetle i ustawieniu postaci. Tego żaden test nie oceni.
+- Przejdź [factcheck-test-08](../../human-tasks/factcheck-test-08.md), szczególnie punkty o wrażeniu przestrzeni, świetle i ustawieniu postaci. Tego żaden test nie oceni.
 - Build robię tylko na Twoją prośbę. Ta zmiana dotyczy wyglądu całego obozu, więc nadaje się na nową wersję dla zespołu (0.5 albo 0.4.2).
 
 ## Test
 - Automatyczne: pełny zestaw w dwóch porcjach razem z nowymi testami, **16/16 zaliczonych**: unit, lint, dialogue, schedule, **places**, **camp_walk**, day1, save_load, rzapie, night1, day2, kaplica, day3, expedition, drudzy, week. Oba nowe testy są w domyślnym zestawie `tools/run_tests.sh`.
-- Ręczne: [factcheck-test-08](../human-tasks/factcheck-test-08.md) (12 punktów, ok. 20 min).
+- Ręczne: [factcheck-test-08](../../human-tasks/factcheck-test-08.md) (12 punktów, ok. 20 min).
 
 ## Podsumowanie
 Obóz jest teraz naturalną jaskinią ok. 32 × 16 m ze sklepieniem ok. 6 m, a nie długim korytarzem z desek. Drewno zostało tylko w konstrukcjach: zagroda Racibora, rusztowanie nad magazynem, odrzwia, latarnie na słupach i jeden stary tor z wózkami. Strefy są w dawnej kolejności, ale luźniej, a ognisko stoi w środku. Wyjścia, nazwy węzłów, rozkład dnia i zapisy działają bez zmian. Ustawienie postaci sprawdzają dwa nowe testy: `places` (35 znaczników: podłoga, kolizje, kierunek, z próbami kontrolnymi) i `camp_walk` (gracz dochodzi do każdej strefy i każdego wyjścia). Na zrzutach rano, w dzień i wieczorem nic nie stoi krzywo. Pełny zestaw testów przechodzi (16/16). Zostało Twoje przejście factchecku. Build zrobię, jeśli o niego poprosisz.

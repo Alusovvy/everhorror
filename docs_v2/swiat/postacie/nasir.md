@@ -8,7 +8,7 @@
 | **Rola** | pompiarz i górnik z Sułtanatu Nerdii |
 | **Poczytalność (max)** | 100 (start 72) |
 | **Zdrowie (max)** | 100 |
-| **Pojawia się** | od dnia 1; od dnia 4 z gorączką |
+| **Pojawia się** | od dnia 1: w dniu 1 na szychcie w losowym pomieszczeniu pierwszego poziomu (zob. [NPC](../../systemy/npc.md#rozkład-dnia)), od dnia 2 w obozie; od dnia 4 z gorączką |
 | **Wygląd w grze** | ciemna skóra, kaptur strażnika naciągnięty na głowę, piaskowy strój, czarna broda |
 
 ## Historia

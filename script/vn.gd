@@ -10,6 +10,7 @@ const BALLOON := preload("res://scene/vn/vn_balloon.tscn")
 
 ## Every response picked in a conversation with an NPC costs this much (task_09, DIA-5).
 ## Free: opening the conversation, farewells ([#leave]), simple hand-overs of an item ([#free]),
+## a response already picked before with the same person (GameState.asked, factcheck 10),
 ## and responses whose follow-up spends time of its own (dice, the pumps, fishing): their 5
 ## minutes are given back, so the cost is what the player sees. Scene dialogues (dreams, the
 ## wall, the campfire, announcements, Hrapek) never charge.
@@ -62,6 +63,10 @@ func response_picked(response: DialogueResponse) -> void:
 	_last_charge_open = false
 	if not _charging or response.tags.has("leave") or response.tags.has("free"):
 		return
+	# factcheck 10: the same option asked again of the same person costs nothing.
+	if GameState.was_asked(current_npc, response.text):
+		return
+	GameState.mark_asked(current_npc, response.text)
 	_talk_minutes += TALK_MINUTES
 	_last_charge_open = true
 	GameState.add_quiet_time(TALK_MINUTES / 60.0)

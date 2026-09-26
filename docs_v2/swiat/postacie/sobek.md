@@ -8,7 +8,7 @@
 | **Rola** | Egzarcha, straż obozu |
 | **Poczytalność (max)** | 100 (start 84) |
 | **Zdrowie (max)** | 100 |
-| **Pojawia się** | od dnia 1 |
+| **Pojawia się** | od dnia 1: w dniu 1 na szychcie w losowym pomieszczeniu pierwszego poziomu (zob. [NPC](../../systemy/npc.md#rozkład-dnia)), od dnia 2 w obozie |
 | **Wygląd w grze** | zielony strój strażnika bez kaptura, krótkie włosy i broda, goły miecz opuszczony w dłoni |
 
 ## Historia

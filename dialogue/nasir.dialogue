@@ -5,11 +5,22 @@ if has_fever("nasir")
 	=> sick
 if not has_flag("met_nasir")
 	$> set_flag("met_nasir")
-	if npc_place("nasir") == "teren"
+	if npc_place("nasir") == "teren" and day == 1
+		W półmroku klęczy ciemnoskóry mężczyzna w kapturze naciągniętym po same oczy. Przykłada ucho do mokrej skały i nasłuchuje, jak felczer, który osłuchuje chorego.
+	elif npc_place("nasir") == "teren"
 		Przy pompie klęczy ciemnoskóry mężczyzna w kapturze naciągniętym po same oczy. Stuka kluczem w rurę i nasłuchuje, jak felczer, który osłuchuje chorego.
 	else
 		Ciemnoskóry mężczyzna w kapturze naciągniętym na uszy grzeje dłonie o kubek, choć ten dawno już ostygł.
 	Nasir: Nasir. Z Bakaszu, w Sułtanacie. Tak, daleko. Tak, zimno. Nie, nie przyzwyczaiłem się.
+	if npc_place("nasir") == "teren" and day == 1
+		if current_place() == "east"
+			Nasir: Tu jest sucho, habibi. Za sucho. Woda poszła gdzieś w dół i ja chcę wiedzieć, gdzie.
+		elif current_place() == "rzapie"
+			Nasir: Słyszysz? Woda gada. Stary szyb pije z trzech stron, a oddaje tylko jedną.
+		elif current_place() == "west"
+			Pytasz, jak przeszli przez zawał. Pokazują szparę pod stropem, przez którą przeciśnie się człowiek bez plecaka. Wrócą nią dopiero po szychcie.
+			Nasir: Za zawałem woda stoi jak w misce. Zawał ją trzyma. Jak go wysadzicie, trzymać przestanie. Pamiętaj, że mówiłem.
+		Nasir: Zarządca kazał mi słuchać, skąd idzie woda. Słucham od świtu. Do jutra będę wiedział, habibi. Albo ogłuchnę.
 	Nasir: U nas mówią, że gdzie woda, tam życie. A gdzie jej za dużo, tam śmierć. W tej kopalni wody jest za dużo, habibi.
 elif has_flag("nasir_fever_started") and not has_flag("nas_thanked_health")
 	$> set_flag("nas_thanked_health")
@@ -88,6 +99,9 @@ Nasir: [[Mów, habibi.|Słucham.|Tak?]]
 
 ~ sick
 Nasir leży skulony pod dwoma kocami i trzęsie się, choć czoło ma rozpalone. Anzelm zmienia mu mokrą szmatę na głowie.
+if not has_flag("met_nasir")
+	$> set_flag("met_nasir")
+	Anzelm mówi cicho, że to Nasir, pompiarz z Sułtanatu. Gorączka złapała go, zanim zdążyliście się poznać.
 if not has_flag("nas_sick_seen")
 	$> set_flag("nas_sick_seen")
 	Nasir: Habibi... Wiesz, co jest najgłupsze? Dwanaście lat w kamieniołomie, w upale, i nic. A tu, w zimnie... Zimno mnie dopadło.

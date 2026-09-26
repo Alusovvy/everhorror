@@ -66,3 +66,40 @@ func scenario() -> void:
 	gs.set_flag("encounter_npcs", ["hieronim"])
 	var hie: Dictionary = FieldS.placement(&"hieronim", &"grota")
 	check(not hie.is_empty() and story._marker(String(hie["marker"])) != null, "an encounter spot in the grotto exists")
+
+	step("task_10, day 1: four in the camp, the five in first-level rooms (100 rolls)")
+	var camp_extra := 0
+	var field_bad := 0
+	var crowded := 0
+	for roll in 100:
+		gs.reset()
+		gs.set_flag("intro_done")
+		for hour in [6.5, 13.0, 20.5]:
+			gs.hour = hour
+			for id in gs.NPCS:
+				if not CampS.placement(id).is_empty() and not id in [&"miroslaw", &"bolko", &"tekla", &"racibor"]:
+					camp_extra += 1
+			for room in gs.FIRST_ROOMS:
+				var taken := {}
+				for id in gs.FIRST_MEET:
+					var spot: Dictionary = FieldS.placement(id, room)
+					if spot.is_empty():
+						continue
+					var marker_name := String(spot["marker"])
+					if story._marker(marker_name) == null or taken.has(marker_name) or spot["place"] != "teren":
+						field_bad += 1
+						print("   ZŁE miejsce: %s w %s -> %s" % [id, room, marker_name])
+					taken[marker_name] = id
+				if taken.size() > gs.FIRST_ROOM_CAPACITY:
+					crowded += 1
+	check(camp_extra == 0, "day 1: only Mirosław, Bolko, Tekla and Racibor in the camp (%d others)" % camp_extra)
+	check(field_bad == 0, "day 1: each of the five on an existing spot of their room (%d bad)" % field_bad)
+	check(crowded == 0, "day 1: never more than two to a room (%d crowded)" % crowded)
+	gs.reset()
+	gs.day = 2
+	gs.hour = 6.5
+	var back := 0
+	for id in gs.FIRST_MEET:
+		if not CampS.placement(id).is_empty():
+			back += 1
+	check(back == gs.FIRST_MEET.size(), "day 2 morning: all five in the camp (%d)" % back)

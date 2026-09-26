@@ -143,10 +143,16 @@ func _build() -> void:
 	drawing.set("field_mode", mode == Mode.FIELD)
 	drawing.queue_redraw()
 
+## "1 h 15 min" (the way back is often not a whole hour).
+static func _duration(hours: float) -> String:
+	return GameState.duration_text(int(round(hours * 60.0)))
+
 func _button_text(id: StringName, route: Array[StringName]) -> String:
 	if id == Expeditions.CAMP:
-		return "Obóz  ·  %s drogi" % GameState.hours_text(Expeditions.walk_hours(route))
+		return "Obóz  ·  %s drogi" % _duration(Expeditions.return_hours())
 	var text := "%s  ·  %s" % [Expeditions.display_name(id), GameState.hours_text(Expeditions.trip_hours(route))]
+	if GameState.is_exhausted():
+		text += "  ·  zmęczenie ×2"
 	if not Expeditions.is_visited(id):
 		text += "  ·  nowe"
 	elif Expeditions.veins_marked(id) < Expeditions.veins_total(id):
@@ -182,8 +188,10 @@ func _details_text(id: StringName, route: Array[StringName], reason: String) -> 
 	var walk := Expeditions.walk_hours(route)
 	var arrive := GameState.hour + Expeditions.trip_hours(route)
 	if id == Expeditions.CAMP:
-		var back := "[b]Powrót do obozu[/b]\nDroga: %s, w obozie będziesz ok. %s." % [GameState.hours_text(walk), GameState.time_text(GameState.hour + walk)]
-		if GameState.hour + walk > GameState.DAY_START_HOUR + GameState.DAY_LENGTH_HOURS:
+		# task_12: half of the way walked since leaving the camp, never doubled by fatigue.
+		var home := Expeditions.return_hours()
+		var back := "[b]Powrót do obozu[/b]\nDroga: %s (znaną drogą idzie się szybciej: połowa tego, co przeszedłeś od obozu), w obozie będziesz ok. %s." % [_duration(home), GameState.time_text(GameState.hour + home)]
+		if GameState.hour + home > GameState.DAY_START_HOUR + GameState.DAY_LENGTH_HOURS:
 			back += "\n[color=#ff8a66]Wrócisz po nocy, ledwo żywy ze zmęczenia.[/color]"
 		return back
 	var data := Expeditions.place(id)
@@ -191,6 +199,8 @@ func _details_text(id: StringName, route: Array[StringName], reason: String) -> 
 	var way := "Droga: %s" % GameState.hours_text(walk)
 	if not Expeditions.is_visited(id):
 		way += " + %s na rozpoznanie" % GameState.hours_text(Expeditions.SCOUTING_HOURS)
+	if GameState.is_exhausted():
+		way += " (padasz z nóg: każdy odcinek idziesz dwa razy dłużej)"
 	if GameState.is_badly_hurt():
 		way += " (z ranami idziesz wolniej)"
 	text += "%s, na miejscu ok. %s.\n" % [way, GameState.time_text(arrive)]

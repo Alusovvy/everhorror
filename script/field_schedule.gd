@@ -14,6 +14,15 @@ const DRUDZY: Array[StringName] = [&"ottokar", &"sabina", &"hieronim", &"welf"]
 ## left fist), Welf has no staff and stands ready to cast.
 const STAFF_POSE := &"Idle_Torch"
 const CAST_POSE := &"Spell_Simple_Idle"
+## task_10: what the five do on their day-1 shift. Miners and the medic kneel at the rock or a
+## bundle, the scribe and the guard stand.
+const FIRST_DAY_POSES := {
+	&"wszebor": &"Fixing_Kneeling",
+	&"nasir": &"Fixing_Kneeling",
+	&"hagiwara": &"Idle",
+	&"sobek": &"Idle",
+	&"anzelm": &"Fixing_Kneeling",
+}
 
 static func placement(npc_id: StringName, place_id: StringName) -> Dictionary:
 	if place_id == &"oboz":
@@ -22,6 +31,12 @@ static func placement(npc_id: StringName, place_id: StringName) -> Dictionary:
 	if String(GameState.get_flag("encounter_place", "")) == String(place_id) and String(npc_id) in met:
 		var slot := met.find(String(npc_id)) + 1
 		return _at(place_id, slot, _encounter_pose(npc_id))
+	# task_10: day 1, the five on their shift, each in a room of the first level, all day long
+	# (also after the hero has met them there).
+	if GameState.away_first_day(npc_id):
+		if GameState.first_room(npc_id) != place_id:
+			return {}
+		return _at(place_id, GameState.first_room_slot(npc_id), FIRST_DAY_POSES.get(npc_id, &"Idle"))
 	if GameState.part_of_day() != "dzien" or GameState.npc_status(npc_id) in ["gone", "dead"]:
 		return {}
 	match npc_id:

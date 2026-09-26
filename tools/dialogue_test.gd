@@ -165,6 +165,7 @@ func _run() -> void:
 	await _task05()
 	await _task06()
 	await _task09()
+	await _task11()
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit()
@@ -476,6 +477,59 @@ func _task09() -> void:
 	_check(tags.get("Mam dla ciebie lonty. Suche.", PackedStringArray()).has("free"), "handing over the fuses is free")
 	_check(tags.get("Muszę iść.", PackedStringArray()).has("leave"), "the farewell is tagged leave")
 	_check(not tags.get("Skąd jesteś?", PackedStringArray(["free"])).has("free"), "an ordinary question is not free")
+
+## task_11: the first meeting of each of the five in each first-level room on day 1 has the
+## room line, and nowhere the camp greeting; on day 2 in the camp there is no shift line.
+func _task11() -> void:
+	print("--- task_11: first meetings on the day-1 shift, one line per room")
+	var room_lines := {
+		"wszebor": {"east": "Stemple stoją", "rzapie": "Woda mi po kostki", "west": "na wydechu"},
+		"nasir": {"east": "Tu jest sucho", "rzapie": "Woda gada", "west": "stoi jak w misce"},
+		"hagiwara": {"east": "znaczyła stemple", "rzapie": "Wilgoć niszczy papier", "west": "Przejście było niegodne"},
+		"sobek": {"east": "jest prosto", "rzapie": "Nie lubię wody", "west": "Miecz przeszedł pierwszy"},
+		"anzelm": {"east": "mech, który tamuje", "rzapie": "do picia się nie nadaje", "west": "powietrze jest ciężkie"},
+	}
+	for who in room_lines:
+		var res: Resource = load("res://dialogue/%s.dialogue" % who)
+		for room in room_lines[who]:
+			gs.reset()
+			gs.set_flag("location", room)
+			gs.places[StringName(who)] = "teren"
+			_seen.clear()
+			await _talk(res, "start", ["Muszę iść."])
+			var line: String = room_lines[who][room]
+			var hit := _seen.any(func(t): return t.contains(line))
+			var gap := _seen.any(func(t): return t.contains("szparę pod stropem"))
+			_check(hit and gap == (room == "west"), "%s met first in %s: the room line%s" % [who, room, ", the gap under the roof" if room == "west" else ""])
+	for who in room_lines:
+		var res: Resource = load("res://dialogue/%s.dialogue" % who)
+		gs.reset()
+		gs.start_next_day()
+		gs.places[StringName(who)] = "stol"
+		_seen.clear()
+		await _talk(res, "start", ["Muszę iść."])
+		var shift_line := _seen.any(func(t): return t.contains("jutro") or t.contains("szycht"))
+		_check(not shift_line, "%s met first in the camp on day 2: no shift line" % who)
+
+	print("--- task_11: first meetings the coverage review found without a greeting")
+	gs.reset()
+	gs.start_next_day()
+	gs.places[&"miroslaw"] = "kat"
+	_seen.clear()
+	await _talk(load("res://dialogue/miroslaw.dialogue"), "start", ["Muszę iść."])
+	_check(_seen.any(func(t): return t.contains("W ciemnym kącie")), "Mirosław met first in his dark corner: the corner, not the fire")
+	gs.reset()
+	gs.start_next_day()
+	_seen.clear()
+	await _talk(load("res://dialogue/bolko.dialogue"), "start", ["Pójdę już."])
+	_check(gs.has_flag("met_bolko") and _seen.any(func(t): return t.contains("wnuk")), "Bolko met first on day 2 still introduces himself")
+	gs.reset()
+	gs.day = 4
+	gs.set_flag("fever_nasir")
+	gs.set_flag("nasir_fever_started")
+	_seen.clear()
+	await _talk(load("res://dialogue/nasir.dialogue"), "start", ["Trzymaj się."])
+	_check(gs.has_flag("met_nasir") and _seen.any(func(t): return t.contains("pompiarz z Sułtanatu")), "Nasir met first in his fever: Anzelm says who he is")
 
 func _talk(resource: Resource, cue: String, choices: Array) -> void:
 	var line = await dm.get_next_dialogue_line(resource, cue)

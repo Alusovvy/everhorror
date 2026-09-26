@@ -4,9 +4,11 @@ extends "res://tools/tests/test_base.gd"
 ## expedition summary, then the inventory (using bandages) and a locked place on the map.
 
 func scenario() -> void:
-	step("day 1, 08:00, set off east from the map table")
+	step("day 2, 08:00, set off east from the map table")
+	# Day 2: on day 1 Wszebor is on his first-level shift (task_10), not in the old working.
 	await start_world(func():
 		gs.set_flag("intro_done")
+		gs.day = 2
 		gs.hour = 8.0)
 	var map = world.get_node("MapScreen")
 	await use(world.get_node("Camp/CampProps/MapTable/MapTableUse"))
@@ -31,10 +33,10 @@ func scenario() -> void:
 	await use(find_interactable("Locations/Wyrobisko", "Kilof w gruzie"))
 	check(gs.has_item("obuch"), "pickaxe head taken")
 
-	step("back to the camp (1 h + 2 h), the summary")
+	step("back to the camp (task_12: half of the 3 h walked = 1 h 30 min), the summary")
 	await go_on("oboz")
 	check(not gs.is_away() and gs.expedition.is_empty(), "back in the camp, expedition closed")
-	check(is_equal_approx(gs.hour, 17.0), "17:00 (%s)" % gs.clock_text())
+	check(is_equal_approx(gs.hour, 15.5), "15:30 (%s)" % gs.clock_text())
 	check(last_summary.contains("Stara sztolnia") and last_summary.contains("Stare wyrobisko"), "summary lists the places")
 	check(last_summary.contains("Obuch kilofa") and last_summary.contains("Nowe żyły na mapie: 1"), "summary lists the pickaxe head and the vein")
 

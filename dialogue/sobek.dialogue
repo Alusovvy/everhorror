@@ -5,10 +5,23 @@ if not has_flag("met_sobek")
 	$> set_flag("met_sobek")
 	if npc_place("sobek") == "kosci"
 		Przy wspólnym stole brodaty mężczyzna gra sam ze sobą w kości i przegrywa. Goły miecz leży obok talerza, jak łyżka.
+	elif npc_place("sobek") == "teren"
+		W chodniku stoi brodaty mężczyzna z gołym mieczem opuszczonym ku ziemi i obraca w palcach dwie kości do gry. Pilnuje ludzi przy robocie, a raczej ciemności za nimi.
 	else
 		Przy wyjściu na wschód stoi brodaty mężczyzna z gołym mieczem opuszczonym ku ziemi. Obraca w palcach dwie kości do gry.
-	Sobek: Stój, kto idzie! Żartuję. Widziałem cię przy śniadaniu.
-	Sobek: Sobek, z Wielkiego Stepu. Pilnuję, żeby nikt nie wyniósł zapasów. I żeby nic nie wlazło tu z ciemności.
+	if npc_place("sobek") == "teren"
+		Sobek: Stój, kto idzie! Żartuję. Ty jesteś ten nowy. Wnuk przewodnika, co?
+		Sobek: Sobek, z Wielkiego Stepu. Dziś pilnuję szychty, żeby nic nie wylazło na nich z ciemności. Do obozu wracam jutro. Zapasy niech sobie Tekla pilnuje sama.
+		if current_place() == "east"
+			Sobek: Tu przynajmniej jest prosto. Widzę, co idzie, zanim przyjdzie.
+		elif current_place() == "rzapie"
+			Sobek: Nie lubię wody, której dna nie widać. Na stepie woda jest płytka i uczciwa.
+		elif current_place() == "west"
+			Pytasz, jak przeszli przez zawał. Pokazują szparę pod stropem, przez którą przeciśnie się człowiek bez plecaka. Wrócą nią dopiero po szychcie.
+			Sobek: Miecz przeszedł pierwszy, ja za nim. Tak się chodzi w obce miejsca.
+	else
+		Sobek: Stój, kto idzie! Żartuję. Widziałem cię przy śniadaniu.
+		Sobek: Sobek, z Wielkiego Stepu. Pilnuję, żeby nikt nie wyniósł zapasów. I żeby nic nie wlazło tu z ciemności.
 elif not done_today("sob_hello")
 	$> mark_today("sob_hello")
 	if quest_state("zaklad") == "active"

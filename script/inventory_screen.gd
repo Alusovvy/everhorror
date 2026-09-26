@@ -18,6 +18,13 @@ const MIND_LINES := {
 	"na_krawedzi": "Na krawędzi. Słyszysz szepty i nie zawsze wiesz, czy to twoje myśli.",
 	"zalamany": "Załamany.",
 }
+## task_12: fatigue in words (no numbers, NPC-13).
+const FATIGUE_LINES := {
+	"wypoczety": "",
+	"zmeczony": "Jesteś zmęczony. Jeszcze trochę chodzenia po chodnikach i zaczniesz padać z nóg.",
+	"ledwo_idzie": "Ledwo idziesz. Pora odpocząć: przy ognisku albo na posłaniu.",
+	"wyczerpany": "Padasz z nóg. Każda droga w głąb zajmie ci dwa razy dłużej (powrót do obozu nie).",
+}
 const CATEGORY_ORDER := [ItemData.Category.MEDICINE, ItemData.Category.TOOL, ItemData.Category.SUPPLY, ItemData.Category.QUEST, ItemData.Category.VALUABLE]
 
 @onready var header: Label = $Root/Center/Panel/Margin/VBox/Header
@@ -93,6 +100,9 @@ func _status_text() -> String:
 	var lines := "[color=#ffb861]Ty:[/color] %s %s" % [HEALTH_LINES[GameState.health_band()], MIND_LINES[GameState.mind_band()]]
 	if GameState.player_fever:
 		lines += " [color=#ff8a66]Masz gorączkę.[/color]"
+	var tired: String = FATIGUE_LINES[GameState.fatigue_band()]
+	if tired != "":
+		lines += " [color=#ffb861]%s[/color]" % tired
 	lines += "\n[color=#8a7f70]%s[/color]" % GameState.quota_text()
 	return lines
 

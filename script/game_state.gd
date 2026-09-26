@@ -36,6 +36,14 @@ const QUOTA_DAY := 7
 
 const PLAYER_MAX := 100
 const PLAYER_START_SANITY := 80
+## task_12: the hero's fatigue, 0-100. Hours in the tunnels (walking, scouting, work there) tire
+## him more than hours in the camp. At 100 every walk to a place takes twice as long; the way
+## back to the camp never does (decision-task-12). Sleep and the evening fire take some off.
+const FATIGUE_MAX := 100.0
+const FATIGUE_TUNNEL_PER_HOUR := 8.0
+const FATIGUE_CAMP_PER_HOUR := 2.0
+const FATIGUE_SLEEP := 60.0
+const FATIGUE_FIRE := 15.0
 
 const NPCS: Dictionary = {
 	&"miroslaw": preload("res://data/npc/miroslaw.tres"),
@@ -107,6 +115,12 @@ const ITEMS: Dictionary = {
 }
 ## NPCs whose sanity never moves (Hrapek: "always the same", card 02_postacie/hrapek.md).
 const FIXED_SANITY: Array[StringName] = [&"hrapek"]
+## task_10: on day 1 only Mirosław, Bolko, Tekla and Racibor are in the camp. These five are on
+## a shift in the rooms of the first level (depth 1) and are met there, at most two to a room;
+## from the morning of day 2 they follow their usual schedule (decision-task-10: 1A, 2a, 3a, 4a).
+const FIRST_MEET: Array[StringName] = [&"wszebor", &"nasir", &"hagiwara", &"sobek", &"anzelm"]
+const FIRST_ROOMS: Array[StringName] = [&"east", &"rzapie", &"west"]
+const FIRST_ROOM_CAPACITY := 2
 ## Places of the expedition map (Expeditions). The camp itself is "oboz".
 const LOCATIONS: Dictionary = {
 	&"east": preload("res://data/locations/east.tres"),
@@ -146,6 +160,14 @@ var expedition: Dictionary = {}
 ## What the time went on, per day (the notebook's "Czas" tab): "day" → [{"at": hour, "min": minutes, "why": reason}].
 ## Keys are strings so the dictionary survives JSON as it is.
 var time_log: Dictionary = {}
+## task_11 / factcheck 10: responses already picked, "<npc>|<text>" -> true. Picking one again
+## costs no talk time.
+var asked: Dictionary = {}
+## task_12: see FATIGUE_*.
+var player_fatigue: float = 0.0
+## True while the StoryDirector moves the hero between places: those hours are tunnel hours
+## even though the location flag is not set yet (leaving the camp) or already cleared (back).
+var travelling := false
 
 ## Open modal screens (dialogue, map, notebook…). While > 0 the player can't move.
 var _modal_count := 0
@@ -165,8 +187,11 @@ func reset() -> void:
 	player_health = PLAYER_MAX
 	player_sanity = PLAYER_START_SANITY
 	player_fever = false
+	player_fatigue = 0.0
+	travelling = false
 	expedition = {}
 	time_log = {}
+	asked = {}
 	for id in NPCS:
 		var data: NpcData = NPCS[id]
 		npcs[id] = {"sanity": data.start_sanity, "health": data.max_health, "reputation": data.start_reputation, "status": "camp"}
@@ -174,6 +199,7 @@ func reset() -> void:
 	items["amulet"] = 1
 	_modal_count = 0
 	start_quest("slady")
+	roll_first_rooms()
 	state_replaced.emit()
 
 #region Time
@@ -192,12 +218,14 @@ func advance_time(hours: float, reason: String = "") -> void:
 		return
 	log_time(hour, hours, reason)
 	hour += hours
+	_tire(hours)
 	time_advanced.emit(hours, reason)
 
 ## Moves the clock during a conversation (5 minutes per option): the VN clock follows, the toast
 ## and the log entry come once, from commit_time(), when the conversation closes.
 func add_quiet_time(hours: float) -> void:
 	hour += hours
+	_tire(hours)
 	clock_changed.emit()
 
 ## Reports time already added with add_quiet_time() (a whole conversation) as one entry.
@@ -224,6 +252,8 @@ func logged_minutes(on_day: int) -> int:
 func start_next_day() -> void:
 	day += 1
 	hour = DAY_START_HOUR
+	# A night's sleep takes off a good part of the fatigue, not all of it (decision-task-12: 2a).
+	change_fatigue(-FATIGUE_SLEEP)
 	day_started.emit(day)
 
 func hours_left_text() -> String:
@@ -537,6 +567,50 @@ func health_text() -> String:
 func mind_text() -> String:
 	return {"spokojny": "spokojny", "niespokojny": "niespokojny", "na_krawedzi": "na krawędzi", "zalamany": "załamany"}[mind_band()]
 
+#region Fatigue (task_12)
+
+## Hours passed: the tunnels tire more than the camp.
+func _tire(hours: float) -> void:
+	var rate := FATIGUE_TUNNEL_PER_HOUR if (travelling or is_away()) else FATIGUE_CAMP_PER_HOUR
+	change_fatigue(hours * rate)
+
+func change_fatigue(delta: float) -> void:
+	var before := fatigue_band()
+	player_fatigue = clampf(player_fatigue + delta, 0.0, FATIGUE_MAX)
+	if fatigue_band() != before:
+		player_changed.emit()
+
+## The evening by the fire (dialogue/ognisko.dialogue) takes some fatigue off.
+func rest_by_fire() -> void:
+	change_fatigue(-FATIGUE_FIRE)
+
+## True at 100%: every walk to a place takes twice as long.
+func is_exhausted() -> bool:
+	return player_fatigue >= FATIGUE_MAX - 0.001
+
+## "wypoczety" (< 75), "zmeczony" (75+), "ledwo_idzie" (90+), "wyczerpany" (100).
+func fatigue_band() -> String:
+	if is_exhausted():
+		return "wyczerpany"
+	if player_fatigue >= 90.0:
+		return "ledwo_idzie"
+	if player_fatigue >= 75.0:
+		return "zmeczony"
+	return "wypoczety"
+
+## Short word for the HUD corner ("" while rested).
+func fatigue_text() -> String:
+	return {"wypoczety": "", "zmeczony": "zmęczony", "ledwo_idzie": "ledwo idziesz", "wyczerpany": "padasz z nóg"}[fatigue_band()]
+
+#endregion
+
+## task_11 / factcheck 10: has this response been picked before with this person?
+func was_asked(npc_id: StringName, text: String) -> bool:
+	return asked.has("%s|%s" % [npc_id, text])
+
+func mark_asked(npc_id: StringName, text: String) -> void:
+	asked["%s|%s" % [npc_id, text]] = true
+
 func is_badly_hurt() -> bool:
 	return health_band() in ["ranny", "ciezko_ranny"]
 
@@ -595,6 +669,8 @@ func begin_expedition() -> void:
 	expedition = {
 		"day": day, "start": hour, "places": [], "veins": veins_mapped(), "items": {},
 		"events": [], "health": player_health, "sanity": player_sanity,
+		# task_12: hours walked since leaving the camp; the way back costs half of it.
+		"outbound_hours": 0.0,
 	}
 
 func note_expedition_place(place_id: String) -> void:
@@ -740,6 +816,51 @@ func is_in_camp(npc_id: StringName) -> bool:
 	var place := npc_place(npc_id)
 	return place != "" and place != "teren"
 
+## Where each of the FIRST_MEET five works on day 1: a random room of the first level, at most
+## FIRST_ROOM_CAPACITY to a room. Kept in the flags "first_room_<id>" (so saves keep it).
+## Also Zawalony chodnik: whoever is there waits until the rubble is blown, or turns up in the
+## camp on day 2.
+func roll_first_rooms(rng: RandomNumberGenerator = null) -> void:
+	if rng == null:
+		rng = RandomNumberGenerator.new()
+		rng.randomize()
+	var free: Array[StringName] = []
+	for room in FIRST_ROOMS:
+		for i in FIRST_ROOM_CAPACITY:
+			free.append(room)
+	for id in FIRST_MEET:
+		var room: StringName = free.pop_at(rng.randi_range(0, free.size() - 1))
+		flags["first_room_%s" % id] = String(room)
+
+## The room where this one of the five is on day 1 (&"" for everyone else). A save from before
+## task_10 has no rooms yet: they are rolled the first time someone asks.
+func first_room(npc_id: StringName) -> StringName:
+	if not npc_id in FIRST_MEET:
+		return &""
+	if not flags.has("first_room_%s" % npc_id):
+		roll_first_rooms()
+	return StringName(String(flags["first_room_%s" % npc_id]))
+
+## 1 or 2: the spot this one takes in the room ("EastSpot1"), in FIRST_MEET order.
+func first_room_slot(npc_id: StringName) -> int:
+	var room := first_room(npc_id)
+	var slot := 0
+	for id in FIRST_MEET:
+		if first_room(id) == room:
+			slot += 1
+		if id == npc_id:
+			break
+	return slot
+
+## Out on the day-1 shift: not in the camp, not even in the evening.
+func away_first_day(npc_id: StringName) -> bool:
+	return day == 1 and npc_id in FIRST_MEET
+
+## For dialogues and scenes: this person is in the camp today (the campfire on day 1 has only
+## the four who stayed).
+func in_camp_today(npc_id: StringName) -> bool:
+	return npc_status(npc_id) == "camp" and not away_first_day(npc_id)
+
 #endregion
 
 #region Modal screens
@@ -770,9 +891,10 @@ func save_state() -> Dictionary:
 		"notes": notes.map(func(n): return String(n)),
 		"quests": quests.duplicate(true),
 		"npcs": npcs.duplicate(true),
-		"player": {"health": player_health, "sanity": player_sanity, "fever": player_fever},
+		"player": {"health": player_health, "sanity": player_sanity, "fever": player_fever, "fatigue": player_fatigue},
 		"expedition": expedition.duplicate(true),
 		"time_log": time_log.duplicate(true),
+		"asked": asked.duplicate(),
 	}
 
 ## Saves from older versions lack the hero and the expedition: they start healthy, in the camp.
@@ -800,6 +922,9 @@ func load_state(data: Dictionary) -> void:
 	player_health = int(hero.get("health", PLAYER_MAX))
 	player_sanity = int(hero.get("sanity", PLAYER_START_SANITY))
 	player_fever = bool(hero.get("fever", false))
+	# Saves before task_11/12: nothing asked yet, the hero rested.
+	player_fatigue = float(hero.get("fatigue", 0.0))
+	asked = Dictionary(data.get("asked", {})).duplicate()
 	# Saves before task_09 have no time log: the notebook starts it from now on.
 	time_log = Dictionary(data.get("time_log", {})).duplicate(true)
 	expedition = data.get("expedition", {})

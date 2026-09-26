@@ -17,7 +17,7 @@ Rozmowa jest wyborem z kosztem, a nie przerwą w grze. Gracz widzi, że wcześni
    - przedmioty, notatki, wpisy zadań, flagi,
    - czas (`advance_time`),
    - akcje świata po rozmowie („sleep”, „blast”) ✅.
-5. **Koszt rozmowy: 5 minut za każdą wybraną opcję** **[decyzja 2026-09-26, task_09]**. Za darmo: zagadanie, pożegnania (`[#leave]`) i proste oddanie przedmiotu (`[#free]`). Opcja z własną ceną (kości 1 h, pompy 2 h, wysadzenie 4 h, ryby 4 h) nie dolicza 5 minut. Sceny fabularne (sny, ogłoszenia, ściana, ognisko, Hrapek) nic nie kosztują ✅.
+5. **Koszt rozmowy: 5 minut za każdą wybraną opcję** **[decyzja 2026-09-26, task_09]**. Za darmo: zagadanie, pożegnania (`[#leave]`), proste oddanie przedmiotu (`[#free]`) i opcja wybrana już wcześniej u tej samej osoby (**[decyzja 2026-09-26, factcheck 10]**, pamiętane w zapisie). Opcja z własną ceną (kości 1 h, pompy 2 h, wysadzenie 4 h, ryby 4 h) nie dolicza 5 minut. Sceny fabularne (sny, ogłoszenia, ściana, ognisko, Hrapek) nic nie kosztują ✅.
 5a. **Wyszarzone opcje** ✅ **[decyzja 2026-09-26]**: opcja, której brakuje tylko zaufania albo przedmiotu, jest widoczna, szara, z powodem w nawiasie („(potrzebne: lina)”, „(Bolko jeszcze ci nie ufa)”). Opcje na dalszy etap historii zostają ukryte. Przełącznik „Show locked choices” w opcjach, domyślnie włączony.
 6. **Mówcy, którzy nie są postacią, mogą mieć statyczny portret** (ściana w kaplicy: świecące znaki sanctinu) ✅.
 7. **Gwara śląska górników:**

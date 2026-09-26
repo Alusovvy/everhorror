@@ -60,6 +60,102 @@ func _run() -> void:
 	_check(Ex.passed_through(Ex.path(&"oboz", &"east")).is_empty(), "a direct leg passes nothing")
 	_check(not Ex.is_visited(&"kostnica"), "passing through doesn't make a place visited")
 
+	print("--- task_10: the day-1 rooms of the five")
+	var worst := 0
+	var unplaced := 0
+	for roll in 200:
+		gs.reset()
+		var per_room := {}
+		for id in gs.FIRST_MEET:
+			var room: StringName = gs.first_room(id)
+			if not room in gs.FIRST_ROOMS:
+				unplaced += 1
+			per_room[room] = int(per_room.get(room, 0)) + 1
+		for room in per_room:
+			worst = maxi(worst, per_room[room])
+	_check(unplaced == 0, "every one of the five gets a first-level room")
+	_check(worst <= gs.FIRST_ROOM_CAPACITY, "never more than two to a room (worst %d)" % worst)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	gs.roll_first_rooms(rng)
+	var first: Array = gs.FIRST_MEET.map(func(id): return gs.first_room(id))
+	rng.seed = 7
+	gs.roll_first_rooms(rng)
+	_check(first == gs.FIRST_MEET.map(func(id): return gs.first_room(id)), "the same seed gives the same rooms")
+	for pair in [["wszebor", "east"], ["nasir", "rzapie"], ["hagiwara", "west"], ["sobek", "east"], ["anzelm", "rzapie"]]:
+		gs.set_flag("first_room_%s" % pair[0], pair[1])
+	_check(gs.first_room_slot(&"wszebor") == 1 and gs.first_room_slot(&"sobek") == 2, "two in one room take spots 1 and 2")
+	_check(gs.away_first_day(&"sobek") and not gs.in_camp_today(&"sobek") and gs.in_camp_today(&"bolko"), "day 1: Sobek out, Bolko in")
+	gs.day = 2
+	_check(not gs.away_first_day(&"sobek") and gs.in_camp_today(&"sobek"), "day 2: Sobek back in the camp")
+	gs.flags.erase("first_room_nasir")
+	_check(gs.first_room(&"nasir") in gs.FIRST_ROOMS, "a save without rooms gets them on first ask")
+	_check(gs.first_room(&"bolko") == &"", "Bolko has no first room")
+
+	print("--- task_11: an option asked again is free")
+	gs.reset()
+	_check(not gs.was_asked(&"nasir", "Wiesz coś o pompach?"), "not asked yet")
+	gs.mark_asked(&"nasir", "Wiesz coś o pompach?")
+	_check(gs.was_asked(&"nasir", "Wiesz coś o pompach?") and not gs.was_asked(&"tekla", "Wiesz coś o pompach?"), "remembered per person")
+	var asked_save: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	gs.reset()
+	gs.load_state(asked_save)
+	_check(gs.was_asked(&"nasir", "Wiesz coś o pompach?"), "asked options survive save and load")
+
+	print("--- task_12: fatigue and the way back")
+	gs.reset()
+	gs.set_flag("intro_done")
+	gs.advance_time(2.0, "Obóz")
+	_check(is_equal_approx(gs.player_fatigue, 4.0), "camp: +2%%/h (%.1f)" % gs.player_fatigue)
+	gs.set_flag("location", "east")
+	gs.advance_time(2.0, "Tunel")
+	_check(is_equal_approx(gs.player_fatigue, 20.0), "tunnels: +8%%/h (%.1f)" % gs.player_fatigue)
+	gs.clear_flag("location")
+	gs.travelling = true
+	gs.advance_time(1.0, "Droga")
+	gs.travelling = false
+	_check(is_equal_approx(gs.player_fatigue, 28.0), "walking between places counts as tunnels (%.1f)" % gs.player_fatigue)
+	gs.rest_by_fire()
+	_check(is_equal_approx(gs.player_fatigue, 13.0), "the fire takes 15 off (%.1f)" % gs.player_fatigue)
+	gs.player_fatigue = 90.0
+	gs.start_next_day()
+	_check(is_equal_approx(gs.player_fatigue, 30.0), "a night's sleep takes 60 off (%.1f)" % gs.player_fatigue)
+	gs.player_fatigue = 74.0
+	_check(gs.fatigue_band() == "wypoczety" and gs.fatigue_text() == "", "below 75: nothing to say")
+	gs.player_fatigue = 75.0
+	_check(gs.fatigue_band() == "zmeczony", "75: tired")
+	gs.player_fatigue = 92.0
+	_check(gs.fatigue_band() == "ledwo_idzie", "90: barely walking")
+	gs.player_fatigue = 100.0
+	_check(gs.is_exhausted() and gs.fatigue_text() == "padasz z nóg", "100: exhausted")
+	var to_wyrobisko: Array[StringName] = Ex.path(&"oboz", &"wyrobisko")
+	_check(Ex.walk_hours(to_wyrobisko) == 6.0, "exhausted: camp -> old working doubled, 3 h -> 6 h (%.1f)" % Ex.walk_hours(to_wyrobisko))
+	gs.player_health = 30
+	_check(Ex.walk_hours(to_wyrobisko) == 8.0, "the wound penalty is added after doubling (%.1f)" % Ex.walk_hours(to_wyrobisko))
+	gs.player_health = 100
+	_check(Ex.walk_hours(to_wyrobisko, false) == 3.0, "without fatigue: 3 h")
+	gs.player_fatigue = 0.0
+	gs.begin_expedition()
+	gs.expedition["outbound_hours"] = 4.5
+	gs.set_flag("location", "grota")
+	_check(is_equal_approx(Ex.return_hours(), 2.25), "back: half of 4.5 h = 2 h 15 min (%.3f)" % Ex.return_hours())
+	gs.expedition["outbound_hours"] = 2.5
+	_check(is_equal_approx(Ex.return_hours(), 1.25), "back: half of 2.5 h = 1 h 15 min")
+	gs.expedition["outbound_hours"] = 1.0 + 1.0 / 12.0
+	_check(is_equal_approx(Ex.return_hours(), 7.0 / 12.0), "back: rounded up to 5 min (%.4f)" % Ex.return_hours())
+	gs.player_fatigue = 100.0
+	gs.expedition["outbound_hours"] = 4.0
+	_check(is_equal_approx(Ex.return_hours(), 2.0), "back is never doubled, even exhausted")
+	gs.expedition.erase("outbound_hours")
+	gs.player_fatigue = 0.0
+	gs.set_flag("location", "east")
+	_check(is_equal_approx(Ex.return_hours(), 1.0), "a save without the sum: half of the way home (camp <- east 2 h)")
+	gs.player_fatigue = 55.0
+	var tired_save: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	gs.reset()
+	gs.load_state(tired_save)
+	_check(is_equal_approx(gs.player_fatigue, 55.0), "fatigue survives save and load")
+
 	print("--- Polish number helpers")
 	_check(gs.plural(1, "został", "zostały", "zostało") == "został", "plural: 1")
 	_check(gs.plural(3, "został", "zostały", "zostało") == "zostały", "plural: 3")

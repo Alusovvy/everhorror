@@ -7,11 +7,19 @@ extends SceneTree
 ##   so a renamed key can't silently orphan a notebook line),
 ## - the vein ids built by the generators match LOCATIONS[*].veins exactly,
 ## - every camp NPC dialogue has a [#leave] farewell (the free exit),
-## - [#free] (a response that costs no talk time) only on responses that hand over an item.
+## - [#free] (a response that costs no talk time) only on responses that hand over an item,
+## - task_11: every npc_place(...) == "<place>" names a place the schedule really uses, and
+##   everyone who can be met first in the tunnels has a "teren" greeting with a line per
+##   first-level room.
 ## Catches the typo class the scenario tests only hit when they walk the exact branch. ~2 s.
 
 ## Field-scene mages: every pick is meant to charge, so no [#leave] there.
 const NO_LEAVE_EXEMPT := ["welf", "hieronim"]
+## Camp people the hero can meet first in the tunnels (day-1 shift, work posts): their first
+## greeting needs a "teren" branch (task_11).
+const FIELD_FIRST_MEET := ["wszebor", "nasir", "hagiwara", "sobek", "anzelm"]
+## Met only in the tunnels (the Exitium mages; Sabina until she joins the camp).
+const FIELD_ONLY := ["ottokar", "hieronim", "welf", "sabina"]
 const DIALOGUE_DIR := "res://dialogue"
 const EXTRA_SOURCES := [
 	"res://tools/generators/gen_camp.gd",
@@ -140,8 +148,75 @@ func _run() -> void:
 				print("   LINT %s:%d: [#free] on a response that hands nothing over" % [path, i + 1])
 	_check(free_count > 5 and bad_free == 0, "%d free hand-overs, %d wrongly tagged" % [free_count, bad_free])
 
+	print("--- task_11: first greetings know where they happen")
+	var places_of := _schedule_places()
+	var bad_place := 0
+	var place_checks := 0
+	var re_place := RegEx.create_from_string("npc_place\\(&?\"(\\w+)\"\\) [!=]= \"(\\w*)\"")
+	for path in sources:
+		for m in re_place.search_all(sources[path]):
+			var who := m.get_string(1)
+			var where := m.get_string(2)
+			if where != "" and places_of.has(who):
+				place_checks += 1
+			if where != "" and places_of.has(who) and not where in places_of[who]:
+				bad_place += 1
+				print("   LINT %s: %s is never at '%s' (schedule: %s)" % [path, who, where, places_of[who]])
+	_check(place_checks > 20 and bad_place == 0, "every npc_place(...) == \"...\" names a place the schedule really uses (%d checked, %d wrong)" % [place_checks, bad_place])
+	var no_field_greeting := 0
+	for who in FIELD_FIRST_MEET:
+		var text: String = sources.get("%s/%s.dialogue" % [DIALOGUE_DIR, who], "")
+		var intro := _block_after(text, "if not has_flag(\"met_%s\")" % who)
+		if not intro.contains("npc_place(\"%s\") == \"teren\"" % who):
+			no_field_greeting += 1
+			print("   LINT %s: can be met first in the tunnels, but the first greeting has no \"teren\" branch" % who)
+		if StringName(who) in gs.FIRST_MEET:
+			for room in gs.FIRST_ROOMS:
+				if not intro.contains("current_place() == \"%s\"" % room):
+					no_field_greeting += 1
+					print("   LINT %s: no line for the first meeting in '%s'" % [who, room])
+	_check(no_field_greeting == 0, "everyone met first in the tunnels has a tunnel greeting and a line per first-level room (%d missing)" % no_field_greeting)
+
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)
+
+## Places each NPC can have, read from the schedule scripts: every _at("<place>", …) in the
+## NPC's CampSchedule function, plus "teren" for whoever FieldSchedule can put in the tunnels.
+func _schedule_places() -> Dictionary:
+	var result := {}
+	var camp := FileAccess.get_file_as_string("res://script/camp_schedule.gd")
+	var re_func := RegEx.create_from_string("static func _(\\w+)\\(\\) -> Dictionary:")
+	var re_at := RegEx.create_from_string("_at\\(\"(\\w+)\"")
+	var funcs := re_func.search_all(camp)
+	for i in funcs.size():
+		var who := funcs[i].get_string(1)
+		if not gs.NPCS.has(StringName(who)):
+			continue
+		var end := funcs[i + 1].get_start() if i + 1 < funcs.size() else camp.length()
+		var body := camp.substr(funcs[i].get_end(), end - funcs[i].get_end())
+		var places: Array[String] = []
+		for m in re_at.search_all(body):
+			places.append(m.get_string(1))
+		result[who] = places
+	for who in FIELD_FIRST_MEET + FIELD_ONLY:
+		if not result.has(who):
+			result[who] = []
+		result[who].append("teren")
+	return result
+
+## The lines indented under `header` (its whole if-block), or "" if it isn't there.
+func _block_after(text: String, header: String) -> String:
+	var lines := text.split("\n")
+	for i in lines.size():
+		if lines[i].strip_edges() == header:
+			var indent := lines[i].length() - lines[i].lstrip("\t").length()
+			var block: Array[String] = []
+			for j in range(i + 1, lines.size()):
+				if lines[j].strip_edges() != "" and lines[j].length() - lines[j].lstrip("\t").length() <= indent:
+					break
+				block.append(lines[j])
+			return "\n".join(block)
+	return ""
 
 func _vein_registry() -> Dictionary:
 	var veins := {}

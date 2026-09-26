@@ -73,14 +73,27 @@ static func _shortest(from: StringName, to: StringName, open_ways_only: bool) ->
 		result.push_front(step)
 	return result
 
-## Hours of walking along a path, with the wound penalty per leg (no scouting).
-static func walk_hours(route: Array[StringName]) -> float:
+## Hours of walking along a path, with the wound penalty per leg (no scouting). An exhausted
+## hero (fatigue 100%, task_12) walks every leg twice as long; the wound penalty is added after
+## the doubling (decision-task-12: 4a). `with_fatigue = false` for the way back to the camp.
+static func walk_hours(route: Array[StringName], with_fatigue := true) -> float:
+	var factor := 2.0 if with_fatigue and GameState.is_exhausted() else 1.0
 	var hours := 0.0
 	for i in range(1, route.size()):
-		hours += float(neighbours(route[i - 1]).get(route[i], 0.0))
+		hours += float(neighbours(route[i - 1]).get(route[i], 0.0)) * factor
 		if GameState.is_badly_hurt():
 			hours += WOUNDED_EXTRA_HOURS
 	return hours
+
+## task_12: going back to the camp always takes half of the walking done since leaving it
+## (every leg as it was paid: doubled, wounded; no scouting, no time spent at the places),
+## rounded up to 5 minutes, and is never doubled by fatigue. An expedition saved before task_12
+## has no such sum: then half of the way back from here.
+static func return_hours() -> float:
+	var walked := float(GameState.expedition.get("outbound_hours", -1.0))
+	if walked < 0.0:
+		walked = walk_hours(path(GameState.current_place(), CAMP), false)
+	return ceilf(walked * 0.5 * 12.0 - 0.001) / 12.0
 
 ## Walking plus scouting a place seen for the first time.
 static func trip_hours(route: Array[StringName]) -> float:

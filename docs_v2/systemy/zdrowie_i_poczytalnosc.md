@@ -39,6 +39,7 @@ Nie ma pasków ani liczb. HUD dopisuje w rogu „ranny” czy „gorączka”, d
 8. **Co ją przywraca** ✅: nalewka +15, świeca +6, pieśń Wszebora +6, kości z Sobkiem +5, opowieść o Długiej Nocy +3, wiersz Hagiwary +4, wieczór przy ognisku z Mirosławem +2.
 9. **Winieta** ✅ **[decyzja 2026-09-25, task_06]**: na pasmie „na krawędzi” brzegi ekranu ciemnieją i powoli pulsują (siła 0,3–0,7, im mniej poczytalności, tym mocniej). Znika w rozmowach i na ekranach. Bez drżenia kamery.
 10. **Załamanie** ✅ (poczytalność 0): „Uciekasz przed czymś, czego nie ma”. Ktoś przynosi bohatera do obozu, reszta dnia przepada, poczytalność wraca do 20.
+11. **Zmęczenie** ✅ **[decyzja 2026-09-26, task_12]**: 0–100%. Rośnie o 8% na godzinę w tunelach (także w drodze) i o 2% na godzinę w obozie. Sen zdejmuje 60%, wieczór przy ognisku 15%. Przy 100% każdy marsz w głąb trwa dwa razy dłużej (powrót do obozu nigdy). Poniżej tylko słowa: od 75% „zmęczony”, od 90% „ledwo idziesz”, przy 100% „padasz z nóg” (róg ekranu, plecak), a mapa dopisuje „zmęczenie ×2”. Nie rusza zdrowia ani poczytalności. Kod: `GameState.player_fatigue`, `FATIGUE_*`, `_tire()`, `Expeditions.walk_hours()`.
 
 ## Dane i strojenie
 | Parametr | Wartość | Gdzie |

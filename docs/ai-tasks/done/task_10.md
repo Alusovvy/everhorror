@@ -26,7 +26,7 @@ Priorytet: do ustalenia · Kolejność: po task_09 (oba zmieniają rozkład dnia
 - **Pojemność:** pierwszego dnia otwarte są tylko 2 miejsca głębokości 1. Przy „najwyżej 2 w jednym” mieszczą 4 osoby, a spotkać trzeba 5.
 - **Co dalej z postacią, której gracz nie spotkał:** czy wieczorem wraca do obozu, czy czeka w tunelu, aż ją znajdzie?
 
-Wszystko to jest w [decision-task-10](../human-tasks/decision-task-10.md).
+Wszystko to jest w [decision-task-10](../../human-tasks/done/decision-task-10.md).
 
 ## Plan (wariant rekomendowany)
 1. **Losowanie na starcie nowej gry**:
@@ -49,17 +49,73 @@ Wszystko to jest w [decision-task-10](../human-tasks/decision-task-10.md).
    - wpis w `WDROZENIA.md`, docs_v2.
 
 ## Co zostało zrobione
-Na razie analiza i plan. Implementacja po decyzjach.
+Decyzje (2026-09-26, [decision-task-10](../../human-tasks/done/decision-task-10.md)):
+- 1A: pomieszczenia to miejsca głębokości 1 (Stara sztolnia, Rząpie, Zawalony chodnik),
+- 2a: zawał też jest losowany, a kto tam trafi, czeka na wybuch,
+- 3a: od rana w dniu 2 wszyscy są w obozie,
+- 4a: czysto losowo (nie wybrałeś rekomendowanego „losowo z sensem”).
+
+### Rozstawienie w dniu 1
+- **Losowanie** (`GameState.roll_first_rooms()`):
+  - przy każdej nowej grze każda z piątki (Wszebor, Nasir, Hagiwara, Sobek, Anzelm) dostaje pomieszczenie, najwyżej 2 osoby w jednym,
+  - wynik trzymają flagi `first_room_<id>`, więc zapis i wczytanie go nie zmieniają,
+  - zapis sprzed tej zmiany dostaje pomieszczenia przy pierwszym pytaniu.
+- **Obóz** (`CampSchedule`): w dniu 1 piątki nie ma przez cały dzień, także wieczorem. Od rana w dniu 2 obowiązuje zwykły rozkład.
+- **Teren** (`FieldSchedule`):
+  - w dniu 1 każdy z piątki stoi w swoim pomieszczeniu na znaczniku `<Miejsce>Spot1`/`Spot2` (te same, których od dnia 3 używają Drudzy),
+  - pozy: Wszebor, Nasir i Anzelm klęczą przy robocie, Hagiwara i Sobek stoją,
+  - po rozmowie zostają na miejscu do końca dnia.
+- Wszystko stoi w `GameState`: `FIRST_MEET`, `FIRST_ROOMS`, `FIRST_ROOM_CAPACITY`, `first_room()`, `first_room_slot()`, `away_first_day()` i `in_camp_today()` dla scen.
+
+### Teksty dnia 1 [ROBOCZE]
+- **Wstęp:** „W obozie zostali tylko zarządca, kwatermistrzyni i dwaj górnicy. Reszta ekipy od świtu kopie w chodnikach najbliżej obozu i wróci dopiero jutro. Chcesz ich poznać, to ich poszukaj.”
+- **Powitania na szychcie** dla całej piątki (wariant „teren” w dniu 1):
+  - opis pasuje do chodnika,
+  - każdy mówi jednym zdaniem, co robi na szychcie i że wraca jutro,
+  - Sobek nie mówi już „widziałem cię przy śniadaniu”,
+  - za zawałem narracja wyjaśnia, jak tam weszli: szparą pod stropem, przez którą przeciśnie się człowiek bez plecaka.
+
+  Dawne powitania Wszebora w wyrobisku i Nasira przy pompach (od dnia 2) zostały bez zmian. Zdania zależne od konkretnego pomieszczenia to task_11.
+- **Ognisko:** wszystkie sprawdzenia „czy ta osoba jest w obozie” idą przez `in_camp_today()`, więc w dniu 1 przy ogniu nie śpiewa Wszebor, którego nie ma. W dniu 1 dochodzi linijka „Przy ogniu jest luźno. Połowa ekipy została na nocnej szychcie w chodnikach i wróci dopiero rano.”.
+- Kwestie Bolka, Mirosława, Tekli i Racibora nie wspominają piątki w dniu 1 (poza „Co myślisz o Wszeborze?”, które było już zależne od poznania).
+
+### Specyfikacja i dokumentacja (bez commita)
+- **Specyfikacja:**
+  - nowa reguła **NPC-17** (pierwszy dzień) i „Dla agenta”,
+  - `04_tresc/tydzien.md` (dzień 1: wstęp i cztery osoby w obozie),
+  - karty 5 postaci („Pojawia się”),
+  - `07_balans.md` (pomieszczenia, pojemność, losowanie),
+  - wpis w `WDROZENIA.md` → „Zmiany agenta poza specyfikacją”.
+- **docs_v2:** `systemy/npc.md` (rozkład dnia 1) i karty 5 postaci.
+- **CLAUDE.md:** reguła dnia 1 i nowy test.
 
 ## Decyzje i założenia
 - Wymagania to dosłowny cytat z czatu. Moje doprecyzowania są w tym pliku i w pliku decyzji.
 - Losowanie odbywa się raz, na starcie gry, a nie codziennie. Dzięki temu „spotkaj ludzi w pomieszczeniach” to zadanie pierwszego dnia, a nie loteria na cały tydzień.
+- **Cały dzień 1, nie tylko „za dnia”:** piątka jest na szychcie od rana do nocy („nocna szychta”), zgodnie z „pierwszego dnia w obozie tylko…”.
+- **Po poznaniu w dniu 1 nikt nie wraca do obozu tego samego dnia.** Wraca rano w dniu 2, jak wszyscy.
+- **Szpara pod stropem:** moje wyjaśnienie, jak ktoś jest za zawałem, zanim Mirosław go wysadzi [ROBOCZE].
+- **Pozy** dobrałem do roli (klęczą ci, którzy coś robią przy skale). Wszyscy stoją twarzą do wejścia, bo tak są obrócone znaczniki.
 
 ## Czego potrzebuję od Ciebie
-- Odpowiedzi w [decision-task-10](../human-tasks/decision-task-10.md) (4 pytania).
+- **Przejrzenia tekstów [ROBOCZE]** przez Ren: wstęp, powitania na szychcie i szpara pod stropem.
+- **Factcheck 10:** przeszedłeś go w części, bez uwag poza jedną: „ta sama opcja nie powinna już zużywać 5 minut”. Zrobiłem to w task_11. Resztę sprawdzimy w większym teście.
 
 ## Test
-Po implementacji: `docs/human-tasks/factcheck-test-10.md`.
+- **Automatyczne (uruchomione):**
+  - `unit`: 9 nowych sprawdzeń (200 losowań: każdy dostaje pomieszczenie, nigdy więcej niż 2; to samo ziarno daje ten sam wynik; miejsca 1 i 2; dzień 1 i 2; zapis bez pomieszczeń),
+  - `lint`, `dialogue`,
+  - nowy scenariusz **`first_meet`** w prawdziwym świecie: w dniu 1 czwórka w obozie, Wszebor i Sobek w sztolni na `EastSpot1/2` z powitaniem na szychcie (bez „Siadaj, siadaj” i bez „przy śniadaniu”), Nasir i Hagiwara w rząpiu, po rozmowie zostają, wieczorem piątki nie ma, rano w dniu 2 wszyscy w obozie, a Anzelm (za zawałem) dostaje powitanie obozowe.
+
+  Wszystkie przechodzą.
+- **Zrzut** Starej sztolni w dniu 1: Wszebor klęczy, a Sobek stoi w chodniku tuż za wejściem, nikt nie wchodzi w ścianę.
+- **Pełny zestaw (za zgodą, 2026-09-26):** 18/18 po poprawieniu oczekiwań w testach (szczegóły w raporcie task_12). `first_meet` jest w domyślnej liście `run_tests.sh`.
+- **Ręczne:** [factcheck-test-10](../../human-tasks/factcheck-test-10.md) (13 punktów, ok. 25 min).
 
 ## Podsumowanie
-Pierwszego dnia obóz ma tylko czterech mieszkańców, a pozostałą piątkę gracz spotyka w pomieszczeniach kopalni, najwyżej dwie osoby w jednym. Większość elementów już jest: znaczniki w terenie, powitania zależne od miejsca, rozkład dnia z miejscami poza obozem. Przed startem trzeba ustalić, co znaczy „pierwsze piętro”, bo pierwszego dnia otwarte miejsca mieszczą tylko 4 z 5 osób, oraz co dzieje się z kimś, kogo gracz nie spotkał. **Status: czeka na decyzje.**
+- **Obóz w dniu 1:** są w nim tylko Mirosław, Bolko, Tekla i Racibor.
+- **Piątka na szychcie:** Wszebor, Nasir, Hagiwara, Sobek i Anzelm pracują w losowych pomieszczeniach pierwszego poziomu (Stara sztolnia, Rząpie, Zawalony chodnik), najwyżej dwoje w jednym, i witają bohatera po szychtowemu.
+- **Wieczór i dzień 2:** wieczorem w dniu 1 piątki w obozie nie ma. Od rana w dniu 2 wszyscy są w obozie.
+- **Spójność:** wstęp i ognisko mówią to samo, a losowanie przeżywa zapis.
+
+Pełny zestaw testów przechodzi (18/18).
