@@ -19,12 +19,14 @@ Working title "everhorror" (the GDD still calls the game "XYZ"). The logo `asset
 
 ## Specification (`../specification`, separate repo)
 - `C:\dev\gamedev\everhorror\specification`, next to this repo. **The design source of truth**, in Polish. The user pushes it to GitHub as its own project, the team edits it there, and I pull it locally (`git pull` in that folder). Version 1.0 was written from docs_v2 and the code after task_05. Start with its `README.md`.
-- **Workflow when asked to sync:**
-  1. `git pull`.
-  2. `git diff <commit from WDROZENIA.md>..HEAD`, plus new files in `zgloszenia/`.
-  3. Plan and questions. Implement, then tests and a factcheck (in this repo).
-  4. Update the spec: markers ⬜→✅, anything I had to decide marked [ROBOCZE], and an entry in `WDROZENIA.md`.
-  5. Commit the spec only when asked, with the prefix `[agent]`.
+- **Workflow (2026-09-26): the `spec-sync` skill** ([.claude/skills/spec-sync/SKILL.md](.claude/skills/spec-sync/SKILL.md)) — use it whenever asked to sync. In short: the team edits the spec in its React dashboard (`../specification/dashboard/`), every edit is a PR approved by the section owner (`zespol.json`), merged into the spec `master`. Then:
+  1. `git pull`, `node dashboard/cli.ts status` / `diff <baseline> HEAD --json` (semantic diff per rule ID, table cell, question; baseline = last hash in `WDROZENIA.md` → "Wpisy"), plus 📥 tickets.
+  2. Plan; questions go to the user (interactive) or into a ❔ ticket (unattended).
+  3. Implement on a `spec/<date>-<sha7>` branch in the **worktree `../everhorror-wdrozenie`** (never switch branches in this main copy — other sessions work here), tests, factcheck `docs/human-tasks/factcheck-spec-<sha7>.md`.
+  4. Spec: a row in `WDROZENIA.md` → "Na gałęziach" (🧪), [ROBOCZE] details; `[agent]` commit + push.
+  5. After the user merges the branch into `master`: `/spec-sync finalize` flips ⬜→✅ and moves the row to "Wpisy".
+- **Standing permission (user decision 2026-09-26):** commits on `spec/*` branches, `[agent]` commits and pushes to the spec `master`, short tests. Still ask for: the full test suite, merging into the game `master`. Other spec commits (outside spec-sync): only when asked.
+- **Poller:** `tools/spec_poll.ps1` (every 15 min via Task Scheduler, `-Register`/`-Unregister`, `-DryRun`) runs `claude -p "/spec-sync <mode> unattended"` only when there is work; state and logs in `reports/spec-sync/`. Permissions for that run: `.claude/settings.json`.
 - **Markers:**
   - ✅ in the game, 🟡 partial, ⬜ decided and waiting (the order in `WDROZENIA.md` → "Czeka na wdrożenie" is the priority),
   - 💡 proposal and ❓ open question: don't implement,

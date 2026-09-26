@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "additionalDirectories": [
+      "../specification",
+      "../everhorror-wdrozenie"
+    ],
+    "allow": [
+      "Bash(git:*)",
+      "Bash(node:*)",
+      "Bash(tools/run_tests.sh:*)",
+      "Bash(C:/dev/gamedev/Godot_v4.7.2-stable_win64_console.exe:*)",
+      "Bash(cp -r:*)",
+      "Bash(mkdir:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(diff:*)",
+      "Bash(date:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git -C * push --force*)",
+      "Bash(git -C * push -f*)",
+      "Bash(git reset --hard:*)",
+      "Bash(git -C * reset --hard*)",
+      "Bash(git clean:*)",
+      "Bash(git -C * clean*)",
+      "Bash(git branch -D:*)",
+      "Bash(git -C * branch -D*)",
+      "Bash(git worktree remove --force:*)"
+    ]
+  }
+}
