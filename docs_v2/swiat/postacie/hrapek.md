@@ -7,5 +7,5 @@
 - **Wygląd:** łysy, blady, bez koszuli, w podartych portkach, skulony, mniejszy (części Quaternius, `scene/characters/hrapek_model.tscn`).
 - **Poczytalność:** stała, 20.
 - **Kiedy:** tylko przy powrotach z tuneli do obozu, od dnia 3 po wysadzeniu zachodniego zawału (pierwszy powrót na pewno), potem 25% raz dziennie, drugie spotkanie na pewno w dniu 5. Rozmowy nic nie kosztują.
-- **Zadanie:** „Ryba dla Hrapka” (ryba od Tekli albo 4 h łowienia ze Wszeborem lub Mirosławem). Nagroda: o NIM i o dziadku („byłeś starszy, broda siwa”).
+- **Zadanie:** „Ryba dla Hrapka” (ryba od Tekli, 4 h łowienia ze Wszeborem lub Mirosławem, gdy pompy działają, albo bandaż dla Wszebora — ryba z rząpia następnego ranka; task_13). Nagroda: o NIM i o dziadku („byłeś starszy, broda siwa”).
 - **Śmierć:** w nocy z dnia 5 na 6. Przy pierwszym powrocie w dniu 6+ ciało w chodniku i pierścień („Zabierz pierścień” / „Zostaw go”), tylko jeśli bohater go spotkał.

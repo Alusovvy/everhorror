@@ -375,6 +375,22 @@ func _task06() -> void:
 	gs.day = 6
 	await _talk(system, "dream", [])
 	_check(_seen.any(func(l): return l.contains("Dochodzi do czternastu")), "the counting dream")
+	_seen.clear()
+	gs.day = 7
+	await _talk(system, "dream", [])
+	_check(_seen.any(func(l): return l.contains("czy policzyłeś")) and _seen.any(func(l): return l.contains("Dochodzi do czternastu")), "task_13: the counting in the last dream too")
+
+	print("--- task_13: the deciphered letter ends the dream of whatever night it happens")
+	for night in [3, 5, 7]:
+		gs.reset()
+		gs.day = night
+		gs.add_note(&"odszyfrowana")
+		_seen.clear()
+		await _talk(system, "dream", [])
+		_check(_seen.any(func(l): return l.contains("Twoim pismem")) and gs.has_flag("dream_decipher_seen"), "letter after night %d" % night)
+		_seen.clear()
+		await _talk(system, "dream", [])
+		_check(not _seen.any(func(l): return l.contains("Twoim pismem")), "only once (night %d)" % night)
 	gs.set_flag("fourteenth_gift")
 	await _talk(system, "left_behind", [])
 	_check(_seen.any(func(l): return l.contains("znakiem dziadka")), "the lamp in the left-alone ending")
@@ -442,9 +458,28 @@ func _task09() -> void:
 	_check(gs.has_flag("hrapek_told_palace"), "the fish resets the question count")
 	_check(gs.rep(&"hrapek") == 10, "trust +10")
 
-	print("--- Fishing with Wszebor (4 h) and Mirosław")
+	print("--- task_13: the pond is under water until the pumps run; the bandage for Wszebor")
 	gs.reset()
 	gs.start_quest("ryba")
+	gs.hour = 9.0
+	await _talk(mir, "hub", ["Chodź ze mną na ryby", "Muszę iść."])
+	_check(not gs.has_item("ryba") and is_equal_approx(gs.hour, 9.0), "Mirosław: the pond is flooded, no fishing")
+	_check(_seen.any(func(l): return l.contains("woda stoi po sam strop")), "Mirosław says why")
+	await _talk(wszebor, "start", ["Chodź ze mną na ryby", "Muszę iść."])
+	_check(not gs.has_item("ryba") and gs.has_flag("wsz_fish_offer"), "Wszebor: flooded, but offers the bandage deal")
+	gs.give_item("bandaze")
+	await _talk(wszebor, "start", ["Masz, bandaż na rękę", "Jak tam ryba z rząpia", "Muszę iść."])
+	_check(not gs.has_item("bandaze") and gs.get_flag("wsz_fish_day") == gs.day, "the bandage taken, the fish promised")
+	_check("wymiana" in gs.quests[&"ryba"]["entries"], "notebook: the deal")
+	_check(not gs.has_item("ryba") and _seen.any(func(l): return l.contains("Rano, mówiłem")), "same day: not yet")
+	gs.day += 1
+	await _talk(wszebor, "start", ["Jak tam ryba z rząpia", "Muszę iść."])
+	_check(gs.has_item("ryba") and "od_wszebora" in gs.quests[&"ryba"]["entries"], "next morning: a fish from the sump")
+
+	print("--- Fishing with Wszebor (4 h) and Mirosław, the pumps running")
+	gs.reset()
+	gs.start_quest("ryba")
+	gs.set_flag("pump_running")
 	gs.hour = 20.0
 	await _talk(wszebor, "start", ["Chodź ze mną na ryby", "Muszę iść."])
 	_check(not gs.has_item("ryba") and is_equal_approx(gs.hour, 20.0), "too late: tomorrow")

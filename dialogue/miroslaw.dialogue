@@ -121,6 +121,9 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 	Mirosław: Mnie z tej piwnicy wyciągnęła baba spod Mirosila, co wiozła rzepę na targ. Nie mag.
 	=> hub
 - Chodź ze mną na ryby do stawu. (4 h) [if quest_state("ryba") == "active" and not has_item("ryba") /]
+	if not has_flag("pump_running")
+		Mirosław: Do stawu? Tam woda stoi po sam strop, póki pompy nie ruszą. Pod wodą ani ryby nie złowisz, ani nie odetchniesz.
+		=> hub
 	if not can_afford(4)
 		Mirosław: Na ryby? O tej porze? Do stawu kawał drogi. Jutro.
 		=> hub

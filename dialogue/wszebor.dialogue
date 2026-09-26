@@ -125,6 +125,13 @@ Wszebor: [[Gadaj, gadaj.|No?|Czego ci trza?]]
 	$> change_sanity("wszebor", 3)
 	=> hub
 - Chodź ze mną na ryby do stawu. (4 h) [if quest_state("ryba") == "active" and not has_item("ryba") /]
+	if not has_flag("pump_running")
+		Wszebor: Do stawu? Tam woda stoi po sam strop, póki pompy Nasira nie ruszą. Tam się teraz nie łowi, tam się tonie.
+		if not has_flag("wsz_fish_day")
+			$> set_flag("wsz_fish_offer")
+			Wszebor ogląda swoją prawą dłoń. Wnętrze ma rozharatane od kucia, owinięte brudną szmatą.
+			Wszebor: Ale wiesz co? Daj mi czysty bandaż na tę łapę, a rybę ci sam wyciągnę. Z rząpia. Tam też stoją, ślepe, tylko trzeba umieć. Rano będzie.
+		=> hub
 	if not can_afford(4)
 		Wszebor: Na ryby? Teraz? Zanim dojdziemy, trzeba będzie wracać spać. Jutro, przewodniku. Z samego rana.
 		=> hub
@@ -136,6 +143,23 @@ Wszebor: [[Gadaj, gadaj.|No?|Czego ci trza?]]
 	Staw leży w zalanym chodniku, tam gdzie woda stanęła i już nie odpłynęła. Wszebor siedzi nad nim bez ruchu, z żyłką owiniętą wokół palca, i nuci coś pod nosem.
 	Po trzech godzinach coś bierze. Ryba jest biała, bez oczu, i trzepie się w jego wielkiej dłoni jak serce.
 	Wszebor: Ślepa. Pod ziemią nawet ryby zapominają, po co im oczy. Masz. Tylko nie mów Tekli, bo będzie chciała ugotować.
+	=> hub
+- Masz, bandaż na rękę. Za rybę. [if quest_state("ryba") == "active" and has_flag("wsz_fish_offer") and not has_flag("wsz_fish_day") and not has_item("ryba") and has_item("bandaze") /] [#free]
+	$> give_to_npc("bandaze", "wszebor")
+	$> set_flag("wsz_fish_day", day)
+	$> quest_log("ryba", "wymiana")
+	Wszebor zdziera szmatę zębami i owija dłoń czystym płótnem, ciasno, jak ktoś, kto robił to setki razy.
+	Wszebor: Ha! Od razu lżej. Rano będziesz miał rybę. Hawiar słowa dotrzymuje, nawet jak ryba nie chce.
+	=> hub
+- Jak tam ryba z rząpia? [if quest_state("ryba") == "active" and has_flag("wsz_fish_day") and not has_flag("wsz_fish_given") and not has_item("ryba") /]
+	if day > get_flag("wsz_fish_day", 99)
+		Wszebor sięga do wiadra przy nogach i podaje ci rybę, jeszcze mokrą. Biała, bez oczu, jak te ze stawu.
+		Wszebor: Wziąłem ją przed świtem, jak wszystkie spały. Ryba śpi mocno, kiedy nie ma czym mrugać.
+		$> give_item("ryba")
+		$> quest_log("ryba", "od_wszebora")
+		$> set_flag("wsz_fish_given")
+	else
+		Wszebor: Rano, mówiłem. W rząpiu łowi się przed świtem, jak cały obóz chrapie. Nawet ryby.
 	=> hub
 - Muszę iść. [#leave]
 	Wszebor: Idź, idź. Tylko łeb trzymaj nisko, strop jest niżej, niż myślisz.

@@ -65,6 +65,9 @@ else
 	Liczy i liczy, a palców ciągle mu brakuje.
 Z bardzo daleka ktoś odpowiada na twój oddech swoim. Wolniejszym.
 Budzisz się zlany potem. Amulet jest ciepły, choć leżał na zimnej ziemi.
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+	$> set_flag("dream_decipher_seen")
+	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
 
 ~ dream4
@@ -75,13 +78,21 @@ if quest_state("czternasty") == "active" or has_flag("fourteenth_gift")
 if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
 	Gdzieś obok ktoś płacze przez sen. Poznajesz głos Mirosława, choć Mirosław nigdy nie płacze.
 Budzisz się i przez dłuższą chwilę nie wiesz, po której stronie skały jesteś.
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+	$> set_flag("dream_decipher_seen")
+	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
 
 ~ dream_last
 Śnisz dziadka. Siedzi przy ognisku jak wtedy, kiedy byłeś mały, i struga coś nożem.
 Nie podnosi wzroku. Pyta tylko, czy policzyłeś.
+if quest_state("czternasty") == "active" or has_flag("fourteenth_gift")
+	Ktoś siedzi na skraju twojego snu i liczy szeptem. Dochodzi do czternastu, milknie i zaczyna od nowa. Czekasz na piętnaście. Nigdy nie pada.
 Chcesz zapytać, co miał policzyć, ale ogień gaśnie, a on razem z nim.
 Budzisz się przed świtem. W jaskini jest cicho, jakby wszyscy wstrzymali oddech.
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+	$> set_flag("dream_decipher_seen")
+	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
 
 ~ too_late

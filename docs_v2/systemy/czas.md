@@ -37,7 +37,7 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
    - stan bohatera: −3 poczytalności co noc, odpoczynek +8 zdrowia albo gorączka −12 zdrowia (zob. [Zdrowie i poczytalność](zdrowie_i_poczytalnosc.md)),
    - odszyfrowanie wiadomości dziadka, jeśli gracz ma szyfr i klucz,
    - podarunek „Czternastego” (od 5. nocy, przy ≥ 4 śladach questu): lampa przy posłaniu,
-   - sen bohatera: inny w noce 1, 2, 3–4, 5–6 i 7, a w gorączce z dodatkiem.
+   - sen bohatera: inny w noce 1, 2, 3–4, 5–6 i 7, a w gorączce z dodatkiem; pierwszej nocy po odszyfrowaniu (obojętnie której) kończy się kartką dziadka, a przy „Czternastu kreskach” w noce 5–7 ktoś liczy do czternastu (task_13).
 8. **Poranki** ✅:
    - plansza z nowiną nocy („Nasir kaszle od świtu”, „W nocy ziemia drżała”),
    - zapis stanu poranka (do „spróbuj od rana” po śmierci),

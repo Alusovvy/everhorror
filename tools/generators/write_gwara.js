@@ -210,6 +210,9 @@ const gwara = {
     "Na ryby? O tyj porze? Do stawu kawał drogi. Jutro.",
   "Na ryby?[wait=0.4] Wiesz co? Chętnie. Przy wodzie nic nie wybucha.":
     "Na ryby?[wait=0.4] Wiysz co? Chętnie. Przi wodzie nic niy pierdyknie.",
+  // --- task_13: staw pod wodą, póki pompy stoją ---
+  "Do stawu? Tam woda stoi po sam strop, póki pompy nie ruszą. Pod wodą ani ryby nie złowisz, ani nie odetchniesz.":
+    "Do stawu? Tam woda stoi po sam strop, póki pompy niy ruszóm. Pod wodom ani ryby niy chycisz, ani niy odetchniesz.",
   "Ślepa. Jak my wszyscy tutaj. Masz, zanieś temu, komu tam chcesz.":
     "Ślepo. Jak my wszyjscy tukej. Mosz, zanieś tymu, kómu tam chcesz.",
 };

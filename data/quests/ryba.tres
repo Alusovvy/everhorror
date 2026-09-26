@@ -11,6 +11,8 @@ entries = {
 "start": "Hrapek, ten blady człowiek z chodników, jest głodny. Chce ryby. „Rybkę dla Hrapka, Cesarzu, rybkę!” Tekla może coś mieć. A Wszebor i Mirosław mówili o stawie w zalanym chodniku.",
 "od_tekli": "Tekla dała mi suszoną rybę, po cichu. Za tobołek.",
 "zlowiona": "Złowiliśmy rybę w stawie w zalanym chodniku. Ślepa i blada, ale ryba.",
+"wymiana": "Dałem Wszeborowi bandaż. Rano ma przynieść rybę, mówi, że w rząpiu też stoją, tylko trzeba umieć.",
+"od_wszebora": "Wszebor przyniósł rybę z rząpia. Ślepa, jak tamte ze stawu.",
 "oddana": "Hrapek zjadł rybę razem z ośćmi. Mówił o NIM: ON czeka na dole, ON już raz mnie dopadł. Twierdzi, że mnie zna, tylko byłem starszy. Chyba pomylił mnie z dziadkiem.",
 "za_pozno": "Nie zdążyłem z rybą. Hrapek nie żyje."
 }
