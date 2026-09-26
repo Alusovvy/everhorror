@@ -267,4 +267,19 @@ quest("odlamek", "Odłamek dla Sabiny", "Sabina von Reuss", {
   start: "Sabina chce zbadać czysty błękit. Najczystszy ma być w Kryształowej galerii, najniżej na mapie.",
   oddany: "Dałem Sabinie odłamek z galerii. Pierwszy raz widziałem, jak Druga się cieszy. Tak mi się przynajmniej wydaje, pod maską.",
 });
+// --- task_09: Hrapek (card 02_postacie/hrapek.md by Roland; lines [ROBOCZE]) ---
+npc({
+  id: "hrapek", display_name: "Hrapek", dialogue_name: "Hrapek", instr: "Hrapkiem", faction: 2,
+  role: "Rybak, potem górnik. Mieszka poziom niżej, w swoim pałacu", max_sanity: 100, start_sanity: 20, eye: 1.43,
+  history: "Kiedyś łowił ryby, potem zjechał do kopalni i został na dole, kiedy zasypało chodnik. Przeżył na grzybach, które świecą i zmieniają tego, kto je je. Mówi wierszem, śmieje się, sprząta „cesarskie piwnice” i bohatera nazywa Cesarzem. Zadaj mu trzy pytania z rzędu, a ucieka.",
+  zero: "Nie spada. Hrapek jest zawsze taki sam.",
+});
+quest("ryba", "Ryba dla Hrapka", "Hrapek", {
+  start: "Hrapek, ten blady człowiek z chodników, jest głodny. Chce ryby. „Rybkę dla Hrapka, Cesarzu, rybkę!” Tekla może coś mieć. A Wszebor i Mirosław mówili o stawie w zalanym chodniku.",
+  od_tekli: "Tekla dała mi suszoną rybę, po cichu. Za tobołek.",
+  zlowiona: "Złowiliśmy rybę w stawie w zalanym chodniku. Ślepa i blada, ale ryba.",
+  oddana: "Hrapek zjadł rybę razem z ośćmi. Mówił o NIM: ON czeka na dole, ON już raz mnie dopadł. Twierdzi, że mnie zna, tylko byłem starszy. Chyba pomylił mnie z dziadkiem.",
+  za_pozno: "Nie zdążyłem z rybą. Hrapek nie żyje.",
+});
+
 console.log("data written");

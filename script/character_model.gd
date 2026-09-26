@@ -16,6 +16,8 @@ const LOOPED_WORK_ANIMATIONS: Array[StringName] = [&"Fixing_Kneeling", &"Interac
 @export var base_scene: PackedScene
 ## Head-only mesh cut from the base body (male head if empty).
 @export var head_mesh: Mesh
+## Keeps the whole base body instead of the head-only mesh: for someone with no shirt (Hrapek).
+@export var keep_body := false
 ## Outfit, hair, beard… Each is a glTF rigged to the same skeleton.
 @export var parts: Array[PackedScene] = []
 ## Node names of part meshes to hide, e.g. the hood that comes with the ranger outfit.
@@ -47,7 +49,8 @@ func _ready() -> void:
 	body.name = "Body"
 	add_child(body)
 	skeleton = body.find_child("GeneralSkeleton", true, false) as Skeleton3D
-	_find_skin_mesh(body).mesh = head_mesh if head_mesh else MALE_HEAD
+	if not keep_body:
+		_find_skin_mesh(body).mesh = head_mesh if head_mesh else MALE_HEAD
 	_customise_meshes(body)
 	for scene in parts:
 		var part := scene.instantiate()

@@ -6,7 +6,8 @@ extends SceneTree
 ## - every quest_log entry exists in its QuestData (and every defined entry is used somewhere,
 ##   so a renamed key can't silently orphan a notebook line),
 ## - the vein ids built by the generators match LOCATIONS[*].veins exactly,
-## - every camp NPC dialogue has a [#leave] farewell (the free exit).
+## - every camp NPC dialogue has a [#leave] farewell (the free exit),
+## - [#free] (a response that costs no talk time) only on responses that hand over an item.
 ## Catches the typo class the scenario tests only hit when they walk the exact branch. ~2 s.
 
 ## Field-scene mages: every pick is meant to charge, so no [#leave] there.
@@ -112,6 +113,32 @@ func _run() -> void:
 			no_leave += 1
 			print("   LINT %s: no [#leave] farewell" % path)
 	_check(no_leave == 0, "farewells tagged everywhere (%d missing)" % no_leave)
+
+	print("--- [#free] only on responses that hand over an item")
+	var bad_free := 0
+	var free_count := 0
+	for path in sources:
+		if not String(path).ends_with(".dialogue"):
+			continue
+		var lines: PackedStringArray = sources[path].split("\n")
+		for i in lines.size():
+			if not lines[i].contains("[#free]"):
+				continue
+			free_count += 1
+			var indent := lines[i].length() - lines[i].lstrip("\t").length()
+			var hands_over := false
+			for j in range(i + 1, lines.size()):
+				var line := lines[j]
+				if line.strip_edges() == "":
+					continue
+				if line.length() - line.lstrip("\t").length() <= indent:
+					break
+				if line.contains("take_item(") or line.contains("give_to_npc("):
+					hands_over = true
+			if not hands_over:
+				bad_free += 1
+				print("   LINT %s:%d: [#free] on a response that hands nothing over" % [path, i + 1])
+	_check(free_count > 5 and bad_free == 0, "%d free hand-overs, %d wrongly tagged" % [free_count, bad_free])
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)

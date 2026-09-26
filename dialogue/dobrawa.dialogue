@@ -53,7 +53,7 @@ Dobrawa: [[Słucham.|Tak?|Mów krótko. To miejsce boli.]]
 	if has_item("krysztal")
 		Dobrawa: Czuję go stąd. W niszy był kryształ, prawda?
 	=> hub
-- Znalazłem w kaplicy kryształ. [if has_item("krysztal") and not has_flag("dob_asked_crystal") /]
+- Znalazłem w kaplicy kryształ. [if has_flag("wall_open") and not has_flag("crystal_to_racibor") and not has_flag("crystal_to_ottokar") and not has_flag("dob_asked_crystal") and has_item("krysztal") /]
 	$> set_flag("dob_asked_crystal")
 	Dobrawa: Nie podawaj mi go do ręki. Połóż tutaj, na skrzyni.
 	Pochyla się nad kryształem. Błękitna iskra w środku przesuwa się w jej stronę, jakby ją poznawała.

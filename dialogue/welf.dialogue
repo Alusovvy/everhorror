@@ -12,7 +12,7 @@ Welf: Czego? Nie mam czasu dla kopaczy. Mistrz czeka.
 Welf siedzi pod ścianą z ręką przyciśniętą do boku. Czerwony płaszcz jest ciemniejszy tam, gdzie trzyma dłoń. Maskę ma przekrzywioną.
 Welf: Nie podchodź! Nic mi nie jest. Para. Albo ta ściana. Coś mnie trafiło, kiedy próbowałem... Nieważne.
 Welf: Mistrz poszedł dalej. Powiedział, że go dogonię. Nie dogonię.
-- Mam bandaże. Pokaż ranę. [if has_item("bandaze") /]
+- Mam bandaże. Pokaż ranę. [if has_item("bandaze") /] [#free]
 	$> take_item("bandaze")
 	$> set_flag("welf_helped")
 	$> change_rep("welf", 20)

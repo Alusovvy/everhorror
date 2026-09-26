@@ -11,9 +11,14 @@ class_name StoryDirector
 const SYSTEM_DIALOGUE := preload("res://dialogue/system.dialogue")
 const RACIBOR_DIALOGUE := preload("res://dialogue/racibor.dialogue")
 const DRUDZY_DIALOGUE := preload("res://dialogue/drudzy.dialogue")
+const HRAPEK_DIALOGUE := preload("res://dialogue/hrapek.dialogue")
 const BLAST_HOURS := 4.0
 ## After the meeting on day 3, the chance to run into one of the Drudzy on arrival (once a day).
 const DRUDZY_CHANCE := 0.4
+## Hrapek (task_09): after the first meeting, the chance he turns up on a way back (once a day).
+const HRAPEK_CHANCE := 0.25
+## The night he dies (from the evening of this day to the next morning).
+const HRAPEK_LAST_NIGHT := 5
 ## Seconds between whispers while the hero is on the edge in the tunnels.
 const WHISPER_SECONDS := Vector2(40.0, 80.0)
 const WHISPERS: Array[String] = [
@@ -221,6 +226,8 @@ func _return_to_camp() -> void:
 	var route := Expeditions.path(GameState.current_place(), Expeditions.CAMP)
 	var hours := Expeditions.walk_hours(route)
 	_busy = true
+	# On the way back, before the walk: Hrapek, or what is left of him.
+	await _hrapek_on_the_way_back()
 	GameState.push_modal()
 	await fade.fade_out(0.7)
 	_leave_encounter()
@@ -315,6 +322,44 @@ func _meet_drudzy_if_due(place_id: StringName) -> void:
 
 #endregion
 
+#region Hrapek on the way back
+
+## Met only on the way back to the camp (card 02_postacie/hrapek.md, decisions 1A–3a): from day 3
+## once the west rubble is blown (the first way back then is certain), afterwards 25% a way back,
+## once a day; a second meeting is certain on the first way back on day 5. He dies in the night
+## after day 5; the first way back after that finds the body, if the hero ever met him.
+static func hrapek_due() -> String:
+	if not GameState.has_flag("hrapek_free") or GameState.has_flag("hrapek_found"):
+		return ""
+	var meetings := int(GameState.get_flag("hrapek_meetings", 0))
+	if GameState.has_flag("hrapek_dead"):
+		return "body" if meetings > 0 else ""
+	if GameState.day < 3 or GameState.done_today("hrapek_seen"):
+		return ""
+	if meetings == 0 or (GameState.day == HRAPEK_LAST_NIGHT and meetings < 2):
+		return "meet"
+	# Seeded by the day, the place and the hour, so loading a save doesn't reroll it.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = hash("hrapek-%d-%s-%d" % [GameState.day, GameState.current_place(), int(GameState.hour * 2.0)])
+	return "meet" if rng.randf() < HRAPEK_CHANCE else ""
+
+func _hrapek_on_the_way_back() -> void:
+	var due := hrapek_due()
+	if due == "":
+		return
+	if due == "meet":
+		GameState.mark_today("hrapek_seen")
+		GameState.set_flag("hrapek_meetings", int(GameState.get_flag("hrapek_meetings", 0)) + 1)
+		GameState.set_flag("met_hrapek")
+		GameState.set_flag("hrapek_q", 0)
+		GameState.note_event("W drodze powrotnej zaczepił cię Hrapek.")
+		await VN.play(HRAPEK_DIALOGUE, "meet", &"hrapek")
+	else:
+		GameState.note_event("W chodniku przed obozem leżał martwy Hrapek.")
+		await VN.play(HRAPEK_DIALOGUE, "body", &"hrapek")
+
+#endregion
+
 #region Blast, nights and mornings
 
 func _blast() -> void:
@@ -325,6 +370,8 @@ func _blast() -> void:
 	blast_sound.play()
 	await fade.show_card("Huk", "Mirosław wysadza zawał w zachodnim chodniku. Pył długo nie chce opaść.", 2.4)
 	GameState.set_flag("west_blasted")
+	# Kept for good: west_blasted goes away when Mirosław takes the tunnel with him, Hrapek doesn't.
+	GameState.set_flag("hrapek_free")
 	GameState.quest_log(&"lonty", "wysadzone")
 	GameState.complete_quest(&"lonty")
 	GameState.change_sanity(&"miroslaw", -4)
@@ -338,6 +385,8 @@ func _sleep() -> void:
 	_busy = true
 	GameState.push_modal()
 	await fade.fade_out(1.2)
+	# The night is one line in the notebook's time log.
+	GameState.log_time(GameState.hour, 0.0, "Sen")
 	var news := _resolve_night()
 	GameState.pop_modal()
 	await VN.play(SYSTEM_DIALOGUE, "dream")
@@ -397,6 +446,9 @@ func _resolve_night() -> String:
 				GameState.change_sanity(id, -2)
 	if GameState.has_flag("welf_wounded") and not GameState.has_flag("welf_helped"):
 		GameState.set_flag("welf_lost")
+	# Hrapek dies in the night after day 5. Nobody in the camp knows; the hero finds him later.
+	if night == HRAPEK_LAST_NIGHT:
+		GameState.set_flag("hrapek_dead")
 	# The hero: bad dreams, rest, the fever (it never kills in his sleep).
 	GameState.change_player_sanity(-3)
 	if GameState.done_today("soaked") and not GameState.player_fever:
@@ -565,6 +617,8 @@ func _end_summary(success: bool) -> String:
 	lines.append("Ściana w kaplicy: %s" % ("otwarta, list dziadka przeczytany" if GameState.has_flag("wall_open") else "nierozwiązana"))
 	lines.append("Kryształ: %s" % _crystal_summary())
 	lines.append("Upadowa: %s" % _upadowa_summary(success))
+	if GameState.has_flag("met_hrapek"):
+		lines.append("Hrapek: %s" % _hrapek_summary())
 	if GameState.quest_state(&"czternasty") != "":
 		lines.append("Czternasty: %s" % ("ktoś odpowiedział ci lampą" if GameState.has_flag("fourteenth_gift") else "%d śladów, odpowiedzi brak" % GameState.fourteenth_clues()))
 	lines.append("")
@@ -598,6 +652,17 @@ func _new_people_summary() -> Array[String]:
 	if GameState.has_flag("welf_wounded"):
 		result.append("Welf z Exitium: %s" % ("żyje dzięki twoim bandażom" if GameState.has_flag("welf_helped") else "przepadł w chodnikach"))
 	return result
+
+func _hrapek_summary() -> String:
+	var parts: Array[String] = []
+	parts.append("zjadł twoją rybę" if GameState.quest_state(&"ryba") == "done" else "ryby się nie doczekał")
+	if GameState.has_flag("hrapek_found"):
+		parts.append("zginął szóstego dnia w chodniku")
+		if GameState.has_flag("hrapek_ring"):
+			parts.append("jego pierścień masz przy sobie")
+	elif GameState.has_flag("hrapek_dead"):
+		parts.append("od szóstego dnia nikt go nie widział")
+	return ", ".join(parts)
 
 func _crystal_summary() -> String:
 	if GameState.has_flag("crystal_to_dobrawa"):

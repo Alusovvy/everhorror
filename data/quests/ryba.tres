@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="QuestData" format=3]
+
+[ext_resource type="Script" path="res://script/data/quest_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"ryba"
+title = "Ryba dla Hrapka"
+giver = "Hrapek"
+entries = {
+"start": "Hrapek, ten blady człowiek z chodników, jest głodny. Chce ryby. „Rybkę dla Hrapka, Cesarzu, rybkę!” Tekla może coś mieć. A Wszebor i Mirosław mówili o stawie w zalanym chodniku.",
+"od_tekli": "Tekla dała mi suszoną rybę, po cichu. Za tobołek.",
+"zlowiona": "Złowiliśmy rybę w stawie w zalanym chodniku. Ślepa i blada, ale ryba.",
+"oddana": "Hrapek zjadł rybę razem z ośćmi. Mówił o NIM: ON czeka na dole, ON już raz mnie dopadł. Twierdzi, że mnie zna, tylko byłem starszy. Chyba pomylił mnie z dziadkiem.",
+"za_pozno": "Nie zdążyłem z rybą. Hrapek nie żyje."
+}

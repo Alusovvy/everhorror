@@ -88,7 +88,7 @@ Racibor: [[Mów.|Słucham.|Do rzeczy.]]
 	else
 		Racibor: {{veins_mapped()}} z {{quota()}}. Idzie. Za wolno, ale idzie.
 	=> hub
-- Tekla ukrywa coś przed tobą. [if has_item("tobolek") and not has_flag("tekla_reported") /]
+- Tekla ukrywa coś przed tobą. [if has_flag("took_bundle") and quest_state("towar") != "done" and not has_flag("tekla_reported") and has_item("tobolek") /]
 	Racibor: Mów.
 	Kładziesz na stole tobołek. Racibor wysypuje sakiewkę, czyta list z pieczęcią i pierwszy raz widzisz, jak zaciska szczęki.
 	Racibor: Konfraternia. Skupują błękit za plecami Kniazia. Za to się wisi.
@@ -116,7 +116,7 @@ Racibor: [[Mów.|Słucham.|Do rzeczy.]]
 	Racibor: Exitium siedzi w starej kopalni po drugiej stronie Wąwozu. Magowie, którzy kopią w ruinach, jakby szukali własnego grobu.
 	Racibor: Ten ich przewodniczący, von Brühl, patrzy na ludzi jak na narzędzia. Ja też tak patrzę. Tylko że ja o swoje narzędzia dbam.
 	=> hub
-- Znalazłem w kaplicy kryształ. [if has_item("krysztal") and not has_flag("rac_saw_crystal") /]
+- Znalazłem w kaplicy kryształ. [if has_flag("wall_open") and not has_flag("crystal_to_dobrawa") and not has_flag("crystal_to_ottokar") and not has_flag("rac_saw_crystal") and has_item("krysztal") /]
 	$> set_flag("rac_saw_crystal")
 	Racibor obraca kryształ w palcach pod światło świecy. Błękitna iskra w środku przesuwa się za jego ręką.
 	Racibor: Za coś takiego Kniaź zapłaci więcej niż za wóz błękitu. Pójdzie na górę z pierwszą dostawą.

@@ -20,6 +20,9 @@ var fullscreen: bool = false
 ## Miners (Mirosław, Bolko) speak with Silesian dialect elements. Off = the original lines
 ## from the .dialogue files.
 var silesian_dialect: bool = true
+## Dialogue responses locked only by trust or a missing item are shown greyed out with the
+## reason (DIA-2, task_09). On for the demo and playtests.
+var show_locked_choices: bool = true
 
 var _gwara: Translation
 var _gwara_loaded := false
@@ -81,6 +84,7 @@ func save_settings() -> void:
 	config.set_value("video", "brightness", brightness)
 	config.set_value("video", "fullscreen", fullscreen)
 	config.set_value("dialogue", "silesian_dialect", silesian_dialect)
+	config.set_value("dialogue", "show_locked_choices", show_locked_choices)
 	var err := config.save(PATH)
 	if err != OK:
 		push_error("Could not save settings: %s" % error_string(err))
@@ -96,3 +100,4 @@ func load_settings() -> void:
 	brightness = config.get_value("video", "brightness", brightness)
 	fullscreen = config.get_value("video", "fullscreen", fullscreen)
 	silesian_dialect = config.get_value("dialogue", "silesian_dialect", silesian_dialect)
+	show_locked_choices = config.get_value("dialogue", "show_locked_choices", show_locked_choices)

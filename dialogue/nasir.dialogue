@@ -57,7 +57,7 @@ Nasir: [[Mów, habibi.|Słucham.|Tak?]]
 	Nasir: Jeśli stare pompy jeszcze stoją, to za nimi jest zalany chodnik. A w zalanych chodnikach, habibi, zawsze coś się kryje. Pustych chodników nikt nie zalewa.
 	Nasir: Daj mi oleju do tłoków, a zajrzę do nich. Od następnego dnia będę tam siedział za dnia, aż ruszą.
 	=> hub
-- Mam olej do tłoków. [if quest_state("pompy") == "active" and has_item("olej") and not has_flag("nasir_at_pumps") /]
+- Mam olej do tłoków. [if quest_state("pompy") == "active" and has_item("olej") and not has_flag("nasir_at_pumps") /] [#free]
 	$> take_item("olej")
 	$> set_flag("nasir_at_pumps", day)
 	$> quest_log("pompy", "olej")
@@ -94,7 +94,7 @@ if not has_flag("nas_sick_seen")
 else
 	Nasir: [[Jeszcze... jestem.|Dżiny stoją przy łóżku. Powiedz im, żeby poczekały.|Zimno. Tak strasznie zimno.]]
 Anzelm patrzy na ciebie znad miski z wodą i nic nie mówi.
-- Mam dla ciebie lekarstwo. [if has_item("lekarstwo") /]
+- Mam dla ciebie lekarstwo. [if has_item("lekarstwo") /] [#free]
 	$> give_to_npc("lekarstwo", "nasir")
 	$> change_npc_health("nasir", 30)
 	$> quest_log("goraczka", "wyleczony")

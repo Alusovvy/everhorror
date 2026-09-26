@@ -38,7 +38,7 @@ $> start_quest("oferta")
 if has_item("krysztal")
 	Ottokar: Wiem, co nosisz. Czuję to od trzech korytarzy. Kryształ z kaplicy. Klucz albo zapis, jeszcze nie wiem. Chcę się dowiedzieć.
 	Ottokar: Dam ci za niego coś, czego potrzebujesz bardziej. Twój zarządca liczy żyły. Ja wiem, gdzie są dwie, do których sam nigdy nie trafisz.
-	- Zaznacz mi te żyły. Kryształ jest twój.
+	- Zaznacz mi te żyły. Kryształ jest twój. [#free]
 		$> take_item("krysztal")
 		$> set_flag("crystal_to_ottokar")
 		$> set_flag("ott_deal_done")

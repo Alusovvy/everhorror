@@ -1,0 +1,115 @@
+using GameState
+
+# Hrapek (task_09, karta 02_postacie/hrapek.md, autor karty: Roland). Kwestie [ROBOCZE] do
+# przejrzenia przez Rolanda i Ren. Mówi wierszem, bohatera nazywa Cesarzem. Spotkania tylko przy
+# powrocie do obozu (StoryDirector), rozmowa nie kosztuje czasu. Trzecie pytanie z rzędu: ucieka.
+# Oddanie ryby i pożegnanie nie liczą się jako pytania.
+
+~ meet
+if get_flag("hrapek_meetings", 0) <= 1
+	Za plecami coś szura. Coś bosego, na czworakach. Kiedy się odwracasz, stoi przed tobą chudy, łysy człowiek, blady jak spód kamienia. Oczy ma wielkie i mokre od światła twojej lampy.
+	Hrapek: Cesarz! Cesarz w piwnicy! Hrapek sprząta, Hrapek się kłania, Hrapek pięknie prosi o zmiłowania!
+	Kłania się tak nisko, że czołem dotyka skały. Potem łapie się za brzuch.
+	Hrapek: Hrapek głodny, brzuch mu gra, rybki nie jadł ze sto lat. Rybkę, Cesarzu, rybkę przynieś, a Hrapek ci powie, czego się nie widzi!
+	$> start_quest("ryba")
+else
+	Za plecami coś szura. Nie musisz się odwracać, żeby wiedzieć, kto to.
+	Hrapek: [[Cesarz wraca, Cesarz chodzi, Hrapek za nim w cieniu brodzi!|Znowu Cesarz! Jaka radość! Hrapek wymiótł całą ciemność!|Ciii, Cesarzu, cicho, sza. ON dziś nisko, ON nie śpi, ha!]]
+	if quest_state("ryba") == "active" and not has_item("ryba")
+		Hrapek: A rybka? Rybka jest? Hrapek pyta tylko raz. No, może dwa.
+=> hub
+
+~ hub
+Hrapek: [[Pytaj, Cesarzu, pytaj śmiało!|Cesarz pyta, Hrapek słucha.|Co jeszcze, Cesarzu? Co jeszcze?]]
+- Mam dla ciebie rybę. [if has_item("ryba") /]
+	=> fish
+- Co tu robisz? [if not has_flag("hrapek_told_work") /]
+	if bump_flag("hrapek_q") >= 3
+		=> flee
+	$> set_flag("hrapek_told_work")
+	Hrapek: Hrapek sprząta, Hrapek zmiata cesarskie piwnice od lata do lata!
+	Hrapek: Cesarz się gniewał, Cesarz był zły. To Hrapek sprząta i liczy mu dni.
+	=> hub
+- Kim jest ten Cesarz? [if not has_flag("hrapek_told_emperor") /]
+	if bump_flag("hrapek_q") >= 3
+		=> flee
+	$> set_flag("hrapek_told_emperor")
+	Hrapek chichocze i pokazuje na ciebie palcem. Paznokieć ma długi i czarny od ziemi.
+	Hrapek: Ty, ty, ty! Cesarz to ty! Korona z lampy, a płaszcz z mgły!
+	Hrapek: Cesarz chodzi z ogniem w ręku, a Hrapek w ciemności, bez żadnego lęku.
+	=> hub
+- Kim byłeś, zanim tu trafiłeś? [if not has_flag("hrapek_told_past") /]
+	if bump_flag("hrapek_q") >= 3
+		=> flee
+	$> set_flag("hrapek_told_past")
+	Hrapek: Górnikiem...[wait=0.6] A nie, nie, nie! Rybakiem! Rybakiem był Hrapek, nad wodą, pod krzakiem!
+	Hrapek: Potem przyszedł kilof, potem przyszła skała. A potem skała drzwi zamknęła i Hrapka zabrała.
+	=> hub
+- Co tu jesz? [if not has_flag("hrapek_told_food") /]
+	if bump_flag("hrapek_q") >= 3
+		=> flee
+	$> set_flag("hrapek_told_food")
+	Hrapek: Grzybki! Grzybki świecące, ciepłe i gorące! Zjesz jeden, widzisz dwa. Zjesz trzy, a ściana gada.
+	Hrapek oblizuje wargi. Przy świetle lampy widzisz, że skórę na przedramionach ma dziwnie przejrzystą.
+	Hrapek: Ale rybki Hrapek nie jadł od lat. Za rybkę Hrapek oddałby świat.
+	=> hub
+- Gdzie jest twój pałac? [if not has_flag("hrapek_told_palace") /]
+	if bump_flag("hrapek_q") >= 3
+		=> flee
+	$> set_flag("hrapek_told_palace")
+	Hrapek: Niżej, niżej, gdzie woda śpi, gdzie błękit świeci, gdzie ON... ciii.
+	Hrapek: Pałac ma okna z samego błękitu. Nie chodź tam, Cesarzu. Tam nie ma świtu.
+	=> hub
+- Znałeś mojego dziadka? [if not has_flag("hrapek_told_grandfather") /]
+	if bump_flag("hrapek_q") >= 3
+		=> flee
+	$> set_flag("hrapek_told_grandfather")
+	Hrapek przekrzywia głowę i długo ci się przygląda. Za długo.
+	Hrapek: Dziadków było wielu, co zeszli na dół bez celu. Hrapek nie pamięta twarzy. Hrapek pamięta rybki.
+	=> hub
+- Muszę iść. [#leave]
+	Hrapek: [[Idź, Cesarzu, idź na górę, Hrapek zostanie, Hrapek zna dziurę!|Pa, Cesarzu! Hrapek posprząta za tobą!|Hrapek nie widział Cesarza. Cesarz nie widział Hrapka. Umowa?]]
+	Coś szura w ciemności i Hrapka już nie ma.
+	=> END
+
+~ fish
+$> set_flag("hrapek_q", 0)
+$> take_item("ryba")
+$> quest_log("ryba", "oddana")
+$> complete_quest("ryba")
+$> change_rep("hrapek", 10)
+Hrapek chwyta rybę oburącz i zjada ją w trzech kęsach, razem z ośćmi i ogonem. Potem długo patrzy na ciebie z bliska. Za blisko.
+Hrapek: Znam cię. Znam! Tylko byłeś starszy, broda siwa, ręka twarda. I też chodziłeś z lampą, i też rysowałeś kreski.
+Hrapek: Młodszy teraz jesteś. Dziwne. Na dole wszystko jest dziwne.
+Nagle przestaje się śmiać. Mówi cicho i zwyczajnie, bez rymów, i to jest gorsze niż wszystko, co słyszałeś do tej pory.
+Hrapek: ON cię już raz dopadł, Cesarzu. Tam, na dole. ON pamięta. ON czeka.
+Hrapek: Zejdziesz za głęboko, to ON dopadnie cię znowu.
+Amulet dziadka robi się ciepły.
+Hrapek: Hrapek nic nie mówił! Hrapek tylko je rybki!
+=> hub
+
+~ flee
+Hrapek: Czemu pyta? CO TYLE PYTA? Hrapek nie wie, Hrapek spróbuje się dowiedzieć!
+Odskakuje na czworakach, szybciej, niż człowiek powinien umieć, i znika w bocznej szczelinie. Przez chwilę słychać jeszcze szuranie. Potem nic.
+=> END
+
+~ body
+W chodniku, kawałek przed obozem, ktoś leży skulony pod ścianą. Chudy, łysy, blady jak spód kamienia.
+To Hrapek.
+Nie ma na nim śladu kilofa ani noża. Oczy ma otwarte i spokojne, jakby coś go dopadło i poszło dalej. Palce zaciska na czymś małym.
+if quest_state("ryba") == "active"
+	$> quest_log("ryba", "za_pozno")
+	$> fail_quest("ryba")
+	Myślisz o rybie, której nie zdążyłeś przynieść.
+$> set_flag("hrapek_found")
+$> set_npc_status("hrapek", "dead")
+$> change_player_sanity(-3, "Hrapek nie żyje")
+- Zabierz pierścień.
+	$> give_item("pierscien")
+	$> set_flag("hrapek_ring")
+	Rozginasz mu palce. Na dłoni leży cienka, matowa obrączka. Kiedy ją podnosisz, przez chwilę nie widzisz własnej ręki.
+	Mrugasz. Ręka jest na miejscu.
+- Zostaw go.
+	$> set_flag("hrapek_left")
+	Zostawiasz go tak, jak leży. Przecież sprzątał tu całe życie. Niech ma swój pałac.
+=> END

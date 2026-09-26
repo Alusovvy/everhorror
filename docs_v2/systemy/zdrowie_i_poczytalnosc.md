@@ -6,7 +6,7 @@
 Kopalnia zabiera zdrowie i rozum także bohaterowi. Rany i strach to kolejny koszt wypraw obok czasu. Śmierć przychodzi dopiero wtedy, gdy ktoś schodzi na dół już poraniony **[decyzja 2026-09-25, MECHANICS §13 pkt 3]**.
 
 ## Doświadczenie gracza
-Nie ma pasków ani liczb. HUD dopisuje pod zegarem „ranny” czy „gorączka”, dopiero gdy coś jest nie tak. Ekwipunek opisuje stan zdaniami („Ranny. Rany pieką przy każdym kroku…”). Na krawędzi w tunelach słychać szepty.
+Nie ma pasków ani liczb. HUD dopisuje w rogu „ranny” czy „gorączka”, dopiero gdy coś jest nie tak. Ekwipunek opisuje stan zdaniami („Ranny. Rany pieką przy każdym kroku…”). Na krawędzi w tunelach słychać szepty.
 
 ## Zasady
 1. **Zdrowie 0–100** (start 100), opisane pasmami ✅:
@@ -62,7 +62,7 @@ Nie ma pasków ani liczb. HUD dopisuje pod zegarem „ranny” czy „gorączka�
   - `player_health`, `player_sanity`, `player_fever`,
   - `hurt_player`, `heal_player`, `change_player_sanity`, `set_fever`,
   - sygnały `player_died`, `player_broke`,
-- HUD `Condition` pod zegarem i winieta (`Vignette` + `shader/sanity_vignette.gdshader`),
+- HUD `Condition` w rogu (zegara na HUD nie ma od task_09) i winieta (`Vignette` + `shader/sanity_vignette.gdshader`),
 - ekwipunek (opis stanu),
 - `StoryDirector` (`_on_player_died`, `_on_player_broke`, szepty),
 - `SaveManager.capture_morning()` / `retry_morning()`,

@@ -15,7 +15,7 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
 | Akcja | Kosztuje czas? |
 |---|---|
 | Chodzenie po obozie i po miejscu wyprawy | nie |
-| Rozmowa z NPC | **tak: 0,5 h** przy pierwszej odpowiedzi innej niż pożegnanie; zagadać i wyjść — za darmo **[decyzja 2026-09-25, task_06]** |
+| Rozmowa z NPC | **tak: 5 minut za każdą wybraną opcję**; zagadać, pożegnać się i oddać przedmiot — za darmo **[decyzja 2026-09-26, task_09]** |
 | Podróż do miejsca, dalej przez [M] i z powrotem | **tak** |
 | Pierwsze rozpoznanie nowego miejsca | **tak** |
 | Badanie niektórych rzeczy, znaczenie żył | **czasami** |
@@ -23,9 +23,9 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
 | Pomoc NPC (wysadzenie, praca przy pompach, opatrywanie) | **tak, dużo** |
 | Sen | **tak**, kończy dzień |
 
-3. **Dzień ma budżet 16 godzin** (06:00–22:00). ✅ Gdy godzin brakuje, dalsze wyprawy i znaczenie żył są niedostępne z podpowiedzią „(za późno)”. Rozmowę można zacząć zawsze; jej koszt widać toastem przy naliczeniu.
+3. **Dzień ma budżet 16 godzin** (06:00–22:00). ✅ Gdy godzin brakuje, dalsze wyprawy i znaczenie żył są niedostępne z podpowiedzią „(za późno)”. Rozmowę można zacząć zawsze; jej koszt widać w zegarze okna rozmowy i w dymku po jej zamknięciu.
 4. **Gracz zawsze wraca na noc do obozu**, ale może przy tym zmarnować dużo czasu **[decyzja 2026-09-25, MECHANICS §13 pkt 8]**. ✅ Powrót jest możliwy nawet po 22:00, kosztuje wtedy trochę poczytalności.
-5. **Koszt jest widoczny przed akcją** („[E] Zaznacz żyłę na mapie · 1 h”, na mapie: droga, rozpoznanie i godzina przybycia), a przy rozmowach toastem „−0,5 h · Rozmowa z…” w chwili naliczenia. ✅
+5. **Koszt jest widoczny przed akcją** („[E] Zaznacz żyłę na mapie · 1 h”, na mapie: droga, rozpoznanie i godzina przybycia), a przy rozmowach zegar w oknie VN przesuwa się o 5 minut przy każdej opcji, a po rozmowie jeden dymek podaje sumę („−15 min · Rozmowa z Teklą”). ✅ **[decyzja 2026-09-26]**
 6. **Tydzień.** ✅ Gra trwa 7 dni. Rano ósmego dnia Racibor liczy żyły ([Eksploracja](eksploracja_kopalni.md#złoża-i-norma)):
    - co najmniej 12 żył: zakończenie „Koniec tygodnia”,
    - mniej: wyprawa wyjeżdża bez gracza, a on zostaje sam w kopalni („Zostałeś sam”) **[decyzja 2026-09-25, MECHANICS §13 pkt 2]**.
@@ -49,7 +49,7 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
 | Parametr | Wartość | Gdzie |
 |---|---|---|
 | Godziny w dniu | 16 (06:00–22:00) | `GameState.DAY_START_HOUR`, `DAY_LENGTH_HOURS` |
-| Rozmowa z NPC | 0,5 h przy pierwszej odpowiedzi innej niż pożegnanie (`[#leave]` w plikach dialogów) | `VN.TALK_HOURS` |
+| Rozmowa z NPC | 5 min za opcję; darmowe pożegnania (`[#leave]`) i oddanie przedmiotu (`[#free]`); opcja z własną ceną nie dolicza 5 min | `VN.TALK_MINUTES` |
 | Podróż | wg grafu miejsc: 2 h obóz ↔ sąsiednie, 1–1,5 h dalej | `data/locations/*.tres` (`links`) |
 | Rozpoznanie nowego miejsca | +1 h | `Expeditions.SCOUTING_HOURS` |
 | Ciężko ranny / ranny | +1 h na każdy odcinek drogi | `Expeditions.WOUNDED_EXTRA_HOURS` |
@@ -78,10 +78,10 @@ Spokojna eksploracja bez stopera, ale z ciągłą świadomością, że *ta rozmo
 ## Implementacja
 ✅
 - autoload `GameState` (`day`, `hour`, `advance_time()`, `can_afford()`, `part_of_day()`, `days_to_deadline()`, sygnał `time_advanced`),
-- zegar w HUD i VN,
+- zegar w notesie (zakładka „Czas” z dziennikiem dni: `GameState.time_log`, zapis v4) i w oknie VN; w rogu ekranu zegara nie ma **[decyzja 2026-09-26, task_09]**,
 - rozliczenie nocy i poranki w `StoryDirector` (`_resolve_night()`, `_morning_events()`, `_week_end()`),
 - rytm dnia w `CampSchedule`.
 
 ## Otwarte pytania
-- ❓ Czas w świecie: świeca, zegarek dziadka? Na razie jest zegar w rogu ekranu.
-- ❓ Czy po tygodniu gra ma trwać dalej (kolejny termin, kopanie upadowej), czy demo kończy się na liczeniu?
+- ✅ ~~Czas w świecie?~~ Zespół (2026-09-26): zegar w notesie zamiast w rogu i dziennik czasu. Zrobione w task_09.
+- ✅ ~~Czy po tygodniu gra trwa dalej?~~ Zespół (2026-09-26): demo kończy się na podsumowaniu.

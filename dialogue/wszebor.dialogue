@@ -77,7 +77,7 @@ Wszebor: [[Gadaj, gadaj.|No?|Czego ci trza?]]
 	Wszebor: Ale stara ekipa miała hawiarskiego kowala, to wiem na pewno. Po robocie widać. Gdzieś w chodnikach musiał zostać jego obuch. Ja bym szukał w starym wyrobisku, tam, gdzie kopię. Tylko że ja nie mam czasu szukać.
 	Wszebor: Znajdź mi obuch, a ja ci go osadzę na trzonku z porządnego jesionu. Do rana będzie gotowy.
 	=> hub
-- Mam obuch. [if has_item("obuch") and quest_state("kilof") != "done" /]
+- Mam obuch. [if quest_state("kilof") == "active" and not has_flag("wsz_forging_day") and has_item("obuch") /] [#free]
 	$> take_item("obuch")
 	$> quest_log("kilof", "oddany")
 	$> set_flag("wsz_forging_day", day)
@@ -111,6 +111,19 @@ Wszebor: [[Gadaj, gadaj.|No?|Czego ci trza?]]
 	$> change_player_sanity(6)
 	$> change_sanity("miroslaw", 3)
 	$> change_sanity("wszebor", 3)
+	=> hub
+- Chodź ze mną na ryby do stawu. (4 h) [if quest_state("ryba") == "active" and not has_item("ryba") /]
+	if not can_afford(4)
+		Wszebor: Na ryby? Teraz? Zanim dojdziemy, trzeba będzie wracać spać. Jutro, przewodniku. Z samego rana.
+		=> hub
+	Wszebor: Na ryby! A wiesz ty, że u nas w Przystani ryby łowi się przez przerębel, a przerębel rąbie się kilofem? Chodź.
+	$> advance_time(4, "Ryby w stawie z Wszeborem")
+	$> give_item("ryba")
+	$> quest_log("ryba", "zlowiona")
+	$> change_rep("wszebor", 3)
+	Staw leży w zalanym chodniku, tam gdzie woda stanęła i już nie odpłynęła. Wszebor siedzi nad nim bez ruchu, z żyłką owiniętą wokół palca, i nuci coś pod nosem.
+	Po trzech godzinach coś bierze. Ryba jest biała, bez oczu, i trzepie się w jego wielkiej dłoni jak serce.
+	Wszebor: Ślepa. Pod ziemią nawet ryby zapominają, po co im oczy. Masz. Tylko nie mów Tekli, bo będzie chciała ugotować.
 	=> hub
 - Muszę iść. [#leave]
 	Wszebor: Idź, idź. Tylko łeb trzymaj nisko, strop jest niżej, niż myślisz.

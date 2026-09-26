@@ -72,6 +72,12 @@ item({ id: "lampa", name: "Stara lampa przewodnika", acc: "starą lampę", cat: 
 item({ id: "klejnot", name: "Daleki Klejnot", acc: "Daleki Klejnot", cat: "valuable", consumable: false,
   text: "Szklany paciorek w mosiężnej oprawce. Na bazarach w Lajihar sprzedają takie jako kawałek planety Kinkenheim. Nasir twierdzi, że ten jest prawdziwy." });
 
+// --- task_09: Hrapek ---
+item({ id: "ryba", name: "Ryba", acc: "rybę", cat: "quest",
+  text: "Ryba bez oczu, blada jak brzuch świecy. Pod ziemią nawet ryby zapominają, po co im oczy. Hrapek bardzo chciał rybę." });
+item({ id: "pierscien", name: "Pierścień Hrapka", acc: "pierścień Hrapka", cat: "valuable", consumable: false,
+  text: "Cienka obrączka z matowego metalu, zdjęta z palca Hrapka. Kiedy obracasz ją w palcach, przez chwilę nie widzisz własnej dłoni. Pewnie przez zmęczenie." });
+
 // --- Places and the travel graph ---
 // Edges: [a, b, hours]. The camp is "oboz".
 const EDGES = [

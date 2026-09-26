@@ -64,7 +64,7 @@ Sabina: [[Tak, kochanie?|Słucham cię.|Mów, mów, nie wstydź się.]]
 	Sabina: Och, pytasz jak kupiec! Czysty błękit. Kawałek bez grama skały. Z niego wyczytałabym więcej niż z tysiąca kamieni z waszych wózków.
 	Sabina: Najczystszy będzie tam, gdzie jest go najwięcej. Najniżej. Tam, gdzie Hieronim chodzi i się śmieje.
 	=> hub
-- Mam dla ciebie odłamek z galerii. [if quest_state("odlamek") == "active" and has_item("odlamek") /]
+- Mam dla ciebie odłamek z galerii. [if quest_state("odlamek") == "active" and has_item("odlamek") /] [#free]
 	$> take_item("odlamek")
 	Sabina bierze odłamek dwoma palcami, jak coś żywego. Przez chwilę nie oddycha.
 	Sabina: Słyszysz? Nie, oczywiście, że nie. Buczy. Śpiewa. To nie jest kamień, to zapis. Ktoś zapisał coś w metalu, a ja... ja prawie umiem to przeczytać.

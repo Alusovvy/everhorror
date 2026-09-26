@@ -205,6 +205,13 @@ const gwara = {
     "Ostatni dziyń przed rachowaniym. Racibor łazi jak struty. Znom to. Twój starzik tyż mioł taki dziyń. Ostatni.",
   "[[Żyjesz jeszcze? To dobrze.|Nie łaź dziś za daleko, coś mi w kościach strzyka.|Znowu ty. Siadaj, jak chcesz.]]":
     "[[Żyjesz jeszcze? To dobrze.|Niy łaź dzisiej za daleko, cosik mi w kościach strzyko.|Zaś ty. Siadej, jak chcesz.]]",
+  // --- task_09: ryby dla Hrapka ---
+  "Na ryby? O tej porze? Do stawu kawał drogi. Jutro.":
+    "Na ryby? O tyj porze? Do stawu kawał drogi. Jutro.",
+  "Na ryby?[wait=0.4] Wiesz co? Chętnie. Przy wodzie nic nie wybucha.":
+    "Na ryby?[wait=0.4] Wiysz co? Chętnie. Przi wodzie nic niy pierdyknie.",
+  "Ślepa. Jak my wszyscy tutaj. Masz, zanieś temu, komu tam chcesz.":
+    "Ślepo. Jak my wszyjscy tukej. Mosz, zanieś tymu, kómu tam chcesz.",
 };
 
 // Collect the miners' spoken lines from every dialogue file (they also speak in other scenes).

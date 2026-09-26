@@ -93,7 +93,7 @@ field_map={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialogue/bolko.dialogue", "res://dialogue/miroslaw.dialogue", "res://dialogue/system.dialogue", "res://dialogue/dobrawa.dialogue", "res://dialogue/racibor.dialogue", "res://dialogue/tekla.dialogue", "res://dialogue/sciana.dialogue", "res://dialogue/drudzy.dialogue", "res://dialogue/anzelm.dialogue", "res://dialogue/hagiwara.dialogue", "res://dialogue/hieronim.dialogue", "res://dialogue/nasir.dialogue", "res://dialogue/ottokar.dialogue", "res://dialogue/sabina.dialogue", "res://dialogue/sobek.dialogue", "res://dialogue/welf.dialogue", "res://dialogue/wszebor.dialogue", "res://dialogue/ognisko.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/bolko.dialogue", "res://dialogue/miroslaw.dialogue", "res://dialogue/system.dialogue", "res://dialogue/dobrawa.dialogue", "res://dialogue/racibor.dialogue", "res://dialogue/tekla.dialogue", "res://dialogue/sciana.dialogue", "res://dialogue/drudzy.dialogue", "res://dialogue/anzelm.dialogue", "res://dialogue/hagiwara.dialogue", "res://dialogue/hieronim.dialogue", "res://dialogue/nasir.dialogue", "res://dialogue/ottokar.dialogue", "res://dialogue/sabina.dialogue", "res://dialogue/sobek.dialogue", "res://dialogue/welf.dialogue", "res://dialogue/wszebor.dialogue", "res://dialogue/ognisko.dialogue", "res://dialogue/hrapek.dialogue")
 
 [layer_names]
 

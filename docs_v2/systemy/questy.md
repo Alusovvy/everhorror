@@ -31,6 +31,7 @@ Dać graczowi pamięć tego, co obiecał, co wie i co mu ucieka, bez prowadzenia
 | **Oferta z Exitium** | Ottokar | kryształ (2 żyły) albo mapy dziadka (1 żyła), albo odmowa | żyły na mapie; odmowa kosztuje poczytalność |
 | **Odłamek dla Sabiny** | Sabina | odłamek z Kryształowej galerii → Sabina | lekarstwo, zaufanie |
 | **Czternaście kresek** [ROBOCZE] | ja | kreski (rząpie, filar w wyrobisku) albo zeszyt Grabca zaczynają zapiski → chleb, lampka, pusta nisza, medalik po wstrząsie dopisują się → przy ≥ 4 śladach, od 5. nocy, ktoś zostawia przy posłaniu starą lampę przewodnika | lampa, wiersz w zakończeniach; demo nie mówi, kim jest Czternasty |
+| **Ryba dla Hrapka** | Hrapek | pierwsze spotkanie z Hrapkiem → ryba od Tekli (po oddanym tobołku) albo 4 h łowienia ze Wszeborem lub Mirosławem w stawie w Zalanym chodniku → Hrapek, przed jego śmiercią w nocy 5→6 | informacje o NIM i o dziadku, zaufanie Hrapka |
 
 Dane: `data/quests/*.tres` i `data/notes/*.tres`, generowane przez `tools/generators/write_story_data.js`.
 

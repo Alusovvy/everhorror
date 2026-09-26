@@ -15,6 +15,7 @@ const SENSITIVITY_SCALE := 0.0002
 @onready var sfx_slider: HSlider = $Grid/SfxSlider
 @onready var fullscreen_toggle: CheckButton = $Grid/FullscreenToggle
 @onready var dialect_toggle: CheckButton = $Grid/DialectToggle
+@onready var locked_toggle: CheckButton = $Grid/LockedToggle
 @onready var back_button: Button = $BackButton
 
 func _ready() -> void:
@@ -25,6 +26,7 @@ func _ready() -> void:
 	sfx_slider.value_changed.connect(_on_sfx_changed)
 	fullscreen_toggle.toggled.connect(_on_fullscreen_toggled)
 	dialect_toggle.toggled.connect(_on_dialect_toggled)
+	locked_toggle.toggled.connect(_on_locked_toggled)
 	back_button.pressed.connect(_on_back)
 
 func open() -> void:
@@ -35,6 +37,7 @@ func open() -> void:
 	sfx_slider.set_value_no_signal(Settings.sfx_volume)
 	fullscreen_toggle.set_pressed_no_signal(Settings.fullscreen)
 	dialect_toggle.set_pressed_no_signal(Settings.silesian_dialect)
+	locked_toggle.set_pressed_no_signal(Settings.show_locked_choices)
 	show()
 	sensitivity_slider.grab_focus()
 
@@ -64,6 +67,10 @@ func _on_fullscreen_toggled(on: bool) -> void:
 
 func _on_dialect_toggled(on: bool) -> void:
 	Settings.silesian_dialect = on
+	Settings.apply()
+
+func _on_locked_toggled(on: bool) -> void:
+	Settings.show_locked_choices = on
 	Settings.apply()
 
 func _on_back() -> void:

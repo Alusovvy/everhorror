@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" path="res://script/data/item_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"ryba"
+display_name = "Ryba"
+name_accusative = "rybę"
+description = "Ryba bez oczu, blada jak brzuch świecy. Pod ziemią nawet ryby zapominają, po co im oczy. Hrapek bardzo chciał rybę."
+category = 3
+heal = 0
+sanity = 0
+cures_fever = false
+consumable = true
+use_hours = 0
+use_text = ""

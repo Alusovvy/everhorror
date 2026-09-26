@@ -71,11 +71,11 @@ Anzelm: [[Mów, synu.|Słucham.|Czym mogę pomóc?]]
 	=> hub
 - Co z Nasirem? [if quest_state("goraczka") == "active" /]
 	=> fever
-- Mam świecący grzyb. [if has_item("grzyb") and not has_flag("anzelm_brewing_day") /]
+- Mam świecący grzyb. [if quest_state("goraczka") == "active" and not has_flag("anzelm_brewing_day") and has_item("grzyb") /] [#free]
 	Anzelm: Grzyb z groty? Pokaż.
 	Anzelm obwąchuje go ostrożnie, jakby spodziewał się, że ugryzie.
 	Anzelm: Tak. Wiem ze starych ksiąg Zakonu, że da się z tego uwarzyć lekarstwo. Zakon trzymał te księgi, żeby wiedzieć, co palić. Ja wyniosłem z nich tylko przepisy.
-	- Uwarz lekarstwo.
+	- Uwarz lekarstwo. [#free]
 		$> take_item("grzyb")
 		$> set_flag("anzelm_brewing_day", day)
 		$> quest_log("goraczka", "grzyb")

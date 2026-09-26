@@ -66,7 +66,7 @@ Hagiwara: [[Słucham pana.|Czym mogę służyć?|Proszę mówić.]]
 	Hagiwara: Piękna. Proszę mi wybaczyć, to brzmi niewdzięcznie. Ale w tej ciemności nie ma niczego, co mógłbym zapisać wierszem.
 	Hagiwara: Górnicy mówią o grocie, w której rosną grzyby świecące jak latarnie. Jeśli to prawda, chciałbym jeden zobaczyć. Tylko zobaczyć. I napisać.
 	=> hub
-- Przyniosłem świecący grzyb. [if quest_state("wiersz") == "active" and has_item("grzyb") /]
+- Przyniosłem świecący grzyb. [if quest_state("wiersz") == "active" and has_item("grzyb") /] [#free]
 	$> take_item("grzyb")
 	Hagiwara bierze grzyb w obie dłonie jak czarkę i długo się w niego wpatruje. Poświata kładzie mu się na twarzy.
 	Hagiwara: Proszę chwilę zaczekać.

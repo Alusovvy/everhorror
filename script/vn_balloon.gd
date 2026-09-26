@@ -45,12 +45,19 @@ var dialogue_line: DialogueLine:
 
 func _ready() -> void:
 	balloon.hide()
-	responses_menu.hide_failed_responses = true
+	# Locked responses are filtered here (ResponseLock): only trust or item locks are shown, greyed.
+	responses_menu.hide_failed_responses = false
 	responses_menu.response_selected.connect(_on_response_selected)
 	balloon.gui_input.connect(_on_balloon_gui_input)
 	portrait_rect.texture = portrait_viewport.get_texture()
 	portrait_rect.hide()
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	clock_label.text = GameState.clock_text()
+	# Talking costs 5 minutes an option: the clock here moves with every pick.
+	GameState.clock_changed.connect(_update_clock)
+	GameState.time_advanced.connect(func(_h, _r): _update_clock())
+
+func _update_clock() -> void:
 	clock_label.text = GameState.clock_text()
 
 func _process(_delta: float) -> void:
@@ -89,7 +96,7 @@ func apply_dialogue_line() -> void:
 	dialogue_label.hide()
 	dialogue_label.dialogue_line = dialogue_line
 	responses_menu.hide()
-	responses_menu.responses = dialogue_line.responses
+	responses_menu.responses = visible_responses(dialogue_line.responses)
 	balloon.show()
 	dialogue_label.show()
 
@@ -110,6 +117,22 @@ func apply_dialogue_line() -> void:
 		is_waiting_for_input = true
 		balloon.focus_mode = Control.FOCUS_ALL
 		balloon.grab_focus()
+
+## Allowed responses, plus the ones locked only by trust or a missing item, greyed out with
+## the reason in brackets (DIA-2, "Show locked choices" in the options). The rest stay hidden.
+func visible_responses(all: Array) -> Array:
+	var shown: Array = []
+	for response in all:
+		if response.is_allowed:
+			shown.append(response)
+			continue
+		if not Settings.show_locked_choices:
+			continue
+		var why := ResponseLock.reason(response.condition_as_text, GameState)
+		if why != "":
+			response.text = "%s  (%s)" % [response.text, why]
+			shown.append(response)
+	return shown
 
 #region Portrait
 

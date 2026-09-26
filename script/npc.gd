@@ -41,8 +41,8 @@ func _ready() -> void:
 	talk.display_name = data.display_name
 	talk.action = Interactable.Action.DIALOGUE
 	talk.prompt_text = "Porozmawiaj z %s" % data.display_name_instrumental
-	# Opening a conversation is free; the VN charges VN.TALK_HOURS at the first response
-	# that isn't a farewell ([#leave] in the .dialogue files). Task_06, user decision.
+	# Opening a conversation is free; the VN charges VN.TALK_MINUTES for every picked response
+	# except farewells ([#leave]) and hand-overs ([#free]). Task_09, user decision.
 	talk.time_cost_hours = 0.0
 	talk.dialogue = data.dialogue
 	talk.speaker_npc = data.id

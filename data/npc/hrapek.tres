@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="NpcData" format=3]
+
+[ext_resource type="Script" path="res://script/data/npc_data.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scene/characters/hrapek_model.tscn" id="2_model"]
+[ext_resource type="Resource" path="res://dialogue/hrapek.dialogue" id="3_dialogue"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"hrapek"
+display_name = "Hrapek"
+dialogue_name = "Hrapek"
+display_name_instrumental = "Hrapkiem"
+faction = 2
+role = "Rybak, potem górnik. Mieszka poziom niżej, w swoim pałacu"
+max_sanity = 100
+start_sanity = 20
+max_health = 100
+start_reputation = 0
+history = "Kiedyś łowił ryby, potem zjechał do kopalni i został na dole, kiedy zasypało chodnik. Przeżył na grzybach, które świecą i zmieniają tego, kto je je. Mówi wierszem, śmieje się, sprząta „cesarskie piwnice” i bohatera nazywa Cesarzem. Zadaj mu trzy pytania z rzędu, a ucieka."
+sanity_zero_effect = "Nie spada. Hrapek jest zawsze taki sam."
+model = ExtResource("2_model")
+dialogue = ExtResource("3_dialogue")
+portrait_eye_height = 1.43
+female = false

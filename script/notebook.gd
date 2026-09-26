@@ -1,8 +1,9 @@
 extends CanvasLayer
 class_name Notebook
 
-## The hero's notebook [J]: quests (in the hero's own words), found documents and the people
-## met so far, with how they seem to be doing, in words (MECHANICS §13 pkt 4).
+## The hero's notebook [J]: quests (in the hero's own words), found documents, the people met so
+## far with how they seem to be doing, in words (MECHANICS §13 pkt 4), and the time: the clock
+## (not on the HUD since task_09) and what each day went on.
 
 @onready var tabs: TabContainer = $Root/Center/Panel/Margin/VBox/Tabs
 @onready var quests_text: RichTextLabel = $Root/Center/Panel/Margin/VBox/Tabs/Zadania
@@ -11,6 +12,7 @@ class_name Notebook
 @onready var header: Label = $Root/Center/Panel/Margin/VBox/Header
 @onready var people_list: ItemList = $Root/Center/Panel/Margin/VBox/Tabs/Ludzie/List
 @onready var person_text: RichTextLabel = $Root/Center/Panel/Margin/VBox/Tabs/Ludzie/Text
+@onready var time_text: RichTextLabel = $Root/Center/Panel/Margin/VBox/Tabs/Czas
 
 func _ready() -> void:
 	hide()
@@ -34,6 +36,7 @@ func open() -> void:
 	_build_quests()
 	_build_notes()
 	_build_people()
+	_build_time()
 	show()
 
 func close() -> void:
@@ -74,6 +77,25 @@ func _build_notes() -> void:
 func _show_note(index: int) -> void:
 	var data: NoteData = GameState.NOTES[notes_list.get_item_metadata(index)]
 	note_text.text = "[font_size=21][color=#ffb861]%s[/color][/font_size]\n\n%s" % [data.title, data.text]
+
+## The clock, the hours left before night, then every day from the newest: what took how long.
+func _build_time() -> void:
+	var text := "[font_size=34][color=#ffb861]%s[/color][/font_size]   [font_size=19]Dzień %d[/font_size]\n" % [GameState.time_text(GameState.hour), GameState.day]
+	var left := int(round(GameState.hours_left() * 60.0))
+	text += ("Do nocy zostało: %s.\n\n" % GameState.duration_text(left)) if left > 0 else "Noc. Pora na posłanie.\n\n"
+	for day in range(GameState.day, 0, -1):
+		var entries: Array = GameState.time_log.get(str(day), [])
+		if entries.is_empty():
+			continue
+		text += "[font_size=20][color=#ffb861]Dzień %d[/color][/font_size]   [color=#8a7f70]razem %s[/color]\n" % [day, GameState.duration_text(GameState.logged_minutes(day))]
+		for entry in entries:
+			var minutes := int(entry["min"])
+			var line := "%s · %s" % [GameState.time_text(float(entry["at"])), entry["why"]]
+			if minutes > 0:
+				line += " · [color=#c9b89a]%s[/color]" % GameState.duration_text(minutes)
+			text += line + "\n"
+		text += "\n"
+	time_text.text = text
 
 func _build_people() -> void:
 	people_list.clear()
@@ -120,6 +142,8 @@ func _health_line(npc_id: StringName, female: bool) -> String:
 	return "Ledwo trzyma się na nogach."
 
 func _mind_line(npc_id: StringName, female: bool) -> String:
+	if npc_id in GameState.FIXED_SANITY:
+		return "Wciąż ten sam. Żyje we własnym pałacu i nic go stamtąd nie wyciągnie."
 	match GameState.sanity_band(npc_id):
 		"spokojny":
 			return "Trzyma się. Na tyle, na ile można się tu trzymać."

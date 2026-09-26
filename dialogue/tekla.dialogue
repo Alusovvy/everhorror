@@ -32,7 +32,7 @@ Tekla: [[No?|Co tam?|Czego ci trzeba?]]
 	=> hub
 - Masz dla mnie jakąś robotę? [if not has_flag("tekla_asked_favor") /]
 	=> favor
-- Mam twój tobołek. [if has_item("tobolek") /]
+- Mam twój tobołek. [if has_flag("took_bundle") and quest_state("towar") != "done" and has_item("tobolek") /]
 	=> bundle
 - Znałaś może mojego dziadka? [if quest_state("towar") == "done" and not has_flag("tekla_reported") and not has_flag("tekla_father") /]
 	$> set_flag("tekla_father")
@@ -73,13 +73,13 @@ Tekla: [[No?|Co tam?|Czego ci trzeba?]]
 		Tekla: Czarna godzina chyba właśnie przyszła. Bierz. Jesteśmy kwita za tobołek. Prawie.
 	else
 		Tekla: Konfraternia nic nie daje za darmo. Mogę się zamienić. Coś cennego za coś cennego.
-		- Dam ci za nie Daleki Klejnot. [if has_item("klejnot") /]
+		- Dam ci za nie Daleki Klejnot. [if has_item("klejnot") /] [#free]
 			$> take_item("klejnot")
 			$> give_item("lekarstwo")
 			$> set_flag("tekla_gave_medicine")
 			Tekla ogląda paciorek pod światło świecy i wzdycha.
 			Tekla: Szkło. Ale ładne szkło. Niech ci będzie.
-		- Dam ci za nie nalewkę. [if has_item("nalewka") /]
+		- Dam ci za nie nalewkę. [if has_item("nalewka") /] [#free]
 			$> take_item("nalewka")
 			$> give_item("lekarstwo")
 			$> set_flag("tekla_gave_medicine")
@@ -91,6 +91,17 @@ Tekla: [[No?|Co tam?|Czego ci trzeba?]]
 	$> set_flag("tekla_asked_dobrawa")
 	Tekla: Nie je, nie pije, nie siada. Wczoraj przez godzinę stała przy starych wózkach i mówiła coś do kamieni.
 	Tekla: Kupcy mają takie powiedzenie. Kiedy Drudzy przychodzą do miasta, ceny idą w górę. Kiedy wychodzą, zostają same długi.
+	=> hub
+- Masz może jakąś rybę? [if quest_state("ryba") == "active" and not has_item("ryba") and not has_flag("tekla_gave_fish") /]
+	if has_flag("tekla_owes")
+		$> set_flag("tekla_gave_fish")
+		$> give_item("ryba")
+		$> quest_log("ryba", "od_tekli")
+		Tekla: Rybę? Pod ziemią?[wait=0.4] Ciszej.
+		Tekla wyjmuje spod lady coś zawiniętego w natłuszczony papier. Suszona ryba, twarda jak podeszwa.
+		Tekla: Trzymałam na czarną godzinę. Twoja czarna godzina chyba jest czarniejsza od mojej. Za tobołek.
+	else
+		Tekla: Ryby są w rzece, a rzeka jest na górze. Tu masz kaszę. Kaszy nikt nie chce, a wszyscy jedzą.
 	=> hub
 - Muszę iść. [#leave]
 	Tekla: Idź, idź. Tylko wróć na kolację, bo drugi raz nie będę grzać.

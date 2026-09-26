@@ -1,7 +1,8 @@
 extends CanvasLayer
 class_name Hud
 
-## In-game HUD: crosshair, interaction prompt, description panel, clock and short messages.
+## In-game HUD: crosshair, interaction prompt, description panel, the hero's condition and short
+## messages. No clock since task_09: the time is in the notebook [J] (and in the dialogue window).
 
 @onready var vignette: ColorRect = $Vignette
 @onready var crosshair: ColorRect = $Crosshair
@@ -9,8 +10,7 @@ class_name Hud
 @onready var description_panel: PanelContainer = $DescriptionPanel
 @onready var description_title: Label = $DescriptionPanel/VBox/Title
 @onready var description_body: Label = $DescriptionPanel/VBox/Body
-@onready var clock: Label = $Clock
-## The hero's state under the clock, only when something is wrong ("ranny · gorączka").
+## The hero's state in the corner, only when something is wrong ("ranny · gorączka").
 @onready var condition: Label = $Condition
 @onready var toasts: VBoxContainer = $Toasts
 
@@ -28,13 +28,10 @@ var _pinned_until := 0.0
 
 func _ready() -> void:
 	GameState.time_advanced.connect(_on_time_advanced)
-	GameState.day_started.connect(func(_d): _update_clock())
-	GameState.state_replaced.connect(_update_clock)
 	GameState.message.connect(show_toast)
 	GameState.quest_updated.connect(_on_quest_updated)
 	GameState.player_changed.connect(_update_condition)
 	GameState.state_replaced.connect(_update_condition)
-	_update_clock()
 	_update_condition()
 	_refresh()
 
@@ -42,7 +39,6 @@ func _process(_delta: float) -> void:
 	# Hide the in-world HUD while a modal screen (dialogue, map, notebook) is open.
 	var modal := GameState.is_modal()
 	crosshair.visible = not modal
-	clock.visible = not modal
 	condition.visible = not modal
 	vignette.visible = not modal and _vignette_strength() > 0.0
 	if modal:
@@ -108,8 +104,7 @@ func _on_interacted(target: Interactable) -> void:
 	_refresh()
 
 func _on_time_advanced(hours: float, reason: String) -> void:
-	_update_clock()
-	var amount := GameState.hours_text(hours)
+	var amount := GameState.duration_text(int(round(hours * 60.0)))
 	show_toast("−%s · %s" % [amount, reason] if reason != "" else "−%s" % amount)
 	if GameState.is_day_over():
 		show_toast("Robi się późno. Pora wracać na posłanie.")
@@ -117,9 +112,6 @@ func _on_time_advanced(hours: float, reason: String) -> void:
 func _on_quest_updated(quest: QuestData, entry_text: String) -> void:
 	if entry_text != "":
 		show_toast("Notes: %s  [J]" % quest.title)
-
-func _update_clock() -> void:
-	clock.text = GameState.clock_text()
 
 func _update_condition() -> void:
 	var parts: Array[String] = []

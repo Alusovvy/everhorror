@@ -33,6 +33,7 @@ Przewodnik i kryptograf. Latami potajemnie wynosił błękitne żelazo i nigdy g
 | **Ottokar von Brühl** | Drudzy (Exitium) | szef wyprawy Drugich | 3, w tunelach | [ottokar.md](postacie/ottokar.md) [ROBOCZE] |
 | **Hieronim z Grotthamu** | Drudzy (Exitium) | stary Drugi, szaleniec | 3, w tunelach | [hieronim.md](postacie/hieronim.md) [ROBOCZE] |
 | **Welf von Hagen** | Drudzy (Exitium) | młody, wyniosły Drugi | 3, w tunelach | [welf.md](postacie/welf.md) [ROBOCZE] |
+| **Hrapek** | Inna | rybak, potem górnik; mówi wierszem, bohatera nazywa Cesarzem | 3 (po wybuchu), przy powrotach z tuneli; ginie w nocy 5→6 | [hrapek.md](postacie/hrapek.md) (karta Rolanda, kwestie [ROBOCZE]) |
 
 [ROBOCZE] oznacza postać wymyśloną na potrzeby dema. Czeka na przegląd Ren. Dane w grze: `data/npc/*.tres` (generuje `tools/generators/write_story_data.js`), dialogi: `dialogue/*.dialogue`.
 

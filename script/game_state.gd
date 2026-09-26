@@ -5,6 +5,8 @@ extends Node
 ## sanity, and the current expedition. Dialogue files use it through `using GameState`.
 
 signal time_advanced(hours: float, reason: String)
+## The clock moved without a toast or a log entry yet (a conversation charging per option).
+signal clock_changed
 signal day_started(day: int)
 ## Emitted after reset() or load_state(): listeners re-read everything.
 signal state_replaced
@@ -50,6 +52,7 @@ const NPCS: Dictionary = {
 	&"ottokar": preload("res://data/npc/ottokar.tres"),
 	&"hieronim": preload("res://data/npc/hieronim.tres"),
 	&"welf": preload("res://data/npc/welf.tres"),
+	&"hrapek": preload("res://data/npc/hrapek.tres"),
 }
 const NOTES: Dictionary = {
 	&"notatka_dowodcy": preload("res://data/notes/notatka_dowodcy.tres"),
@@ -78,6 +81,7 @@ const QUESTS: Dictionary = {
 	&"oferta": preload("res://data/quests/oferta.tres"),
 	&"odlamek": preload("res://data/quests/odlamek.tres"),
 	&"czternasty": preload("res://data/quests/czternasty.tres"),
+	&"ryba": preload("res://data/quests/ryba.tres"),
 }
 const ITEMS: Dictionary = {
 	&"amulet": preload("res://data/items/amulet.tres"),
@@ -98,7 +102,11 @@ const ITEMS: Dictionary = {
 	&"odlamek": preload("res://data/items/odlamek.tres"),
 	&"klejnot": preload("res://data/items/klejnot.tres"),
 	&"lampa": preload("res://data/items/lampa.tres"),
+	&"ryba": preload("res://data/items/ryba.tres"),
+	&"pierscien": preload("res://data/items/pierscien.tres"),
 }
+## NPCs whose sanity never moves (Hrapek: "always the same", card 02_postacie/hrapek.md).
+const FIXED_SANITY: Array[StringName] = [&"hrapek"]
 ## Places of the expedition map (Expeditions). The camp itself is "oboz".
 const LOCATIONS: Dictionary = {
 	&"east": preload("res://data/locations/east.tres"),
@@ -135,6 +143,9 @@ var player_sanity: int = PLAYER_START_SANITY
 var player_fever := false
 ## The expedition under way (empty in the camp): start time, places, veins, items, events.
 var expedition: Dictionary = {}
+## What the time went on, per day (the notebook's "Czas" tab): "day" → [{"at": hour, "min": minutes, "why": reason}].
+## Keys are strings so the dictionary survives JSON as it is.
+var time_log: Dictionary = {}
 
 ## Open modal screens (dialogue, map, notebook…). While > 0 the player can't move.
 var _modal_count := 0
@@ -155,6 +166,7 @@ func reset() -> void:
 	player_sanity = PLAYER_START_SANITY
 	player_fever = false
 	expedition = {}
+	time_log = {}
 	for id in NPCS:
 		var data: NpcData = NPCS[id]
 		npcs[id] = {"sanity": data.start_sanity, "health": data.max_health, "reputation": data.start_reputation, "status": "camp"}
@@ -178,8 +190,36 @@ func is_day_over() -> bool:
 func advance_time(hours: float, reason: String = "") -> void:
 	if hours <= 0.0:
 		return
+	log_time(hour, hours, reason)
 	hour += hours
 	time_advanced.emit(hours, reason)
+
+## Moves the clock during a conversation (5 minutes per option): the VN clock follows, the toast
+## and the log entry come once, from commit_time(), when the conversation closes.
+func add_quiet_time(hours: float) -> void:
+	hour += hours
+	clock_changed.emit()
+
+## Reports time already added with add_quiet_time() (a whole conversation) as one entry.
+func commit_time(hours: float, reason: String, from_hour: float) -> void:
+	if hours <= 0.0:
+		return
+	log_time(from_hour, hours, reason)
+	time_advanced.emit(hours, reason)
+
+## One line in the day's time log ("07:00 · Rozmowa z Bolkiem · 15 min").
+func log_time(at_hour: float, hours: float, reason: String) -> void:
+	var key := str(day)
+	if not time_log.has(key):
+		time_log[key] = []
+	(time_log[key] as Array).append({"at": at_hour, "min": int(round(hours * 60.0)), "why": reason if reason != "" else "Coś zajęło czas"})
+
+## Minutes the day's log adds up to.
+func logged_minutes(on_day: int) -> int:
+	var total := 0
+	for entry in time_log.get(str(on_day), []):
+		total += int(entry["min"])
+	return total
 
 func start_next_day() -> void:
 	day += 1
@@ -188,6 +228,14 @@ func start_next_day() -> void:
 
 func hours_left_text() -> String:
 	return hours_text(maxf(hours_left(), 0.0))
+
+## "5 min", "1 h 20 min", "2 h" (the time log and the toasts).
+static func duration_text(minutes: int) -> String:
+	if minutes < 60:
+		return "%d min" % minutes
+	if minutes % 60 == 0:
+		return "%d h" % (minutes / 60)
+	return "%d h %d min" % [minutes / 60, minutes % 60]
 
 ## "2 h", "1,5 h".
 static func hours_text(hours: float) -> String:
@@ -259,6 +307,12 @@ func done_today(flag_name: String) -> bool:
 
 func mark_today(flag_name: String) -> void:
 	set_flag(flag_name, day)
+
+## Counts in a flag and returns the new count (Hrapek's questions in a row: `if bump_flag("hrapek_q") >= 3`).
+func bump_flag(flag_name: String) -> int:
+	var count := int(flags.get(flag_name, 0)) + 1
+	flags[flag_name] = count
+	return count
 
 func item_data(item_id: String) -> ItemData:
 	return ITEMS.get(StringName(item_id))
@@ -640,6 +694,8 @@ func sanity_band(npc_id: StringName) -> String:
 	return "zalamany"
 
 func change_sanity(npc_id: StringName, delta: int) -> void:
+	if npc_id in FIXED_SANITY:
+		return
 	var data: NpcData = NPCS[npc_id]
 	npcs[npc_id]["sanity"] = clampi(sanity(npc_id) + delta, 0, data.max_sanity)
 	npc_changed.emit(npc_id)
@@ -710,6 +766,7 @@ func save_state() -> Dictionary:
 		"npcs": npcs.duplicate(true),
 		"player": {"health": player_health, "sanity": player_sanity, "fever": player_fever},
 		"expedition": expedition.duplicate(true),
+		"time_log": time_log.duplicate(true),
 	}
 
 ## Saves from older versions lack the hero and the expedition: they start healthy, in the camp.
@@ -737,6 +794,8 @@ func load_state(data: Dictionary) -> void:
 	player_health = int(hero.get("health", PLAYER_MAX))
 	player_sanity = int(hero.get("sanity", PLAYER_START_SANITY))
 	player_fever = bool(hero.get("fever", false))
+	# Saves before task_09 have no time log: the notebook starts it from now on.
+	time_log = Dictionary(data.get("time_log", {})).duplicate(true)
 	expedition = data.get("expedition", {})
 	if not expedition.is_empty():
 		# JSON turns numbers into floats and loses nothing else we need.

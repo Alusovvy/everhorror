@@ -19,7 +19,8 @@ const SAVE_DIR := "user://saves"
 const SLOT_COUNT := 3
 ## The dawn autosave, load-only in the UI.
 const AUTO_SLOT := 0
-const SAVE_VERSION := 3
+## 4: the time log (task_09). Older saves load with an empty log.
+const SAVE_VERSION := 4
 const PERSIST_GROUP := "persist"
 
 var _pending: Dictionary = {}

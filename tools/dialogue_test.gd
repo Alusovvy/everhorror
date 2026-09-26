@@ -3,7 +3,8 @@ extends SceneTree
 ## Plays the demo's dialogues without UI (picks responses by text) and checks the state:
 ## the dialect switch, Mirosław and Bolko (day 1), the new NPCs and their quests, the riddle
 ## wall, the crystal, the night texts and Racibor's announcement on day 3; task_05: the week,
-## items and the new people (camp and Exitium), Racibor's reminder and reckoning.
+## items and the new people (camp and Exitium), Racibor's reminder and reckoning; task_09: Hrapek
+## (verse, running away after three questions, the fish, the body) and the fish quest.
 
 var _failures := 0
 var _requests: Array[String] = []
@@ -88,6 +89,8 @@ func _run() -> void:
 	_check(gs.has_item("lina") and not gs.has_item("kwit"), "rope for the permit")
 	await _talk(tekla, "start", ["Masz dla mnie jakąś robotę?", "Dobrze, przyniosę.", "Muszę iść."])
 	_check(gs.quest_state("towar") == "active", "quest towar started")
+	# as the pickup in the sump does
+	gs.set_flag("took_bundle")
 	gs.give_item("tobolek")
 	gs.add_note(&"list_konfraterni")
 	await _talk(tekla, "start", ["Mam twój tobołek.", "Nikomu nie powiem.", "Znałaś może mojego dziadka?", "To był mój dziadek.", "Muszę iść."])
@@ -140,6 +143,7 @@ func _run() -> void:
 
 	print("--- Reporting Tekla instead (fresh state)")
 	gs.reset()
+	gs.set_flag("took_bundle")
 	gs.give_item("tobolek")
 	await _talk(racibor, "start", ["Tekla ukrywa coś przed tobą.", "Muszę iść."])
 	_check(gs.has_flag("tekla_reported") and gs.has_item("lina"), "Tekla under watch, rope from Racibor")
@@ -160,6 +164,7 @@ func _run() -> void:
 
 	await _task05()
 	await _task06()
+	await _task09()
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit()
@@ -215,6 +220,8 @@ func _task05() -> void:
 	gs.player_health = 50
 	await _talk(anzelm, "start", ["Opatrzysz mnie?", "Muszę iść."])
 	_check(gs.player_health == 75, "Anzelm heals 25 (got %d)" % gs.player_health)
+	# the mushroom goes to Anzelm for Nasir's fever (task_09: no greyed spoiler before the quest)
+	gs.start_quest("goraczka")
 	gs.give_item("grzyb")
 	await _talk(anzelm, "start", ["Mam świecący grzyb.", "Uwarz lekarstwo.", "Muszę iść."])
 	gs.start_next_day()
@@ -391,6 +398,85 @@ func _task06() -> void:
 	_check(_seen.any(func(l): return l.contains("czajnik")), "they feel the crystal")
 
 ## Runs a conversation, choosing responses whose text starts with the given strings, in order.
+## task_09: Hrapek and "Ryba dla Hrapka", the [#free] tags.
+func _task09() -> void:
+	var hrapek: Resource = load("res://dialogue/hrapek.dialogue")
+	var tekla: Resource = load("res://dialogue/tekla.dialogue")
+	var wszebor: Resource = load("res://dialogue/wszebor.dialogue")
+	var mir: Resource = load("res://dialogue/miroslaw.dialogue")
+
+	print("--- Hrapek: the first meeting, three questions in a row and he runs")
+	gs.reset()
+	gs.day = 3
+	gs.set_flag("hrapek_meetings", 1)
+	gs.set_flag("hrapek_q", 0)
+	var hour_before: float = gs.hour
+	await _talk(hrapek, "meet", ["Co tu robisz?", "Kim jest ten Cesarz?", "Kim byłeś"])
+	_check(gs.quest_state("ryba") == "active", "he is hungry: quest ryba started")
+	_check(_seen.any(func(l): return l.contains("CO TYLE PYTA?")), "the third question: he runs")
+	_check(not gs.has_flag("hrapek_told_past"), "the third question gets no answer")
+	_check(is_equal_approx(gs.hour, hour_before), "talking to Hrapek costs no time")
+	_check(gs.sanity(&"hrapek") == 20, "his sanity stays at 20")
+
+	print("--- Hrapek: next meeting, two questions and a goodbye")
+	gs.set_flag("hrapek_meetings", 2)
+	gs.set_flag("hrapek_q", 0)
+	await _talk(hrapek, "meet", ["Kim byłeś", "Znałeś mojego dziadka?", "Muszę iść."])
+	_check(_seen.any(func(l): return l.begins_with("Hrapek: Górnikiem")), "Górnikiem... a nie, rybakiem")
+	_check(gs.has_flag("hrapek_told_grandfather"), "two questions answered, no running")
+
+	print("--- The fish: Tekla gives one only after the bundle")
+	await _talk(tekla, "start", ["Masz może jakąś rybę?", "Muszę iść."])
+	_check(not gs.has_item("ryba"), "no bundle, no fish")
+	gs.set_flag("tekla_owes")
+	await _talk(tekla, "start", ["Masz może jakąś rybę?", "Muszę iść."])
+	_check(gs.has_item("ryba") and "od_tekli" in gs.quests[&"ryba"]["entries"], "fish from Tekla")
+
+	print("--- Hrapek eats the fish: HE and the grandfather")
+	gs.set_flag("hrapek_q", 2)
+	await _talk(hrapek, "meet", ["Mam dla ciebie rybę.", "Gdzie jest twój pałac?", "Muszę iść."])
+	_check(gs.quest_state("ryba") == "done" and not gs.has_item("ryba"), "fish eaten, quest done")
+	_check(_seen.any(func(l): return l.contains("ON cię już raz dopadł")), "he tells about HIM")
+	_check(_seen.any(func(l): return l.contains("broda siwa")), "he takes you for the grandfather")
+	_check(gs.has_flag("hrapek_told_palace"), "the fish resets the question count")
+	_check(gs.rep(&"hrapek") == 10, "trust +10")
+
+	print("--- Fishing with Wszebor (4 h) and Mirosław")
+	gs.reset()
+	gs.start_quest("ryba")
+	gs.hour = 20.0
+	await _talk(wszebor, "start", ["Chodź ze mną na ryby", "Muszę iść."])
+	_check(not gs.has_item("ryba") and is_equal_approx(gs.hour, 20.0), "too late: tomorrow")
+	gs.hour = 9.0
+	await _talk(wszebor, "start", ["Chodź ze mną na ryby", "Muszę iść."])
+	_check(gs.has_item("ryba") and is_equal_approx(gs.hour, 13.0), "4 h at the pond, a fish (%s)" % gs.clock_text())
+	gs.take_item("ryba")
+	gs.day = 2
+	gs.hour = 9.0
+	await _talk(mir, "hub", ["Chodź ze mną na ryby", "Muszę iść."])
+	_check(gs.has_item("ryba") and "zlowiona" in gs.quests[&"ryba"]["entries"], "a fish with Mirosław")
+	_check(gs.done_today("mir_company"), "fishing counts as company for Mirosław")
+
+	print("--- Hrapek's body: the ring, the fish too late")
+	gs.reset()
+	gs.start_quest("ryba")
+	await _talk(hrapek, "body", ["Zabierz pierścień."])
+	_check(gs.has_item("pierscien") and gs.has_flag("hrapek_found"), "the ring taken")
+	_check(gs.quest_state("ryba") == "failed" and "za_pozno" in gs.quests[&"ryba"]["entries"], "the fish came too late")
+	_check(gs.npc_status(&"hrapek") == "dead", "Hrapek is dead in the notebook")
+
+	print("--- [#free] hand-overs and [#leave] farewells are tagged")
+	gs.reset()
+	gs.give_item("lonty")
+	gs.set_flag("mir_asked_collapse")
+	var hub_line = await dm.get_next_dialogue_line(mir, "hub")
+	var tags := {}
+	for r in hub_line.responses:
+		tags[r.text] = r.tags
+	_check(tags.get("Mam dla ciebie lonty. Suche.", PackedStringArray()).has("free"), "handing over the fuses is free")
+	_check(tags.get("Muszę iść.", PackedStringArray()).has("leave"), "the farewell is tagged leave")
+	_check(not tags.get("Skąd jesteś?", PackedStringArray(["free"])).has("free"), "an ordinary question is not free")
+
 func _talk(resource: Resource, cue: String, choices: Array) -> void:
 	var line = await dm.get_next_dialogue_line(resource, cue)
 	var guard := 0

@@ -30,7 +30,7 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 	if has_item("lonty")
 		Mirosław: Czekaj no... A to co ci z torby wystaje? Lonty?
 	=> hub
-- Mam dla ciebie lonty. Suche. [if has_item("lonty") and has_flag("mir_asked_collapse") /]
+- Mam dla ciebie lonty. Suche. [if has_flag("mir_asked_collapse") and not has_flag("fuses_delivered") and has_item("lonty") /] [#free]
 	$> take_item("lonty")
 	$> quest_log("lonty", "oddane")
 	$> change_rep("miroslaw", 10)
@@ -104,7 +104,7 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 	Siedzicie przy ogniu. Mirosław siedzi tak, żeby mieć do niego jak najdalej, i patrzy w płomienie jak w coś, co może wybuchnąć.
 	Mirosław: Dobrze, że ktoś siedzi. Jak jestem sam, to ogień zaczyna gadać.
 	=> hub
-- Napij się. To na nerwy. [if has_item("nalewka") and not done_today("mir_drink") /]
+- Napij się. To na nerwy. [if has_item("nalewka") and not done_today("mir_drink") /] [#free]
 	$> mark_today("mir_drink")
 	$> give_to_npc("nalewka", "miroslaw")
 	$> change_rep("miroslaw", 3)
@@ -115,6 +115,20 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 	$> set_flag("mir_asked_drudzy")
 	Mirosław: Jak Pierwsi przyszli do Głuszy, to magowie przyjechali trzy dni później. Obejrzeli, co zostało, zapisali coś w księgach i pojechali.
 	Mirosław: Mnie z tej piwnicy wyciągnęła baba spod Mirosila, co wiozła rzepę na targ. Nie mag.
+	=> hub
+- Chodź ze mną na ryby do stawu. (4 h) [if quest_state("ryba") == "active" and not has_item("ryba") /]
+	if not can_afford(4)
+		Mirosław: Na ryby? O tej porze? Do stawu kawał drogi. Jutro.
+		=> hub
+	Mirosław: Na ryby?[wait=0.4] Wiesz co? Chętnie. Przy wodzie nic nie wybucha.
+	$> advance_time(4, "Ryby w stawie z Mirosławem")
+	$> give_item("ryba")
+	$> quest_log("ryba", "zlowiona")
+	$> change_sanity("miroslaw", 5)
+	$> mark_today("mir_company")
+	Staw leży w zalanym chodniku, tam gdzie woda stanęła i już nie odpłynęła. Mirosław siedzi nad nim długo i pierwszy raz od tygodnia nie liczy beczek.
+	Ryba bierze dopiero po trzech godzinach. Biała, bez oczu, zimna jak kamień.
+	Mirosław: Ślepa. Jak my wszyscy tutaj. Masz, zanieś temu, komu tam chcesz.
 	=> hub
 - Muszę iść. [#leave]
 	Mirosław: To idź. Tylko nie zabłądź.
@@ -152,7 +166,7 @@ if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalam
 		$> change_sanity("miroslaw", 4)
 		Siadasz obok niego na zimnej ziemi i nic nie mówisz. Po godzinie Mirosław przestaje liczyć.
 		Mirosław: Nie idź jeszcze. Jak ktoś siedzi obok, to wybuchy są ciszej.
-	- Napij się. To na nerwy. [if has_item("nalewka") /]
+	- Napij się. To na nerwy. [if has_item("nalewka") /] [#free]
 		$> give_to_npc("nalewka", "miroslaw")
 		Mirosław pije łapczywie, połowa ścieka mu po brodzie.
 		Mirosław: Pali. Dobrze, że pali. Jak pali, to znaczy, że jeszcze coś czuję.

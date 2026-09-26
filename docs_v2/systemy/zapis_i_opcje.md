@@ -10,7 +10,7 @@ Standardowe funkcje, których gracz oczekuje: start, wczytanie, pauza, ustawieni
 2. **Pauza** pod [Esc] w trakcie gry: RESUME, SAVE GAME, LOAD GAME, OPTIONS, MAIN MENU, EXIT. Świat stoi, kursor jest uwolniony. [Esc] w podmenu wraca poziom wyżej, a na głównej liście pauzy wznawia grę. ✅
 3. **Zapis ręczny w 3 slotach.** Slot pokazuje datę i godzinę zapisu, zapis nadpisuje slot bez pytania. ✅
 4. **Co jest zapisywane:** scena, pozycja gracza z kierunkiem patrzenia i cały `GameState`: dzień, godzina, flagi (w tym miejsce wyprawy, spotkanie w tunelach, otwarta ściana, zabrane przedmioty), przedmioty, notatki, zadania, stan NPC (poczytalność, zdrowie, reputacja, status), zdrowie, poczytalność i gorączka bohatera, trwająca wyprawa. ✅ Rozstawienie postaci liczy się po wczytaniu od nowa z pory dnia.
-5. **Opcje:** czułość myszy, **jasność obrazu**, głośność ogólna i **osobno tło (Ambience) oraz efekty (SFX)**, pełny ekran, **gwara śląska górników** (domyślnie włączona). Zapamiętywane między sesjami. ✅
+5. **Opcje:** czułość myszy, **jasność obrazu**, głośność ogólna i **osobno tło (Ambience) oraz efekty (SFX)**, pełny ekran, **gwara śląska górników** (domyślnie włączona). Zapamiętywane między sesjami. ✅ Od task_09 także „Show locked choices” (wyszarzone opcje w rozmowach, domyślnie włączone), a zapis (wersja 4) obejmuje dziennik czasu.
 6. ✅ **Autozapis AUTO** **[decyzja 2026-09-25, task_06]**: każdy świt (i chwila po wczytaniu) zapisuje się na dysk (`user://saves/auto.json`). W LOAD GAME to pierwszy rząd, tylko do wczytania; ręczny zapis go nie nadpisuje.
 7. [propozycja] Zapis tylko w FPP, nie w trakcie scen VN.
 8. Język UI menu: angielski (decyzja zespołu, zob. dziennik decyzji w specyfikacji). Tekst w świecie: polski.
