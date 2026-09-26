@@ -29,7 +29,7 @@ Ottokar czeka, aż się odezwiesz. Wygląda na kogoś, kto umie czekać bardzo d
 	=> hub
 - W sprawie twojej oferty. [if not has_flag("ott_deal_done") /]
 	=> offer
-- Muszę iść.
+- Muszę iść. [#leave]
 	Ottokar: Idź. Kopalnia jest duża, a i tak się spotkamy. Wszystkie drogi prowadzą tu w dół.
 	=> END
 
