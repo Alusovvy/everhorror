@@ -51,6 +51,15 @@ func _run() -> void:
 	_check(Ex.route_lock(Ex.path(&"oboz", &"upadowa")).contains("Mirosław"), "the decline is gone for good")
 	_check(Ex.path(&"oboz", &"nigdzie").is_empty(), "unknown place: empty route")
 
+	print("--- Arrival card: the places passed on the way")
+	gs.reset()
+	for f in ["visited_east", "visited_kaplica", "kaplica_known"]:
+		gs.set_flag(f)
+	var via: Array[StringName] = [&"east", &"kaplica", &"kostnica"]
+	_check(", ".join(Ex.passed_through(via)) == "Kaplica", "east -> kostnica goes through the chapel (%s)" % ", ".join(Ex.passed_through(via)))
+	_check(Ex.passed_through(Ex.path(&"oboz", &"east")).is_empty(), "a direct leg passes nothing")
+	_check(not Ex.is_visited(&"kostnica"), "passing through doesn't make a place visited")
+
 	print("--- Polish number helpers")
 	_check(gs.plural(1, "został", "zostały", "zostało") == "został", "plural: 1")
 	_check(gs.plural(3, "został", "zostały", "zostało") == "zostały", "plural: 3")
@@ -81,6 +90,16 @@ func _run() -> void:
 	_check(gs.mind_band() == "na_krawedzi", "band edge: 34 is on the brink")
 	gs.player_sanity = 35
 	_check(gs.mind_band() == "niespokojny", "band edge: 35 is uneasy")
+	var said: Array[String] = []
+	var listen := func(text: String) -> void: said.append(text)
+	gs.message.connect(listen)
+	gs.player_sanity = 90
+	gs.change_player_sanity(-8, "To miejsce cię przygniata")
+	_check(said.back() == "To miejsce cię przygniata.", "same band: only the line, no \"Czujesz się: spokojny\" (%s)" % said.back())
+	gs.player_sanity = 62
+	gs.change_player_sanity(-8, "To miejsce cię przygniata")
+	_check(said.back() == "To miejsce cię przygniata. Czujesz się: niespokojny.", "band changed: the new state is named (%s)" % said.back())
+	gs.message.disconnect(listen)
 
 	print("--- Payload flags (the day-3 crash regression) and the Fourteenth")
 	gs.reset()

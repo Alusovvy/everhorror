@@ -560,10 +560,16 @@ func heal_player(amount: int) -> void:
 func change_player_sanity(delta: int, reason: String = "") -> void:
 	if delta == 0:
 		return
+	var band_before := mind_band()
 	player_sanity = clampi(player_sanity + delta, 0, PLAYER_MAX)
 	player_changed.emit()
 	if delta < 0 and reason != "":
-		message.emit("%s. Czujesz się: %s." % [reason, mind_text()])
+		# The state of mind only when it changed: "Czujesz się: spokojny." after "To miejsce
+		# cię przygniata" contradicts the line itself.
+		if mind_band() != band_before:
+			message.emit("%s. Czujesz się: %s." % [reason, mind_text()])
+		else:
+			message.emit("%s." % reason)
 	if player_sanity <= 0:
 		player_broke.emit(reason)
 

@@ -101,7 +101,9 @@ Obie plansze końcowe wybiera liczba żył. Losy ludzi, dziadek i kryształ są 
 | 9 | **Czy zakończenie ma zależeć od czegoś więcej niż norma?** | **a)** Te same dwie plansze, ale ich tytuł i pierwszy akapit zmieniają się według losu ludzi (np. „Koniec tygodnia” / „Koniec tygodnia. Nie wszyscy wyjadą” przy dwóch albo więcej stratach). **b)** Trzecie zakończenie. **c)** Zostawić | **a)**: bez nowego kanonu, tylko odbicie decyzji w tekście. Treść do akceptacji przez Ren i Vitava | |
 | 10 | **Kolejność prac** | **a)** Najpierw task_09, potem jedno zadanie „feeling” (punkty 4–8), a na końcu balans (1–3) z liczbami z dziennika. **b)** Najpierw balans, potem feeling. **c)** Wszystko w task_09 | **a)**: feeling można sprawdzić od razu w grze, a do balansu potrzebne są liczby z dziennika czasu, który powstaje w task_09 | |
 
-## Drobne poprawki (zrobię przy najbliższym zadaniu, bez decyzji)
+## Drobne poprawki (bez decyzji)
+> **Zrobione 2026-09-26, build 0.5:** komunikat grozy, nazwy na mapie (każda przy swojej kropce, z odstępem od innych nazw, kresek żył i w miarę możliwości od tuneli) i „przez: …” na planszy przybycia. Testy: `unit` (nowe sprawdzenia komunikatu i trasy), `lint`, `expedition`. Ostrzeżenia UID zostają, zgodnie z opisem poniżej.
+
 - **Sprzeczny komunikat** „To miejsce cię przygniata. Czujesz się: spokojny.”: stan głowy dopiszę tylko wtedy, gdy zmieni się pasmo. Samo przygniatające zdanie zostaje.
 - **Etykiety na mapie nachodzą na siebie**: „Stare wyrobisko” i „Kaplica” zlewają się na rysunku mapy.
 - **Przejście przez nieodwiedzone miejsce**: trasa ze Starej sztolni do Kostnicy prowadzi przez Kaplicę, a Kaplica zostaje „nowa”, choć bohater przez nią przeszedł. Na planszy przybycia dopiszę „przez: Kaplica”, żeby gracz wiedział, którędy szedł. Zasady rozpoznania nie zmieniam.

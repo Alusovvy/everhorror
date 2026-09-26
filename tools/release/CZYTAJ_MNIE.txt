@@ -1,4 +1,4 @@
-EVERHORROR - wersja testowa (demo 0.4.1)
+EVERHORROR - wersja testowa (demo 0.5)
 ========================================
 
 JAK URUCHOMIĆ
@@ -15,7 +15,7 @@ STEROWANIE
   mysz ............ rozglądanie się
   E ............... rozmowa, oglądanie i branie rzeczy
   I ............... ekwipunek (leki, narzędzia, stan bohatera)
-  J ............... notes (zadania, zapiski, ludzie)
+  J ............... notes (zadania, zapiski, ludzie, zegar i dziennik czasu)
   M ............... mapa w chodnikach: dalej w głąb albo z powrotem do obozu
   Esc ............. pauza (zapis, wczytanie, opcje)
   Spacja / Enter .. dalej w rozmowie (albo kliknij myszką)
@@ -41,6 +41,24 @@ dzień da się powtórzyć od rana (RETRY FROM MORNING).
 
 Cały tydzień to mniej więcej 2-3 godziny grania. Grę zapisuje się pod Esc
 (3 miejsca na zapis).
+
+CO NOWEGO W 0.5
+- obóz to teraz naturalna jaskinia: dużo więcej miejsca, wysokie sklepienie,
+  ognisko w środku, drewno tylko w konstrukcjach (zagroda zarządcy, rusztowanie)
+- w drodze powrotnej z chodników można spotkać kogoś bardzo dziwnego, a za nim
+  idzie nowe zadanie (i pytanie, skąd w kopalni wziąć rybę)
+- zegara nie ma już w rogu ekranu: godzina, ile zostało do nocy i dziennik
+  "co ile czasu zjadło" są w notesie (J, zakładka "Czas"), a w rozmowie przy
+  tekście
+- rozmowa kosztuje 5 minut za każdą wybraną odpowiedź zamiast pół godziny;
+  pożegnanie i samo oddanie przedmiotu nic nie kosztują
+- odpowiedzi zablokowane przez brak zaufania albo przedmiotu widać na szaro,
+  z powodem w nawiasie (można to wyłączyć: OPTIONS -> Show locked choices)
+- mapa: nazwy miejsc nie nachodzą już na siebie, a plansza przybycia mówi,
+  przez które miejsca prowadziła droga
+- strach w strasznych miejscach nie kończy się już zdaniem "czujesz się: spokojny"
+- UWAGA: obóz wygląda inaczej niż w 0.4.x, więc zacznij nową grę
+  (starych zapisów nie sprawdzaliśmy z nowym obozem)
 
 CO NOWEGO W 0.4.1 (poprawki)
 - komunikat o upływie czasu nie ma już podwójnego "h" (było: "−0,5 h h")

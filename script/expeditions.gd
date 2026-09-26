@@ -89,6 +89,15 @@ static func trip_hours(route: Array[StringName]) -> float:
 		hours += SCOUTING_HOURS
 	return hours
 
+## Names of the places walked through on the way (neither the start, the goal nor the camp),
+## for the arrival card: "przez: Kaplica". Passing through doesn't count as a visit.
+static func passed_through(route: Array[StringName]) -> Array[String]:
+	var names: Array[String] = []
+	for i in range(1, route.size() - 1):
+		if route[i] != CAMP:
+			names.append(display_name(route[i]))
+	return names
+
 static func is_visited(id: StringName) -> bool:
 	return GameState.has_flag("visited_%s" % id)
 

@@ -168,32 +168,99 @@ Priorytet: średni (do potwierdzenia) · Termin: po zamknięciu task_08 (obóz),
 - Pełny zestaw tylko za Twoją zgodą. Na koniec factcheck `docs/human-tasks/factcheck-test-09.md`.
 
 ## Co zostało zrobione
-Przygotowanie:
-- analiza zmian, plan i [plik decyzji](../human-tasks/done/decision-task-09.md); decyzje zapadły 2026-09-26,
-- punkt 6 (5 minut za opcję) dopisany na prośbę z czatu; reguły w specyfikacji już przepisane (⬜) i dodane do „Czeka na wdrożenie” w `WDROZENIA.md`.
+Przygotowanie (wcześniej): analiza zmian, plan i [plik decyzji](../human-tasks/done/decision-task-09.md). Przed startem (2026-09-26) ustaliliśmy w czacie:
+- najpierw commit task_08 (zrobiony: `d39bbb9`),
+- kwestie Hrapka piszę sam jako [ROBOCZE],
+- uruchamiam tylko unit, lint, dialogi i nowy scenariusz Hrapka.
 
-Implementacja rusza po zamknięciu task_08.
+### 1. Hrapek
+- Karta w danych (`write_story_data.js`): frakcja Inna, rola „rybak, potem górnik”, poczytalność stała (20). `GameState.FIXED_SANITY` sprawia, że noc, wstrząs i rozmowy jej nie ruszają.
+- Wygląd z części Quaternius (`scene/characters/hrapek_model.tscn`): łysy, blady, bez koszuli, w podartych portkach, skulony, mniejszy o 12%. Dodałem do `CharacterModel` opcję `keep_body`, która zostawia całe ciało bazowe, bo zwykle zostaje sama głowa pod ubraniem. Ciało bazowe jest muskularne, więc to nie jest prawdziwy „Golum”. Na demo wystarczy, lepszy wygląd wymaga własnego modelu.
+- Spotkania (`StoryDirector.hrapek_due()`, `_hrapek_on_the_way_back()`):
+  - po wybraniu „Obóz” na mapie [M], przed drogą, otwiera się scena VN,
+  - pierwsza okazja: pierwszy powrót od dnia 3, jeśli zawał jest wysadzony (trwała flaga `hrapek_free`, żeby Hrapek nie znikał, kiedy Mirosław zabiera zachodni chodnik),
+  - potem 25% raz dziennie, a drugie spotkanie na pewno przy pierwszym powrocie w dniu 5,
+  - losowanie zależy od dnia, miejsca i godziny, więc wczytanie gry go nie zmienia.
+- Dialog `dialogue/hrapek.dialogue`, cały wierszem [ROBOCZE]:
+  - sześć pytań: co tu robi, kim jest Cesarz, kim był („Górnikiem… a nie, nie, nie! Rybakiem!”), co je, gdzie jest pałac, czy znał dziadka,
+  - trzecie pytanie z rzędu → „Czemu pyta? CO TYLE PYTA?…” i ucieczka; oddanie ryby i pożegnanie nie są pytaniami,
+  - rozmowa nic nie kosztuje.
+- Śmierć: w nocy z dnia 5 na 6. Przy pierwszym powrocie w dniu 6+ scena z ciałem: „Zabierz pierścień” / „Zostaw go”. Scena jest tylko wtedy, gdy bohater spotkał Hrapka. Pierścień (`pierscien`) działa tylko fabularnie.
+- Notes → Ludzie: „Wciąż ten sam. Żyje we własnym pałacu…”, po znalezieniu ciała „Nie żyje.”. Podsumowanie tygodnia i podsumowanie wyprawy wspominają Hrapka.
+
+### 2. „Ryba dla Hrapka”
+- Przedmiot `ryba` i zadanie `ryba` z wpisami `start`, `od_tekli`, `zlowiona`, `oddana`, `za_pozno`.
+- Tekla: „Masz może jakąś rybę?”. Daje ją raz, jeśli bohater oddał jej tobołek; bez tego odmawia.
+- Wszebor i Mirosław: „Chodź ze mną na ryby do stawu. (4 h)”. Staw jest w Zalanym chodniku, łowi się bez wyprawy (NPC-11). Wieczorem, gdy do nocy zostało mniej niż 4 h, odpowiadają „jutro”. Z Mirosławem wyprawa liczy się jak wieczór w towarzystwie (+5 poczytalności).
+- Za rybę Hrapek mówi o NIM (bez rymów, cicho: „ON cię już raz dopadł…”) i o dziadku („byłeś starszy, broda siwa”), zaufanie +10. Wpis w notesie.
+- Nowe kwestie Mirosława mają wersję w gwarze (3 linie).
+
+### 3. Zegar w notesie i dziennik czasu
+- HUD nie ma już zegara. Stan bohatera („ranny · gorączka”) jest w rogu, a dymki pokazują czas w minutach („−15 min · Rozmowa z Teklą”).
+- Notes [J] ma nową zakładkę **„Czas”**:
+  - duży zegar i „Do nocy zostało: …”,
+  - pod nimi dni od najnowszego, z sumą: „07:00 · Rozmowa z Bolkiem · 15 min”, noc to linijka „Sen”.
+- `GameState.time_log` zapisuje każde przesunięcie czasu, cała rozmowa to jedna pozycja. Dziennik jest w zapisie gry (wersja zapisu 4); starsze zapisy wczytują się z pustym dziennikiem.
+- Godzina jest dalej w oknie VN i przesuwa się przy każdej opcji.
+
+### 4. Wyszarzone opcje (DIA-2)
+- `script/response_lock.gd` dzieli warunek opcji na człony „and”. Opcja jest szara z powodem tylko wtedy, gdy nie przechodzą **wyłącznie** człony `has_item(...)` albo `rep(...) >= N`: „(potrzebne: lina)”, „(Bolko jeszcze ci nie ufa)”. Wszystko inne (flagi, dzień, zadania, warunki z „albo”) zostaje ukryte. Szarej opcji nie da się wybrać.
+- Przełącznik w OPTIONS: „Show locked choices”, domyślnie włączony.
+- Przegląd wszystkich dialogów: 7 opcji dostało warunek zadania albo zdarzenia, żeby szarość nie zdradzała historii (tobołek dopiero po wyłowieniu, kryształ dopiero po otwarciu ściany, obuch przy zadaniu kilofa, grzyb przy gorączce) i nie wracała po oddaniu przedmiotu (lonty, obuch).
+
+### 6. 5 minut za opcję
+- `VN.TALK_MINUTES = 5` za każdą wybraną odpowiedź w rozmowie z NPC. Za darmo:
+  - pożegnania `[#leave]`,
+  - proste oddanie przedmiotu `[#free]` (14 odpowiedzi w 11 dialogach; lint pilnuje, żeby `[#free]` stało tylko tam, gdzie coś się oddaje),
+  - odpowiedzi, które uruchamiają akcję z własnym kosztem. Ich 5 minut wraca, także gdy akcja wykonuje się po rozmowie (wysadzenie zawału), więc „(4 h)” kosztuje równo 4 h.
+- Zegar w oknie VN przesuwa się przy każdej opcji. Po zamknięciu rozmowy jest jeden dymek z sumą i jedna pozycja w dzienniku.
+
+### 5. Specyfikacja i docs_v2
+Specyfikację zmieniłem, ale nie commitowałem:
+- reguły ⬜ → ✅: CZAS-2, CZAS-4, DIA-2 (wyszarzanie), DIA-5, NPC-14,
+- nowe reguły CZAS-14 (zegar tylko w notesie i VN) i CZAS-15 (dziennik czasu),
+- UI-2 i ekrany HUD, VN, opcje, notes; ZAP-4 i ZAP-5; balans (koszt rozmowy, liczby Hrapka i ryby),
+- zamknięte pytania: czas, koniec dema, wybory na czas,
+- „na później”: EKW-9, zmiany miejsc między wizytami, obóz przenoszony niżej (⬜ z uwagą); podświetlenie jako 💡; amulet dalej ❓ („może będzie podpowiadał, do ustalenia”),
+- karta Hrapka przepisana: treść Rolanda zostaje, poprawione tabele i szablonowe pola, dopisane terminy, śmierć i pierścień, [ROBOCZE] przy moich dodatkach,
+- przedmioty `ryba` i `pierscien`, zadanie `ryba` z wpisami, staw w Zalanym chodniku,
+- `WDROZENIA.md`: pozycje 3–6 zdjęte z „Czeka na wdrożenie”, wpis w „Zmiany agenta poza specyfikacją”.
+
+Lint specyfikacji (`node dashboard/cli.ts lint`): 0 błędów, 0 uwag. Docs_v2 zsynchronizowane: czas, dialogi, NPC, zadania, postacie (plus krótka karta Hrapka), interfejs, zapis i opcje. CLAUDE.md i tools/README też.
 
 ## Decyzje i założenia
-- Wymagania 1–5 spisałem sam, na podstawie zmian w specyfikacji. Po decyzjach doprecyzowałem punkt 1 („co najmniej 2 spotkania do dnia 5”). Punkt 6 to Twoja prośba z czatu.
-- Wszystkie 7 decyzji wybrałeś zgodnie z rekomendacją. Zmiany w planie: odpowiedź „Górnikiem… rybakiem!”, brak nawiązań do Czternastego, amulet bez zmian (podpowiedzi do ustalenia).
-- Punkt 6: za darmo są pożegnania, proste oddanie przedmiotu (nowy znacznik `[#free]`) i sceny. Akcje z własnym kosztem nie doliczają 5 minut. Suma rozmowy pokazuje się jednym dymkiem po zamknięciu.
-- Odpowiedzi dopisane w „Otwartych pytaniach” traktuję jako decyzje zespołu, mimo że stoją jeszcze przy ❓.
-- Założenia bez rozwidleń (wiersz bez gwary, wygląd z części Quaternius, zakładka „Czas”, flaga `hrapek_free`) są w pliku decyzji w części „Czego nie trzeba decydować”.
+- **Pozostałe 5 minut przy akcjach:** zwrot działa na każde `advance_time` i każde `request()` wywołane przez odpowiedź, więc nowe akcje z ceną nie wymagają oznaczania.
+- **Mieszane opcje:** jeśli opcja wymaga i przedmiotu, i np. flagi, a flagi brakuje, zostaje ukryta. Szara jest tylko wtedy, gdy brakuje samego przedmiotu albo zaufania.
+- **Nazwy przedmiotów w nawiasie:** małą literą („lina”), nazwy własne bez zmian („Tobołek Tekli”, „Daleki Klejnot”). Forma „potrzebne:” pasuje do każdego rodzaju.
+- **„Mam twój tobołek”** kosztuje 5 minut, bo sam tobołek oddaje się dopiero w następnym wyborze („Nikomu nie powiem” / „Nie. Masz swój tobołek”).
+- **Hrapek i stukanie „Czternastego”:** zgodnie z odpowiedzią zespołu brak nawiązań.
+- **Zaufanie Hrapka +10 za rybę** i **licznik pytań zerowany przez rybę** to moje liczby [ROBOCZE].
+- **Balans:** typowa rozmowa (2–4 opcje) to 10–20 min zamiast 30, długa (8+ opcji) kosztuje więcej niż dotąd. To szacunek z dialogów. Pomiar na scenariuszu tygodnia wymaga pełnego zestawu testów, na który nie było zgody.
 
 ## Czego potrzebuję od Ciebie
-- Potwierdzenia priorytetu i tego, że zaczynam po zamknięciu task_08.
-- Najlepiej od Rolanda: kilku kwestii Hrapka wierszem albo akceptacji, że napiszę je sam jako [ROBOCZE].
+- **Zgody na trzy scenariusze** `day1`, `day2`, `rzapie`: przeliczyłem w nich godziny na 5 minut za opcję (np. dzień 1: 06:15 zamiast 07:00), ale ich nie uruchamiałem. Najlepiej od razu cały zestaw w porcjach, bo nowy koszt dotyka każdej rozmowy.
+- **Rolanda i Ren:** przejrzenie kwestii Hrapka (wiersze) i tego, co mówi o NIM i o dziadku.
+- Przejście [factcheck-test-09](../human-tasks/factcheck-test-09.md).
+- Build tylko na prośbę (proponuję 0.5 razem z obozem z task_08).
 
 ## Test
-Po implementacji: `docs/human-tasks/factcheck-test-09.md`.
+- Automatyczne (uruchomione, zgodnie z ustaleniem):
+  - `unit`: 29 nowych sprawdzeń (czas trwania, dziennik i jego zapis, powody wyszarzenia, reguły spotkań Hrapka), wszystkie OK,
+  - `lint`: nowa reguła `[#free]` (14 oznaczeń, 0 błędnych),
+  - `dialogue`: nowa część task_09 (spotkanie, ucieczka po trzecim pytaniu, rozmowa bez kosztu, ryba u Tekli, Wszebora i Mirosława, zjedzenie ryby, ciało i pierścień, znaczniki `[#free]`/`[#leave]`),
+  - nowy scenariusz `hrapek` w prawdziwym świecie: dwa spotkania, 5 minut za opcję z wpisem w dzienniku, szara opcja u Bolka, brak zegara, śmierć w nocy 5→6, ciało i pierścień w dniu 6.
+  
+  Wszystkie przechodzą.
+- Nie uruchomione (czekają na zgodę): pełny zestaw, w tym przeliczone `day1`, `day2`, `rzapie`.
+- Ręczne: [factcheck-test-09](../human-tasks/factcheck-test-09.md) (22 punkty, ok. 40 min).
 
 ## Podsumowanie
-Zadanie obejmuje pięć rzeczy do gry:
-- **Hrapek** z zadaniem „Ryba dla Hrapka” (największa część),
-- **zegar w notesie** z dziennikiem czasu,
-- **wyszarzone opcje dialogowe** na demo,
-- **5 minut za każdą opcję w rozmowie** zamiast 0,5 h za rozmowę,
-- **porządki w specyfikacji** po odpowiedziach zespołu.
+Wszystkie sześć punktów jest zrobionych:
+- **Hrapek** spotyka bohatera przy powrotach z tuneli. Mówi wierszem, ucieka po trzech pytaniach, ginie w nocy z dnia 5 na 6 i zostawia pierścień.
+- **„Ryba dla Hrapka”:** ryba od Tekli albo z łowienia. Za rybę Hrapek mówi o NIM i o dziadku.
+- **Zegar** jest tylko w notesie (zakładka „Czas” z dziennikiem dni) i w oknie rozmowy.
+- **Opcje zablokowane** przez zaufanie albo przedmiot są widoczne, szare, z powodem.
+- **Rozmowa** kosztuje 5 minut za opcję. Pożegnanie, oddanie przedmiotu i akcje z własną ceną nie kosztują nic ekstra.
+- **Specyfikacja i docs_v2** są zaktualizowane (bez commita).
 
-Część jest już prawie gotowa: zegar w notesie, powody przesunięć czasu, podsumowanie na końcu dema i dane o zablokowanych opcjach w Dialogue Manager. Sprzeczności w karcie Hrapka są rozstrzygnięte, a wszystkie decyzje zapadły zgodnie z rekomendacjami. **Status: gotowe do startu po zamknięciu task_08.**
+Uruchomione testy (unit, lint, dialogi, nowy scenariusz `hrapek`) przechodzą. Stare scenariusze z przeliczonymi godzinami czekają na Twoją zgodę.

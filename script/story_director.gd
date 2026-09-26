@@ -211,7 +211,7 @@ func _arrive(place_id: StringName, route: Array[StringName], reason: String) -> 
 	_roll_encounter(place_id)
 	_place_player(_marker(data.entry))
 	apply_world_state()
-	await fade.show_card(data.display_name, GameState.clock_text(), 1.2)
+	await fade.show_card(data.display_name, _arrival_subtitle(route), 1.2)
 	await fade.fade_in(0.7)
 	GameState.pop_modal()
 	_busy = false
@@ -221,6 +221,14 @@ func _arrive(place_id: StringName, route: Array[StringName], reason: String) -> 
 		if data.dread > 0:
 			GameState.change_player_sanity(-data.dread, "To miejsce cię przygniata")
 	await _meet_drudzy_if_due(place_id)
+
+## The clock, and the places passed on the way ("przez: Kaplica"): walking through a place
+## doesn't scout it, so the player should at least know which way he went.
+func _arrival_subtitle(route: Array[StringName]) -> String:
+	var passed := Expeditions.passed_through(route)
+	if passed.is_empty():
+		return GameState.clock_text()
+	return "%s\nprzez: %s" % [GameState.clock_text(), ", ".join(passed)]
 
 func _return_to_camp() -> void:
 	var route := Expeditions.path(GameState.current_place(), Expeditions.CAMP)
