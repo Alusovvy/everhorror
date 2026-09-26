@@ -1,5 +1,5 @@
-EVERHORROR - wersja testowa (demo 0.5)
-========================================
+EVERHORROR - wersja testowa (demo 0.5.1)
+==========================================
 
 JAK URUCHOMIĆ
 1. Rozpakuj cały ZIP do jakiegoś folderu (nie odpalaj gry prosto z ZIP-a).
@@ -32,8 +32,9 @@ Każda rozmowa, droga i zaznaczona żyła zabiera czas, więc wszystkiego
 nie da się zdążyć.
 
 W obozie mieszkają ludzie z różnych stron świata: górnicy, kucharka, pisarz,
-najemnik, felczer. Każdy ma swój rozkład dnia i swoje sprawy, a niektórzy
-w dzień pracują w chodnikach. Trzeciego dnia w tunelach czeka ktoś jeszcze.
+najemnik, felczer. Pierwszego dnia połowa z nich jest na szychcie w chodnikach
+najbliżej obozu i trzeba ich tam znaleźć. Każdy ma swój rozkład dnia i swoje
+sprawy. Trzeciego dnia w tunelach czeka ktoś jeszcze.
 
 Kopalnia zabiera zdrowie i rozum także bohaterowi. Leki i świece są
 w ekwipunku (I). Kto schodzi na dół poraniony, może nie wrócić. Po śmierci
@@ -41,6 +42,19 @@ dzień da się powtórzyć od rana (RETRY FROM MORNING).
 
 Cały tydzień to mniej więcej 2-3 godziny grania. Grę zapisuje się pod Esc
 (3 miejsca na zapis).
+
+CO NOWEGO W 0.5.1
+- pierwszy dzień: w obozie są tylko zarządca, kwatermistrzyni i dwaj górnicy;
+  resztę ekipy spotkasz na szychcie w Starej sztolni, w rząpiu albo za
+  zachodnim zawałem (za każdym razem gdzie indziej), a od drugiego dnia
+  wszyscy są w obozie
+- ludzie witają się inaczej zależnie od tego, gdzie ich pierwszy raz spotkasz
+- zmęczenie: długie chodzenie po tunelach męczy (widać to w rogu ekranu
+  i w ekwipunku); kto padnie z nóg, idzie w głąb dwa razy dłużej. Pomaga sen
+  i wieczór przy ognisku
+- powrót do obozu trwa połowę drogi, którą przeszedłeś od wyjścia
+- ta sama odpowiedź w rozmowie z tą samą osobą kosztuje czas tylko raz
+- UWAGA: zacznij nową grę (zmienił się pierwszy dzień)
 
 CO NOWEGO W 0.5
 - obóz to teraz naturalna jaskinia: dużo więcej miejsca, wysokie sklepienie,

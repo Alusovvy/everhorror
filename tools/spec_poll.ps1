@@ -1,13 +1,14 @@
 <#
 .SYNOPSIS
-  Checks the design spec (../specification) and starts the spec-sync agent when there is work.
+  Checks the design spec (../specification) and starts the agent when there is work.
 
 .DESCRIPTION
   Cheap check first (git fetch + the spec CLI); Claude is started only when:
     - a spec/* deployment branch was merged into the game master  -> /spec-sync finalize
-    - the spec master moved and has changes for the game or 📥 tickets -> /spec-sync sync
-  Nothing starts while a deployment branch waits for review, while the spec working copy has
-  uncommitted edits, or while another run holds the lock. Logs: reports/spec-sync/.
+    - the spec master moved and has changes for the game or 📥 tickets -> /spec-tasks (writes
+      docs/ai-tasks/task_NN.md files only; implementing is /ai-task implement NN, started by a person)
+  A branch waiting for review does not stop task planning. Nothing starts while the spec working copy
+  has uncommitted edits, or while another run holds the lock. Logs: reports/spec-sync/.
 
 .EXAMPLE
   pwsh -File tools/spec_poll.ps1 -DryRun     # say what would happen, start nothing
@@ -43,7 +44,7 @@ if ($Register) {
 	$action = New-ScheduledTaskAction -Execute 'pwsh.exe' -Argument "-NoProfile -WindowStyle Hidden -File `"$PSCommandPath`"" -WorkingDirectory $Game
 	$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes $Minutes)
 	$settings = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 3) -StartWhenAvailable
-	Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger -Settings $settings -Description 'Sprawdza specyfikację Everhorror i uruchamia agenta spec-sync.' -Force | Out-Null
+	Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger -Settings $settings -Description 'Sprawdza specyfikację Everhorror; nowe zmiany zamienia w zadania (spec-tasks), scalone gałęzie domyka (spec-sync finalize).' -Force | Out-Null
 	Write-Output "Zarejestrowano zadanie '$TaskName' (co $Minutes min, tylko gdy jesteś zalogowany)."
 	exit 0
 }
@@ -106,14 +107,11 @@ try {
 		$mode = 'finalize'
 		Log "scalone gałęzie do domknięcia: $($toFinalize -join ', ')"
 	}
-	elseif ($waiting.Count) {
-		Log "czeka na sprawdzenie: $($waiting -join ', ') (nowe zmiany poczekają)"
-		exit 0
-	}
 	elseif ($remoteHead -ne $last) {
+		if ($waiting.Count) { Log "czeka na sprawdzenie: $($waiting -join ', ') (zadania i tak powstaną)" }
 		$newTickets = @($st.openTickets | Where-Object { $_.status -eq '📥' })
 		if ($st.changes.actionable -gt 0 -or $newTickets.Count) {
-			$mode = 'sync'
+			$mode = 'tasks'
 			Log "spec $($remoteHead.Substring(0,7)): $($st.changes.actionable) zmian do wdrożenia, $($newTickets.Count) nowych zgłoszeń"
 		}
 		else {
@@ -122,24 +120,29 @@ try {
 			exit 0
 		}
 	}
+	elseif ($waiting.Count) {
+		Log "czeka na sprawdzenie: $($waiting -join ', ')"
+		exit 0
+	}
 	else {
 		exit 0
 	}
 
-	if ($DryRun) { Log "DryRun: uruchomiłbym /spec-sync $mode"; exit 0 }
+	# 'tasks' plans new spec changes as task files; 'finalize' closes merged branches.
+	$command = if ($mode -eq 'tasks') { '/spec-tasks unattended' } else { "/spec-sync $mode unattended" }
+	if ($DryRun) { Log "DryRun: uruchomiłbym $command"; exit 0 }
 
 	Set-Content -Path $LockFile -Value "$mode $remoteHead pid $PID" -Encoding utf8
 	$runLog = Join-Path $StateDir "run-$(Get-Date -Format 'yyyyMMdd-HHmmss')-$mode.log"
-	Log "start /spec-sync $mode → $runLog"
+	Log "start $command → $runLog"
 	Push-Location $Game
 	try {
-		$prompt = "/spec-sync $mode unattended"
-		& claude -p $prompt --permission-mode acceptEdits --add-dir $Spec --add-dir $Worktree *> $runLog
+		& claude -p $command --permission-mode acceptEdits --add-dir $Spec --add-dir $Worktree *> $runLog
 		$code = $LASTEXITCODE
 	}
 	finally { Pop-Location }
-	Log "koniec /spec-sync $mode (kod $code)"
-	if ($code -eq 0 -and $mode -eq 'sync') { Set-Content -Path $LastFile -Value $remoteHead -Encoding utf8 }
+	Log "koniec $command (kod $code)"
+	if ($code -eq 0 -and $mode -eq 'tasks') { Set-Content -Path $LastFile -Value $remoteHead -Encoding utf8 }
 }
 catch {
 	Log "błąd: $($_.Exception.Message)"

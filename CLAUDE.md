@@ -20,14 +20,20 @@ Working title "everhorror" (the GDD still calls the game "XYZ"). The logo `asset
 
 ## Specification (`../specification`, separate repo)
 - `C:\dev\gamedev\everhorror\specification`, next to this repo. **The design source of truth**, in Polish. The user pushes it to GitHub as its own project, the team edits it there, and I pull it locally (`git pull` in that folder). Version 1.0 was written from docs_v2 and the code after task_05. Start with its `README.md`.
-- **Workflow (2026-09-26): the `spec-sync` skill** ([.claude/skills/spec-sync/SKILL.md](.claude/skills/spec-sync/SKILL.md)) — use it whenever asked to sync. In short: each team member hosts the React dashboard locally (`npm start` in `../specification/dashboard/`); every edit becomes a `zmiana/*` branch pushed to the shared repo, the section owner (`zespol.json`) approves it by squash-merging to the spec `master` in their dashboard (a GitHub-API mode with PRs also exists). Architecture: `../specification/dashboard/ARCHITEKTURA.md`. Then:
-  1. `git pull`, `node dashboard/cli.ts status` / `diff <baseline> HEAD --json` (semantic diff per rule ID, table cell, question; baseline = last hash in `WDROZENIA.md` → "Wpisy"), plus 📥 tickets.
-  2. Plan; questions go to the user (interactive) or into a ❔ ticket (unattended).
-  3. Implement on a `spec/<date>-<sha7>` branch in the **worktree `../everhorror-wdrozenie`** (never switch branches in this main copy — other sessions work here), tests, factcheck `docs/human-tasks/factcheck-spec-<sha7>.md`.
-  4. Spec: a row in `WDROZENIA.md` → "Na gałęziach" (🧪), [ROBOCZE] details; `[agent]` commit + push.
-  5. After the user merges the branch into `master`: `/spec-sync finalize` flips ⬜→✅ and moves the row to "Wpisy".
-- **Standing permission (user decision 2026-09-26):** commits on `spec/*` branches, `[agent]` commits and pushes to the spec `master`, short tests. Still ask for: the full test suite, merging into the game `master`. Other spec commits (outside spec-sync): only when asked.
-- **Poller:** `tools/spec_poll.ps1` (every 15 min via Task Scheduler, `-Register`/`-Unregister`, `-DryRun`) runs `claude -p "/spec-sync <mode> unattended"` only when there is work; state and logs in `reports/spec-sync/`. Permissions for that run: `.claude/settings.json`.
+- **Workflow (2026-09-26): spec changes → tasks → branch → finalize.** Each team member hosts the React dashboard locally (`npm start` in `../specification/dashboard/`). Every edit becomes a `zmiana/*` branch pushed to the shared repo, and the section owner (`zespol.json`) approves it by squash-merging to the spec `master` in their dashboard (a GitHub-API mode with PRs also exists). Architecture: `../specification/dashboard/ARCHITEKTURA.md`. Then:
+  1. **`/spec-tasks`** ([.claude/skills/spec-tasks/SKILL.md](.claude/skills/spec-tasks/SKILL.md)) — use it whenever asked to sync or check the spec.
+     - `git pull`, then a semantic diff (`node dashboard/cli.ts diff <start> HEAD --json`). The start is the last hash in `WDROZENIA.md` → "W zadaniach", or the baseline (last hash in "Wpisy").
+     - Actionable changes, 📥 tickets and unplanned queue rows become `docs/ai-tasks/task_NN.md` files, one per feature. Their requirements are rule quotes and they carry the line `Źródło: specyfikacja <sha7>`.
+     - Each task gets a row in "W zadaniach" (📋). Questions go to the user, or into a ❔ ticket when unattended.
+     - Plans only; never implements.
+  2. **`/ai-task implement NN`** (started by a person) builds a spec task on a `spec/<date>-task<NN>` branch in the **worktree `../everhorror-wdrozenie`**. Never switch branches in this main copy: other sessions work here. Then tests and the factcheck `docs/human-tasks/factcheck-test-NN.md`. Spec: a row in "Na gałęziach" (🧪), [ROBOCZE] details, `[agent]` commit + push. At most one open `spec/*` branch.
+  3. After the user merges the branch into the game `master`, **`/spec-sync finalize`**:
+     - flips ⬜→✅ and marks "W zadaniach" ✅;
+     - moves the row to "Wpisy". The baseline moves only when every task of that spec commit is done;
+     - moves the task file to `done/`.
+     `/spec-sync status` shows where everything stands.
+- **Standing permission (user decision 2026-09-26):** commits on `spec/*` branches, `[agent]` commits and pushes to the spec `master`, short tests. Still ask for: the full test suite, merging into the game `master`. Other spec commits (outside spec-tasks, spec tasks and finalize): only when asked.
+- **Poller:** `tools/spec_poll.ps1` (every 15 min via Task Scheduler, `-Register`/`-Unregister`, `-DryRun`) runs `claude -p "/spec-tasks unattended"` (new spec changes → task files, even while a branch waits for review) or `"/spec-sync finalize unattended"` (a merged `spec/*` branch), and only when there is work; state and logs in `reports/spec-sync/`. Permissions for that run: `.claude/settings.json`.
 - **Markers:**
   - ✅ in the game, 🟡 partial, ⬜ decided and waiting (the order in `WDROZENIA.md` → "Czeka na wdrożenie" is the priority),
   - 💡 proposal and ❓ open question: don't implement,
@@ -87,7 +93,7 @@ Working title "everhorror" (the GDD still calls the game "XYZ"). The logo `asset
 - **Audio**: `default_bus_layout.tres` has buses Ambience and SFX, both with reverb. `random_sound_emitter.gd` (AudioStreamPlayer3D) replays a sound at random intervals. Placeholder SFX in `assets/sounds/generated/` come from `tools/generators/synth_sfx.js`. The `cave_ambient.mp3` bed is non-positional and looped.
 - `visual_interaction.tscn`: an early VN prototype, unused (the VN balloon replaced it).
 - **Dev tools**: see [tools/README.md](tools/README.md): screenshots (lets me SEE the game, which the MCP can't; supports `day`/`hour`/`flags`, `hide` and `bright` for layout views), `level_probe.gd` (piece positions/AABBs of a level), `character_preview.gd` (character models side by side), test scenarios, generators.
-- **Build**: `--export-release "Windows Desktop" build/windows/Everhorror.exe` (embedded PCK; `tools/*`, `docs*`, `build/*`, `assets/Sewer/*` excluded; `dialogue/*.json` included), then zip with `tools/release/CZYTAJ_MNIE.txt` as `build/Everhorror-demo-<version>-windows.zip`. Current: 0.5 (2026-09-26: the cave camp from task_08, task_09 (Hrapek, the clock in the notebook, locked choices, 5 minutes a response) and the small fixes from the gameplay analysis: map labels, "przez: …" on the arrival card, no "Czujesz się: spokojny" after a scare). Patch releases get a third number. The main menu starts a new game with the user arg `--new-game` (smoke tests).
+- **Build**: `--export-release "Windows Desktop" build/windows/Everhorror.exe` (embedded PCK; `tools/*`, `docs*`, `build/*`, `assets/Sewer/*` excluded; `dialogue/*.json` included), then zip with `tools/release/CZYTAJ_MNIE.txt` as `build/Everhorror-demo-<version>-windows.zip`. Current: 0.5.1 (2026-09-26: 0.5 + task_10-12: the day-1 shift in the first-level rooms, first greetings by place, free repeated options, fatigue and the half-way return). Patch releases get a third number. The main menu starts a new game with the user arg `--new-game` (smoke tests).
 
 ## Conventions
 - Static typing (`var x: Type`, `-> void`), `@onready` node references, `class_name` for reusable types.
