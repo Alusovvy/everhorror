@@ -45,3 +45,11 @@ For each "Na gałęziach" row whose branch is merged into the game `master` (or 
 1. Spec: flip the implemented rules ⬜→✅ (🟡 where partial), move the row to "Wpisy" (`| <date> | \`<sha7>\` | <IDs> | <game version or branch> | <notes, skipped items> |` — the baseline is the last hash in that table, so it must be the spec commit the branch implemented), remove finished items from "Czeka na wdrożenie", close answered tickets (status ✅, move to `zgloszenia/zamkniete/`). Lint, commit `[agent] finalize spec/<…>`, push.
 2. Game repo: `git -C <worktree> switch --detach` and `git -C <game> branch -d spec/<…>` (only `-d`, it refuses unmerged branches).
 3. A branch the user rejected (row status ❌ or the user says so): leave the branch, set the row to ❌ with the reason; the changes stay pending.
+
+## The baseline must always move
+The baseline is the newest commit hash in `WDROZENIA.md` → "Wpisy"; everything committed after it counts as waiting for the agent. So **every time the spec is updated to describe something that is already in the game, add a "Wpisy" row too** — not only after a spec-driven deployment:
+
+- work given outside the spec (a task from chat, a bug fix): after updating the spec and logging the row in "Zmiany agenta poza specyfikacją", add a "Wpisy" row with the spec commit the game now matches (`| <data> | \`<sha7>\` | <IDs / krótko> | <task albo wersja> | <uwagi> |`),
+- the hash is the spec commit **before** your own `[agent]` commit (you cannot know your own hash yet); your commit only adds ✅ markers and [ROBOCZE] details, which the dashboard does not count as work.
+
+Without that row the queue keeps growing with things that are long since in the game — that is exactly what happened with task_06…task_12. The dashboard offers the same bookkeeping under *Wdrożenia → „Jeśli to już jest w grze”*.
