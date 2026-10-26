@@ -110,7 +110,7 @@ Decyzje (2026-09-26, [decision-task-10](../../human-tasks/done/decision-task-10.
   Wszystkie przechodzą.
 - **Zrzut** Starej sztolni w dniu 1: Wszebor klęczy, a Sobek stoi w chodniku tuż za wejściem, nikt nie wchodzi w ścianę.
 - **Pełny zestaw (za zgodą, 2026-09-26):** 18/18 po poprawieniu oczekiwań w testach (szczegóły w raporcie task_12). `first_meet` jest w domyślnej liście `run_tests.sh`.
-- **Ręczne:** [factcheck-test-10](../../human-tasks/factcheck-test-10.md) (13 punktów, ok. 25 min).
+- **Ręczne:** [factcheck-test-10](../../human-tasks/done/factcheck-test-10.md) (13 punktów, ok. 25 min).
 
 ## Podsumowanie
 - **Obóz w dniu 1:** są w nim tylko Mirosław, Bolko, Tekla i Racibor.

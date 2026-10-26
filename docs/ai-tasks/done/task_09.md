@@ -165,7 +165,7 @@ Priorytet: średni (do potwierdzenia) · Termin: po zamknięciu task_08 (obóz),
 - `dialogue`: Hrapek, ucieczka po 3 pytaniach, ryba u Tekli, Wszebora i Mirosława.
 - Nowy scenariusz `hrapek`: tydzień powrotów, oddanie ryby, ciało w dniu 6.
 - Krótki test E2E przez `godot-runtime` (w tle): [J] → zakładka „Czas”, brak zegara na HUD, wyszarzona opcja w rozmowie.
-- Pełny zestaw tylko za Twoją zgodą. Na koniec factcheck `docs/human-tasks/factcheck-test-09.md`.
+- Pełny zestaw tylko za Twoją zgodą. Na koniec factcheck `docs/human-tasks/done/factcheck-test-09.md`.
 
 ## Co zostało zrobione
 Przygotowanie (wcześniej): analiza zmian, plan i [plik decyzji](../../human-tasks/done/decision-task-09.md). Przed startem (2026-09-26) ustaliliśmy w czacie:
@@ -240,7 +240,7 @@ Lint specyfikacji (`node dashboard/cli.ts lint`): 0 błędów, 0 uwag. Docs_v2 z
 ## Czego potrzebuję od Ciebie
 - **Zgody na trzy scenariusze** `day1`, `day2`, `rzapie`: przeliczyłem w nich godziny na 5 minut za opcję (np. dzień 1: 06:15 zamiast 07:00), ale ich nie uruchamiałem. Najlepiej od razu cały zestaw w porcjach, bo nowy koszt dotyka każdej rozmowy.
 - **Rolanda i Ren:** przejrzenie kwestii Hrapka (wiersze) i tego, co mówi o NIM i o dziadku.
-- Przejście [factcheck-test-09](../../human-tasks/factcheck-test-09.md).
+- Przejście [factcheck-test-09](../../human-tasks/done/factcheck-test-09.md).
 - Build tylko na prośbę (proponuję 0.5 razem z obozem z task_08).
 
 ## Test
@@ -252,7 +252,7 @@ Lint specyfikacji (`node dashboard/cli.ts lint`): 0 błędów, 0 uwag. Docs_v2 z
   
   Wszystkie przechodzą.
 - Nie uruchomione (czekają na zgodę): pełny zestaw, w tym przeliczone `day1`, `day2`, `rzapie`.
-- Ręczne: [factcheck-test-09](../../human-tasks/factcheck-test-09.md) (22 punkty, ok. 40 min).
+- Ręczne: [factcheck-test-09](../../human-tasks/done/factcheck-test-09.md) (22 punkty, ok. 40 min).
 
 ## Podsumowanie
 Wszystkie sześć punktów jest zrobionych:

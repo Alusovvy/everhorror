@@ -1,6 +1,8 @@
 # Factcheck test 12: zmęczenie i powrót za połowę drogi
 
-> Zadanie: [task_12](../ai-tasks/done/task_12.md) · Decyzje: [decision-task-12](done/decision-task-12.md) · Przygotowano: 2026-09-26 · Czas: ~30 min
+> **2026-10-26:** zastąpione arkuszem PT0 [factcheck-test-14.md](../factcheck-test-14.md) (decyzja planu końcowego, etap 3). Kolumny człowieka zostają puste.
+
+> Zadanie: [task_12](../../ai-tasks/done/task_12.md) · Decyzje: [decision-task-12](decision-task-12.md) · Przygotowano: 2026-09-26 · Czas: ~30 min
 > Graj z edytora (F5). Najszybciej: nowa gra, dzień 1 i 2 z dalekimi wyprawami (sztolnia → wyrobisko → grota), potem noc.
 
 ## Co się zmieniło

@@ -1,6 +1,8 @@
 # Factcheck test 11: pierwsze spotkania, darmowe powtórzone opcje
 
-> Zadanie: [task_11](../ai-tasks/done/task_11.md) · Decyzje: [decision-task-11](done/decision-task-11.md) · Przygotowano: 2026-09-26 · Czas: ~15 min
+> **2026-10-26:** zastąpione arkuszem PT0 [factcheck-test-14.md](../factcheck-test-14.md) (decyzja planu końcowego, etap 3). Kolumny człowieka zostają puste.
+
+> Zadanie: [task_11](../../ai-tasks/done/task_11.md) · Decyzje: [decision-task-11](decision-task-11.md) · Przygotowano: 2026-09-26 · Czas: ~15 min
 > Graj z edytora (F5). Można przejść razem z [factcheck-test-10](factcheck-test-10.md) i [factcheck-test-12](factcheck-test-12.md): nowa gra, dzień 1 i 2.
 
 ## Co się zmieniło

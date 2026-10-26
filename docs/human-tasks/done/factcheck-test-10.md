@@ -1,6 +1,8 @@
 # Factcheck test 10: pierwszy dzień, ludzie na szychcie w pomieszczeniach
 
-> Zadanie: [task_10](../ai-tasks/done/task_10.md) · Decyzje: [decision-task-10](done/decision-task-10.md) · Przygotowano: 2026-09-26 · Czas: ~25 min
+> **2026-10-26:** zastąpione arkuszem PT0 [factcheck-test-14.md](../factcheck-test-14.md) (decyzja planu końcowego, etap 3). Wpisy człowieka (wiersze 1–2 i uwaga „Reszta spoko”) zostają bez zmian; pozostałe kolumny człowieka są puste.
+
+> Zadanie: [task_10](../../ai-tasks/done/task_10.md) · Decyzje: [decision-task-10](decision-task-10.md) · Przygotowano: 2026-09-26 · Czas: ~25 min
 > Graj z edytora (F5). Build tylko na Twoją prośbę. Nowa gra; najszybciej: dzień 1, Stara sztolnia, Rząpie, wybuch u Mirosława i Zawalony chodnik, potem noc i ranek dnia 2.
 > Rozstawienie jest losowe, więc przy każdej nowej grze ludzie mogą stać gdzie indziej. Zapisz w uwagach, kto gdzie był.
 
