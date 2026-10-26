@@ -10,7 +10,7 @@ Wymagania:
 
 <!-- Opcjonalne (usuń, jeśli niepotrzebne): -->
 Kontekst:
-- <po co to robimy / z czym się wiąże, np. link do dokumentu w docs_v2>
+- <po co to robimy / z czym się wiąże, np. ID i dokument w specyfikacji; źródła i pierwszeństwo: specification/WORKFLOW.md>
 
 Kryteria akceptacji:
 - <po czym poznam, że jest dobrze, np. "po [E] na skrzyni widać opis">

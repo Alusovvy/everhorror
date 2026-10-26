@@ -3,6 +3,14 @@
 Dev tools run from the command line (project root). Not used by the game and excluded from the export.
 `GODOT` below means `C:/dev/gamedev/Godot_v4.7.2-stable_win64_console.exe`.
 
+## Workflow and documentation checks
+
+- Current workflow and source ownership: `../specification/WORKFLOW.md`. A person starts planning, implementation and finalization.
+- `pwsh -NoProfile -File tools/spec_poll.ps1 -DryRun`: reports locally known specification state, with no fetch, model launch, files, logs or registration. A normal run fetches upstream and records only the last reported notification in `reports/spec-sync/last-notification.txt`; `-LocalOnly` skips fetch. No changes to tasks, the ledger or gameplay. Schedule registration is optional and has not been performed by the foundation task.
+- `pwsh -NoProfile -File tools/test_spec_poll.ps1`: checks notifications, deduplication, CLI failure and side-effect-free DryRun in temporary Git repositories, without project remotes.
+- `node tools/check_doc_links.js`: checks local Markdown file targets in the specification and `CLAUDE.md`. Optional arguments select files/directories. It does not validate remote pages or heading fragments. The dashboard has separate fragment-navigation tests.
+- Dashboard validation (from `../specification/dashboard`): `npm test`, `npm run build`, `npm run lint-spec`. Browser journeys and the remaining human checks are recorded in `docs/human-tasks/factcheck-foundation-2026-10-26.md`.
+
 ## Tests
 
 **Run the full suite only after the user approves it** (see `CLAUDE.md`). To check a change, run one short scenario.

@@ -1,13 +1,13 @@
 ---
 name: spec-tasks
-description: Turn new changes in the design spec (../specification, the source of truth) into agent tasks — pull the spec, diff it since the last planned commit, group the actionable changes, 📥 tickets and queued items by feature, write docs/ai-tasks/task_NN.md files (implemented later with /ai-task implement NN) and record them in the spec's WDROZENIA.md → "W zadaniach". Never implements anything. Use when asked to check the spec for changes, turn spec changes into tasks, or when the spec poller (tools/spec_poll.ps1) starts a run.
+description: On a person's request, turn accepted changes in the design spec (../specification) into tasks — diff since the last planned commit, group actionable changes, tickets and queue by feature, write docs/ai-tasks/task_NN.md files and record them in WDROZENIA.md. Never implements gameplay. The poller reports status only and does not invoke this skill.
 ---
 
 # spec-tasks
 
 The one entry point from the spec to the game. It only **plans**: it writes task files and spec bookkeeping, never game code. Implementation goes through `/ai-task implement NN` (spec tasks are built on a `spec/*` branch in the worktree, see the ai-task skill). After the user merges that branch, `/spec-sync finalize` flips the markers.
 
-An argument `unattended` means the poller started this run with nobody watching. In that case, never wait for an answer: questions go into a spec ticket (step 6).
+This skill starts on a person's instruction, not from the poller. A legacy `unattended` argument is meaningful only for an explicitly authorized noninteractive invocation; unresolved questions go into a spec ticket (step 6), without inventing decisions. Current process/source map: `C:/dev/gamedev/everhorror/specification/WORKFLOW.md`; Roland owns all sections, and newer accepted decisions take precedence over older instructions.
 
 ## Places
 | What | Path |
@@ -31,6 +31,7 @@ Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` fir
    - Otherwise start from the baseline (`status.baseline`).
    - Then run `node dashboard/cli.ts diff <start> HEAD --json`. If the start already equals HEAD, and there are no 📥 tickets and no unplanned queue items, there is nothing to do: stop.
 3. **Collect work.** Read the surrounding spec text and the file's "Dla agenta" section for each item.
+   - Distinguish design changes from editorial/process corrections. `actionable` is a parser classification, not proof of new gameplay requirements. Report a false positive with file/ID and reason; never move the baseline to hide it or create a gameplay task for an ownership/header/template correction.
    - Diff changes with `actionable: true`. The marker says what to do:
      - ✅ with changed text: the game must follow the new text;
      - ⬜: implement;

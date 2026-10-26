@@ -10,7 +10,7 @@ Modes (the argument after `/ai-task`): **`status`** (default), **`analyze NN`**,
 ## Places
 | What | Path |
 |---|---|
-| Game repo (work here, on `master`, no commits unless asked) | `C:/dev/gamedev/everhorror/everhorror` |
+| Game main copy (task reports and reading; never switch its branch) | `C:/dev/gamedev/everhorror/everhorror` |
 | Tasks: open / done | `docs/ai-tasks/task_NN.md` / `docs/ai-tasks/done/` |
 | Decisions and factchecks: open / done | `docs/human-tasks/` / `docs/human-tasks/done/` |
 | Workflow rules (the user's) | `docs/ai-tasks/INFO.md`, template `docs/ai-tasks/task_template.md` |
@@ -21,6 +21,10 @@ Read `CLAUDE.md` first; it holds the conventions every step relies on. Hard rule
 - Never edit the task's requirements section ("Wymagania:" / "Requierments"), typos included.
 - The task file always ends with **Podsumowanie** (Summary).
 - Write in the task's language (task_02+ are Polish). Report in the task file, and briefly in chat.
+
+Current process and source precedence: `C:/dev/gamedev/everhorror/specification/WORKFLOW.md` (accepted solo mode, 2026-10-26). Roland owns all active sections. Keep original authorship. Never fill human `wynik`/`uwagi` columns; your automated checks go in a separate report/Agent column. Attribute any chat decision. A merge or green automated check is not human verification; retain pending playtests until a person's result or Roland's explicit waiver.
+
+Before new gameplay implementation, a chat request becomes accepted spec text and then a task with its spec SHA (accepted WF-1). Use the designated implementation worktree and the Spec tasks rules below; do not implement a new gameplay request directly on main. Historical task requirements stay unchanged. A bounded documentation/tooling request follows its explicitly authorized scope, without starting gameplay waves.
 
 ## Subagents
 Three helpers live in `.claude/agents/`. Spawn them at the steps below. Each gets the working directory, the files involved and one concrete question, and returns only conclusions. They never edit files, so apply their findings yourself.
@@ -60,13 +64,13 @@ A task whose header has the line `Źródło: specyfikacja` was written by `/spec
    - Polish number helpers;
    - `has_flag` never through `bool()`;
    - `--import` after `.dialogue` changes (twice for a new file).
-3. **Lore.** If the change adds or changes Polish lines, or facts about people, places, magic or factions, spawn `lore-checker`. Give it the new lines with their `file:line` and the facts they assert. Fix real contradictions. Leave a canon question for Ren as a note in "Czego potrzebuję od Ciebie".
+3. **Lore.** If the change adds or changes Polish lines, or facts about people, places, magic or factions, spawn `lore-checker`. Give it the new lines with their `file:line` and the facts they assert. Fix real contradictions. Route unresolved canon to Roland with sources and a recommendation; preserve deliberate unknowns and `[ROBOCZE]` rather than inventing answers.
 4. **Tests.** Spawn `test-runner` with `unit lint dialogue` plus the scenarios that cover the touched systems (see `tools/README.md`). Also tell it whether `.dialogue` files or new `class_name` scripts changed (it must `--import` first). Never ask it for the full suite unless the user approved that in this conversation; then pass the words "user approved full suite". Fix failures caused by the change. Report failures outside the change instead of widening the change.
 5. **Review.** Spawn `convention-reviewer` on the uncommitted diff, naming the task number. Fix what it finds, then re-run `test-runner` on the scenarios the fixes touch.
 6. **Docs.**
    - `docs/human-tasks/factcheck-test-NN.md` (Polish): what was added, then a table `# | co sprawdzić | jak | oczekiwany wynik | wynik | uwagi`, with `wynik`/`uwagi` left empty.
-   - docs_v2: status markers ✅/🟡/⬜ and the changed system files.
-   - Spec: update the rules; mark details you decided yourself as **[ROBOCZE]**; add code pointers under "Dla agenta"; add a row in `WDROZENIA.md` → "Zmiany agenta poza specyfikacją". Numbers go in `07_balans.md`. Run `node dashboard/cli.ts lint` in the spec repo (0 errors). Spec commits only when the user asks (outside spec-sync).
+   - Current design belongs to the spec; duplicated docs_v2/MECHANICS descriptions are reference-only and have no ongoing sync duty. Preserve their unique LoreDoc/asset evidence pending verified migration; follow the WORKFLOW source map.
+   - Spec: update the rules; mark details you decided yourself as **[ROBOCZE]**; add code pointers under "Dla agenta"; add a row for game changes in `WDROZENIA.md` → "Zmiany agenta poza specyfikacją". Numbers go in `07_balans.md`. Run `node dashboard/cli.ts lint` in the spec repo (0 errors). Commits/pushes follow current authorization and the accepted plan's exact scope; a local-only documentation task does not commit or push.
    - `CLAUDE.md`: update it if a system, a convention or a test layer changed.
 7. **Task file.** Fill in these sections:
    - "Co zostało zrobione" (one subsection per requirement);
@@ -87,7 +91,7 @@ These are tasks with the line `Źródło: specyfikacja <sha7>`, created by `/spe
   - At most one open `spec/*` branch at a time: if "Na gałęziach" in `WDROZENIA.md` has a 🔧/🧪 row, stop and say which branch waits for review.
   - Pass the worktree path to `test-runner` and `convention-reviewer`.
 - **Requirements** are rule quotes. The spec text of those IDs (and their "Dla agenta" sections) is binding. A detail you decide yourself goes into the spec marked **[ROBOCZE]**. If the spec contradicts itself, ask (interactive) or write a ❔ ticket (unattended); don't guess.
-- **Commit.** The code, docs_v2 and the factcheck (`docs/human-tasks/factcheck-test-NN.md`, one row per rule ID) go on the branch, committed as `task_NN: <short Polish summary>` with the IDs in the body. Standing permission covers `spec/*` commits. Never commit to or merge into `master`.
+- **Commit.** The code, relevant current docs and the factcheck (`docs/human-tasks/factcheck-test-NN.md`) go on the branch, committed as `task_NN: <short Polish summary>` with the IDs in the body. Link automated rule checks separately; human rows focus on what a person must judge. Standing permission covers `spec/*` commits. Never commit to or merge into `master`.
 - **Task file.** The report goes into the task file in the main copy. It stays in `docs/ai-tasks/` until the branch is merged; `/spec-sync finalize` moves it to `done/`.
 - **Spec.**
   - Add a row to `WDROZENIA.md` → "Na gałęziach": `| \`spec/<date>-task<NN>\` | \`<sha7>\` | <IDs>, task_NN | \`docs/human-tasks/factcheck-test-NN.md\` | 🧪 do sprawdzenia |`.

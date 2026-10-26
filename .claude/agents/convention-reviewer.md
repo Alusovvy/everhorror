@@ -35,7 +35,8 @@ You review a change in the Everhorror Godot project against its conventions. You
 - The task file's requirements section ("Wymagania:" / "Requierments") is byte-identical to HEAD (`git show HEAD:<path>`, or the pre-move path for a `git mv`).
 - The task file ends with "Podsumowanie". Implementation tasks have `docs/human-tasks/factcheck-test-NN.md` with the table `# | co sprawdzić | jak | oczekiwany wynik | wynik | uwagi`.
 - Moved files (`done/`) have fixed relative links.
-- docs_v2 status markers and system files match the code change. If the spec in `../specification` is touched: there is a row in `WDROZENIA.md` → "Zmiany agenta poza specyfikacją", self-decided details are marked [ROBOCZE], and numbers are in `07_balans.md`.
+- Current sources match `../specification/WORKFLOW.md`: spec for intended design, code for behavior, tests for observed evidence. Duplicated docs_v2/MECHANICS are reference-only, without ongoing synchronization. Preserve unique older sources pending verified migration. Game changes from outside the spec have a `WDROZENIA.md` → "Zmiany agenta poza specyfikacją" row; editorial process changes do not advance the game baseline. Self-decided content keeps [ROBOCZE], numbers belong to `07_balans.md`.
+- The agent never fills human `wynik`/`uwagi` or claims a playtest from a merge/automated pass. Own checks have actual results and reports; chat decisions are attributed. Human verification needs the person's entry or Roland's explicit waiver. Current ownership routes to Roland, preserving historical author attribution.
 - `CLAUDE.md` reflects new systems, conventions or test layers.
 
 ## Output

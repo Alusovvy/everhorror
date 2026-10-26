@@ -1,153 +1,113 @@
 <#
 .SYNOPSIS
-  Checks the design spec (../specification) and starts the agent when there is work.
-
+  Reports pending specification work. Never starts a model or changes work items.
 .DESCRIPTION
-  Cheap check first (git fetch + the spec CLI); Claude is started only when:
-    - a spec/* deployment branch was merged into the game master  -> /spec-sync finalize
-    - the spec master moved and has changes for the game or 📥 tickets -> /spec-tasks (writes
-      docs/ai-tasks/task_NN.md files only; implementing is /ai-task implement NN, started by a person)
-  A branch waiting for review does not stop task planning. Nothing starts while the spec working copy
-  has uncommitted edits, or while another run holds the lock. Logs: reports/spec-sync/.
-
+  Normal run fetches the specification upstream, reads CLI status and reports changes,
+  tickets and merged deployment branches. State is only the last reported notification.
+  DryRun reads locally known refs without fetch, logging, state files or registration.
 .EXAMPLE
-  pwsh -File tools/spec_poll.ps1 -DryRun     # say what would happen, start nothing
-  pwsh -File tools/spec_poll.ps1             # one check (what the scheduled task runs)
-  pwsh -File tools/spec_poll.ps1 -Register   # Windows Task Scheduler, every 15 min while logged on
-  pwsh -File tools/spec_poll.ps1 -Unregister
+  pwsh -File tools/spec_poll.ps1 -DryRun
+.EXAMPLE
+  pwsh -File tools/spec_poll.ps1 -LocalOnly
 #>
+[CmdletBinding()]
 param(
-	[switch]$DryRun,
-	[switch]$Register,
-	[switch]$Unregister,
-	# Testing only (with -DryRun): check even when the spec working copy has uncommitted edits.
-	[switch]$IgnoreDirty,
-	[int]$Minutes = 15
+    [switch]$DryRun,
+    [switch]$Register,
+    [switch]$Unregister,
+    [switch]$LocalOnly,
+    # Retained for old callers; read-only notifications also work with a dirty spec.
+    [switch]$IgnoreDirty,
+    [ValidateRange(1, 1440)][int]$Minutes = 15,
+    # Optional isolated repository paths for tests; defaults are the project layout.
+    [string]$GamePath,
+    [string]$SpecPath,
+    [string]$StateDirectory
 )
 
 $ErrorActionPreference = 'Stop'
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
-# Unattended: git must fail instead of waiting for a credential prompt nobody sees.
 $env:GIT_TERMINAL_PROMPT = '0'
 $env:GCM_INTERACTIVE = 'never'
-$TaskName = 'Everhorror spec-sync'
-$Game = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
-$Root = Split-Path -Parent $Game
-$Spec = Join-Path $Root 'specification'
-$Worktree = Join-Path $Root 'everhorror-wdrozenie'
-$StateDir = Join-Path $Game 'reports/spec-sync'
-$LastFile = Join-Path $StateDir 'last-head.txt'
-$LockFile = Join-Path $StateDir 'lock'
-$LogFile = Join-Path $StateDir 'poll.log'
+$taskName = 'Everhorror spec-sync'
+if (($DryRun -and ($Register -or $Unregister)) -or ($Register -and $Unregister)) {
+    Write-Error 'DryRun nie może rejestrować ani usuwać zadania; wybierz jedną operację.'
+    exit 1
+}
+if (-not $GamePath) { $GamePath = Join-Path $PSScriptRoot '..' }
+$GamePath = [IO.Path]::GetFullPath($GamePath)
+if (-not $SpecPath) { $SpecPath = Join-Path (Split-Path -Parent $GamePath) 'specification' }
+$SpecPath = [IO.Path]::GetFullPath($SpecPath)
+if (-not $StateDirectory) { $StateDirectory = Join-Path $GamePath 'reports/spec-sync' }
+$StateDirectory = [IO.Path]::GetFullPath($StateDirectory)
 
 if ($Register) {
-	$action = New-ScheduledTaskAction -Execute 'pwsh.exe' -Argument "-NoProfile -WindowStyle Hidden -File `"$PSCommandPath`"" -WorkingDirectory $Game
-	$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes $Minutes)
-	$settings = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Hours 3) -StartWhenAvailable
-	Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger -Settings $settings -Description 'Sprawdza specyfikację Everhorror; nowe zmiany zamienia w zadania (spec-tasks), scalone gałęzie domyka (spec-sync finalize).' -Force | Out-Null
-	Write-Output "Zarejestrowano zadanie '$TaskName' (co $Minutes min, tylko gdy jesteś zalogowany)."
-	exit 0
+    $argument = [string]::Format('-NoProfile -WindowStyle Hidden -File "{0}"', $PSCommandPath)
+    $action = New-ScheduledTaskAction -Execute 'pwsh.exe' -Argument $argument -WorkingDirectory $GamePath
+    $trigger = New-ScheduledTaskTrigger -Once -At (Get-Date).AddMinutes(1) -RepetitionInterval (New-TimeSpan -Minutes $Minutes)
+    $settings = New-ScheduledTaskSettingsSet -MultipleInstances IgnoreNew -ExecutionTimeLimit (New-TimeSpan -Minutes 5)
+    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Description 'Everhorror: tylko powiadomienia o zmianach specyfikacji i scalonych gałęziach; pracę rozpoczyna osoba.' -Force | Out-Null
+    Write-Output "Zarejestrowano powiadomienia '$taskName' (co $Minutes min)."
+    exit 0
 }
 if ($Unregister) {
-	Unregister-ScheduledTask -TaskName $TaskName -Confirm:$false
-	Write-Output "Usunięto zadanie '$TaskName'."
-	exit 0
+    Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
+    Write-Output "Usunięto zadanie '$taskName'."
+    exit 0
 }
 
-New-Item -ItemType Directory -Force $StateDir | Out-Null
-
-function Log([string]$msg) {
-	$line = "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')  $msg"
-	Add-Content -Path $LogFile -Value $line -Encoding utf8
-	Write-Output $line
-}
-
-function Invoke-Git([string]$repo) {
-	$out = & git -C $repo @args 2>&1
-	if ($LASTEXITCODE -ne 0) { throw "git -C $repo $($args -join ' '): $out" }
-	return $out
-}
-
-# One run at a time; a lock older than 3 h is stale (crashed run).
-if (Test-Path $LockFile) {
-	$age = (Get-Date) - (Get-Item $LockFile).LastWriteTime
-	if ($age.TotalHours -lt 3) { Log "pomijam: trwa inne uruchomienie ($(Get-Content $LockFile -Raw))"; exit 0 }
-	Log 'stara blokada (ponad 3 h), usuwam'
-	Remove-Item $LockFile -Force
+function Invoke-ProjectGit([string]$repository, [string[]]$arguments) {
+    $output = & git -C $repository @arguments 2>&1
+    if ($LASTEXITCODE -ne 0) { throw "git: $($output -join ' ')" }
+    return ($output -join [Environment]::NewLine).Trim()
 }
 
 try {
-	Invoke-Git $Spec fetch --quiet | Out-Null
-	$remoteHead = (Invoke-Git $Spec rev-parse '@{u}').Trim()
-	$last = if (Test-Path $LastFile) { (Get-Content $LastFile -Raw).Trim() } else { '' }
-
-	if ((Invoke-Git $Spec status --porcelain) -and -not ($DryRun -and $IgnoreDirty)) {
-		Log 'pomijam: w kopii specyfikacji są niezacommitowane zmiany (ktoś ją edytuje ręcznie)'
-		exit 0
-	}
-
-	$status = (& node (Join-Path $Spec 'dashboard/cli.ts') status --json --rev $remoteHead 2>&1) -join "`n"
-	if ($LASTEXITCODE -ne 0) { throw "cli status: $status" }
-	$st = $status | ConvertFrom-Json
-
-	# Deployment branches waiting in WDROZENIA.md → merged into the game master?
-	$merged = @(& git -C $Game branch --merged master --list 'spec/*' 2>$null | ForEach-Object { $_.Trim(' ', '*', '+') })
-	$waiting = @()
-	$toFinalize = @()
-	foreach ($b in $st.branches) {
-		$name = ($b.PSObject.Properties | Select-Object -First 1).Value -replace '`', ''
-		$state = ($b.PSObject.Properties | Select-Object -Last 1).Value
-		if ($state -match '🔧|🧪') {
-			if ($merged -contains $name) { $toFinalize += $name } else { $waiting += $name }
-		}
-	}
-
-	$mode = $null
-	if ($toFinalize.Count) {
-		$mode = 'finalize'
-		Log "scalone gałęzie do domknięcia: $($toFinalize -join ', ')"
-	}
-	elseif ($remoteHead -ne $last) {
-		if ($waiting.Count) { Log "czeka na sprawdzenie: $($waiting -join ', ') (zadania i tak powstaną)" }
-		$newTickets = @($st.openTickets | Where-Object { $_.status -eq '📥' })
-		if ($st.changes.actionable -gt 0 -or $newTickets.Count) {
-			$mode = 'tasks'
-			Log "spec $($remoteHead.Substring(0,7)): $($st.changes.actionable) zmian do wdrożenia, $($newTickets.Count) nowych zgłoszeń"
-		}
-		else {
-			Log "spec $($remoteHead.Substring(0,7)): tylko zmiany redakcyjne, nic do wdrożenia"
-			if (-not $DryRun) { Set-Content -Path $LastFile -Value $remoteHead -Encoding utf8 }
-			exit 0
-		}
-	}
-	elseif ($waiting.Count) {
-		Log "czeka na sprawdzenie: $($waiting -join ', ')"
-		exit 0
-	}
-	else {
-		exit 0
-	}
-
-	# 'tasks' plans new spec changes as task files; 'finalize' closes merged branches.
-	$command = if ($mode -eq 'tasks') { '/spec-tasks unattended' } else { "/spec-sync $mode unattended" }
-	if ($DryRun) { Log "DryRun: uruchomiłbym $command"; exit 0 }
-
-	Set-Content -Path $LockFile -Value "$mode $remoteHead pid $PID" -Encoding utf8
-	$runLog = Join-Path $StateDir "run-$(Get-Date -Format 'yyyyMMdd-HHmmss')-$mode.log"
-	Log "start $command → $runLog"
-	Push-Location $Game
-	try {
-		& claude -p $command --permission-mode acceptEdits --add-dir $Spec --add-dir $Worktree *> $runLog
-		$code = $LASTEXITCODE
-	}
-	finally { Pop-Location }
-	Log "koniec $command (kod $code)"
-	if ($code -eq 0 -and $mode -eq 'tasks') { Set-Content -Path $LastFile -Value $remoteHead -Encoding utf8 }
+    $scope = if ($DryRun -or $LocalOnly) { 'lokalnie znane refy, bez fetch' } else { 'upstream po fetch' }
+    if (-not $DryRun -and -not $LocalOnly) {
+        Invoke-ProjectGit $SpecPath @('fetch', '--quiet') | Out-Null
+        $head = Invoke-ProjectGit $SpecPath @('rev-parse', '@{u}')
+    } else {
+        $head = Invoke-ProjectGit $SpecPath @('rev-parse', 'HEAD')
+    }
+    $statusText = (& node (Join-Path $SpecPath 'dashboard/cli.ts') status --json --rev $head 2>&1) -join [Environment]::NewLine
+    if ($LASTEXITCODE -ne 0) { throw "cli status: $statusText" }
+    $status = $statusText | ConvertFrom-Json
+    if ($null -eq $status.changes -or $null -eq $status.changes.actionable) { throw 'cli status: brak pola changes.actionable' }
+    $mergedText = Invoke-ProjectGit $GamePath @('branch', '--merged', 'master', '--list', 'spec/*')
+    $merged = @($mergedText -split '[\r\n]+' | ForEach-Object { $_.Trim(' ', '*', '+') } | Where-Object { $_ })
+    $toFinalize = @()
+    foreach ($branch in $status.branches) {
+        $values = @($branch.PSObject.Properties | ForEach-Object { $_.Value })
+        if ($values.Count -lt 2) { continue }
+        $name = @($values | ForEach-Object { ([string]$_ -replace [char]96, '').Trim() } | Where-Object { $_ -match '^spec/' }) | Select-Object -First 1
+        $waiting = @($values | Where-Object { [string]$_ -match '🔧|🧪' }).Count -gt 0
+        if ($name -and $waiting -and $merged -contains $name) { $toFinalize += $name }
+    }
+    $toFinalize = @($toFinalize | Sort-Object -Unique)
+    $newTickets = @($status.openTickets | Where-Object { $_.status -eq '📥' })
+    # Include merged-branch changes even when the spec commit has not changed.
+    $notificationKey = "$scope|$head|$($status.changes.actionable)|$($newTickets.file -join ',')|$($toFinalize -join ',')"
+    $stateFile = Join-Path $StateDirectory 'last-notification.txt'
+    $previous = if (Test-Path -LiteralPath $stateFile) { (Get-Content -LiteralPath $stateFile -Raw).Trim() } else { '' }
+    $messages = @(
+        "specyfikacja $($head.Substring(0,7)): $($status.changes.actionable) zmian do zaplanowania",
+        "zgłoszenia 📥: $($newTickets.Count)"
+    )
+    if ($toFinalize.Count) { $messages += "scalone gałęzie do domknięcia (finalize): $($toFinalize -join ', ')" }
+    $message = $messages -join '; '
+    if ($DryRun) {
+        Write-Output "DryRun ($scope): $message"
+        Write-Output 'Pracę rozpoczyna osoba: spec-tasks / ai-task / spec-sync. Bez zmian plików i refów.'
+        exit 0
+    }
+    if ($notificationKey -eq $previous) { Write-Output "Bez nowych powiadomień ($scope)."; exit 0 }
+    New-Item -ItemType Directory -Path $StateDirectory -Force | Out-Null
+    Add-Content -LiteralPath (Join-Path $StateDirectory 'powiadomienia.log') -Value "$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss') $message ($scope)" -Encoding utf8
+    Set-Content -LiteralPath $stateFile -Value $notificationKey -Encoding utf8
+    Write-Output "$message ($scope). Pracę rozpoczyna osoba."
 }
 catch {
-	Log "błąd: $($_.Exception.Message)"
-	exit 1
-}
-finally {
-	if (-not $DryRun -and (Test-Path $LockFile) -and ((Get-Content $LockFile -Raw) -match "pid $PID")) { Remove-Item $LockFile -Force }
+    Write-Error "Powiadomienie nie powstało: $($_.Exception.Message)"
+    exit 1
 }

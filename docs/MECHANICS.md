@@ -1,5 +1,7 @@
 # Mechaniki
 
+> **Materiał odniesienia od 2026-10-26.** Bieżące zasady są w specyfikacji (`C:/dev/gamedev/everhorror/specification`), a proces i pierwszeństwo źródeł w jej `WORKFLOW.md`. Nie synchronizować tego dokumentu z nowymi zmianami kodu. Oryginalna treść pozostaje jako źródło historyczne do zweryfikowanej migracji M5; starsze instrukcje poniżej nie są aktualnym procesem.
+
 Dokument rozwija sekcję 4 [GDD](GDD.md) do poziomu, na którym da się je zaimplementować. Opisuje, jak ma działać gra; historia i postacie zostają w GDD.
 
 **Oznaczenia:**

@@ -1,11 +1,13 @@
 # Dokumentacja gry — everhorror (v2)
 
+> **Materiały odniesienia od 2026-10-26.** Bieżąca specyfikacja i proces są w sąsiednim repo `specification` (`WORKFLOW.md`). Zduplikowanych opisów nie synchronizujemy z kodem. Oryginały zostają do sprawdzonej migracji M5; nagłówki i statusy niżej są historyczne. Pełny `swiat/LoreDoc.md` i szczegóły rejestru/licencji `05_oprawa.md` nadal są potrzebnymi źródłami uzupełniającymi — nie zostały przeniesione ani usunięte.
+
 > Tytuł roboczy: **everhorror** (w pierwotnym GDD: „XYZ”).
 > Ostatnia aktualizacja: 2026-09-25 (po task_05) · Wersja dokumentacji: 2.2
 
-Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótkich, modułowych dokumentów. Stare dokumenty zostają bez zmian jako materiał źródłowy.
+Ten folder powstał jako modularizacja [docs/GDD.md](../docs/GDD.md). Obecnie oba są materiałem źródłowym; nowe decyzje, liczby i opisy zmieniamy w specyfikacji, bez dwóch niezależnie edytowanych kopii.
 
-> **Od 2026-09-25 źródłem prawdy o projekcie jest specyfikacja gry**: osobne repozytorium `specification` obok repozytorium gry (`C:\dev\gamedev\everhorror\specification`). Zespół zmienia ją na GitHubie, a agent wdraża zmiany. Ten folder opisuje stan implementacji i jest aktualizowany razem z grą. Dziennik decyzji, zbiorcze pytania, słowniczek i kamienie milowe są już tylko w specyfikacji.
+> **Źródłem prawdy o projekcie jest specyfikacja gry**: osobne repozytorium `specification` obok repozytorium gry (`C:\dev\gamedev\everhorror\specification`). Dziennik decyzji, zbiorcze pytania, słowniczek i kamienie milowe są tam. W razie rozbieżności obowiązuje nowsza przyjęta decyzja; kod pokazuje zachowanie, a test tylko sprawdzony zakres. Pełną mapę podaje `specification/WORKFLOW.md`.
 
 ## Jak czytać
 
@@ -56,12 +58,12 @@ Ten folder zastępuje monolityczny [docs/GDD.md](../docs/GDD.md) zestawem krótk
 - **❓** — otwarte pytanie. Zbiorcza lista jest w specyfikacji (`09_produkcja.md`, „Otwarte pytania”).
 - **✅ / 🟡 / ⬜** — stan implementacji: gotowe / częściowo / nie zaczęte.
 
-## Zasady prowadzenia dokumentacji
+## Historyczne zasady i obecne miejsce edycji
 
-1. **Dokumentacja żyje.** Aktualizujemy ją razem ze zmianą w grze, w tym samym commicie, jeśli to możliwe.
+1. **Bieżąca dokumentacja jest w specyfikacji.** Zmiana gry aktualizuje odpowiednie zasady i dowody tam; ten folder nie wymaga synchronizacji.
 2. **Jeden temat, jeden plik.** Plik systemu ma najwyżej 2–3 ekrany. Jeśli rośnie, dzielimy go.
 3. **Najpierw „po co”, potem „jak”.** Każdy system zaczyna się od celu i doświadczenia gracza.
-4. **Liczby w jednym miejscu.** Wartości do balansu trzymamy w sekcji „Dane i strojenie” danego systemu, a w grze w plikach `Resource`, nie w kodzie.
+4. **Liczby w jednym miejscu.** Autorytatywny balans projektu to `specification/07_balans.md`. Dane i stałe gry są implementacją, nie nowym niezależnym źródłem projektu.
 5. **Decyzje zapisujemy.** Gdy propozycja zostaje przyjęta albo odrzucona, dopisujemy wpis w dzienniku decyzji (specyfikacja, `09_produkcja.md`) i usuwamy znacznik [propozycja].
-6. **Nowe systemy i postacie** zaczynamy od [szablonów](szablony/).
+6. **Nowe systemy i postacie** opisujemy opcjonalnymi szablonami w `specification/szablony/`; tutejsze wzory są historyczne.
 7. **Język:** dokumentacja po polsku. Kod, nazwy w kodzie i komentarze po angielsku.

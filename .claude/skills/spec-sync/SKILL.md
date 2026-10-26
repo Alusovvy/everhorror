@@ -1,13 +1,15 @@
 ---
 name: spec-sync
-description: Close the loop between the design spec (../specification) and the game after a spec task's branch was merged — "finalize" (markers ⬜→✅, "W zadaniach" ✅, row to "Wpisy" moving the baseline, task file to done/, tickets closed) and "status" (baseline, spec HEAD, pending changes, branches, spec tasks, tickets). New spec changes are turned into tasks by /spec-tasks and implemented by /ai-task implement NN. Use when someone mentions a merged spec/* branch, asks where the game stands against the spec, or the spec poller starts a finalize run.
+description: On a person's request, report spec/game status or finalize a merged spec task — markers, existing WDROZENIA tables, task report and tickets. Finalize records implementation, not a human playtest. The poller reports status only and never invokes finalize.
 ---
 
 # spec-sync
 
-Modes (the argument after `/spec-sync`): **`status`** (default), **`finalize`**. An argument `unattended` means the poller started this run with nobody watching: never wait for an answer.
+Modes (the argument after `/spec-sync`): **`status`** (default), **`finalize`**. A legacy `unattended` argument requires an explicitly authorized noninteractive invocation; the poller no longer starts this skill. Read `C:/dev/gamedev/everhorror/specification/WORKFLOW.md` for current source precedence and solo ownership.
 
-**Flow since 2026-09-26 (user decision):** spec changes → `/spec-tasks` (writes `task_NN.md` + "W zadaniach") → `/ai-task implement NN` (builds a spec task on a `spec/<date>-task<NN>` branch in the worktree, "Na gałęziach" 🧪) → the user plays, fills in the factcheck and merges the branch into the game `master` → `/spec-sync finalize`. The old `sync` mode (implementing straight from the diff) is gone. If someone asks for `sync`, run `/spec-tasks` instead.
+**Current flow (2026-10-26):** accepted spec changes → manually started `/spec-tasks` (`task_NN.md` + "W zadaniach") → `/ai-task implement NN` (`spec/<date>-task<NN>` in the worktree, "Na gałęziach" 🧪) → automated checks and review → Roland's merge decision → manually started `/spec-sync finalize`. Human playtest results remain separate and may still be pending after integration. The old `sync` mode (implementing straight from the diff) is gone. If someone asks for `sync`, run `/spec-tasks` instead.
+
+**Clarification, 2026-10-26:** Roland owns all active sections. A merge proves integration, not a human playtest. Finalize never fills human `wynik`/`uwagi`, moves an unfilled factcheck to done/, or calls it verified. Keep the person's evidence/explicit waiver separate from implementation markers. Pure editorial/process changes never advance the game's baseline.
 
 ## Places
 | What | Path |
