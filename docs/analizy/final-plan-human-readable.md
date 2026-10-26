@@ -175,7 +175,7 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - pukanie, które z dnia na dzień jest bliżej;
   - lampa przygasa, gdy bohater jest na krawędzi.
 - **Łagodniejsze podświetlenie.** Postacie tracą podświetlenie, a przedmioty dostają cienki kontur.
-- **Mikro-horror** wieczorami i nocami w dniach 1–2. Do tego próba w Kostnicy w wariancie neutralnym (cień, gasnąca świeca), który nie rozstrzyga kanonu.
+- **Mikro-horror** wieczorami i nocami w dniach 1–2. Próba w Kostnicy (4b) nie weszła do decyzji: Roland wybrał 4a. Wraca tylko na osobne polecenie.
 - **Licencje.** `cave_ambient.mp3` i `steps.mp3` wymienić na dźwięki CC0. Freesound wchodzi w grę, jeśli Roland poda klucz.
 - **Sesja gry PT1.** Daje punkt odniesienia K1–K5 z pierwszego raportu przebiegu oraz porównanie napięcia (K3) z PT0. Warto dać build też znajomemu.
 
@@ -416,7 +416,7 @@ Tezy wcześniejszego planu agenta zostały sprawdzone od nowa w kodzie, historii
   - **123 z nich agent oznaczył jako „sprawdzone przez użytkownika”** (commit `d39bbb9`) i do dziś nie zostały skorygowane;
   - task_13 zamknięto z pustym arkuszem;
   - 76 wierszy czeka na człowieka.
-- **Decyzje:** w `decision-analiza-rozgrywki.md` jest 0 z 10 odpowiedzi i plik nadal jest otwarty.
+- **Decyzje:** w `decision-analiza-rozgrywki.md` było 0 z 10 odpowiedzi (rozstrzygnięte 2026-10-26).
 - **Śledzenie:** tylko 3 ze 128 ID reguł pojawiają się w kodzie lub testach.
 - **Bohater prawie nigdy nie jest „na krawędzi”.** Bez ogniska spada z 80 do 59 punktów w tydzień, a ognisko oddaje około +30.
 - **Zakończenie zależy tylko od normy żył.** Losy ludzi to sam tekst podsumowania.
@@ -471,7 +471,7 @@ Roland, czat 2026-10-26: „all decisions go as recommended”, czyli wszystkie 
 | D-01 | Nowy sposób pracy: zasady z [§3](#3-zasady-które-obowiązują), krótki arkusz gry, zasada uczciwości wpisów. Zakres ograniczony przez [§8.3](#83-co-upraszczam). | 0–4 |
 | D-02 | `docs/MECHANICS.md` i `docs_v2/` idą do archiwum; rejestr zasobów i tekst LoreDoc przechodzą do specyfikacji. Na razie tylko baner. | 1, potem później |
 | D-03 | Karty decyzji trzymamy w `specification/zgloszenia/` jako „Rodzaj: decyzja”. | 1 |
-| D-04 | Pakiet odczucia: ruch, światło według głębokości, szepty 3D, łagodniejsze podświetlenie, mikro-horror, próba w Kostnicy w wariancie neutralnym. | 5 |
+| D-04 | Pakiet odczucia: ruch, światło według głębokości, szepty 3D, łagodniejsze podświetlenie, mikro-horror. Próba w Kostnicy odpada (Roland wybrał D4 = a). | 5 |
 | D-05 | Presja: norma etapami, cena nocy, żyły ponad normę jako pokusa, rozmowy oddają czas. Liczby ustala bot. | 6 |
 | D-06 | Ludzie: wspólne wstrząsy, załamania Tekli, Racibora i Anzelma, zapowiedzi, jedna szansa na odwrócenie. Teksty pisze agent, Roland może zawetować. | 7 |
 | D-07 | Zakończenie zależy od losów ludzi: tytuł i pierwszy akapit. | 7 |
@@ -484,14 +484,16 @@ Roland, czat 2026-10-26: „all decisions go as recommended”, czyli wszystkie 
 | D-14 | „Wydarzenia jako dane”: tak, w częściach. Teraz tylko część 1. | 7 |
 | D-15 | Automatyzacja: poller tylko powiadamia (zrobione), węższe uprawnienia, push po każdym scaleniu. CI gry jest opcjonalne. | 0, 4 |
 
-### Decyzje o rozgrywce (D1–D10, z `decision-analiza-rozgrywki.md`)
+### Decyzje o rozgrywce (D1–D10)
+
+Roland, czat 2026-10-26: „1. a, 2. c, 3 a, 4 a, 5 a, 6 A”, „Reszta też jak rekomendowane”. Zapisane w `docs/human-tasks/done/decision-analiza-rozgrywki.md`.
 
 | # | Pytanie | Decyzja | Etap |
 |---|---|---|---|
 | D1 | Presja w dniach 5–7 | Norma etapami: kontrole rano w dniach 4, 6 i 8, start 4/8/14, strojenie botem. | 6 |
 | D2 | Więcej kruszących się ludzi | Wspólne wstrząsy i efekty zerowej poczytalności dla Tekli, Racibora i Anzelma. | 7 |
 | D3 | Bohater częściej na krawędzi | Najpierw pomiar, strojenie po jednym zmierzonym tygodniu. | 4 → 6 |
-| D4 | Horror w pierwszej osobie | Dźwięk zamiast tekstu oraz jedna próba w Kostnicy (wariant neutralny). | 5 |
+| D4 | Horror w pierwszej osobie | **a)** Dźwięk zamiast tekstu. Bez próby w Kostnicy. | 5 |
 | D5 | Ruch | 3,2 m/s, bezwładność, opcjonalne kołysanie głowy, kroki według podłoża, wolniej gdy ranny. | 5 |
 | D6 | Światło według głębokości | Ciepły obóz, zimne tunele, na głębokości 3–4 tylko lampa i żyły. | 5 |
 | D7 | Późny powrót | −3 poczytalności za rozpoczętą godzinę po 22:00; po północy pobudka o 7:00. | 6 |
@@ -502,7 +504,7 @@ Roland, czat 2026-10-26: „all decisions go as recommended”, czyli wszystkie 
 Pytania zespołowe:
 - etapy normy uzasadnia wózek z góry co dwa dni;
 - teksty załamań pisze agent na podstawie propozycji z kart postaci;
-- scena w Kostnicy jest w wariancie neutralnym.
+- pytanie o Kostnicę odpada, bo próba 4b nie weszła do decyzji.
 
 **Te decyzje nie obejmują:** wydatków (np. opłata Steam Direct, około 100 USD), publikacji (strona w sklepie, publiczne buildy, promocja) i zmian bezpieczeństwa poza D-15. Każda z tych rzeczy wymaga osobnego „tak”.
 
