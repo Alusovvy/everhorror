@@ -1,5 +1,7 @@
 # Nasir z Bakaszu [ROBOCZE]
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🔵 do przeglądu (Ren) · Autor: agent (task_05) · Aktualizacja: 2026-09-25 · Źródło w LoreDoc: Zjednoczony Sułtanat Nerdii (Bakasz, Lajihar, kamieniołomy, inżynierowie wodni z Waldgrossen), Dżiny, Rinust („kapryśny jak Rinust”), Gorejąca Palada, Kinkenheim („Daleki Klejnot”)
 
 | Pole | Wartość |

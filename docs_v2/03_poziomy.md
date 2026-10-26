@@ -1,5 +1,7 @@
 # 03 Poziomy
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic (demo zaimplementowane, 15 miejsc) · Właściciel: — · Aktualizacja: 2026-09-25 (task_05)
 
 ## Struktura gry **[GDD]**

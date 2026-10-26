@@ -1,5 +1,7 @@
 # Postacie
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: zespół · Aktualizacja: 2026-09-25 (task_05) · Źródło: GDD §2.1, §5, task_03, task_04, task_05, LoreDoc
 > Nowe postacie zaczynamy od [szablonu NPC](../szablony/npc.md). Zasady systemowe są w [NPC](../systemy/npc.md). Magia i Drudzy: [Magia](magia.md).
 

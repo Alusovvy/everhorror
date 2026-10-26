@@ -1,5 +1,7 @@
 # Wszebor ze Śnieżnej Przystani [ROBOCZE]
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🔵 do przeglądu (Ren) · Autor: agent (task_05) · Aktualizacja: 2026-09-25 · Źródło w LoreDoc: Hawiarowie, Śnieżna Przystań, Święta Jaksarczyków (Noc Onych, Długa Noc, Dzień Krwawego Nieba)
 
 | Pole | Wartość |

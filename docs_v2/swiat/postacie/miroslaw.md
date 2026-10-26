@@ -1,5 +1,7 @@
 # Mirosław z Głuszy
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Autor: GDD (historia), task_03–05 (demo) · Aktualizacja: 2026-09-25 (task_05)
 
 | Pole | Wartość |

@@ -1,5 +1,7 @@
 # [Nazwa systemu]
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🔴 do ustalenia · Właściciel: [imię] · Aktualizacja: RRRR-MM-DD · Filary: [1/2/3]
 
 ## Cel

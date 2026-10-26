@@ -1,3 +1,5 @@
+> **Materiał źródłowy (unikalny) — nie aktualizować.** Nowe wpisy idą do specyfikacji; ten plik zostaje do migracji.
+
 
 
 ![][image1]

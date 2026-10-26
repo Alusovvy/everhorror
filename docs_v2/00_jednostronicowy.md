@@ -1,5 +1,7 @@
 # everhorror — jednostronicowy opis
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: zespół · Aktualizacja: 2026-09-25 (task_05)
 
 **W jednym zdaniu:** Schodzisz w głąb przeklętej kopalni błękitnego żelaza śladami zaginionego dziadka. Masz ograniczony czas, a ekspedycja wokół ciebie powoli traci zmysły.

@@ -1,5 +1,7 @@
 # 01 Wizja i filary
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: Vitav · Aktualizacja: 2026-09-25 · Źródło: GDD §1, §2.1
 
 ## High concept **[GDD]**

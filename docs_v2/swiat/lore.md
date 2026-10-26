@@ -1,5 +1,7 @@
 # Świat i lore
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: Ren · Aktualizacja: 2026-09-25 · Źródło: GDD §2.1, §5
 
 Ten dokument zbiera **tylko to, co już ustalono w GDD**, żeby nic się nie rozjechało między autorami. Nowe fakty dopisujemy tu, zanim trafią do dialogów.

@@ -1,5 +1,7 @@
 # Hrapek
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Karta: Roland (specyfikacja `02_postacie/hrapek.md`, źródło prawdy). Kwestie w grze: agent, [ROBOCZE] (task_09, 2026-09-26). ID: `hrapek` · W grze: ✅
 
 - **Kto:** rybak, który potem został górnikiem. Był uwięziony poziom niżej, przeżył na świecących grzybach, które go zmieniły. Uważa, że mieszka w pałacu, bohatera nazywa Cesarzem. Frakcja: Inna.

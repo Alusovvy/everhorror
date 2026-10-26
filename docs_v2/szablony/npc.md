@@ -1,5 +1,7 @@
 # [Imię i przydomek]
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🔴 do ustalenia · Autor: [imię] · Aktualizacja: RRRR-MM-DD
 
 | Pole | Wartość |

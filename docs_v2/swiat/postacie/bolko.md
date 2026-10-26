@@ -1,5 +1,7 @@
 # Stary Bolko [ROBOCZE]
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🔵 do przeglądu (Ren) · Autor: agent (task_03–05) · Aktualizacja: 2026-09-25 (task_05)
 
 | Pole | Wartość |

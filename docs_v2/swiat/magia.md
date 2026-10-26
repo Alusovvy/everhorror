@@ -1,5 +1,7 @@
 # Magia
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: Ren · Aktualizacja: 2026-09-25 · Źródło: [LoreDoc](LoreDoc.md) (Wprowadzenie, Grupy, Magia, Charakterystyka Initium, Fizyczność Drugich, Zaklinanie Przedmiotów)
 
 Streszczenie tego, jak działa magia według LoreDoc. Miejsca, w których LoreDoc sam sobie przeczy, mają znacznik ❓ i opis w [niespójnościach LoreDoc](loredoc_niespojnosci.md).

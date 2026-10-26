@@ -1,5 +1,7 @@
 # Postacie niezależne (NPC)
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟢 zaimplementowane (demo, tydzień) · Właściciel: Roland · Aktualizacja: 2026-09-25 (task_05) · Filary: 2 (Ludzie się kruszą) · Źródło: GDD §4, §5
 
 ## Cel

@@ -1,5 +1,7 @@
 # Sabina von Reuss [ROBOCZE]
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🔵 do przeglądu (Ren) · Autor: agent (task_05) · Aktualizacja: 2026-09-25 · Źródło w LoreDoc: Drudzy (Inicjacja w Maszynie, ból przy zaklęciach, drugi krąg: leczenie ran, dotyk groźny dla ludzi), Initium, Exitium
 
 | Pole | Wartość |

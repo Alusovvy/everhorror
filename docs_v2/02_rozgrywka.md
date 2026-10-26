@@ -1,5 +1,7 @@
 # 02 Rozgrywka
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: Roland · Aktualizacja: 2026-09-25 (task_05) · Źródło: GDD §1, §4
 
 ## Pętla główna (jeden dzień) **[GDD]**

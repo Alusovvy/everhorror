@@ -1,5 +1,7 @@
 # Interakcje z otoczeniem
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟢 zaimplementowane · Właściciel: Roland · Aktualizacja: 2026-09-25 (task_05) · Filary: 3
 
 ## Cel

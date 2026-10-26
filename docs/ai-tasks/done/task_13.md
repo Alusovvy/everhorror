@@ -61,14 +61,14 @@ Wszystkie trzy punkty zrobione; w spec status 🔧 do finalizacji.
 - Ta sama linia liczenia w snach nocy 5–6 i 7 — celowo (spec i wzór z `~ dream4`); lore-checker zwrócił uwagę tylko stylistycznie.
 
 ## Czego potrzebuję od Ciebie
-- Zagraj w gałąź i wypełnij [factcheck-test-13](../../human-tasks/factcheck-test-13.md) (plik jest na gałęzi). Gdy będzie dobrze: `git merge spec/2026-09-26-task13` na `master`, potem `/spec-sync finalize` (⬜→✅, wpis w „Wpisy”).
+- Stan na 2026-10-26: gałąź została scalona do `master` (`f56d146`, build 0.5.2 `e4c5edc`). Zostaje ręczne sprawdzenie: zagraj i wypełnij [factcheck-test-13](../../human-tasks/factcheck-test-13.md) — nadal czeka na człowieka. (Pierwotnie: `git merge spec/2026-09-26-task13` na `master`, potem `/spec-sync finalize`.)
 - Ren: fakt „w rząpiu stoją ślepe ryby, Wszebor umie je wyciągnąć” jest [ROBOCZE] do przeglądu kanonu.
 
 ## Test
 - `test-runner` w worktree: **unit, lint, dialogue, hrapek — ALL PASSED**, bez SCRIPT ERROR.
 - `dialogue_test.gd` dopisany: sen z listem po nocach 3, 5, 7 (i tylko raz), liczenie w noc 7, odmowa łowienia u obu postaci bez pomp, propozycja, oddanie bandaża, odbiór tego samego dnia (odmowa) i następnego (ryba + wpis); dotychczasowe łowienie działa po ustawieniu `pump_running`.
 - `lore-checker`: bez sprzeczności z kanonem. `convention-reviewer`: bez usterek.
-- Factcheck do ręcznego sprawdzenia: [factcheck-test-13](../../human-tasks/factcheck-test-13.md) (na gałęzi).
+- Factcheck do ręcznego sprawdzenia: [factcheck-test-13](../../human-tasks/factcheck-test-13.md) (obecnie na `master`, czeka na człowieka).
 
 ## Podsumowanie
-Trzy niedociągnięcia z wyrównania naprawione w grze zgodnie z decyzją Rolanda: sen z listem gra po każdej nocy odszyfrowania, liczenie kresek słychać też w noc 7, a staw w Zalanym chodniku czeka na pompy — zamiast niego Wszebor za bandaż przynosi rano rybę z rząpia. Zmiana na gałęzi `spec/2026-09-26-task13` (`f56d146`), testy zielone, czeka na Twoje granie i scalenie.
+Trzy niedociągnięcia z wyrównania naprawione w grze zgodnie z decyzją Rolanda: sen z listem gra po każdej nocy odszyfrowania, liczenie kresek słychać też w noc 7, a staw w Zalanym chodniku czeka na pompy — zamiast niego Wszebor za bandaż przynosi rano rybę z rząpia. Zmiana była na gałęzi `spec/2026-09-26-task13`, testy zielone. **Aktualizacja 2026-10-26:** scalona do `master` (`f56d146`, build 0.5.2 `e4c5edc`); factcheck-test-13 nadal czeka na sprawdzenie przez człowieka.

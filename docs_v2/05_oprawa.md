@@ -1,5 +1,7 @@
 # 05 Oprawa wizualna i dźwiękowa
 
+> **Materiał źródłowy (unikalny) — nie aktualizować.** Nowe wpisy idą do specyfikacji; ten plik zostaje do migracji.
+
 > Status: 🟡 szkic · Właściciel: — · Aktualizacja: 2026-09-25
 
 ## Kierunek wizualny

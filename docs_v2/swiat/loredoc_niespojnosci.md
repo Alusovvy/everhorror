@@ -1,5 +1,7 @@
 # Niespójności w LoreDoc
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🔵 do przeglądu · Właściciel: Ren · Aktualizacja: 2026-09-25 · Źródło: [LoreDoc](LoreDoc.md), [Świat i lore](lore.md), [Magia](magia.md)
 
 Lista miejsc, w których LoreDoc sam sobie przeczy, oraz rozjazdów między LoreDoc a tym, co gra już zakłada (GDD). Przy każdym punkcie jest to, co mówią źródła, i to, co trzeba ustalić. Numeracja jest ciągła, żeby łatwo było się odwołać („punkt 7”). Rozstrzygnięty punkt skreślamy i dopisujemy decyzję do dziennika decyzji.

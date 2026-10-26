@@ -1,5 +1,7 @@
 # Fabuła, prolog, zakończenia
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: Ren (fabuła główna), Vitav (prolog i zakończenia) · Aktualizacja: 2026-09-25 · Źródło: GDD §2, §3
 
 ## Premisa **[GDD]**

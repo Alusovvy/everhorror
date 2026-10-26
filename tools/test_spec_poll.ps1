@@ -1,5 +1,11 @@
 # Integration checks in owned temporary Git repositories; never uses project remotes.
 $ErrorActionPreference = 'Stop'
+# Output of the child pwsh is decoded with the console code page (852 by default on Windows),
+# which breaks Polish diacritics; force UTF-8 for the duration of the test and restore afterwards.
+$previousConsoleEncoding = [Console]::OutputEncoding
+$previousOutputEncoding = $OutputEncoding
+[Console]::OutputEncoding = [Text.UTF8Encoding]::new($false)
+$OutputEncoding = [Text.UTF8Encoding]::new($false)
 $poller = Join-Path $PSScriptRoot 'spec_poll.ps1'
 $testRoot = Join-Path ([IO.Path]::GetTempPath()) ('everhorror-poller-' + [guid]::NewGuid().ToString('N'))
 $specTest = Join-Path $testRoot 'specification'
@@ -69,6 +75,8 @@ process.stdout.write(readFileSync(new URL('../status.json', import.meta.url), 'u
     Write-Output 'RESULT: ALL PASSED (poller: DryRun, flags, notification, deduplication, CLI failure, merged-state change)'
 }
 finally {
+    [Console]::OutputEncoding = $previousConsoleEncoding
+    $OutputEncoding = $previousOutputEncoding
     # Resolve and verify the entire recursive cleanup target before deleting it.
     $resolvedTest = [IO.Path]::GetFullPath($testRoot)
     $resolvedTemp = [IO.Path]::GetFullPath([IO.Path]::GetTempPath()).TrimEnd([IO.Path]::DirectorySeparatorChar)

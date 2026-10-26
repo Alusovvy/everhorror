@@ -1,5 +1,7 @@
 # 04 UI / UX
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟡 szkic · Właściciel: — · Aktualizacja: 2026-09-25
 
 ## Zasady

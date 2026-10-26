@@ -1,5 +1,7 @@
 # Eksploracja kopalni
 
+> **Materiał referencyjny — nie aktualizować.** Źródło prawdy: specyfikacja (`C:/dev/gamedev/everhorror/specification`, `WORKFLOW.md`).
+
 > Status: 🟢 zaimplementowane (demo, 15 miejsc) · Właściciel: Roland · Aktualizacja: 2026-09-25 (task_05) · Filary: 1, 3 · Źródło: GDD §1, §4
 
 ## Cel
