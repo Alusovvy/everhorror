@@ -14,10 +14,17 @@ var vn
 var sm
 var world: Node
 
+## The scenarios write into the same user data folder as the exported game: the AUTO slot at every
+## dawn, slot 3 in save_load. A scenario keeps the saves that were there when it started in memory
+## and puts them back when it ends (also on a timeout), so a test run never costs a tester a save.
+const SAVES_DIR := "user://saves"
+
 var _failures := 0
 var _step_name := "start"
 var _started_ms := 0
 var _done := false
+var _kept_saves := {}
+var _saves_kept := false
 
 func _initialize() -> void:
 	# Autoloads are only available after the first frame.
@@ -28,9 +35,35 @@ func _boot() -> void:
 	vn = root.get_node("VN")
 	sm = root.get_node("SaveManager")
 	_started_ms = Time.get_ticks_msec()
+	_keep_saves()
 	create_timer(timeout_s).timeout.connect(_on_timeout)
 	await scenario()
 	_finish()
+
+func _keep_saves() -> void:
+	_kept_saves = {}
+	for file in _save_files():
+		_kept_saves[file] = FileAccess.get_file_as_bytes(SAVES_DIR + "/" + file)
+	_saves_kept = true
+
+## Puts the saves back as they were: files the run changed get their bytes again, files it
+## created go away.
+func _restore_saves() -> void:
+	if not _saves_kept:
+		return
+	_saves_kept = false
+	for file in _save_files():
+		if not _kept_saves.has(file):
+			DirAccess.remove_absolute(ProjectSettings.globalize_path(SAVES_DIR + "/" + file))
+	for file in _kept_saves:
+		var handle := FileAccess.open(SAVES_DIR + "/" + file, FileAccess.WRITE)
+		if handle != null:
+			handle.store_buffer(_kept_saves[file])
+
+func _save_files() -> PackedStringArray:
+	if not DirAccess.dir_exists_absolute(ProjectSettings.globalize_path(SAVES_DIR)):
+		return PackedStringArray()
+	return DirAccess.get_files_at(SAVES_DIR)
 
 ## Implemented by each scenario.
 func scenario() -> void:
@@ -64,6 +97,7 @@ func _finish() -> void:
 	if _done:
 		return
 	_done = true
+	_restore_saves()
 	print("RESULT: %s  (%.1f s)" % ["ALL PASSED" if _failures == 0 else "%d FAILED" % _failures, _elapsed()])
 	quit(0 if _failures == 0 else 1)
 
@@ -71,6 +105,7 @@ func _on_timeout() -> void:
 	if _done:
 		return
 	_done = true
+	_restore_saves()
 	print("RESULT: TIMEOUT in step '%s' after %.0f s" % [_step_name, timeout_s])
 	quit(2)
 

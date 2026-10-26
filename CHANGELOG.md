@@ -4,7 +4,7 @@ Co się zmieniło w kolejnych wersjach Everhorror, od najnowszej. Przy każdej w
 
 ## [0.5.3] - 2026-10-26
 
-Zgodność ze spec: `8e46253` · zadanie: task_14 · gałąź: `spec/2026-10-26-task14`
+Zgodność ze spec: `27e91e7` (reguły z `8e46253`, szczegóły [ROBOCZE] dopisane po weryfikacji) · zadanie: task_14 · gałąź: `spec/2026-10-26-task14`
 
 W tej wersji razem: trzy poprawki, numer wersji w menu głównym, raport przebiegu i bot balansu. Plan końcowy przewidywał raport i bota dopiero na 0.5.4 (etap 4), ale wchodzą już teraz, żeby sesja gry PT0 (etap 3) dała pierwsze liczby. Wpis w dzienniku decyzji `09_produkcja.md` z 2026-10-26 to rekomendacja agenta według zasady planu (§3 pkt 3), obowiązująca do weta Rolanda. Bot balansu jest narzędziem programisty (`tools/balance_sim.gd`), więc w samej grze go nie ma.
 
@@ -14,14 +14,15 @@ W tej wersji razem: trzy poprawki, numer wersji w menu głównym, raport przebie
 - Z kodu zniknął martwy warunek odejścia Hieronima (`hieronim_gone`; żadna część gry nigdy nie ustawiała tej flagi). W rozgrywce bez zmian: Hieronim nie ma odejścia przy 0% poczytalności.
 
 ### Dodane
-- Numer wersji i skrót commita specyfikacji w prawym dolnym rogu menu głównego, np. „0.5.3 · spec 8e46253” (UI-6, TECH-1). W pauzie go nie ma. Skrót wpisuje do `script/build_info.gd` skrypt `tools/release/stamp_build.js` tuż przed eksportem.
+- Numer wersji i skrót commita specyfikacji w prawym dolnym rogu menu głównego, np. „0.5.3 · spec 27e91e7” (UI-6, TECH-1). W pauzie go nie ma. Skrót wpisuje do `script/build_info.gd` skrypt `tools/release/stamp_build.js` tuż przed eksportem.
 - Raport przebiegu (ZAP-11, UI-7): na końcu tygodnia (oba zakończenia) i po naciśnięciu SAVE REPORT w pauzie gra zapisuje lokalnie dwa pliki, `przebieg-<data>_<godzina>.md` (do czytania) i `.json` (do liczenia), w folderze `raporty` w danych użytkownika (`%APPDATA%\Godot\app_userdata\Everhorror\raporty`). Zawartość: czas według kategorii dla każdego dnia (CZAS-16) i niewykorzystany czas przed snem, żyły o świcie, stan bohatera i poznanych postaci o świcie, kiedy zaznaczono każdą żyłę i kiedy osiągnięto normę, kluczowe wybory, zakończenie. Po śmierci raport nie powstaje sam. Nic nie jest wysyłane przez sieć.
 - `CHANGELOG.md` (ten plik) w archiwum ZIP obok `CZYTAJ_MNIE.txt` (TECH-2).
 - Poza grą: bot balansu (`tools/balance_sim.gd`, test `balance`, TECH-3) „gra” tydzień bez świata gry na prawdziwych kosztach z gry i podaje, kiedy osiągnięto normę; skrypty wydania `tools/release/stamp_build.js` i `tools/release/make_zip.sh`; piąta warstwa testów w `tools/run_tests.sh`.
 
 ### Zmienione
 - Zapis gry ma wersję 6 (ZAP-12): dziennik świtów i dziennik zaznaczonych żył dla raportu. Zapisy z wcześniejszych wersji, także z 0.5.x, nadal się wczytują, z pustymi dziennikami; raport oznacza wtedy dni sprzed wczytania jako „brak danych”.
-- Cztery warstwy testów stały się pięcioma (dodano `balance`).
+- Ekran końca tygodnia: gdy podsumowanie jest wyższe niż okno gry, znika logo, a tekst robi się mniejszy, żeby przyciski MAIN MENU i EXIT były widoczne (wcześniej wypadały poza ekran). Pod podsumowaniem stoi nazwa zapisanego raportu przebiegu. Krótkie ekrany (śmierć) bez zmian.
+- Cztery warstwy testów stały się pięcioma (dodano `balance`). Scenariusze testowe nie nadpisują już zapisów gry w folderze danych (slot AUTO, slot 3): po przebiegu wracają one do stanu sprzed testu.
 
 ## [0.5.2] - 2026-09-26
 
@@ -41,7 +42,7 @@ Zgodność ze spec: `df2b9fd` · zadania: task_10, task_11, task_12
 ### Zmienione
 - Pierwszy dzień: w obozie są tylko zarządca, kwatermistrzyni i dwaj górnicy. Reszta ekipy jest na szychcie w Starej sztolni, w rząpiu albo za zachodnim zawałem (za każdym razem gdzie indziej) i wita się „po szychtowemu”. Od drugiego dnia wszyscy są w obozie. Zacznij nową grę.
 - Zmęczenie bohatera: długie chodzenie po tunelach męczy, sen i wieczór przy ognisku odpoczywają. Kto padnie z nóg, idzie w głąb dwa razy dłużej.
-- Powrót do obozu trwa połowę drogi, którą przeszedłeś od wyjścia.
+- Powrót do obozu trwa połowę drogi przebytej od wyjścia.
 - Ta sama odpowiedź w rozmowie z tą samą osobą kosztuje czas tylko raz.
 - Zapis gry w wersji 5.
 

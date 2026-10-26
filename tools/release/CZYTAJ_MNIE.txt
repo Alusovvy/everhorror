@@ -58,6 +58,8 @@ CO NOWEGO W 0.5.3
   nocny wstrząs dotyka ich tak samo jak resztę
 - poprawka: wstęp mówi, że stół z mapą stoi w zagrodzie Racibora, za niską
   palisadą bez dachu
+- ekran końca tygodnia mieści się w oknie: przy długim podsumowaniu znika
+  logo, a pod tekstem stoi nazwa zapisanego raportu
 - zapisy z 0.5.x działają (zapis gry ma teraz wersję 6)
 - w archiwum jest też CHANGELOG.md z historią wersji
 

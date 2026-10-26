@@ -12,7 +12,7 @@ extends Control
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	# UI-6: "0.5.3 · spec 8e46253", dimmed, bottom right.
+	# UI-6: "0.5.3 · spec 27e91e7", dimmed, bottom right.
 	version_label.text = BuildInfo.label()
 	start_button.pressed.connect(SaveManager.new_game)
 	options_button.pressed.connect(_open_options)

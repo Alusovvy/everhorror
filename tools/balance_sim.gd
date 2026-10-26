@@ -142,9 +142,14 @@ func _play_week(style: String, delay: int) -> Dictionary:
 	# Day 8 has begun (the last night was slept).
 	_expect(gs.day == gs.QUOTA_DAY + 1, "the week ends on day %d (%d)" % [gs.QUOTA_DAY + 1, gs.day])
 	_expect(gs.vein_log.size() == gs.veins_mapped(), "the vein log has every vein marked (%d of %d)" % [gs.vein_log.size(), gs.veins_mapped()])
-	if _quota_day > 0 and gs.vein_log.size() >= gs.QUOTA:
-		var logged: Dictionary = gs.vein_log[gs.QUOTA - 1]
-		_expect(int(logged["day"]) == _quota_day and is_equal_approx(float(logged["at"]), _quota_hour), "the vein log agrees on when the quota was reached")
+	var counted := true
+	for i in gs.vein_log.size():
+		counted = counted and int(gs.vein_log[i].get("n", 0)) == i + 1
+	_expect(counted, "the vein log counts the veins on the map as they are marked (n = 1, 2, 3…)")
+	if _quota_day > 0:
+		# The vein that brought the count to the quota, found by its count, as the report does.
+		var at_quota: Array = gs.vein_log.filter(func(entry): return int(entry.get("n", 0)) == gs.QUOTA)
+		_expect(at_quota.size() == 1 and int(at_quota[0]["day"]) == _quota_day and is_equal_approx(float(at_quota[0]["at"]), _quota_hour), "the vein log agrees on when the quota was reached")
 	return {
 		"quota_day": _quota_day, "quota_hour": _quota_hour, "veins_day7": _veins_day7, "vein_total": gs.vein_total(),
 		"new_problems": _problems.size() - problems_before,
@@ -357,7 +362,9 @@ func _camp_gates() -> void:
 		_spend(OLEJ_HOURS, "Rozmowa z Teklą")
 		gs.give_item("olej")
 		_olej_day = day
-	if not gs.has_flag("kaplica_known") and day >= _talk_gate_day(KAPLICA_DAY):
+	# Nobody can tell the hero about the chapel on day 1 (Bolko offers it from day 2, Dobrawa comes
+	# on day 2, the deciphering happens at night), so the talking style does not open this gate early.
+	if not gs.has_flag("kaplica_known") and day >= maxi(KAPLICA_DAY, _talk_gate_day(KAPLICA_DAY)):
 		gs.set_flag("kaplica_known")
 	# The pick's head, once found, goes to Wszebor (in the camp from day 2); the pickaxe is ready
 	# the day after (a delayed variant waits one more day).
@@ -388,7 +395,7 @@ func _print_assumptions() -> void:
 	print("BALANCE założenia: pominięte zdrowie i poczytalność bohatera, spotkania z Drugimi i Hrapkiem, wątki Dobrawy i Tekli; wynik to górna granica tempa, nie przewidywanie")
 	print("BALANCE styl żyły: rozmawia tylko wtedy, gdy wymaga tego bramka; styl rozmowy: rano %d opcje z każdym w obozie (po %d min; %d osoby w dniu 1, potem %d), wieczorem ognisko (%s)" % [TALK_OPTIONS, vn.TALK_MINUTES, PEOPLE_FIRST_DAY, PEOPLE_LATER, gs.hours_text(FIRE_HOURS)])
 	print("BALANCE bramki [optymistyczny]: zawał = po 1. wizycie w Starej sztolni, %s w obozie | lina = od dnia %d, %s w obozie | olej = od dnia %d, %s w obozie | pompy = dzień po oleju, %s w Komorze pomp | kilof = dzień po oddaniu obucha Wszeborowi (w obozie od dnia %d; obuch %s w Starym wyrobisku) | kaplica = od dnia %d" % [gs.hours_text(Story.BLAST_HOURS), LINA_DAY, gs.hours_text(LINA_HOURS), OLEJ_DAY, gs.hours_text(OLEJ_HOURS), gs.hours_text(PUMP_HOURS), WSZEBOR_IN_CAMP_FROM, gs.hours_text(OBUCH_HOURS), KAPLICA_DAY])
-	print("BALANCE bramki [opóźniony]: każda bramka o dzień później; w stylu rozmowy bramki zależne od rozmów (lina, olej, kaplica) o dzień wcześniej, nie wcześniej niż w dniu 1")
+	print("BALANCE bramki [opóźniony]: każda bramka o dzień później; w stylu rozmowy bramki zależne od rozmów (lina, olej) o dzień wcześniej, nie wcześniej niż w dniu 1; wiedza o kaplicy w żadnym stylu nie jest wcześniejsza niż dzień %d" % KAPLICA_DAY)
 
 func _result_line(style: String, delay: int, result: Dictionary) -> String:
 	var head := "BALANCE[%s, %s]: norma %d → " % [style, VARIANTS[delay], gs.QUOTA]

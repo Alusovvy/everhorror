@@ -177,8 +177,9 @@ var travelling := false
 ## "npcs": {id: {sanity, health, rep, status, fever, arrived}}, "flags_new": [names set since the
 ## last dawn]}. Saved; a save from before version 6 has none ("brak danych" in the report).
 var dawn_log: Array = []
-## task_14 (ZAP-12): every vein as it was marked, {"id", "day", "at"} (+ "via" when someone else
-## marked it for the hero). Saved like the dawn log.
+## task_14 (ZAP-12): every vein as it was marked, {"id", "day", "at", "n"} (+ "via" when someone
+## else marked it for the hero); "n" counts the veins on the map including this one. Saved like
+## the dawn log.
 var vein_log: Array = []
 
 ## Open modal screens (dialogue, map, notebook…). While > 0 the player can't move.
@@ -372,11 +373,14 @@ func set_flag(flag_name: String, value: Variant = true) -> void:
 
 ## task_14 (ZAP-12): a vein marked now goes into vein_log (the day and the hour it was done at;
 ## interactables advance the clock before they set the flag, so this is the finishing time).
+## "n" is how many veins are on the map with this one (its flag is already set), so the quota
+## time is the entry with n = QUOTA even when the log starts late: a save from before version 6
+## that already had veins has a log of only the veins marked after the load.
 func _log_vein(vein_id: String, via: String = "") -> void:
 	for logged in vein_log:
 		if String(logged.get("id", "")) == vein_id:
 			return
-	var entry := {"id": vein_id, "day": day, "at": hour}
+	var entry := {"id": vein_id, "day": day, "at": hour, "n": veins_mapped()}
 	if via != "":
 		entry["via"] = via
 	vein_log.append(entry)

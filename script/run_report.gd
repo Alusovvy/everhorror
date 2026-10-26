@@ -46,10 +46,19 @@ const PREFIX_CATEGORY := {
 ## The fallback label of GameState.log_time() for an action with no reason: knowingly "inne".
 const FALLBACK_LABEL := "Coś zajęło czas"
 
+## Band words as the report prints them (masculine, the hero's and Mirosław's form).
 const MIND_WORDS := {"spokojny": "spokojny", "niespokojny": "niespokojny", "na_krawedzi": "na krawędzi", "zalamany": "załamany"}
 const HEALTH_WORDS := {"zdrowy": "zdrowy", "poobijany": "poobijany", "ranny": "ranny", "ciezko_ranny": "ciężko ranny", "martwy": "martwy"}
 const TRUST_WORDS := {"ufa": "ufa", "lubi": "lubi", "dystans": "dystans", "nie_ufa": "nie ufa"}
 const FATIGUE_WORDS := {"wypoczety": "wypoczęty", "zmeczony": "zmęczony", "ledwo_idzie": "ledwo idzie", "wyczerpany": "wyczerpany"}
+## The feminine form of a masculine word, for a woman's cell (the notebook words its lines for the
+## person's gender the same way, NpcData.female); a word not listed has one form.
+const FEMININE := {
+	"spokojny": "spokojna", "niespokojny": "niespokojna", "załamany": "załamana",
+	"zdrowy": "zdrowa", "poobijany": "poobijana", "ranny": "ranna", "ciężko ranny": "ciężko ranna", "martwy": "martwa",
+	"odszedł": "odeszła",
+}
+const FEVER := "gorączka"
 const NO_DATA := "brak danych"
 const DASH := "—"
 
@@ -82,7 +91,7 @@ static func collect(ending: String = ENDING_IN_PROGRESS) -> Dictionary:
 	var people: Array = []
 	for id in GameState.NPCS:
 		var data: NpcData = GameState.NPCS[id]
-		people.append({"id": String(id), "name": data.display_name, "met": is_met(id), "fixed_sanity": id in GameState.FIXED_SANITY})
+		people.append({"id": String(id), "name": data.display_name, "female": data.female, "met": is_met(id), "fixed_sanity": id in GameState.FIXED_SANITY})
 	return {
 		"report_version": REPORT_VERSION,
 		"build": {"version": BuildInfo.version(), "spec": BuildInfo.SPEC_SHA},
@@ -183,12 +192,22 @@ static func _people_data(saved: Dictionary) -> Dictionary:
 		result[key] = entry
 	return result
 
+## The quota was reached by the vein whose count ("n") is QUOTA. The log is not always complete: a
+## save from before version 6 that already had veins logs only the ones marked after the load, so
+## the position in the log says nothing and the count does. When the log begins past the quota (it
+## was reached before the load), nobody knows when: null.
 static func _quota_data() -> Dictionary:
 	var reached: Variant = null
-	if GameState.vein_log.size() >= GameState.QUOTA:
-		var logged: Dictionary = GameState.vein_log[GameState.QUOTA - 1]
-		var at := float(logged.get("at", 0.0))
-		reached = {"day": int(logged.get("day", 0)), "at": at, "time": GameState.time_text(at)}
+	var position := 0
+	for logged in GameState.vein_log:
+		position += 1
+		var count := _vein_number(logged, position)
+		if count < GameState.QUOTA:
+			continue
+		if count == GameState.QUOTA:
+			var at := float(logged.get("at", 0.0))
+			reached = {"day": int(logged.get("day", 0)), "at": at, "time": GameState.time_text(at)}
+		break
 	return {
 		"required": GameState.QUOTA, "deadline_day": GameState.QUOTA_DAY, "veins": GameState.veins_mapped(),
 		"met": GameState.quota_met(), "reached_at": reached,
@@ -198,14 +217,21 @@ static func _quota_data() -> Dictionary:
 
 static func _vein_rows() -> Array:
 	var rows: Array = []
+	var position := 0
 	for logged in GameState.vein_log:
+		position += 1
 		var id := String(logged.get("id", ""))
 		var at := float(logged.get("at", 0.0))
-		var row := {"id": id, "place": _vein_place(id), "day": int(logged.get("day", 0)), "at": at, "time": GameState.time_text(at)}
+		var row := {"n": _vein_number(logged, position), "id": id, "place": _vein_place(id), "day": int(logged.get("day", 0)), "at": at, "time": GameState.time_text(at)}
 		if logged.has("via"):
 			row["via"] = String(logged["via"])
 		rows.append(row)
 	return rows
+
+## How many veins were on the map with this one. An entry without the count (a log written before
+## it existed) counts from its position, as if the log had been complete.
+static func _vein_number(logged: Dictionary, position: int) -> int:
+	return int(logged.get("n", position))
 
 static func _vein_place(vein_id: String) -> String:
 	for place_id in GameState.LOCATIONS:
@@ -362,7 +388,7 @@ static func to_markdown(data: Dictionary) -> String:
 	lines.append("")
 	lines.append("## Ludzie o świcie")
 	lines.append("")
-	lines.append("Kreska (%s) oznacza kogoś, kto jeszcze nie dotarł do obozu. Pokazani są tylko poznani; pasma jak w notesie." % DASH)
+	lines.append("Kreska (%s) oznacza, że postać jeszcze nie dotarła: Sabina, dopóki nie wprowadzi się do obozu, a Ottokar, Hieronim i Welf, dopóki nie spotkano wyprawy z Exitium (NPC-18). Pokazani są tylko poznani. Pasma jak w notesie; w tabeli zdrowia „%s” zastępuje pasmo, tak jak tam." % [DASH, FEVER])
 	lines.append("")
 	var people: Array = data.get("people", [])
 	lines.append("### Głowa")
@@ -386,7 +412,7 @@ static func to_markdown(data: Dictionary) -> String:
 	lines.append("")
 	lines.append("## Żyły")
 	lines.append("")
-	lines.append_array(_vein_table(data.get("veins", [])))
+	lines.append_array(_vein_table(data.get("veins", []), int(quota.get("veins", 0))))
 	lines.append("")
 	lines.append("## Kluczowe wybory")
 	lines.append("")
@@ -464,6 +490,7 @@ static func _hero_table(days: Array) -> Array[String]:
 	return _table(["Dzień", "Żyły o świcie", "Zdrowie", "Głowa", "Gorączka", "Zmęczenie"], rows)
 
 ## One matrix: a row per met character, a column per day, the band words (or a dash, or the fate).
+## The words follow the person's gender, as the notebook's lines do.
 static func _people_table(days: Array, people: Array, band_key: String, words: Dictionary) -> Array[String]:
 	var headers: Array = ["Postać"]
 	for day in days:
@@ -474,13 +501,13 @@ static func _people_table(days: Array, people: Array, band_key: String, words: D
 			continue
 		var row: Array = [String(person.get("name", "?"))]
 		for day in days:
-			row.append(_person_cell(day.get("dawn"), String(person.get("id", "")), band_key, words))
+			row.append(_person_cell(day.get("dawn"), String(person.get("id", "")), band_key, words, bool(person.get("female", false))))
 		rows.append(row)
 	if rows.is_empty():
-		return ["Jeszcze z nikim nie rozmawiałeś."]
+		return ["Jeszcze nikogo nie poznano."]
 	return _table(headers, rows)
 
-static func _person_cell(dawn: Variant, id: String, band_key: String, words: Dictionary) -> String:
+static func _person_cell(dawn: Variant, id: String, band_key: String, words: Dictionary, female: bool = false) -> String:
 	if dawn == null:
 		return NO_DATA
 	var state: Variant = (dawn.get("people", {}) as Dictionary).get(id)
@@ -492,24 +519,40 @@ static func _person_cell(dawn: Variant, id: String, band_key: String, words: Dic
 	if status == "dead":
 		return "nie żyje"
 	if status == "gone":
-		return "odszedł"
+		return _gendered("odszedł", female)
+	# The notebook puts the fever in place of the health line; so does the health table.
+	if band_key == "health_band" and bool(state.get("fever", false)):
+		return FEVER
 	var band: Variant = state.get(band_key)
 	if band == "stala":
 		return "stała"
 	if band == null:
 		return DASH
-	return String(words.get(band, band))
+	return _gendered(String(words.get(band, band)), female)
 
-static func _vein_table(rows_data: Array) -> Array[String]:
+static func _gendered(word: String, female: bool) -> String:
+	return String(FEMININE.get(word, word)) if female else word
+
+## The veins in the order they were marked, numbered by how many were on the map with each one.
+## `on_map` is the count now: with no log at all it tells a week without veins from a save that
+## kept none.
+static func _vein_table(rows_data: Array, on_map: int = 0) -> Array[String]:
 	if rows_data.is_empty():
-		return ["Żadna żyła nie została jeszcze zaznaczona (albo zapis jest sprzed wersji 6: %s)." % NO_DATA]
+		if on_map > 0:
+			return ["Żyły na mapie: %d, ale zapis jest sprzed wersji 6: %s o dniu i godzinie." % [on_map, NO_DATA]]
+		return ["Żadna żyła nie została jeszcze zaznaczona."]
 	var rows: Array = []
-	var n := 0
+	var position := 0
 	for logged in rows_data:
-		n += 1
+		position += 1
 		var via := " (zaznaczył %s)" % String(logged["via"]).capitalize() if logged.has("via") else ""
-		rows.append([str(n), "%s%s" % [logged.get("place", "?"), via], str(int(logged.get("day", 0))), String(logged.get("time", "?"))])
-	return _table(["#", "Miejsce", "Dzień", "Godzina"], rows)
+		rows.append([str(int(logged.get("n", position))), "%s%s" % [logged.get("place", "?"), via], str(int(logged.get("day", 0))), String(logged.get("time", "?"))])
+	var out := _table(["#", "Miejsce", "Dzień", "Godzina"], rows)
+	var first := int(rows_data[0].get("n", 1))
+	if first > 1:
+		out.append("")
+		out.append("Numer liczy wszystkie żyły na mapie. Żyły 1–%d były już na niej przed wczytaniem zapisu sprzed wersji 6: %s o dniu i godzinie." % [first - 1, NO_DATA])
+	return out
 
 #endregion
 

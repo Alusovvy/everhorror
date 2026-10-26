@@ -184,6 +184,12 @@ func _run() -> void:
 					print("   LINT %s: no line for the first meeting in '%s'" % [who, room])
 	_check(no_field_greeting == 0, "everyone met first in the tunnels has a tunnel greeting and a line per first-level room (%d missing)" % no_field_greeting)
 
+	# The dialogues, the generators and every script (a label written in any script/*.gd counts).
+	var all_sources := sources.duplicate()
+	for file in DirAccess.get_files_at("res://script"):
+		if file.ends_with(".gd"):
+			all_sources["res://script/" + file] = FileAccess.get_file_as_string("res://script/" + file)
+
 	print("--- task_14: time labels have a report category (CZAS-16)")
 	var report = load("res://script/run_report.gd")
 	var label_patterns := [
@@ -194,15 +200,18 @@ func _run() -> void:
 	var labels := {}
 	for pattern in label_patterns:
 		var re_label := RegEx.create_from_string(pattern)
-		for path in sources:
-			for m in re_label.search_all(sources[path]):
+		for path in all_sources:
+			for m in re_label.search_all(all_sources[path]):
 				labels[m.get_string(1)] = path
 	var uncategorised := 0
 	for label in labels:
 		if report.categorize(label) == report.OTHER and label != report.FALLBACK_LABEL:
 			uncategorised += 1
 			print("   LINT %s: the time label \"%s\" would count as \"inne\" in the run report (add it to RunReport.LABEL_CATEGORY)" % [labels[label], label])
-	_check(labels.size() > 15 and uncategorised == 0, "%d time labels in the sources, %d without a category" % [labels.size(), uncategorised])
+	# Any label at all proves the patterns still match the sources; how many there are is not a rule.
+	if labels.is_empty():
+		print("   LINT: no time label found in the sources: the patterns of this check no longer match how the game writes them")
+	_check(not labels.is_empty() and uncategorised == 0, "%d time labels in the sources, %d without a category" % [labels.size(), uncategorised])
 
 	print("--- task_14: the bot's hidden veins are the generators' pickaxe veins")
 	var hidden_built := {}
@@ -215,23 +224,19 @@ func _run() -> void:
 	_check(not hidden_built.is_empty() and hidden_built.keys().all(func(id): return bot_hidden.has(id)) and bot_hidden.keys().all(func(id): return hidden_built.has(id)), "balance_sim.gd knows exactly the veins gen_locations.gd hides under flowstone %s" % [hidden_built.keys()])
 
 	print("--- task_14: every flag that is read is set somewhere")
-	var flag_sources := sources.duplicate()
-	for file in DirAccess.get_files_at("res://script"):
-		if file.ends_with(".gd"):
-			flag_sources["res://script/" + file] = FileAccess.get_file_as_string("res://script/" + file)
 	var read_patterns := ["has_flag\\(\\s*\"([^\"%+]+)\"", "done_today\\(\\s*\"([^\"%+]+)\"", "\"required_flag\":\\s*\"([^\"%+]+)\"", "\"hidden_by_flag\":\\s*\"([^\"%+]+)\""]
 	var write_patterns := ["set_flag\\(\\s*\"([^\"%+]+)\"", "mark_today\\(\\s*\"([^\"%+]+)\"", "bump_flag\\(\\s*\"([^\"%+]+)\"", "flags\\[\\s*\"([^\"%+]+)\"\\s*\\]\\s*=", "\"on_use_flag\":\\s*\"([^\"%+]+)\""]
 	var written := {}
 	for pattern in write_patterns:
 		var re_write := RegEx.create_from_string(pattern)
-		for path in flag_sources:
-			for m in re_write.search_all(flag_sources[path]):
+		for path in all_sources:
+			for m in re_write.search_all(all_sources[path]):
 				written[m.get_string(1)] = true
 	var read_flags := {}
 	for pattern in read_patterns:
 		var re_read := RegEx.create_from_string(pattern)
-		for path in flag_sources:
-			for m in re_read.search_all(flag_sources[path]):
+		for path in all_sources:
+			for m in re_read.search_all(all_sources[path]):
 				read_flags[m.get_string(1)] = path
 	var never_set := 0
 	for flag_name in read_flags:

@@ -295,6 +295,7 @@ func _run() -> void:
 	_task14_version()
 	_task14_logs_and_categories()
 	_task14_report()
+	_task14_report_after_review()
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)
@@ -384,7 +385,7 @@ func _task14_version() -> void:
 	var head := RegEx.create_from_string("\\(demo ([\\d.]+)\\)").search(readme)
 	_check(head != null and head.get_string(1) == version, "the CZYTAJ_MNIE.txt header names version %s (header: %s)" % [version, head.get_string(1) if head else "none"])
 	var label: String = Info.label()
-	_check(RegEx.create_from_string("^\\d+\\.\\d+\\.\\d+ · spec ([0-9a-f]{7}\\+?|unknown)$").search(label) != null, "BuildInfo.label() looks like \"0.5.3 · spec 8e46253\" (\"%s\")" % label)
+	_check(RegEx.create_from_string("^\\d+\\.\\d+\\.\\d+ · spec ([0-9a-f]{7}\\+?|unknown)$").search(label) != null, "BuildInfo.label() looks like \"0.5.3 · spec 27e91e7\" (\"%s\")" % label)
 	_check(label.begins_with(version + " · spec "), "the label starts with the project version")
 
 ## CZAS-16 categories, the dawn log and the vein log (ZAP-12), and their save.
@@ -549,6 +550,109 @@ func _task14_report() -> void:
 	var done: Dictionary = Report.collect(Report.ENDING_WEEK)
 	_check(bool(done["quota"]["met"]) and done["quota"]["reached_at"] != null and int(done["quota"]["reached_at"]["day"]) == 1 and done["quota"]["reached_at"]["time"] == "18:00", "12 veins at one an hour from 06:00: the quota at 18:00 (%s)" % [done["quota"]["reached_at"]])
 	_check(Report.to_markdown(done).contains("norma osiągnięta: dzień 1, 18:00"), "the Markdown says when")
+
+## What the review of the first version found (ZAP-11): the quota time and the numbering of a save
+## that already had veins, the words for women, the fever in the health table, the dash legend and
+## the neutral wording.
+func _task14_report_after_review() -> void:
+	print("--- task_14: a save from before version 6 that already had five veins (the quota time comes from the count)")
+	gs.reset()
+	for vein in gs.vein_ids().slice(0, 5):
+		gs.flags["vein_" + vein] = true
+	var old: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	old.erase("dawn_log")
+	old.erase("vein_log")
+	gs.load_state(old)
+	_check(gs.vein_log.is_empty() and gs.veins_mapped() == 5, "the old save has five veins and no log")
+	var no_log_md: String = Report.to_markdown(Report.collect(Report.ENDING_IN_PROGRESS))
+	_check(no_log_md.contains("Żyły na mapie: 5, ale zapis jest sprzed wersji 6: brak danych"), "with no log the report says there are five and nothing else is known")
+	gs.day = 4
+	gs.hour = gs.DAY_START_HOUR
+	for vein in gs.vein_ids().slice(5, 17):
+		gs.advance_time(1.0, "Znaczenie żyły")
+		gs.set_flag("vein_" + vein)
+	_check(gs.vein_log.size() == 12 and int(gs.vein_log[0]["n"]) == 6 and int(gs.vein_log[11]["n"]) == 17, "twelve veins are logged after the load, counted 6 to 17")
+	var late: Dictionary = Report.collect(Report.ENDING_IN_PROGRESS)
+	var reached: Variant = late["quota"]["reached_at"]
+	_check(reached != null and int(reached["day"]) == 4 and reached["time"] == "13:00", "the 12th vein on the map, the 7th logged, brought the quota at 13:00 on day 4 (%s)" % [reached])
+	_check(not bool(late["quota"]["reached_unknown"]), "…so the time is known")
+	_check(int(late["veins"][0]["n"]) == 6 and late["veins"][0]["time"] == "07:00", "the JSON numbers the first logged vein 6")
+	var late_md: String = Report.to_markdown(late)
+	var vein_section := late_md.get_slice("## Żyły", 1).get_slice("## Kluczowe wybory", 0)
+	_check(late_md.contains("norma osiągnięta: dzień 4, 13:00") and not late_md.contains("norma osiągnięta: dzień 4, 18:00"), "the Markdown says 13:00, not the time of the 12th logged vein")
+	_check(vein_section.contains("\n| 6 | ") and vein_section.contains("\n| 17 | ") and not vein_section.contains("\n| 1 | "), "the vein table is numbered 6 to 17, like the map")
+	_check(vein_section.contains("Żyły 1–5 były już na niej przed wczytaniem zapisu sprzed wersji 6"), "…and says the first five have no day and hour")
+
+	print("--- task_14: a save whose quota was reached before the load")
+	gs.reset()
+	for vein in gs.vein_ids().slice(0, 13):
+		gs.flags["vein_" + vein] = true
+	var past: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	past.erase("dawn_log")
+	past.erase("vein_log")
+	gs.load_state(past)
+	gs.set_flag("vein_" + gs.vein_ids()[13])
+	var unknown: Dictionary = Report.collect(Report.ENDING_IN_PROGRESS)
+	_check(bool(unknown["quota"]["met"]) and unknown["quota"]["reached_at"] == null and bool(unknown["quota"]["reached_unknown"]), "the quota was met before the log began: nobody knows when")
+	_check(Report.to_markdown(unknown).contains("norma osiągnięta, kiedy: brak danych"), "the Markdown says so")
+
+	print("--- task_14: a log entry without a count is numbered by its position")
+	gs.reset()
+	for vein in gs.vein_ids().slice(0, 12):
+		gs.advance_time(1.0, "Znaczenie żyły")
+		gs.set_flag("vein_" + vein)
+	for entry in gs.vein_log:
+		entry.erase("n")
+	var bare: Dictionary = Report.collect(Report.ENDING_WEEK)
+	_check(bare["quota"]["reached_at"] != null and bare["quota"]["reached_at"]["time"] == "18:00" and int(bare["veins"][11]["n"]) == 12, "a complete log without counts still gives 18:00 and numbers 1 to 12")
+
+	print("--- task_14: the people tables use the person's gender and show the fever")
+	gs.reset()
+	for id in ["tekla", "sabina", "wszebor", "nasir"]:
+		gs.set_flag("met_" + id)
+	gs.set_flag("drudzy_met")
+	gs.set_flag("sabina_joined")
+	gs.set_flag("fever_nasir")
+	# One dawn per band: calm and well, uneasy and bruised, on the edge and hurt, broken and badly hurt, gone.
+	var steps := [[50, 100], [25, 60], [10, 30], [0, 10]]
+	for i in steps.size():
+		for id in [&"tekla", &"sabina", &"wszebor", &"nasir"]:
+			gs.npcs[id]["sanity"] = steps[i][0]
+			gs.npcs[id]["health"] = steps[i][1]
+		gs.start_next_day()
+	gs.set_npc_status(&"sabina", "gone")
+	gs.set_npc_status(&"wszebor", "gone")
+	gs.start_next_day()
+	var markdown: String = Report.to_markdown(Report.collect(Report.ENDING_IN_PROGRESS))
+	var head_section := markdown.get_slice("### Głowa", 1).get_slice("### Zdrowie", 0)
+	var health_section := markdown.get_slice("### Zdrowie", 1).get_slice("### Stosunek", 0)
+	var tekla: String = gs.NPCS[&"tekla"].display_name
+	var sabina: String = gs.NPCS[&"sabina"].display_name
+	var wszebor: String = gs.NPCS[&"wszebor"].display_name
+	var nasir: String = gs.NPCS[&"nasir"].display_name
+	_check(_row_cells(head_section, tekla).slice(2, 6) == ["spokojna", "niespokojna", "na krawędzi", "załamana"], "a woman's head bands are feminine (Tekla: %s)" % [_row_cells(head_section, tekla)])
+	_check(_row_cells(head_section, wszebor).slice(2, 6) == ["spokojny", "niespokojny", "na krawędzi", "załamany"], "a man's stay masculine (Wszebor: %s)" % [_row_cells(head_section, wszebor)])
+	_check(_row_cells(health_section, tekla).slice(2, 6) == ["zdrowa", "poobijana", "ranna", "ciężko ranna"], "a woman's health bands are feminine (Tekla: %s)" % [_row_cells(health_section, tekla)])
+	_check(_row_cells(health_section, wszebor).slice(2, 6) == ["zdrowy", "poobijany", "ranny", "ciężko ranny"], "a man's stay masculine (Wszebor: %s)" % [_row_cells(health_section, wszebor)])
+	_check(_row_cells(head_section, sabina)[-1] == "odeszła" and _row_cells(head_section, wszebor)[-1] == "odszedł", "someone who has left: \"odeszła\" for Sabina, \"odszedł\" for Wszebor")
+	_check(_row_cells(health_section, nasir).slice(2, 6) == ["gorączka", "gorączka", "gorączka", "gorączka"], "the fever replaces the health band, as in the notebook (Nasir: %s)" % [_row_cells(health_section, nasir)])
+	_check(not _row_cells(head_section, nasir).has("gorączka"), "…but only in the health table")
+	var report_data: Dictionary = Report.collect(Report.ENDING_IN_PROGRESS)
+	var nasir_json: Dictionary = report_data["days"][2]["dawn"]["people"]["nasir"]
+	_check(bool(nasir_json["fever"]) and nasir_json["health_band"] == "poobijany", "the JSON keeps the health band beside the fever")
+	_check(markdown.contains("Ottokar, Hieronim i Welf, dopóki nie spotkano") and markdown.contains("Sabina, dopóki nie wprowadzi się do obozu") and not markdown.contains("nie dotarł do obozu"), "the dash legend names who it stands for")
+
+	print("--- task_14: neutral wording for the reader of the report")
+	gs.reset()
+	var nobody: String = Report.to_markdown(Report.collect(Report.ENDING_IN_PROGRESS))
+	_check(nobody.contains("Jeszcze nikogo nie poznano.") and not nobody.contains("rozmawiałeś"), "nobody met: \"Jeszcze nikogo nie poznano.\"")
+
+## The cells of the row that starts with `name` in a Markdown table, without the outer pipes.
+func _row_cells(section: String, name: String) -> Array:
+	for line in section.split("\n"):
+		if line.begins_with("| %s |" % name):
+			return Array(line.split("|", false)).map(func(cell): return cell.strip_edges())
+	return []
 
 #endregion
 

@@ -6,11 +6,11 @@ class_name BuildInfo
 ## constant below by tools/release/stamp_build.js just before every export and committed with the
 ## release, so between releases it still shows the last release's commit ("unknown" in a tree
 ## that was never stamped). The built game never calls git.
-const SPEC_SHA := "8e46253"
+const SPEC_SHA := "27e91e7"
 
 static func version() -> String:
 	return str(ProjectSettings.get_setting("application/config/version", "dev"))
 
-## "0.5.3 · spec 8e46253", the label in the corner of the main menu.
+## "0.5.3 · spec 27e91e7", the label in the corner of the main menu.
 static func label() -> String:
 	return "%s · spec %s" % [version(), SPEC_SHA]

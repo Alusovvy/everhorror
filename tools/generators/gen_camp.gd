@@ -449,7 +449,7 @@ func _storage(camp: Node3D) -> void:
 #region East: the leader's pen, supply
 
 ## Racibor's pen: a roofless palisade about 2 m high against the north wall, with a gate facing
-## the camp (the intro says "w zagrodzie Racibora, za niską palisadą bez dachu"). The map table,
+## the camp (the intro calls it "zagroda Racibora", a palisade without a roof). The map table,
 ## his bed and chest inside.
 func _command(camp: Node3D) -> void:
 	var pen := group(camp, "Pen")
