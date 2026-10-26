@@ -10,7 +10,11 @@ extends SceneTree
 ## - [#free] (a response that costs no talk time) only on responses that hand over an item,
 ## - task_11: every npc_place(...) == "<place>" names a place the schedule really uses, and
 ##   everyone who can be met first in the tunnels has a "teren" greeting with a line per
-##   first-level room.
+##   first-level room,
+## - task_14: every time label written by a dialogue, a generator or the StoryDirector has a
+##   category in the run report other than "inne" (CZAS-16), every hidden vein the bot knows
+##   about is built with a pickaxe by the generators, and every flag a script or dialogue reads
+##   is set somewhere (the dead `hieronim_gone` check was this kind of bug).
 ## Catches the typo class the scenario tests only hit when they walk the exact branch. ~2 s.
 
 ## Field-scene mages: every pick is meant to charge, so no [#leave] there.
@@ -20,6 +24,9 @@ const NO_LEAVE_EXEMPT := ["welf", "hieronim"]
 const FIELD_FIRST_MEET := ["wszebor", "nasir", "hagiwara", "sobek", "anzelm"]
 ## Met only in the tunnels (the Exitium mages; Sabina until she joins the camp).
 const FIELD_ONLY := ["ottokar", "hieronim", "welf", "sabina"]
+## Flags whose names are put together at run time ("vein_" + id, "visited_%s" % place): a read of
+## one of them has no literal `set_flag` to match.
+const FLAG_FAMILIES := ["vein_", "visited_"]
 const DIALOGUE_DIR := "res://dialogue"
 const EXTRA_SOURCES := [
 	"res://tools/generators/gen_camp.gd",
@@ -176,6 +183,66 @@ func _run() -> void:
 					no_field_greeting += 1
 					print("   LINT %s: no line for the first meeting in '%s'" % [who, room])
 	_check(no_field_greeting == 0, "everyone met first in the tunnels has a tunnel greeting and a line per first-level room (%d missing)" % no_field_greeting)
+
+	print("--- task_14: time labels have a report category (CZAS-16)")
+	var report = load("res://script/run_report.gd")
+	var label_patterns := [
+		"advance_time\\(\\s*[^,()\"]+,\\s*\"([^\"%]+)\"\\s*\\)",
+		"log_time\\([^,()]+,[^,()]+,\\s*\"([^\"%]+)\"\\s*\\)",
+		"\"time_reason\":\\s*\"([^\"%]+)\"",
+	]
+	var labels := {}
+	for pattern in label_patterns:
+		var re_label := RegEx.create_from_string(pattern)
+		for path in sources:
+			for m in re_label.search_all(sources[path]):
+				labels[m.get_string(1)] = path
+	var uncategorised := 0
+	for label in labels:
+		if report.categorize(label) == report.OTHER and label != report.FALLBACK_LABEL:
+			uncategorised += 1
+			print("   LINT %s: the time label \"%s\" would count as \"inne\" in the run report (add it to RunReport.LABEL_CATEGORY)" % [labels[label], label])
+	_check(labels.size() > 15 and uncategorised == 0, "%d time labels in the sources, %d without a category" % [labels.size(), uncategorised])
+
+	print("--- task_14: the bot's hidden veins are the generators' pickaxe veins")
+	var hidden_built := {}
+	var re_hidden := RegEx.create_from_string("hidden_vein\\(\\s*\\w+,\\s*\"(\\w+)\"")
+	for m in re_hidden.search_all(sources["res://tools/generators/gen_locations.gd"]):
+		hidden_built[m.get_string(1)] = true
+	var bot_hidden := {}
+	for id in load("res://tools/balance_sim.gd").HIDDEN_VEINS:
+		bot_hidden[String(id)] = true
+	_check(not hidden_built.is_empty() and hidden_built.keys().all(func(id): return bot_hidden.has(id)) and bot_hidden.keys().all(func(id): return hidden_built.has(id)), "balance_sim.gd knows exactly the veins gen_locations.gd hides under flowstone %s" % [hidden_built.keys()])
+
+	print("--- task_14: every flag that is read is set somewhere")
+	var flag_sources := sources.duplicate()
+	for file in DirAccess.get_files_at("res://script"):
+		if file.ends_with(".gd"):
+			flag_sources["res://script/" + file] = FileAccess.get_file_as_string("res://script/" + file)
+	var read_patterns := ["has_flag\\(\\s*\"([^\"%+]+)\"", "done_today\\(\\s*\"([^\"%+]+)\"", "\"required_flag\":\\s*\"([^\"%+]+)\"", "\"hidden_by_flag\":\\s*\"([^\"%+]+)\""]
+	var write_patterns := ["set_flag\\(\\s*\"([^\"%+]+)\"", "mark_today\\(\\s*\"([^\"%+]+)\"", "bump_flag\\(\\s*\"([^\"%+]+)\"", "flags\\[\\s*\"([^\"%+]+)\"\\s*\\]\\s*=", "\"on_use_flag\":\\s*\"([^\"%+]+)\""]
+	var written := {}
+	for pattern in write_patterns:
+		var re_write := RegEx.create_from_string(pattern)
+		for path in flag_sources:
+			for m in re_write.search_all(flag_sources[path]):
+				written[m.get_string(1)] = true
+	var read_flags := {}
+	for pattern in read_patterns:
+		var re_read := RegEx.create_from_string(pattern)
+		for path in flag_sources:
+			for m in re_read.search_all(flag_sources[path]):
+				read_flags[m.get_string(1)] = path
+	var never_set := 0
+	for flag_name in read_flags:
+		var family := false
+		for prefix in FLAG_FAMILIES:
+			if flag_name.begins_with(prefix):
+				family = true
+		if not written.has(flag_name) and not family:
+			never_set += 1
+			print("   LINT %s: the flag '%s' is read but nothing sets it" % [read_flags[flag_name], flag_name])
+	_check(read_flags.size() > 100 and never_set == 0, "%d flags are read, %d of them never set" % [read_flags.size(), never_set])
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)

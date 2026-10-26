@@ -3,7 +3,11 @@ extends SceneTree
 ## Pure-logic checks, no world scene: the expedition graph (including the "route around
 ## closed places" regression from task_05), the Polish number helpers, the hero's bands
 ## and wound rules, payload flags and the Fourteenth's clue counter; task_09: durations ("5 min"),
-## the time log, locked-response reasons (ResponseLock) and Hrapek's meeting rules. Runs in ~2 s.
+## the time log, locked-response reasons (ResponseLock) and Hrapek's meeting rules; task_14: who
+## has not arrived loses no sanity at night or in the tremor (NPC-18), the same version in
+## project.godot / CHANGELOG.md / CZYTAJ_MNIE.txt and a well-formed menu label (UI-6, TECH-2),
+## the bands, the time categories, the dawn and vein logs and their save (ZAP-12, CZAS-16) and the
+## run report itself (ZAP-11). Runs in ~2 s.
 
 var _failures := 0
 var gs
@@ -11,6 +15,8 @@ var gs
 var Ex
 var Lock
 var Story
+var Info
+var Report
 
 func _initialize() -> void:
 	# Autoloads are only available after the first frame.
@@ -21,6 +27,8 @@ func _run() -> void:
 	Ex = load("res://script/expeditions.gd")
 	Lock = load("res://script/response_lock.gd")
 	Story = load("res://script/story_director.gd")
+	Info = load("res://script/build_info.gd")
+	Report = load("res://script/run_report.gd")
 
 	print("--- Expeditions: the graph and trip costs")
 	gs.reset()
@@ -282,8 +290,267 @@ func _run() -> void:
 	gs.change_sanity(&"hrapek", -15)
 	_check(gs.sanity(&"hrapek") == 20, "Hrapek's sanity never moves")
 
+	_task14_arrival()
+	_task14_bands()
+	_task14_version()
+	_task14_logs_and_categories()
+	_task14_report()
+
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)
+
+#region task_14
+
+## NPC-18: nobody who has not arrived loses sanity at night or in the tremor; B2: nothing asks
+## whether Hieronim has gone.
+func _task14_arrival() -> void:
+	print("--- task_14: who has not arrived loses no sanity (NPC-18)")
+	gs.reset()
+	_check(not gs.has_arrived(&"sabina") and not gs.has_arrived(&"ottokar") and not gs.has_arrived(&"hieronim") and not gs.has_arrived(&"welf"), "at the start nobody from Exitium has arrived")
+	_check(gs.has_arrived(&"wszebor") and gs.has_arrived(&"dobrawa") and gs.has_arrived(&"hrapek"), "everyone else is part of the week from the start")
+	for id in load("res://script/field_schedule.gd").DRUDZY:
+		_check(gs.ARRIVAL_FLAG.has(id), "%s (an Exitium arrival) has an arrival flag" % id)
+	var director = Story.new()
+	var before := {}
+	for id in [&"sabina", &"ottokar", &"hieronim", &"welf", &"wszebor", &"dobrawa"]:
+		before[id] = gs.sanity(id)
+	gs.day = 1
+	director._resolve_night()
+	_check(gs.sanity(&"sabina") == before[&"sabina"], "night 1: Sabina keeps her sanity before she has moved in")
+	_check(gs.sanity(&"wszebor") == before[&"wszebor"] - 2, "night 1: Wszebor, out on his shift, loses 2 as before")
+	_check(gs.sanity(&"dobrawa") == before[&"dobrawa"], "night 1: Dobrawa is not touched yet (she comes on day 2)")
+	gs.day = 2
+	director._resolve_night()
+	_check(gs.sanity(&"dobrawa") == before[&"dobrawa"] - 5, "night 2: Dobrawa loses 5 as before")
+	gs.day = 5
+	director._resolve_night()
+	for id in [&"sabina", &"ottokar", &"hieronim", &"welf"]:
+		_check(gs.sanity(id) == before[id], "night 5: the tremor skips %s before the meeting" % id)
+	_check(gs.has_flag("tremor_seen"), "the tremor still happens")
+
+	gs.reset()
+	gs.set_flag("drudzy_met")
+	_check(gs.has_arrived(&"ottokar") and gs.has_arrived(&"hieronim") and gs.has_arrived(&"welf") and not gs.has_arrived(&"sabina"), "the meeting brings the three mages, not yet Sabina")
+	for id in [&"sabina", &"ottokar", &"hieronim", &"welf"]:
+		before[id] = gs.sanity(id)
+	gs.day = 3
+	director._resolve_night()
+	_check(gs.sanity(&"ottokar") == before[&"ottokar"] and gs.sanity(&"sabina") == before[&"sabina"], "night 3: the mages have no nightly loss, Sabina is not in the camp yet")
+	gs.set_flag("sabina_joined")
+	gs.day = 4
+	director._resolve_night()
+	_check(gs.sanity(&"sabina") == before[&"sabina"] - 2, "night 4: Sabina, now in the camp, loses 2")
+	gs.day = 5
+	director._resolve_night()
+	_check(gs.sanity(&"ottokar") == before[&"ottokar"] - 2 and gs.sanity(&"welf") == before[&"welf"] - 2 and gs.sanity(&"hieronim") == before[&"hieronim"] - 2, "night 5: after the meeting the tremor shakes the mages like the others (-2)")
+	_check(gs.sanity(&"sabina") == before[&"sabina"] - 6, "night 5: Sabina loses 2 and the tremor 2 more (%d)" % (before[&"sabina"] - gs.sanity(&"sabina")))
+	gs.set_npc_status(&"welf", "gone")
+	var welf_sanity: int = gs.sanity(&"welf")
+	gs.day = 5
+	director._resolve_night()
+	_check(gs.sanity(&"welf") == welf_sanity, "a mage who has left is not shaken")
+
+	print("--- task_14: nothing asks whether Hieronim has gone")
+	director.npcs = {&"hieronim": null, &"ottokar": null, &"welf": null}
+	gs.set_flag("hieronim_gone")
+	_check("hieronim" in director._roaming_drudzy(&"rzapie"), "Hieronim can turn up near the camp whatever that old flag says")
+	_check(not FileAccess.get_file_as_string("res://script/story_director.gd").contains("hieronim_gone\""), "story_director.gd no longer reads hieronim_gone")
+	director.free()
+
+## The band helpers behind the notebook and the report.
+func _task14_bands() -> void:
+	print("--- task_14: bands as values (the run report reads the same thresholds as the notebook)")
+	_check(gs.health_band_of(75) == "zdrowy" and gs.health_band_of(74) == "poobijany" and gs.health_band_of(44) == "ranny" and gs.health_band_of(19) == "ciezko_ranny" and gs.health_band_of(0) == "martwy", "health bands by value")
+	_check(gs.mind_band_of(60) == "spokojny" and gs.mind_band_of(59) == "niespokojny" and gs.mind_band_of(34) == "na_krawedzi" and gs.mind_band_of(0) == "zalamany", "the hero's mind bands by value")
+	_check(gs.sanity_band_of(40) == "spokojny" and gs.sanity_band_of(39) == "niespokojny" and gs.sanity_band_of(19) == "na_krawedzi" and gs.sanity_band_of(0) == "zalamany", "an NPC's mind bands by value")
+	_check(gs.trust_band_of(20) == "ufa" and gs.trust_band_of(5) == "lubi" and gs.trust_band_of(0) == "dystans" and gs.trust_band_of(-1) == "nie_ufa", "trust bands by value")
+	_check(gs.fatigue_band_of(74.9) == "wypoczety" and gs.fatigue_band_of(75.0) == "zmeczony" and gs.fatigue_band_of(90.0) == "ledwo_idzie" and gs.fatigue_band_of(100.0) == "wyczerpany", "fatigue bands by value")
+	gs.reset()
+	gs.player_health = 30
+	gs.player_sanity = 20
+	gs.player_fatigue = 80.0
+	_check(gs.health_band() == gs.health_band_of(30) and gs.mind_band() == gs.mind_band_of(20) and gs.fatigue_band() == gs.fatigue_band_of(80.0), "the old band functions say the same")
+
+## TECH-2 / UI-6: one version everywhere, and a label the menu can show.
+func _task14_version() -> void:
+	print("--- task_14: the version is the same everywhere (TECH-2); the menu label (UI-6)")
+	var version := str(ProjectSettings.get_setting("application/config/version", ""))
+	_check(RegEx.create_from_string("^\\d+\\.\\d+\\.\\d+$").search(version) != null, "project.godot has application/config/version (\"%s\")" % version)
+	var changelog := FileAccess.get_file_as_string("res://CHANGELOG.md")
+	var top := RegEx.create_from_string("(?m)^## \\[([\\d.]+)\\]").search(changelog)
+	_check(top != null and top.get_string(1) == version, "CHANGELOG.md starts with version %s (heading: %s)" % [version, top.get_string(1) if top else "none"])
+	_check(changelog.contains("Zgodność ze spec: `"), "the newest CHANGELOG entry names the spec it matches")
+	var readme := FileAccess.get_file_as_string("res://tools/release/CZYTAJ_MNIE.txt").get_slice("\n", 0)
+	var head := RegEx.create_from_string("\\(demo ([\\d.]+)\\)").search(readme)
+	_check(head != null and head.get_string(1) == version, "the CZYTAJ_MNIE.txt header names version %s (header: %s)" % [version, head.get_string(1) if head else "none"])
+	var label: String = Info.label()
+	_check(RegEx.create_from_string("^\\d+\\.\\d+\\.\\d+ · spec ([0-9a-f]{7}\\+?|unknown)$").search(label) != null, "BuildInfo.label() looks like \"0.5.3 · spec 8e46253\" (\"%s\")" % label)
+	_check(label.begins_with(version + " · spec "), "the label starts with the project version")
+
+## CZAS-16 categories, the dawn log and the vein log (ZAP-12), and their save.
+func _task14_logs_and_categories() -> void:
+	print("--- task_14: time categories (CZAS-16)")
+	var expected := [
+		["Rozmowa z Teklą", "rozmowy"], ["Wyprawa: Stara sztolnia", "drogi"], ["Droga: Kaplica", "drogi"], ["Powrót do obozu", "drogi"],
+		["Znaczenie żyły", "żyły"], ["Odkuwanie nacieku", "żyły"],
+		["Mirosław wysadza zawał", "pomoc"], ["Praca przy pompach", "pomoc"], ["Opatrywanie ran", "pomoc"],
+		["Ottokar przerysowuje mapy", "pomoc"], ["Ryby w stawie z Wszeborem", "pomoc"], ["Ryby w stawie z Mirosławem", "pomoc"],
+		["Wieczór przy ogniu", "obóz"], ["Kości z Sobkiem", "obóz"], ["Przy ogniu z Mirosławem", "obóz"], ["Z Mirosławem w kącie", "obóz"],
+		["Obracanie kręgów", "eksploracja"], ["Rozbijanie skrytki", "eksploracja"],
+		[gs.item_name("bandaze"), "przedmioty"], [gs.item_name("swieca"), "przedmioty"],
+		["Sen", "sen"], ["Coś zajęło czas", "inne"], ["Coś zupełnie nowego", "inne"],
+	]
+	for pair in expected:
+		_check(Report.categorize(pair[0]) == pair[1], "\"%s\" counts as %s (%s)" % [pair[0], pair[1], Report.categorize(pair[0])])
+	_check(Report.CATEGORIES.size() == 9 and Report.CATEGORIES.has("inne"), "nine categories, the last one is the catch-all")
+
+	print("--- task_14: the dawn log and the vein log (ZAP-12)")
+	gs.reset()
+	_check(gs.dawn_log.size() == 1 and int(gs.dawn_log[0]["day"]) == 1, "a new game starts the dawn log with day 1")
+	var first: Dictionary = gs.dawn_log[0]
+	_check(first["npcs"]["wszebor"]["arrived"] == true and first["npcs"]["sabina"]["arrived"] == false, "day 1: the five are in the week, Sabina has not arrived")
+	_check(int(first["veins"]) == 0 and int(first["hero"]["health"]) == 100, "day 1: no veins, a healthy hero")
+	_check(gs.vein_log.is_empty(), "no veins logged yet")
+	gs.set_flag("location", "east")
+	gs.set_flag("vein_east_1")
+	_check(gs.vein_log.size() == 1 and gs.vein_log[0]["id"] == "east_1" and int(gs.vein_log[0]["day"]) == 1 and is_equal_approx(float(gs.vein_log[0]["at"]), 6.0), "a marked vein is logged with its day and hour")
+	gs.set_flag("vein_east_1")
+	_check(gs.vein_log.size() == 1, "the same vein is not logged twice")
+	gs.mark_veins_for_player(1)
+	_check(gs.vein_log.size() == 2 and gs.vein_log[1].get("via", "") == "ottokar", "veins marked for the hero by Ottokar are logged as his")
+	gs.clear_flag("location")
+	gs.set_flag("some_flag_of_day_one")
+	gs.start_next_day()
+	_check(gs.dawn_log.size() == 2 and int(gs.dawn_log[1]["day"]) == 2 and int(gs.dawn_log[1]["veins"]) == 2, "day 2 has its dawn entry, with the veins marked so far")
+	_check("some_flag_of_day_one" in gs.dawn_log[1]["flags_new"] and not "some_flag_of_day_one" in gs.dawn_log[0]["flags_new"], "the flags set during the day are listed with the next dawn")
+	gs.record_dawn()
+	_check(gs.dawn_log.size() == 2, "recording the same dawn again replaces the entry")
+	gs.set_flag("later_flag")
+	gs.start_next_day()
+	_check(not "some_flag_of_day_one" in gs.dawn_log[2]["flags_new"] and "later_flag" in gs.dawn_log[2]["flags_new"], "a dawn lists only what is new since the last one")
+
+	print("--- task_14: the logs survive a save, and an old save has none")
+	var saved: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	gs.reset()
+	gs.load_state(saved)
+	_check(gs.dawn_log.size() == 3 and gs.vein_log.size() == 2, "a save keeps both logs (%d dawns, %d veins)" % [gs.dawn_log.size(), gs.vein_log.size()])
+	_check(int(gs.dawn_log[2]["day"]) == 3 and int(gs.vein_log[0]["day"]) == 1, "the numbers come back from JSON as floats and read as ints")
+	var old: Dictionary = saved.duplicate(true)
+	old.erase("dawn_log")
+	old.erase("vein_log")
+	gs.load_state(old)
+	_check(gs.dawn_log.is_empty() and gs.vein_log.is_empty(), "a save from before version 6 loads with empty logs")
+	gs.start_next_day()
+	_check(gs.dawn_log.size() == 1 and gs.dawn_log[0].get("partial", false) == true and gs.dawn_log[0]["flags_new"].is_empty(), "its first new dawn is marked partial, with no \"new flags\" claimed")
+	gs.set_flag("after_old_save")
+	gs.start_next_day()
+	_check(gs.dawn_log[1]["flags_new"] == ["after_old_save"], "the next dawn lists just the flag set since (%s)" % [gs.dawn_log[1]["flags_new"]])
+	var save_manager = root.get_node("SaveManager")
+	_check(int(save_manager.SAVE_VERSION) == 6, "the save version is 6")
+
+## ZAP-11: the report built from a short synthetic week.
+func _task14_report() -> void:
+	print("--- task_14: the run report (ZAP-11)")
+	gs.reset()
+	# Day 1: a talk, a trip, a vein, the way back, the fire, bed.
+	gs.add_quiet_time(0.25)
+	gs.commit_time(0.25, "Rozmowa z Teklą", 6.0)
+	gs.advance_time(2.0, "Wyprawa: Stara sztolnia")
+	gs.set_flag("location", "east")
+	gs.advance_time(1.0, "Znaczenie żyły")
+	gs.set_flag("vein_east_1")
+	gs.clear_flag("location")
+	gs.advance_time(1.0, "Powrót do obozu")
+	gs.advance_time(1.0, "Wieczór przy ogniu")
+	gs.log_time(gs.hour, 0.0, "Sen")
+	gs.start_next_day()
+	# Day 2: the Exitium expedition is met.
+	gs.advance_time(0.5, "Coś zupełnie nowego")
+	gs.set_flag("met_wszebor")
+	gs.set_flag("drudzy_met")
+	gs.log_time(gs.hour, 0.0, "Sen")
+	gs.start_next_day()
+	# Day 3: Sabina moves in. Late bedtime, nothing unused.
+	gs.set_flag("sabina_joined")
+	gs.advance_time(16.0, "Droga: Kaplica")
+	gs.log_time(gs.hour, 0.0, "Sen")
+	gs.start_next_day()
+	# Day 4 is in progress.
+	var data: Dictionary = Report.collect(Report.ENDING_IN_PROGRESS)
+	var days: Array = data["days"]
+	_check(days.size() == 4 and int(data["now"]["day"]) == 4, "a report on day 4 has four days")
+	var time1: Dictionary = days[0]["time"]
+	_check(int(time1["minutes"]["rozmowy"]) == 15 and int(time1["minutes"]["drogi"]) == 180 and int(time1["minutes"]["żyły"]) == 60 and int(time1["minutes"]["obóz"]) == 60, "day 1 by category: 15 + 180 + 60 + 60 min")
+	var sum := 0
+	for category in Report.CATEGORIES:
+		sum += int(time1["minutes"][category])
+	_check(sum == int(time1["total"]) and int(time1["total"]) == gs.logged_minutes(1), "the categories add up to the day's log (%d min)" % int(time1["total"]))
+	_check(int(time1["unused_before_sleep_min"]) == 645, "day 1: 10 h 45 min unused when he went to bed (%s)" % [time1["unused_before_sleep_min"]])
+	_check(int(days[1]["time"]["minutes"]["inne"]) == 30, "an unknown label counts as inne")
+	_check(int(days[2]["time"]["unused_before_sleep_min"]) == 0, "day 3: no time left at bed")
+	_check(days[3]["time"]["unused_before_sleep_min"] == null and not bool(days[3]["time"]["available"]), "day 4: still going, nothing unused to report")
+	_check(int(days[0]["dawn"]["veins"]) == 0 and int(days[1]["dawn"]["veins"]) == 1, "veins at dawn: 0, then 1")
+	_check(days[0]["dawn"]["hero"]["mind_band"] == "spokojny" and days[0]["dawn"]["hero"]["health_band"] == "zdrowy", "the hero's bands at the first dawn")
+	var sabina_by_day: Array = days.map(func(d): return d["dawn"]["people"]["sabina"]["arrived"])
+	var ottokar_by_day: Array = days.map(func(d): return d["dawn"]["people"]["ottokar"]["arrived"])
+	_check(sabina_by_day == [false, false, false, true], "Sabina arrives at the dawn after she moved in %s" % [sabina_by_day])
+	_check(ottokar_by_day == [false, false, true, true], "Ottokar at the dawn after the meeting %s" % [ottokar_by_day])
+	_check(days[0]["dawn"]["people"]["sabina"]["mind_band"] == null and days[3]["dawn"]["people"]["sabina"]["mind_band"] != null, "someone who has not arrived has no bands")
+	_check(data["veins"].size() == 1 and data["veins"][0]["place"] == "Stara sztolnia" and data["veins"][0]["time"] == "09:15", "the vein table: Stara sztolnia at 09:15 (%s)" % [data["veins"]])
+	_check(not bool(data["quota"]["met"]) and data["quota"]["reached_at"] == null and int(data["quota"]["veins"]) == 1, "the quota is not met")
+	_check(data["ending"]["id"] == "w_trakcie" and data["ending"]["title"] == "w trakcie", "from the pause the ending is \"w trakcie\"")
+	var choice_ids: Array = data["choices"].map(func(c): return c["id"])
+	for id in ["krysztal", "tekla", "welf", "nasir", "miroslaw", "dobrawa"]:
+		_check(id in choice_ids, "the key choices include %s" % id)
+
+	var parsed: Dictionary = JSON.parse_string(Report.to_json(data))
+	_check(parsed["build"]["version"] == Info.version() and parsed["days"].size() == 4 and int(parsed["days"][0]["time"]["total"]) == 315, "the JSON reads back")
+	var markdown: String = Report.to_markdown(data)
+	_check(markdown.contains(Info.version()) and markdown.contains("spec " + Info.SPEC_SHA), "the Markdown names the build")
+	_check(markdown.contains("## Czas według kategorii") and markdown.contains("## Bohater o świcie") and markdown.contains("## Ludzie o świcie") and markdown.contains("## Żyły") and markdown.contains("## Kluczowe wybory"), "the Markdown has all its sections")
+	var sabina_row := ""
+	var ottokar_row := ""
+	var head_section := markdown.get_slice("### Głowa", 1).get_slice("### Zdrowie", 0)
+	for line in head_section.split("\n"):
+		if line.begins_with("| %s " % gs.NPCS[&"sabina"].display_name):
+			sabina_row = line
+		if line.begins_with("| %s " % gs.NPCS[&"ottokar"].display_name):
+			ottokar_row = line
+	_check(sabina_row.contains("| — | — | — | "), "Sabina's row has dashes before she arrived (%s)" % sabina_row)
+	_check(ottokar_row.contains("| — | — | "), "Ottokar's row has dashes too (%s)" % ottokar_row)
+	_check(not head_section.contains("Hagiwara") and markdown.contains("Jeszcze nie poznani: ") and markdown.contains("Hagiwara"), "people not met are left out of the tables and listed below them")
+
+	var path: String = Report.write(Report.ENDING_IN_PROGRESS)
+	_check(path.begins_with("user://raporty/przebieg-") and path.ends_with(".md") and FileAccess.file_exists(path), "write() puts przebieg-….md under user://raporty (%s)" % path)
+	var json_path := path.trim_suffix(".md") + ".json"
+	_check(FileAccess.file_exists(json_path) and JSON.parse_string(FileAccess.get_file_as_string(json_path)) is Dictionary, "…and the .json beside it, valid")
+	var shown: String = Report.display_path(path)
+	_check(shown.ends_with(path.get_file()) and shown.contains("raporty") and not shown.begins_with("user:") and (OS.get_name() != "Windows" or not shown.contains("/")), "display_path gives the real folder of the file, as Windows writes it (%s)" % shown)
+	var path_again: String = Report.write(Report.ENDING_IN_PROGRESS)
+	_check(path_again != path and FileAccess.file_exists(path_again), "two reports in the same second do not overwrite each other")
+	for file in [path, json_path, path_again, path_again.trim_suffix(".md") + ".json"]:
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(file))
+
+	print("--- task_14: a report from a save with no logs says so")
+	var saved: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	saved.erase("dawn_log")
+	saved.erase("vein_log")
+	gs.load_state(saved)
+	var thin: Dictionary = Report.collect(Report.ENDING_IN_PROGRESS)
+	_check(thin["days"][0]["dawn"] == null and thin["days"][3]["dawn"] == null, "no dawn data for any day")
+	var thin_md: String = Report.to_markdown(thin)
+	_check(thin_md.contains("brak danych"), "the Markdown says \"brak danych\"")
+
+	print("--- task_14: the quota time comes from the vein log")
+	gs.reset()
+	for vein in gs.vein_ids().slice(0, 12):
+		gs.advance_time(1.0, "Znaczenie żyły")
+		gs.set_flag("vein_" + vein)
+	var done: Dictionary = Report.collect(Report.ENDING_WEEK)
+	_check(bool(done["quota"]["met"]) and done["quota"]["reached_at"] != null and int(done["quota"]["reached_at"]["day"]) == 1 and done["quota"]["reached_at"]["time"] == "18:00", "12 veins at one an hour from 06:00: the quota at 18:00 (%s)" % [done["quota"]["reached_at"]])
+	_check(Report.to_markdown(done).contains("norma osiągnięta: dzień 1, 18:00"), "the Markdown says when")
+
+#endregion
 
 func _check(ok: bool, what: String) -> void:
 	print("   [%s] %s" % ["OK" if ok else "FAIL", what])

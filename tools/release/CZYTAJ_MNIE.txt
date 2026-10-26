@@ -1,4 +1,4 @@
-EVERHORROR - wersja testowa (demo 0.5.2)
+EVERHORROR - wersja testowa (demo 0.5.3)
 ==========================================
 
 JAK URUCHOMIĆ
@@ -17,7 +17,7 @@ STEROWANIE
   I ............... ekwipunek (leki, narzędzia, stan bohatera)
   J ............... notes (zadania, zapiski, ludzie, zegar i dziennik czasu)
   M ............... mapa w chodnikach: dalej w głąb albo z powrotem do obozu
-  Esc ............. pauza (zapis, wczytanie, opcje)
+  Esc ............. pauza (zapis, wczytanie, opcje, SAVE REPORT)
   Spacja / Enter .. dalej w rozmowie (albo kliknij myszką)
 
 O CO CHODZI
@@ -25,7 +25,7 @@ Bohater dołącza do ekspedycji górniczej. Jego dziadek przepadł w tej kopalni
 czterdzieści lat temu. Zarządca daje tydzień: do wieczora siódmego dnia Kniaź
 chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano zarządca je policzy.
 
-Wyprawy planuje się przy stole z mapą w kwaterze zarządcy (przycisk WYRUSZ).
+Wyprawy planuje się przy stole z mapą w zagrodzie Racibora (przycisk WYRUSZ).
 W chodnikach klawisz M (albo drogowskaz przy wejściu) prowadzi dalej w głąb
 albo z powrotem do obozu. Po powrocie gra podsumowuje wyprawę.
 Każda rozmowa, droga i zaznaczona żyła zabiera czas, więc wszystkiego
@@ -42,6 +42,24 @@ dzień da się powtórzyć od rana (RETRY FROM MORNING).
 
 Cały tydzień to mniej więcej 2-3 godziny grania. Grę zapisuje się pod Esc
 (3 miejsca na zapis).
+
+CO NOWEGO W 0.5.3
+- w prawym dolnym rogu menu głównego jest numer wersji i skrót specyfikacji
+  ("0.5.3 · spec ..."): przepisz go do uwag, żeby było wiadomo, na którym
+  buildzie grasz
+- RAPORT PRZEBIEGU: na końcu tygodnia oraz po naciśnięciu SAVE REPORT w pauzie
+  (Esc) gra zapisuje u Ciebie na dysku dwa pliki, przebieg-....md (do czytania)
+  i przebieg-....json, w folderze "raporty" obok zapisów gry (adres na samym
+  dole). Jest w nich czas według kategorii, żyły o świcie, stan bohatera i ludzi
+  oraz najważniejsze wybory. Nic nie jest wysyłane przez sieć: jeśli chcesz
+  pokazać raport, skopiuj oba pliki i dołącz je do swoich uwag
+- poprawka: Sabina oraz Ottokar, Hieronim i Welf nie tracą już głowy, zanim
+  dotrą do obozu (Sabina) albo zanim ich spotkasz (pozostali); po spotkaniu
+  nocny wstrząs dotyka ich tak samo jak resztę
+- poprawka: wstęp mówi, że stół z mapą stoi w zagrodzie Racibora, za niską
+  palisadą bez dachu
+- zapisy z 0.5.x działają (zapis gry ma teraz wersję 6)
+- w archiwum jest też CHANGELOG.md z historią wersji
 
 CO NOWEGO W 0.5.2 (poprawki)
 - staw w zalanym chodniku jest pod wodą, dopóki nie ruszą pompy, więc łowić
@@ -123,5 +141,6 @@ gdzie było za ciemno, czy tydzień był za krótki albo za długi.
 Zrzut ekranu (Win + Shift + S) bardzo pomaga. Przy błędzie podaj dzień
 i godzinę z zegara w grze.
 
-Zapisy gry i ustawienia leżą w:
+Zapisy gry, ustawienia i raporty przebiegu leżą w:
   %APPDATA%\Godot\app_userdata\Everhorror
+(raporty w podfolderze "raporty", zapisy w "saves")

@@ -79,6 +79,10 @@ text = "LOAD GAME"
 layout_mode = 2
 text = "OPTIONS"
 
+[node name="ReportButton" type="Button" parent="Root/Center/Content/MainButtons"]
+layout_mode = 2
+text = "SAVE REPORT"
+
 [node name="MainMenuButton" type="Button" parent="Root/Center/Content/MainButtons"]
 layout_mode = 2
 text = "MAIN MENU"
@@ -94,3 +98,22 @@ layout_mode = 2
 [node name="SaveSlotsPanel" parent="Root/Center/Content" instance=ExtResource("4_slots")]
 visible = false
 layout_mode = 2
+
+[node name="ReportStatus" type="Label" parent="Root"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 190.0
+offset_top = 150.0
+offset_right = 560.0
+offset_bottom = 270.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.86, 0.81, 0.74, 1)
+theme_override_font_sizes/font_size = 15
+autowrap_mode = 3

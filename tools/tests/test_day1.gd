@@ -2,10 +2,15 @@ extends "res://tools/tests/test_base.gd"
 ## Day 1 from the intro to the evening: the camp schedule, Mirosław and Tekla, the trip east
 ## (fuses, cipher), the blast and comforting Mirosław.
 
+var _intro_lines: Array[String] = []
+
 func scenario() -> void:
 	step("new game: intro")
+	root.get_node("DialogueManager").got_dialogue.connect(func(line): _intro_lines.append(line.text))
 	await start_world()
 	check(gs.has_flag("intro_done") and is_equal_approx(gs.hour, 6.0), "intro played, 06:00 (%s)" % gs.clock_text())
+	check(_intro_lines.any(func(t): return t.contains("w zagrodzie Racibora, za niską palisadą bez dachu")), "task_14: the intro puts the map table in Racibor's pen, behind the low roofless palisade")
+	check(not _intro_lines.any(func(t): return t.contains("kwaterze zarządcy") or t.contains("drewnianą ścianką")), "task_14: the old \"manager's quarters behind a wooden partition\" wording is gone")
 	check(gs.npc_place(&"tekla") == "kuchnia" and gs.npc_place(&"racibor") == "stol", "breakfast: Tekla cooks, Racibor eats (%s)" % gs.places)
 	check(not npc("Dobrawa").present, "Dobrawa not in the camp yet")
 	var away := []

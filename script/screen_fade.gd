@@ -55,3 +55,27 @@ func show_end(summary: String, title: String = "Everhorror: koniec wersji demo",
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	GameState.push_modal()
 	(retry_button if retry.is_valid() else menu_button).grab_focus()
+	await _fit_end_panel()
+
+## A week's summary is taller than the screen (logo, title, up to twenty lines, buttons): drop the
+## logo, then tighten the text, until the buttons are on screen (task_14: the report line was
+## added to it and the buttons were already running off the bottom at the base 1152 x 648).
+func _fit_end_panel() -> void:
+	var box: VBoxContainer = $EndPanel/Center/VBox
+	var logo: Control = box.get_node("Logo")
+	logo.show()
+	end_summary.add_theme_font_size_override("font_size", 17)
+	box.add_theme_constant_override("separation", 20)
+	for tighter in 3:
+		await get_tree().process_frame
+		if box.size.y <= get_viewport().get_visible_rect().size.y - 16.0:
+			return
+		match tighter:
+			0:
+				logo.hide()
+			1:
+				end_summary.add_theme_font_size_override("font_size", 15)
+				box.add_theme_constant_override("separation", 12)
+			2:
+				end_summary.add_theme_font_size_override("font_size", 14)
+				box.add_theme_constant_override("separation", 8)
