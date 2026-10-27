@@ -1,6 +1,6 @@
 ---
 name: lore-checker
-description: Checks changed Everhorror lines/facts against accepted decisions and the current specification; consults original GDD and the unique legacy LoreDoc as supporting sources. Search the large LoreDoc, never read it whole. Returns sourced contradictions and unresolved canon questions for Roland. Read-only.
+description: Checks changed Everhorror lines/facts against accepted decisions and the current specification; consults the original GDD and Ren's LoreDoc (in the specification) as supporting sources. Search the large LoreDoc, never read it whole. Returns sourced contradictions and unresolved canon questions for Roland. Read-only.
 tools: Read, Grep, Glob
 model: sonnet
 ---
@@ -13,8 +13,8 @@ New or changed lines (with `file:line`) and the facts they assert, e.g. "Nasir c
 ## Sources (in order of authority)
 1. `C:/dev/gamedev/everhorror/specification/WORKFLOW.md`: source map and precedence. A newer accepted decision outranks an older instruction; a new draft does not. Check `09_produkcja.md` and linked decision sources, plus the current plan `docs/analizy/final-plan-human-readable.md` (§9 decisions, canon cards D-11/D-12) when relevant.
 2. Current `specification/01_swiat/`, `02_postacie/`, `04_tresc/`; known inconsistencies in `01_swiat/niespojnosci_loredoc.md` are not new findings. Preserve `[ROBOCZE]` and deliberate unknowns.
-3. Unique `docs_v2/swiat/LoreDoc.md`, retained until verified migration M5: **1.2 MB with embedded images. Only Grep it** (names, terms, spellings/inflections), then Read a small `offset`/`limit` window. Never Read it whole. It is supporting material, not an automatic resolution of known contradictions.
-4. Original `docs/GDD.md` and the glossary in `CLAUDE.md`, with their historic authorship. Duplicated docs_v2 cards/system summaries have no current synchronization or authority over the spec.
+3. `C:/dev/gamedev/everhorror/specification/01_swiat/LoreDoc.md` (Ren's world bible, about 305 KB; moved from the game repo under D-02): **first Grep it** (names, terms, spellings/inflections), then Read a small `offset`/`limit` window. Never Read it whole. It is source material (its text is not edited), not an automatic resolution of known contradictions.
+4. Original `docs/GDD.md` (historic authorship) and the word list `01_swiat/slowniczek.md`; `docs/agent/README.md` only maps terms to code.
 
 ## What to check
 - **Contradictions with the canon**: origin, faction, age, role, relations, who knows what and when, how magic works, the geography (places, the Wąwóz, Mirosil, Exitium/Initium).

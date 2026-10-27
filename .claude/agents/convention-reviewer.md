@@ -12,7 +12,7 @@ You review a change in the Everhorror Godot project against its conventions. You
 - The diff range (default: uncommitted changes, `git diff HEAD` plus untracked files from `git status --porcelain`). For a spec task: the worktree `C:/dev/gamedev/everhorror/everhorror-wdrozenie` and the range `master...<branch>`; the task file and the human sheet are in the main copy.
 - The task number, if any.
 
-`CLAUDE.md` (sections Conventions, Systems, Docs, Specification) is the rulebook. Read the relevant parts before judging.
+`CLAUDE.md` (sections Hard rules, Conventions, Tech essentials) is the rulebook; `docs/agent/README.md` describes the systems, `tools/README.md` the test layers and the release. Read the relevant parts before judging.
 
 ## Checklist
 **Dialogue (`dialogue/*.dialogue`)**
@@ -35,12 +35,12 @@ You review a change in the Everhorror Godot project against its conventions. You
 - The task file's requirements section ("Wymagania:" / "Requierments") is byte-identical to HEAD (`git show HEAD:<path>`, or the pre-move path for a `git mv`).
 - The task file ends with "Podsumowanie". Implementation tasks have `docs/human-tasks/factcheck-test-NN.md` (from `factcheck_template.md` or `playtest_template.md`) with the table `# | co sprawdzić | jak | oczekiwany wynik | wynik | uwagi`.
 - The human sheet lives in the **main copy**, not on the branch: `git -C <worktree> diff master...<branch> --stat` lists no `docs/human-tasks/` file. A sheet that already sits on the branch (committed before this rule) is a finding to report, not to move.
-- Human zones are untouched, per `docs/human-tasks/INFO.md`: in a new sheet every `wynik`/`uwagi`/`ocena`/`wybór` cell, every answer section and the `Wyniki człowieka`/`Zwolnienie`/`Zamknięcie` lines are empty; in an existing one filled values are byte-identical to HEAD. The agent's own results are only in the task report or under `## Wyniki automatu (agent)`. The sheet header gained no `zastąpione …`, `niesprawdzone przez człowieka` or `Zwolnienie:` line, no human column was renamed (`wynik` to `Wynik automatu`), no `(agent)` was added to the heading of a human table and no empty row was deleted: such edits close a sheet without a person, and the dashboard audit reports them as `SHEET_STATE`.
+- Human zones are untouched. Their only definition is [docs/human-tasks/INFO.md](../../docs/human-tasks/INFO.md#strefy-człowieka) (columns, whole tables, answer sections, header lines): in a new sheet they are all empty; in an existing one filled values are byte-identical to HEAD. The agent's own results are only in the task report or under `## Wyniki automatu (agent)`. The sheet header gained no `zastąpione …`, `niesprawdzone przez człowieka` or `Zwolnienie:` line, no human column was renamed (`wynik` to `Wynik automatu`), no `(agent)` was added to the heading of a human table and no empty row was deleted: such edits close a sheet without a person, and the dashboard audit reports them as `SHEET_STATE`.
 - Open questions are decision cards in the spec (`../specification/zgloszenia/`, `Rodzaj: decyzja`, `Zadanie: task_NN`), not new `docs/human-tasks/decision-task-NN.md` files.
-- Moved files (`done/`) have fixed relative links.
-- Current sources match `../specification/WORKFLOW.md`: spec for intended design, code for behavior, tests for observed evidence. Duplicated docs_v2/MECHANICS are reference-only, without ongoing synchronization. Preserve unique older sources pending verified migration. Game changes from outside the spec have a `WDROZENIA.md` → "Zmiany agenta poza specyfikacją" row; editorial process changes do not advance the game baseline. Self-decided content keeps [ROBOCZE], numbers belong to `07_balans.md`.
+- Moved files (`done/`) have fixed relative links, and so do the links that point to them (the sheet header → `../ai-tasks/done/task_NN.md`). Exception: links inside the quoted requirements stay as they were, because the requirements stay byte-identical (see `docs/ai-tasks/done/task_13.md`). A file that is not yet in git history must be saved there before a `git mv`.
+- Current sources match `../specification/WORKFLOW.md`: spec for intended design, code for behavior, tests for observed evidence. `docs/archiwum/` is history, not a source. A game change from outside the spec adds no new row to `WDROZENIA.md` → "Zmiany agenta poza specyfikacją" (an urgent fix that restores an existing rule needs none; anything else was a ⬜ first); editorial process changes do not advance the game baseline. Self-decided content keeps [ROBOCZE], numbers belong to `07_balans.md`.
 - The agent never fills human `wynik`/`uwagi` or claims a playtest from a merge/automated pass. Own checks have actual results and reports; chat decisions are attributed. Human verification needs the person's entry or Roland's explicit waiver. Current ownership routes to Roland, preserving historical author attribution.
-- `CLAUDE.md` reflects new systems, conventions or test layers.
+- New systems are described in `docs/agent/README.md`, new conventions in `CLAUDE.md` (the core stays within 10 KB), new test layers and release steps in `tools/README.md`.
 
 ## Output
 Findings, most serious first:

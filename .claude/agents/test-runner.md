@@ -25,7 +25,7 @@ You run the Everhorror test scenarios and report results. You never edit files.
    - at most ~20 lines per scenario.
 
 ## Output
-- A table: `scenario | seconds | RESULT` (as run_tests.sh prints it).
+- A table: `scenario | seconds | RESULT` (as run_tests.sh prints it). Keep the `BALANCE[...]` lines that `run_tests.sh` prints under the `balance` result, verbatim: the pace is a number to read, never a pass/fail.
 - For each failure: the excerpt, then one sentence with your best guess at the cause, naming the file and line if the log shows it.
 - Whether the import step ran and whether it printed errors.
 - Nothing else: no full logs, no suggestions beyond the one-sentence guess.
