@@ -456,7 +456,7 @@ Wcześniejszy plan był zbyt ambitny jak na jedną osobę z agentem: miał 8 fal
 | „Wydarzenia jako dane” w 3 częściach, przed presją | Robimy **tylko część 1**, w etapie 7, jako przygotowanie do pakietu „Ludzie”. Dalsze części tylko wtedy, gdy się opłacą. | Mniej przepisywania przed pierwszym efektem w grze. |
 | Zakres pakietu „Ludzie”: Tekla, Racibor, Anzelm | Dochodzi naprawa Dobrawy. | Jej załamanie jest dziś martwym kodem. |
 | Raport tygodniowy z CLI | Krótka notatka agenta przed przeglądem. | Bez nowego narzędzia. |
-| Dalszy rozwój dashboardu | **Wstrzymany**, tylko poprawki błędów. | Narzędzie już wystarcza. |
+| Dalszy rozwój dashboardu | **Wstrzymany**, tylko poprawki błędów. Zastąpione 2026-10-26: Roland zlecił orkiestrację zadań z dashboardu (specification/09_produkcja.md, dziennik decyzji). | Narzędzie już wystarcza. |
 
 ---
 

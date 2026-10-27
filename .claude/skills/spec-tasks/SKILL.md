@@ -7,7 +7,9 @@ description: On a person's request, turn accepted changes in the design spec (..
 
 The one entry point from the spec to the game. It only **plans**: it writes task files and spec bookkeeping, never game code. Implementation goes through `/ai-task implement NN` (spec tasks are built on a `spec/*` branch in the worktree, see the ai-task skill). After the user merges that branch, `/spec-sync finalize` flips the markers.
 
-This skill starts on a person's instruction, not from the poller. A legacy `unattended` argument is meaningful only for an explicitly authorized noninteractive invocation; unresolved questions go into a spec ticket (step 6), without inventing decisions. Current process/source map: `C:/dev/gamedev/everhorror/specification/WORKFLOW.md`; Roland owns all sections, and newer accepted decisions take precedence over older instructions.
+This skill starts on a person's instruction, not from the poller. A legacy `unattended` argument is meaningful only for an explicitly authorized noninteractive invocation; unresolved questions go into a spec ticket (step 6), without inventing decisions. A **dashboard run** is such an explicitly authorized unattended invocation: Roland's "Zaplanuj zadania" click starts `/spec-tasks unattended` with `EVERHORROR_DASHBOARD_RUN` set and an appended prompt that starts with `# Przebieg z dashboardu`. Then the rules of the `ai-task` skill, section **Dashboard runs**, apply too: non-interactive, no commits in the game main copy, full paths in `git -C` and for the spec CLI (`node C:/dev/gamedev/everhorror/specification/dashboard/cli.ts lint`), no `git -c`, `bash -c`, `eval` or `node -e`, human zones off limits. Current process/source map: `C:/dev/gamedev/everhorror/specification/WORKFLOW.md`; Roland owns all sections, and newer accepted decisions take precedence over older instructions.
+
+**Dashboard lock.** Before you change anything, read `reports/dashboard-runs/lock.json` in the game main copy. If it exists, its `pid` is a live process (PowerShell: `Get-Process -Id <pid>`; `null` means the run is just starting) and you are not that run (your run id is named in the dashboard contract; a terminal session has none), stop and report who holds it (`kind`, `task`, `startedBy`): a dashboard run owns the repos. Never delete the lock. A lock whose process is gone is stale; ignore it.
 
 ## Places
 | What | Path |
@@ -17,6 +19,7 @@ This skill starts on a person's instruction, not from the poller. A legacy `unat
 | Spec repo (remote `everhorror-spec`, branch `master`) | `C:/dev/gamedev/everhorror/specification` |
 | Spec CLI (run from the spec root) | `node dashboard/cli.ts status --json`, `diff <from> <to> --json`, `lint` |
 | Deployment log | spec `WDROZENIA.md`: "Wpisy" (baseline), "Na gałęziach", **"W zadaniach"**, "Czeka na wdrożenie" |
+| Dashboard run records and lock | `reports/dashboard-runs/` (game main copy, git-ignored) |
 
 Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` first. Standing permission (user decision 2026-09-26): `[agent]` commits **and pushes** to the spec `master`. Game-repo commits are not part of this skill.
 
@@ -68,6 +71,7 @@ Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` fir
 6. **Unclear items.** An item is unclear when it is contradictory, missing a number, or needs a design decision the spec doesn't make.
    - Interactive run: ask the user (AskUserQuestion) before writing that task.
    - Unattended run: write `zgloszenia/<YYYY-MM-DD>_pytania-agenta-<sha7>.md` from `szablony/zgloszenie.md` (Status `❔ pytanie`, Zgłasza: agent, Rodzaj: pytanie; one numbered question per item, quoting its ID and the options you see). Then either create the task for the clear part with the line "czeka na odpowiedź: <ticket>", or create no task at all.
+   - Dashboard run: write one decision card (D-03) instead of the ❔ ticket, so Roland can resolve it with a click: `zgloszenia/<YYYY-MM-DD>_<short-topic>.md` (ASCII name) from `szablony/decyzja.md`, `Rodzaj: decyzja`, `Zadanie: task_NN` of the task you create for the clear part (leave the field out when you create none), a choice table `| # | Pytanie | Opcje | Rekomendacja | Twój wybór |` with one numbered question per item (quote its ID; options as `**a)** … **b)** …`, your recommendation first, `Twój wybór` empty), `## Decyzja` left as "Do rozstrzygnięcia.". The card's `Zadanie` field ties it to the board, so you do not add the line "czeka na odpowiedź:". Commit it with the rest of the bookkeeping (step 7) and finish with `STATUS: czeka-na-decyzje`.
 7. **Spec bookkeeping** (spec repo, on `master`):
    - If `WDROZENIA.md` has no "W zadaniach" section yet, create it between "Na gałęziach" and "Czeka na wdrożenie":
      - intro: "Zadania w repozytorium gry (`docs/ai-tasks/`), które agent utworzył ze zmian w specyfikacji (skill `spec-tasks`). Wdraża je `/ai-task implement NN` na gałęzi `spec/*`; po scaleniu `/spec-sync finalize` zaznacza ✅.";
@@ -78,10 +82,12 @@ Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` fir
    - Tickets that became tasks: status `🔧`, plus "Odpowiedź agenta": "Zadanie `task_NN` w repo gry."
    - `node dashboard/cli.ts lint` must report 0 errors.
    - First run, interactive: show the user the task list before committing.
-   - Commit `[agent] zadania z <sha7>: task_NN, …` and push.
+   - Commit `[agent] zadania z <sha7>: task_NN, …` and push. Commit with explicit paths only: `git -C <spec> add -- <paths>`, then `git -C <spec> commit -m "…" -- <paths>`; never `-a`, `add -A` or `add .`. A dashboard run always does this, and only after lint shows 0 errors. Never force a push.
 8. **Report** in chat, or in the run log when unattended, in Polish:
    - the tasks created, with their IDs;
    - tasks that got a "Zmiana w specyfikacji" section;
    - what was skipped (💡/❓/deferred) and why;
    - the questions asked;
    - next step: `/ai-task analyze NN` or `/ai-task implement NN`.
+
+   A dashboard run ends with exactly three lines, in Polish: `STATUS: ok|czeka-na-decyzje|blad`, `ZROBIONE: <the tasks created, with their IDs, in one sentence>` and `NASTĘPNY KROK: <what Roland does next>`. `ok` also covers "nothing to plan" (step 2); `czeka-na-decyzje` means a decision card was written (step 6); `blad` means a precondition failed (a dirty spec, a live lock held by another run), a pull was not a fast-forward or lint shows errors.
