@@ -63,5 +63,28 @@ Innych wystąpień nie ma: `grep` po `script/`, `dialogue/`, `tools/` (bez `docs
 9. Arkusz `docs/human-tasks/factcheck-test-17.md` w głównej kopii (z `factcheck_template.md`, strefy człowieka puste), dwa wiersze: wstęp w nowej grze mówi „za palisadą bez dachu” i brzmi naturalnie; [M] w obozie pokazuje „…w zagrodzie Racibora…”.
 10. Specyfikacja: „Na gałęziach” 🧪 i „W zadaniach” task_17 → 🧪, bez przełączania ⬜→✅ (robi to `/spec-sync finalize`) i bez wiersza w „Zmianach agenta poza specyfikacją”. Lint, commit `[agent]` z jawnymi ścieżkami, push. W zgłoszeniu `2026-10-26_niska-palisada.md` (pod „Odpowiedź agenta”) można dopisać gałąź, na której to weszło.
 
-## Podsumowanie
+## Co zostało zrobione
+Gałąź `spec/2026-10-27-task17` w kopii wdrożeniowej (od `master` po scaleniu task_16), commit `2ca7904`.
+
+**Wymaganie 1 i 2 (wstęp, komunikat stołu).**
+- `dialogue/system.dialogue:107`: „za niską palisadą” → „za palisadą”; zdanie dosłownie jak w wymaganiu 1 (po `--import`).
+- `script/map_screen.gd:78`: „w kwaterze Racibora” → „w zagrodzie Racibora”.
+- `tools/tests/test_day1.gd`: asercja na nowy wstęp i brak „niską”, a także nowe sprawdzenie komunikatu [M] w obozie (zdarzenie `field_map` podane do `MapScreen._unhandled_input`, przechwycenie `GameState.message`).
+- `CHANGELOG.md`: nowa sekcja „[Nieopublikowane]”, wpis 0.5.3 i `CZYTAJ_MNIE.txt` bez zmian; `gen_camp.gd` bez zmian.
+
+## Decyzje i założenia
+Brak nowych. Wariant A wybrał Roland w zgłoszeniu. Numeru wersji nie podniesiono. W specyfikacji nie zmieniano reguł ani żadnego [ROBOCZE].
+
+## Czego potrzebuję od Ciebie
+Sprawdź dwa wiersze arkusza [factcheck-test-17](../human-tasks/factcheck-test-17.md), potem scal gałąź.
+
+## Test
+Arkusz: [factcheck-test-17](../human-tasks/factcheck-test-17.md). `lore-checker`: bez sprzeczności. `convention-reviewer`: bez błędów. Po `--import`:
+- `unit`, `lint`, `dialogue`, `day1`: ALL PASSED.
+- Pełny zestaw (`tools/run_tests.sh`, za zgodą Rolanda), 19 scenariuszy: wszystkie ALL PASSED (balance 1415 sprawdzeń).
+
+## Podsumowanie analizy
 Zadanie to dwie zmiany słów: „niską” znika ze wstępu (`dialogue/system.dialogue:107`), a komunikat [M] w obozie mówi „w zagrodzie Racibora” zamiast „w kwaterze” (`script/map_screen.gd:78`). Do tego poprawka testu `day1` z nowym sprawdzeniem komunikatu i wpis w `CHANGELOG.md` w nowej sekcji. Historia wydania 0.5.3 i komentarz w `gen_camp.gd` (już bez „low”) zostają bez zmian. Decyzja Rolanda zapadła w zgłoszeniu (wariant A), więc nie piszę karty. Zadanie czeka tylko na kolejność: domyślnie wdrażane po scaleniu task_16, albo razem z nim, jeśli Roland tak wskaże przy kliknięciu „Wdrażaj”.
+
+## Podsumowanie
+Wdrożone na gałęzi `spec/2026-10-27-task17` (`2ca7904`): wstęp bez „niską”, komunikat [M] „w zagrodzie Racibora”, test `day1` rozszerzony, wpis w `CHANGELOG.md`. Pełny zestaw testów przeszedł. Czeka na sprawdzenie arkusza przez człowieka i scalenie przez Rolanda.
