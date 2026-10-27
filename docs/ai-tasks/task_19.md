@@ -38,12 +38,17 @@ Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
 | T2-teraz | 2 | F4, F5, F10, F11, W1: wznowienie po decyzji, licznik planowania, „Wyjaśnione”, świeżość stanu, spokojne powody; [task_18](task_18.md) („Zmiany do wdrożenia” pod przyciskiem „Zaplanuj zadania”) | Sonnet high | scalone (`d0706cf`) |
 | T2-zadanie | 2 | W3, F15: kolejność kart strony zadania, polecenie dla zadań narzędziowych | Haiku max | scalone (`d0706cf`) |
 | T2-diff | 2 | (a)–(d), (h), (i): fałszywe „do wdrożenia”, pliki redakcyjne, wtyczki w przebiegach, domknięcie; czerwony test e2e z `work.e2e.ts:1264` | Sonnet high | scalone (`d0706cf`; e2e 22/22) |
-| T3-tlum | 3 | Tłumaczenie pozostałych napisów, po grupach plików (kilku agentów naraz) | Haiku max | czeka |
-| T4-kopie | 4 | R2, R3: kopia robocza na przebieg, jeden pisarz buchalterii, blokada na zapis | Sonnet high | czeka |
+| T3-tlum | 3 | Tłumaczenie pozostałych napisów w czterech grupach: rdzeń (`derive.ts`, `workView.ts`, znaczniki, opisy zmian), przebiegi (`runs.ts`, `Runs.tsx`), widoki (Zgłoszenia, Wdrożenia, Nowe zadanie, Zespół, Logowanie i inne), części wspólne (`FileView`, komponenty, komunikaty danych) | Sonnet high ×2, Haiku max ×2 | scalone (`cc10bc2`); dopięcie tłumaczeń (Haiku max) scalone |
+| T4-kopie | 4 | R2, R3: kopia robocza na przebieg, jeden pisarz buchalterii, blokada na zapis | Sonnet high | R2 scalone (`50b95ee`); R3 tylko jako plan w `ARCHITEKTURA.md` (zbyt ryzykowne bez próby na prawdziwym agencie) |
+| T5-poprawki | 5 | Poprawki z przeglądu koordynatora: linki do zadań i arkuszy, rodzaj zgłoszenia, komunikaty lintu i parsowania w języku ekranu, klucze React, nazwy w dokumentach | Sonnet high | scalone (`e62f3a4`) |
 | T4-rownolegle | 4 | R4: dwa wdrożenia naraz | Sonnet high | czeka na decyzję (plan §3 pkt 5, §5) |
 | R1 | — | Reguła gałęzi `master` gry w GitHubie | koordynator | czeka na „tak” Rolanda (zmiana publiczna) |
 
 ## Co zostało zrobione
+
+**Stan końcowy gałęzi `agent/dashboard-ux` (`e62f3a4`, wypchnięta do `everhorror-spec` jako kopia zapasowa):** typy bez błędów, `npm test` 1976/1976, `npm run e2e` 25/25, build, lint specyfikacji 0/0. Gałąź zawiera też aktualny master specyfikacji (zasady z 2026-10-27). Koordynator przejrzał osobiście strażnika przebiegów, scalanie, zamknięcie z ⏭ i zakładanie kopii roboczych, uruchomił gałąź na prawdziwych danych (tylko odczyt) i obejrzał 14 stron w PL i EN w przeglądarce bez okna: 0 wyjątków; usterki z tego przeglądu poprawił T5. Szczegóły fal są w tabeli wyżej i w commitach gałęzi; poniżej najważniejsze zapisy z pierwszych zadań.
+
+**Co zostaje poza zadaniem:** R3 (jeden pisarz buchalterii, plan w `ARCHITEKTURA.md`), R4 (dwa wdrożenia naraz, czeka na decyzję), R1 (reguła gałęzi w GitHubie, czeka na „tak”). Teksty na ekranie, które celowo zostają po polsku: treść specyfikacji, zadań i arkuszy, wartości zapisywane do plików, kontrakt agenta, zapisane wyniki audytu i komunikaty serwera.
 
 ### T0-test (J1) — Sonnet 5.5 high, scalone `437a830`
 - `node/security.test.ts`: każde `specApi()` dostaje katalogi gry, kopii i przebiegów w świeżym folderze tymczasowym, więc menedżer przebiegów w ogóle nie powstaje. Pozostałe testy już używały folderów tymczasowych (sprawdzone wszystkie).
@@ -73,6 +78,14 @@ Arkusz kilku zadań (D-27) i zamknięcie z ⏭ (D-28) wchodzą w grze dopiero ra
 - `docs/human-tasks/factcheck_template.md` i `playtest_template.md`: zdanie o dopisywaniu części do otwartego arkusza i sekcja „Raport przebiegu: dołącz plik” z tabelą pod `<!-- człowiek -->`.
 - Prompt wdrożenia w `src/work/runs.ts` już to mówi (`6e7b7b7`), więc skill i dashboard zmieniają się w tej samej chwili.
 
+Kopia robocza na gałąź (R2, T4-kopie) też wchodzi dopiero razem z kodem dashboardu:
+- `ai-task/SKILL.md`, „Dashboard runs” (punkt o kodzie): zamiast stałej ścieżki `…/everhorror-wdrozenie` — „kopia wskazana w kontrakcie (dashboard zakłada jedną na gałąź w `C:/dev/gamedev/everhorror/everhorror-wt/`; starsze gałęzie mogą stać w `everhorror-wdrozenie`)”; Godot nadal tylko z `--path` na tę kopię.
+- Ten sam plik, „Spec tasks / Where”: w przebiegu z dashboardu gałąź i jej kopia już istnieją i są przełączone, więc nic nie zakładać ani nie przełączać. W terminalu: `git -C <gra> worktree add -b spec/<data>-task<NN> C:/dev/gamedev/everhorror/everhorror-wt/spec-<data>-task<NN> master`, potem skopiować `.godot` albo `godot --headless --path <kopia> --import`. Usunąć zdanie „If it exists: `git switch -c`…”.
+- Ten sam plik, „fix NN” krok 1: kopia gałęzi (z kontraktu) stoi na gałęzi i jest czysta; jeśli nie, stop i raport. Tylko starsza gałąź we wspólnej kopii może być odłączona i czysta, a potem `switch`.
+- Ten sam plik, „implement” krok 4 i „review”: świeża kopia potrzebuje `--import` Godota przed testami.
+- `spec-sync/SKILL.md` (domknięcie): dashboard usuwa kopię gałęzi przy scaleniu; `switch --detach` tylko wtedy, gdy kopia z kontraktu to stara wspólna kopia wciąż na gałęzi. Gdy `branch -d` odmawia, bo kopia wciąż trzyma gałąź (miała niezatwierdzone zmiany), nie wymuszać; zgłosić w `ZROBIONE`.
+- `CLAUDE.md` gry, tabela „Places” i „Branches”: kopie wdrożeniowe w `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>`, `everhorror-wdrozenie` tylko dla gałęzi sprzed zmiany.
+
 ### Dokładne teksty do wklejenia (D-27, D-28)
 
 1. `ai-task/SKILL.md`, implement krok 6, zamiast punktu „Sheet `docs/human-tasks/factcheck-test-NN.md` …”:
@@ -101,5 +114,7 @@ Arkusz kilku zadań (D-27) i zamknięcie z ⏭ (D-28) wchodzą w grze dopiero ra
 ## Czego potrzebuję od Ciebie
 
 ## Test
+
+Odbiór człowieka: arkusz [factcheck-test-19](../human-tasks/factcheck-test-19.md) (16 wierszy, z instrukcją uruchomienia gałęzi).
 
 ## Podsumowanie
