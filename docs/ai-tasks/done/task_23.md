@@ -10,7 +10,7 @@ Roland, czat 2026-10-27, odpowiedź na pytania koordynatora po task_19 (1: dost�
 Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
 
 Kontekst:
-- R3 i R4 opisuje `specification/dashboard/ARCHITEKTURA.md` („Plan: jeden pisarz buchalterii”) oraz plan, [D-33](../../analizy/final-plan-human-readable.md#decyzje-z-task_23-d-33d-34). R4 bez R3 dawałby konflikty w `WDROZENIA.md`, więc najpierw R3.
+- R3 i R4 opisuje `specification/dashboard/ARCHITEKTURA.md` („Plan: jeden pisarz buchalterii”) oraz plan, [D-33](../../archiwum/plan-historia-2026-10.md#decyzje-z-task_23-d-33d-34). R4 bez R3 dawałby konflikty w `WDROZENIA.md`, więc najpierw R3.
 - „Czytelność nazw”: `specification/zgloszenia/2026-10-27_czytelnosc-nazw.md` (wiersz 3 arkusza odbioru task_19, niski priorytet). Zasady i słowniczek: `specification/dashboard/UI.md`.
 - R1 zrobione przez koordynatora: reguła GitHub `master — bez force push i usuwania (R1)` w repozytorium gry (id 25967090).
 - Punkt 1: sesje terminalowe gry nie dostają dostępu do `../everhorror-wt` (`.claude/settings.json` bez zmian).

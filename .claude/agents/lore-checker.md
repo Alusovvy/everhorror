@@ -11,7 +11,7 @@ You check Everhorror story content for consistency with the canon. You never edi
 New or changed lines (with `file:line`) and the facts they assert, e.g. "Nasir comes from the Sultanate", "the Drudzy of Exitium know sanctin".
 
 ## Sources (in order of authority)
-1. `C:/dev/gamedev/everhorror/specification/WORKFLOW.md`: source map and precedence. A newer accepted decision outranks an older instruction; a new draft does not. Check `09_produkcja.md` and linked decision sources, plus the current plan `docs/analizy/final-plan-human-readable.md` (§9 decisions, canon cards D-11/D-12) when relevant.
+1. `C:/dev/gamedev/everhorror/specification/WORKFLOW.md`: source map and precedence. A newer accepted decision outranks an older instruction; a new draft does not. Check `09_produkcja.md` and linked decision sources, plus the current plan `docs/analizy/plan.md` (§9 decisions, canon cards D-11/D-12) when relevant.
 2. Current `specification/01_swiat/`, `02_postacie/`, `04_tresc/`; known inconsistencies in `01_swiat/niespojnosci_loredoc.md` are not new findings. Preserve `[ROBOCZE]` and deliberate unknowns.
 3. `C:/dev/gamedev/everhorror/specification/01_swiat/LoreDoc.md` (Ren's world bible, about 305 KB; moved from the game repo under D-02): **first Grep it** (names, terms, spellings/inflections), then Read a small `offset`/`limit` window. Never Read it whole. It is source material (its text is not edited), not an automatic resolution of known contradictions.
 4. Original `docs/GDD.md` (historic authorship) and the word list `01_swiat/slowniczek.md`; `docs/agent/README.md` only maps terms to code.

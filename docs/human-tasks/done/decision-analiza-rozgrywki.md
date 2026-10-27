@@ -2,7 +2,7 @@
 
 > Przygotowano: 2026-09-26 · Na prośbę z czatu („Przeanalizuj obecne mechaniki i feeling rozgrywki…”) · Bez zadania w `ai-tasks/`. Po decyzjach zrobię z nich zadanie.
 > Podstawa: specyfikacja (`00_gra`, `03_mechaniki/*`, `07_balans`, `04_tresc/miejsca`, `tydzien`), kod (`player.gd`, `story_director.gd`, `vn.gd`, `game_state.gd`, `expeditions.gd`), factchecki 01–08 i krótka sesja w grze w tle (wstęp, obóz, rozmowa z Mirosławem, Stara sztolnia, Kostnica, mapa [M]).
-> **Status: rozstrzygnięte 2026-10-26** (Roland, czat: „1. a, 2. c, 3 a, 4 a, 5 a, 6 A”, „Reszta też jak rekomendowane”). Wybory są w ostatniej kolumnie tabeli. Kolejność wdrożenia: `docs/analizy/final-plan-human-readable.md`, etapy 4–7.
+> **Status: rozstrzygnięte 2026-10-26** (Roland, czat: „1. a, 2. c, 3 a, 4 a, 5 a, 6 A”, „Reszta też jak rekomendowane”). Wybory są w ostatniej kolumnie tabeli. Kolejność wdrożenia: `docs/analizy/plan.md`, etapy 4–7.
 > **Errata 2026-10-26:** ✅ „sprawdzone przez użytkownika” w factcheckach 01 i 03–07 wpisał agent (commit `d39bbb9`), nie tester. Zdanie niżej o factcheckach 03–07 nie opisuje więc wyników człowieka.
 
 ## Czego nie sprawdziłem

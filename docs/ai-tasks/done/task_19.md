@@ -19,7 +19,7 @@ Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
 
 ## Plan
 
-Źródła: propozycje z przeglądu dashboardu `docs/analizy/propozycje-dashboard.md` (F1–F15, J1–J6, W1–W5, R1–R4) oraz punkty (a)–(k) z planu ([Odłożone](../../analizy/final-plan-human-readable.md#odłożone-bez-decyzji)) i decyzje [D-27…D-29](../../analizy/final-plan-human-readable.md#decyzje-o-arkuszach-człowieka-d-27d-28). Po zakończeniu zadania plik propozycji zostaje usunięty, a ten plik jest jedynym zapisem.
+Źródła: propozycje z przeglądu dashboardu `docs/analizy/propozycje-dashboard.md` (F1–F15, J1–J6, W1–W5, R1–R4) oraz punkty (a)–(k) z planu ([Odłożone](../../archiwum/plan-historia-2026-10.md#odłożone-bez-decyzji)) i decyzje [D-27…D-29](../../archiwum/plan-historia-2026-10.md#decyzje-o-arkuszach-człowieka-d-27d-28). Po zakończeniu zadania plik propozycji zostaje usunięty, a ten plik jest jedynym zapisem.
 
 **Jak pracujemy.** Kod powstaje w osobnej kopii roboczej specyfikacji `C:\dev\gamedev\everhorror\specification-praca` na gałęzi `agent/dashboard-ux` (od `6436f80`), jak w task_15. Żywa kopia `specification` jest używana przez Rolanda i działający dashboard. Każde zadanie cząstkowe robi jeden agent od początku do końca we własnej kopii (`specification-praca-<id>`, gałąź `agent/dux-<id>` od `agent/dashboard-ux`). Koordynator (Opus 5.5) przegląda wynik i scala go do `agent/dashboard-ux`. Do master specyfikacji całość trafia dopiero po odbiorze Rolanda. Modele: Sonnet 5.5 high, a przy prostszych zadaniach Haiku 5.5 max.
 

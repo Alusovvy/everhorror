@@ -1,15 +1,8 @@
-# Everhorror — plan końcowy
+# Everhorror — plan końcowy: historia (stan z 2026-10-27, przed D-36)
 
-> 2026-10-26, zaktualizowany 2026-10-27 · Przygotował: agent (Claude) · Dla: Rolanda
+> **To archiwum.** Pełny tekst planu z 2026-10-26/27 przeniesiony bez zmian treści z `docs/analizy/final-plan-human-readable.md`, żeby żaden dowód ani uzasadnienie nie zginęły. Bieżący, krótki plan to [`docs/analizy/plan.md`](../analizy/plan.md); agent go nie musi czytać stąd, chyba że `plan.md` odsyła do konkretnego miejsca (karty decyzji D-xx, szczegóły etapów, §7 i §8).
 >
-> To jedyny plan projektu: **co robimy, w jakiej kolejności i kto co robi**. Zastępuje wcześniejsze analizy i plany. Ich decyzje, zgody i najważniejsze ustalenia przeniesiono tutaj ([§9](#9-decyzje-i-stałe-zgody)), a same pliki usunięto.
->
-> **Status treści:**
-> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-35 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
-> - **Uproszczenia** z [§8.3](#83-co-upraszczam) to rekomendacja. Obowiązują od zapisu, dopóki Roland ich nie zawetuje.
-> - **Liczby w etapach 5–7** to wartości startowe, które sprawdzi pomiar. Nie są to ostateczne decyzje.
->
-> **Od czego zacząć:** [Gdzie jesteśmy](#gdzie-jesteśmy-2026-10-27). Skróty (PT, CP, K, ⬜, `[ROBOCZE]`) objaśnia [słowniczek](#10-słowniczek).
+> **Co w tym tekście jest już nieaktualne** (zastępuje to `plan.md`): zdania o limicie jednej otwartej gałęzi (§3 pkt 5, „Gdzie jesteśmy”, D-27) zastąpiło D-33 (do 3); „do `master` gry scala tylko Roland” (§3 pkt 6) zmienia D-35 i D-36; modele w D-18 zastąpiło D-36 pkt 7; „bez grafu relacji” (§5) zmienia D-36 pkt 1; stan zadań i gałęzi w „Gdzie jesteśmy” jest sprzed wydania 0.5.4. Liczba „3 ze 128” w §8.1 jest z 2026-10-26; 2026-10-27 było **31 ze 165** ID reguł w kodzie lub testach.
 
 ## Gdzie jesteśmy (2026-10-27)
 
@@ -429,7 +422,7 @@ Tezy wcześniejszego planu agenta sprawdzono w kodzie, historii Git i źródłac
 
 - **Proces:** 36 commitów z jednego konta, 0 tagów, 13 z 14 zmian poza oficjalną drogą przeglądu.
 - **Fałszywe potwierdzenia testów:** 123 z 219 wierszy factchecków agent oznaczył jako „sprawdzone przez użytkownika” (`d39bbb9`). Korektę robił etap 1.
-- **Gra:** bohater prawie nigdy nie jest „na krawędzi”; zakończenie zależy tylko od normy żył; horror jest w tekście (chód 5 m/s, jeden dźwięk kroków, szepty jako napisy, światło bez zmian z głębokością); `story_director.gd` ma około 107 warunków; tylko 3 ze 128 ID reguł są w kodzie lub testach. Trzy błędy z etapu 2 naprawiono w 0.5.3.
+- **Gra:** bohater prawie nigdy nie jest „na krawędzi”; zakończenie zależy tylko od normy żył; horror jest w tekście (chód 5 m/s, jeden dźwięk kroków, szepty jako napisy, światło bez zmian z głębokością); `story_director.gd` ma około 107 warunków; tylko 3 ze 128 ID reguł są w kodzie lub testach (stan 2026-10-26; 2026-10-27: 31 ze 165). Trzy błędy z etapu 2 naprawiono w 0.5.3.
 
 ### 8.2 Co poprawiam
 
@@ -560,6 +553,12 @@ Obie wchodzą w życie z zadaniem narzędziowym (punkt (k) w [Odłożone](#odło
 |---|---|---|
 | D-33 | **Przebiegi równolegle (R4).** Do **3** analiz naraz (dowolne zadania) i do **3** wdrożeń albo poprawek naraz, każde w swojej kopii gałęzi i tylko na rozłącznych plikach i systemach; planowanie i domknięcie najwyżej po jednym, ale mogą iść obok reszty; commity w specyfikacji idą po kolei pod krótką blokadą; scala nadal tylko Roland, jedno po drugim. Zastępuje „najwyżej 1 otwarta gałąź z kodem” (§3 pkt 5) i w tym zakresie „bez orkiestratora wielu agentów” (§5) oraz zasadę jednego przebiegu naraz. Warunek: najpierw R3 (jeden pisarz buchalterii), bo bez niego dwa przebiegi kolidowałyby w `WDROZENIA.md`. Wdrożone 2026-10-27 (task_23, spec `c10bbda`); limity zmienia `EVERHORROR_RUN_LIMITS`. Zadanie: [task_23](../ai-tasks/done/task_23.md). | Roland, czat 2026-10-27: „2. ok” (R4), potem „Do 3 analiz równolegle i do 3 wdrożeń równolegle na rozłączonych plikach, reszta tak jak napisałeś, daję pełne tak” |
 | D-34 | **Reguła gałęzi `master` gry w GitHubie (R1)**: zakaz force push i usuwania gałęzi (ruleset „master — bez force push i usuwania (R1)”). Bez wymogu pull requestów, bo scalanie z dashboardu i commity procesowe idą z jednego konta. Sesje terminalowe gry nie dostają dostępu do `../everhorror-wt`. | Roland, czat 2026-10-27: „Nie mają dostępu. … 3. ok” |
+
+### Decyzje z audytu 2026-10-27 (D-36)
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-36 | **Przebudowa procesu według audytu** (`docs/analizy/audyt-2026-10-27/`): koordynator przyjął rekomendowane opcje wszystkich 13 decyzji z `README.md` audytu i wdraża je bez osobnych zadań. (1) §5 „bez grafu relacji” → graf tylko jako widok pochodny, bez bazy i ręcznej edycji. (2) Fakty do scalania automatycznego pochodzą z serwera: testy uruchamia serwer po wdrożeniu i poprawkach, zapis arkusza notuje sha zagranego builda, scalanie wymaga „sha arkusza = HEAD”; dla poziomów tekst i narzędzia scalanie po przeglądzie i testach serwera bez arkusza. (3) `node` w przebiegach tylko dla `cli.ts` i śledzonych skryptów (plan, analiza, domknięcie, przegląd); scalanie, push gry, przełącznik scalania automatycznego i wydanie wymagają sekretu serwera, którego przebieg nie czyta. (4) Poziomy zadań `tekst | narzędzia | rozgrywka` nadaje planowanie; tekst i narzędzia bez arkusza (dowód: testy i zrzut), rozgrywka z jednym arkuszem na build (zmienia D-27 i D-32 w tym zakresie, nie zmienia §3 pkt 4). (5) Łańcuch analiza → wdrożenie → testy serwera → build → przegląd bez kliknięć, z zatrzymaniem na karcie, czerwonym teście, werdykcie „poprawki”, konflikcie i po analizie, gdy plan dotyka plików spoza `Pliki:` albo ryzyko jest „wysokie”; jeden ekran „Do rozstrzygnięcia”. (6) Serwer zapisuje dokumenty gry po przebiegu bez naruszeń, podpisane osobą, która kliknęła start (doprecyzowanie D-17c). (7) Jedna tabela modeli: Opus medium dla planowania, analizy i przeglądu; Sonnet high dla wdrożenia i poprawek; Haiku dla domknięcia i próby (zastępuje D-18). (8) Zadania narzędziowe wdraża przebieg dashboardu. (9) Nowe napisy EN z zapasem PL (ostrzeżenie, nie błąd; D-30 bez zmian co do zasady). (10) Krótki `plan.md` i historia w `docs/archiwum/`. (11) Sonda wydajności teraz. (12) Osobne foldery testów i czerwone `^ERROR:` przed task_20. (13) Graf według `widok-grafowy.md` §8. Decyzje 3 i N9 (CI) wymagały wyraźnego „tak”: dało je polecenie Rolanda. | Roland, czat 2026-10-27: „Based on audyt-2026-10-27 apply as much changes to make this process most transparent, automated and fast as possible. Do the changes, ask no questions … skip task workflow, just do the rework, and then go through all tasks and rewrite them into new flow.” |
 
 ### Decyzje z task_24 (D-35)
 

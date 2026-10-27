@@ -1,7 +1,7 @@
 # PT0: sesja gry na buildzie 0.5.3 i odbiór dashboardu
 
 > Zadanie: [task_14](../../ai-tasks/done/task_14.md) · Dashboard: [task_15](../../ai-tasks/done/task_15.md) · Przygotowano: 2026-10-26, połączono 2026-10-27 · Czas: 1–2 h gry + ok. 1 h dashboardu
-> Jeden arkusz zamiast sześciu otwartych factchecków: [08](factcheck-test-08.md), [09](factcheck-test-09.md), [10](factcheck-test-10.md), [11](factcheck-test-11.md), [12](factcheck-test-12.md), [13](factcheck-test-13.md) (78 wierszy; decyzja [planu końcowego](../../analizy/final-plan-human-readable.md), etap 3). Zostały tylko rzeczy, które ocenia człowiek: odczucie, czytelność, ton i obraz.
+> Jeden arkusz zamiast sześciu otwartych factchecków: [08](factcheck-test-08.md), [09](factcheck-test-09.md), [10](factcheck-test-10.md), [11](factcheck-test-11.md), [12](factcheck-test-12.md), [13](factcheck-test-13.md) (78 wierszy; decyzja [planu końcowego](../../analizy/plan.md), etap 3). Zostały tylko rzeczy, które ocenia człowiek: odczucie, czytelność, ton i obraz.
 > Połączono tu też odbiór dashboardu ([factcheck-test-15](factcheck-test-15.md)) i odbiór podstaw pracy ([factcheck-foundation](factcheck-foundation-2026-10-26.md)) na prośbę Rolanda (czat 2026-10-27: wszystko do sprawdzenia w jednej kolejnej sesji). Część A to gra (wiersze 1–15, ankieta, raport), część B to dashboard (wiersze 16–29); kolejność dowolna.
 > Kolumny „wynik” i „uwagi” oraz pola ankiety wypełnia człowiek. Agent niczego tu nie wpisuje: puste pole znaczy „nie sprawdzono”.
 > Wyniki człowieka: Roland (dashboard), 2026-10-27 07:40

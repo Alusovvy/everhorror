@@ -15,7 +15,7 @@ Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
 
 Kontekst:
 - Kolejka startów: jednym kliknięciem zlecić kilka przebiegów (np. „Analizuj wszystkie zaplanowane”); ruszają w wolne miejsca według limitów D-33, reszta czeka i startuje sama.
-- Automatyczne scalanie ([D-35](../../analizy/final-plan-human-readable.md#decyzje-z-task_24-d-35)): dashboard scala gałąź sam, gdy przegląd kodu dał aktualne „gotowe”, testy przeszły, nie ma konfliktu i arkusz człowieka jest wypełniony bez ❌; potem wypycha master; tag wersji zostaje ręczny.
+- Automatyczne scalanie ([D-35](../../archiwum/plan-historia-2026-10.md#decyzje-z-task_24-d-35)): dashboard scala gałąź sam, gdy przegląd kodu dał aktualne „gotowe”, testy przeszły, nie ma konfliktu i arkusz człowieka jest wypełniony bez ❌; potem wypycha master; tag wersji zostaje ręczny.
 - „Tree merge”: wykrywanie konfliktów między otwartymi gałęziami i master przez `git merge-tree` (propozycja nr 4 agenta R4) zamiast zgadywania po ścieżkach.
 
 ---
