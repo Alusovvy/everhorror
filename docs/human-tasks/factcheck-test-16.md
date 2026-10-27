@@ -2,6 +2,7 @@
 
 > Zadanie: [task_16](../ai-tasks/task_16.md) · Przygotowano: 2026-10-27 · Gałąź: `spec/2026-10-27-task16`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis.
+> Wyniki człowieka: Roland (dashboard), 2026-10-27 14:14
 
 ## Co zostało dodane
 - Stara sztolnia ma teraz dokładnie dwie żyły (ZYL-1) i obie da się zaznaczyć (ZYL-2). Wcześniej w jaskini świeciło sześć skał, a zaznaczyć dało się tylko dwie; jedna z pozostałych nazywała się „Żyła błękitnego żelaza” i miała tylko opis.
@@ -15,14 +16,14 @@ Zacznij nową grę (albo dzień 1 po rozmowie z Raciborem), idź na wschód do S
 
 | # | co sprawdzić | jak | oczekiwany wynik | wynik | uwagi |
 |---|---|---|---|---|---|
-| 1 | W jaskini świecą dokładnie dwie skały | wejdź do jaskini za korytarzem i rozejrzyj się | dwie skały pulsują błękitem (ściana wschodnia i południowo-zachodni róg), pozostałe skały i filary są szare | | |
-| 2 | Pierwszą żyłę da się zaznaczyć | podejdź do skały na ścianie wschodniej, [E] „Zaznacz żyłę na mapie · 1 h” | mija godzina, obok skały stoi palik, pojawia się komunikat | | |
-| 3 | Licznik po pierwszej żyle | po pkt 2 przeczytaj komunikat | komunikat mówi „Żyły błękitu: 1 z 12”, nie 0 | | |
-| 4 | Licznik w innych miejscach | otwórz mapę [M], ekwipunek [I], notes [J] (zadanie „Złoża dla Kniazia”) | wszędzie 1 z 12; przy Starej sztolni na mapie „żyły: 1 z 2 zaznaczone” | | |
-| 5 | Drugą żyłę da się zaznaczyć | podejdź do skały w południowo-zachodnim rogu jaskini, [E] | jak w pkt 2; licznik 2 z 12; na mapie „2 z 2 zaznaczone” | | |
-| 6 | Zwykłe skały nie udają żył | podejdź do filarów na środku i skał przy północnej oraz wschodniej ścianie (bliżej wejścia) | nie świecą, [E] nic nie proponuje | | |
-| 7 | Podsumowanie wyprawy | wróć do obozu | w podsumowaniu „Nowe żyły na mapie: 2” (albo tyle, ile zaznaczono) | | |
-| 8 | Klimat jaskini | oceń oświetlenie po zmianie | jaskinia nadal wygląda niepokojąco i jest dość jasna, by się poruszać | | |
+| 1 | W jaskini świecą dokładnie dwie skały | wejdź do jaskini za korytarzem i rozejrzyj się | dwie skały pulsują błękitem (ściana wschodnia i południowo-zachodni róg), pozostałe skały i filary są szare | ✅ |  |
+| 2 | Pierwszą żyłę da się zaznaczyć | podejdź do skały na ścianie wschodniej, [E] „Zaznacz żyłę na mapie · 1 h” | mija godzina, obok skały stoi palik, pojawia się komunikat | ✅ |  |
+| 3 | Licznik po pierwszej żyle | po pkt 2 przeczytaj komunikat | komunikat mówi „Żyły błękitu: 1 z 12”, nie 0 | ✅ |  |
+| 4 | Licznik w innych miejscach | otwórz mapę [M], ekwipunek [I], notes [J] (zadanie „Złoża dla Kniazia”) | wszędzie 1 z 12; przy Starej sztolni na mapie „żyły: 1 z 2 zaznaczone” | ✅ |  |
+| 5 | Drugą żyłę da się zaznaczyć | podejdź do skały w południowo-zachodnim rogu jaskini, [E] | jak w pkt 2; licznik 2 z 12; na mapie „2 z 2 zaznaczone” | ✅ |  |
+| 6 | Zwykłe skały nie udają żył | podejdź do filarów na środku i skał przy północnej oraz wschodniej ścianie (bliżej wejścia) | nie świecą, [E] nic nie proponuje | ✅ |  |
+| 7 | Podsumowanie wyprawy | wróć do obozu | w podsumowaniu „Nowe żyły na mapie: 2” (albo tyle, ile zaznaczono) | ✅ |  |
+| 8 | Klimat jaskini | oceń oświetlenie po zmianie | jaskinia nadal wygląda niepokojąco i jest dość jasna, by się poruszać | ✅ |  |
 
 ## Wyniki automatu (agent)
 Testy uruchomione przez agenta w kopii wdrożeniowej, na gałęzi `spec/2026-10-27-task16`. To nie jest weryfikacja człowieka.
