@@ -44,6 +44,7 @@ Take each "Na gałęziach" row whose branch is merged into the game `master` (`g
    - Check the release tag: `git -C <game> rev-list -n 1 v<version>` must print the commit the zip was built from (the "Wpisy" row names the version). If it is missing or points elsewhere: in a terminal session place it per plan §9 "Reguła tagów i pushy"; in a dashboard run only list it in `NASTĘPNY KROK`.
    - Ask Roland whether to delete the remote branch `spec/<…>` (`git -C <game> push <remote> --delete spec/<…>`); do it only after his yes, and in a dashboard run (no network) only list it in `NASTĘPNY KROK`.
    - Leave every human sheet in `docs/human-tasks/` where it is, whatever its state: closing one is a person's act, never part of finalize.
+   - `CHANGELOG.md`: write the task's entry (what the player notices, Polish, with rule ids) under `## [Nieopublikowane]` — never a version heading; the release (dashboard card „Wydanie”) moves that text under the new version.
    - Playable builds in `build/do-ogrania/` stay as they are (outside git; the dashboard keeps the two newest of a task).
    - Don't commit in the main copy unless the user asks.
 3. **Rejected branch** (row status ❌, or the user says so):

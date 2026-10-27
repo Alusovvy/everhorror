@@ -15,7 +15,7 @@ Dev tools run from the command line (project root). Not used by the game and exc
 
 ## Testy
 
-**Run the full suite only after the user approves it. Never start it automatically.** To check a change, run one short scenario (`tools/run_tests.sh unit` and `balance` take about 2 s each, `lint` about 8 s with the generator check).
+**Run the full suite only after the user approves it. Never start it automatically.** The dashboard server runs `unit lint dialogue` plus the scenarios named in the task file after every implement or fix run (D-36; the whole suite on the server: `EVERHORROR_SERVER_TESTS=full` in the dashboard's environment, `off` disables it). To check a change by hand, run one short scenario (`tools/run_tests.sh unit` and `balance` take about 2 s each, `lint` about 8 s with the generator check).
 
 The suite has five layers, all scripts that print a `RESULT` line and are run by `tools/run_tests.sh`: (1) `unit`, pure logic; (2) `lint`, static cross-checks of ids and time labels; (3) `dialogue`, every conversation without UI; (4) the world scenarios in `tools/tests/`; (5) `balance`, the balance bot. `run_tests.sh` fails a scenario whose log has no `RESULT: ALL PASSED` line **or contains an `ERROR:` / `SCRIPT ERROR:` line** that is not on the allow-list at the top of the script (the engine's exit noise: RID leaks, "resources still in use", PagedAllocator, the dummy renderer's `Parameter "material" is null`, and the Beehave `Capture not registered` line until task_21 removes it); the first offending lines are printed under the result. Logs go to `reports/tests/<name>.log`. After changing a `.dialogue` file run `--import` first (the tests read the imported version; a brand-new `.dialogue` file needs two import passes). Run `balance` after any balance change and compare the `BALANCE[...]` lines; its story gates are a simplified table of `07_balans.md` "Pomiar" in the specification, keep the two in step.
 
@@ -110,7 +110,9 @@ A playable build (D-32) is the game exported from one commit of a task branch (o
 
 A release is not a playable build (above): it has a version number, a CHANGELOG entry and a tag, and is made after the merge.
 
-Release steps (task_14; the current version is the newest heading of `CHANGELOG.md`):
+Since the audit of 2026-10-27 (D-36) the dashboard makes the release: the card „Wydanie” on **Praca** (administrator) takes the new version number, runs the steps below in a temporary copy of `master` (the text of `## [Nieopublikowane]` in `CHANGELOG.md` moves under the new heading, `CZYTAJ_MNIE.txt` gets the version, stamp, import, export, zip), commits, fast-forwards `master`, tags `v<version>`, pushes and writes the version into `WDROZENIA.md` (`cli.ts ledger release`). Finalize writes each closed task's entry under `## [Nieopublikowane]`. The manual path stays:
+
+Release steps (task_14; the current version is the newest `## [x.y.z]` heading of `CHANGELOG.md`):
 
 1. The version is the same in three places: `application/config/version` in `project.godot`, the newest `## [x.y.z]` heading of `CHANGELOG.md` (Polish, newest first, with "Zgodność ze spec: `<sha>`" per version) and the first line of `release/CZYTAJ_MNIE.txt` ("(demo x.y.z)"). `run_tests.sh unit` and `stamp_build.js --check` fail when they differ.
 2. `node tools/release/stamp_build.js`: stamps the spec commit into `script/build_info.gd`.

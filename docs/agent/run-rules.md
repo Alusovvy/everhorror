@@ -14,7 +14,7 @@ Korzenie zapisu obowiązują `Edit`, `Write`, `MultiEdit` i powłokę tak samo.
 | domknięcie | `<spec>` (oraz przeniesienie własnego pliku zadania do `done/`, zob. kontrakt) |
 | każdy rodzaj | `<gra>/reports/dashboard-runs/<id przebiegu>/tmp/`: folder roboczy na pliki tymczasowe, serwer kasuje go po audycie |
 
-Nigdy: strefy człowieka (wyniki, oceny, uwagi i wybory w arkuszach i kartach, linie „Wyniki człowieka”, „Zwolnienie”, „Zamknięcie”), pliki cudzych zadań, `<spec>/dashboard/`, `.claude/`, `.github/`, `.git/`, `addons/`. Sekcja „Wymagania” zadania zostaje identyczna co do bajta. Głównej kopii gry nie przełączasz na inną gałąź i nie commitujesz w niej; dokumenty, które w niej zmieniasz, zostają niezatwierdzone (zapisze je serwer po czystym audycie).
+Nigdy: strefy człowieka (wyniki, oceny, uwagi i wybory w arkuszach i kartach, linie „Wyniki człowieka”, „Zwolnienie”, „Zamknięcie”), linia `> Build:` w nagłówku arkusza (ustawia ją serwer po buildzie), pliki cudzych zadań, `<spec>/dashboard/`, `.claude/`, `.github/`, `.git/`, `addons/`. Sekcja „Wymagania” zadania zostaje identyczna co do bajta. Głównej kopii gry nie przełączasz na inną gałąź i nie commitujesz w niej; dokumenty, które w niej zmieniasz, zostają niezatwierdzone (zapisze je serwer po czystym audycie).
 
 ## 2. Polecenia
 - **Jedno polecenie na wywołanie.** Jedyny dozwolony łańcuch to `cd <kopia> && tools/run_tests.sh unit lint` (nazwy scenariuszy po spacji) oraz `cd <kopia> && C:/dev/gamedev/Godot_v4.7.2-stable_win64_console.exe --headless --path . --import`.
@@ -35,8 +35,8 @@ Nigdy: strefy człowieka (wyniki, oceny, uwagi i wybory w arkuszach i kartach, l
 
 ## 5. Czego nie robisz ręcznie
 - Nie eksportujesz, nie pakujesz i nie stemplujesz gry (`tools/release/stamp_build.js` odpada). Serwer sam uruchamia testy po wdrożeniu i poprawkach, robi build do ogrania i zapisuje dokumenty gry po czystym audycie.
-- Pełnego zestawu testów nie uruchamiasz, chyba że kontrakt mówi „user approved full suite”. Zwykle: `unit lint dialogue` i scenariusze dotkniętych systemów.
-- Nie ma pytań w trakcie: gdy Roland musi coś rozstrzygnąć, piszesz kartę decyzji (D-03) w `<spec>/zgloszenia/` i kończysz `STATUS: czeka-na-decyzje`.
+- Po wdrożeniu i poprawkach serwer sam uruchamia `unit lint dialogue` oraz scenariusze z sekcji „Test” pliku zadania i zapisuje wynik w przebiegu (pełny zestaw na serwerze: `EVERHORROR_SERVER_TESTS=full`). Ty uruchamiasz w trakcie pracy tylko scenariusze, których potrzebujesz; pełnego zestawu nie uruchamiasz, chyba że kontrakt mówi „user approved full suite”.
+- Nie ma pytań w trakcie: gdy Roland musi coś rozstrzygnąć, piszesz kartę decyzji (D-03) w `<spec>/zgloszenia/` i kończysz `STATUS: czeka-na-decyzje`. Analiza zostawia w sekcji Plan pliku zadania linię `Plan zależy od wyboru: tak|nie`. Po odpowiedzi serwer sam dopisuje do pliku zadania sekcję `## Decyzje z karty <plik>` (przy „tak” krótki przebieg uaktualnia Plan); ta sekcja jest wiążąca dla kolejnych przebiegów i nie jest wznowieniem rozmowy.
 
 ## 6. Zakończenie
 Trzy linie po polsku, nic po nich: `STATUS: ok|czeka-na-decyzje|blad`, `ZROBIONE: <jedno zdanie>`, `NASTĘPNY KROK: <co robi człowiek albo następny przebieg>`. Przegląd kończy się wyłącznie obiektem JSON z werdyktem (bez linii `STATUS`).

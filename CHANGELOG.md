@@ -2,6 +2,10 @@
 
 Co się zmieniło w kolejnych wersjach Everhorror, od najnowszej. Przy każdej wersji jest „Zgodność ze spec”: skrót commita specyfikacji (repozytorium `specification`), z którą ta wersja jest zgodna. Numer wersji jest w ustawieniach projektu (`application/config/version`), w nagłówku `tools/release/CZYTAJ_MNIE.txt` i w prawym dolnym rogu menu głównego gry (TECH-1, TECH-2). Ten plik trafia do archiwum ZIP obok `CZYTAJ_MNIE.txt`.
 
+## [Nieopublikowane]
+
+Wpisy zadań domkniętych po 0.5.4 (dopisuje je domknięcie zadania). Przy wydaniu serwer dashboardu (karta „Wydanie”) przenosi ten tekst pod nowy numer wersji z datą i skrótem commita specyfikacji.
+
 ## [0.5.4] - 2026-10-27
 
 Zgodność ze spec: `3f76c0f` · zadania: task_16, task_17 · gałęzie: `spec/2026-10-27-task16`, `spec/2026-10-27-task17`
