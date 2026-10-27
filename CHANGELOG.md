@@ -2,11 +2,12 @@
 
 Co się zmieniło w kolejnych wersjach Everhorror, od najnowszej. Przy każdej wersji jest „Zgodność ze spec”: skrót commita specyfikacji (repozytorium `specification`), z którą ta wersja jest zgodna. Numer wersji jest w ustawieniach projektu (`application/config/version`), w nagłówku `tools/release/CZYTAJ_MNIE.txt` i w prawym dolnym rogu menu głównego gry (TECH-1, TECH-2). Ten plik trafia do archiwum ZIP obok `CZYTAJ_MNIE.txt`.
 
-## [Nieopublikowane]
+## [0.5.4] - 2026-10-27
 
-Zgodność ze spec: `3f76c0f` · zadanie: task_17 · gałąź: `spec/2026-10-27-task17`
+Zgodność ze spec: `3f76c0f` · zadania: task_16, task_17 · gałęzie: `spec/2026-10-27-task16`, `spec/2026-10-27-task17`
 
 ### Naprawione
+- W Starej sztolni są dokładnie dwie żyły i obie da się zaznaczyć (ZYL-1, ZYL-2). Wcześniej świeciło sześć skał, a zaznaczyć dało się tylko dwie; skały bez żyły są teraz zwykłym kamieniem. Licznik po pierwszej zaznaczonej żyle pokazuje 1 z 12 (ZYL-4).
 - Wstęp nie nazywa już palisady „niską”: stół z mapą stoi „w zagrodzie Racibora, za palisadą bez dachu”. Komunikat po naciśnięciu [M] w obozie mówi „w zagrodzie Racibora” zamiast „w kwaterze Racibora”. Wpis 0.5.3 poniżej opisuje tamtą wersję i zostaje bez zmian.
 
 ## [0.5.3] - 2026-10-26
