@@ -12,7 +12,13 @@ To **jedyna definicja** stref człowieka. `CLAUDE.md`, skille, agenci i szablony
 
 ## Nazwy arkuszy
 - `factcheck-test-NN.md`: sprawdzenie zadania `task_NN` (z `factcheck_template.md`).
-- Sesja gry (PT0, PT1, …): z `playtest_template.md`. Plik też nazywa się `factcheck-test-NN.md`, gdzie NN to zadanie, którego build oceniamy, a numer sesji stoi w tytule. PT0 to [factcheck-test-14.md](factcheck-test-14.md) (build 0.5.3).
+- Sesja gry (PT0, PT1, …): z `playtest_template.md`. Plik też nazywa się `factcheck-test-NN.md`, gdzie NN to zadanie, którego build oceniamy, a numer sesji stoi w tytule. PT0 to [factcheck-test-14.md](done/factcheck-test-14.md) (build 0.5.3, zamknięty).
+
+## Minimum ważności sesji gry
+Sesja gry liczy się do celów K z planu tylko wtedy, gdy ma wypełnione „Dotarcie do” i dołączony raport przebiegu (.md albo .json). Sesja bez nich daje tylko wskazówkę kierunku, nie pomiar, i tak ją opisujemy.
+- Wiersze dni powyżej „Dotarcie do” zostają puste. Przy zamknięciu arkusza dashboard wpisze w nich ⏭ (decyzja D-28), więc nikt nie ocenia dni, których nie zagrał.
+- W „Dane sesji” napis z menu głównego kopiujemy w całości (wersja i skrót specyfikacji), a nie tylko numer wersji.
+- Łączny czas gry podajemy w rzeczywistych godzinach; wartość „<1h” przy wielu ocenionych dniach nie jest wiarygodna.
 - Zamknięte arkusze leżą w [done/](done/), razem ze starszą historią: `decision-*.md`, `factcheck-foundation-2026-10-26.md` i zastąpionym `factcheck-test-15.md`. Tych plików nie edytujemy.
 
 ## Znaczniki wyniku

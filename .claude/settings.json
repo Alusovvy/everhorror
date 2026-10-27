@@ -31,7 +31,13 @@
       "Bash(git -C * clean*)",
       "Bash(git branch -D:*)",
       "Bash(git -C * branch -D*)",
-      "Bash(git worktree remove --force:*)"
+      "Bash(git worktree remove --force:*)",
+      "Bash(git checkout:*)",
+      "Bash(git -C * checkout*)",
+      "Bash(git stash:*)",
+      "Bash(git -C * stash*)",
+      "Bash(git rebase:*)",
+      "Bash(git -C * rebase*)"
     ]
   }
 }

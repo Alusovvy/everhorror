@@ -40,7 +40,7 @@ Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` fir
    - An ID already in an open task that **hasn't been started** (no "Co zostało zrobione" section): append `## Zmiana w specyfikacji <sha7>` to that task, below the agent marker, with the new rule text quoted. Never touch its requirements section.
    - An ID in a task in progress or in `done/`: a new task that links the earlier one.
    - An ID in a row of "Na gałęziach": a new task. Say that it follows that branch.
-5. **Group by feature**, not by spec file: all the IDs of one mechanic or one story change go into one task, even across files. For each group, write `docs/ai-tasks/task_NN.md`. NN is the next free number across `docs/ai-tasks/` and `docs/ai-tasks/done/`. The file follows `task_template.md`:
+5. **Group by feature**, not by spec file: all the IDs of one mechanic or one story change go into one task, even across files. For each group, write `docs/ai-tasks/task_NN.md`. NN is the next free number across `docs/ai-tasks/` and `docs/ai-tasks/done/`. Exception for purely textual ⬜ changes (they touch only `.dialogue` files, texts in `data/` or `CZYTAJ_MNIE.txt`): do not give each its own number; group them into one collective task "poprawki tekstów <YYYY-MM-DD>". The one-open-`spec/*`-branch rule stays. The implementer of an open 🧪 branch may add such a collective task to that branch only when Roland chooses it at the click (never on its own). The file follows `task_template.md`:
    ```
    <!--
    Zadanie ze specyfikacji (spec-tasks, <YYYY-MM-DD>). Wymagania to cytat zasad ze specyfikacji w commicie <sha7>; nie edytować.

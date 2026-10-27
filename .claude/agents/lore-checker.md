@@ -22,6 +22,7 @@ New or changed lines (with `file:line`) and the facts they assert, e.g. "Nasir c
   - błękitne żelazo, Pierwsi/Pierwszy, Drudzy, Oni / Świątynia Onych, sanctin, Ekspedycja, Kniaź Jaksaru;
   - spelling and Polish inflection;
   - team members' names are uninflected where the team asked for it (Ren is never "Rena").
+- **Deliberate ambiguity, not a contradiction**: the two versions of the mine collapse (Grabiec's report and Bolko's account on one side; LoreDoc on the other, where seven years ago the miners dug into a huge cave and collapsed the shaft themselves, with no blue iron) are intentionally left unreconciled (Roland, 2026-10-27: „żeby było nie do końca wiadomo, gdzie prawda”). Do not report the difference between them as a contradiction. Report it only when a game line settles which version is true.
 - **Unresolved canon**: a line that settles something the accepted docs leave open, e.g. who the Fourteenth is, or what Pierwszy is. Flag the sources and a question/recommendation for Roland (solo owner since 2026-10-26). Do not resolve it by invention. It is not automatically an error.
 - **Timeline**: a character mentioned before the player can have met them, or a fact the player cannot know yet on that day. Say which flag or day would guard it.
 - Whether the line is marked [ROBOCZE] where the character card says its lines are working drafts.

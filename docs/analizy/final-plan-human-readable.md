@@ -5,7 +5,7 @@
 > To jedyny plan projektu: **co robimy, w jakiej kolejności i kto co robi**. Zastępuje wcześniejsze analizy i plany. Ich decyzje, zgody i najważniejsze ustalenia przeniesiono tutaj ([§9](#9-decyzje-i-stałe-zgody)), a same pliki usunięto.
 >
 > **Status treści:**
-> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-26 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
+> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-31 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
 > - **Uproszczenia** z [§8.3](#83-co-upraszczam) to rekomendacja. Obowiązują od zapisu, dopóki Roland ich nie zawetuje.
 > - **Liczby w etapach 5–7** to wartości startowe, które sprawdzi pomiar. Nie są to ostateczne decyzje.
 >
@@ -13,11 +13,12 @@
 
 ## Gdzie jesteśmy (2026-10-27)
 
-- **Etapy 0–2 są zrobione.** Praca jest zapisana i wypchnięta w obu repozytoriach. Build **0.5.3** jest scalony do `master` gry, a tag `v0.5.3` stoi na `e1ba7ca`.
-- **Zakres 0.5.3 się zmienił.** Raport przebiegu i bot balansu, planowane na 0.5.4 (etap 4), weszły do 0.5.3 w task_14. PT0 odbywa się więc na buildzie, który już zapisuje raport przebiegu (zob. [etap 4](#etap-4--pomiar-raport-i-bot-weszły-do-053)).
-- **task_14 jest sfinalizowane.** Zadanie leży w `docs/ai-tasks/done/`, a wiersz w `WDROZENIA.md` ma wpis `27e91e7`. Lista „Na gałęziach” jest pusta. Zdalną gałąź `spec/2026-10-26-task14` usunięto 2026-10-27 na prośbę Rolanda (czat); scalenie `5c08c5d` i tag `v0.5.3` zostają. Czasowa kopia robocza specyfikacji `specification-praca` już nie istnieje.
-- **Orkiestracja z dashboardu działa.** Zadania, arkusze, karty decyzji i przebiegi agenta obsługuje widok „Praca” (task_15, kod w `master` specyfikacji, ostatni commit dashboardu `88edde0`). Decyzje: [D-16…D-21](#decyzje-z-task_15-d-16d-21). Instrukcja obsługi: `specification/dashboard/INSTRUKCJA.md`.
-- **Następny krok: etap 3, sesja PT0.** Jest jeden połączony arkusz, `docs/human-tasks/factcheck-test-14.md`. Część A dotyczy gry 0.5.3: wiersze 1–15, ankieta i raport przebiegu. Część B to odbiór dashboardu: wiersze 16–29, a wiersz 29 odsyła do instrukcji. Sesja zajmuje 1–3 godziny ([D-25](#decyzje-z-porządkowania-dokumentacji-d-22d-26)). Wcześniejsze arkusze `factcheck-test-15` i `factcheck-foundation-2026-10-26` są zastąpione i leżą w `done/` jako historia.
+- **Etapy 0–2 są zrobione.** Build **0.5.3** jest scalony do `master` gry, a tag `v0.5.3` stoi na `e1ba7ca`. Raport przebiegu i bot balansu weszły do 0.5.3 w task_14 (zob. [etap 4](#etap-4--pomiar-raport-i-bot-weszły-do-053)).
+- **PT0 jest zamknięte, ale daje tylko kierunek.** Arkusz `docs/human-tasks/done/factcheck-test-14.md` ma czas gry „<1h”, puste „Dotarcie do”, oceny dni, których nie zagrano, i nie ma raportu przebiegu. Liczby 3/7 i 4/7 z ankiety to sygnał, a nie pomiar. Pełny tydzień z raportem to sesja **PT0b** ([etap 3](#etap-3--sesja-gry-pt0-bramka), [D-31](#decyzje-z-analizy-projektu-d-31)).
+- **Na gałęzi:** task_16 (żyły w Starej sztolni), gałąź `spec/2026-10-27-task16`, arkusz `docs/human-tasks/factcheck-test-16.md` czeka na grę Rolanda. Za nim czeka task_17 (palisada bez „niską”), bo obowiązuje limit jednej gałęzi.
+- **Specyfikacja 2026-10-27:** odpowiedzi Rolanda pod ❓ są regułami (np. ZAP-13…16, ZAD-9, NPC-19), karta „dynamika i nagrody” dała reguły ⬜ (B1–B4, C1–C4, A1, A2), a analiza projektu UI-8 i CZAS-19. Otwarte karty decyzji: „kim jest ktoś” (Hrapek a D-11) i „forma bohatera”. Zgłoszenie błędu: załamanie w nocy połykane. Z tych reguł zrobi zadania następne „Zaplanuj zadania”.
+- **Dashboard:** task_19 (czytelność, dwujęzyczność PL/EN, propozycje z przeglądu) ma fale 0–2 gotowe na gałęzi `agent/dashboard-ux` w kopii `specification-praca`. Do master specyfikacji trafi po odbiorze Rolanda. Do tego czasu działa wersja z task_15 (`specification/dashboard/INSTRUKCJA.md`).
+- **Zadania narzędziowe gry z analizy projektu:** task_20 (pomiar: tor bohatera w bocie, czas realny dnia, „złoty tydzień”), task_21 (porządek repozytorium i licencje w HEAD), task_22 (narzędzia procesu). Wdrażamy je w terminalu, po kolei, w limicie jednej gałęzi.
 - **Punkt odniesienia K1 z bota** (task_14, nie od gracza): norma 12 żył pada między dniem 4, 13:00 (styl „żyły”) a dniem 5, 15:30 (styl „rozmowy”, wariant opóźniony). Cel [K1](#4-cele-mierzalne) to „nie wcześniej niż wieczorem dnia 6”.
 - **Odłożone przez Rolanda:** hasło administratora dashboardu oraz źródło i licencja `assets/logo.png` („hasło i licencja na razie olać”, czat 2026-10-27; licencja logo wraca najpóźniej przed demem publicznym). Pierwsze płatne kliknięcie przebiegu już było: planowanie z 2026-10-27 ([D-21](#decyzje-z-task_15-d-16d-21)).
 
@@ -28,7 +29,7 @@
 1. **Gra ma mocną pętlę, ale jej trzy obietnice słabną w połowie tygodnia.** Dotyczy to demo 0.5.2 i trzech obietnic: presji czasu, kruszących się ludzi i horroru w głąb. Ponowne sprawdzenie kodu potwierdziło diagnozę. Przy ludziach wyszło nawet gorzej: przez poczytalność łamie się praktycznie tylko Mirosław.
 2. **Poprzednia praca nad narzędziami jest dobra, ale wąska.** Wykonał ją inny model AI. Dashboard specyfikacji dostał wyszukiwarkę i bezpieczny zapis, powstała jedna instrukcja pracy (`WORKFLOW.md`), a poller tylko powiadamia. Testy dashboardu przechodzą; agent uruchomił je ponownie.
 3. **Najtańsze i najcenniejsze kroki są zrobione.** Korekta fałszywych wpisów testów, decyzje w specyfikacji, trzy drobne błędy gry i numer wersji weszły w etapach 1–2 (build 0.5.3).
-4. **Od miesiąca nikt nie grał w grę.** Następnym prawdziwym krokiem jest sesja gry (PT0), a nie kolejne narzędzia.
+4. **Pierwsza sesja gry (PT0) była krótka.** Dała kierunek, ale nie pomiar. Następnym prawdziwym krokiem jest pełny tydzień z raportem (PT0b), a przed zmianą balansu narzędzia pomiaru z etapu 4.
 5. **Kolejność etapów:**
 
    | Etap | Co |
@@ -44,7 +45,7 @@
    | 8 | Fabuła — **równolegle, tylko w specyfikacji** |
    | 9 | Pierwsza godzina i demo |
 
-6. **Upraszczam wcześniejszy plan.** Odkładam nowy dziennik prac i rozbudowane CLI. CI i osobna tożsamość agenta stają się opcjonalne. Wstrzymanie dashboardu zostało zastąpione prośbą Rolanda z 2026-10-26, zob. [D-16](#decyzje-z-task_15-d-16d-21). Specyfikację nadal edytujemy bez osobnej kopii roboczej; kopia `specification-praca` była tylko czasowym wyjątkiem na task_15 i jest już usunięta.
+6. **Upraszczam wcześniejszy plan.** Odkładam nowy dziennik prac i rozbudowane CLI. CI i osobna tożsamość agenta stają się opcjonalne. Wstrzymanie dashboardu zostało zastąpione prośbą Rolanda z 2026-10-26, zob. [D-16](#decyzje-z-task_15-d-16d-21). Specyfikację nadal edytujemy bez osobnej kopii roboczej. Wyjątkiem jest kod dashboardu: przy task_15 i task_19 powstaje w kopii `specification-praca` (D-29).
 
 **Gdzie czytać dalej:** etapy są w [§1](#1-plan-działań), obowiązki Rolanda w [§2](#2-co-robi-roland). [§7](#7-ocena-poprzedniej-pracy-nad-narzędziami) i [§8](#8-weryfikacja-wcześniejszego-planu) to dowody i historia. Wyjątek: [§8.3](#83-co-upraszczam) opisuje zmiany planu, które Roland może zawetować.
 
@@ -56,8 +57,8 @@
 Etap 0  Zabezpieczyć pracę              ~1 h        zrobione
 Etap 1  Uczciwe zapisy i decyzje        ~3 h        zrobione (tylko dokumenty)
 Etap 2  Drobne poprawki gry + wersja    ~3 h        zrobione → build 0.5.3, tag v0.5.3
-Etap 3  Sesja gry PT0                   1–3 h Rolanda   ← teraz, bramka
-Etap 4  Pomiar                          raport i bot już w 0.5.3; reszta → build 0.5.4
+Etap 3  Sesja gry PT0 / PT0b            PT0 zrobione (kierunek); PT0b ← teraz, bramka
+Etap 4  Pomiar                          raport i bot w 0.5.3; task_20 → build 0.5.4
 Etap 5  Odczucie (horror w świecie)     → PT1
 Etap 6  Presja tygodnia                 → PT2
 Etap 7  Ludzie się kruszą               → PT3
@@ -158,8 +159,12 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
 - **Część B** (wiersze 16–29) to odbiór dashboardu z task_15. Wiersz 29 odsyła do `specification/dashboard/INSTRUKCJA.md`.
 - **Bramka:** dopóki PT0 nie jest wypełniony albo świadomie pominięty przez Rolanda, agent nie zaczyna nowych funkcji gry. Narzędzia pomiaru z etapu 4 już są (raport i bot w 0.5.3), a dalsze można budować, bo nie zmieniają rozgrywki.
 
+- **Stan (2026-10-27):** PT0 jest zamknięte, ale bez pełnego tygodnia i bez raportu (zob. [Gdzie jesteśmy](#gdzie-jesteśmy-2026-10-27)), więc daje kierunek, a nie punkt odniesienia K1–K5.
+- **PT0b** (analiza projektu, G1): jedna sesja na 0.5.3 albo na buildzie po task_16/17. Cały tydzień w grze, raport `.md`/`.json` dołączony do arkusza, ocena dnia tylko dla dni faktycznie zagranych. Dopiero ten raport jest punktem odniesienia dla [K1–K5](#4-cele-mierzalne). Koszt: 2–3 godziny Rolanda.
+- **Minimum ważności sesji** (P3, zapisane w `docs/human-tasks/playtest_template.md` i `INFO.md`): sesja liczy się do celów K tylko z wypełnionym „Dotarcie do” i dołączonym raportem; dni po „Dotarcie do” zostają puste, a w „Dane sesji” kopiujemy napis z menu w całości.
+
 - **Kto:** agent przygotowuje arkusz, Roland gra i go wypełnia.
-- **Gotowe, gdy:** arkusz jest wypełniony albo jawnie pominięty, a każdy znaleziony problem ma decyzję (poprawić teraz albo odłożyć).
+- **Gotowe, gdy:** arkusz PT0b spełnia minimum ważności albo Roland świadomie go pomija, a każdy znaleziony problem ma decyzję (poprawić teraz albo odłożyć).
 
 ### Etap 4 — Pomiar (raport i bot weszły do 0.5.3)
 
@@ -175,12 +180,16 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   Nic nie jest wysyłane przez sieć.
 - **Bot balansu.** To skrypt, który sam „gra” tydzień bez uruchamiania świata gry. Ma dwa style gry: „żyły” (zachłanny) i „rozmowy”. Wypisuje, kiedy osiągnięto normę, oraz stan na koniec tygodnia.
 - **Stan wyjściowy K1 z bota.** Norma 12 żył pada od dnia 4, 13:00 (styl „żyły”, wariant optymistyczny) do dnia 5, 15:30 (styl „rozmowy”, wariant opóźniony). Cel z [§4](#4-cele-mierzalne) to wieczór dnia 6. Bot nie zastępuje gracza, więc liczby potwierdzi dopiero raport z PT0.
-- **Zostaje do zrobienia** (proces, nie warunek ukończenia etapu):
-  - zawęzić uprawnienia agenta w `.claude/settings.json`: zamiast ogólnych `git:*` i `node:*` lista konkretnych komend, a w zakazach `+master`, `rebase`, `restore` i `checkout --`;
-  - podział `CLAUDE.md` na rdzeń do 10 KB i pliki tematyczne wykonuje przebieg dokumentacji z 2026-10-27, nie etap 4.
+- **Pomiar przed etapami 5–7, [task_20](../ai-tasks/task_20.md)** (analiza projektu, [D-31](#decyzje-z-analizy-projektu-d-31)):
+  - bot dostaje tor bohatera: poczytalność i zdrowie na przestrzeni tygodnia (G4). Dziś bohater praktycznie nie schodzi do pasma „na krawędzi”, więc szepty i winieta prawie nie startują;
+  - raport przebiegu zapisuje czas realny każdego dnia (G5), potrzebny do cięcia dema;
+  - test „złoty tydzień” powstaje już tutaj (K5), a nie w etapie 7, bo etapy 5 i 6 też zmieniają noce.
+- **Zapis gry** (reguły ZAP-13…16 ⬜, odpowiedzi Rolanda z 2026-10-27): zapis atomowy z kopią poprzedniego, migracja wersji zapisu, potwierdzenie nadpisania, autozapis rano i przy posłaniu plus zapis ręczny. Idzie przez „Zaplanuj zadania” jak każda reguła ⬜.
+- **Uprawnienia i narzędzia procesu, [task_22](../ai-tasks/task_22.md)** (P1, P4, K4, T7, K6): lista dozwolonych komend zamiast `git:*` i `node:*` (minimalny zakaz `checkout`, `stash` i `rebase` jest już w `.claude/settings.json`), skrypt wydania `tools/release/release.sh`, rejestr flag z lintu, lint przeciw „dwunastu żyłom” na sztywno i lint liczący polskie literały w `script/`.
+- Podział `CLAUDE.md` na rdzeń i pliki tematyczne zrobił przebieg dokumentacji z 2026-10-27.
 
 - **Kto:** agent pracuje na gałęzi `spec/*`, Roland scala.
-- **Gotowe, gdy:** bot podaje dzień osiągnięcia normy i gra zapisuje raport przebiegu (oba są w 0.5.3), a uprawnienia są zawężone. Pierwszy punkt odniesienia dla celów [K1–K5](#4-cele-mierzalne) daje PT0, bo arkusz prosi o dołączenie plików raportu. PT1 służy do porównania.
+- **Gotowe, gdy:** bot podaje dzień osiągnięcia normy i najniższą poczytalność bohatera, raport zapisuje czas realny dnia, „złoty tydzień” przechodzi, a uprawnienia są zawężone. Pierwszy punkt odniesienia dla celów [K1–K5](#4-cele-mierzalne) daje PT0, bo arkusz prosi o dołączenie plików raportu. PT1 służy do porównania.
 
 ### Etap 5 — Odczucie: horror w świecie, nie w tekście
 
@@ -198,7 +207,10 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - lampa przygasa, gdy bohater jest na krawędzi.
 - **Łagodniejsze podświetlenie.** Postacie tracą podświetlenie, a przedmioty dostają cienki kontur.
 - **Mikro-horror** wieczorami i nocami w dniach 1–2. Próba w Kostnicy (4b) nie weszła do decyzji: wybrano 4a (Roland, czat 2026-10-26). Wraca tylko na osobne polecenie.
-- **Licencje.** `cave_ambient.mp3` i `steps.mp3` wymienić na dźwięki CC0. Freesound wchodzi w grę, jeśli Roland poda klucz.
+- **Reguły z karty „dynamika i nagrody” (Roland, 2026-10-27, pierwsze zadanie):** zaznaczenie żyły jako mała scena (ZYL-9), godzina pracy z przyciemnieniem i dźwiękiem (CZAS-17), słowne komunikaty o zyskach zaufania i poczytalności (ZDR-13, NPC-20), warianty ogniska, snów i poranków (CZAS-18). Do tego podpowiedzi pierwszej godziny (UI-8) i do trzech nowin na planszy poranka (CZAS-19).
+- **Licencje.** `cave_ambient.mp3` i `steps.mp3` wymienić na dźwięki CC0. Freesound wchodzi w grę, jeśli Roland poda klucz. Pozostałe pliki bez licencji usuwa z HEAD już [task_21](../ai-tasks/task_21.md) (repozytorium gry jest publiczne). Czyszczenie historii tylko po wyraźnym „tak”.
+- **Duże pliki** (P5): na etap 5 zostajemy przy zwykłym gicie i wybieramy dźwięk poza repozytorium, a potem jednym commitem. LFS rozważymy przy pełnej grze. Migracja historii do LFS wymaga wyraźnego „tak” ([D-31](#decyzje-z-analizy-projektu-d-31)).
+- **Wydajność** (K7): przed mgłą i dźwiękiem 3D jeden pomiar FPS w obozie i w Kryształowej galerii. Wszystkie miejsca są dziś załadowane naraz (86 świateł z migotaniem). Jeśli trzeba, gałęzie poza bieżącym miejscem są wyłączane.
 - **Sesja gry PT1.** Porównuje K1–K5 z raportem z PT0 oraz napięcie (K3) z ankietą PT0. Warto dać build też znajomemu.
 
 - **Kto:** agent pracuje na gałęzi `spec/*`, Roland scala i gra.
@@ -215,7 +227,9 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
 - **Żyły ponad normę jako pokusa** (dokładny próg bot ustawi razem z normą). Amulet się grzeje, sny są silniejsze, a każda taka żyła kosztuje −1 poczytalności.
 - **Rozmowy oddają czas.** Każda dłuższa płatna rozmowa daje wskazówkę o drodze lub o żyle, ostrzeżenie albo zniżkę.
 - **Zmęczenie** zostaje tylko jako modyfikator czasu marszu, bez nowych efektów.
-- **Strojenie stanu „na krawędzi”** według pierwszego zmierzonego tygodnia, bez nowych liczników.
+- **Strojenie stanu „na krawędzi”** według pierwszego zmierzonego tygodnia (tor bohatera z task_20), bez nowych liczników.
+- **Reguły etapu 6 już w specyfikacji** (oznaczone [ETAP 6], ruszają dopiero na hasło startu): ZYL-10 (norma etapami, zgodnie z D-05; reguła wymienia kwestie z jednym wozem i „dwunastoma żyłami” do zmiany), ZYL-11 (podsumowanie i mapa mówią o tempie), WYP-16 (zdarzenia przy przybyciu), DIA-11 („nowina dnia”), DIA-12 (obietnice rozliczane później). Rozjazd ZYL-4 (12 żył do dnia 7) z wartościami startowymi D-05 rozstrzyga bot.
+- **Błąd do poprawki przed nocami z ceną:** załamanie bohatera w nocy jest dziś połykane (zgłoszenie `zgloszenia/2026-10-27_zalamanie-w-nocy.md`), a −3 za godzinę po 22:00 zrobi z tego realny przypadek.
 - **Sesja gry PT2.** Sprawdzamy cele K1 i K4.
 
 - **Kto:** agent pracuje na gałęzi `spec/*`, Roland scala i gra.
@@ -229,7 +243,7 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - rejestru kanonu z etapu 8 (krok 1), który przeszedł okno weta;
   - okna weta Rolanda na teksty załamań.
 - **Najpierw przygotowanie (część 1 „wydarzeń jako danych”):**
-  1. Test „złoty tydzień” zapisuje wyniki wszystkich 7 nocy.
+  1. Test „złoty tydzień” (zbudowany już w etapie 4, task_20) zapisuje wyniki wszystkich 7 nocy.
   2. Nocne zmiany poczytalności i poranne zdania przechodzą z kodu do tabel w specyfikacji, a z nich przez generator do danych gry.
   3. Test potwierdza, że wyniki są identyczne. Zachowanie gry się nie zmienia.
 - **Wspólne wstrząsy:**
@@ -261,6 +275,8 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
 
 Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze najwyżej około 20 nowych faktów kanonu między przeglądami.
 
+**Stan (2026-10-27):** odpowiedzi Rolanda w świecie i lore są kanonem (ciało dziadka przed świątynią Onych, kryształ jako nośnik Onych, myśli w snach to myśli dziadka, ujednolicony zimny błękit). Dwie wersje zawalenia są celowo nierozstrzygnięte („żeby było nie do końca wiadomo, gdzie prawda”; `fabula.md`, `lore-checker` tego nie zgłasza). Czekają dwie karty decyzji: „kim jest ktoś” (odpowiedź „Hrapek” kłóci się z D-11 i z jego śmiercią w noc 5) oraz „forma bohatera” (męska, wybór płci albo formy bezosobowe; warto rozstrzygnąć przed tłumaczeniem).
+
 - **Kto:** agent pisze, Roland może zawetować.
 - **Gotowe, gdy:** punkty 1–4 są zapisane, a wybrana oś fabuły przeszła okno weta.
 
@@ -275,7 +291,11 @@ Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze 
   Lepiej zacząć go po etapach 6 i 7.
 - **Prolog na powierzchni**, który jest też samouczkiem.
 - **Demo publiczne:** dni 1–3, zakończone na spotkaniu z Exitium. Pełna gra nadal trwa cały tydzień.
-- **Wersja angielska**, przez ten sam mechanizm tłumaczeń co gwara. Gwara zostaje tylko po polsku.
+- **Wersja angielska**, przez ten sam mechanizm tłumaczeń co gwara. Gwara zostaje tylko po polsku. Przygotowanie od teraz (K6): nowy tekst dla gracza w skrypcie idzie przez `tr()` albo tabelę `Texts` (`CLAUDE.md`), lint liczy polskie literały w `script/` (task_22). Przed etapem 9: pliki tłumaczeń dla skryptów, dialogi przez rozszerzony mechanizm gwary, język menu zgodny z językiem gry (D5).
+- **Klif dema** (D2): build z ustawieniem `demo_cut` reżyseruje spotkanie z Exitium w dniu 3 w miejscu dobranym pod nastrój i kończy planszą „Tu kończy się demo” z podsumowaniem trzech dni. Pełna gra zachowuje dzisiejsze zachowanie.
+- **Długość dema** (D3): cel liczbowy (np. 40–50 min do klifu) ustalamy po pomiarze czasu realnego (task_20) i PT0b, a dzień 3 tniemy pod ten cel.
+- **Zapis w demie** (D4): w buildzie `demo_cut` tylko autozapis rano i przy posłaniu (pomysł w ZAP-16 jako 💡). Buildy testowe zachowują zapis ręczny, zgodnie z odpowiedzią Rolanda.
+- **Podpis kodu albo platforma** (D5): osobna decyzja przed publikacją; wydatek albo rejestracja, więc tylko po wyraźnym „tak”.
 - **Ostateczna nazwa przed stroną w sklepie.** Do tego czasu zostaje „Everhorror” (kandydaci w [§9](#9-decyzje-i-stałe-zgody)).
 - **Wskazówki z researchu** (źródła blogowe, niska pewność):
   - strona sklepu i grafika okładki ważą tyle samo co demo;
@@ -290,7 +310,11 @@ Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze 
 
 ## 2. Co robi Roland
 
-- **Teraz:** sesja PT0 w arkuszu `docs/human-tasks/factcheck-test-14.md` (część A: gra 0.5.3, część B: odbiór dashboardu), 1–3 godziny. Do tego czasu czekają jeszcze trzy sprawy z końca bloku [Gdzie jesteśmy](#gdzie-jesteśmy-2026-10-27).
+- **Teraz:**
+  1. zagrać task_16 i wypełnić `docs/human-tasks/factcheck-test-16.md`, potem scalić (odblokowuje task_17);
+  2. rozstrzygnąć dwie karty decyzji („kim jest ktoś”, „forma bohatera”) i kliknąć „Zaplanuj zadania” dla nowych reguł ⬜;
+  3. sesja PT0b: pełny tydzień z raportem, 2–3 godziny;
+  4. odbiór dashboardu z task_19, gdy agent przygotuje arkusz.
 - **Po każdym etapie gry (zwykle raz w tygodniu):**
   - około 30 minut na karty decyzji czekające na weto, wyniki gry i wybór następnego etapu;
   - około godziny na grę w najnowszy build i wypełnienie krótkiego arkusza; PT0 jest dłuższy, 1–3 godziny.
@@ -495,10 +519,32 @@ Przebieg porządkowania dokumentacji z 2026-10-27 wykonał prośbę Rolanda o pr
 | D-25 | Czas sesji gry dla testera: do PT0 „1–3 godziny”. Jedną liczbę podamy po PT0. | rekomendacja agenta (weto Rolanda) |
 | D-26 | LoreDoc (tekst Rena) jest przeniesiony do specyfikacji dosłownie. Pytanie, czy oryginał ma rozdział „Przystosowanie do Savage Worlds”, oraz poprawa usterek eksportu (H1 w L476, puste `###`) czekają na zgodę. | rekomendacja agenta (weto Rolanda) |
 
+### Decyzje o arkuszach człowieka (D-27…D-28)
+
+Obie wchodzą w życie z zadaniem narzędziowym (punkt (k) w [Odłożone](#odłożone-bez-decyzji)). Do tego czasu obowiązuje zasada z `docs/human-tasks/INFO.md`: osobny arkusz na zadanie, zamknięcie tylko arkusza kompletnego albo zwolnionego.
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-27 | **Arkusz rośnie, zamiast blokować.** Gdy otwarty arkusz człowieka nie jest jeszcze wypełniony, kolejne zadania można wdrażać dalej, a ich wiersze trafiają do tego samego arkusza jako nowa część („Część: task_NN”) z pustymi komórkami człowieka. Nie powstaje nowy arkusz, więc człowiek sprawdza wszystko w jednej sesji gry, jak w PT0. Bez zmian: najwyżej 1 otwarta gałąź z kodem, ostrzeżenie przy 2 buildach do zagrania, agent nie wpisuje wyników. | Roland, czat 2026-10-27: „jak człowiek nie wypełni arkusza to może pchać kolejne elementy i po prostu arkusz się rozrasta o nie” |
+| D-28 | **Zamknięcie z pominięciem.** Arkusz można przenieść do `done/` także z pustymi polami. Wtedy dashboard wpisuje w każde puste pole do wypełnienia (wyniki, skale ankiety, pytania otwarte) `⏭ pominięte (zamknięcie bez wypełnienia)`, a opcjonalna kolumna uwag zostaje pusta, i dopisuje linię `Zamknięcie: <Imię> (dashboard, <data>): pominięte N z M pól`. To wpis człowieka, bo powstaje na kliknięcie Rolanda; agent w przebiegu nigdy go nie robi (§3 pkt 4). ⏭ nie jest dowodem sprawdzenia: liczy się jako „nie sprawdzono”. Zadania z takiego arkusza zamykają się jako „zamknięte bez pełnego sprawdzenia”, a liczba pominiętych pól jest widoczna w dashboardzie. Różnica wobec zwolnienia: zwolnienie mówi „tego testu nie trzeba”, a pominięcie mówi „tego nie sprawdzono”. | Roland, czat 2026-10-27: „powinna być możliwość oddania arkusza do /done z niewypełnionymi polami, wtedy wszystko liczy się jako pominięte” |
+
+### Decyzje z task_19 (D-29…D-30)
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-29 | Zadanie narzędziowe dla dashboardu jest otwarte jako [task_19](../ai-tasks/task_19.md). Koordynuje Opus 5.5, a zadania cząstkowe robią Sonnet 5.5 high albo, przy prostszych, Haiku 5.5 max. Zastępuje w tym zakresie regułę modeli z `CLAUDE.md` („Haiku 5.5 max pisze, eskalacja do Sonnet”). Kod powstaje w osobnej kopii roboczej `specification-praca` na gałęzi `agent/dashboard-ux`, z kopiami cząstkowymi na zadanie, jak w task_15. Do master specyfikacji całość trafia po odbiorze Rolanda. Krok R4 (dwa wdrożenia naraz) czeka na osobną decyzję, bo zmienia §3 pkt 5 i §5. R1 (reguła gałęzi w GitHubie) czeka na „tak”, bo zmienia ustawienia publicznego repozytorium. | Roland, czat 2026-10-27: „Rozplanuj te propozycje na konkretne taski i zacznij delegować Sonnet 5.5 High … albo Haiku 5.5 Max jezeli latwiejsze zadanie. Ty zostajesz koordynatorem.” |
+| D-30 | Dashboard jest dwujęzyczny: polski (domyślny i źródłowy) oraz angielski, z przełącznikiem w nagłówku. Tłumaczy się interfejs, a nie treść specyfikacji, zadań, arkuszy, commitów ani kontraktów agenta. Nazwy i zasady pisania interfejsu opisuje `specification/dashboard/UI.md` (słowniczek PL/EN, jedna nazwa na jedną rzecz). | Roland, czat 2026-10-27: „chce też podneiść czytelność dashboardu, poczytaj o dobrmy projektowaniu UI/UX, o czytelnych nazwach, zrób to wgl dwujęzyczne” |
+
+### Decyzje z analizy projektu (D-31)
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-31 | Propozycje z analizy projektu (Fable 5.1, 2026-10-27, 31 pozycji) są przyjęte i rozdzielone: reguły ⬜, karty i zgłoszenie w specyfikacji (commity `f70da86`…`da97946`), zadania narzędziowe gry [task_20](../ai-tasks/task_20.md)–[task_22](../ai-tasks/task_22.md), punkty etapów 3–9 tego planu i zmiany procesu (minimum ważności sesji, drobne poprawki tekstów na jednej gałęzi w `spec-tasks`, celowa niejednoznaczność w `lore-checker`, konwencja `tr()` w `CLAUDE.md`, zakaz `checkout`, `stash` i `rebase` w `.claude/settings.json`). PT0 liczy się jako kierunek, a punkt odniesienia K1–K5 da PT0b. „Złoty tydzień” przechodzi z etapu 7 do etapu 4. Duże pliki na etap 5: zwykły git bez podmian w pętli, LFS przy pełnej grze (rekomendacja agenta). Czyszczenie historii repozytorium, migracja do LFS, podpis kodu i platforma dla dema wymagają osobnego „tak”. Plik analizy usunięto; jej treść jest w zadaniach, regułach i tutaj. | Roland, czat 2026-10-27: „Wprowadz propozycje Fable, nastepnie odswiez dokumentacje.” |
+
 ### Odłożone (bez decyzji)
 
 - **Korekty specyfikacji do stanu gry.** Każda zmienia treść reguły i w dashboardzie wychodzi jako „do wdrożenia”, więc czeka na jedną zgodę i jeden commit `[agent]`: `welf.md:35` („rozmowa (1 h)”, w grze `[#free]`; brak +20 zaufania), `07_balans.md:82` (kąt +4) i `:134` (lista zaufania), ZAD-1 bez zakładki „Czas”, `00_gra.md` („Stan gry”, „dziesięć postaci”) oraz pochodzenie „Tekla [GDD]” i „Hanusz (LoreDoc)”.
-- **Przyszłe zadanie narzędziowe dla dashboardu** (do otwarcia po PT0; do tego czasu redakcja plików reguł dająca fałszywe „do wdrożenia” czeka):
+- **Zadanie narzędziowe dla dashboardu: [task_19](../ai-tasks/task_19.md)** (otwarte 2026-10-27 po PT0, [D-29](#decyzje-z-task_19-d-29d-30); obejmuje poniższe punkty i propozycje z `docs/analizy/propozycje-dashboard.md`; do czasu punktów (a)–(d) redakcja plików reguł dająca fałszywe „do wdrożenia” czeka):
   - (a) zmiana samych linii meta („Stan na”) bez pozycji `tekst`;
   - (b) `01_swiat/LoreDoc.md` w `EDITORIAL_FILES`;
   - (c) reguły TECH-1…3 są dziś niewidoczne dla `/spec-tasks`, bo `08_technika.md` jest plikiem redakcyjnym;
@@ -507,7 +553,9 @@ Przebieg porządkowania dokumentacji z 2026-10-27 wykonał prośbę Rolanda o pr
   - (f) etykieta „Szablon: zadanie”;
   - (g) rodzajowe stopki commitów (`Wpisał-`, `Scalił-`, `Zamknął-` …) i zdanie „Ten przebieg uruchomił …”;
   - (h) wtyczki użytkownika zsynchronizowane z kontem ładują się w przebiegach z dashboardu (ostrzeżenie przy starcie: „Wtyczki są załadowane: cc-plugin-…”);
-  - (i) domknięcie zapisuje w `WDROZENIA.md` („Wpisy”) commit wdrożenia, więc własny commit domknięcia, który przestawia znaczniki, pokazuje się w dashboardzie jako fałszywe pozycje „do wdrożenia”.
+  - (i) domknięcie zapisuje w `WDROZENIA.md` („Wpisy”) commit wdrożenia, więc własny commit domknięcia, który przestawia znaczniki, pokazuje się w dashboardzie jako fałszywe pozycje „do wdrożenia”;
+  - (j) **opcje w kartach decyzji bez kontekstu.** Panel rozstrzygnięcia pokazuje tylko wiersz tabeli: pytanie, opcje i rekomendację. Opcja w rodzaju „**a)** B1 + B2 + B3 + C4” odsyła do kodów opisanych wyżej w treści karty, więc przy wyborze nie wiadomo, co się wybiera (Roland, czat 2026-10-27: „ja muszę mieć kontekst do takich pytań przy proponowanym wyborze”). Przykład: `zgloszenia/2026-10-27_dynamika-i-nagrody.md`, pytania 1 i 6. Poprawka ma dwie części. Pierwsza: szablon `szablony/decyzja.md` i skille, które piszą karty, wymagają, żeby każdą opcję dało się zrozumieć bez reszty karty, czyli żeby każdy kod miał obok krótki opis (np. „B1 — scena zaznaczenia żyły”). Druga: panel dashboardu przy opcji rozwija opisy użytych kodów z treści karty albo pokazuje kartę obok tabeli. Część pierwszą można zrobić od razu, bez czekania na PT0;
+  - (k) **arkusze rosnące i zamknięcie z pominięciem** ([D-27, D-28](#decyzje-o-arkuszach-człowieka-d-27d-28)). Skill `ai-task implement` dopisuje część do otwartego, niewypełnionego arkusza zamiast tworzyć nowy. Dashboard przypisuje jeden arkusz kilku zadaniom, a w akcji „Przenieś arkusz do done/” pozwala zamknąć arkusz z pustymi polami (z potwierdzeniem i liczbą pominiętych pól; serwer wpisuje ⏭ w puste pola do wypełnienia w tym samym commicie co przeniesienie). Zmiany obejmują `src/work/derive.ts` (dziś zamknięcie jest tylko dla arkusza kompletnego albo zwolnionego, `derive.ts:706`), audyt `SHEET_STATE`, `docs/human-tasks/INFO.md`, szablon arkusza i `INSTRUKCJA.md`.
 
 ### Stałe zgody dla agenta (Roland, 2026-10-26, D-01 i D-15)
 

@@ -1,0 +1,105 @@
+# task_19: Dashboard — czytelność, dwujęzyczność i propozycje z przeglądu
+
+<!--
+Zadanie narzędziowe z czatu Rolanda 2026-10-27; wymagania to jego słowa, nie edytować.
+-->
+
+Wymagania:
+1. „W dashboardzie w przegladzie dostalem pytania i mam odpowiedzi typu a) B1 + B2 + B3
+No tak nie moze byc, ja musze mieć kontekst do takich pytań przy proponowanym wyborze, bo inaczej skad mam wiedziec, dodaj to do planów do poprawy.”
+2. „Dodajmy też mechanizm, że jak człowiek nie wypełni arkusza to może pchać kolejne elementy i po prostu arkusz sie rozrasta o nie. DOdatkowo powinna byc mozliwosc oddania arkusza do /done z niewypelnionymi polami, wtedy wszystko liczy sie jako pominiete.” — „No wpisujemy te pominiecie w kazda pusta komórke.”
+3. „Dodatkowo puść w tle analize Opus 5.5 Max żeby zweryfikował czy można jeszcze jakoś funkcjonalnie/jakościowo/wizualnie usprawnić dashboard, niech zrobi liste propozycji w jakimś pliku .md. To ja sobie potem przejrze”
+4. „No i jak on skonczy z ta porpozycja, to przeczytaj i dopisz tam też sekcje, żeby zrobić troche parallel to runowanie agentów i branche, żeby nie było tyle kolizji i konfliktów z branchami, zrobimy sobie golden-main na githubie, z którego robimy buildy i do niego wrzucamy rzeczy, ale on jest jakby golden-standardem, a wszystko inne pracuje na innych branchach, co myslisz?”
+5. „Rozplanuj te propozycje na konkretne taski i zacznij delegować Sonnet 5.5 High do roboty jako subagenty albo Haiku 5.5 Max jezeli latwiejsze zadanie. Ty zostajesz koordynatorem. Dodatkowo chce też podneiść czytelność dashboardu, poczytaj o dobrmy projektowaniu UI/UX, o czytelnych nazwach, zrób to wgl dwujęzyczne.”
+
+Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
+
+---
+<!-- ↓↓↓ Sekcje poniżej wypełnia agent ↓↓↓ -->
+
+## Plan
+
+Źródła: propozycje z przeglądu dashboardu `docs/analizy/propozycje-dashboard.md` (F1–F15, J1–J6, W1–W5, R1–R4) oraz punkty (a)–(k) z planu ([Odłożone](../analizy/final-plan-human-readable.md#odłożone-bez-decyzji)) i decyzje [D-27…D-29](../analizy/final-plan-human-readable.md#decyzje-o-arkuszach-człowieka-d-27d-28). Po zakończeniu zadania plik propozycji zostaje usunięty, a ten plik jest jedynym zapisem.
+
+**Jak pracujemy.** Kod powstaje w osobnej kopii roboczej specyfikacji `C:\dev\gamedev\everhorror\specification-praca` na gałęzi `agent/dashboard-ux` (od `6436f80`), jak w task_15. Żywa kopia `specification` jest używana przez Rolanda i działający dashboard. Każde zadanie cząstkowe robi jeden agent od początku do końca we własnej kopii (`specification-praca-<id>`, gałąź `agent/dux-<id>` od `agent/dashboard-ux`). Koordynator (Opus 5.5) przegląda wynik i scala go do `agent/dashboard-ux`. Do master specyfikacji całość trafia dopiero po odbiorze Rolanda. Modele: Sonnet 5.5 high, a przy prostszych zadaniach Haiku 5.5 max.
+
+**Zasada dla tekstów od fali 1.** Każdy nowy albo zmieniany napis w interfejsie idzie przez mechanizm tłumaczeń z fali 0, po polsku i po angielsku, według słowniczka z `dashboard/UI.md`. Pozostałe napisy tłumaczy fala 3.
+
+| ID | Fala | Zakres | Model | Stan |
+|---|---|---|---|---|
+| T0-test | 0 | J1: testy nie dotykają prawdziwego folderu przebiegów | Sonnet high | scalone (`437a830`) |
+| T0-ux | 0 | Zasady UI/UX i słowniczek PL/EN (`dashboard/UI.md`), mechanizm dwujęzyczności, przełącznik języka, nawigacja i nazwy (W2) | Sonnet high | scalone (`5a63369`, poprawka `5eb02f2`; tłumacz w `deriveWork`: `4705cab`) |
+| T1-scal | 1 | F1, J2, F2: werdykt przeglądu w oknie scalania, werdykt przypięty do commita, commity i pliki gałęzi | Sonnet high | scalone (`9c0e962`) |
+| T1-karty | 1 | F6, F7, J4 (karta), (j): pełne odpowiedzi, podgląd, panel bez pułapki statusu, kontekst opcji, szablon i skille | Sonnet high | scalone (`baaa16b`) |
+| T1-przebiegi | 1 | F8, F9, F12, J6: koszt i zużycie, różnice od domyślnych, czytelny dziennik, nazwy modeli i Haiku | Sonnet high | scalone (`9c0e962`) |
+| T1-zatwierdz | 1 | F13, F14: ze Zmian do Zatwierdź, podgląd planowania i opis commita | Haiku max | scalone (`9c0e962`) |
+| T1-porzadki | 1 | J3, W4, J5, (e), (f), (g): stary silnik „co dalej”, liczebniki, dokumentacja, nawigacja instrukcji, etykiety i formy neutralne | Haiku max | scalone (`9c0e962`) |
+| T2-arkusze | 2 | F3, W5, (k) = D-27 i D-28: raport przebiegu, nawigacja po pustych polach, arkusz rosnący, zamknięcie z ⏭ | Sonnet high | scalone (`08e0d02`) |
+| T2-teraz | 2 | F4, F5, F10, F11, W1: wznowienie po decyzji, licznik planowania, „Wyjaśnione”, świeżość stanu, spokojne powody; [task_18](task_18.md) („Zmiany do wdrożenia” pod przyciskiem „Zaplanuj zadania”) | Sonnet high | scalone (`d0706cf`) |
+| T2-zadanie | 2 | W3, F15: kolejność kart strony zadania, polecenie dla zadań narzędziowych | Haiku max | scalone (`d0706cf`) |
+| T2-diff | 2 | (a)–(d), (h), (i): fałszywe „do wdrożenia”, pliki redakcyjne, wtyczki w przebiegach, domknięcie; czerwony test e2e z `work.e2e.ts:1264` | Sonnet high | scalone (`d0706cf`; e2e 22/22) |
+| T3-tlum | 3 | Tłumaczenie pozostałych napisów, po grupach plików (kilku agentów naraz) | Haiku max | czeka |
+| T4-kopie | 4 | R2, R3: kopia robocza na przebieg, jeden pisarz buchalterii, blokada na zapis | Sonnet high | czeka |
+| T4-rownolegle | 4 | R4: dwa wdrożenia naraz | Sonnet high | czeka na decyzję (plan §3 pkt 5, §5) |
+| R1 | — | Reguła gałęzi `master` gry w GitHubie | koordynator | czeka na „tak” Rolanda (zmiana publiczna) |
+
+## Co zostało zrobione
+
+### T0-test (J1) — Sonnet 5.5 high, scalone `437a830`
+- `node/security.test.ts`: każde `specApi()` dostaje katalogi gry, kopii i przebiegów w świeżym folderze tymczasowym, więc menedżer przebiegów w ogóle nie powstaje. Pozostałe testy już używały folderów tymczasowych (sprawdzone wszystkie).
+- `node/runner.ts`: `getRunManager()` w procesie `node --test` odmawia (błąd), gdy folder przebiegów leży poza folderem tymczasowym systemu. Zwykły serwer działa bez zmian. Nowy test sprawdza to na wymyślonej ścieżce.
+- `ARCHITEKTURA.md`: opis testów zgodny z kodem.
+- Wynik (zawsze z folderami tymczasowymi): typy bez błędów, `npm test` 1724/1724, `npm run e2e` 20/21. Jedyny błąd e2e był już na `6436f80`: test „waive, close …, spec commit and its lint gate” (`node/e2e/work.e2e.ts:1264`) oczekuje 422 `lint`, a dostaje 409 `conflict` dla `03_mechaniki/czas.md`. Do zbadania w T2-diff.
+
+### T1-karty ((j), F6, F7, J4) — Sonnet 5.5 high, scalone `baaa16b`
+- Panel „Rozstrzygnij decyzję” pokazuje u góry „Kontekst opcji” (sekcja „Możliwości i rekomendacja” z karty), a pod każdym pytaniem „Co znaczą kody w tych opcjach” z definicjami z listy `- B1: …`.
+- Lint: uwaga `OPCJA_KOD_BEZ_OPISU` dla otwartej karty decyzji, gdy opcja używa kodu (B1, A2…) bez definicji w karcie i bez opisu zaraz po kodzie. Opis po ostatnim kodzie nie objaśnia wcześniejszych („B1 + B2 (najmniejszy krok)” → uwaga o B1). ID zasad (CZAS-10) są zwolnione. Na prawdziwych kartach: 0 uwag.
+- Szablon `szablony/decyzja.md` i `zgloszenia/README.md` opisują tę samą zasadę.
+- Niepełne odpowiedzi: domyślny status ❔, zamknięcie ✅/❌ z brakami wymaga zaznaczenia „Zamykam z N pytaniami bez odpowiedzi”, linia decyzji wymienia braki. Zwijany „Podgląd zmiany karty” przed zatwierdzeniem.
+- Ogólne pole statusu i edycja kolumny „Twój wybór” w tabeli są pod „Ręczna edycja (zwykle niepotrzebna)”.
+- Zapis decyzji to czysta funkcja `src/work/decision.ts` z testami na prawdziwej karcie sprzed decyzji (`748b273^`), bez podwójnych pustych linii.
+- Wynik: typy bez błędów, `npm test` 1765/1765 (po scaleniu), lint specyfikacji 0/0. Interfejsu nie oglądano w przeglądarce.
+
+## Do zrobienia przy scaleniu do master specyfikacji
+
+Skille gry, które piszą karty, mają odwoływać się do uwagi lintu dopiero wtedy, gdy żywy lint ją zna:
+- `.claude/skills/ai-task/SKILL.md` (linia z tabelą `| # | Pytanie | Opcje | Rekomendacja | Twój wybór |`), dopisać po `` `## Decyzja` = "Do rozstrzygnięcia." ``: „Every option must be understandable without the rest of the card: it says in words what is chosen, and every code (B1, A2…) it uses is explained either by a list item `- B1: …` under "Możliwości i rekomendacja" (the dashboard shows it next to the question) or on the spot (`**a)** B1 (scena zaznaczenia żyły) + B2 (przyciemnienie przy pracy)`). A gloss after the last code only does not explain the earlier ones (`B1 + B2 (najmniejszy krok)` leaves B1 unexplained). A code with neither triggers the lint warning `OPCJA_KOD_BEZ_OPISU` (rule ids like CZAS-10 are exempt): fix it before committing.”
+- `.claude/skills/spec-tasks/SKILL.md` (pytania z przebiegu bez nadzoru): zamiast „(quote its ID; options as `**a)** … **b)** …`, your recommendation first, `Twój wybór` empty)” wpisać: „(quote its ID; options as `**a)** … **b)** …`, each understandable on its own: every code (B1, A2…) is explained by a list item `- B1: …` under "Możliwości i rekomendacja" or on the spot (`B1 (scena zaznaczenia żyły)`), a gloss after the last code does not cover the earlier ones, and a code with neither triggers the lint warning `OPCJA_KOD_BEZ_OPISU` (rule ids like CZAS-10 are exempt); your recommendation first, `Twój wybór` empty)”.
+
+Arkusz kilku zadań (D-27) i zamknięcie z ⏭ (D-28) wchodzą w grze dopiero razem z kodem dashboardu, bo dzisiejszy dashboard w master nie czyta części `## Część: task_NN` ani linii `> Zadania:`. Przy scaleniu (dokładne teksty w raporcie T2-arkusze, streszczenie tutaj):
+- `.claude/skills/ai-task/SKILL.md`, implement krok 6, pierwszy punkt: otwarty arkusz, którego nikt nie zaczął wypełniać, rośnie zamiast nowego. Część `## Część: task_NN — <tytuł>` z podsekcjami „Co zostało dodane”, „Test”, „Wyniki automatu (agent)” dopisuje się wyłącznie na KOŃCU pliku, a zadanie trafia do linii `> Zadania: [task_16](…), [task_NN](…)` (dawną linię `> Zadanie:` najpierw zamienić). Wiersz „Na gałęziach” wskazuje wspólny arkusz. Arkusz zaczęty przez człowieka nigdy się nie rozrasta.
+- Ten sam plik, `close NN`: arkusz kilku zadań czyta się i zamyka w całości. Zamknięcie z pominięciem robi tylko Roland w dashboardzie; to nie jest zwolnienie, a ⏭ nie jest dowodem.
+- `docs/human-tasks/INFO.md`: nowy rozdział „Arkusz kilku zadań”, uzupełnienie wstępu, „Znaczników wyniku” (⏭ wpisany przez dashboard przy zamknięciu) i punktu „Zamknięcie” w „Zwolnij, zastąp, zamknij” (D-28, „Zamykam bez raportu”). Tabela raportu przebiegu jest strefą człowieka (`<!-- człowiek -->` albo kolumny „Plik .md (człowiek)”, „Plik .json (człowiek)”), a pliki dołącza przycisk „Dołącz raport przebiegu” do `docs/human-tasks/raporty/`.
+- `docs/human-tasks/factcheck_template.md` i `playtest_template.md`: zdanie o dopisywaniu części do otwartego arkusza i sekcja „Raport przebiegu: dołącz plik” z tabelą pod `<!-- człowiek -->`.
+- Prompt wdrożenia w `src/work/runs.ts` już to mówi (`6e7b7b7`), więc skill i dashboard zmieniają się w tej samej chwili.
+
+### Dokładne teksty do wklejenia (D-27, D-28)
+
+1. `ai-task/SKILL.md`, implement krok 6, zamiast punktu „Sheet `docs/human-tasks/factcheck-test-NN.md` …”:
+   > Sheet `docs/human-tasks/factcheck-test-NN.md` (Polish): in the **main copy**, never on the branch; from `factcheck_template.md`, or `playtest_template.md` for a play session (rules: `docs/human-tasks/INFO.md`). Human zones stay empty; in an existing sheet add rows and prose only. **An open sheet that nobody has started grows instead of a new one (D-27):** when the main copy already holds an open sheet whose human cells are all empty (no entry, no `Wyniki człowieka`, `Zwolnienie` or `Zamknięcie` line), do not create `factcheck-test-NN.md`. Append this task's part at the very END of that sheet (never in the middle: table numbers and answer ids of the entries above must stay put): a `## Część: task_NN — <title>` heading with its own "Co zostało dodane", "Test" and "Wyniki automatu (agent)", human cells empty. Add `task_NN` to the header line `> Zadania: [task_16](../ai-tasks/task_16.md), [task_NN](../ai-tasks/task_NN.md) · …` (turn the old `> Zadanie:` line into `> Zadania:` first). The "Na gałęziach" row of `WDROZENIA.md` then names that shared sheet. A sheet a person has started to fill in is never extended: create a new one as before.
+2. `ai-task/SKILL.md`, `close NN`, po „Never move an unfilled sheet without Roland's waiver: …”:
+   > A sheet that holds several tasks (`## Część: task_NN`) is read and closed as a whole: every part's `wynik` cell counts, and all its tasks close with it. Roland can also close an unfilled sheet in the dashboard ("Przenieś arkusz do done/" with a confirmation): the dashboard then writes `⏭ pominięte (zamknięcie bez wypełnienia)` into the empty fields and the `Zamknięcie: … pominięte N z M pól` line. That is closing without full verification, not a waiver, and ⏭ is never evidence; you never do it yourself.
+3. `docs/human-tasks/INFO.md`:
+   - wstęp, po „Agent tworzy je w głównej kopii gry z `factcheck_template.md` albo `playtest_template.md`”: „, albo dopisuje część do otwartego, jeszcze niewypełnionego arkusza (zob. „Arkusz kilku zadań”)”;
+   - „Strefy człowieka → Cała tabela”, na końcu: „Tak samo tabela raportu przebiegu (kolumny „Plik .md” i „Plik .json”): pod `<!-- człowiek -->` albo z kolumnami „Plik .md (człowiek)” i „Plik .json (człowiek)”; nie liczy się do „kompletny”, a plik dołącza przycisk „Dołącz raport przebiegu” w dashboardzie (kopiuje parę z folderu raportów gry do `docs/human-tasks/raporty/` i wpisuje linki).”;
+   - nowy rozdział po „Nazwy arkuszy”: „## Arkusz kilku zadań — Gdy otwarty arkusz nie jest jeszcze wypełniany (żadnego wyniku człowieka, żadnej linii `Wyniki człowieka`, `Zwolnienie`, `Zamknięcie`), kolejne zadania dopisują do niego część zamiast zakładać nowy arkusz: nagłówek `> Zadania: [task_16](…), [task_17](…)` (dawna linia `> Zadanie:` czyta się jak dotąd) i na KOŃCU pliku `## Część: task_NN — <tytuł>` z własnymi podsekcjami („Co zostało dodane”, „Test”, „Wyniki automatu (agent)”) i pustymi komórkami człowieka. Nigdy nie wstawia się części w środek pliku ani nie rusza istniejących wierszy. Część sięga do następnego nagłówka poziomu 1–2. Dashboard przypisuje arkusz każdemu z wymienionych zadań, pokazuje postęp każdej części, a zadania zamykają się razem z arkuszem. Arkusz, który człowiek zaczął wypełniać, się nie rozrasta.”;
+   - „Znaczniki wyniku”, dopisać: „Znacznik `⏭ pominięte (zamknięcie bez wypełnienia)` wpisuje w puste pola sam dashboard przy zamknięciu arkusza z pominięciem; nie jest dowodem sprawdzenia.”;
+   - ostatni punkt „Zwolnij, zastąp, zamknij” zastąpić: „Zamknięcie: arkusz kompletny albo zwolniony przenosi się do `done/` bez zmian (`git mv`, linki dostają `../`). Arkusz jeszcze niewypełniony Roland może zamknąć w dashboardzie „z pominięciem”: w tym samym commicie każde puste pole do wypełnienia (wyniki, skale, pytania otwarte) dostaje `⏭ pominięte (zamknięcie bez wypełnienia)`, kolumna uwag zostaje pusta, a nagłówek dostaje `Zamknięcie: <Imię> (dashboard, <data>): pominięte N z M pól`. To wpis człowieka (agent go nie robi), a zadania z takiego arkusza zamykają się jako „zamknięte bez pełnego sprawdzenia”. Zwolnienie mówi „tego testu nie trzeba”, pominięcie „tego nie sprawdzono”. Pusta tabela raportu przebiegu wymaga w dashboardzie potwierdzenia „Zamykam bez raportu”. Do czasu zamknięcia arkusz leży tutaj.”
+4. `docs/human-tasks/factcheck_template.md`: w komentarzu u góry, po zdaniu kończącym się „…nigdy na gałęzi spec/*; arkusz zatwierdza dashboard.”: „Gdy otwarty arkusz innego zadania nie jest jeszcze wypełniany, nie kopiuj szablonu: dopisz na końcu tamtego arkusza część `## Część: task_NN — <tytuł>` (podsekcje „Co zostało dodane”, „Test”, „Wyniki automatu (agent)” poziomu `###`) i dopisz zadanie do linii `> Zadania:` (reguły: INFO.md, „Arkusz kilku zadań”).” Po „## Wyniki automatu (agent)”, przed „## Uwagi ogólne (wypełnia człowiek)”, opcjonalna sekcja (także w `playtest_template.md` zamiast zdania o „Raport przebiegu: dołącz plik”), z komentarzem „Sekcję „Raport przebiegu” dodaj tylko, gdy build zapisuje raport przebiegu (znacznik nad tabelą i dopisek „(człowiek)” w nagłówkach są obowiązkowe: bez nich formularz tabeli nie pokaże).”:
+   ```
+   ## Raport przebiegu: dołącz plik
+   Po zakończeniu tygodnia kliknij w dashboardzie „Dołącz raport przebiegu”: para plików z folderu raportów gry trafia obok arkusza (`raporty/`), a linki do niej do tabeli. Jeśli raport nie powstał, zapisz to w uwagach.
+
+   <!-- człowiek -->
+   | Plik `.md` (człowiek) | Plik `.json` (człowiek) | Uwagi (człowiek) |
+   |---|---|---|
+   | | | |
+   ```
+
+## Decyzje i założenia
+
+## Czego potrzebuję od Ciebie
+
+## Test
+
+## Podsumowanie

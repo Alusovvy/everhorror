@@ -6,6 +6,7 @@ Wszystko, co wypełnia człowiek, zostaw puste: kolumny „wynik” i „uwagi�
 Do 15 wierszy w „Sprawdzeniach”, tylko to, co ocenia człowiek: odczucie, czytelność, ton, obraz. Mechanikę pilnują testy automatyczne; ich wyniki idą do raportu zadania albo pod „Wyniki automatu (agent)”, nigdy do kolumn człowieka. Pięć pytań ankiety i jedno otwarte zostają bez zmian, żeby sesje dało się porównywać.
 Gdy build zapisuje raport przebiegu, dodaj na końcu sekcję „Raport przebiegu: dołącz plik” z tabelą „Plik .md, Plik .json, Uwagi” i tym samym znacznikiem nad tabelą (wzór: PT0, factcheck-test-14.md).
 Czas sesji podajemy jedną liczbą („1–3 h”), tą samą co w CZYTAJ_MNIE.txt, do czasu PT0, który pokaże rzeczywisty.
+Minimum ważności sesji (zasada w INFO.md): sesja liczy się do celów K tylko z wypełnionym „Dotarcie do” i dołączonym raportem przebiegu. Wiersze dni powyżej „Dotarcie do” zostają puste (dashboard wpisze ⏭ przy zamknięciu).
 Usuń ten komentarz po wypełnieniu.
 -->
 
@@ -22,13 +23,15 @@ Usuń ten komentarz po wypełnieniu.
 
 ## Dane sesji (wypełnia człowiek)
 
+Napis z menu głównego skopiuj w całości, tak jak stoi w prawym dolnym rogu (wersja i skrót specyfikacji). „Dotarcie do” jest obowiązkowe: bez niego sesja nie liczy się do celów.
+
 <!-- człowiek -->
 | Data sesji | Napis z menu głównego | Łączny czas gry | Dotarcie do (dzień albo zakończenie) |
 |---|---|---|---|
 | | | | |
 
 ## Jak grać
-Zacznij nową grę (START) i graj normalnie, najlepiej cały tydzień (dni 1–7). Nie trzeba szukać błędów na siłę: ważne, co czuć, co jest jasne, a co nie. Wiersze poniżej idą mniej więcej w kolejności, w jakiej się na nie trafia, więc nie trzeba ich robić osobno. Wieczorem każdego dnia, tuż przed snem, wpisz liczbę do tabeli „Dziś zabrakło mi czasu” (niżej, pytanie 3).
+Zacznij nową grę (START) i graj normalnie, najlepiej cały tydzień (dni 1–7). Nie trzeba szukać błędów na siłę: ważne, co czuć, co jest jasne, a co nie. Wiersze poniżej idą mniej więcej w kolejności, w jakiej się na nie trafia, więc nie trzeba ich robić osobno. Wieczorem każdego dnia, tuż przed snem, wpisz liczbę do tabeli „Dziś zabrakło mi czasu” (niżej, pytanie 3). Dni, do których nie dotarło się w grze, zostaw puste: przy zamknięciu arkusza dashboard oznaczy je jako pominięte. Na koniec dołącz raport przebiegu; sesja bez raportu albo bez „Dotarcie do” jest tylko wskazówką kierunku, nie pomiarem.
 
 ## Sprawdzenia (tylko to, co ocenia człowiek)
 
