@@ -1,8 +1,9 @@
 # Factcheck test 16: Żyły w Starej sztolni i licznik żył
 
-> Zadanie: [task_16](../ai-tasks/task_16.md) · Przygotowano: 2026-10-27 · Gałąź: `spec/2026-10-27-task16`
+> Zadanie: [task_16](../../ai-tasks/task_16.md) · Przygotowano: 2026-10-27 · Gałąź: `spec/2026-10-27-task16`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis.
 > Wyniki człowieka: Roland (dashboard), 2026-10-27 14:14
+> Zamknięcie: Roland (dashboard), 2026-10-27 14:14
 
 ## Co zostało dodane
 - Stara sztolnia ma teraz dokładnie dwie żyły (ZYL-1) i obie da się zaznaczyć (ZYL-2). Wcześniej w jaskini świeciło sześć skał, a zaznaczyć dało się tylko dwie; jedna z pozostałych nazywała się „Żyła błękitnego żelaza” i miała tylko opis.

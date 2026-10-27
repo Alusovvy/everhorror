@@ -100,10 +100,10 @@ Test odtwarzający (`tools/tests/test_expedition.gd`, nowy krok „task_16”): 
 - Test zaznacza tylko `east_1`; `east_2` ma sprawdzoną strukturę (węzeł i flagę), ale nie jest klikana w teście. Zaznaczenie sprawdza arkusz (wiersz 5).
 
 ## Czego potrzebuję od Ciebie
-Zagraj w jaskinię według arkusza [factcheck-test-16](../human-tasks/factcheck-test-16.md): świecą dwie skały, obie da się zaznaczyć, licznik po pierwszej to 1 z 12 (mapa, ekwipunek, notes, podsumowanie), jaskinia nadal wygląda niepokojąco. Jeśli „0” wróci mimo prawdziwej żyły, zapisz w arkuszu, gdzie je widzisz. Potem scal gałąź (dashboard „Scal do master gry”).
+Zagraj w jaskinię według arkusza [factcheck-test-16](../human-tasks/done/factcheck-test-16.md): świecą dwie skały, obie da się zaznaczyć, licznik po pierwszej to 1 z 12 (mapa, ekwipunek, notes, podsumowanie), jaskinia nadal wygląda niepokojąco. Jeśli „0” wróci mimo prawdziwej żyły, zapisz w arkuszu, gdzie je widzisz. Potem scal gałąź (dashboard „Scal do master gry”).
 
 ## Test
-Arkusz: [factcheck-test-16](../human-tasks/factcheck-test-16.md). Kopia wdrożeniowa, po `--import`:
+Arkusz: [factcheck-test-16](../human-tasks/done/factcheck-test-16.md). Kopia wdrożeniowa, po `--import`:
 ```
 unit         RESULT: ALL PASSED
 lint         RESULT: ALL PASSED
