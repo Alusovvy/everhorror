@@ -5,7 +5,7 @@
 > To jedyny plan projektu: **co robimy, w jakiej kolejności i kto co robi**. Zastępuje wcześniejsze analizy i plany. Ich decyzje, zgody i najważniejsze ustalenia przeniesiono tutaj ([§9](#9-decyzje-i-stałe-zgody)), a same pliki usunięto.
 >
 > **Status treści:**
-> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-32 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
+> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-34 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
 > - **Uproszczenia** z [§8.3](#83-co-upraszczam) to rekomendacja. Obowiązują od zapisu, dopóki Roland ich nie zawetuje.
 > - **Liczby w etapach 5–7** to wartości startowe, które sprawdzi pomiar. Nie są to ostateczne decyzje.
 >
@@ -552,6 +552,13 @@ Obie wchodzą w życie z zadaniem narzędziowym (punkt (k) w [Odłożone](#odło
 | Karta | Decyzja | Źródło |
 |---|---|---|
 | D-31 | Propozycje z analizy projektu (Fable 5.1, 2026-10-27, 31 pozycji) są przyjęte i rozdzielone: reguły ⬜, karty i zgłoszenie w specyfikacji (commity `f70da86`…`da97946`), zadania narzędziowe gry [task_20](../ai-tasks/task_20.md)–[task_22](../ai-tasks/task_22.md), punkty etapów 3–9 tego planu i zmiany procesu (minimum ważności sesji, drobne poprawki tekstów na jednej gałęzi w `spec-tasks`, celowa niejednoznaczność w `lore-checker`, konwencja `tr()` w `CLAUDE.md`, zakaz `checkout`, `stash` i `rebase` w `.claude/settings.json`). PT0 liczy się jako kierunek, a punkt odniesienia K1–K5 da PT0b. „Złoty tydzień” przechodzi z etapu 7 do etapu 4. Duże pliki na etap 5: zwykły git bez podmian w pętli, LFS przy pełnej grze (rekomendacja agenta). Czyszczenie historii repozytorium, migracja do LFS, podpis kodu i platforma dla dema wymagają osobnego „tak”. Plik analizy usunięto; jej treść jest w zadaniach, regułach i tutaj. | Roland, czat 2026-10-27: „Wprowadz propozycje Fable, nastepnie odswiez dokumentacje.” |
+
+### Decyzje z task_23 (D-33…D-34)
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-33 | **Przebiegi równolegle (R4).** Do **3** analiz naraz (dowolne zadania) i do **3** wdrożeń albo poprawek naraz, każde w swojej kopii gałęzi i tylko na rozłącznych plikach i systemach; planowanie i domknięcie najwyżej po jednym, ale mogą iść obok reszty; commity w specyfikacji idą po kolei pod krótką blokadą; scala nadal tylko Roland, jedno po drugim. Zastępuje „najwyżej 1 otwarta gałąź z kodem” (§3 pkt 5) i w tym zakresie „bez orkiestratora wielu agentów” (§5) oraz zasadę jednego przebiegu naraz. Warunek: najpierw R3 (jeden pisarz buchalterii), bo bez niego dwa przebiegi kolidowałyby w `WDROZENIA.md`. Do wdrożenia obowiązuje stara zasada. Zadanie: [task_23](../ai-tasks/task_23.md). | Roland, czat 2026-10-27: „2. ok” (R4), potem „Do 3 analiz równolegle i do 3 wdrożeń równolegle na rozłączonych plikach, reszta tak jak napisałeś, daję pełne tak” |
+| D-34 | **Reguła gałęzi `master` gry w GitHubie (R1)**: zakaz force push i usuwania gałęzi (ruleset „master — bez force push i usuwania (R1)”). Bez wymogu pull requestów, bo scalanie z dashboardu i commity procesowe idą z jednego konta. Sesje terminalowe gry nie dostają dostępu do `../everhorror-wt`. | Roland, czat 2026-10-27: „Nie mają dostępu. … 3. ok” |
 
 ### Decyzje o buildzie do ogrania (D-32)
 
