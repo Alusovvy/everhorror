@@ -1,7 +1,7 @@
 extends RefCounted
 class_name Expeditions
 
-## The expedition map (docs_v2/systemy/eksploracja_kopalni.md): the graph of places from
+## The expedition map (spec 03_mechaniki/wyprawy.md, WYP-2 to WYP-8): the graph of places from
 ## data/locations, shortest paths, what the hero knows and may enter, and what a trip costs.
 ## The camp is the node "oboz". Travel itself is done by the StoryDirector.
 

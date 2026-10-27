@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-// Darkens the screen edges when the hero's mind frays (docs_v2/systemy/zdrowie_i_poczytalnosc.md).
+// Darkens the screen edges when the hero's mind frays (spec 03_mechaniki/zdrowie_i_poczytalnosc.md, ZDR-11).
 // strength 0 = invisible; pulse_amount adds a slow breathing of the edge.
 uniform float strength : hint_range(0.0, 1.0) = 0.0;
 uniform float pulse_amount : hint_range(0.0, 1.0) = 0.0;

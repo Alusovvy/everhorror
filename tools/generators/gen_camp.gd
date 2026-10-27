@@ -2,7 +2,7 @@ extends SceneTree
 ## Usage: godot --headless --path . --script res://tools/generators/gen_camp.gd
 ## Generates res://scene/levels/camp.tscn: the expedition camp in a natural cave (task_08; it used
 ## to be the boarded hall of the pack's test level), about 32 × 16 m and 6 m high, with its areas
-## (docs_v2/03_poziomy.md) in the old order, west to east:
+## (spec 04_tresc/miejsca.md, "Obóz") in the old order, west to east:
 ## - west: Anzelm's infirmary (north-west), the sleeping place (south-west), Mirosław's bedroll,
 ## - middle: the fire with the cook's corner (the heart of the camp), the common table,
 ## - storage under a timber scaffold with the one old track and its ore carts, the powder store in

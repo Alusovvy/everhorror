@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name InventoryScreen
 
-## The hero's pack [I] (docs_v2/systemy/ekwipunek.md): what he carries, what each thing is for,
+## The hero's pack [I] (spec 03_mechaniki/ekwipunek.md, EKW-2, EKW-3): what he carries, what each thing is for,
 ## "UŻYJ" for medicine, drink and candles, and how he is doing. Health and sanity are told in
 ## words, never numbers (MECHANICS §13 pkt 4). Giving things to people happens in dialogues.
 

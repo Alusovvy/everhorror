@@ -1,7 +1,7 @@
 extends RefCounted
 class_name CampSchedule
 
-## Where each NPC is in the camp at the current day and hour (docs_v2/systemy/npc.md).
+## Where each NPC is in the camp at the current day and hour (spec 03_mechaniki/npc.md, NPC-16).
 ## Returns {"place": id, "marker": marker name, "pose": animation}, or {} when the NPC is away
 ## (in the tunnels, not arrived yet, gone). The StoryDirector applies it; dialogues can ask
 ## GameState.npc_place(id) where someone is.

@@ -1,7 +1,7 @@
 extends Node
 class_name StoryDirector
 
-## Runs the week in the world scene (docs_v2/systemy/czas.md, eksploracja_kopalni.md): the intro,
+## Runs the week in the world scene (spec 03_mechaniki/czas.md, wyprawy.md): the intro,
 ## the camp schedule (who is where), expeditions (the map table, [M] in the field, the way back
 ## and its summary), meetings in the tunnels (the Drudzy from Exitium), Mirosław's blast, the
 ## nights (sanity, fever, departures, dreams), the mornings (announcements, Racibor's reminders)
@@ -423,7 +423,7 @@ func _sleep() -> void:
 	await _morning_events()
 	_busy = false
 
-## Night resolution (docs_v2/systemy/czas.md, zasada 5): sanity, fever, departures, deciphering.
+## Night resolution (spec 03_mechaniki/czas.md, CZAS-9): sanity, fever, departures, deciphering.
 ## Returns news for the morning card ("" = nothing special).
 func _resolve_night() -> String:
 	var night := GameState.day

@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name MapScreen
 
-## Grandfather's map (docs_v2/systemy/eksploracja_kopalni.md), in two modes:
+## Grandfather's map (spec 03_mechaniki/wyprawy.md, WYP-3, WYP-5), in two modes:
 ## - at the map table in the camp: every known place, the way there and back, the veins found
 ##   against the Kniaź's quota, and "WYRUSZ" to set off;
 ## - in the field [M] (or at a signpost): the neighbouring places ("IDŹ DALEJ") or the way back

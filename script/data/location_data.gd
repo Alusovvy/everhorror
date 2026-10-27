@@ -1,7 +1,7 @@
 extends Resource
 class_name LocationData
 
-## A place an expedition can reach (docs_v2/systemy/eksploracja_kopalni.md). Places form a graph
+## A place an expedition can reach (spec 03_mechaniki/wyprawy.md, WYP-2). Places form a graph
 ## with the camp ("oboz") in the middle; `links` give travel hours to the neighbours. The map
 ## table sends the player to any known place along the shortest path, [M] in the field goes to a
 ## neighbour or back to the camp (Expeditions).

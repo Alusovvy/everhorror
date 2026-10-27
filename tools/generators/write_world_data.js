@@ -1,6 +1,6 @@
 // Usage (from project root): node tools/generators/write_world_data.js
 // -> data/items/*.tres (ItemData) and data/locations/*.tres (LocationData).
-// Items: docs_v2/systemy/ekwipunek.md. Places and the travel graph: docs_v2/systemy/eksploracja_kopalni.md.
+// Items: spec 03_mechaniki/ekwipunek.md (EKW-1). Places and the travel graph: spec 03_mechaniki/wyprawy.md (WYP-2) and 04_tresc/miejsca.md.
 const fs = require("fs");
 const esc = (s) => s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
 fs.mkdirSync("data/items", { recursive: true });

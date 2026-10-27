@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name ExpeditionSummary
 
-## Shown when the hero gets back to the camp (docs_v2/systemy/eksploracja_kopalni.md): how long
+## Shown when the hero gets back to the camp (spec 03_mechaniki/wyprawy.md, WYP-14): how long
 ## he was away, where he went, veins marked against the quota, what he brought back, what
 ## happened and how he is. `await summary.present(record)` returns when it is closed.
 

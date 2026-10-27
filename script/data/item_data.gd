@@ -1,7 +1,7 @@
 extends Resource
 class_name ItemData
 
-## An item the player can carry (docs_v2/systemy/ekwipunek.md). How many the player has lives in
+## An item the player can carry (spec 03_mechaniki/ekwipunek.md, EKW-1). How many the player has lives in
 ## GameState.items; this resource only holds the definition. Medicine and drink can be used by
 ## the player (inventory [I]) or given to an NPC in a dialogue (GameState.give_to_npc).
 

@@ -17,7 +17,7 @@ signal item_changed(item_id: String, count: int)
 signal npc_changed(npc_id: StringName)
 ## The hero's health, sanity or fever changed.
 signal player_changed
-## Health dropped to zero (docs_v2/systemy/zdrowie_i_poczytalnosc.md: death needs earlier wounds).
+## Health dropped to zero (spec 03_mechaniki/zdrowie_i_poczytalnosc.md, ZDR-2: death needs earlier wounds).
 signal player_died(reason: String)
 ## Sanity dropped to zero: the hero panics and loses the rest of the day.
 signal player_broke(reason: String)
@@ -28,7 +28,7 @@ signal action_requested(action: String)
 
 const DAY_START_HOUR := 6.0
 const DAY_LENGTH_HOURS := 16.0
-## The week ends on the morning of this day: Racibor counts the veins (docs_v2/systemy/czas.md).
+## The week ends on the morning of this day: Racibor counts the veins (spec 03_mechaniki/czas.md CZAS-6, zyly_i_norma.md ZYL-6).
 const LAST_DAY := 8
 ## Veins the Kniaź wants marked by the end of QUOTA_DAY (MECHANICS §13 pkt 2).
 const QUOTA := 12

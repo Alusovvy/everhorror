@@ -1,7 +1,7 @@
 extends Resource
 class_name NpcData
 
-## An NPC card (GDD §5 / docs_v2/szablony/npc.md). Runtime values (current sanity,
+## An NPC card (GDD §5 / spec szablony/postac.md, NPC-1). Runtime values (current sanity,
 ## reputation…) live in GameState; this resource only holds the definition.
 
 enum Faction { DRUDZY, EKSPEDYCJA, INNA }

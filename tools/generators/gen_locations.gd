@@ -2,7 +2,7 @@ extends SceneTree
 ## Usage: godot --headless --path . --script res://tools/generators/gen_locations.gd
 ## (run gen_sanctin_textures.gd and import first).
 ## Generates res://scene/levels/locations.tscn: the expedition places reached from the map
-## table and with [M] (docs_v2/03_poziomy.md). Each is a closed space far away from the main
+## table and with [M] (spec 04_tresc/miejsca.md, "Miejsca wypraw"). Each is a closed space far away from the main
 ## level; travel places the player at its entry marker and the signpost opens the field map.
 ## Every place has spots "<Place>Spot1..4" for people met there (FieldSchedule).
 ## - Rzapie: the flooded bottom of the old shaft (Tekla's bundle, a vein, scratches on the wall),

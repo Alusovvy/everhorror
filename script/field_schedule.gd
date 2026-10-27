@@ -1,7 +1,7 @@
 extends RefCounted
 class_name FieldSchedule
 
-## Who the hero meets out in the tunnels (docs_v2/systemy/npc.md): miners at work in their
+## Who the hero meets out in the tunnels (spec 03_mechaniki/npc.md NPC-9, NPC-17; wyprawy.md WYP-13): miners at work in their
 ## places during the day, and the Drudzy from Exitium after their expedition has arrived.
 ## Returns {"place", "marker", "pose"} like CampSchedule, or {} when the NPC isn't here.
 ## Only asked about NPCs whom CampSchedule doesn't keep in the camp.
