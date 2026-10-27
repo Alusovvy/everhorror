@@ -15,7 +15,14 @@ extends Node
 
 const GAME_SCENE := "res://scene/world.tscn"
 const MAIN_MENU_SCENE := "res://scene/main_menu.tscn"
-const SAVE_DIR := "user://saves"
+const DEFAULT_SAVE_DIR := "user://saves"
+const DEFAULT_REPORT_DIR := "user://raporty"
+## Test isolation (tools only, the game never sets it): a folder given by this environment
+## variable or by the user arg `--test-dir=<path>` holds the saves (`saves/`) and the run reports
+## (`raporty/`) instead of the player's folders. Test scripts without one use
+## `user://test-runs/<pid>` (isolate_for_tests()).
+const TEST_DIR_ENV := "EVERHORROR_TEST_DIR"
+const TEST_DIR_ARG := "--test-dir="
 const SLOT_COUNT := 3
 ## The dawn autosave, load-only in the UI.
 const AUTO_SLOT := 0
@@ -27,13 +34,60 @@ const AUTO_SLOT := 0
 const SAVE_VERSION := 6
 const PERSIST_GROUP := "persist"
 
+var save_dir := DEFAULT_SAVE_DIR
+var report_dir := DEFAULT_REPORT_DIR
+## The isolated folder in use ("" = the player's folders).
+var test_dir := ""
+var _test_dir_owned := false
 var _pending: Dictionary = {}
 var _morning: Dictionary = {}
 
+func _init() -> void:
+	var folder := OS.get_environment(TEST_DIR_ENV)
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with(TEST_DIR_ARG):
+			folder = arg.trim_prefix(TEST_DIR_ARG)
+	if folder != "":
+		use_test_dir(folder)
+
+## Points saves and run reports at `folder` (`saves/` and `raporty/` inside it).
+func use_test_dir(folder: String) -> void:
+	test_dir = folder.replace("\\", "/").trim_suffix("/")
+	save_dir = test_dir + "/saves"
+	report_dir = test_dir + "/raporty"
+
+## For test scripts: when no folder was given, use a fresh `user://test-runs/<pid>` of this process
+## (removed by remove_test_dir()). Returns the folder in use.
+func isolate_for_tests() -> String:
+	if test_dir == "":
+		use_test_dir("user://test-runs/%d" % OS.get_process_id())
+		_test_dir_owned = true
+	return test_dir
+
+## Deletes the folder isolate_for_tests() made (a folder given from outside belongs to whoever
+## gave it) and goes back to the player's folders.
+func remove_test_dir() -> void:
+	if not _test_dir_owned:
+		return
+	_remove_recursive(test_dir)
+	_test_dir_owned = false
+	test_dir = ""
+	save_dir = DEFAULT_SAVE_DIR
+	report_dir = DEFAULT_REPORT_DIR
+
+func _remove_recursive(folder: String) -> void:
+	if not DirAccess.dir_exists_absolute(folder):
+		return
+	for sub in DirAccess.get_directories_at(folder):
+		_remove_recursive(folder + "/" + sub)
+	for file in DirAccess.get_files_at(folder):
+		DirAccess.remove_absolute(folder + "/" + file)
+	DirAccess.remove_absolute(folder)
+
 func slot_path(slot: int) -> String:
 	if slot == AUTO_SLOT:
-		return "%s/auto.json" % SAVE_DIR
-	return "%s/slot_%d.json" % [SAVE_DIR, slot]
+		return "%s/auto.json" % save_dir
+	return "%s/slot_%d.json" % [save_dir, slot]
 
 func has_save(slot: int) -> bool:
 	return FileAccess.file_exists(slot_path(slot))
@@ -68,7 +122,7 @@ func save_game(slot: int) -> bool:
 	return _write(slot, _collect())
 
 func _write(slot: int, data: Dictionary) -> bool:
-	DirAccess.make_dir_recursive_absolute(SAVE_DIR)
+	DirAccess.make_dir_recursive_absolute(save_dir)
 	var file := FileAccess.open(slot_path(slot), FileAccess.WRITE)
 	if file == null:
 		push_error("Could not write save slot %d: %s" % [slot, error_string(FileAccess.get_open_error())])

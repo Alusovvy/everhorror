@@ -1,0 +1,160 @@
+{
+	"game_state": {
+		"day": 2,
+		"expedition": {},
+		"flags": {
+			"first_room_anzelm": "rzapie",
+			"first_room_hagiwara": "east",
+			"first_room_nasir": "rzapie",
+			"first_room_sobek": "west",
+			"first_room_wszebor": "east",
+			"intro_done": true,
+			"pump_running": true,
+			"vein_east_1": true,
+			"west_blasted": true
+		},
+		"hour": 14.0,
+		"items": {
+			"amulet": 1,
+			"bandaze": 2,
+			"lina": 1
+		},
+		"notes": [
+			"klucz"
+		],
+		"npcs": {
+			"anzelm": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 64,
+				"status": "camp"
+			},
+			"bolko": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 75,
+				"status": "camp"
+			},
+			"dobrawa": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 52,
+				"status": "camp"
+			},
+			"hagiwara": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 80,
+				"status": "camp"
+			},
+			"hieronim": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 10,
+				"status": "camp"
+			},
+			"hrapek": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 20,
+				"status": "camp"
+			},
+			"miroslaw": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 38,
+				"status": "camp"
+			},
+			"nasir": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 72,
+				"status": "camp"
+			},
+			"ottokar": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 54,
+				"status": "camp"
+			},
+			"racibor": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 72,
+				"status": "camp"
+			},
+			"sabina": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 48,
+				"status": "camp"
+			},
+			"sobek": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 84,
+				"status": "camp"
+			},
+			"tekla": {
+				"health": 100,
+				"reputation": 2,
+				"sanity": 85,
+				"status": "camp"
+			},
+			"welf": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 44,
+				"status": "camp"
+			},
+			"wszebor": {
+				"health": 100,
+				"reputation": 0,
+				"sanity": 76,
+				"status": "camp"
+			}
+		},
+		"player": {
+			"fever": false,
+			"health": 100,
+			"sanity": 80
+		},
+		"quests": {
+			"slady": {
+				"entries": [
+					"start"
+				],
+				"state": "active"
+			}
+		},
+		"time_log": {
+			"1": [
+				{
+					"at": 8.0,
+					"min": 120,
+					"why": "Wyprawa: Stara sztolnia"
+				},
+				{
+					"at": 10.0,
+					"min": 60,
+					"why": "Znaczenie żyły"
+				}
+			]
+		}
+	},
+	"nodes": {
+		"Player": {
+			"head_yaw": 0.0,
+			"pitch": 0.0,
+			"position": [
+				7.19999980926514,
+				1.02277767658234,
+				4.34999990463257
+			],
+			"yaw": -1.57079637050629
+		}
+	},
+	"saved_at": 1761600000.0,
+	"scene": "res://scene/world.tscn",
+	"version": 4
+}

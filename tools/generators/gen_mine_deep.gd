@@ -6,7 +6,7 @@ extends SceneTree
 
 const M := "res://assets/LoafbrrAssets/MineAndCavesSet/scenes/"
 const P := "res://assets/prop_pack/Exports/glTF/"
-const OUT := "res://scene/levels/mine_deep.tscn"
+var OUT := _out_path("res://scene/levels/mine_deep.tscn")
 
 const Z_MID := 3.0          # corridor centre line
 const TILT_DEG := -10.0     # slope: east end lower
@@ -16,6 +16,15 @@ const SLOPE_END := 64.0
 var root3d: Node3D
 var cache := {}
 var counter := {}
+
+
+## Where the scene is written: `--out=<file>` after `--` (tools/check_generated.js regenerates into a
+## temporary folder this way), otherwise the real scene.
+func _out_path(default_path: String) -> String:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--out="):
+			return arg.trim_prefix("--out=")
+	return default_path
 
 func scene(path: String) -> PackedScene:
 	if not cache.has(path):

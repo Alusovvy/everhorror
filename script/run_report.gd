@@ -8,8 +8,8 @@ class_name RunReport
 ## anywhere. Costs and numbers are the game's own; this class only looks.
 
 const REPORT_VERSION := 1
-## Under the user data folder (Windows: %APPDATA%\Godot\app_userdata\Everhorror\raporty).
-const REPORT_DIR := "user://raporty"
+## Reports go to `SaveManager.report_dir`: the user data folder (Windows:
+## %APPDATA%\Godot\app_userdata\Everhorror\raporty), or the test folder of a test run.
 
 const ENDING_WEEK := "koniec_tygodnia"
 const ENDING_ALONE := "zostales_sam"
@@ -565,10 +565,10 @@ static func to_json(data: Dictionary) -> String:
 ## ("" when it could not be written). `ending` is one of the ENDING_* ids.
 static func write(ending: String = ENDING_IN_PROGRESS) -> String:
 	var data := collect(ending)
-	DirAccess.make_dir_recursive_absolute(REPORT_DIR)
+	DirAccess.make_dir_recursive_absolute(SaveManager.report_dir)
 	var stem := _file_stem()
-	var md_path := "%s/%s.md" % [REPORT_DIR, stem]
-	var json_path := "%s/%s.json" % [REPORT_DIR, stem]
+	var md_path := "%s/%s.md" % [SaveManager.report_dir, stem]
+	var json_path := "%s/%s.json" % [SaveManager.report_dir, stem]
 	if not _store(md_path, to_markdown(data)) or not _store(json_path, to_json(data)):
 		return ""
 	return md_path
@@ -584,7 +584,7 @@ static func _file_stem() -> String:
 	var stem := "przebieg-%04d-%02d-%02d_%02d-%02d-%02d" % [t["year"], t["month"], t["day"], t["hour"], t["minute"], t["second"]]
 	var candidate := stem
 	var n := 1
-	while FileAccess.file_exists("%s/%s.md" % [REPORT_DIR, candidate]) or FileAccess.file_exists("%s/%s.json" % [REPORT_DIR, candidate]):
+	while FileAccess.file_exists("%s/%s.md" % [SaveManager.report_dir, candidate]) or FileAccess.file_exists("%s/%s.json" % [SaveManager.report_dir, candidate]):
 		n += 1
 		candidate = "%s-%d" % [stem, n]
 	return candidate

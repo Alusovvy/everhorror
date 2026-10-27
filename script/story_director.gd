@@ -655,7 +655,7 @@ func _end_summary(success: bool, report_path := "") -> String:
 	lines.append("Dziękujemy za grę.")
 	if report_path != "":
 		# The folder name and the file only: the full path is long, and the panel is tall already.
-		lines.append("Raport przebiegu zapisano: %s" % report_path.trim_prefix("user://"))
+		lines.append("Raport przebiegu zapisano: %s/%s" % [SaveManager.report_dir.get_file(), report_path.get_file()])
 	return "\n".join(lines)
 
 func _upadowa_summary(success: bool) -> String:

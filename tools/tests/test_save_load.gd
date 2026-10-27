@@ -35,3 +35,21 @@ func scenario() -> void:
 	check(gs.vein_log.size() == 1 and gs.vein_log[0]["id"] == "east_1" and int(gs.vein_log[0]["day"]) == 1 and is_equal_approx(float(gs.vein_log[0]["at"]), 18.0), "task_14: the vein log came back (east_1, day 1, 18:00)")
 	if not slot_existed:
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(sm.slot_path(3)))
+
+	# G-E4: saves of every version still in testers' hands load into the real world scene.
+	for version in [3, 4, 5, 6]:
+		step("load the fixture save v%d (tools/tests/fixtures/saves)" % version)
+		DirAccess.make_dir_recursive_absolute(sm.save_dir)
+		var handle := FileAccess.open(sm.slot_path(2), FileAccess.WRITE)
+		handle.store_string(FileAccess.get_file_as_string("res://tools/tests/fixtures/saves/v%d.json" % version))
+		handle.close()
+		check(int(sm.read_slot(2).get("version", 0)) == version, "slot 2 holds a version %d save" % version)
+		check(sm.load_game(2), "v%d loads" % version)
+		await frames(15)
+		world = current_scene
+		await wait_idle()
+		check(gs.day == 2 and is_equal_approx(gs.hour, 14.0) and gs.has_item("lina") and gs.has_flag("pump_running"), "v%d: day 2, 14:00, the rope and the flag are there (%s)" % [version, gs.clock_text()])
+		check(is_equal_approx(gs.player_fatigue, 35.0 if version >= 5 else 0.0), "v%d: fatigue %s" % [version, "35" if version >= 5 else "starts rested"])
+		check(gs.dawn_log.size() == (2 if version >= 6 else 0), "v%d: %d dawn log entries" % [version, 2 if version >= 6 else 0])
+		check(world.get_node("Player") != null and gs.has_arrived(&"tekla"), "v%d: the player and the camp are in the world" % version)
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(sm.slot_path(2)))

@@ -18,7 +18,7 @@ extends SceneTree
 const P := "res://assets/prop_pack/Exports/glTF/"
 const K := "res://assets/props/kenney_survival/"
 const M := "res://assets/LoafbrrAssets/MineAndCavesSet/scenes/"
-const OUT := "res://scene/levels/locations.tscn"
+var OUT := _out_path("res://scene/levels/locations.tscn")
 
 const RZAPIE := Vector3(-60.0, 0.0, 70.0)
 const UPADOWA := Vector3(-60.0, 0.0, 110.0)
@@ -51,6 +51,15 @@ var soot_mat: StandardMaterial3D
 var charred: StandardMaterial3D
 var crust_mat: StandardMaterial3D
 var bone_mat: StandardMaterial3D
+
+
+## Where the scene is written: `--out=<file>` after `--` (tools/check_generated.js regenerates into a
+## temporary folder this way), otherwise the real scene.
+func _out_path(default_path: String) -> String:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--out="):
+			return arg.trim_prefix("--out=")
+	return default_path
 
 func scene(path: String) -> PackedScene:
 	if not cache.has(path):

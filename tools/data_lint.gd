@@ -15,6 +15,10 @@ extends SceneTree
 ##   category in the run report other than "inne" (CZAS-16), every hidden vein the bot knows
 ##   about is built with a pickaxe by the generators, and every flag a script or dialogue reads
 ##   is set somewhere (the dead `hieronim_gone` check was this kind of bug).
+## - warnings (they never fail the run; the count is printed as "WARNINGS: n"): flags only written
+##   and never read by the game, `%d <noun>` in Polish player text (use veins_acc() / plural()),
+##   and a response whose condition gates only on an item (DIA-2: it shows greyed out for ever
+##   once the item is gone; add a quest or event guard).
 ## Catches the typo class the scenario tests only hit when they walk the exact branch. ~2 s.
 
 ## Field-scene mages: every pick is meant to charge, so no [#leave] there.
@@ -36,6 +40,7 @@ const EXTRA_SOURCES := [
 ]
 
 var _failures := 0
+var _warnings := 0
 var gs
 
 func _initialize() -> void:
@@ -248,6 +253,82 @@ func _run() -> void:
 			never_set += 1
 			print("   LINT %s: the flag '%s' is read but nothing sets it" % [read_flags[flag_name], flag_name])
 	_check(read_flags.size() > 100 and never_set == 0, "%d flags are read, %d of them never set" % [read_flags.size(), never_set])
+
+	print("--- warnings: flags that are only written, never read by the game (G-E2)")
+	# A flag counts as read when its name appears quoted anywhere outside the calls that write it
+	# (has_flag, get_flag, a list such as FOURTEENTH_CLUES, a "flag:" requirement of the places
+	# graph, a required_flag in a generator, bump_flag). A flag set with "on_use_flag" is read by
+	# the Interactable itself (it hides a pickup). tools/tests do not count: a flag only a test
+	# reads is dead for the player. Flags the run report lists by name count as read.
+	var write_counts := {}
+	var implicit_read := {}
+	var re_on_use := RegEx.create_from_string("\"on_use_flag\":\\s*\"([^\"%+]+)\"")
+	for path in all_sources:
+		for m in re_on_use.search_all(all_sources[path]):
+			implicit_read[m.get_string(1)] = true
+	for pattern in ["set_flag\\(\\s*\"([^\"%+]+)\"", "mark_today\\(\\s*\"([^\"%+]+)\"", "flags\\[\\s*\"([^\"%+]+)\"\\s*\\]\\s*="]:
+		var re_w := RegEx.create_from_string(pattern)
+		for path in all_sources:
+			for m in re_w.search_all(all_sources[path]):
+				write_counts[m.get_string(1)] = int(write_counts.get(m.get_string(1), 0)) + 1
+	var world_data := FileAccess.get_file_as_string("res://tools/generators/write_world_data.js")
+	var corpus := "\n".join(all_sources.values()) + "\n" + world_data.replace("\"flag:", "\"").replace("\"noflag:", "\"")
+	var only_written := 0
+	var written_names := written.keys()
+	written_names.sort()
+	for flag_name in written_names:
+		var family := false
+		for prefix in FLAG_FAMILIES + ["first_room_", "fever_"]:
+			if flag_name.begins_with(prefix):
+				family = true
+		if family or implicit_read.has(flag_name):
+			continue
+		# Quoted occurrences, minus the ones that write it.
+		var mentions := corpus.count("\"%s\"" % flag_name)
+		if mentions - int(write_counts.get(flag_name, 0)) <= 0:
+			only_written += 1
+			print("   WARN the flag '%s' is set but nothing in the game reads it" % flag_name)
+	_warnings += only_written
+	print("   %d flags are written, %d of them never read" % [written.size(), only_written])
+
+	print("--- warnings: a bare number before a noun in Polish player text (G-E2, K6)")
+	var re_noun := RegEx.create_from_string("(?<!z )(?<!%)%d\\s+([A-Za-ząćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)")
+	var number_nouns := 0
+	for path in all_sources:
+		# The run report is for the developer, not the player (gra.md G3).
+		if path.ends_with("run_report.gd") or path.ends_with("save_manager.gd"):
+			continue
+		for m in re_noun.search_all(all_sources[path]):
+			var word := m.get_string(1)
+			if word in ["min", "h", "z", "of", "x", "s", "ms"]:
+				continue
+			number_nouns += 1
+			print("   WARN %s: \"%%d %s\" has a fixed noun after the number (use plural() / veins_acc() / days_left_text())" % [path, word])
+	_warnings += number_nouns
+
+	print("--- warnings: responses that gate only on an item (DIA-2)")
+	var re_response := RegEx.create_from_string("^\\s*- .*\\[if (.+?) /\\]")
+	var re_item_term := RegEx.create_from_string("^\\s*has_item\\(\"\\w+\"\\)\\s*$")
+	var item_only := 0
+	for path in sources:
+		if not path.ends_with(".dialogue"):
+			continue
+		var line_no := 0
+		for line in sources[path].split("\n"):
+			line_no += 1
+			var m := re_response.search(line)
+			if m == null:
+				continue
+			var all_items := true
+			for term in m.get_string(1).split(" and "):
+				if re_item_term.search(term) == null:
+					all_items = false
+			if all_items:
+				item_only += 1
+				print("   WARN %s:%d: the condition '%s' gates only on an item; add a quest or event guard" % [path, line_no, m.get_string(1)])
+	_warnings += item_only
+
+	print("WARNINGS: %d (flags only written %d, number before a noun %d, item-only responses %d)" % [_warnings, only_written, number_nouns, item_only])
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)

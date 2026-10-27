@@ -17,7 +17,7 @@ extends SceneTree
 const K := "res://assets/props/kenney_survival/"
 const P := "res://assets/prop_pack/Exports/glTF/"
 const M := "res://assets/LoafbrrAssets/MineAndCavesSet/scenes/"
-const OUT := "res://scene/levels/camp.tscn"
+var OUT := _out_path("res://scene/levels/camp.tscn")
 const Y_WEST_LOW := -2.0     # floor of the west tunnel below the first ramp
 const Y_CHAMBER := -2.116    # floor of the east cave chamber
 const TABLE_TOP := 0.81      # Table_Large height
@@ -41,6 +41,15 @@ const SABINA_EVENING := Vector3(3.2, 0.0, 1.0)
 var root3d: Node3D
 var cache := {}
 var counter := {}
+
+
+## Where the scene is written: `--out=<file>` after `--` (tools/check_generated.js regenerates into a
+## temporary folder this way), otherwise the real scene.
+func _out_path(default_path: String) -> String:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--out="):
+			return arg.trim_prefix("--out=")
+	return default_path
 
 func scene(path: String) -> PackedScene:
 	if not cache.has(path):

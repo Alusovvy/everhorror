@@ -39,7 +39,7 @@ func scenario() -> void:
 	check(new_files.size() == 2 and new_files.any(func(f): return f.ends_with(".md")) and new_files.any(func(f): return f.ends_with(".json")), "a .md and a .json appeared (%s)" % [new_files])
 	for f in new_files:
 		if f.ends_with(".json"):
-			var parsed = JSON.parse_string(FileAccess.get_file_as_string("user://raporty/" + f))
+			var parsed = JSON.parse_string(FileAccess.get_file_as_string(sm.report_dir + "/" + f))
 			check(parsed is Dictionary and parsed["ending"]["id"] == "w_trakcie" and int(parsed["now"]["day"]) == 4, "from the pause the report is \"w trakcie\", day 4")
 			check(parsed["days"].size() == 4 and parsed["days"][3]["dawn"] != null and bool(parsed["days"][3]["dawn"]["people"]["nasir"]["fever"]), "four days, the dawn of day 4 with Nasir's fever")
 	_remove_reports(new_files)
@@ -59,7 +59,7 @@ func scenario() -> void:
 	await wait_idle()
 	check(gs.day == 4 and is_equal_approx(gs.hour, 6.0) and gs.player_health == health_morning, "back at dawn of day 4 (%s, health %d)" % [gs.clock_text(), gs.player_health])
 	check(gs.has_fever(&"nasir") and not world.get_node("ScreenFade/EndPanel").visible, "the morning state is back")
-	check(FileAccess.file_exists("user://saves/auto.json"), "the dawn autosave is on disk")
+	check(FileAccess.file_exists(sm.slot_path(0)), "the dawn autosave is on disk")
 	check(_new_report_files(before_death).is_empty(), "task_14 (ZAP-11): the hero's death writes no report of its own")
 	check(gs.dawn_log.size() == 2 and int(gs.dawn_log[1]["day"]) == 4, "task_14 (ZAP-12): the retry brings back the dawn log of that morning (days %s)" % [gs.dawn_log.map(func(d): return int(d["day"]))])
 
@@ -118,7 +118,7 @@ func scenario() -> void:
 	check(ending_files.size() == 2, "one .md and one .json for the ending (%s)" % [ending_files])
 	check(summary.contains("Raport przebiegu zapisano: raporty/przebieg-"), "the end screen says where the report went")
 	for f in ending_files:
-		var text := FileAccess.get_file_as_string("user://raporty/" + f)
+		var text := FileAccess.get_file_as_string(sm.report_dir + "/" + f)
 		if f.ends_with(".md"):
 			check(text.contains("zakończenie: Zostałeś sam") and text.contains("## Kluczowe wybory") and text.contains("Nasir: wywieziony"), "the Markdown names the ending and the key choices (Nasir hauled up)")
 			check(text.contains("Jeszcze nie poznani:") and text.contains("## Ludzie o świcie"), "people the hero never met are listed apart, not in the tables")
@@ -131,11 +131,13 @@ func scenario() -> void:
 	_remove_reports(ending_files)
 
 func _report_files() -> Array:
-	return Array(DirAccess.get_files_at("user://raporty")).filter(func(f): return f.begins_with("przebieg-"))
+	if not DirAccess.dir_exists_absolute(sm.report_dir):
+		return []
+	return Array(DirAccess.get_files_at(sm.report_dir)).filter(func(f): return f.begins_with("przebieg-"))
 
 func _new_report_files(before: Array) -> Array:
 	return _report_files().filter(func(f): return not f in before)
 
 func _remove_reports(files: Array) -> void:
 	for f in files:
-		DirAccess.remove_absolute(ProjectSettings.globalize_path("user://raporty/" + f))
+		DirAccess.remove_absolute(ProjectSettings.globalize_path(sm.report_dir + "/" + f))

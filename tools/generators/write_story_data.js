@@ -2,6 +2,7 @@
 const fs = require("fs");
 const esc = (s) => s.replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
 
+// female: true is explicit on the card (it was once inferred from the portrait eye height).
 // faction: 0 = Drudzy, 1 = Ekspedycja, 2 = Inna (script/data/npc_data.gd)
 function npc(o) {
   fs.writeFileSync(`data/npc/${o.id}.tres`, `[gd_resource type="Resource" script_class="NpcData" format=3]
@@ -27,7 +28,7 @@ sanity_zero_effect = "${esc(o.zero)}"
 model = ExtResource("2_model")
 dialogue = ExtResource("3_dialogue")
 portrait_eye_height = ${o.eye ?? 1.62}
-female = ${o.eye === 1.57 ? "true" : "false"}
+female = ${o.female === true ? "true" : "false"}
 `);
 }
 
@@ -82,13 +83,13 @@ npc({
 });
 npc({
   id: "tekla", display_name: "Tekla, kwatermistrzyni", dialogue_name: "Tekla", instr: "Teklą", faction: 2,
-  role: "Kwatermistrzyni i kucharka z ramienia Konfraterni kupieckiej", max_sanity: 100, start_sanity: 85, eye: 1.57,
+  role: "Kwatermistrzyni i kucharka z ramienia Konfraterni kupieckiej", max_sanity: 100, start_sanity: 85, female: true, eye: 1.57,
   history: "[ROBOCZE] Córka Hanusza, kupca z Mirosil. Konfraternia kupiecka zaopatruje ekspedycję w jedzenie, olej i liny, a Tekla pilnuje tego na miejscu i gotuje dla wszystkich. Po cichu ma też inne zadanie: kupić od górników trochę błękitu, zanim cały trafi do skarbca Kniazia. Jej ojciec robił to samo czterdzieści lat temu.",
   zero: "[ROBOCZE] Nocą zabiera zapasy i ucieka szybem. Obóz zostaje bez jedzenia i oleju do lamp.",
 });
 npc({
   id: "dobrawa", display_name: "Dobrawa z Initium", dialogue_name: "Dobrawa", instr: "Dobrawą", faction: 0,
-  role: "Druga z Initium, badaczka energii", max_sanity: 60, start_sanity: 52, eye: 1.57,
+  role: "Druga z Initium, badaczka energii", max_sanity: 60, start_sanity: 52, female: true, eye: 1.57,
   history: "[ROBOCZE] Urodziła się w Jaksarze, ale od dziecka należy do Initium. Przeszła przemianę w Maszynie, więc nosi żelazną maskę i rękawice: dotyk żywego człowieka jest dla niej niebezpieczny. Initium przysłało ją, kiedy doszły wieści o błękicie. Błękit nie powstaje sam, więc gdzieś pod kopalnią musi być artefakt. Dobrawa ma go znaleźć, zanim zrobi to ktoś inny.",
   zero: "[ROBOCZE] Schodzi sama w głąb, żeby dotknąć źródła energii. Nie wraca.",
 });
@@ -127,7 +128,7 @@ npc({
 // --- task_05: the Exitium expedition (Drudzy); Sabina stays in the camp from day 3 ---
 npc({
   id: "sabina", display_name: "Sabina von Reuss", dialogue_name: "Sabina", instr: "Sabiną", faction: 0,
-  role: "Druga z Exitium, laborantka i uzdrowicielka", max_sanity: 60, start_sanity: 48, eye: 1.57,
+  role: "Druga z Exitium, laborantka i uzdrowicielka", max_sanity: 60, start_sanity: 48, female: true, eye: 1.57,
   history: "Najmłodsza w wyprawie Exitium, z waldgrosseńskiej rodziny, która oddała ją do Initium, kiedy miała sześć lat. Leczy zaklęciami drugiego kręgu i płaci za to bólem, jakby wkładała dłoń pod wrzątek. Dobra z natury i święcie przekonana, że bezmagicznym trzeba pomagać jak dzieciom. Von Brühl zostawił ją w obozie, żeby patrzyła Raciborowi na ręce.",
   zero: "Leczy tak długo, aż ból ją przerasta. Zamyka się w sobie i przestaje odpowiadać, zapatrzona w linie, które widzi tylko ona.",
 });

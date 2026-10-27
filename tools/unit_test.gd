@@ -24,6 +24,8 @@ func _initialize() -> void:
 
 func _run() -> void:
 	gs = root.get_node("GameState")
+	# G-E1: the report this test writes goes to a folder of its own, never to the player's.
+	root.get_node("SaveManager").isolate_for_tests()
 	Ex = load("res://script/expeditions.gd")
 	Lock = load("res://script/response_lock.gd")
 	Story = load("res://script/story_director.gd")
@@ -296,7 +298,9 @@ func _run() -> void:
 	_task14_logs_and_categories()
 	_task14_report()
 	_task14_report_after_review()
+	_save_fixtures()
 
+	root.get_node("SaveManager").remove_test_dir()
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)
 
@@ -522,7 +526,8 @@ func _task14_report() -> void:
 	_check(not head_section.contains("Hagiwara") and markdown.contains("Jeszcze nie poznani: ") and markdown.contains("Hagiwara"), "people not met are left out of the tables and listed below them")
 
 	var path: String = Report.write(Report.ENDING_IN_PROGRESS)
-	_check(path.begins_with("user://raporty/przebieg-") and path.ends_with(".md") and FileAccess.file_exists(path), "write() puts przebieg-….md under user://raporty (%s)" % path)
+	var report_dir: String = root.get_node("SaveManager").report_dir
+	_check(path.begins_with(report_dir + "/przebieg-") and path.ends_with(".md") and FileAccess.file_exists(path), "write() puts przebieg-….md under SaveManager.report_dir (%s)" % path)
 	var json_path := path.trim_suffix(".md") + ".json"
 	_check(FileAccess.file_exists(json_path) and JSON.parse_string(FileAccess.get_file_as_string(json_path)) is Dictionary, "…and the .json beside it, valid")
 	var shown: String = Report.display_path(path)
@@ -660,3 +665,38 @@ func _check(ok: bool, what: String) -> void:
 	print("   [%s] %s" % ["OK" if ok else "FAIL", what])
 	if not ok:
 		_failures += 1
+
+## G-E4: saves of every version that still has to load (tools/tests/fixtures/saves/v3…v6.json): load
+## the game state, save it again and compare field by field; a save that is loaded and saved again
+## must not change, and what an old version lacked comes back empty, never broken.
+func _save_fixtures() -> void:
+	print("--- G-E4: save-version fixtures v3…v6 load and save again unchanged")
+	var save_manager = root.get_node("SaveManager")
+	_check(int(save_manager.SAVE_VERSION) == 6, "the newest fixture is the current save version (%d); add v%d.json when it changes" % [save_manager.SAVE_VERSION, save_manager.SAVE_VERSION])
+	for version in [3, 4, 5, 6]:
+		var path := "res://tools/tests/fixtures/saves/v%d.json" % version
+		var fixture = JSON.parse_string(FileAccess.get_file_as_string(path))
+		_check(fixture is Dictionary and int(fixture.get("version", 0)) == version and fixture.has("game_state"), "v%d.json is a save of version %d" % [version, version])
+		if not fixture is Dictionary:
+			continue
+		var state: Dictionary = fixture["game_state"]
+		gs.reset()
+		gs.load_state(state)
+		var again: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+		_check(int(again["day"]) == int(state["day"]) and is_equal_approx(float(again["hour"]), float(state["hour"])), "v%d: day %d, hour %s" % [version, state["day"], state["hour"]])
+		for key in ["flags", "items", "notes", "quests", "npcs", "expedition"]:
+			_check(JSON.stringify(again[key], "", true) == JSON.stringify(state[key], "", true), "v%d: %s survive load and save" % [version, key])
+		for key in ["health", "sanity", "fever"]:
+			_check(again["player"][key] == state["player"][key], "v%d: the hero's %s" % [version, key])
+		# What the version knew comes back as it was; what it did not know is empty, not broken.
+		var knew_time_log: bool = version >= 4
+		var knew_asked: bool = version >= 5
+		var knew_dawns: bool = version >= 6
+		_check(JSON.stringify(again["time_log"], "", true) == JSON.stringify(state.get("time_log", {}), "", true) and (state.has("time_log") == knew_time_log), "v%d: the time log %s" % [version, "comes back" if knew_time_log else "is empty"])
+		_check(JSON.stringify(again["asked"], "", true) == JSON.stringify(state.get("asked", {}), "", true) and (state.has("asked") == knew_asked), "v%d: the asked options %s" % [version, "come back" if knew_asked else "are empty"])
+		_check(is_equal_approx(float(again["player"]["fatigue"]), float(state["player"].get("fatigue", 0.0))), "v%d: fatigue %s" % [version, "comes back" if knew_asked else "starts rested"])
+		_check(JSON.stringify(again["dawn_log"], "", true) == JSON.stringify(state.get("dawn_log", []), "", true) and JSON.stringify(again["vein_log"], "", true) == JSON.stringify(state.get("vein_log", []), "", true) and (state.has("dawn_log") == knew_dawns), "v%d: the dawn and vein logs %s" % [version, "come back" if knew_dawns else "are empty"])
+		# Load → save → load → save changes nothing.
+		gs.load_state(again)
+		var third: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+		_check(JSON.stringify(third, "", true) == JSON.stringify(again, "", true), "v%d: loading and saving a second time changes nothing" % version)
