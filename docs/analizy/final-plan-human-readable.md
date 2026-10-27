@@ -5,7 +5,7 @@
 > To jedyny plan projektu: **co robimy, w jakiej kolejności i kto co robi**. Zastępuje wcześniejsze analizy i plany. Ich decyzje, zgody i najważniejsze ustalenia przeniesiono tutaj ([§9](#9-decyzje-i-stałe-zgody)), a same pliki usunięto.
 >
 > **Status treści:**
-> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-34 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
+> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-35 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
 > - **Uproszczenia** z [§8.3](#83-co-upraszczam) to rekomendacja. Obowiązują od zapisu, dopóki Roland ich nie zawetuje.
 > - **Liczby w etapach 5–7** to wartości startowe, które sprawdzi pomiar. Nie są to ostateczne decyzje.
 >
@@ -15,6 +15,7 @@
 
 - **Etapy 0–2 są zrobione.** Build **0.5.3** jest scalony do `master` gry, a tag `v0.5.3` stoi na `e1ba7ca`. Raport przebiegu i bot balansu weszły do 0.5.3 w task_14 (zob. [etap 4](#etap-4--pomiar-raport-i-bot-weszły-do-053)).
 - **PT0 jest zamknięte, ale daje tylko kierunek.** Arkusz `docs/human-tasks/done/factcheck-test-14.md` ma czas gry „<1h”, puste „Dotarcie do”, oceny dni, których nie zagrano, i nie ma raportu przebiegu. Liczby 3/7 i 4/7 z ankiety to sygnał, a nie pomiar. Pełny tydzień z raportem to sesja **PT0b** ([etap 3](#etap-3--sesja-gry-pt0-bramka), [D-31](#decyzje-z-analizy-projektu-d-31)).
+- **Błąd eksportu (playtest 2026-10-27).** Każdy build z ZIP-a, także 0.5.3 i 0.5.4 (`c82a4dd`, tag `v0.5.4`), gubi przy eksporcie listy tekstów w zasobach: licznik żył stoi na „0 z 12”, a warunki dróg nie działają (w edytorze wszystko jest dobrze). Zgłoszenie `zgloszenia/2026-10-27_eksport-gubi-listy.md`, poprawka: jedno ustawienie projektu i test eksportu. Dlatego PT0 i sesja z 2026-10-27 (do dnia 4) to tylko kierunek; **PT0b zaczynamy od nowa na buildzie z poprawką** (Roland, czat 2026-10-27: „ok”). Pozostałe uwagi z tej sesji są w specyfikacji (`807c7e5`, `89c8dc1`): ZYL-12, CZAS-20, NPC-21, WYP-17…19, UI-9.
 - **Na gałęzi:** task_16 (żyły w Starej sztolni), gałąź `spec/2026-10-27-task16`, arkusz `docs/human-tasks/factcheck-test-16.md` czeka na grę Rolanda. Za nim czeka task_17 (palisada bez „niską”), bo obowiązuje limit jednej gałęzi.
 - **Specyfikacja 2026-10-27:** odpowiedzi Rolanda pod ❓ są regułami (np. ZAP-13…16, ZAD-9, NPC-19), karta „dynamika i nagrody” dała reguły ⬜ (B1–B4, C1–C4, A1, A2), a analiza projektu UI-8 i CZAS-19. Otwarte karty decyzji: „kim jest ktoś” (Hrapek a D-11) i „forma bohatera”. Zgłoszenie błędu: załamanie w nocy połykane. Z tych reguł zrobi zadania następne „Zaplanuj zadania”.
 - **Dashboard:** task_19 jest zrobione (2026-10-27): dwujęzyczny dashboard (PL/EN) z propozycjami z przeglądu, arkuszami kilku zadań i zamknięciem z ⏭ (D-27, D-28), kopią roboczą na gałąź i buildem do ogrania przed arkuszem (D-32) jest w `master` specyfikacji (`2fc1858`); odbiór w `docs/human-tasks/done/factcheck-test-19.md`. Potem task_23 (2026-10-27): jeden pisarz księgi wdrożeń (R3), do 3 analiz i 3 wdrożeń naraz (R4, D-33), czytelniejsze nazwy i „kopia gałęzi”, reguła `master` gry w GitHubie (R1, D-34).
@@ -559,6 +560,12 @@ Obie wchodzą w życie z zadaniem narzędziowym (punkt (k) w [Odłożone](#odło
 |---|---|---|
 | D-33 | **Przebiegi równolegle (R4).** Do **3** analiz naraz (dowolne zadania) i do **3** wdrożeń albo poprawek naraz, każde w swojej kopii gałęzi i tylko na rozłącznych plikach i systemach; planowanie i domknięcie najwyżej po jednym, ale mogą iść obok reszty; commity w specyfikacji idą po kolei pod krótką blokadą; scala nadal tylko Roland, jedno po drugim. Zastępuje „najwyżej 1 otwarta gałąź z kodem” (§3 pkt 5) i w tym zakresie „bez orkiestratora wielu agentów” (§5) oraz zasadę jednego przebiegu naraz. Warunek: najpierw R3 (jeden pisarz buchalterii), bo bez niego dwa przebiegi kolidowałyby w `WDROZENIA.md`. Wdrożone 2026-10-27 (task_23, spec `c10bbda`); limity zmienia `EVERHORROR_RUN_LIMITS`. Zadanie: [task_23](../ai-tasks/done/task_23.md). | Roland, czat 2026-10-27: „2. ok” (R4), potem „Do 3 analiz równolegle i do 3 wdrożeń równolegle na rozłączonych plikach, reszta tak jak napisałeś, daję pełne tak” |
 | D-34 | **Reguła gałęzi `master` gry w GitHubie (R1)**: zakaz force push i usuwania gałęzi (ruleset „master — bez force push i usuwania (R1)”). Bez wymogu pull requestów, bo scalanie z dashboardu i commity procesowe idą z jednego konta. Sesje terminalowe gry nie dostają dostępu do `../everhorror-wt`. | Roland, czat 2026-10-27: „Nie mają dostępu. … 3. ok” |
+
+### Decyzje z task_24 (D-35)
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-35 | **Automatyczne scalanie po grze i arkuszu.** Dashboard sam scala gałąź zadania do `master` gry, gdy: przegląd kodu dał aktualne „gotowe” (przypięte do commita gałęzi), testy przeszły, `git merge-tree` nie pokazuje konfliktu, a arkusz człowieka jest wypełniony bez ❌ (⏭ i zwolnienie nie wystarczą). Potem wypycha `master`; numer wersji i tag zostają ręczne. Zmienia „do master gry scala tylko Roland” (§3 pkt 6) dla tego przypadku: decyzją Rolanda jest wypełnienie arkusza. Każde inne scalenie nadal tylko na kliknięcie Rolanda. Dodatkowo kolejka startów przebiegów i wykrywanie konfliktów przez `git merge-tree` ([task_24](../ai-tasks/task_24.md)). | Roland, czat 2026-10-27: „Kolejke wdrozmy, ale dajmy scalanie automatycznie” + wybory „Po grze i arkuszu”, „Push tak, tag ręcznie”; „I te tree merge tez robimy” |
 
 ### Decyzje o buildzie do ogrania (D-32)
 
