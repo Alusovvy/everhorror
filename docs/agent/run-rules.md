@@ -31,6 +31,7 @@ Nigdy: strefy człowieka (wyniki, oceny, uwagi i wybory w arkuszach i kartach, l
 ## 4. `node`
 - Planowanie, analiza, przegląd i domknięcie uruchamiają tylko `<spec>/dashboard/cli.ts` oraz śledzone, niezmienione `tools/*.js` z `<gra>`.
 - Wdrożenie i poprawki mogą dodatkowo uruchamiać skrypty z własnej `<kopia>` (testy, generatory).
+- Profil „narzędzia” (zadanie z linią `Poziom: narzędzia`): bez arkusza i bez twierdzeń o rozgrywce; piszesz w `tools/`, `docs/` i skryptach `<kopia>` oraz we własnym pliku zadania. `.claude/` i `<spec>/dashboard/` są zablokowane także tu: taką zmianę opisujesz w raporcie, robi ją sesja z terminala.
 - Scalenie, push gry, przełącznik scalania automatycznego, wydanie i odrzucenie wymagają sekretu administratora, którego przebieg nie ma i nie szuka.
 
 ## 5. Czego nie robisz ręcznie
