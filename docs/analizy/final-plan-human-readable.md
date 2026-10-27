@@ -1,21 +1,33 @@
 # Everhorror — plan końcowy
 
-> 2026-10-26 · Przygotował: agent (Claude) · Dla: Rolanda
+> 2026-10-26, zaktualizowany 2026-10-27 · Przygotował: agent (Claude) · Dla: Rolanda
 >
 > To jedyny plan projektu: **co robimy, w jakiej kolejności i kto co robi**. Zastępuje wcześniejsze analizy i plany. Ich decyzje, zgody i najważniejsze ustalenia przeniesiono tutaj ([§9](#9-decyzje-i-stałe-zgody)), a same pliki usunięto.
 >
 > **Status treści:**
-> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) zostały podjęte 2026-10-26 i obowiązują.
+> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-26 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
 > - **Uproszczenia** z [§8.3](#83-co-upraszczam) to rekomendacja. Obowiązują od zapisu, dopóki Roland ich nie zawetuje.
 > - **Liczby w etapach 5–7** to wartości startowe, które sprawdzi pomiar. Nie są to ostateczne decyzje.
 >
-> **Od czego zacząć:** [Etap 0](#etap-0--zabezpieczyć-pracę). Skróty (PT, CP, K, ⬜, `[ROBOCZE]`) objaśnia [słowniczek](#10-słowniczek).
+> **Od czego zacząć:** [Gdzie jesteśmy](#gdzie-jesteśmy-2026-10-27). Skróty (PT, CP, K, ⬜, `[ROBOCZE]`) objaśnia [słowniczek](#10-słowniczek).
+
+## Gdzie jesteśmy (2026-10-27)
+
+- **Etapy 0–2 są zrobione.** Praca jest zapisana i wypchnięta w obu repozytoriach. Build **0.5.3** jest scalony do `master` gry, a tag `v0.5.3` stoi na `e1ba7ca`.
+- **Zakres 0.5.3 się zmienił.** Raport przebiegu i bot balansu, planowane na 0.5.4 (etap 4), weszły do 0.5.3 w task_14. PT0 odbywa się więc na buildzie, który już zapisuje raport przebiegu (zob. [etap 4](#etap-4--pomiar-raport-i-bot-weszły-do-053)).
+- **task_14 jest sfinalizowane.** Zadanie leży w `docs/ai-tasks/done/`, a wiersz w `WDROZENIA.md` ma wpis `27e91e7`. Lista „Na gałęziach” jest pusta. Zdalna gałąź `spec/2026-10-26-task14` zostaje do decyzji Rolanda. Czasowa kopia robocza specyfikacji `specification-praca` już nie istnieje.
+- **Orkiestracja z dashboardu działa.** Zadania, arkusze, karty decyzji i przebiegi agenta obsługuje widok „Praca” (task_15, kod w `master` specyfikacji, ostatni commit dashboardu `88edde0`). Decyzje: [D-16…D-21](#decyzje-z-task_15-d-16d-21). Instrukcja obsługi: `specification/dashboard/INSTRUKCJA.md`.
+- **Następny krok: etap 3, sesja PT0.** Jest jeden połączony arkusz, `docs/human-tasks/factcheck-test-14.md`. Część A dotyczy gry 0.5.3: wiersze 1–15, ankieta i raport przebiegu. Część B to odbiór dashboardu: wiersze 16–29, a wiersz 29 odsyła do instrukcji. Sesja zajmuje 1–3 godziny ([D-25](#decyzje-z-porządkowania-dokumentacji-d-22d-26)). Wcześniejsze arkusze `factcheck-test-15` i `factcheck-foundation-2026-10-26` są zastąpione i leżą w `done/` jako historia.
+- **Punkt odniesienia K1 z bota** (task_14, nie od gracza): norma 12 żył pada między dniem 4, 13:00 (styl „żyły”) a dniem 5, 15:30 (styl „rozmowy”, wariant opóźniony). Cel [K1](#4-cele-mierzalne) to „nie wcześniej niż wieczorem dnia 6”.
+- **Czeka na wyraźne „tak” Rolanda:** hasło administratora dashboardu, pierwsze płatne kliknięcie przebiegu oraz źródło i licencja `assets/logo.png` przed demem publicznym ([D-21](#decyzje-z-task_15-d-16d-21)).
+
+---
 
 ## W skrócie
 
 1. **Gra ma mocną pętlę, ale jej trzy obietnice słabną w połowie tygodnia.** Dotyczy to demo 0.5.2 i trzech obietnic: presji czasu, kruszących się ludzi i horroru w głąb. Ponowne sprawdzenie kodu potwierdziło diagnozę. Przy ludziach wyszło nawet gorzej: przez poczytalność łamie się praktycznie tylko Mirosław.
 2. **Poprzednia praca nad narzędziami jest dobra, ale wąska.** Wykonał ją inny model AI. Dashboard specyfikacji dostał wyszukiwarkę i bezpieczny zapis, powstała jedna instrukcja pracy (`WORKFLOW.md`), a poller tylko powiadamia. Testy dashboardu przechodzą; agent uruchomił je ponownie.
-3. **Najtańsze i najcenniejsze kroki wciąż czekają.** Trzeba poprawić fałszywe wpisy testów, zapisać decyzje w specyfikacji, naprawić trzy drobne błędy gry i pokazać numer wersji. To etapy 1 i 2, razem około 6 godzin pracy agenta.
+3. **Najtańsze i najcenniejsze kroki są zrobione.** Korekta fałszywych wpisów testów, decyzje w specyfikacji, trzy drobne błędy gry i numer wersji weszły w etapach 1–2 (build 0.5.3).
 4. **Od miesiąca nikt nie grał w grę.** Następnym prawdziwym krokiem jest sesja gry (PT0), a nie kolejne narzędzia.
 5. **Kolejność etapów:**
 
@@ -32,7 +44,7 @@
    | 8 | Fabuła — **równolegle, tylko w specyfikacji** |
    | 9 | Pierwsza godzina i demo |
 
-6. **Upraszczam wcześniejszy plan.** Odkładam nowy dziennik prac i rozbudowane CLI. Rezygnuję z osobnej kopii roboczej specyfikacji. CI i osobna tożsamość agenta stają się opcjonalne. Dashboard rozwijamy dalej tylko przy błędach.
+6. **Upraszczam wcześniejszy plan.** Odkładam nowy dziennik prac i rozbudowane CLI. CI i osobna tożsamość agenta stają się opcjonalne. Wstrzymanie dashboardu zostało zastąpione prośbą Rolanda z 2026-10-26, zob. [D-16](#decyzje-z-task_15-d-16d-21). Specyfikację nadal edytujemy bez osobnej kopii roboczej; kopia `specification-praca` była tylko czasowym wyjątkiem na task_15 i jest już usunięta.
 
 **Gdzie czytać dalej:** etapy są w [§1](#1-plan-działań), obowiązki Rolanda w [§2](#2-co-robi-roland). [§7](#7-ocena-poprzedniej-pracy-nad-narzędziami) i [§8](#8-weryfikacja-wcześniejszego-planu) to dowody i historia. Wyjątek: [§8.3](#83-co-upraszczam) opisuje zmiany planu, które Roland może zawetować.
 
@@ -41,11 +53,11 @@
 ## 1. Plan działań
 
 ```text
-Etap 0  Zabezpieczyć pracę              ~1 h        ← teraz
-Etap 1  Uczciwe zapisy i decyzje        ~3 h        tylko dokumenty
-Etap 2  Drobne poprawki gry + wersja    ~3 h        → build 0.5.3
-Etap 3  Sesja gry PT0                   1–2 h Rolanda   ← bramka
-Etap 4  Pomiar                          → build 0.5.4 (po haśle może ruszyć już w trakcie PT0)
+Etap 0  Zabezpieczyć pracę              ~1 h        zrobione
+Etap 1  Uczciwe zapisy i decyzje        ~3 h        zrobione (tylko dokumenty)
+Etap 2  Drobne poprawki gry + wersja    ~3 h        zrobione → build 0.5.3, tag v0.5.3
+Etap 3  Sesja gry PT0                   1–3 h Rolanda   ← teraz, bramka
+Etap 4  Pomiar                          raport i bot już w 0.5.3; reszta → build 0.5.4
 Etap 5  Odczucie (horror w świecie)     → PT1
 Etap 6  Presja tygodnia                 → PT2
 Etap 7  Ludzie się kruszą               → PT3
@@ -58,6 +70,8 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
 - **Jeśli sesja gry wypadnie źle,** najpierw poprawiamy znalezione problemy, a dopiero potem idziemy dalej.
 
 ### Etap 0 — Zabezpieczyć pracę
+
+**Stan: zrobione.**
 
 **Cel:** awaria dysku nie zabiera miesiąca pracy.
 
@@ -73,6 +87,8 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - `git tag` pokazuje `v0.5.2`.
 
 ### Etap 1 — Uczciwe zapisy i decyzje
+
+**Stan: zrobione.** Banery z ostatniego punktu zastąpiła archiwizacja z [D-02](#decyzje-o-projekcie-i-procesie-d-01d-15).
 
 **Cel:** zapisy mówią prawdę, a decyzje da się znaleźć w specyfikacji. Etap dotyczy dokumentów i jednej drobnej poprawki testu pollera.
 
@@ -95,7 +111,7 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - dopisać test `first_meet` do mapy testów;
   - dopisać Hrapka do tabeli zakończeń;
   - zaktualizować kamienie milowe i hash `master`.
-- **Jedna zasada dla zmian spoza specyfikacji.** Dziś `ARCHITEKTURA.md` i README dashboardu mówią co innego niż skille. Ustalamy, że każda zmiana najpierw trafia do specyfikacji jako ⬜, więc tabela „Zmiany agenta poza specyfikacją” przestaje rosnąć.
+- **Jedna zasada dla zmian spoza specyfikacji.** Dziś `ARCHITEKTURA.md` i README dashboardu mówią co innego niż skille. Ustalamy, że każda zmiana najpierw trafia do specyfikacji jako ⬜, więc tabela „Zmiany agenta poza specyfikacją” przestaje rosnąć ([D-23](#decyzje-z-porządkowania-dokumentacji-d-22d-26)).
 - **Banery** „materiał referencyjny — nie aktualizować” w `docs/MECHANICS.md` i w plikach `docs_v2/`.
 - **Test pollera:** wymusić kodowanie UTF-8, bo dziś pada w domyślnej konsoli Windows.
 
@@ -106,6 +122,8 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - lint daje 0 błędów.
 
 ### Etap 2 — Drobne poprawki gry i numer wersji → 0.5.3
+
+**Stan: zrobione.** Build jest scalony do `master` gry (`5c08c5d`), tag `v0.5.3` stoi na `e1ba7ca`.
 
 **Cel:** czysty build do pierwszej sesji gry.
 
@@ -119,32 +137,35 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - `CHANGELOG.md` dołączony do zipa.
 - **Testy:** warstwy `unit`, `lint`, `dialogue` i jeden krótki scenariusz.
 
-- **Kto:** agent pracuje na gałęzi `spec/*`, Roland scala. Po scaleniu przez Rolanda agent wysyła zmiany (push) i taguje `v0.5.3`.
+- **Kto:** agent pracuje na gałęzi `spec/*`, Roland scala. Po scaleniu przez Rolanda agent taguje `v0.5.3` i wysyła zmiany (push), zgodnie z [regułą tagów i pushy](#reguła-tagów-i-pushy).
 - **Gotowe, gdy:** menu pokazuje wersję, a zip 0.5.3 leży w `build/`.
 
 ### Etap 3 — Sesja gry PT0 (bramka)
 
 **Cel:** pierwsza prawdziwa informacja od człowieka od miesiąca.
 
-- Roland gra w 0.5.3 przez 1–2 godziny; najlepiej, żeby w tym czasie przejść cały tydzień w grze (dni 1–7).
-- **Jeden krótki arkusz** zastępuje sześć otwartych arkuszy (factchecki 08–13, 76 wierszy). Zawiera:
-  - **do 15 wierszy** wyłącznie z rzeczami, które ocenia człowiek: odczucie, czytelność, ton, obraz;
+- Roland gra w 0.5.3 przez 1–3 godziny; najlepiej, żeby w tym czasie przejść cały tydzień w grze (dni 1–7).
+- **Jeden arkusz**, `docs/human-tasks/factcheck-test-14.md`, zastępuje sześć dawnych arkuszy (factchecki 08–13, 76 wierszy) i odbiór dashboardu z task_15. Część A (gra 0.5.3) zawiera:
+  - **15 wierszy** wyłącznie z rzeczami, które ocenia człowiek: odczucie, czytelność, ton, obraz;
   - **5 pytań w skali 1–7:**
     - napięcie w tunelach;
     - rozumiem, co kosztuje czas;
     - „dziś zabrakło mi czasu” — **tę jedną liczbę zapisujemy po każdym dniu gry**;
     - przywiązanie do ludzi;
     - ciekawość „co niżej”;
-  - **1 pytanie otwarte:** „gdzie było nudno albo trudno się połapać?”
-- **Bramka:** dopóki PT0 nie jest wypełniony albo świadomie pominięty przez Rolanda, agent nie zaczyna nowych funkcji gry. Narzędzia pomiaru z etapu 4 można już budować, bo nie zmieniają rozgrywki.
+  - **1 pytanie otwarte:** „gdzie było nudno albo trudno się połapać?”;
+  - **raport przebiegu:** do arkusza dołączamy pliki `.md` i `.json` z gry.
+- **Część B** (wiersze 16–29) to odbiór dashboardu z task_15. Wiersz 29 odsyła do `specification/dashboard/INSTRUKCJA.md`.
+- **Bramka:** dopóki PT0 nie jest wypełniony albo świadomie pominięty przez Rolanda, agent nie zaczyna nowych funkcji gry. Narzędzia pomiaru z etapu 4 już są (raport i bot w 0.5.3), a dalsze można budować, bo nie zmieniają rozgrywki.
 
 - **Kto:** agent przygotowuje arkusz, Roland gra i go wypełnia.
 - **Gotowe, gdy:** arkusz jest wypełniony albo jawnie pominięty, a każdy znaleziony problem ma decyzję (poprawić teraz albo odłożyć).
 
-### Etap 4 — Pomiar → 0.5.4
+### Etap 4 — Pomiar (raport i bot weszły do 0.5.3)
 
 **Cel:** liczby zamiast zgadywania przed zmianą balansu.
 
+- **Zmiana zakresu (2026-10-27).** Raport przebiegu i bot balansu zrobił task_14 już w 0.5.3, a nie w 0.5.4. Dzięki temu PT0 daje pierwszy raport z gry.
 - **Raport przebiegu.** Gra zapisuje go na koniec tygodnia i z menu pauzy, jako lokalny plik `.md` i `.json`. Zawiera:
   - czas w podziale na kategorie, dla każdego dnia;
   - liczbę żył;
@@ -152,13 +173,14 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - kluczowe wybory i zakończenie.
 
   Nic nie jest wysyłane przez sieć.
-- **Bot balansu.** To skrypt, który sam „gra” tydzień bez uruchamiania świata gry. Ma dwa style gry: „żyły” (zachłanny) i „rozmowy”. Wypisuje, kiedy osiągnięto normę (np. „dzień 4, 15:20”), oraz stan na koniec tygodnia.
-- **Przy okazji** (proces, nie warunek ukończenia etapu):
+- **Bot balansu.** To skrypt, który sam „gra” tydzień bez uruchamiania świata gry. Ma dwa style gry: „żyły” (zachłanny) i „rozmowy”. Wypisuje, kiedy osiągnięto normę, oraz stan na koniec tygodnia.
+- **Stan wyjściowy K1 z bota.** Norma 12 żył pada od dnia 4, 13:00 (styl „żyły”, wariant optymistyczny) do dnia 5, 15:30 (styl „rozmowy”, wariant opóźniony). Cel z [§4](#4-cele-mierzalne) to wieczór dnia 6. Bot nie zastępuje gracza, więc liczby potwierdzi dopiero raport z PT0.
+- **Zostaje do zrobienia** (proces, nie warunek ukończenia etapu):
   - zawęzić uprawnienia agenta w `.claude/settings.json`: zamiast ogólnych `git:*` i `node:*` lista konkretnych komend, a w zakazach `+master`, `rebase`, `restore` i `checkout --`;
-  - podzielić `CLAUDE.md` (dziś 35 KB) na rdzeń do 10 KB i pliki tematyczne.
+  - podział `CLAUDE.md` na rdzeń do 10 KB i pliki tematyczne wykonuje przebieg dokumentacji z 2026-10-27, nie etap 4.
 
 - **Kto:** agent pracuje na gałęzi `spec/*`, Roland scala.
-- **Gotowe, gdy:** bot podaje dzień osiągnięcia normy, a gra zapisuje raport przebiegu. Pierwszy pełny punkt odniesienia dla celów [K1–K5](#4-cele-mierzalne) daje PT1. PT0 odbywa się jeszcze na 0.5.3, więc raportu z niego nie będzie, a jedynym zapisem zostaje arkusz.
+- **Gotowe, gdy:** bot podaje dzień osiągnięcia normy i gra zapisuje raport przebiegu (oba są w 0.5.3), a uprawnienia są zawężone. Pierwszy punkt odniesienia dla celów [K1–K5](#4-cele-mierzalne) daje PT0, bo arkusz prosi o dołączenie plików raportu. PT1 służy do porównania.
 
 ### Etap 5 — Odczucie: horror w świecie, nie w tekście
 
@@ -175,9 +197,9 @@ Etap 9  Pierwsza godzina i demo         → PT4 z nowymi graczami
   - pukanie, które z dnia na dzień jest bliżej;
   - lampa przygasa, gdy bohater jest na krawędzi.
 - **Łagodniejsze podświetlenie.** Postacie tracą podświetlenie, a przedmioty dostają cienki kontur.
-- **Mikro-horror** wieczorami i nocami w dniach 1–2. Próba w Kostnicy (4b) nie weszła do decyzji: Roland wybrał 4a. Wraca tylko na osobne polecenie.
+- **Mikro-horror** wieczorami i nocami w dniach 1–2. Próba w Kostnicy (4b) nie weszła do decyzji: wybrano 4a (Roland, czat 2026-10-26). Wraca tylko na osobne polecenie.
 - **Licencje.** `cave_ambient.mp3` i `steps.mp3` wymienić na dźwięki CC0. Freesound wchodzi w grę, jeśli Roland poda klucz.
-- **Sesja gry PT1.** Daje punkt odniesienia K1–K5 z pierwszego raportu przebiegu oraz porównanie napięcia (K3) z PT0. Warto dać build też znajomemu.
+- **Sesja gry PT1.** Porównuje K1–K5 z raportem z PT0 oraz napięcie (K3) z ankietą PT0. Warto dać build też znajomemu.
 
 - **Kto:** agent pracuje na gałęzi `spec/*`, Roland scala i gra.
 - **Gotowe, gdy:** build ma nowy ruch, światło i dźwięk, a arkusz PT1 jest wypełniony.
@@ -268,10 +290,10 @@ Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze 
 
 ## 2. Co robi Roland
 
-- **Teraz:** zgoda na push i tag z etapu 0.
+- **Teraz:** sesja PT0 w arkuszu `docs/human-tasks/factcheck-test-14.md` (część A: gra 0.5.3, część B: odbiór dashboardu), 1–3 godziny. Do tego czasu czekają jeszcze trzy sprawy z końca bloku [Gdzie jesteśmy](#gdzie-jesteśmy-2026-10-27).
 - **Po każdym etapie gry (zwykle raz w tygodniu):**
   - około 30 minut na karty decyzji czekające na weto, wyniki gry i wybór następnego etapu;
-  - około godziny na grę w najnowszy build i wypełnienie krótkiego arkusza; PT0 jest dłuższy, 1–2 godziny.
+  - około godziny na grę w najnowszy build i wypełnienie krótkiego arkusza; PT0 jest dłuższy, 1–3 godziny.
 - **Scalanie:** gałąź agenta trafia do gry tylko po decyzji Rolanda.
 - **Wyraźne „tak”** dla rzeczy publicznych, płatnych i związanych z bezpieczeństwem. Nic takiego nie dzieje się samo.
 - **Opcjonalnie:**
@@ -295,7 +317,7 @@ Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze 
    - najwyżej **2** buildy czekające na zagranie. Przy limicie agent proponuje sesję gry zamiast nowej funkcji; poprawki błędów są nadal dozwolone;
    - najwyżej **5** otwartych kart decyzji.
 6. **Pełny zestaw testów uruchamiamy tylko za zgodą. Do `master` gry scala tylko Roland.**
-7. **Każdy build dostaje numer wersji i tag.** Push następuje po każdym scaleniu.
+7. **Każdy build dostaje numer wersji i tag.** Push następuje po każdym scaleniu, według jednej [reguły tagów i pushy](#reguła-tagów-i-pushy) z §9.
 8. **Zasady projektowe dla każdej zmiany gry:**
    - bez walki;
    - bez nowych liczników;
@@ -349,129 +371,69 @@ Cele sprawdzamy botem, raportami przebiegu i pięcioma pytaniami z arkusza. Przy
 
 ## 7. Ocena poprzedniej pracy nad narzędziami
 
-Przed tym planem inny model AI („drugi model”) uporządkował dokumentację, dashboard i sposób pracy. Jego plan, recenzja i notatka przekazania zostały usunięte; najważniejsze wnioski są poniżej.
+Przed tym planem inny model AI („drugi model”) uporządkował dokumentację, dashboard i sposób pracy. Jego plan, recenzja i notatka przekazania zostały usunięte; wnioski są poniżej.
 
-### Co dostarczył
-
-- **Dashboard:**
-  - wyszukiwanie całej specyfikacji po ID, nazwie (także bez polskich znaków), prozie i tabelach;
-  - przejście do właściwego wiersza;
-  - panel powiązanych materiałów.
-- **Bezpieczny zapis z dashboardu.** Cała partia plików jest sprawdzana przed zapisem. Konflikt nie kasuje szkicu, a nazwa propozycji nie nadpisze innej gałęzi.
-- **`specification/WORKFLOW.md`:** krótka instrukcja trybu solo i mapa tego, gdzie jest prawda. Zawiera też regułę dla sprzecznych źródeł: przyjęta nowsza decyzja wygrywa, a starszą zachowujemy z odsyłaczem.
-- **Tryb solo w plikach:** opiekunem wszystkich działów jest Roland.
-- **Poller tylko informuje.** To skrypt sprawdzający stan specyfikacji. Nie uruchamia modelu, a tryb próbny (DryRun) niczego nie zapisuje.
-- **Szablony:** karta decyzji i przykład INT-9.
-- **Kontrola linków** i arkusz odbioru narzędzi dla człowieka (`docs/human-tasks/factcheck-foundation-2026-10-26.md`).
-
-### Co agent sprawdził ponownie
-
-| Deklaracja | Wynik |
-|---|---|
-| Testy dashboardu 38/38 | zgadza się, 38/38 |
-| Build | poprawny |
-| Lint specyfikacji: 0 błędów, 0 uwag | zgadza się |
-| Linki: 357 celów, 0 brakujących | zgadza się |
-| Test pollera „ALL PASSED” | **tylko w konsoli UTF-8**; w domyślnej konsoli Windows pada na polskich znakach |
-| 3 pozorne „zmiany do wdrożenia” w specyfikacji | liczba się zgadza |
-| Poprawki zapisu (utrata szkicu, zapis częściowy, nadpisanie gałęzi, DryRun) | zgodne z kodem (sprawdzone przez czytanie) |
-| 13 scenariuszy w przeglądarce, test `unit` Godota | nie powtarzano |
-
-### Dobre strony
-
-- **Uczciwość.** Wyniki automatu są oddzielone od wyników człowieka, a kolumny człowieka zostały puste. Ograniczenia są nazwane wprost. Baseline nie został przesunięty, żeby ukryć pozorne zadania.
-- **Trafna decyzja: Markdown + Git zamiast bazy danych.** Przy 59 plikach i około 273 KB baza dodałaby migracje i synchronizację bez korzyści.
-- **Realne ryzyka utraty pracy w dashboardzie są naprawione** i pokryte testami.
-- **Jedna krótka instrukcja pracy** zastąpiła kilka sprzecznych.
-- **Recenzja przed wdrożeniem** wyłapała prawdziwe błędy.
-
-### Słabe strony
-
-- **Złe proporcje.** Kilkaset nowych linii kodu w dashboardzie i około 50 KB planów i recenzji powstało dla jednej osoby z jedną kartą przeglądarki. W tym czasie najcenniejsze kroki (korekta zapisów, decyzje, błędy, wersja) czekały.
-- **Żadna zmiana nie trafiła do commita.** To był świadomy wybór, żeby Roland mógł przejrzeć zmiany, ale cała praca zależała od jednego dysku.
-- **Decyzje z 2026-10-26 nie trafiły do specyfikacji.** Naprawia to etap 1.
-- **Dług techniczny w dashboardzie:**
-  - stan zapisu w `store.tsx` jest skomplikowany (6 referencji pilnujących wyścigów);
-  - starego szkicu bez zapisanej bazy nie da się wysłać jako propozycji;
-  - obsługiwana jest tylko jedna karta edycyjna.
-
-  Poprawiamy to dopiero wtedy, gdy zacznie przeszkadzać.
-- **`CLAUDE.md` urósł do 35 KB**, choć miał się zmniejszyć.
-- **Dokumenty były gęste i trudne do czytania.**
+- **Dostarczył:** wyszukiwanie w dashboardzie, bezpieczny zapis (partia plików sprawdzana przed zapisem), `specification/WORKFLOW.md` z regułą „nowsza przyjęta decyzja wygrywa”, tryb solo, poller tylko informujący, szablony i kontrolę linków.
+- **Sprawdzone ponownie:** testy dashboardu 38/38, build, lint (0 błędów) i linki (357 celów, 0 brakujących) zgadzają się, a poprawki zapisu są zgodne z kodem. Wyjątek: test pollera przechodził **tylko w konsoli UTF-8** (poprawka w etapie 1).
+- **Dobre strony:** wyniki automatu oddzielone od wyników człowieka, Markdown + Git zamiast bazy danych, jedna krótka instrukcja zamiast kilku sprzecznych.
+- **Słabe strony:**
+  - złe proporcje: kod dashboardu i około 50 KB planów powstały dla jednej osoby, a najcenniejsze kroki czekały;
+  - żadna zmiana nie była w commicie, więc praca zależała od jednego dysku (naprawia etap 0), a decyzje nie trafiły do specyfikacji (etap 1);
+  - dług w dashboardzie (skomplikowany stan zapisu w `store.tsx`, jedna karta edycyjna) poprawiamy dopiero wtedy, gdy zacznie przeszkadzać;
+  - `CLAUDE.md` urósł do ponad 40 KB, choć miał się zmniejszyć. Przebieg dokumentacji z 2026-10-27 skrócił go do rdzenia 9 053 B; reszta jest w `docs/agent/README.md`, `tools/README.md` i specyfikacji.
 
 ---
 
 ## 8. Weryfikacja wcześniejszego planu
 
-Tezy wcześniejszego planu agenta zostały sprawdzone od nowa w kodzie, historii Git i źródłach (metoda na końcu dokumentu).
+Tezy wcześniejszego planu agenta sprawdzono w kodzie, historii Git i źródłach (metoda na końcu dokumentu).
 
 ### 8.1 Co się potwierdziło
 
-- **Proces:**
-  - wszystkie 36 commitów (19 w grze, 17 w specyfikacji) pochodzą z jednego konta;
-  - jest 0 tagów i 0 scaleń przez przegląd `zmiana/*`;
-  - jedna zmiana przeszła oficjalną drogą, a 13 ją ominęło.
-- **Fałszywe potwierdzenia testów:**
-  - factchecki mają 219 wierszy;
-  - **123 z nich agent oznaczył jako „sprawdzone przez użytkownika”** (commit `d39bbb9`) i do dziś nie zostały skorygowane;
-  - task_13 zamknięto z pustym arkuszem;
-  - 76 wierszy czeka na człowieka.
-- **Decyzje:** w `decision-analiza-rozgrywki.md` było 0 z 10 odpowiedzi (rozstrzygnięte 2026-10-26).
-- **Śledzenie:** tylko 3 ze 128 ID reguł pojawiają się w kodzie lub testach.
-- **Bohater prawie nigdy nie jest „na krawędzi”.** Bez ogniska spada z 80 do 59 punktów w tydzień, a ognisko oddaje około +30.
-- **Zakończenie zależy tylko od normy żył.** Losy ludzi to sam tekst podsumowania.
-- **Horror jest w tekście:**
-  - chód ma 5 m/s i nie ma bezwładności;
-  - jeden dźwięk kroków na każde podłoże;
-  - szepty to napisy na ekranie;
-  - światło i mgła nie zmieniają się z głębokością.
-- **Wydarzenia są zapisane w kodzie.** `story_director.gd` ma około 107 warunków, a noce 3 i 5 są „magicznymi” numerami.
-- **Trzy błędy z etapu 2 nadal są w grze.**
-- **Cytowane źródła są prawdziwe:** Thomas Grip (Frictional), Emily Short (storylety) i GitHub Spec Kit.
+- **Proces:** 36 commitów z jednego konta, 0 tagów, 13 z 14 zmian poza oficjalną drogą przeglądu.
+- **Fałszywe potwierdzenia testów:** 123 z 219 wierszy factchecków agent oznaczył jako „sprawdzone przez użytkownika” (`d39bbb9`). Korektę robił etap 1.
+- **Gra:** bohater prawie nigdy nie jest „na krawędzi”; zakończenie zależy tylko od normy żył; horror jest w tekście (chód 5 m/s, jeden dźwięk kroków, szepty jako napisy, światło bez zmian z głębokością); `story_director.gd` ma około 107 warunków; tylko 3 ze 128 ID reguł są w kodzie lub testach. Trzy błędy z etapu 2 naprawiono w 0.5.3.
 
 ### 8.2 Co poprawiam
 
 | Pisałem we wcześniejszym planie | Jest naprawdę |
 |---|---|
 | 5 commitów niewysłanych na serwer | **4** |
-| Norma 12 żył „w południe dnia 4” | To szacunek ze starej tabeli, która wychodzi poza koniec dnia (22:00). Nowy szacunek: **dzień 3–5**, zależnie od blokad i zmęczenia. **Nikt tego nie zmierzył**, dlatego najpierw robimy pomiar (etap 4). Żył jest 25 przy normie 12, więc połowa mapy jest opcjonalna. |
-| Tekla może spaść do 0 bez skutku | **Błąd.** Tekla nie zejdzie niżej niż około 13. |
-| Na oczach gracza łamią się 3 osoby (Mirosław, Nasir, Dobrawa) | **Gorzej:** przez poczytalność łamie się tylko **Mirosław**. Dobrawa kończy tydzień na około 20, więc jej załamanie jest w praktyce martwym kodem. Gorączka Nasira dotyczy zdrowia, a nie poczytalności. |
-| 49 sprzeczności między warstwami dokumentów | Przykłady sprzeczności są prawdziwe, ale **liczby nie udało się odtworzyć**. |
-| ~198 z 234 flag bez dokumentacji | Około **85%** flag nie ma dokumentacji; dokładne liczby zależą od sposobu liczenia. |
-| Pomocnicy „tylko do odczytu” mają dostęp do konsoli | Dotyczy tylko `convention-reviewer`. `test-runner` potrzebuje konsoli z założenia. |
-| Zmęczenie dodano wbrew ostrzeżeniu, żeby nie dokładać drugiego zegara | Ostrzeżenie powstało, gdy zmęczenie już było, i dotyczy **kolejnych** liczników. Zmęczenie samo hamuje „wyścig po żyły”. |
+| Norma 12 żył „w południe dnia 4” | Szacunek ze starej tabeli. Nowy szacunek to dzień 3–5, a bot z 0.5.3 daje dzień 4, 13:00 – dzień 5, 15:30 (zob. [K1](#4-cele-mierzalne)). Żył jest 25, więc połowa mapy jest opcjonalna. |
+| Tekla może spaść do 0 | Nie zejdzie niżej niż około 13. |
+| Na oczach gracza łamią się 3 osoby | Przez poczytalność łamie się tylko **Mirosław**. Dobrawa kończy tydzień na około 20, więc jej załamanie to martwy kod; gorączka Nasira dotyczy zdrowia. |
+| 49 sprzeczności; ~198 z 234 flag bez dokumentacji | Przykłady prawdziwe, liczb nie odtworzono; flag bez dokumentacji jest około 85%. |
 
 ### 8.3 Co upraszczam
 
-Wcześniejszy plan był zbyt ambitny jak na jedną osobę z agentem: miał 8 fal, 30 zadań i kilkanaście kroków porządkowych przed pierwszą zmianą w grze. Poniższe zmiany to rekomendacja, którą Roland może zawetować.
+Wcześniejszy plan (8 fal, 30 zadań) był zbyt ambitny dla jednej osoby z agentem. To rekomendacja, którą Roland może zawetować.
 
-| Było w planie | Teraz | Dlaczego |
-|---|---|---|
-| Osobna kopia robocza specyfikacji i gałęzie `agent/*` | Specyfikację edytujemy lokalnie według `WORKFLOW.md`. Agent commituje po lincie z wynikiem 0 błędów. Kopia robocza gry (`everhorror-wdrozenie`) dla `spec/*` zostaje. | Gałęzie przeglądu chronią przed drugą osobą, której teraz nie ma. |
-| Nowy dziennik „Prace” i CLI `work/finalize/trace/review/report/doctor` | **Odkładamy.** Obecne tabele `WDROZENIA.md` zostają. Małe narzędzie `doctor` wraca tylko wtedy, gdy rozjazdy statusów się powtórzą. | To dni pracy, a obecne tabele w większości działają. |
-| Natychmiastowa archiwizacja `docs_v2/` i `MECHANICS.md` | Teraz baner w samych plikach. Przeniesienie dopiero po przeniesieniu LoreDoc i rejestru licencji do specyfikacji. | Stare pliki mają jeszcze unikalne treści, a specyfikacja do nich linkuje. |
-| CI gry na GitHub, osobna tożsamość agenta, hook przed pushem | **Opcjonalne**, gdy będzie chwila. Lint uruchamiamy ręcznie. Do CI wystarczy `chickensoft-games/setup-godot` z `use-dotnet: false`. | Przy jednym autorze zysk jest mały. |
-| Zawężenie uprawnień i podział `CLAUDE.md` w pierwszym tygodniu | Robimy to w etapie 4, przy okazji pomiaru. | Nie zmieniają gry ani zapisów. |
-| „Wydarzenia jako dane” w 3 częściach, przed presją | Robimy **tylko część 1**, w etapie 7, jako przygotowanie do pakietu „Ludzie”. Dalsze części tylko wtedy, gdy się opłacą. | Mniej przepisywania przed pierwszym efektem w grze. |
-| Zakres pakietu „Ludzie”: Tekla, Racibor, Anzelm | Dochodzi naprawa Dobrawy. | Jej załamanie jest dziś martwym kodem. |
-| Raport tygodniowy z CLI | Krótka notatka agenta przed przeglądem. | Bez nowego narzędzia. |
-| Dalszy rozwój dashboardu | **Wstrzymany**, tylko poprawki błędów. Zastąpione 2026-10-26: Roland zlecił orkiestrację zadań z dashboardu (specification/09_produkcja.md, dziennik decyzji). | Narzędzie już wystarcza. |
+| Było w planie | Teraz |
+|---|---|
+| Osobna kopia robocza specyfikacji i gałęzie `agent/*` | Specyfikację edytujemy lokalnie według `WORKFLOW.md`, commit po lincie z 0 błędów. Czasowy wyjątek task_15 (kopia `specification-praca`, już usunięta) zastąpiła prośba Rolanda z 2026-10-26, zob. [D-16](#decyzje-z-task_15-d-16d-21). Kopia gry `everhorror-wdrozenie` zostaje. |
+| Dziennik „Prace” i CLI `work/finalize/trace/review/report/doctor` | **Odkładamy.** Zostają tabele `WDROZENIA.md`. |
+| Natychmiastowa archiwizacja `docs_v2/` i `MECHANICS.md` | Wykonana 2026-10-27 po przeniesieniu LoreDoc i rejestru zasobów do specyfikacji (specyfikacja `e8c899e`, obrazy `ca9832b`): `docs_v2/` usunięty (`<SHA-docs_v2>`), `MECHANICS.md` w `docs/archiwum/` ([D-02](#decyzje-o-projekcie-i-procesie-d-01d-15)). |
+| CI gry, osobna tożsamość agenta, hook przed pushem | **Opcjonalne.** Lint ręcznie. Tożsamość agenta w przebiegach z dashboardu: [D-19](#decyzje-z-task_15-d-16d-21). |
+| Zawężenie uprawnień i podział `CLAUDE.md` w pierwszym tygodniu | Uprawnienia w etapie 4; podział `CLAUDE.md` zrobiono 2026-10-27. |
+| „Wydarzenia jako dane” w 3 częściach | **Tylko część 1**, w etapie 7. |
+| Pakiet „Ludzie”: Tekla, Racibor, Anzelm | Dochodzi naprawa Dobrawy. |
+| Raport tygodniowy z CLI | Krótka notatka agenta przed przeglądem. |
+| Dalszy rozwój dashboardu | Wstrzymany, tylko poprawki błędów. **Zastąpione** prośbą Rolanda z 2026-10-26 (orkiestracja zadań z dashboardu), zob. [D-16](#decyzje-z-task_15-d-16d-21). |
 
 ---
 
 ## 9. Decyzje i stałe zgody
 
-Roland, czat 2026-10-26: „all decisions go as recommended”, czyli wszystkie decyzje zgodnie z rekomendacją. Poniżej ich treść, z uwzględnieniem uproszczeń z [§8.3](#83-co-upraszczam). W etapie 1 trafią do dziennika decyzji w specyfikacji.
+Roland, czat 2026-10-26: „all decisions go as recommended”, czyli wszystkie decyzje zgodnie z rekomendacją. Poniżej ich treść, z uwzględnieniem uproszczeń z [§8.3](#83-co-upraszczam). Zapisano je w dzienniku decyzji w specyfikacji (karty D-03).
 
 ### Decyzje o projekcie i procesie (D-01…D-15)
 
 | Karta | Decyzja | Etap |
 |---|---|---|
 | D-01 | Nowy sposób pracy: zasady z [§3](#3-zasady-które-obowiązują), krótki arkusz gry, zasada uczciwości wpisów. Zakres ograniczony przez [§8.3](#83-co-upraszczam). | 0–4 |
-| D-02 | `docs/MECHANICS.md` i `docs_v2/` idą do archiwum; rejestr zasobów i tekst LoreDoc przechodzą do specyfikacji. Na razie tylko baner. | 1, potem później |
+| D-02 | `docs/MECHANICS.md` i `docs_v2/` idą do archiwum; rejestr zasobów i tekst LoreDoc przechodzą do specyfikacji. Wykonane 2026-10-27: LoreDoc i rejestr w specyfikacji (specyfikacja `e8c899e`, obrazy `ca9832b`), `docs_v2/` usunięty z repozytorium (historia gita: `<SHA-docs_v2>`), `MECHANICS.md` w `docs/archiwum/`. Taką formę archiwizacji zaproponował agent (rekomendacja, weto Rolanda). | 1, wykonane 2026-10-27 |
 | D-03 | Karty decyzji trzymamy w `specification/zgloszenia/` jako „Rodzaj: decyzja”. | 1 |
-| D-04 | Pakiet odczucia: ruch, światło według głębokości, szepty 3D, łagodniejsze podświetlenie, mikro-horror. Próba w Kostnicy odpada (Roland wybrał D4 = a). | 5 |
+| D-04 | Pakiet odczucia: ruch, światło według głębokości, szepty 3D, łagodniejsze podświetlenie, mikro-horror. Próba w Kostnicy odpada (wybór D4 = a, Roland, czat 2026-10-26). | 5 |
 | D-05 | Presja: norma etapami, cena nocy, żyły ponad normę jako pokusa, rozmowy oddają czas. Liczby ustala bot. | 6 |
 | D-06 | Ludzie: wspólne wstrząsy, załamania Tekli, Racibora i Anzelma, zapowiedzi, jedna szansa na odwrócenie. Teksty pisze agent, Roland może zawetować. | 7 |
 | D-07 | Zakończenie zależy od losów ludzi: tytuł i pierwszy akapit. | 7 |
@@ -508,13 +470,51 @@ Pytania zespołowe:
 
 **Te decyzje nie obejmują:** wydatków (np. opłata Steam Direct, około 100 USD), publikacji (strona w sklepie, publiczne buildy, promocja) i zmian bezpieczeństwa poza D-15. Każda z tych rzeczy wymaga osobnego „tak”.
 
+### Decyzje z task_15 (D-16…D-21)
+
+Źródło: [`docs/ai-tasks/done/task_15.md`](../ai-tasks/done/task_15.md), sekcje „Decyzje i założenia” oraz „Czego potrzebuję od Ciebie”. Pozycje oznaczone „rekomendacja” agent przyjął w ramach polecenia „Reszta też jak rekomendowane” (Roland, czat 2026-10-26), więc Roland może je zawetować.
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-16 | Orkiestracja zadań i arkuszy z dashboardu (widok „Praca”). Zadania i arkusze zostają w `docs/`, stan liczy się z dokumentów i gita bez własnej bazy, pytania agenta to karty D-03, strefy człowieka mają jedną definicję składniową, a przebiegi agenta to lokalne `claude -p` na kliknięcie (jeden naraz, strażnik i audyt). Zastępuje w tym zakresie [§8.3](#83-co-upraszczam): „dalszy rozwój dashboardu wstrzymany”; „bez osobnej kopii roboczej” miało tylko czasowy wyjątek na task_15 (kopia `specification-praca`, już usunięta). Bez zmian: dziennik „Prace” odłożony, [§5](#5-czego-nie-robimy), jedna otwarta gałąź, scalanie tylko przez Rolanda, pełny zestaw testów za zgodą, agent nie wpisuje wyników człowieka. | prośba Rolanda, czat 2026-10-26 (`task_15.md`, D1–D14 projektu, w tym D13) |
+| D-17 | Zmiany procesu: (a) arkusze człowieka żyją w `master` gry, nie na gałęziach `spec/*`, a zapis z dashboardu to commit jednego pliku podpisany wybraną osobą; (b) pytania z analizy zadań to karty decyzji D-03, nie `decision-task-NN.md`; (c) przebiegi z dashboardu nie commitują w grze, nie wypychają i nie tagują. | rekomendacja agenta (weto Rolanda), `task_15.md` pkt 1 |
+| D-18 | Domyślne modele przebiegów: Opus z effort high dla planowania, analizy i przeglądu; Sonnet z effort high dla wdrożenia, poprawek i domknięcia; próba bez zmian (Sonnet low). Limity kosztu bez zmian. Zastępuje „Opus max i Sonnet max” z `task_15.md` pkt 3. Haiku jest dziś dostępny w oknie uruchomienia tylko jako „własny identyfikator”. Zmiana wartości w kodzie dashboardu (`RUN_KINDS`, `AGENT_LABELS`) idzie osobnym commitem w przebiegu dokumentacji. | Roland, czat 2026-10-27: „Używajmy w kolejnych zadaniach Opus 5.5 High, Haiku 5.5 Max albo Sonnet 5.5 High, żeby było szybciej” |
+| D-19 | Tożsamość agenta w przebiegach z dashboardu to „Claude (agent)” z adresem `agent@everhorror.local`. Przebiegi działają na subskrypcji; płatne API tylko po `EVERHORROR_ALLOW_API_KEY=1`. | rekomendacja agenta (weto Rolanda), `task_15.md` pkt 4–5 |
+| D-20 | Włączenie dashboardu do `master` specyfikacji i zapis dokumentów procesu w grze. Wykonane: dashboard w `88edde0`, dokumenty procesu w `2a155ce`. | rekomendacja agenta (weto Rolanda), `task_15.md` pkt 6–7 |
+| D-21 | **Czeka na Rolanda.** Hasło administratora dashboardu (dziś puste), pierwsze płatne kliknięcie przebiegu („Sprawdź agenta”, grosze) oraz źródło i licencja `assets/logo.png` przed demem publicznym. Każda z tych rzeczy wymaga wyraźnego „tak”. | `task_15.md` pkt 8–9, D-10 |
+
+### Decyzje z porządkowania dokumentacji (D-22…D-26)
+
+Przebieg porządkowania dokumentacji z 2026-10-27 wykonał prośbę Rolanda o przegląd, aktualizację i redukcję rozproszonych dokumentów oraz o instrukcję obsługi dashboardu.
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-22 | Agent robi commity `[agent] proces: dokumentacja — …` w `master` gry i wypycha je po przeglądzie. To jednorazowy wyjątek od stałych zgód, tylko dla tego przebiegu. | Roland, czat 2026-10-26/27: prośba o wykonanie pracy łącznie z commitem i pushem |
+| D-23 | Tabela „Zmiany agenta poza specyfikacją” nie dostaje nowych wierszy. Pilna poprawka błędu, który narusza istniejącą regułę, nie potrzebuje wiersza, bo przywraca zgodność. Każda inna zmiana najpierw trafia do specyfikacji jako ⬜. | rekomendacja agenta (weto Rolanda) |
+| D-24 | Założenia agenta z task_05 w `09_produkcja.md` (np. „Norma to 12 z 25”) zostają do etapu 6 z dopiskiem „zweryfikuje D1/D-05”. | rekomendacja agenta (weto Rolanda) |
+| D-25 | Czas sesji gry dla testera: do PT0 „1–3 godziny”. Jedną liczbę podamy po PT0. | rekomendacja agenta (weto Rolanda) |
+| D-26 | LoreDoc (tekst Rena) jest przeniesiony do specyfikacji dosłownie. Pytanie, czy oryginał ma rozdział „Przystosowanie do Savage Worlds”, oraz poprawa usterek eksportu (H1 w L476, puste `###`) czekają na zgodę. | rekomendacja agenta (weto Rolanda) |
+
+### Odłożone (bez decyzji)
+
+- **Korekty specyfikacji do stanu gry.** Każda zmienia treść reguły i w dashboardzie wychodzi jako „do wdrożenia”, więc czeka na jedną zgodę i jeden commit `[agent]`: `welf.md:35` („rozmowa (1 h)”, w grze `[#free]`; brak +20 zaufania), `07_balans.md:82` (kąt +4) i `:134` (lista zaufania), ZAD-1 bez zakładki „Czas”, `00_gra.md` („Stan gry”, „dziesięć postaci”) oraz pochodzenie „Tekla [GDD]” i „Hanusz (LoreDoc)”.
+- **Przyszłe zadanie narzędziowe dla dashboardu** (do otwarcia po PT0; do tego czasu redakcja plików reguł dająca fałszywe „do wdrożenia” czeka):
+  - (a) zmiana samych linii meta („Stan na”) bez pozycji `tekst`;
+  - (b) `01_swiat/LoreDoc.md` w `EDITORIAL_FILES`;
+  - (c) reguły TECH-1…3 są dziś niewidoczne dla `/spec-tasks`, bo `08_technika.md` jest plikiem redakcyjnym;
+  - (d) linie ❓ w listach numerowanych;
+  - (e) wpis INSTRUKCJI w nawigacji aplikacji;
+  - (f) etykieta „Szablon: zadanie”;
+  - (g) rodzajowe stopki commitów (`Wpisał-`, `Scalił-`, `Zamknął-` …) i zdanie „Ten przebieg uruchomił …”;
+  - (h) wtyczki użytkownika zsynchronizowane z kontem ładują się w przebiegach z dashboardu (ostrzeżenie przy starcie: „Wtyczki są załadowane: cc-plugin-…”);
+  - (i) domknięcie zapisuje w `WDROZENIA.md` („Wpisy”) commit wdrożenia, więc własny commit domknięcia, który przestawia znaczniki, pokazuje się w dashboardzie jako fałszywe pozycje „do wdrożenia”.
+
 ### Stałe zgody dla agenta (Roland, 2026-10-26, D-01 i D-15)
 
 **Wolno bez pytania:**
 - commity na gałęziach `spec/*` w kopii roboczej `everhorror-wdrozenie`;
 - commity `[agent]` w specyfikacji, po lincie z wynikiem 0 błędów;
-- push `master` gry po scaleniu przez Rolanda;
-- tworzenie i wysyłanie tagów wersji;
+- tag wersji i push `master` gry po scaleniu przez Rolanda, według [reguły tagów i pushy](#reguła-tagów-i-pushy);
 - krótkie testy (`unit`, `lint`, `dialogue`, pojedynczy scenariusz).
 
 Bieżące polecenie może ten zakres zawęzić.
@@ -526,9 +526,17 @@ Bieżące polecenie może ten zakres zawęzić.
 - wszystko publiczne, wydatki i ustawienia bezpieczeństwa (poza zawężeniem uprawnień z etapu 4).
 
 **Zasady commitów:**
-- prefiksy: `task_NN: …`, `fix: …`, `build: vX.Y.Z`, `[agent] …` (specyfikacja), `[agent] proces: …` (zmiany procesu);
+- prefiksy: `task_NN: …`, `fix: …`, `build: vX.Y.Z`, `[agent] …` (specyfikacja), `[agent] proces: …` (zmiany procesu, np. `[agent] proces: dokumentacja — …`, [D-22](#decyzje-z-porządkowania-dokumentacji-d-22d-26));
 - zmiany procesu i praca nad grą nigdy w jednym commicie;
 - żaden commit nie nazywa się po prostu „changes”.
+
+### Reguła tagów i pushy
+
+Jedna reguła dla wszystkich dokumentów i skilli:
+
+- Agent stawia tag `vX.Y.Z` na commicie, z którego zbudowano zip, i wysyła go razem z `master` gry po scaleniu przez Rolanda.
+- Przebiegi z dashboardu nie commitują w grze, nie wypychają i nie tagują.
+- Opcja „tag i push” przy kliknięciu „Scal” robi to samo w imieniu Rolanda.
 
 ---
 
@@ -544,7 +552,7 @@ Bieżące polecenie może ten zakres zawęzić.
 | **PT0…PT4** | Kolejne sesje gry (playtesty). |
 | **CP-0…CP-6** | Pakiety zmian gry z wcześniejszego planu: Pomiar, Odczucie, Wydarzenia jako dane, Presja, Ludzie, Fabuła, Pierwsza godzina. Tu odpowiadają im etapy 4–9. |
 | **K1…K5** | Cele mierzalne z [§4](#4-cele-mierzalne). |
-| **D-01…D-15, D1–D10** | Podjęte decyzje z [§9](#9-decyzje-i-stałe-zgody). |
+| **D-01…D-26, D1–D10** | Decyzje z [§9](#9-decyzje-i-stałe-zgody). D-16…D-21 pochodzą z task_15, D-22…D-26 z porządkowania dokumentacji. |
 | **Baseline** | Commit specyfikacji, do którego gra jest w pełni wdrożona. Punkt odniesienia dla pytania, co się zmieniło od ostatniego wdrożenia. |
 | **Bot balansu** | Skrypt, który sam „gra” tydzień bez świata gry i podaje, kiedy osiągnięto normę. |
 | **Raport przebiegu** | Lokalny plik z czasem, żyłami i stanem ludzi z jednej rozgrywki. |
