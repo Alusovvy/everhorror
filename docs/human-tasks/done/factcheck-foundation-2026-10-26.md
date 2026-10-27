@@ -1,6 +1,8 @@
 # Odbiór podstaw pracy — 2026-10-26
 
-Lokalne zmiany dokumentacji, workflow i dashboardu; bez nowej rozgrywki. Ocena tej pracy i wyniki automatu: [plan końcowy, §7](../analizy/final-plan-human-readable.md#7-ocena-poprzedniej-pracy-nad-narzędziami). Kolumny wyniku i uwag poniżej wypełnia człowiek; nie są potwierdzeniem testów automatycznych.
+> Zastąpione 2026-10-27 arkuszem [factcheck-test-14](../factcheck-test-14.md) (część B): Roland, czat 2026-10-27, poprosił o zebranie wszystkiego do sprawdzenia w jeden arkusz na jedną sesję. Ten arkusz nie był wypełniany; wyniki człowieka wpisuje się tam.
+
+Lokalne zmiany dokumentacji, workflow i dashboardu; bez nowej rozgrywki. Ocena tej pracy i wyniki automatu: [plan końcowy, §7](../../analizy/final-plan-human-readable.md#7-ocena-poprzedniej-pracy-nad-narzędziami). Kolumny wyniku i uwag poniżej wypełnia człowiek; nie są potwierdzeniem testów automatycznych.
 
 | # | Co sprawdzić | Jak | Oczekiwany wynik | Wynik człowieka | Uwagi człowieka |
 |---|---|---|---|---|---|
