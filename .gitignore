@@ -34,6 +34,8 @@ desktop.ini
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# GdUnit4 test reports
+# Local reports: test logs (reports/tests), dashboard runs and their lock
+# (reports/dashboard-runs), spec-sync state, build and import logs
 /reports/
+# Local data of the godot-runtime MCP server
 .mcp/

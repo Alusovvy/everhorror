@@ -40,7 +40,7 @@ Kopalnia zabiera zdrowie i rozum także bohaterowi. Leki i świece są
 w ekwipunku (I). Kto schodzi na dół poraniony, może nie wrócić. Po śmierci
 dzień da się powtórzyć od rana (RETRY FROM MORNING).
 
-Cały tydzień to mniej więcej 2-3 godziny grania. Grę zapisuje się pod Esc
+Cały tydzień to mniej więcej 1-3 godziny grania. Grę zapisuje się pod Esc
 (3 miejsca na zapis).
 
 CO NOWEGO W 0.5.3
@@ -61,75 +61,6 @@ CO NOWEGO W 0.5.3
 - ekran końca tygodnia mieści się w oknie: przy długim podsumowaniu znika
   logo, a pod tekstem stoi nazwa zapisanego raportu
 - zapisy z 0.5.x działają (zapis gry ma teraz wersję 6)
-- w archiwum jest też CHANGELOG.md z historią wersji
-
-CO NOWEGO W 0.5.2 (poprawki)
-- staw w zalanym chodniku jest pod wodą, dopóki nie ruszą pompy, więc łowić
-  da się dopiero potem. Jest za to inny sposób na rybę: zapytaj Wszebora
-  (i miej przy sobie bandaż)
-- sen po odszyfrowaniu wiadomości dziadka przychodzi zawsze, niezależnie od
-  tego, którego dnia zdobędziesz szyfr i klucz (wcześniej tylko po dniu 1 i 2)
-- sen ostatniej nocy ma swoją końcówkę dla tych, którzy liczyli kreski
-- "Muszę iść." u przybysza z Exitium nie zabiera już 5 minut
-- zapisy z 0.5.1 działają
-
-CO NOWEGO W 0.5.1
-- pierwszy dzień: w obozie są tylko zarządca, kwatermistrzyni i dwaj górnicy;
-  resztę ekipy spotkasz na szychcie w Starej sztolni, w rząpiu albo za
-  zachodnim zawałem (za każdym razem gdzie indziej), a od drugiego dnia
-  wszyscy są w obozie
-- ludzie witają się inaczej zależnie od tego, gdzie ich pierwszy raz spotkasz
-- zmęczenie: długie chodzenie po tunelach męczy (widać to w rogu ekranu
-  i w ekwipunku); kto padnie z nóg, idzie w głąb dwa razy dłużej. Pomaga sen
-  i wieczór przy ognisku
-- powrót do obozu trwa połowę drogi, którą przeszedłeś od wyjścia
-- ta sama odpowiedź w rozmowie z tą samą osobą kosztuje czas tylko raz
-- UWAGA: zacznij nową grę (zmienił się pierwszy dzień)
-
-CO NOWEGO W 0.5
-- obóz to teraz naturalna jaskinia: dużo więcej miejsca, wysokie sklepienie,
-  ognisko w środku, drewno tylko w konstrukcjach (zagroda zarządcy, rusztowanie)
-- w drodze powrotnej z chodników można spotkać kogoś bardzo dziwnego, a za nim
-  idzie nowe zadanie (i pytanie, skąd w kopalni wziąć rybę)
-- zegara nie ma już w rogu ekranu: godzina, ile zostało do nocy i dziennik
-  "co ile czasu zjadło" są w notesie (J, zakładka "Czas"), a w rozmowie przy
-  tekście
-- rozmowa kosztuje 5 minut za każdą wybraną odpowiedź zamiast pół godziny;
-  pożegnanie i samo oddanie przedmiotu nic nie kosztują
-- odpowiedzi zablokowane przez brak zaufania albo przedmiotu widać na szaro,
-  z powodem w nawiasie (można to wyłączyć: OPTIONS -> Show locked choices)
-- mapa: nazwy miejsc nie nachodzą już na siebie, a plansza przybycia mówi,
-  przez które miejsca prowadziła droga
-- strach w strasznych miejscach nie kończy się już zdaniem "czujesz się: spokojny"
-- UWAGA: obóz wygląda inaczej niż w 0.4.x, więc zacznij nową grę
-  (starych zapisów nie sprawdzaliśmy z nowym obozem)
-
-CO NOWEGO W 0.4.1 (poprawki)
-- komunikat o upływie czasu nie ma już podwójnego "h" (było: "−0,5 h h")
-- gdy Nasira wywiozą bez lekarstwa, zadanie "Gorączka Nasira" kończy się
-  jako nieudane, z wpisem w notesie (wcześniej wisiało jako aktywne)
-
-CO NOWEGO W 0.4
-- wieczory przy ognisku: usiądź przy ogniu po 20:00 (opowieści, pieśń o Długiej Nocy, wieczór po wstrząsie)
-- nowa zagadka do wytropienia: ktoś w tej kopalni liczy do czternastu
-- ludzie w obozie witają się inaczej każdego dnia, a nocny wstrząs zostawia ślady w chodnikach
-- autozapis każdego świtu (slot AUTO w LOAD GAME)
-- opcje: jasność obrazu, osobna głośność tła i efektów
-- kiedy bohaterowi pęka głowa, widać to na brzegach ekranu
-- usunięty skok
-- rozmowy zabierają pół godziny zamiast godziny i tylko wtedy, gdy naprawdę rozmawiasz;
-  zagadać kogoś i od razu pójść dalej można za darmo
-
-CO BYŁO NOWE W 0.3
-- tydzień zamiast trzech dni, norma 12 żył i rozliczenie ósmego dnia rano
-- stół z mapą, wyprawy dalej w głąb pod M, podsumowanie każdej wyprawy
-- 10 nowych miejsc i 25 żył do znalezienia
-- 9 nowych postaci: pięć osób w obozie i wyprawa Drugich z Exitium
-- ekwipunek (I): leki, narzędzia, rzeczy, które przydadzą się innym
-- zdrowie, rany, gorączka i poczytalność bohatera
-- nowa zakładka "Ludzie" w notesie
-- poprawka: E zamyka okienko z opisem i nie zabiera drugi raz czasu
-- zapisy z wersji 0.2 dalej się wczytują
 
 GWARA
 Górnicy (Mirosław i Bolko) godają z elementami gwary śląskiej.
@@ -146,3 +77,5 @@ i godzinę z zegara w grze.
 Zapisy gry, ustawienia i raporty przebiegu leżą w:
   %APPDATA%\Godot\app_userdata\Everhorror
 (raporty w podfolderze "raporty", zapisy w "saves")
+
+Historia wersji: CHANGELOG.md (w tym archiwum).
