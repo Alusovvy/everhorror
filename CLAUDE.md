@@ -40,6 +40,7 @@ Before you change anything, read `reports/dashboard-runs/lock.json` in the game 
 - `GameState.has_flag` accepts payload flags (String place, int day, Array): any non-empty payload counts as set; never call `bool()` on a flag value.
 - Numbers in Polish text: use `veins_acc()`, `days_left_text()`, `GameState.plural()`, never a bare number before a noun.
 - Write longer JS/GD patches to files with the Write tool; bash heredocs can mangle backslashes.
+- Delegation (Roland, 2026-10-27): one task = one agent end to end (read, change, test, self-check, report or commit), so it keeps its context and cache. No separate reviewer or fixer agents unless Roland asks. Parallel agents only for truly independent tasks. Tests: targeted layers while working, the agreed set once at the end. Models: Sonnet high to write, Opus high to analyse.
 
 ## Tech essentials
 - Godot **4.7.2** (Forward+, D3D12, Jolt): `C:/dev/gamedev/Godot_v4.7.2-stable_win64_console.exe`. Scripts are **GDScript**; do not add C# unless asked.
