@@ -1,8 +1,8 @@
 # Mechaniki
 
-> **Materiał odniesienia od 2026-10-26.** Bieżące zasady są w specyfikacji (`C:/dev/gamedev/everhorror/specification`), a proces i pierwszeństwo źródeł w jej `WORKFLOW.md`. Nie synchronizować tego dokumentu z nowymi zmianami kodu. Oryginalna treść pozostaje jako źródło historyczne do zweryfikowanej migracji M5; starsze instrukcje poniżej nie są aktualnym procesem.
+> **Materiał odniesienia od 2026-10-26.** Bieżące zasady są w specyfikacji (`C:/dev/gamedev/everhorror/specification`), a proces i pierwszeństwo źródeł w jej `WORKFLOW.md`. Nie synchronizować tego dokumentu z nowymi zmianami kodu. Oryginalna treść pozostaje jako źródło historyczne do zweryfikowanej migracji D-02; starsze instrukcje poniżej nie są aktualnym procesem. Plik leży w `docs/archiwum/` (D-02); agenci go pomijają.
 
-Dokument rozwija sekcję 4 [GDD](GDD.md) do poziomu, na którym da się je zaimplementować. Opisuje, jak ma działać gra; historia i postacie zostają w GDD.
+Dokument rozwija sekcję 4 [GDD](../GDD.md) do poziomu, na którym da się je zaimplementować. Opisuje, jak ma działać gra; historia i postacie zostają w GDD.
 
 **Oznaczenia:**
 - **[GDD]** — ustalone w GDD.
@@ -73,7 +73,7 @@ Czas płynie więc tylko wtedy, gdy gracz podejmuje decyzję, a nie w czasie rze
 - wysadzenie zawału kosztuje 4 h, zaznaczenie żyły 1 h (spod nacieku 2 h), błędna próba przy ścianie w kaplicy 1 h, praca przy pompach 2 h, bandaże i świeca 0,5 h,
 - demo trwa tydzień (7 dni), rozliczenie jest rano w dniu 8.
 
-Szczegóły: [docs_v2/systemy/czas.md](../docs_v2/systemy/czas.md).
+Szczegóły w specyfikacji: `03_mechaniki/czas.md` (CZAS-1…CZAS-16).
 ✅ Terminy (odpowiedź w §13 pkt 2): w demie jest jeden termin, norma Kniazia (12 żył do wieczora dnia 7). Kiedy się spóźnia, Racibor upomina, a bez normy wyprawa wyjeżdża bez gracza.
 ❓ Czy w pełnej grze są też osobne terminy questów?
 
@@ -94,7 +94,7 @@ Kopalnia → jaskinie → Świątynia Onych. Im niżej, tym groźniej. Każdy po
 - w tunelach mapa [M]: dalej do sąsiedniego miejsca albo powrót do obozu,
 - po powrocie podsumowanie wyprawy.
 
-Zob. [docs_v2/systemy/eksploracja_kopalni.md](../docs_v2/systemy/eksploracja_kopalni.md).
+Zob. specyfikacja: `03_mechaniki/wyprawy.md` (WYP-1…WYP-15) i `04_tresc/miejsca.md`.
 
 ### 5.3 Wydobycie
 Gracz wydobywa błękitne żelazo i znajduje notatki dowódcy poprzedniej ekipy **[GDD]**.
@@ -113,7 +113,7 @@ Proste zagadki logiczne w pomieszczeniach **[GDD]**. Dziadek był kryptografem, 
 - śmierć tylko wtedy, gdy bohater był już ranny, z przyciskiem „RETRY FROM MORNING”,
 - załamanie przy zerze poczytalności.
 
-Zob. [docs_v2/systemy/zdrowie_i_poczytalnosc.md](../docs_v2/systemy/zdrowie_i_poczytalnosc.md).
+Zob. specyfikacja: `03_mechaniki/zdrowie_i_poczytalnosc.md` (ZDR-1…ZDR-12).
 
 ## 6. Ekwipunek
 
@@ -133,7 +133,7 @@ Przed wyprawą gracz wybiera, co bierze ze sobą **[GDD]**, np. paliwo do lampy 
 - zużywają się leki, świece i nalewka, narzędzia nie,
 - amulet nie ma działania mechanicznego.
 
-Zob. [docs_v2/systemy/ekwipunek.md](../docs_v2/systemy/ekwipunek.md).
+Zob. specyfikacja: `03_mechaniki/ekwipunek.md` (EKW-1…EKW-9).
 
 ## 7. Postacie niezależne (NPC)
 
@@ -187,7 +187,7 @@ Od task_05:
 - Drudzy z Exitium spotykani w tunelach,
 - Sabina dołącza do obozu w dniu 3.
 
-Zob. [docs_v2/systemy/npc.md](../docs_v2/systemy/npc.md#rozkład-dnia).
+Zob. specyfikacja: `03_mechaniki/npc.md` (NPC-16, NPC-17).
 
 ### 7.5 Pomoc NPC w pomieszczeniach **[GDD]**
 Niektóre pomieszczenia wymagają specjalisty. Gracz nie idzie z nim fizycznie. W panelu VN wybiera opcję typu *[Poproś XYZ o pomoc, bo się na tym zna]*. To kosztuje dużo czasu, bo trzeba po niego pójść i wrócić.
@@ -256,7 +256,7 @@ Systemy i ich kolejność. Każdy krok da się zagrać i sprawdzić osobno.
 | 12 | Menu główne, pauza, opcje | `main_menu.tscn`, `pause_menu.tscn` | ✅ + gwara śląska |
 | 13 | Zdrowie i poczytalność bohatera | `GameState`, HUD, ekwipunek, ekran końca | ✅ rany, gorączka, śmierć z „od rana”, załamanie |
 
-**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. ✅ Zrobiony w task_03 i rozbudowany w task_04 do demo na 3 dni (obóz ze strefami, 5 NPC, 5 miejsc wypraw, zagadka ściany). Opis: [task_04](ai-tasks/done/task_04.md). W task_05 demo urosło do tygodnia: 15 miejsc, 14 postaci, ekwipunek i norma żył ([task_05](ai-tasks/done/task_05.md)).
+**Minimalny grywalny wycinek:** kroki 1–5 oraz jeden NPC z kroku 6. ✅ Zrobiony w task_03 i rozbudowany w task_04 do demo na 3 dni (obóz ze strefami, 5 NPC, 5 miejsc wypraw, zagadka ściany). Opis: [task_04](../ai-tasks/done/task_04.md). W task_05 demo urosło do tygodnia: 15 miejsc, 14 postaci, ekwipunek i norma żył ([task_05](../ai-tasks/done/task_05.md)).
 
 ## 13. Otwarte pytania (zbiorczo)
 
