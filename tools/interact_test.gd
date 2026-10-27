@@ -4,7 +4,7 @@ extends SceneTree
 
 var world: Node3D
 var frame := 0
-var targets := ["Bag2", "Barrel2", "Crate", "Note", "Bucket", "MineDeep/Rails/mine_cart_aa_1", "MineDeep/Props/Pickaxe_Bronze_1", "MineDeep/Props/Scroll_2_1", "MineDeep/BlueIronVeins/cave_wall_rocks_c_1"]
+var targets := ["Bag2", "Barrel2", "Crate", "Note", "Bucket", "MineDeep/Rails/mine_cart_aa_1", "MineDeep/Props/Pickaxe_Bronze_1", "MineDeep/Props/Scroll_2_1", "MineDeep/BlueIronVeins/VeinMark_east_1"]
 var idx := -1
 var player
 var hud
