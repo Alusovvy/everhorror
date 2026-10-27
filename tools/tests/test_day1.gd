@@ -9,7 +9,15 @@ func scenario() -> void:
 	root.get_node("DialogueManager").got_dialogue.connect(func(line): _intro_lines.append(line.text))
 	await start_world()
 	check(gs.has_flag("intro_done") and is_equal_approx(gs.hour, 6.0), "intro played, 06:00 (%s)" % gs.clock_text())
-	check(_intro_lines.any(func(t): return t.contains("w zagrodzie Racibora, za niską palisadą bez dachu")), "task_14: the intro puts the map table in Racibor's pen, behind the low roofless palisade")
+	check(_intro_lines.any(func(t): return t.contains("w zagrodzie Racibora, za palisadą bez dachu")), "task_17: the intro puts the map table in Racibor's pen, behind the roofless palisade")
+	check(not _intro_lines.any(func(t): return t.contains("niską")), "task_17: the intro no longer calls the palisade low")
+	var map_messages: Array[String] = []
+	gs.message.connect(func(text): map_messages.append(text))
+	var map_key := InputEventAction.new()
+	map_key.action = &"field_map"
+	map_key.pressed = true
+	world.get_node("MapScreen")._unhandled_input(map_key)
+	check(map_messages.any(func(t): return t.contains("w zagrodzie Racibora")) and not map_messages.any(func(t): return t.contains("kwaterze")), "task_17: [M] in camp says the map table is in Racibor's pen (%s)" % str(map_messages))
 	check(not _intro_lines.any(func(t): return t.contains("kwaterze zarządcy") or t.contains("drewnianą ścianką")), "task_14: the old \"manager's quarters behind a wooden partition\" wording is gone")
 	check(gs.npc_place(&"tekla") == "kuchnia" and gs.npc_place(&"racibor") == "stol", "breakfast: Tekla cooks, Racibor eats (%s)" % gs.places)
 	check(not npc("Dobrawa").present, "Dobrawa not in the camp yet")

@@ -75,7 +75,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			if GameState.is_away():
 				open_field()
 			else:
-				GameState.message.emit("Wyprawy planujesz przy stole z mapą, w kwaterze Racibora. [M] działa w chodnikach.")
+				GameState.message.emit("Wyprawy planujesz przy stole z mapą, w zagrodzie Racibora. [M] działa w chodnikach.")
 	elif visible and event.is_action_pressed(&"ui_cancel"):
 		get_viewport().set_input_as_handled()
 		close()
