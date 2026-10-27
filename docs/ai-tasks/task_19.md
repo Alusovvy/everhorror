@@ -115,6 +115,6 @@ Kopia robocza na gałąź (R2, T4-kopie) też wchodzi dopiero razem z kodem dash
 
 ## Test
 
-Odbiór człowieka: arkusz [factcheck-test-19](../human-tasks/factcheck-test-19.md) (16 wierszy, z instrukcją uruchomienia gałęzi).
+Odbiór człowieka: arkusz [factcheck-test-19](../human-tasks/done/factcheck-test-19.md) (16 wierszy, z instrukcją uruchomienia gałęzi).
 
 ## Podsumowanie

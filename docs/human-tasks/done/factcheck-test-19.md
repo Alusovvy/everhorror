@@ -1,8 +1,9 @@
 # Factcheck test 19: Dashboard — czytelność, dwujęzyczność i propozycje z przeglądu
 
-> Zadanie: [task_19](../ai-tasks/task_19.md) · Przygotowano: 2026-10-27 · Gałąź: `agent/dashboard-ux` w repozytorium specyfikacji (kopia `C:\dev\gamedev\everhorror\specification-praca`)
+> Zadanie: [task_19](../../ai-tasks/task_19.md) · Przygotowano: 2026-10-27 · Gałąź: `agent/dashboard-ux` w repozytorium specyfikacji (kopia `C:\dev\gamedev\everhorror\specification-praca`)
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis.
 > Wyniki człowieka: Roland (dashboard), 2026-10-27 14:16
+> Zamknięcie: Roland (dashboard), 2026-10-27 14:19
 
 ## Co zostało dodane
 - **Dwa języki.** Przełącznik „PL | EN” w pasku bocznym i na ekranie logowania. Polski jest domyślny; tłumaczy się interfejs, a nie treść specyfikacji, zadań, arkuszy i commitów (D-30). Nazwy według słowniczka `dashboard/UI.md`: jedna nazwa na jedną rzecz („Start”, „Przegląd kodu (agent)”, „Zatwierdź zmiany”, „Domknij zadanie (agent)”).
