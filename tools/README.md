@@ -71,7 +71,13 @@ Writing scenarios: extend `res://tools/tests/test_base.gd`, implement `scenario(
 | `generators/write_gwara.js` | `dialogue/gwara_slaska.json` (original miner line → Silesian). Reports lines without a version and keys that no longer match. | `node tools/generators/write_gwara.js` |
 | `generators/synth_sfx.js` | Placeholder sounds in `assets/sounds/generated/`. | `node tools/generators/synth_sfx.js` |
 
+## Build do ogrania
+
+A playable build (D-32) is the game exported from one commit of a task branch (or master) without a version number, a CHANGELOG entry or a tag, so that a person plays the branch before the sheet. The spec dashboard makes it by itself after an implement or fix run that ended well, or on a click ("Zbuduj do ogrania"); in a terminal: `node ../specification/dashboard/cli.ts build task_NN` (or `master`), refused while a dashboard run holds the lock. It checks the commit out into a temporary worktree (`../everhorror-wt/_build-<sha7>-…`, removed afterwards) with the `.godot` import cache of the branch worktree (else of the main copy), runs `GODOT --headless --path <tmp> --import` and `--export-release "Windows Desktop" <out>`, and writes `build/do-ogrania/Everhorror-test-task<NN>-<sha7>-windows.zip` (Everhorror.exe, CZYTAJ_MNIE.txt, CHANGELOG.md, BUILD_DO_OGRANIA.txt) with a manifest `.json` and the Godot log `.log` next to it; the two newest builds of a task stay. It never runs `stamp_build.js`: the stamp would dirty a worktree and belongs to a release, so the main menu of a playable build shows the version of the last release. `EVERHORROR_GODOT`, `EVERHORROR_PLAYBUILDS_DIR` and `EVERHORROR_PLAYBUILD_AUTO=0` (no build after runs) change it. Details: `../specification/dashboard/ARCHITEKTURA.md`, "Build do ogrania (D-32)".
+
 ## Wydanie
+
+A release is not a playable build (above): it has a version number, a CHANGELOG entry and a tag, and is made after the merge.
 
 Release steps (task_14; the current version is the newest heading of `CHANGELOG.md`):
 

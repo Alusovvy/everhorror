@@ -66,6 +66,104 @@ Priorytet: średni · Etap planu: 4 (P1, P4, K4), 6 (T7), 9 (K6) · Kolejność:
 ---
 <!-- ↓↓↓ Sekcje poniżej wypełnia agent ↓↓↓ -->
 
+## Analiza
+Analiza z 2026-10-27, przebieg z dashboardu `20261027-151905-analyze-22-050463`. Numery linii pochodzą z `master` gry z tego dnia.
+
+**Kolejność i gdzie wdrażać.**
+- Zadanie nie zależy od task_16–21.
+- W „Na gałęziach” stoi jednak otwarta gałąź `spec/2026-10-27-task17` (🧪, arkusz już zamknięty). Obowiązuje zasada „najwyżej jedna otwarta gałąź `spec/*`”, więc wdrożenie task_22 zaczyna się dopiero po scaleniu task17 i `/spec-sync finalize`.
+- Wdrożenie musi iść w terminalu (`/ai-task implement 22`), nie z dashboardu. Przebiegi z dashboardu mają zakaz zapisu w `.claude/**`, także w kopii wdrożeniowej (`buildSettings`, `dashboard/src/work/runs.ts:1037–1038`). Tak samo mówi `docs/ai-tasks/INFO.md`: zadania narzędziowe wdrażamy w terminalu.
+
+**P1 (uprawnienia).** Jak jest dziś:
+- `.claude/settings.json` ma `allow` z `Bash(git:*)`, `Bash(node:*)`, `tools/run_tests.sh`, Godotem i pomocnikami (`cp -r`, `mkdir`, `ls`, `cat`, `grep`, `head`, `tail`, `wc`, `diff`, `date`).
+- `deny` blokuje force push, `reset --hard`, `clean`, `branch -D`, `worktree remove --force`, `checkout`, `stash` i `rebase`.
+
+Najważniejsze ryzyka:
+- **Przebiegi z dashboardu zależą od listy `allow` projektu.** Startują z `--permission-mode dontAsk --setting-sources project`. Ich własny `settings.json` dokłada tylko zapis w ścieżkach rodzaju i drobne polecenia powłoki (`SHELL_HELPER_ALLOW`, `runs.ts:937`). Komentarz w kodzie mówi wprost, że git, node, `ls`, `cat` itd. pochodzą z listy projektu. W trybie `dontAsk` każde polecenie spoza `allow` jest odrzucane bez pytania, więc luka w nowej liście zatrzyma kolejne przebiegi Rolanda. Dlatego zestawienie poleceń skilli to sedno P1, nie formalność.
+- **Polecenia skilli i pomocników.** Zebrane z `.claude/skills/*/SKILL.md` i `.claude/agents/*.md`; wykonawca uzupełnia listę, a w raporcie stawia ją obok reguł:
+  - git, tylko odczyt: `status` (też `--porcelain`, `-sb`), `log`, `diff` (też `master...<gałąź>`, `--stat`), `show`, `ls-files --error-unmatch`, `rev-parse`, `rev-list -n 1 v<wersja>`, `merge-base --is-ancestor`, `branch --list`, `branch --merged master --list "spec/*"`, `branch --show-current`, `worktree list`, `remote -v`;
+  - git w specyfikacji: `add --`, `commit -m … --`, `fetch`, `pull --ff-only`, `push`;
+  - git w kopii wdrożeniowej: `add`, `commit`, `mv`, `rm`, `restore`, `switch -c`, `switch <gałąź>` (`ai-task fix`), `switch --detach` (`spec-sync`), `push` gałęzi `spec/*`;
+  - git w głównej kopii: `worktree add … -b spec/…`, `branch -d spec/…`, `mv` pliku zadania (`spec-sync`), `push <remote> --delete spec/…` (po zgodzie);
+  - pozostałe: `node dashboard/cli.ts …` (forma względna, z katalogu specyfikacji), `node C:/dev/gamedev/everhorror/specification/dashboard/cli.ts …`, `node tools/check_doc_links.js`, `node tools/generators/*.js`, `node tools/release/stamp_build.js`, `tools/run_tests.sh <nazwy>`, Godot `--import` z przekierowaniem do pliku, `cp -r <gra>/.godot <worktree>/`.
+- **Sprzeczności w propozycji.**
+  - Zakaz `git switch*` „bez `-c`” łamie `ai-task fix` i `spec-sync`, które przełączają kopię wdrożeniową. Zakaz trzeba więc ograniczyć do głównej kopii; to drobny szczegół, który przyjmuję sam (karta, sekcja „Przyjęte”).
+  - Zakaz `git tag*` i `git push * master` łamie stałą zgodę z planu §9 („tag wersji i push `master` gry po scaleniu przez Rolanda”) i krok tagu w `spec-sync`. To wymaga decyzji Rolanda (karta, pytanie 1).
+- **Pułapki wzorców.**
+  - `git merge*` bez spacji łapie też `git merge-base`, którego używa `spec-tasks`; dashboard pisze to celowo ze spacją (`runs.ts:939`).
+  - Ogólne `git -C * push * master` zablokowałoby dozwolony push `master` specyfikacji, więc zakaz musi wskazywać repozytorium gry.
+  - Reguły Bash nie są granicą bezpieczeństwa (`../specification/dashboard/ARCHITEKTURA.md`, „Profil przebiegu”): względne ścieżki i inne zapisy da się nimi obejść. Zawężenie chroni przed pomyłką, nie przed złą wolą.
+- **Kiedy nowe reguły zaczynają działać.** Plik zmienia się na gałęzi w kopii wdrożeniowej, a każda sesja czyta `.claude/settings.json` ze swojego katalogu roboczego, czyli z głównej kopii. Reguły działają więc dopiero po scaleniu. Próba przed scaleniem wymaga sesji uruchomionej w kopii wdrożeniowej (karta, pytanie 2).
+
+**P4 (skrypt wydania).** Jak jest dziś:
+- Wydanie to sześć kroków z `tools/README.md#wydanie`.
+- `stamp_build.js` ma już `--check` i `--spec <rev>`.
+- `make_zip.sh` sam sprawdza wersję, a gdy brak `zip`, używa PowerShella (w terminalu to działa, w przebiegu z dashboardu nie, ale wydanie nie jest przebiegiem z dashboardu).
+
+Luki i ryzyka:
+- Konsolowy Godot potrafi zakończyć `--export-release` kodem 0 mimo błędu. Skrypt powinien więc sprawdzić, czy `build/windows/Everhorror.exe` istnieje i jest nowszy niż start skryptu.
+- Argument `<wersja>` musi się równać wersji z `project.godot`; to pierwszy krok i najtańszy test zatrzymania („`release.sh 9.9.9`” kończy się błędem przed eksportem).
+- Tag i push zostają wypisane, nie wykonane, zgodnie z wymaganiami.
+
+**K4 (rejestr flag).**
+- `tools/data_lint.gd:226–250` zbiera flagi ustawiane (`written`, bez ścieżek) i czytane (`read_flags`, tylko ostatnia ścieżka), potem je wyrzuca.
+- Źródła: dialogi, trzy generatory `.gd`, `story_director.gd` i `script/*.gd`, ale tylko z poziomu katalogu: `script/data/` jest pominięty.
+- Flagi z rodzin `vein_*` i `visited_*` składa się w czasie gry.
+- `write_world_data.js` ma pola flag (`required_flag` itp.), a lint go nie czyta.
+- `reports/` jest w `.gitignore`, więc `flags.tsv` nie trafi do repozytorium. Do repozytorium trafia tylko wygenerowany `docs/agent/flags.md`.
+- Żeby powtórne uruchomienie dało identyczny plik, wynik musi być posortowany, bez daty i bez numerów linii (numery zmieniałyby plik przy każdej edycji dialogu).
+
+**T7 (sztywna „dwunastka”).** Wyszukiwanie z 2026-10-27 znalazło więcej miejsc, niż wymienia zadanie:
+- tekst normy: `dialogue/system.dialogue:105`; `dialogue/racibor.dialogue:43,50,69,144,186` (69 to „Do dwunastu jeszcze daleko.”, a 186 kończy się „Kniaź chce dwunastu.”, więc słowo „żył” nie zawsze stoi obok); `dialogue/miroslaw.dialogue:192` z kluczem gwary (`write_gwara.js:180–181`, `gwara_slaska.json:84`, gdzie wersja śląska też ma „Dwanaście żył”); `script/game_state.gd:581`; `tools/release/CZYTAJ_MNIE.txt:26`;
+- notes: trzy wpisy zadania „Złoża” w `tools/generators/write_story_data.js:196,200,201` (→ `data/quests/`). Są poza trzema miejscami z wymagań (karta, pytanie 4);
+- fałszywe trafienia: Nasir, „Dwanaście lat” i „dwunastu latach” (`dialogue/nasir.dialogue:45,46,107`, `write_story_data.js:106`). Prosta reguła na same słowa „dwanaście/dwunastu” je złapie, więc potrzebują komentarza-wyjątku.
+
+Co ważne dla wykonawcy:
+- **Kolejność w Dialogue Manager.** Najpierw tłumaczy linię po surowym tekście razem z `{{…}}` (`addons/dialogue_manager/dialogue_manager.gd:430`, `translate()` → `tr(data.text, "dialogue")`), dopiero potem wstawia wartości, szukając tego samego `{{…}}` w przetłumaczonym tekście (`:496–513`). Klucz i wartość w `gwara_slaska.json` muszą więc zawierać identyczne `{{…}}`. Dziś żaden klucz gwary go nie ma, więc to pierwszy taki przypadek i `dialogue` musi go sprawdzić.
+- **Pomocnik `quota_words()`.** Musi znać dwa przypadki: mianownik/biernik („dwanaście żył”) i dopełniacz („dwunastu żył”, „dwunastu”). Musi też odmieniać rzeczownik razem z liczebnikiem, bo przy normie 4 z etapu 6 (D-05) będzie „cztery żyły”, a nie „cztery żył”. Do tego wielka litera na początku zdania (Mirosław, komunikat z `game_state.gd:581`).
+- **CZYTAJ_MNIE.txt** to czysty tekst bez komentarzy i bez `{{…}}` (karta, pytanie 3).
+
+**K6 (polskie literały).**
+- W `script/` nie ma ani `tr()`, ani tabeli `Texts`.
+- Wyszukiwanie łańcuchów z polskimi znakami daje 259 trafień w 20 plikach. Najwięcej mają `run_report.gd` (74), `story_director.gd` (65) i `game_state.gd` (27). Liczba obejmuje też komentarze z cudzysłowami, więc lint musi pomijać komentarze.
+- Sama reguła „ma polski znak” nie widzi tekstów bez ogonków („Nowe kreski na mapie: %s”). Wykonawca dobiera krótką listę słów i opisuje sposób liczenia w `tools/README.md`.
+- Kolejność ma znaczenie: T7 dodaje polskie słowa liczebników do `game_state.gd`, więc stan bazowy K6 zapisujemy po T7.
+
+## Plan
+Rodzaj „narzędzia”, wdrożenie w terminalu: worktree `C:/dev/gamedev/everhorror/everhorror-wdrozenie`, gałąź `spec/<data>-task22` od `master`. Warunki startu: task17 scalony i domknięty, karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) rozstrzygnięta. W „Na gałęziach” wiersz z `—` zamiast sha7 i z `task_22` jako ID, bez wiersza „W zadaniach”. Kroki:
+
+1. **K4.**
+   - `data_lint.gd` zbiera każdą ścieżkę, w której flagę ustawia się i czyta. Dochodzą źródła `script/data/*.gd` i `tools/generators/write_world_data.js`.
+   - Lint zapisuje `reports/flags.tsv` z kolumnami: flaga, ustawiana w, czytana w, ładunek (tak, gdy drugi argument `set_flag` nie jest `true`, oraz `mark_today`), rodzina. Wynik jest posortowany, bez numerów linii.
+   - Nowy `tools/generators/write_flags_doc.js` robi z niego `docs/agent/flags.md`: nagłówek „plik generowany”, rodziny `vein_*` i `visited_*` w osobnej części.
+   - Sprawdzenie: dwa uruchomienia → `diff` bez różnic.
+2. **T7.**
+   - `GameState.quota_words(przypadek, wielka_litera)` zwraca liczebnik żeński z rzeczownikiem w dobrej formie. Tabela słów ma komentarz `lint-quota`; dla liczb spoza tabeli są cyfry z `plural()`.
+   - Linie z sekcji T7 dostają `{{quota_words(…)}}`, a `game_state.gd:581` pomocnika. Klucz i wartość gwary Mirosława zmieniamy w `write_gwara.js` i uruchamiamy generator.
+   - Kwestie Nasira dostają komentarz `lint-quota`. `CZYTAJ_MNIE.txt` i notes według pytań 3 i 4 karty.
+   - Nowa reguła w `data_lint.gd`: „dwanaście/dwunastu/12 żył” poza oznaczonymi miejscami to błąd.
+   - Sprawdzenie: przed zmianą lint zgłasza wszystkie miejsca. Po zmianie `--import` (zmienione `.dialogue`), a potem `dialogue`; wykonawca porównuje wyświetlany tekst przed i po w obu wersjach, z gwarą i bez.
+3. **K6.**
+   - Reguła w `data_lint.gd` liczy polskie literały w `script/**/*.gd` dla każdego pliku. Pomija komentarze i łańcuchy w `tr("…")`. Liczy łańcuchy z polskimi znakami oraz łańcuchy z listy częstych słów bez ogonków.
+   - Stan bazowy trafia do `tools/lint_baseline.json` (każdy plik osobno, żeby spadek w jednym pliku nie ukrył wzrostu w innym). Wzrost to błąd; spadek wypisuje przypomnienie o obniżeniu wartości bazowej.
+   - Tabeli `Texts` nie dodajemy: konwencja z `CLAUDE.md` opiera się na `tr()`, a mechanizm per język i tak powstanie w etapie 9.
+   - Próba robocza: dopisany i potem usunięty polski łańcuch → lint kończy się błędem.
+4. **P4.**
+   - `tools/release/release.sh <wersja> [--spec <rev>] [--dry-run]` wykonuje po kolei: zgodność argumentu z `project.godot` → `stamp_build.js --check` → `stamp_build.js [--spec]` → `--import` → `--export-release` (do pliku logu; potem sprawdzenie, czy `.exe` powstał i jest nowy) → `make_zip.sh`. Na końcu wypisuje `git commit`, `git tag v<wersja>`, `git push` oraz przypomnienie o tym samym commicie specyfikacji w `CHANGELOG.md` i `WDROZENIA.md`.
+   - `set -e`; `--dry-run` tylko wypisuje kroki.
+   - Sprawdzenie: `release.sh 0.5.3 --dry-run` oraz `release.sh 9.9.9`, który musi zatrzymać się na pierwszym kroku.
+5. **P1.**
+   - W `.claude/settings.json` lista `allow` z sekcji Analiza. W `deny`: `git merge *`, `git switch` w głównej kopii, `git worktree remove*`, wszystko w formach `git …` i `git -C * …`. Tag i push `master` gry według pytania 1.
+   - Dochodzi `tools/release/release.sh` do `allow`.
+   - Sprawdzenie: plik jest poprawnym JSON (parsuje go `data_lint.gd` przez `JSON.parse_string` albo mały skrypt w `tools/`; `node -e` jest zakazane). Próba według pytania 2. Zestawienie „polecenie skilla → reguła” w raporcie.
+   - Roland widzi diff przed zatwierdzeniem.
+6. **Dokumentacja.**
+   - `tools/README.md`: wiersz `release.sh` i sekcja Wydanie (sześć kroków zostaje jako opis tego, co robi skrypt), reguły lintu T7 i K6 z opisem liczenia, `write_flags_doc.js` w Generatorach.
+   - `docs/agent/README.md`: odnośnik do `flags.md`.
+   - W raporcie propozycja skrócenia `08_technika.md:37–54` do 15 flag z odnośnikiem; to zmiana w specyfikacji, poza zadaniem.
+   - Plan §4 (wiersz task_22) bez zmian do scalenia.
+7. **Testy i przegląd.** `test-runner`: `unit lint dialogue` (zmienione `.dialogue` i może nowy `class_name`, więc najpierw `--import`). Potem `convention-reviewer` na diff. Arkusz `docs/human-tasks/factcheck-test-22.md` w głównej kopii: wiersze na diff uprawnień, `release.sh --dry-run`, `flags.md` i jeden rzut oka na wstęp oraz Racibora w grze (tekst bez zmian).
+
 ## Co zostało zrobione
 <!-- Osobna podsekcja dla każdego punktu z Wymagań. -->
 
@@ -74,8 +172,16 @@ Priorytet: średni · Etap planu: 4 (P1, P4, K4), 6 (T7), 9 (K6) · Kolejność:
 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
+Rozstrzygnięcia karty [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md):
+1. Tag i push `master` gry: lista `ask` czy `deny`?
+2. Czy wykonawca może sprawdzić uprawnienia krótkim zagnieżdżonym `claude -p` w kopii wdrożeniowej?
+3. Co z „dwanaście żył” w `CZYTAJ_MNIE.txt`?
+4. Czy T7 obejmuje też trzy wpisy notesu z `write_story_data.js`?
+
+Poza tym przed wdrożeniem trzeba scalić i domknąć task17, a wdrożenie uruchomić w terminalu.
 
 ## Test
 <!-- Jeśli zadanie zawiera implementację: link do docs/human-tasks/factcheck-test-XX.md -->
 
 ## Podsumowanie
+Analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Większość zadania nie wymaga decyzji. Wdrożenie czeka na kartę decyzji (tag i push w uprawnieniach, próba uprawnień, „dwanaście żył” w `CZYTAJ_MNIE.txt` i w notesie) oraz na domknięcie gałęzi task17. Wdrożenie idzie w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.

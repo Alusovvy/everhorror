@@ -4,7 +4,8 @@ Agent kopiuje go jako docs/human-tasks/factcheck-test-NN.md (NN = numer zadania,
 Zamień NN, RRRR-MM-DD, <numer> (kolejna sesja: PT0, PT1, …) i <wersja>. Wypełnij tylko części opisowe: „Co nowego”, „Jak zdobyć build” oraz kolumny „co sprawdzić”, „jak” i „oczekiwany wynik”. W nagłówku zamień „task_NN” na link do pliku zadania, jak w poprzednich arkuszach.
 Wszystko, co wypełnia człowiek, zostaw puste: kolumny „wynik” i „uwagi”, tabelę „Dane sesji” (nad nią stoi znacznik „człowiek” w komentarzu HTML), tabele skal, tabelę dni i odpowiedź między znacznikami odpowiedzi człowieka.
 Do 15 wierszy w „Sprawdzeniach”, tylko to, co ocenia człowiek: odczucie, czytelność, ton, obraz. Mechanikę pilnują testy automatyczne; ich wyniki idą do raportu zadania albo pod „Wyniki automatu (agent)”, nigdy do kolumn człowieka. Pięć pytań ankiety i jedno otwarte zostają bez zmian, żeby sesje dało się porównywać.
-Gdy build zapisuje raport przebiegu, dodaj na końcu sekcję „Raport przebiegu: dołącz plik” z tabelą „Plik .md, Plik .json, Uwagi” i tym samym znacznikiem nad tabelą (wzór: PT0, factcheck-test-14.md).
+Gdy otwarty arkusz innego zadania nie jest jeszcze wypełniany, nie kopiuj szablonu: dopisz na końcu tamtego arkusza część `## Część: task_NN — <tytuł>` i dopisz zadanie do linii `> Zadania:` (reguły: INFO.md, „Arkusz kilku zadań”).
+Sekcję „Raport przebiegu” (na końcu) dodaj tylko, gdy build zapisuje raport przebiegu (znacznik nad tabelą i dopisek „(człowiek)” w nagłówkach są obowiązkowe: bez nich formularz tabeli nie pokaże); w przeciwnym razie usuń ją z szablonu (wzór: PT0, factcheck-test-14.md).
 Czas sesji podajemy jedną liczbą („1–3 h”), tą samą co w CZYTAJ_MNIE.txt, do czasu PT0, który pokaże rzeczywisty.
 Minimum ważności sesji (zasada w INFO.md): sesja liczy się do celów K tylko z wypełnionym „Dotarcie do” i dołączonym raportem przebiegu. Wiersze dni powyżej „Dotarcie do” zostają puste (dashboard wpisze ⏭ przy zamknięciu).
 Usuń ten komentarz po wypełnieniu.
@@ -71,3 +72,11 @@ Pytania 1, 2, 4 i 5 wypełnij raz, po zakończeniu gry (albo po ostatnim dniu, d
 <!-- odpowiedź człowieka -->
 -
 <!-- /odpowiedź człowieka -->
+
+## Raport przebiegu: dołącz plik
+Po zakończeniu tygodnia kliknij w dashboardzie „Dołącz raport przebiegu”: para plików z folderu raportów gry trafia obok arkusza (`raporty/`), a linki do niej do tabeli. Jeśli raport nie powstał, zapisz to w uwagach.
+
+<!-- człowiek -->
+| Plik `.md` (człowiek) | Plik `.json` (człowiek) | Uwagi (człowiek) |
+|---|---|---|
+| | | |

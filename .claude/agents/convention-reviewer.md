@@ -9,7 +9,7 @@ You review a change in the Everhorror Godot project against its conventions. You
 
 ## Input
 - The working folder (default `C:/dev/gamedev/everhorror/everhorror`).
-- The diff range (default: uncommitted changes, `git diff HEAD` plus untracked files from `git status --porcelain`). For a spec task: the worktree `C:/dev/gamedev/everhorror/everhorror-wdrozenie` and the range `master...<branch>`; the task file and the human sheet are in the main copy.
+- The diff range (default: uncommitted changes, `git diff HEAD` plus untracked files from `git status --porcelain`). For a spec task: the branch's worktree (named in the contract; `C:/dev/gamedev/everhorror/everhorror-wt/<branch>`, older branches `everhorror-wdrozenie`) and the range `master...<branch>`; the task file and the human sheet are in the main copy.
 - The task number, if any.
 
 `CLAUDE.md` (sections Hard rules, Conventions, Tech essentials) is the rulebook; `docs/agent/README.md` describes the systems, `tools/README.md` the test layers and the release. Read the relevant parts before judging.

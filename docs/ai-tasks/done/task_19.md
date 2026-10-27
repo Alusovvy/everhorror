@@ -19,7 +19,7 @@ Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
 
 ## Plan
 
-Źródła: propozycje z przeglądu dashboardu `docs/analizy/propozycje-dashboard.md` (F1–F15, J1–J6, W1–W5, R1–R4) oraz punkty (a)–(k) z planu ([Odłożone](../analizy/final-plan-human-readable.md#odłożone-bez-decyzji)) i decyzje [D-27…D-29](../analizy/final-plan-human-readable.md#decyzje-o-arkuszach-człowieka-d-27d-28). Po zakończeniu zadania plik propozycji zostaje usunięty, a ten plik jest jedynym zapisem.
+Źródła: propozycje z przeglądu dashboardu `docs/analizy/propozycje-dashboard.md` (F1–F15, J1–J6, W1–W5, R1–R4) oraz punkty (a)–(k) z planu ([Odłożone](../../analizy/final-plan-human-readable.md#odłożone-bez-decyzji)) i decyzje [D-27…D-29](../../analizy/final-plan-human-readable.md#decyzje-o-arkuszach-człowieka-d-27d-28). Po zakończeniu zadania plik propozycji zostaje usunięty, a ten plik jest jedynym zapisem.
 
 **Jak pracujemy.** Kod powstaje w osobnej kopii roboczej specyfikacji `C:\dev\gamedev\everhorror\specification-praca` na gałęzi `agent/dashboard-ux` (od `6436f80`), jak w task_15. Żywa kopia `specification` jest używana przez Rolanda i działający dashboard. Każde zadanie cząstkowe robi jeden agent od początku do końca we własnej kopii (`specification-praca-<id>`, gałąź `agent/dux-<id>` od `agent/dashboard-ux`). Koordynator (Opus 5.5) przegląda wynik i scala go do `agent/dashboard-ux`. Do master specyfikacji całość trafia dopiero po odbiorze Rolanda. Modele: Sonnet 5.5 high, a przy prostszych zadaniach Haiku 5.5 max.
 
@@ -35,7 +35,7 @@ Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
 | T1-zatwierdz | 1 | F13, F14: ze Zmian do Zatwierdź, podgląd planowania i opis commita | Haiku max | scalone (`9c0e962`) |
 | T1-porzadki | 1 | J3, W4, J5, (e), (f), (g): stary silnik „co dalej”, liczebniki, dokumentacja, nawigacja instrukcji, etykiety i formy neutralne | Haiku max | scalone (`9c0e962`) |
 | T2-arkusze | 2 | F3, W5, (k) = D-27 i D-28: raport przebiegu, nawigacja po pustych polach, arkusz rosnący, zamknięcie z ⏭ | Sonnet high | scalone (`08e0d02`) |
-| T2-teraz | 2 | F4, F5, F10, F11, W1: wznowienie po decyzji, licznik planowania, „Wyjaśnione”, świeżość stanu, spokojne powody; [task_18](task_18.md) („Zmiany do wdrożenia” pod przyciskiem „Zaplanuj zadania”) | Sonnet high | scalone (`d0706cf`) |
+| T2-teraz | 2 | F4, F5, F10, F11, W1: wznowienie po decyzji, licznik planowania, „Wyjaśnione”, świeżość stanu, spokojne powody; [task_18](../task_18.md) („Zmiany do wdrożenia” pod przyciskiem „Zaplanuj zadania”) | Sonnet high | scalone (`d0706cf`) |
 | T2-zadanie | 2 | W3, F15: kolejność kart strony zadania, polecenie dla zadań narzędziowych | Haiku max | scalone (`d0706cf`) |
 | T2-diff | 2 | (a)–(d), (h), (i): fałszywe „do wdrożenia”, pliki redakcyjne, wtyczki w przebiegach, domknięcie; czerwony test e2e z `work.e2e.ts:1264` | Sonnet high | scalone (`d0706cf`; e2e 22/22) |
 | T3-tlum | 3 | Tłumaczenie pozostałych napisów w czterech grupach: rdzeń (`derive.ts`, `workView.ts`, znaczniki, opisy zmian), przebiegi (`runs.ts`, `Runs.tsx`), widoki (Zgłoszenia, Wdrożenia, Nowe zadanie, Zespół, Logowanie i inne), części wspólne (`FileView`, komponenty, komunikaty danych) | Sonnet high ×2, Haiku max ×2 | scalone (`cc10bc2`); dopięcie tłumaczeń (Haiku max) scalone |
@@ -109,12 +109,46 @@ Kopia robocza na gałąź (R2, T4-kopie) też wchodzi dopiero razem z kodem dash
    | | | |
    ```
 
+### Build do ogrania przed arkuszem (D-32)
+
+Wchodzi razem z kodem dashboardu z gałęzi `agent/dux-build` (dzisiejszy dashboard nie robi buildów i nie wstrzymuje arkuszy). Przebieg wdrożenia i poprawek dostaje już w kontrakcie zdanie, że build robi dashboard po przebiegu, więc skille i dashboard zmieniają się w tej samej chwili. Teksty do wklejenia:
+
+1. `CLAUDE.md` gry, „Flow”, po zdaniu „`/ai-task implement NN` builds on the branch, … with an `[agent]` commit and push.”:
+   > After an implement or fix run that ended well the dashboard server exports a playable build of the branch head (no model, no version stamp, no tag) into `build/do-ogrania/` (`Everhorror-test-task<NN>-<sha7>-windows.zip`); a sheet of a task on an open branch takes entries only while that build is current (D-32). A release (version, CHANGELOG, tag) stays a separate step after the merge.
+2. `CLAUDE.md`, tabela „Places”, nowy wiersz po „Dashboard run records and lock”:
+   > | Playable builds (git-ignored; made by the dashboard, or by `node <spec>/dashboard/cli.ts build task_NN` in a terminal) | `build/do-ogrania/` |
+3. `ai-task/SKILL.md`, implement krok 6, na końcu punktu o arkuszu (po tekście D-27):
+   > The dashboard offers the sheet for entries only once it has a current playable build of the branch (D-32). Never export, zip or stamp the game by hand (no `tools/release/stamp_build.js` on a task branch): in a dashboard run the dashboard makes the build after the run; in a terminal session without the dashboard, after the commit on the branch, run `node C:/dev/gamedev/everhorror/specification/dashboard/cli.ts build task_NN` (about a minute; it refuses while a dashboard run holds the lock).
+4. `ai-task/SKILL.md`, „Spec tasks”, punkt „Report”, zamiast „with how to try it: the worktree in Godot, or merge from the dashboard ("Scal do master gry") or `git merge spec/…`”:
+   > with how to try it: the playable build `build/do-ogrania/Everhorror-test-task<NN>-<sha7>-windows.zip` (the dashboard makes it after the run; in a terminal see step 6), then the sheet. Merging stays Roland's click ("Scal do master gry").
+5. `ai-task/SKILL.md`, `fix NN` krok 5, na końcu:
+   > The dashboard makes a new playable build of the branch head after the run (terminal: `cli.ts build task_NN`); the sheet waits for it.
+6. `spec-sync/SKILL.md`, finalize, „Game repo”, nowy punkt po „Leave every human sheet …”:
+   > Playable builds in `build/do-ogrania/` stay as they are (outside git; the dashboard keeps the two newest of a task).
+7. `tools/README.md`, nowy rozdział przed „## Wydanie”, i zdanie na początku „Wydanie”:
+   > ## Build do ogrania
+   >
+   > A playable build (D-32) is the game exported from one commit of a task branch (or master) without a version number, a CHANGELOG entry or a tag, so that a person plays the branch before the sheet. The spec dashboard makes it by itself after an implement or fix run that ended well, or on a click ("Zbuduj do ogrania"); in a terminal: `node ../specification/dashboard/cli.ts build task_NN` (or `master`), refused while a dashboard run holds the lock. It checks the commit out into a temporary worktree (`../everhorror-wt/_build-<sha7>-…`, removed afterwards) with the `.godot` import cache of the branch worktree (else of the main copy), runs `GODOT --headless --path <tmp> --import` and `--export-release "Windows Desktop" <out>`, and writes `build/do-ogrania/Everhorror-test-task<NN>-<sha7>-windows.zip` (Everhorror.exe, CZYTAJ_MNIE.txt, CHANGELOG.md, BUILD_DO_OGRANIA.txt) with a manifest `.json` and the Godot log `.log` next to it; the two newest builds of a task stay. It never runs `stamp_build.js`: the stamp would dirty a worktree and belongs to a release, so the main menu of a playable build shows the version of the last release. `EVERHORROR_GODOT`, `EVERHORROR_PLAYBUILDS_DIR` and `EVERHORROR_PLAYBUILD_AUTO=0` (no build after runs) change it. Details: `../specification/dashboard/ARCHITEKTURA.md`, "Build do ogrania (D-32)".
+
+   W „## Wydanie”, po „Release steps (task_14; …)”: „A release is not a playable build (above): it has a version number, a CHANGELOG entry and a tag, and is made after the merge.”
+8. `docs/human-tasks/INFO.md`:
+   - wstęp, na końcu pierwszego akapitu: „Arkusz zadania z otwartą gałęzią przyjmuje wpisy w dashboardzie dopiero przy aktualnym buildzie do ogrania tej gałęzi (D-32, `build/do-ogrania/`); pisze go agent jak dotąd.”;
+   - „Minimum ważności sesji gry”, punkt o „Dane sesji”, na końcu: „Build do ogrania pokazuje w menu numer ostatniego wydania, więc przy nim dopisz też nazwę ZIP-a (numer zadania i skrót commita).”
+
 ## Decyzje i założenia
+- Kod powstawał w osobnej kopii `specification-praca` na gałęzi `agent/dashboard-ux`, z kopiami cząstkowymi na każde zadanie (D-29); koordynator przeglądał każdą gałąź i scalał ją sam. Do `master` specyfikacji całość weszła po odbiorze Rolanda (`2fc1858`, potem poprawka instrukcji `edb7932`).
+- Polski jest językiem źródłowym; po polsku zostają treść specyfikacji, zadań i arkuszy, wartości zapisywane do plików, kontrakt agenta, zapisane wyniki audytu i komunikaty serwera (D-30, `dashboard/UI.md`).
+- R3 (jeden pisarz buchalterii) zostało tylko planem w `dashboard/ARCHITEKTURA.md`: ścisła wersja zablokowałaby skille, gdyby polecenie nie objęło każdej edycji `WDROZENIA.md`, a tego nie da się sprawdzić bez prawdziwego agenta.
+- Build do ogrania przed arkuszem (D-32) dołączył do zadania na prośbę Rolanda w trakcie prac (przez agenta T0-ux); przejrzany i scalony razem z resztą.
+- Zmiany skilli i dokumentów gry, które zależały od nowego dashboardu, weszły dopiero po scaleniu do master (lista wyżej), żeby przebiegi nie odwoływały się do funkcji, których jeszcze nie było.
 
 ## Czego potrzebuję od Ciebie
+- Decyzja: czy dopisać `../everhorror-wt` do `additionalDirectories` w `.claude/settings.json` gry (sesje terminalowe nie widzą dziś nowych kopii roboczych; to zmiana uprawnień, więc bez Twojego „tak” jej nie robię).
+- Bez pośpiechu: R4 (dwa wdrożenia naraz) i R1 (reguła gałęzi `master` w GitHubie) czekają na Twoje decyzje.
 
 ## Test
 
-Odbiór człowieka: arkusz [factcheck-test-19](../human-tasks/done/factcheck-test-19.md) (16 wierszy, z instrukcją uruchomienia gałęzi).
+Odbiór człowieka: arkusz [factcheck-test-19](../../human-tasks/done/factcheck-test-19.md): 15 × ✅, wiersz 3 💬 „Polskie nazwy można by poprawić, ale to low-priority” (zgłoszenie `zgloszenia/2026-10-27_czytelnosc-nazw.md`). Automat: `npm test` 2018/2018, `npm run e2e` 27/27, build, lint specyfikacji 0/0 (izolowane foldery tymczasowe).
 
 ## Podsumowanie
+Dashboard jest dwujęzyczny (PL/EN) i ma jeden słowniczek nazw. Doszły do niego: werdykt przeglądu w oknie scalania, kontekst opcji w kartach decyzji, koszt i czytelny dziennik przebiegów, „Teraz” z wznawianiem i „Wyjaśnione”, arkusze kilku zadań i zamknięcie z ⏭, kopia robocza na każdą gałąź oraz build do ogrania przed arkuszem. Fałszywych „do wdrożenia” jest mniej, a testy nie dotykają prawdziwych przebiegów. Zostają: R3 (plan), R4 i R1 (decyzje Rolanda), zgłoszenie o czytelności polskich nazw (niski priorytet) i martwe zdanie zapasowe o `git switch -c` w kontrakcie wdrożenia (`src/work/runs.ts`), do usunięcia przy okazji task_22.

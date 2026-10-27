@@ -5,7 +5,7 @@
 > To jedyny plan projektu: **co robimy, w jakiej kolejności i kto co robi**. Zastępuje wcześniejsze analizy i plany. Ich decyzje, zgody i najważniejsze ustalenia przeniesiono tutaj ([§9](#9-decyzje-i-stałe-zgody)), a same pliki usunięto.
 >
 > **Status treści:**
-> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-31 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
+> - **Decyzje** z [§9](#9-decyzje-i-stałe-zgody) obowiązują. D-01…D-15 i D1–D10 pochodzą z 2026-10-26, a D-16…D-32 z 2026-10-26/27; każda ma w tabeli podane źródło, także gdy jest to tylko rekomendacja agenta bez weta.
 > - **Uproszczenia** z [§8.3](#83-co-upraszczam) to rekomendacja. Obowiązują od zapisu, dopóki Roland ich nie zawetuje.
 > - **Liczby w etapach 5–7** to wartości startowe, które sprawdzi pomiar. Nie są to ostateczne decyzje.
 >
@@ -17,7 +17,7 @@
 - **PT0 jest zamknięte, ale daje tylko kierunek.** Arkusz `docs/human-tasks/done/factcheck-test-14.md` ma czas gry „<1h”, puste „Dotarcie do”, oceny dni, których nie zagrano, i nie ma raportu przebiegu. Liczby 3/7 i 4/7 z ankiety to sygnał, a nie pomiar. Pełny tydzień z raportem to sesja **PT0b** ([etap 3](#etap-3--sesja-gry-pt0-bramka), [D-31](#decyzje-z-analizy-projektu-d-31)).
 - **Na gałęzi:** task_16 (żyły w Starej sztolni), gałąź `spec/2026-10-27-task16`, arkusz `docs/human-tasks/factcheck-test-16.md` czeka na grę Rolanda. Za nim czeka task_17 (palisada bez „niską”), bo obowiązuje limit jednej gałęzi.
 - **Specyfikacja 2026-10-27:** odpowiedzi Rolanda pod ❓ są regułami (np. ZAP-13…16, ZAD-9, NPC-19), karta „dynamika i nagrody” dała reguły ⬜ (B1–B4, C1–C4, A1, A2), a analiza projektu UI-8 i CZAS-19. Otwarte karty decyzji: „kim jest ktoś” (Hrapek a D-11) i „forma bohatera”. Zgłoszenie błędu: załamanie w nocy połykane. Z tych reguł zrobi zadania następne „Zaplanuj zadania”.
-- **Dashboard:** task_19 (czytelność, dwujęzyczność PL/EN, propozycje z przeglądu) jest gotowe na gałęzi `agent/dashboard-ux` w kopii `specification-praca` (fale 0–5, wypchnięta jako kopia zapasowa) i czeka na odbiór w arkuszu `docs/human-tasks/factcheck-test-19.md`. Do master specyfikacji trafi po odbiorze Rolanda, razem ze zmianami skilli gry zapisanymi w task_19. Do tego czasu działa wersja z task_15 (`specification/dashboard/INSTRUKCJA.md`).
+- **Dashboard:** task_19 jest zrobione (2026-10-27): dwujęzyczny dashboard (PL/EN) z propozycjami z przeglądu, arkuszami kilku zadań i zamknięciem z ⏭ (D-27, D-28), kopią roboczą na gałąź i buildem do ogrania przed arkuszem (D-32) jest w `master` specyfikacji (`2fc1858`); odbiór w `docs/human-tasks/done/factcheck-test-19.md`. Zostają R3 (plan w `dashboard/ARCHITEKTURA.md`), R4 i R1 (decyzje Rolanda) oraz zgłoszenie „Czytelność nazw” (niski priorytet).
 - **Zadania narzędziowe gry z analizy projektu:** task_20 (pomiar: tor bohatera w bocie, czas realny dnia, „złoty tydzień”), task_21 (porządek repozytorium i licencje w HEAD), task_22 (narzędzia procesu). Wdrażamy je w terminalu, po kolei, w limicie jednej gałęzi.
 - **Punkt odniesienia K1 z bota** (task_14, nie od gracza): norma 12 żył pada między dniem 4, 13:00 (styl „żyły”) a dniem 5, 15:30 (styl „rozmowy”, wariant opóźniony). Cel [K1](#4-cele-mierzalne) to „nie wcześniej niż wieczorem dnia 6”.
 - **Odłożone przez Rolanda:** hasło administratora dashboardu oraz źródło i licencja `assets/logo.png` („hasło i licencja na razie olać”, czat 2026-10-27; licencja logo wraca najpóźniej przed demem publicznym). Pierwsze płatne kliknięcie przebiegu już było: planowanie z 2026-10-27 ([D-21](#decyzje-z-task_15-d-16d-21)).
@@ -314,11 +314,11 @@ Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze 
   1. zagrać task_16 i wypełnić `docs/human-tasks/factcheck-test-16.md`, potem scalić (odblokowuje task_17);
   2. rozstrzygnąć dwie karty decyzji („kim jest ktoś”, „forma bohatera”) i kliknąć „Zaplanuj zadania” dla nowych reguł ⬜;
   3. sesja PT0b: pełny tydzień z raportem, 2–3 godziny;
-  4. odbiór dashboardu z task_19, gdy agent przygotuje arkusz.
 - **Po każdym etapie gry (zwykle raz w tygodniu):**
   - około 30 minut na karty decyzji czekające na weto, wyniki gry i wybór następnego etapu;
   - około godziny na grę w najnowszy build i wypełnienie krótkiego arkusza; PT0 jest dłuższy, 1–3 godziny.
 - **Scalanie:** gałąź agenta trafia do gry tylko po decyzji Rolanda.
+- **Po każdym wdrożeniu i poprawkach:** zagrać w build do ogrania gałęzi (ZIP w `everhorror/build/do-ogrania/`, ramka „Build do ogrania” na stronie zadania), potem wypełnić arkusz. Arkusz bez aktualnego builda jest zamknięty ([D-32](#build-do-ogrania-przed-arkuszem-d-32)).
 - **Wyraźne „tak”** dla rzeczy publicznych, płatnych i związanych z bezpieczeństwem. Nic takiego nie dzieje się samo.
 - **Opcjonalnie:**
   - klucz Freesound;
@@ -338,10 +338,10 @@ Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze 
 4. **Agent nigdy nie wpisuje wyników za człowieka.** Brak wpisu oznacza brak sprawdzenia. Decyzję z czatu agent zapisuje tylko z podpisem „Roland, czat <data>: …”.
 5. **Limity pracy:**
    - najwyżej **1** otwarta gałąź z kodem;
-   - najwyżej **2** buildy czekające na zagranie. Przy limicie agent proponuje sesję gry zamiast nowej funkcji; poprawki błędów są nadal dozwolone;
+   - najwyżej **2** buildy czekające na zagranie. Przy limicie agent proponuje sesję gry zamiast nowej funkcji; poprawki błędów są nadal dozwolone. Liczy się też gałąź, której build do ogrania jeszcze nie powstał;
    - najwyżej **5** otwartych kart decyzji.
 6. **Pełny zestaw testów uruchamiamy tylko za zgodą. Do `master` gry scala tylko Roland.**
-7. **Każdy build dostaje numer wersji i tag.** Push następuje po każdym scaleniu, według jednej [reguły tagów i pushy](#reguła-tagów-i-pushy) z §9.
+7. **Każde wydanie dostaje numer wersji i tag.** Push następuje po każdym scaleniu, według jednej [reguły tagów i pushy](#reguła-tagów-i-pushy) z §9. Build do ogrania z gałęzi albo z master ([D-32](#build-do-ogrania-przed-arkuszem-d-32)) wydaniem nie jest: nie ma numeru wersji ani tagu, rozpoznaje się go po numerze zadania i skrócie commita.
 8. **Zasady projektowe dla każdej zmiany gry:**
    - bez walki;
    - bez nowych liczników;
@@ -352,6 +352,18 @@ Wszystko oznaczamy `[ROBOCZE]` i obowiązuje dopiero po oknie weta. Agent pisze 
    - każda dłuższa płatna rozmowa coś oddaje.
 
 Codzienną drogę od pomysłu do sprawdzenia opisuje `specification/WORKFLOW.md`.
+
+### Build do ogrania przed arkuszem (D-32)
+
+Roland, czat 2026-10-27: „niech każdy branch, jak już skończy implementację, sobie robi build i mi go gdzieś zrzuca, a ja potem pobieram zipa i sprawdzam. I dopiero jak jest build zrobiony do ogrania, to wtedy może być ten arkusz, wcześniej nie ma sensu.”
+
+- **Kto i kiedy.** Serwer dashboardu, bez modelu i bez kosztu tokenów: sam po udanym wdrożeniu albo poprawkach (przebieg „Zakończony” albo „z uwagami”), a poza tym na kliknięcie „Zbuduj do ogrania” (gałąź zadania) albo „Zbuduj do ogrania z master gry”. W terminalu to samo robi `node dashboard/cli.ts build task_NN` (albo `master`) w specyfikacji. Pierwszy prawdziwy build (master `df27308`, ze scalonym task_16) trwał 42 s.
+- **Jak.** Tymczasowa kopia dokładnie tego commita (`everhorror-wt/_build-…`, usuwana po buildzie) z pamięcią importu Godota skopiowaną z kopii gałęzi, potem `--import` i `--export-release "Windows Desktop"`. Kopia gałęzi i główna kopia są tylko czytane, więc otwarty edytor Godota nie przeszkadza, a build nie bierze blokady przebiegów (jeden build naraz ma własną). Bez `stamp_build.js`, commita, tagu i pusha.
+- **Gdzie.** `everhorror/build/do-ogrania/` (poza gitem): `Everhorror-test-task17-<sha7>-windows.zip` (master: `Everhorror-test-master-<sha7>-windows.zip`), obok manifest `.json` (commit, gałąź, kiedy, kto, po którym przebiegu) i dziennik Godota `.log`. W ZIP-ie gra, `CZYTAJ_MNIE.txt`, `CHANGELOG.md` i kartka `BUILD_DO_OGRANIA.txt`. Strona zadania pokazuje plik, ścieżkę do skopiowania i „Otwórz folder”. Zostają dwa najnowsze buildy każdego zadania.
+- **Arkusz.** Agent dalej pisze arkusz przy wdrożeniu (jego wiersze to plan testu), ale dashboard przyjmuje w nim wpisy dopiero przy aktualnym buildzie gałęzi. Nowy commit na gałęzi robi build „nieaktualny” i arkusz znowu czeka; po poprawkach nowy build powstaje sam. Arkusz, w którym już są wpisy, zostaje otwarty z ostrzeżeniem, a arkusz zadania scalonego nie czeka (gramy w ostatni build gałęzi albo w build z master). Plik arkusza się nie zmienia.
+- **Wydanie a build do ogrania.** Wydanie (numer wersji, wpis w `CHANGELOG.md`, stempel `stamp_build.js`, tag) zostaje osobnym krokiem po scaleniu, według `tools/README.md#wydanie`. W buildzie do ogrania menu gry pokazuje numer ostatniego wydania.
+- **Odrzucone warianty.** (1) Build w przebiegu wdrożenia: tokeny za krok bez decyzji, model może go pominąć, a każda poprawka budowałaby od nowa. (2) Osobny przebieg agenta „zbuduj”: ten sam koszt bez zysku. (3) Arkusz zakładany dopiero przez build: serwer nie napisze treści testu, a szkice w osobnym folderze dokładają konwencję i przypadki audytu. (4) Build w kopii gałęzi: stempel i import mogłyby ją zabrudzić (to blokuje poprawki i scalenie), a otwarty edytor Godota by się z nim gryzł. (5) Pobieranie ZIP-a przez przeglądarkę: plik leży na tym samym komputerze, a odczyt bez tokenu osłabiłby strażnika żądań.
+- **Otwarte dla Rolanda.** (a) ZIP na innym komputerze: wystarczy ustawić `EVERHORROR_PLAYBUILDS_DIR` na folder synchronizowany (np. OneDrive); to wysyła pliki poza ten komputer, więc wymaga „tak”. (b) Numer w menu: plik `override.cfg` obok `Everhorror.exe` w ZIP-ie mógłby pokazać np. „0.5.3+task17.2ca7904” bez zmiany kodu gry; niesprawdzone w eksportowanej grze, czeka na decyzję i próbę.
 
 ---
 
@@ -532,7 +544,7 @@ Obie wchodzą w życie z zadaniem narzędziowym (punkt (k) w [Odłożone](#odło
 
 | Karta | Decyzja | Źródło |
 |---|---|---|
-| D-29 | Zadanie narzędziowe dla dashboardu jest otwarte jako [task_19](../ai-tasks/task_19.md). Koordynuje Opus 5.5, a zadania cząstkowe robią Sonnet 5.5 high albo, przy prostszych, Haiku 5.5 max. Zastępuje w tym zakresie regułę modeli z `CLAUDE.md` („Haiku 5.5 max pisze, eskalacja do Sonnet”). Kod powstaje w osobnej kopii roboczej `specification-praca` na gałęzi `agent/dashboard-ux`, z kopiami cząstkowymi na zadanie, jak w task_15. Do master specyfikacji całość trafia po odbiorze Rolanda. Krok R4 (dwa wdrożenia naraz) czeka na osobną decyzję, bo zmienia §3 pkt 5 i §5. R1 (reguła gałęzi w GitHubie) czeka na „tak”, bo zmienia ustawienia publicznego repozytorium. | Roland, czat 2026-10-27: „Rozplanuj te propozycje na konkretne taski i zacznij delegować Sonnet 5.5 High … albo Haiku 5.5 Max jezeli latwiejsze zadanie. Ty zostajesz koordynatorem.” |
+| D-29 | Zadanie narzędziowe dla dashboardu jest otwarte jako [task_19](../ai-tasks/done/task_19.md). Koordynuje Opus 5.5, a zadania cząstkowe robią Sonnet 5.5 high albo, przy prostszych, Haiku 5.5 max. Zastępuje w tym zakresie regułę modeli z `CLAUDE.md` („Haiku 5.5 max pisze, eskalacja do Sonnet”). Kod powstaje w osobnej kopii roboczej `specification-praca` na gałęzi `agent/dashboard-ux`, z kopiami cząstkowymi na zadanie, jak w task_15. Do master specyfikacji całość trafia po odbiorze Rolanda. Krok R4 (dwa wdrożenia naraz) czeka na osobną decyzję, bo zmienia §3 pkt 5 i §5. R1 (reguła gałęzi w GitHubie) czeka na „tak”, bo zmienia ustawienia publicznego repozytorium. | Roland, czat 2026-10-27: „Rozplanuj te propozycje na konkretne taski i zacznij delegować Sonnet 5.5 High … albo Haiku 5.5 Max jezeli latwiejsze zadanie. Ty zostajesz koordynatorem.” |
 | D-30 | Dashboard jest dwujęzyczny: polski (domyślny i źródłowy) oraz angielski, z przełącznikiem w nagłówku. Tłumaczy się interfejs, a nie treść specyfikacji, zadań, arkuszy, commitów ani kontraktów agenta. Nazwy i zasady pisania interfejsu opisuje `specification/dashboard/UI.md` (słowniczek PL/EN, jedna nazwa na jedną rzecz). | Roland, czat 2026-10-27: „chce też podneiść czytelność dashboardu, poczytaj o dobrmy projektowaniu UI/UX, o czytelnych nazwach, zrób to wgl dwujęzyczne” |
 
 ### Decyzje z analizy projektu (D-31)
@@ -541,10 +553,16 @@ Obie wchodzą w życie z zadaniem narzędziowym (punkt (k) w [Odłożone](#odło
 |---|---|---|
 | D-31 | Propozycje z analizy projektu (Fable 5.1, 2026-10-27, 31 pozycji) są przyjęte i rozdzielone: reguły ⬜, karty i zgłoszenie w specyfikacji (commity `f70da86`…`da97946`), zadania narzędziowe gry [task_20](../ai-tasks/task_20.md)–[task_22](../ai-tasks/task_22.md), punkty etapów 3–9 tego planu i zmiany procesu (minimum ważności sesji, drobne poprawki tekstów na jednej gałęzi w `spec-tasks`, celowa niejednoznaczność w `lore-checker`, konwencja `tr()` w `CLAUDE.md`, zakaz `checkout`, `stash` i `rebase` w `.claude/settings.json`). PT0 liczy się jako kierunek, a punkt odniesienia K1–K5 da PT0b. „Złoty tydzień” przechodzi z etapu 7 do etapu 4. Duże pliki na etap 5: zwykły git bez podmian w pętli, LFS przy pełnej grze (rekomendacja agenta). Czyszczenie historii repozytorium, migracja do LFS, podpis kodu i platforma dla dema wymagają osobnego „tak”. Plik analizy usunięto; jej treść jest w zadaniach, regułach i tutaj. | Roland, czat 2026-10-27: „Wprowadz propozycje Fable, nastepnie odswiez dokumentacje.” |
 
+### Decyzje o buildzie do ogrania (D-32)
+
+| Karta | Decyzja | Źródło |
+|---|---|---|
+| D-32 | **Build do ogrania przed arkuszem.** Po udanym wdrożeniu i poprawkach dashboard sam robi build gałęzi (ZIP bez numeru wersji i tagu w `everhorror/build/do-ogrania/`), a arkusz zadania z otwartą gałęzią przyjmuje wpisy dopiero przy aktualnym buildzie. Reguła 7 z [§3](#3-zasady-które-obowiązują) dotyczy wydań. Szczegóły, odrzucone warianty i otwarte punkty: [§3, „Build do ogrania przed arkuszem”](#build-do-ogrania-przed-arkuszem-d-32). Wchodzi w życie z kodem dashboardu (gałąź `agent/dux-build`, przez `agent/dashboard-ux` i odbiór task_19 do master specyfikacji); do tego czasu działa jak dotąd. Sposób (serwer bez modelu, tymczasowa kopia, folder, dwa buildy na zadanie, bramka tylko dla otwartej gałęzi) to rekomendacja agenta (weto Rolanda). | Roland, czat 2026-10-27: „niech każdy branch, jak już skończy implementację, sobie robi build i mi go gdzieś zrzuca … I dopiero jak jest build zrobiony do ogrania, to wtedy może być ten arkusz” |
+
 ### Odłożone (bez decyzji)
 
 - **Korekty specyfikacji do stanu gry.** Każda zmienia treść reguły i w dashboardzie wychodzi jako „do wdrożenia”, więc czeka na jedną zgodę i jeden commit `[agent]`: `welf.md:35` („rozmowa (1 h)”, w grze `[#free]`; brak +20 zaufania), `07_balans.md:82` (kąt +4) i `:134` (lista zaufania), ZAD-1 bez zakładki „Czas”, `00_gra.md` („Stan gry”, „dziesięć postaci”) oraz pochodzenie „Tekla [GDD]” i „Hanusz (LoreDoc)”.
-- **Zadanie narzędziowe dla dashboardu: [task_19](../ai-tasks/task_19.md)** (otwarte 2026-10-27 po PT0, [D-29](#decyzje-z-task_19-d-29d-30); obejmuje poniższe punkty i propozycje z `docs/analizy/propozycje-dashboard.md`; do czasu punktów (a)–(d) redakcja plików reguł dająca fałszywe „do wdrożenia” czeka):
+- **Zadanie narzędziowe dla dashboardu: [task_19](../ai-tasks/done/task_19.md)** (otwarte 2026-10-27 po PT0, [D-29](#decyzje-z-task_19-d-29d-30); zrobione 2026-10-27; objęło poniższe punkty i propozycje z przeglądu dashboardu (plik przeglądu usunięty po zakończeniu); do czasu punktów (a)–(d) redakcja plików reguł dająca fałszywe „do wdrożenia” czeka):
   - (a) zmiana samych linii meta („Stan na”) bez pozycji `tekst`;
   - (b) `01_swiat/LoreDoc.md` w `EDITORIAL_FILES`;
   - (c) reguły TECH-1…3 są dziś niewidoczne dla `/spec-tasks`, bo `08_technika.md` jest plikiem redakcyjnym;
@@ -604,6 +622,8 @@ Jedna reguła dla wszystkich dokumentów i skilli:
 | **Baseline** | Commit specyfikacji, do którego gra jest w pełni wdrożona. Punkt odniesienia dla pytania, co się zmieniło od ostatniego wdrożenia. |
 | **Bot balansu** | Skrypt, który sam „gra” tydzień bez świata gry i podaje, kiedy osiągnięto normę. |
 | **Raport przebiegu** | Lokalny plik z czasem, żyłami i stanem ludzi z jednej rozgrywki. |
+| **Build do ogrania** | ZIP gry z jednego commita gałęzi zadania (albo master), robiony przez dashboard po wdrożeniu; bez numeru wersji i tagu. Arkusz gałęzi otwiera się dopiero przy nim (D-32). |
+| **Wydanie** | Build z numerem wersji, wpisem w `CHANGELOG.md` i tagiem, robiony po scaleniu (`tools/README.md#wydanie`). |
 | **Dashboard / poller** | Dashboard to lokalna aplikacja do przeglądania i edycji specyfikacji. Poller to skrypt, który tylko raportuje stan, bez uruchamiania modelu. |
 | **`everhorror` i `everhorror-wdrozenie`** | To samo repozytorium gry w dwóch folderach. Główna kopia jest na `master` i nigdy nie zmienia gałęzi. Druga kopia robocza (*git worktree*) służy agentowi do gałęzi `spec/*`. |
 | **Gałąź `spec/*`** | Gałąź z kodem jednego zadania, w kopii `everhorror-wdrozenie`. |
