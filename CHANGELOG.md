@@ -2,6 +2,13 @@
 
 Co się zmieniło w kolejnych wersjach Everhorror, od najnowszej. Przy każdej wersji jest „Zgodność ze spec”: skrót commita specyfikacji (repozytorium `specification`), z którą ta wersja jest zgodna. Numer wersji jest w ustawieniach projektu (`application/config/version`), w nagłówku `tools/release/CZYTAJ_MNIE.txt` i w prawym dolnym rogu menu głównego gry (TECH-1, TECH-2). Ten plik trafia do archiwum ZIP obok `CZYTAJ_MNIE.txt`.
 
+## [Nieopublikowane]
+
+Zgodność ze spec: `3f76c0f` · zadanie: task_17 · gałąź: `spec/2026-10-27-task17`
+
+### Naprawione
+- Wstęp nie nazywa już palisady „niską”: stół z mapą stoi „w zagrodzie Racibora, za palisadą bez dachu”. Komunikat po naciśnięciu [M] w obozie mówi „w zagrodzie Racibora” zamiast „w kwaterze Racibora”. Wpis 0.5.3 poniżej opisuje tamtą wersję i zostaje bez zmian.
+
 ## [0.5.3] - 2026-10-26
 
 Zgodność ze spec: `27e91e7` (reguły z `8e46253`, szczegóły [ROBOCZE] dopisane po weryfikacji) · zadanie: task_14 · gałąź: `spec/2026-10-26-task14`
