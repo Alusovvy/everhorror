@@ -154,7 +154,7 @@ func interactable(parent: Node3D, display_name: String, description: String, sol
 
 ## Racibor's quest (task_05): marking a vein costs an hour; afterwards a stake shows it is done.
 func vein_mark(rock: Node3D, vein_id: String, description: String, stake_pos: Vector3) -> void:
-	var mark := script_area("VeinMark", {
+	var mark := script_area("VeinMark_" + vein_id, {
 		"display_name": "Żyła błękitnego żelaza", "prompt_text": "Zaznacz żyłę na mapie", "description": description,
 		"time_cost_hours": 1.0, "time_reason": "Znaczenie żyły", "on_use_flag": "vein_" + vein_id,
 		"hidden_by_flag": "vein_" + vein_id, "highlight_target": rock, "solid": false, "padding": 0.1,
@@ -284,21 +284,20 @@ func _initialize() -> void:
 	var vein_mat := ShaderMaterial.new()
 	vein_mat.shader = load("res://shader/blue_iron_vein.gdshader")
 	veins.set("overlay", vein_mat)
-	var vein_rocks := [
-		["c", Vector3(81.7, y0 + 1.4, 1.2), -90.0],
-		["e", Vector3(81.7, y0 + 1.6, 5.4), -90.0],
-		["d", Vector3(76.4, y0 + 1.3, -3.6), 0.0],
-		["f", Vector3(72.0, y0 + 1.5, 9.6), 180.0],
-	]
-	add(veins, M + "Rocks/Cave_Rocks/cave_pillar_b.tscn", Vector3(75.5, y0, 0.2), rot_y(35))
-	add(veins, M + "Rocks/Cave_Rocks/cave_pillar_c.tscn", Vector3(78.2, y0, 7.2), rot_y(120))
-	for v in vein_rocks:
-		add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_%s.tscn" % v[0], v[1], rot_y(v[2]))
-	interactable(veins.get_child(2), "Żyła błękitnego żelaza", "Przez skałę biegną cienkie żyłki, świecące na niebiesko. Metal jest ciepły, choć dookoła ziąb. Jak się dłużej przyjrzeć, światło rośnie i słabnie. Jakby ktoś oddychał.")
-	vein_mark(veins.get_child(3), "east_1", "Żyła biegnie przez całą ścianę, od spągu po strop, i znika w szczelinie. Odmierzasz ją krokami i wrysowujesz na mapę dla Racibora.", Vector3(80.6, y0, 6.2))
-	vein_mark(veins.get_child(5), "east_2", "Cienka, ale czysta żyła, jak nitka wszyta w skałę. Stara ekipa jej nie ruszyła. Może nie zdążyła. Zaznaczasz ją na mapie.", Vector3(72.9, y0, 8.7))
+	# ZYL-1/ZYL-2: the cave has exactly two veins. Only these two rocks glow, and both can be marked.
+	var vein_east_1 := add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_e.tscn", Vector3(81.7, y0 + 1.6, 5.4), rot_y(-90.0))
+	var vein_east_2 := add(veins, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_f.tscn", Vector3(72.0, y0 + 1.5, 9.6), rot_y(180.0))
+	vein_mark(vein_east_1, "east_1", "Żyła biegnie przez całą ścianę, od spągu po strop, i znika w szczelinie. Odmierzasz ją krokami i wrysowujesz na mapę dla Racibora.", Vector3(80.6, y0, 6.2))
+	vein_mark(vein_east_2, "east_2", "Cienka, ale czysta żyła, jak nitka wszyta w skałę. Stara ekipa jej nie ruszyła. Może nie zdążyła. Zaznaczasz ją na mapie.", Vector3(72.9, y0, 8.7))
+	# Plain rock (no glow, nothing to mark) where the cave used to have four more glowing ones.
+	var plain_rocks := group(root3d, "PlainRocks")
+	add(plain_rocks, M + "Rocks/Cave_Rocks/cave_pillar_b.tscn", Vector3(75.5, y0, 0.2), rot_y(35))
+	add(plain_rocks, M + "Rocks/Cave_Rocks/cave_pillar_c.tscn", Vector3(78.2, y0, 7.2), rot_y(120))
+	add(plain_rocks, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_c.tscn", Vector3(81.7, y0 + 1.4, 1.2), rot_y(-90.0))
+	add(plain_rocks, M + "Rocks/Cave_Wall_Rocks/cave_wall_rocks_d.tscn", Vector3(76.4, y0 + 1.3, -3.6), rot_y(0.0))
+	# one blue light per vein, plus one between the pillars so the cave stays eerie
 	var vein_lights := group(root3d, "VeinLights")
-	for p in [Vector3(80.4, y0 + 1.6, 3.2), Vector3(76.4, y0 + 1.4, -2.2), Vector3(72.0, y0 + 1.5, 8.2), Vector3(76.8, y0 + 2.2, 3.8)]:
+	for p in [Vector3(80.4, y0 + 1.6, 4.6), Vector3(72.0, y0 + 1.5, 8.2), Vector3(76.8, y0 + 2.2, 3.8)]:
 		var l := OmniLight3D.new()
 		l.name = "VeinLight"
 		l.position = p

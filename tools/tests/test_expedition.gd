@@ -20,10 +20,32 @@ func scenario() -> void:
 	check(is_equal_approx(gs.hour, 11.0), "2 h walk + 1 h scouting: 11:00 (%s)" % gs.clock_text())
 	check(not gs.expedition.is_empty(), "expedition under way")
 
+	step("task_16 (ZYL-1, ZYL-2): the old adit has exactly two veins, each glowing and markable; the first one counts 1")
+	var glowing := world.get_node("MineDeep/BlueIronVeins").get_children().filter(func(n: Node) -> bool: return not n is Area3D)
+	check(glowing.size() == 2, "two glowing rocks in the cave (%d)" % glowing.size())
+	var marks := world.get_node("MineDeep").find_children("VeinMark_*", "Area3D", true, false)
+	check(marks.size() == 2, "two vein marks in the cave (%d)" % marks.size())
+	for mark in marks:
+		check(mark.get_parent().name == "BlueIronVeins", "%s stands next to a glowing rock" % mark.name)
+	for node in world.get_node("MineDeep").find_children("*", "Area3D", true, false):
+		if node.get("display_name") == "Żyła błękitnego żelaza":
+			check(String(node.get("on_use_flag")) != "", "a node called a vein can be marked (%s)" % node.name)
+	check(gs.veins_mapped() == 0, "no vein marked yet")
+	var messages: Array[String] = []
+	var on_message := func(text: String) -> void: messages.append(text)
+	gs.message.connect(on_message)
+	await use(world.get_node("MineDeep/BlueIronVeins/VeinMark_east_1"))
+	gs.message.disconnect(on_message)
+	check(gs.has_flag("vein_east_1") and gs.veins_mapped() == 1, "east_1 marked, counter at 1 (%d)" % gs.veins_mapped())
+	check(messages.any(func(t: String) -> bool: return t.contains("Żyły błękitu: 1 z 12")), "the message says 1 of 12 (%s)" % [messages])
+	check(gs.quota_text().begins_with("Żyły błękitu: 1 z 12"), "the quota line says 1 (%s)" % gs.quota_text())
+	check(load("res://script/expeditions.gd").veins_text(&"east") == "żyły: 1 z 2 zaznaczone", "the map shows 1 of 2 for the adit")
+	check(is_equal_approx(gs.hour, 12.0), "marking took 1 h: 12:00 (%s)" % gs.clock_text())
+
 	step("[M] onwards to the old working (1 h + 1 h scouting)")
 	await go_on("wyrobisko")
 	check(gs.current_place() == &"wyrobisko", "in the old working")
-	check(is_equal_approx(gs.hour, 13.0), "13:00 (%s)" % gs.clock_text())
+	check(is_equal_approx(gs.hour, 14.0), "14:00 (%s)" % gs.clock_text())
 	check(npc("Wszebor").present and gs.npc_place(&"wszebor") == "teren", "Wszebor hews here by day")
 
 	step("mark a vein (1 h), take the pickaxe head")
@@ -36,9 +58,9 @@ func scenario() -> void:
 	step("back to the camp (task_12: half of the 3 h walked = 1 h 30 min), the summary")
 	await go_on("oboz")
 	check(not gs.is_away() and gs.expedition.is_empty(), "back in the camp, expedition closed")
-	check(is_equal_approx(gs.hour, 15.5), "15:30 (%s)" % gs.clock_text())
+	check(is_equal_approx(gs.hour, 16.5), "16:30 (%s)" % gs.clock_text())
 	check(last_summary.contains("Stara sztolnia") and last_summary.contains("Stare wyrobisko"), "summary lists the places")
-	check(last_summary.contains("Obuch kilofa") and last_summary.contains("Nowe żyły na mapie: 1"), "summary lists the pickaxe head and the vein")
+	check(last_summary.contains("Obuch kilofa") and last_summary.contains("Nowe żyły na mapie: 2"), "summary lists the pickaxe head and the two veins (the adit's east_1 and the old working's)")
 
 	step("inventory: bandages on a wound")
 	gs.player_health = 50
