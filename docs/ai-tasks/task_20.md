@@ -51,7 +51,7 @@ Priorytet: wysoki · Etap planu: 4 · Kolejność: najlepiej przed etapami 5–7
 ## Analiza
 <!-- agent, /ai-task analyze 20, przebieg z dashboardu 2026-10-27 -->
 
-**Kolejność.** Wdrożenie czeka na dwie rzeczy: kartę decyzji [2026-10-27_task20-pomiar.md](../../../specification/zgloszenia/2026-10-27_task20-pomiar.md) (trzy pytania, niżej) oraz scalenie gałęzi `spec/2026-10-27-task16` (🧪 w „Na gałęziach”; najwyżej jedna otwarta gałąź `spec/*`). task_16 zmienia żyły na wschodzie (`gen_mine_deep.gd`), więc dzisiejsze linie tempa bota i tak się po nim przesuną: punktem odniesienia „linie tempa bez zmian” ma być `master` po scaleniu task_16, nie dzisiejszy.
+**Kolejność.** Karta decyzji [2026-10-27_task20-pomiar.md](../../../specification/zgloszenia/2026-10-27_task20-pomiar.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a). task_16 jest już scalone (✅ w „W zadaniach”), więc punktem odniesienia „linie tempa bez zmian” jest bieżący `master` gry. Stan z wznowienia (2026-10-27): w „Na gałęziach” stoi `spec/2026-10-27-task17` (🧪), a naraz może być otwarta najwyżej jedna gałąź `spec/*`, więc `implement 20` rusza dopiero po jej scaleniu (albo odrzuceniu). task_17 zmienia tylko teksty wstępu, toru bohatera ani bota nie dotyka.
 
 **G4: bot dziś.** `tools/balance_sim.gd` gra tydzień na gołym `GameState`: wyprawy (`_travel`, `_return_home`), żyły, bramki, ognisko w stylu „rozmowy” (`_fire` woła tylko `rest_by_fire()`, bez poczytalności). Noc to samo `gs.start_next_day()` (`balance_sim.gd:180`), bez `_resolve_night()`, więc ani noc, ani gorączka, ani leczenie bohatera nie działają. Źródła toru bohatera w grze (numery linii sprawdzone 2026-10-27):
 - groza miejsca przy pierwszej wizycie: `story_director.gd:227–228`, `Expeditions.place(id).dread` (dane z `write_world_data.js`; bot może je czytać wprost);
@@ -74,7 +74,7 @@ Priorytet: wysoki · Etap planu: 4 · Kolejność: najlepiej przed etapami 5–7
 - Odświeżanie pliku złotego zapisuje do `res://`; tylko na wyraźny argument, nigdy w zwykłym przebiegu testu.
 
 ## Plan
-<!-- Warianty oznaczone „1a/2a/3a” to rekomendacje z karty; plan zmieni się, jeśli Roland wybierze inaczej. -->
+<!-- Warianty „1a/2a/3a” wybrał Roland w karcie 2026-10-27_task20-pomiar.md (2026-10-27, dashboard). Gałąź i drzewo robocze zakłada dashboard: `spec/<data>-task20` w `../everhorror-wt/<gałąź>`. -->
 
 1. **K5 najpierw** (żeby osłonić krok 3): `tools/tests/test_golden_week.gd`, `extends SceneTree` jak `unit_test.gd` (bez świata, krótki). Kilka ustalonych tygodni jako tablica „dzień → flagi i zdarzenia dnia” (spokojny; „wszystko źle”: zawał bez pocieszenia, `tekla_reported`, przemoczenie w dniu 3, Dobrawa odchodzi, Nasir wywieziony, `drudzy_met` i `sabina_joined`, notatki `szyfr` i `klucz`). Siedem nocy: `log_time(…, "Sen")`, `_resolve_night()`, `start_next_day()`; wynik: wpisy `dawn_log` (bez pól czasu), `_quota_lags()`, `_morning_subtitle()` i wiadomość nocy. Porównanie z `tools/tests/golden/week.json`, lista rozbieżności „tydzień, postać, noc, pole: było → jest”. Odświeżenie: `godot --headless --path . --script res://tools/tests/test_golden_week.gd -- --update-golden`. Dopisać `golden_week` do mapy w `tools/run_tests.sh` (nazwa pasuje do `test_<name>.gd`, więc wystarczy lista domyślna) i do tabeli w `tools/README.md`. Próba robocza: zmiana −3 na −4 w nocy, czerwony wynik, cofnięcie (opis w raporcie).
 2. **G5** (wariant 1a): w `GameState` licznik czasu grania (rośnie w `_process` tylko przy działającym, niezapauzowanym świecie), w `record_dawn()` pole wpisu, np. `"played_ms"`; zapis i wczytanie jako pole opcjonalne (brak → brak danych), `SAVE_VERSION` bez zmian; powtórka poranka nie cofa licznika. `run_report.gd`: w `_day_data()` czas dnia = różnica sąsiednich świtów (ostatni dzień: do chwili raportu), kolumna „czas realny” w `_time_table()` i suma; JSON: pole dnia i suma, `null` przy braku danych; Markdown: „brak danych”. `unit`: świeży przebieg (dwa świty, kolumna i suma), stary zapis bez pola (brak danych, bez błędu). `golden_week` pomija to pole.
@@ -89,14 +89,20 @@ Priorytet: wysoki · Etap planu: 4 · Kolejność: najlepiej przed etapami 5–7
 ## Decyzje i założenia
 <!-- Co agent przyjął sam, bo nie wynikało z wymagań. -->
 
+- **Decyzje Rolanda** (karta [2026-10-27_task20-pomiar.md](../../../specification/zgloszenia/2026-10-27_task20-pomiar.md), 2026-10-27, dashboard: 1: a, 2: a, 3: a):
+  1. „Czas realny dnia” to **czas grania**: licznik w `GameState` rośnie tylko przy działającym, niezapauzowanym świecie, zapisuje się w zapisie gry jako pole opcjonalne (`SAVE_VERSION` bez zmian); powtórka poranka po śmierci dolicza czas nieudanej próby do dnia. To odchodzi od propozycji G5 (`ticks` i czas systemowy przy świcie) z powodu opisanego w Analizie.
+  2. Linia bota podaje **dwie liczby poczytalności**: drogę bota (żyły i to, co je spotyka, w tym rana na żyle `szczelina_2`) oraz najgorszy przypadek z oględzinami wszystkich obiektów dostępnych w odwiedzonych miejscach.
+  3. Część bohatera z `_resolve_night()` zostaje **wydzielona do osobnej funkcji** (ten sam kod, ta sama kolejność), wołanej przez grę i bota; najpierw powstaje `golden_week`, który potwierdza brak zmiany zachowania.
+- **Przyjęte przez agenta** (zapisane w karcie, do weta w przeglądzie): nowa linia `BALANCE[styl, wariant] bohater: …` obok dzisiejszej linii tempa, która się nie zmienia; ognisko przez prawdziwy `ognisko.dialogue`; bot nie ma lekarstwa, więc gorączka trwa do końca tygodnia, a linia podaje dzień jej początku; plik złoty to wpisy `dawn_log` po każdej nocy w kilku ustalonych tygodniach, bez pól czasu realnego; noc nie losuje, więc test nie potrzebuje ziarna.
+
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
 
-Rozstrzygnięcia karty [2026-10-27_task20-pomiar.md](../../../specification/zgloszenia/2026-10-27_task20-pomiar.md): (1) czy czas realny dnia to czas grania, czy zegar ścienny; (2) czy bot podaje także najgorszy przypadek z oględzinami obiektów grozy; (3) czy wolno wydzielić część bohatera z `_resolve_night()` (ten sam kod), żeby bot liczył noc kodem gry. Poza tym scalenia `spec/2026-10-27-task16` przed wdrożeniem.
+Pytania z karty [2026-10-27_task20-pomiar.md](../../../specification/zgloszenia/2026-10-27_task20-pomiar.md) są rozstrzygnięte (1: a, 2: a, 3: a). Do wdrożenia potrzebne jest tylko zamknięcie otwartej gałęzi `spec/2026-10-27-task17` (scalenie albo odrzucenie), bo naraz może być otwarta jedna gałąź `spec/*`; potem przebieg `implement 20`.
 
 ## Test
 <!-- Jeśli zadanie zawiera implementację: link do docs/human-tasks/factcheck-test-XX.md -->
 
 ## Podsumowanie
 
-Analiza gotowa, wdrożenia jeszcze nie ma. Bot balansu nie przechodzi dziś przez noc (`start_next_day()` bez `_resolve_night()`), więc tor bohatera trzeba dobudować z kodu gry. Noc nie losuje niczego, więc test złotego tygodnia porówna wpisy `dawn_log` bez pól czasu realnego. Czas realny ze znaczników `ticks` gubi dzień przerwany wyjściem z gry. Trzy pytania czekają w karcie decyzji, a wdrożenie dodatkowo na scalenie gałęzi task_16.
+Analiza gotowa, wdrożenia jeszcze nie ma. Bot balansu nie przechodzi dziś przez noc (`start_next_day()` bez `_resolve_night()`), więc tor bohatera trzeba dobudować z kodu gry. Noc nie losuje niczego, więc test złotego tygodnia porówna wpisy `dawn_log` bez pól czasu realnego. Czas realny ze znaczników `ticks` gubi dzień przerwany wyjściem z gry. Roland rozstrzygnął kartę decyzji (1: a, 2: a, 3: a): czas grania zamiast zegara ściennego, dwie liczby poczytalności w linii bota, wspólna funkcja nocy bohatera dla gry i bota. Plan jest zgodny z tymi wyborami. Wdrożenie czeka już tylko na zamknięcie gałęzi task_17.

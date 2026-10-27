@@ -130,7 +130,7 @@ Co ważne dla wykonawcy:
 - Kolejność ma znaczenie: T7 dodaje polskie słowa liczebników do `game_state.gd`, więc stan bazowy K6 zapisujemy po T7.
 
 ## Plan
-Rodzaj „narzędzia”, wdrożenie w terminalu: worktree `C:/dev/gamedev/everhorror/everhorror-wdrozenie`, gałąź `spec/<data>-task22` od `master`. Warunki startu: task17 scalony i domknięty, karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) rozstrzygnięta. W „Na gałęziach” wiersz z `—` zamiast sha7 i z `task_22` jako ID, bez wiersza „W zadaniach”. Kroki:
+Rodzaj „narzędzia”, wdrożenie w terminalu: gałąź `spec/<data>-task22` od `master` we własnym worktree `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>` (zasada z `CLAUDE.md` od 2026-10-27; `everhorror-wdrozenie` tylko dla starszych gałęzi). Warunki startu: task17 scalony i domknięty; karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a). W „Na gałęziach” wiersz z `—` zamiast sha7 i z `task_22` jako ID, bez wiersza „W zadaniach”. Kroki:
 
 1. **K4.**
    - `data_lint.gd` zbiera każdą ścieżkę, w której flagę ustawia się i czyta. Dochodzą źródła `script/data/*.gd` i `tools/generators/write_world_data.js`.
@@ -140,8 +140,10 @@ Rodzaj „narzędzia”, wdrożenie w terminalu: worktree `C:/dev/gamedev/everho
 2. **T7.**
    - `GameState.quota_words(przypadek, wielka_litera)` zwraca liczebnik żeński z rzeczownikiem w dobrej formie. Tabela słów ma komentarz `lint-quota`; dla liczb spoza tabeli są cyfry z `plural()`.
    - Linie z sekcji T7 dostają `{{quota_words(…)}}`, a `game_state.gd:581` pomocnika. Klucz i wartość gwary Mirosława zmieniamy w `write_gwara.js` i uruchamiamy generator.
-   - Kwestie Nasira dostają komentarz `lint-quota`. `CZYTAJ_MNIE.txt` i notes według pytań 3 i 4 karty.
-   - Nowa reguła w `data_lint.gd`: „dwanaście/dwunastu/12 żył” poza oznaczonymi miejscami to błąd.
+   - Kwestie Nasira dostają komentarz `lint-quota`.
+   - **Notes (karta, 4a).** Trzy wpisy zadania „Złoża” w `write_story_data.js:196,200,201` dostają znaczniki normy (np. `{norma}` w mianowniku, `{norma_dop}` w dopełniaczu, `{Norma}` z wielkiej litery). Jeden pomocnik w `GameState` (np. `quest_entry_text(data, entry_id)`) zamienia je przez `quota_words()`. Używają go oba miejsca, które dziś pokazują wpis dosłownie: notes (`script/notebook.gd:59`) i sygnał `quest_updated` (`script/game_state.gd:821`). Potem `node tools/generators/write_story_data.js`, a `data/quests/` tylko z generatora. Tekst w notesie wygląda tak samo jak dziś; sprawdza to nowy przypadek w `unit` (wpisy `start`, `zdane`, `norma` po zamianie = dzisiejszy tekst).
+   - **CZYTAJ_MNIE.txt (karta, 3a).** Tekst zostaje bez zmian. Dla tego pliku reguła lintu nie zabrania liczby słownie, tylko sprawdza, że „… żył błękitu” zgadza się z `quota_words()` dla `QUOTA`. Przy zmianie normy lint wskaże to zdanie.
+   - Nowa reguła w `data_lint.gd`: w `dialogue/`, `script/` i `tools/generators/write_story_data.js` „dwanaście/dwunastu/12 żył” poza oznaczonymi miejscami to błąd; `CZYTAJ_MNIE.txt` jak wyżej.
    - Sprawdzenie: przed zmianą lint zgłasza wszystkie miejsca. Po zmianie `--import` (zmienione `.dialogue`), a potem `dialogue`; wykonawca porównuje wyświetlany tekst przed i po w obu wersjach, z gwarą i bez.
 3. **K6.**
    - Reguła w `data_lint.gd` liczy polskie literały w `script/**/*.gd` dla każdego pliku. Pomija komentarze i łańcuchy w `tr("…")`. Liczy łańcuchy z polskimi znakami oraz łańcuchy z listy częstych słów bez ogonków.
@@ -153,9 +155,11 @@ Rodzaj „narzędzia”, wdrożenie w terminalu: worktree `C:/dev/gamedev/everho
    - `set -e`; `--dry-run` tylko wypisuje kroki.
    - Sprawdzenie: `release.sh 0.5.3 --dry-run` oraz `release.sh 9.9.9`, który musi zatrzymać się na pierwszym kroku.
 5. **P1.**
-   - W `.claude/settings.json` lista `allow` z sekcji Analiza. W `deny`: `git merge *`, `git switch` w głównej kopii, `git worktree remove*`, wszystko w formach `git …` i `git -C * …`. Tag i push `master` gry według pytania 1.
-   - Dochodzi `tools/release/release.sh` do `allow`.
-   - Sprawdzenie: plik jest poprawnym JSON (parsuje go `data_lint.gd` przez `JSON.parse_string` albo mały skrypt w `tools/`; `node -e` jest zakazane). Próba według pytania 2. Zestawienie „polecenie skilla → reguła” w raporcie.
+   - W `.claude/settings.json` lista `allow` z sekcji Analiza. W `deny`: `git merge *`, `git switch` w głównej kopii, `git worktree remove*`, wszystko w formach `git …` i `git -C * …`.
+   - **Tag i push `master` gry (karta, 1a):** lista `ask` (`git tag *`, `git -C * tag *`, push `master` w repozytorium gry, w obu formach). W terminalu zawsze pytają Rolanda, w dashboardzie (`dontAsk`) są odrzucane. Stała zgoda z planu §9 i krok tagu w `spec-sync` zostają bez zmian.
+   - `node` zawężony jak w karcie, ze ścieżką worktree `C:/dev/gamedev/everhorror/everhorror-wt/*/tools/*` zamiast `everhorror-wdrozenie` (a dla starszych gałęzi też ta druga). Dochodzi `tools/release/release.sh` do `allow`.
+   - Sprawdzenie: plik jest poprawnym JSON (parsuje go `data_lint.gd` przez `JSON.parse_string` albo mały skrypt w `tools/`; `node -e` jest zakazane). Zestawienie „polecenie skilla → reguła” w raporcie.
+   - **Próba (karta, 2a):** jeden krótki `claude -p` uruchomiony w worktree zadania, z `--setting-sources project --permission-mode dontAsk` i limitem `--max-budget-usd 0.5`. Próbuje nieszkodliwych wariantów zakazanych poleceń (merge nieistniejącej gałęzi, `switch` w głównej kopii na nieistniejącą gałąź, `git tag` z `ask` → odrzucony w `dontAsk`, `push --dry-run … master` w grze) oraz kilku poleceń skilli tylko do odczytu (`git -C … status`, `node dashboard/cli.ts lint` z katalogu specyfikacji, `tools/run_tests.sh lint`). Wynik każdego polecenia (odrzucone / przeszło) trafia do raportu.
    - Roland widzi diff przed zatwierdzeniem.
 6. **Dokumentacja.**
    - `tools/README.md`: wiersz `release.sh` i sekcja Wydanie (sześć kroków zostaje jako opis tego, co robi skrypt), reguły lintu T7 i K6 z opisem liczenia, `write_flags_doc.js` w Generatorach.
@@ -169,19 +173,24 @@ Rodzaj „narzędzia”, wdrożenie w terminalu: worktree `C:/dev/gamedev/everho
 
 ## Decyzje i założenia
 <!-- Co agent przyjął sam, bo nie wynikało z wymagań. -->
+- Decyzje Rolanda: karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md), Roland, 2026-10-27 (dashboard): 1: a, 2: a, 3: a, 4: a.
+- Przyjęte przez agenta bez pytania (do weta w przeglądzie; wymienione w karcie, sekcja „Przyjęte”):
+  - zakaz `git switch` tylko w głównej kopii;
+  - reguły zakazu ze spacją (`git merge *`), żeby nie łapały `merge-base`;
+  - push `master` objęty regułą tylko w repozytorium gry;
+  - `node` zawężony do narzędzi gry i `cli.ts`;
+  - komentarz `lint-quota` przy Nasirze i tabeli liczebników;
+  - bez tabeli `Texts`.
+- Worktree: od 2026-10-27 każda gałąź zadania ma własny katalog w `everhorror-wt/` (`CLAUDE.md`), więc plan i reguły `node` biorą tę ścieżkę.
 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
-Rozstrzygnięcia karty [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md):
-1. Tag i push `master` gry: lista `ask` czy `deny`?
-2. Czy wykonawca może sprawdzić uprawnienia krótkim zagnieżdżonym `claude -p` w kopii wdrożeniowej?
-3. Co z „dwanaście żył” w `CZYTAJ_MNIE.txt`?
-4. Czy T7 obejmuje też trzy wpisy notesu z `write_story_data.js`?
-
-Poza tym przed wdrożeniem trzeba scalić i domknąć task17, a wdrożenie uruchomić w terminalu.
+Karta [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a); plan wyżej ją uwzględnia. Zostały dwie rzeczy:
+1. Scalić i domknąć task17 (`spec/2026-10-27-task17` stoi jeszcze w „Na gałęziach” jako 🧪), bo naraz może być otwarta tylko jedna gałąź `spec/*`.
+2. Uruchomić wdrożenie w terminalu (`/ai-task implement 22`), bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`. Ta sesja zrobi też płatną próbę uprawnień z pytania 2 (limit 0,5 USD).
 
 ## Test
 <!-- Jeśli zadanie zawiera implementację: link do docs/human-tasks/factcheck-test-XX.md -->
 
 ## Podsumowanie
-Analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Większość zadania nie wymaga decyzji. Wdrożenie czeka na kartę decyzji (tag i push w uprawnieniach, próba uprawnień, „dwanaście żył” w `CZYTAJ_MNIE.txt` i w notesie) oraz na domknięcie gałęzi task17. Wdrożenie idzie w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.
+Analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Karta decyzji jest rozstrzygnięta zgodnie z rekomendacjami: tag i push `master` gry trafiają na listę `ask`, uprawnienia sprawdza krótki przebieg w worktree zadania, `CZYTAJ_MNIE.txt` zostaje bez zmian (lint sprawdza zgodność z normą), a T7 obejmuje też wpisy notesu. Wdrożenie czeka tylko na domknięcie gałęzi task17 i idzie w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.

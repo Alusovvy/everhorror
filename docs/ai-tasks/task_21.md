@@ -81,6 +81,12 @@ Rodzaj „narzędzia”: worktree `C:/dev/gamedev/everhorror/everhorror-wdrozeni
 6. **Sprawdzenie kryteriów:** grep (poza `docs/archiwum/`, `docs/analizy/`, `docs/ai-tasks/`) bez `Beehave`, `PhantomCamera`, `Sewer`, `sample-pic`, `visual_interaction`, `_ui_shot_tmp`. Uwaga: zakończone pliki `docs/ai-tasks/done/` (task_01, task_16) i ten plik zadania z natury je zawierają, a wymaganie ich nie wyłącza. Traktuję je jako historię i nie edytuję [założenie]. Potem `convention-reviewer` na diff.
 7. **Arkusz** `docs/human-tasks/factcheck-test-21.md` w głównej kopii: gra startuje do menu, edytor otwiera projekt bez błędów brakujących wtyczek, most MCP łączy się (przy 2a/2c).
 
+### Rozstrzygnięcia karty (wznowienie analizy, 2026-10-27)
+Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md) ma status ✅ i linię „Roland, 2026-10-27 (dashboard): 2: a”.
+- **Pyt. 2 → a.** `addons/godot_mcp` zostaje w repozytorium, dostaje plik `LICENSE` z tekstem licencji upstreamu, a raport podaje adres źródła i wiersz do `06_oprawa.md`. `project.godot` (wtyczka, `MCPRuntimeProbe`) się nie zmienia. **Warunek:** przebiegi z dashboardu nie mają sieci, więc tekst i adres licencji musi dostarczyć Roland (albo sesja z siecią), np. w uwadze do przebiegu `implement` albo jako plik położony w `addons/godot_mcp/`. Bez tego wykonawca robi resztę zadania, a kryterium licencji zgłasza w raporcie jako niespełnione. Licencji nie zgaduje. Jeśli upstream licencji nie ma, karta wraca z wyborem b/c (tak stanowi opcja a).
+- **Pyt. 1 (GdUnit4): bez wyboru.** Roland nie wybrał wariantu, a status quo nie wymaga zmiany. Plan: **GdUnit4 zostaje** (folder, wpis w `[editor_plugins]`, wykluczenie `addons/gdUnit4/*` w `export_presets.cfg`), a raport powtarza rekomendację jednym zdaniem: „Usunąć GdUnit4, bo nie ma w nim żadnego testu, a jego CLI nie wejdzie do `run_tests.sh`”. To spełnia kryterium „zgłoszona Rolandowi z jednym zdaniem rekomendacji”. Usunięcie tylko po wyraźnym „tak” Rolanda (np. w uwadze do przebiegu `implement`).
+- **Miejsce pracy.** Po zmianie `CLAUDE.md` każda gałąź zadania dostaje własny worktree `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>` (tworzy go dashboard). `everhorror-wdrozenie` służy tylko gałęziom sprzed tej zmiany, więc krok „worktree” w planie wyżej czytaj jako `everhorror-wt/spec/<data>-task21`.
+
 ## Co zostało zrobione
 <!-- Osobna podsekcja dla każdego punktu z Wymagań. -->
 
@@ -89,10 +95,12 @@ Rodzaj „narzędzia”: worktree `C:/dev/gamedev/everhorror/everhorror-wdrozeni
 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
-Rozstrzygnięcia karty [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md): (1) czy usunąć GdUnit4; (2) co z licencją `addons/godot_mcp`. Przy wyborze 2a potrzebny jest też adres i tekst licencji z upstreamu, bo przebieg nie ma sieci.
+Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md) rozstrzygnięta: 2: a. Przed `implement 21` potrzebuję jeszcze:
+- **adresu i pełnego tekstu licencji** `hybridindie/godot-mcp` (przebieg nie ma sieci), w uwadze do przebiegu albo jako plik w `addons/godot_mcp/`;
+- opcjonalnie **„tak” na usunięcie GdUnit4** (pyt. 1 zostało bez wyboru, więc domyślnie zostaje).
 
 ## Test
 <!-- Jeśli zadanie zawiera implementację: link do docs/human-tasks/factcheck-test-XX.md -->
 
 ## Podsumowanie
-Analiza gotowa (2026-10-27): zależność od task_16 spełniona, plan w siedmiu krokach powyżej. Wdrożenie czeka na kartę decyzji (GdUnit4, licencja `godot_mcp`); reszta sprzątania nie wymaga decyzji.
+Analiza gotowa (2026-10-27): zależność od task_16 spełniona, plan w siedmiu krokach powyżej. Karta rozstrzygnięta (2: a): `godot_mcp` dostaje plik LICENSE z upstreamu. Tekst licencji musi dostarczyć Roland, bo przebiegi nie mają sieci. GdUnit4 bez wyboru, więc zostaje, a rekomendacja usunięcia trafi do raportu. Zadanie jest gotowe do `implement 21`.
