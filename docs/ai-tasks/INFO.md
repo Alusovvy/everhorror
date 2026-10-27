@@ -16,7 +16,21 @@ Od 2026-10-26 Roland prowadzi zadania z dashboardu specyfikacji (widok **Praca**
   - Sekcje pod wymaganiami (analiza, raport, poprawki, podsumowanie): agent.
   - Pola człowieka w arkuszach: tylko człowiek. Co dokładnie nim jest, definiuje jedno miejsce: [Strefy człowieka](../human-tasks/INFO.md#strefy-człowieka). Każdy zapis z dashboardu to osobny commit tego jednego pliku, z podpisem osoby, która wpisuje (autor, committer i `Wpisał-Człowiek`).
 - **Statusy zadania** (tablica Praca): Zaplanowane, Czeka na decyzję, W pracy, Na gałęzi (🧪), Scalone — do domknięcia, Czeka na człowieka, Sprawdzone albo Zamknięte, Odrzucone; Niespójne, gdy pliki i `WDROZENIA.md` się rozjeżdżają.
-- **Rozgrywka zaczyna się w specyfikacji.** Prośba o nową mechanikę, postać albo tekst najpierw trafia do specyfikacji jako reguła ⬜, a zadanie z niej robi `/spec-tasks` (z linią `Źródło: specyfikacja`). Formularz „Nowe zadanie narzędziowe” (`/praca/nowe`) służy tylko do narzędzi i dokumentacji: zapisuje słowa Rolanda dosłownie w wymaganiach i dodaje linię `Rodzaj: narzędzia` albo `dokumentacja`. Takie zadania wdrażamy na razie w terminalu (`/ai-task`), nie z dashboardu.
+- **Rozgrywka zaczyna się w specyfikacji.** Prośba o nową mechanikę, postać albo tekst najpierw trafia do specyfikacji jako reguła ⬜, a zadanie z niej robi `/spec-tasks` (z linią `Źródło: specyfikacja`). Formularz „Nowe zadanie narzędziowe” (`/praca/nowe`) służy tylko do narzędzi i dokumentacji: zapisuje słowa Rolanda dosłownie w wymaganiach i dodaje linie `Rodzaj: narzędzia` (albo `dokumentacja`) oraz `Poziom: narzędzia`. Takie zadania wdrażamy na razie w terminalu (`/ai-task`), nie z dashboardu.
+
+## Poziom, pliki i ryzyko (D-36)
+
+Trzy informacje, które dashboard czyta z pliku zadania. Linia `Poziom:` stoi w bloku metadanych (zwykłe linie pod listą `Wymagania:`, obok `Rodzaj:` i `Źródło:`), a `Pliki:` i `Ryzyko:` zamykają sekcję `## Plan` analizy.
+
+- **`Poziom: tekst | narzędzia | rozgrywka`** (jedna z trzech wartości, jedna linia; zapis `Rodzaj: narzędzia · Poziom: narzędzia` też działa; pierwsza linia wygrywa; brak linii znaczy `rozgrywka`). Nadaje go `/spec-tasks`, a Roland może zmienić. Poziom decyduje, czego wymaga scalenie i czy zadanie ma arkusz dla człowieka:
+  - `tekst`: zmieniają się tylko teksty, dialogi albo dokumenty. Bez arkusza; scalenie po przeglądzie kodu, testach serwera i buildzie.
+  - `narzędzia`: `tools/`, generatory, skille, dashboard i okolice, bez zmian w rozgrywce. Bez arkusza i bez builda do ogrania; scalenie po przeglądzie i testach serwera.
+  - `rozgrywka`: wszystko, co zmienia to, co gracz przeżywa (także nowa flaga w `.dialogue`, liczby, czas, zapis gry). Arkusz dla człowieka, jeden na build ([human-tasks/INFO.md](../human-tasks/INFO.md#poziomy-zadań-i-arkusz-na-build)).
+  - Wątpliwość rozstrzyga ostrzejszy poziom: zadanie, które dotyka i tekstu, i rozgrywki, to `rozgrywka`.
+- **`Pliki: <ścieżki lub wzorce po przecinku, bez apostrofów>`**: pliki i foldery, które przebieg wdrożenia ruszy (przykład: `Pliki: project.godot, export_presets.cfg, tools/export_smoke/, script/game_state.gd`). Jedna linia, przedostatnia w `## Plan`. Dashboard używa jej do wykrywania nakładania się równoległych przebiegów, a łańcuch zatrzymuje się po analizie, gdy plan dotyka plików spoza tej listy.
+- **`Ryzyko: niskie | średnie | wysokie`**: jedna linia, ostatnia w `## Plan` (zaraz po `Pliki:`). `wysokie` zatrzymuje łańcuch po analizie, żeby Roland zobaczył plan, zanim ruszy wdrożenie.
+
+Zadanie bez `Pliki:` i `Ryzyko:` działa jak dotąd, ale łańcuch nie zna wtedy zakresu i zatrzymuje się po analizie.
 
 ## Historia
 

@@ -40,7 +40,7 @@ Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` fir
    - An ID already in an open task that **hasn't been started** (no "Co zostało zrobione" section): append `## Zmiana w specyfikacji <sha7>` to that task, below the agent marker, with the new rule text quoted. Never touch its requirements section.
    - An ID in a task in progress or in `done/`: a new task that links the earlier one.
    - An ID in a row of "Na gałęziach": a new task. Say that it follows that branch.
-5. **Group by feature**, not by spec file: all the IDs of one mechanic or one story change go into one task, even across files. For each group, write `docs/ai-tasks/task_NN.md`. NN is the next free number across `docs/ai-tasks/` and `docs/ai-tasks/done/`. Exception for purely textual ⬜ changes (they touch only `.dialogue` files, texts in `data/` or `CZYTAJ_MNIE.txt`): do not give each its own number; group them into one collective task "poprawki tekstów <YYYY-MM-DD>". The implementer of an open 🧪 branch may add such a collective task to that branch only when Roland chooses it at the click (never on its own). The file follows `task_template.md`:
+5. **Group by feature**, not by spec file: all the IDs of one mechanic or one story change go into one task, even across files. For each group, write `docs/ai-tasks/task_NN.md`. NN is the next free number across `docs/ai-tasks/` and `docs/ai-tasks/done/`. Exception for purely textual ⬜ changes (they touch only `.dialogue` files, texts in `data/` or `CZYTAJ_MNIE.txt`): do not give each its own number; group them into one collective task "poprawki tekstów <YYYY-MM-DD>" (with `Poziom: tekst`). The implementer of an open 🧪 branch may add such a collective task to that branch only when Roland chooses it at the click (never on its own). The file follows `task_template.md`:
    ```
    <!--
    Zadanie ze specyfikacji (spec-tasks, <YYYY-MM-DD>). Wymagania to cytat zasad ze specyfikacji w commicie <sha7>; nie edytować.
@@ -51,6 +51,7 @@ Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` fir
    2. …   (a ticket: its "Co" and "Było → ma być", quoted)
 
    Źródło: specyfikacja `<sha7>` · ID: <IDs> · Zgłoszenia: <files or —>
+   Poziom: <tekst | narzędzia | rozgrywka>
 
    Priorytet: <from the order in "Czeka na wdrożenie", else "do ustalenia"> · Kolejność: <tasks it depends on, or "—">
 
@@ -61,6 +62,10 @@ Read the spec's `README.md` (markers, IDs, rules) and the game's `CLAUDE.md` fir
    <which systems and files ("Dla agenta" pointers), risks, what is unclear. Full analysis: /ai-task analyze NN>
    ```
    Write in Polish. Quote the rules; don't paraphrase them. Don't add an agent "Podsumowanie" yet: `ai-task` ends the file when the task is done.
+   **Tier (D-36).** Give every task a plain line `Poziom: tekst`, `Poziom: narzędzia` or `Poziom: rozgrywka` in the metadata block, next to `Źródło:` (one value, never the list). `tekst` = the task changes only text, dialogue or documents (`.dialogue` lines without new flags or numbers, `CZYTAJ_MNIE.txt`, docs). `narzędzia` = it changes `tools/`, generators, skills, scripts around the dashboard or the docs of the process and nothing the player experiences. `rozgrywka` = everything that changes what the player experiences: scripts, scenes, data, a new flag, number, time rule or save format, even inside a `.dialogue`. When in doubt take the stricter tier; a task that mixes a tier with `rozgrywka` is `rozgrywka`. Only `rozgrywka` gets a human sheet (one per build); `tekst` and `narzędzia` merge after the review and the server's tests.
+
+   **Plan lines.** The `## Plan` of every analysis ends with two one-line fields, in this order: `Pliki: <comma-separated paths or globs the implement run will touch, no backticks>` and `Ryzyko: niskie|średnie|wysokie`. The chain stops after the analysis when the plan goes beyond `Pliki:` or the risk is `wysokie`.
+
 6. **Unclear items.** An item is unclear when it is contradictory, missing a number, or needs a design decision the spec doesn't make.
    - Interactive run: ask the user (AskUserQuestion) before writing that task.
    - Unattended run: write `zgloszenia/<YYYY-MM-DD>_pytania-agenta-<sha7>.md` from `szablony/zgloszenie.md` (Status `❔ pytanie`, Zgłasza: agent, Rodzaj: pytanie; one numbered question per item, quoting its ID and the options you see). Then either create the task for the clear part with the line "czeka na odpowiedź: <ticket>", or create no task at all.

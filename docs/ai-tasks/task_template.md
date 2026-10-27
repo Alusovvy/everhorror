@@ -3,6 +3,8 @@ Szablon zadania dla agenta AI. Skopiuj jako task_XX.md (XX = kolejny numer) i wy
 Reszta pliku należy do agenta: dopisuje swoje sekcje pod wymaganiami i kończy plik podsumowaniem.
 Zasady pracy z folderem: zob. INFO.md.
 Tytuł (opcjonalny): linia „# task_XX: <krótki tytuł>” pod tym komentarzem; dashboard pokazuje ją jako nazwę zadania, a bez niej nazwą jest początek wymagań. Usuń ją, jeśli niepotrzebna.
+Poziom (zalecany, D-36): linia „Poziom: tekst”, „Poziom: narzędzia” albo „Poziom: rozgrywka” (jedna wartość) w bloku metadanych pod Wymaganiami, obok „Rodzaj:”; bez niej zadanie jest „rozgrywka”. tekst = tylko teksty, dialogi, dokumenty (bez arkusza); narzędzia = tools/, generatory, skille, dashboard, bez zmian w rozgrywce (bez arkusza i bez builda); rozgrywka = wszystko, co zmienia to, co gracz przeżywa (arkusz dla człowieka, jeden na build). Nadaje go /spec-tasks; zasady: INFO.md, „Poziom, pliki i ryzyko”.
+Sekcja „## Plan” analizy (dopisuje ją agent, nie kopiuj jej tutaj pustej) kończy się dwiema liniami, każda w jednym wierszu: „Pliki: <ścieżki lub wzorce po przecinku, bez apostrofów>” (pliki i foldery, które ruszy wdrożenie) i „Ryzyko: niskie|średnie|wysokie”; zasady: INFO.md.
 Rodzaj (opcjonalny): „Rodzaj: narzędzia” albo „Rodzaj: dokumentacja” oznacza zadanie narzędziowe lub dokumentacyjne, bez zmian w rozgrywce. Formularz „Nowe zadanie narzędziowe” w dashboardzie dopisuje tę linię sam, razem z „Zleca: <imię> (dashboard, <data>)”. Zmiana rozgrywki nie jest zadaniem narzędziowym: najpierw trafia do specyfikacji, a /spec-tasks robi z niej zadanie z linią „Źródło: specyfikacja <sha7>”.
 -->
 
@@ -14,6 +16,7 @@ Wymagania:
 
 <!-- Opcjonalne (usuń, jeśli niepotrzebne): -->
 Rodzaj: <narzędzia / dokumentacja>
+Poziom: <tekst / narzędzia / rozgrywka>
 
 Kontekst:
 - <po co to robimy / z czym się wiąże, np. ID i dokument w specyfikacji; źródła i pierwszeństwo: specification/WORKFLOW.md>
