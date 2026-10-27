@@ -1,6 +1,8 @@
 # Factcheck test 08: obóz w jaskini
 
-> Zadanie: [task_08](../ai-tasks/done/task_08.md) · Decyzje: [decision-task-08](done/decision-task-08.md) · Przygotowano: 2026-09-26 · Czas: ~20 min
+> **2026-10-26:** zastąpione arkuszem PT0 [factcheck-test-14.md](../factcheck-test-14.md) (decyzja planu końcowego, etap 3). Kolumny człowieka zostają puste.
+
+> Zadanie: [task_08](../../ai-tasks/done/task_08.md) · Decyzje: [decision-task-08](decision-task-08.md) · Przygotowano: 2026-09-26 · Czas: ~20 min
 > Graj z edytora (F5) albo z builda po jego zrobieniu (build tylko na Twoją prośbę). Nowa gra, potem kilka pór dnia.
 
 ## Co się zmieniło

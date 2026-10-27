@@ -32,8 +32,17 @@ func scenario() -> void:
 	check(npc("Sabina").present and gs.is_in_camp(&"sabina"), "Sabina has a place in the camp (%s)" % gs.npc_place(&"sabina"))
 	check(last_summary.contains("Exitium"), "the meeting is in the summary")
 
-	step("who can turn up where")
+	step("task_14 (NPC-18): the night after Sabina has moved in wears her down, and not the mages")
 	var story = world.get_node("Story")
+	var sabina_before: int = gs.sanity(&"sabina")
+	var mages_before := {}
+	for id in [&"ottokar", &"hieronim", &"welf"]:
+		mages_before[id] = gs.sanity(id)
+	story._resolve_night()
+	check(gs.sanity(&"sabina") == sabina_before - 2, "Sabina loses 2 (%d -> %d)" % [sabina_before, gs.sanity(&"sabina")])
+	check(gs.sanity(&"ottokar") == mages_before[&"ottokar"] and gs.sanity(&"hieronim") == mages_before[&"hieronim"] and gs.sanity(&"welf") == mages_before[&"welf"], "the mages lose nothing at night (met, no tremor yet)")
+
+	step("who can turn up where")
 	var shallow: Array = story._roaming_drudzy(&"rzapie")
 	check("hieronim" in shallow and not "ottokar" in shallow and not "welf" in shallow, "near the camp only Hieronim (%s)" % [shallow])
 	var deep: Array = story._roaming_drudzy(&"grota")

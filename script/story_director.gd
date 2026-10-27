@@ -304,7 +304,9 @@ func _roll_encounter(place_id: StringName) -> void:
 func _roaming_drudzy(place_id: StringName) -> Array[String]:
 	var result: Array[String] = []
 	var deep := Expeditions.place(place_id).depth >= 3 or place_id in [&"kaplica", &"upadowa"]
-	if npcs.has(&"hieronim") and not GameState.has_flag("hieronim_gone"):
+	# task_14 (NPC-18): Hieronim has no exit at 0% sanity (it is only a proposal on his card), so
+	# nothing here asks whether he has gone.
+	if npcs.has(&"hieronim"):
 		result.append("hieronim")
 	if npcs.has(&"ottokar") and deep:
 		result.append("ottokar")
@@ -453,12 +455,13 @@ func _resolve_night() -> String:
 		if news == "":
 			news = "Dobrawa zeszła sama w głąb. Nie wróciła." if GameState.has_flag("dobrawa_went_down") else "Dobrawy nie ma. Zniknęła przed świtem, razem z kryształem."
 	_resolve_new_people(night)
-	# The fifth night the ground shakes (Wszebor calls it the Day of the Bloody Sky).
+	# The fifth night the ground shakes (Wszebor calls it the Day of the Bloody Sky). task_14
+	# (NPC-18): it shakes those who are here; the Exitium mages only once they have been met.
 	if night == 5:
 		GameState.set_flag("tremor_seen")
 		GameState.change_player_sanity(-3)
 		for id in GameState.npcs:
-			if GameState.npc_status(id) in ["camp", "field"]:
+			if GameState.has_arrived(id) and GameState.npc_status(id) in ["camp", "field"]:
 				GameState.change_sanity(id, -2)
 	if GameState.has_flag("welf_wounded") and not GameState.has_flag("welf_helped"):
 		GameState.set_flag("welf_lost")
@@ -491,10 +494,11 @@ func _resolve_night() -> String:
 		GameState.set_flag("kaplica_known")
 	return news
 
-## The camp people added in task_05: nightly wear, Nasir's fever from the third night.
+## The camp people added in task_05: nightly wear, Nasir's fever from the third night. Sabina
+## wears down only from the night after she has moved into the camp (task_14, NPC-18).
 func _resolve_new_people(night: int) -> void:
 	for id in [&"wszebor", &"hagiwara", &"sobek", &"anzelm", &"nasir", &"sabina"]:
-		if GameState.npcs.has(id):
+		if GameState.npcs.has(id) and GameState.has_arrived(id):
 			GameState.change_sanity(id, -2)
 	if GameState.npcs.has(&"anzelm") and GameState.has_flag("sabina_joined") and not GameState.has_flag("anzelm_sabina_peace"):
 		GameState.change_sanity(&"anzelm", -2)
@@ -618,9 +622,11 @@ func _week_end() -> void:
 	else:
 		await fade.show_card("Dzień %d" % GameState.day, "Budzi cię cisza.", 2.4)
 		await VN.play(SYSTEM_DIALOGUE, "left_behind")
-	await fade.show_end(_end_summary(success), "Koniec tygodnia" if success else "Zostałeś sam")
+	# task_14 (ZAP-11): the run report is written with the state of the very end, for both endings.
+	var report_path := RunReport.write(RunReport.ENDING_WEEK if success else RunReport.ENDING_ALONE)
+	await fade.show_end(_end_summary(success, report_path), "Koniec tygodnia" if success else "Zostałeś sam")
 
-func _end_summary(success: bool) -> String:
+func _end_summary(success: bool, report_path := "") -> String:
 	var band := {"spokojny": "spokojny", "niespokojny": "niespokojny", "na_krawedzi": "na krawędzi", "zalamany": "załamany"}
 	var lines: Array[String] = []
 	if success:
@@ -647,6 +653,9 @@ func _end_summary(success: bool) -> String:
 		lines.append(line)
 	lines.append("")
 	lines.append("Dziękujemy za grę.")
+	if report_path != "":
+		# The folder name and the file only: the full path is long, and the panel is tall already.
+		lines.append("Raport przebiegu zapisano: %s" % report_path.trim_prefix("user://"))
 	return "\n".join(lines)
 
 func _upadowa_summary(success: bool) -> String:

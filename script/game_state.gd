@@ -121,6 +121,10 @@ const FIXED_SANITY: Array[StringName] = [&"hrapek"]
 const FIRST_MEET: Array[StringName] = [&"wszebor", &"nasir", &"hagiwara", &"sobek", &"anzelm"]
 const FIRST_ROOMS: Array[StringName] = [&"east", &"rzapie", &"west"]
 const FIRST_ROOM_CAPACITY := 2
+## task_14 (NPC-18): people who are not part of the week until a flag says so (the Exitium
+## mages: the meeting; Sabina: once she has moved into the camp). Until then nothing that
+## happens at night, the tremor included, touches them.
+const ARRIVAL_FLAG := {&"sabina": "sabina_joined", &"ottokar": "drudzy_met", &"hieronim": "drudzy_met", &"welf": "drudzy_met"}
 ## Places of the expedition map (Expeditions). The camp itself is "oboz".
 const LOCATIONS: Dictionary = {
 	&"east": preload("res://data/locations/east.tres"),
@@ -168,6 +172,15 @@ var player_fatigue: float = 0.0
 ## True while the StoryDirector moves the hero between places: those hours are tunnel hours
 ## even though the location flag is not set yet (leaving the camp) or already cleared (back).
 var travelling := false
+## task_14 (ZAP-12), for the run report: one entry per dawn (day 1 at reset(), then
+## start_next_day()): {"day", "veins", "hero": {health, sanity, fever, fatigue},
+## "npcs": {id: {sanity, health, rep, status, fever, arrived}}, "flags_new": [names set since the
+## last dawn]}. Saved; a save from before version 6 has none ("brak danych" in the report).
+var dawn_log: Array = []
+## task_14 (ZAP-12): every vein as it was marked, {"id", "day", "at", "n"} (+ "via" when someone
+## else marked it for the hero); "n" counts the veins on the map including this one. Saved like
+## the dawn log.
+var vein_log: Array = []
 
 ## Open modal screens (dialogue, map, notebook…). While > 0 the player can't move.
 var _modal_count := 0
@@ -192,6 +205,8 @@ func reset() -> void:
 	expedition = {}
 	time_log = {}
 	asked = {}
+	dawn_log = []
+	vein_log = []
 	for id in NPCS:
 		var data: NpcData = NPCS[id]
 		npcs[id] = {"sanity": data.start_sanity, "health": data.max_health, "reputation": data.start_reputation, "status": "camp"}
@@ -200,6 +215,7 @@ func reset() -> void:
 	_modal_count = 0
 	start_quest("slady")
 	roll_first_rooms()
+	record_dawn()
 	state_replaced.emit()
 
 #region Time
@@ -254,7 +270,50 @@ func start_next_day() -> void:
 	hour = DAY_START_HOUR
 	# A night's sleep takes off a good part of the fatigue, not all of it (decision-task-12: 2a).
 	change_fatigue(-FATIGUE_SLEEP)
+	record_dawn()
 	day_started.emit(day)
+
+## task_14 (ZAP-12): writes this dawn into dawn_log (day 1 from reset(), later days from
+## start_next_day(), after the night has been resolved). An entry for the same day is replaced.
+func record_dawn() -> void:
+	var known := {}
+	for earlier in dawn_log:
+		if int(earlier.get("day", 0)) < day:
+			for flag_name in earlier.get("flags_new", []) + earlier.get("flags_all", []):
+				known[String(flag_name)] = true
+	# With no earlier entry on a later day (a save from before version 6) "new since the last
+	# dawn" is unknown: this entry says so ("partial") and keeps every flag name instead, as the
+	# base for the next one.
+	var first_known := dawn_log.is_empty() and day > 1
+	var fresh: Array = []
+	for flag_name in flags.keys():
+		if first_known or not known.has(String(flag_name)):
+			fresh.append(String(flag_name))
+	fresh.sort()
+	var people := {}
+	for id in NPCS:
+		var state: Dictionary = npcs.get(id, {})
+		if state.is_empty():
+			continue
+		people[String(id)] = {
+			"sanity": int(state["sanity"]), "health": int(state["health"]), "rep": int(state["reputation"]),
+			"status": String(state["status"]), "fever": has_fever(id), "arrived": has_arrived(id),
+		}
+	var entry := {
+		"day": day,
+		"veins": veins_mapped(),
+		"hero": {"health": player_health, "sanity": player_sanity, "fever": player_fever, "fatigue": player_fatigue},
+		"npcs": people,
+		"flags_new": [] if first_known else fresh,
+	}
+	if first_known:
+		entry["partial"] = true
+		entry["flags_all"] = fresh
+	for i in dawn_log.size():
+		if int(dawn_log[i].get("day", 0)) == day:
+			dawn_log[i] = entry
+			return
+	dawn_log.append(entry)
 
 func hours_left_text() -> String:
 	return hours_text(maxf(hours_left(), 0.0))
@@ -307,8 +366,24 @@ func set_flag(flag_name: String, value: Variant = true) -> void:
 	flags[flag_name] = value
 	flags_changed.emit()
 	if new_vein:
+		if has_flag(flag_name):
+			_log_vein(flag_name.trim_prefix("vein_"))
 		message.emit("Żyła na mapie. %s." % quota_text())
 		_check_quota()
+
+## task_14 (ZAP-12): a vein marked now goes into vein_log (the day and the hour it was done at;
+## interactables advance the clock before they set the flag, so this is the finishing time).
+## "n" is how many veins are on the map with this one (its flag is already set), so the quota
+## time is the entry with n = QUOTA even when the log starts late: a save from before version 6
+## that already had veins has a log of only the veins marked after the load.
+func _log_vein(vein_id: String, via: String = "") -> void:
+	for logged in vein_log:
+		if String(logged.get("id", "")) == vein_id:
+			return
+	var entry := {"id": vein_id, "day": day, "at": hour, "n": veins_mapped()}
+	if via != "":
+		entry["via"] = via
+	vein_log.append(entry)
 
 func clear_flag(flag_name: String) -> void:
 	flags.erase(flag_name)
@@ -491,6 +566,7 @@ func mark_veins_for_player(count: int) -> void:
 			for vein in data.veins:
 				if marked.size() < count and not has_flag("vein_" + vein):
 					flags["vein_" + vein] = true
+					_log_vein(vein, "ottokar")
 					marked.append(data.display_name)
 	if not marked.is_empty():
 		flags_changed.emit()
@@ -541,23 +617,30 @@ func days_left_text() -> String:
 
 ## "zdrowy" ≥ 75, "poobijany" ≥ 45, "ranny" ≥ 20, "ciezko_ranny" > 0, "martwy" = 0.
 func health_band() -> String:
-	if player_health >= 75:
+	return health_band_of(player_health)
+
+## The same bands for any health value (an NPC's, or a number kept in the run report's logs).
+static func health_band_of(value: int) -> String:
+	if value >= 75:
 		return "zdrowy"
-	if player_health >= 45:
+	if value >= 45:
 		return "poobijany"
-	if player_health >= 20:
+	if value >= 20:
 		return "ranny"
-	if player_health > 0:
+	if value > 0:
 		return "ciezko_ranny"
 	return "martwy"
 
 ## "spokojny" ≥ 60, "niespokojny" ≥ 35, "na_krawedzi" > 0, "zalamany" = 0.
 func mind_band() -> String:
-	if player_sanity >= 60:
+	return mind_band_of(player_sanity)
+
+static func mind_band_of(value: int) -> String:
+	if value >= 60:
 		return "spokojny"
-	if player_sanity >= 35:
+	if value >= 35:
 		return "niespokojny"
-	if player_sanity > 0:
+	if value > 0:
 		return "na_krawedzi"
 	return "zalamany"
 
@@ -590,11 +673,14 @@ func is_exhausted() -> bool:
 
 ## "wypoczety" (< 75), "zmeczony" (75+), "ledwo_idzie" (90+), "wyczerpany" (100).
 func fatigue_band() -> String:
-	if is_exhausted():
+	return fatigue_band_of(player_fatigue)
+
+static func fatigue_band_of(value: float) -> String:
+	if value >= FATIGUE_MAX - 0.001:
 		return "wyczerpany"
-	if player_fatigue >= 90.0:
+	if value >= 90.0:
 		return "ledwo_idzie"
-	if player_fatigue >= 75.0:
+	if value >= 75.0:
 		return "zmeczony"
 	return "wypoczety"
 
@@ -766,7 +852,9 @@ func sanity(npc_id: StringName) -> int:
 
 ## Symptom band used by dialogues: "spokojny" ≥ 40, "niespokojny" ≥ 20, "na_krawedzi" > 0, "zalamany" = 0.
 func sanity_band(npc_id: StringName) -> String:
-	var value := sanity(npc_id)
+	return sanity_band_of(sanity(npc_id))
+
+static func sanity_band_of(value: int) -> String:
 	if value >= 40:
 		return "spokojny"
 	if value >= 20:
@@ -774,6 +862,17 @@ func sanity_band(npc_id: StringName) -> String:
 	if value > 0:
 		return "na_krawedzi"
 	return "zalamany"
+
+## How an NPC feels about the hero (the notebook's "Do ciebie" line): "ufa" ≥ 20, "lubi" ≥ 5,
+## "nie_ufa" < 0, otherwise "dystans".
+static func trust_band_of(value: int) -> String:
+	if value >= 20:
+		return "ufa"
+	if value >= 5:
+		return "lubi"
+	if value < 0:
+		return "nie_ufa"
+	return "dystans"
 
 func change_sanity(npc_id: StringName, delta: int) -> void:
 	if npc_id in FIXED_SANITY:
@@ -861,6 +960,14 @@ func away_first_day(npc_id: StringName) -> bool:
 func in_camp_today(npc_id: StringName) -> bool:
 	return npc_status(npc_id) == "camp" and not away_first_day(npc_id)
 
+## task_14 (NPC-18): has this person reached the story yet? Sabina counts from the moment she
+## moves into the camp (`sabina_joined`), Ottokar, Hieronim and Welf from the first meeting with
+## the Exitium expedition (`drudzy_met`); everyone else is part of the week from the start. The
+## nightly sanity losses and the tremor skip anyone who has not arrived. Derived from the flags,
+## so nothing is saved and nobody's status changes.
+func has_arrived(npc_id: StringName) -> bool:
+	return not ARRIVAL_FLAG.has(npc_id) or has_flag(String(ARRIVAL_FLAG[npc_id]))
+
 #endregion
 
 #region Modal screens
@@ -895,6 +1002,8 @@ func save_state() -> Dictionary:
 		"expedition": expedition.duplicate(true),
 		"time_log": time_log.duplicate(true),
 		"asked": asked.duplicate(),
+		"dawn_log": dawn_log.duplicate(true),
+		"vein_log": vein_log.duplicate(true),
 	}
 
 ## Saves from older versions lack the hero and the expedition: they start healthy, in the camp.
@@ -927,6 +1036,12 @@ func load_state(data: Dictionary) -> void:
 	asked = Dictionary(data.get("asked", {})).duplicate()
 	# Saves before task_09 have no time log: the notebook starts it from now on.
 	time_log = Dictionary(data.get("time_log", {})).duplicate(true)
+	# Saves before version 6 (task_14) have no report logs: empty, the report says "brak danych".
+	# reset() above wrote a day-1 entry that does not belong to this run, so replace it either way.
+	var saved_dawns: Variant = data.get("dawn_log", [])
+	dawn_log = (saved_dawns as Array).duplicate(true) if saved_dawns is Array else []
+	var saved_veins: Variant = data.get("vein_log", [])
+	vein_log = (saved_veins as Array).duplicate(true) if saved_veins is Array else []
 	expedition = data.get("expedition", {})
 	if not expedition.is_empty():
 		# JSON turns numbers into floats and loses nothing else we need.

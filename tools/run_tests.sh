@@ -2,7 +2,8 @@
 # Runs the headless test scenarios and prints one line per scenario; full logs go to reports/tests/.
 # Usage (from the project root):  tools/run_tests.sh              # all scenarios (ask the user first!)
 #                                 tools/run_tests.sh day1 kaplica  # only the named ones
-# Scenarios: dialogue (tools/dialogue_test.gd) and tools/tests/test_<name>.gd.
+# Scenarios: dialogue (tools/dialogue_test.gd), balance (tools/balance_sim.gd, the balance bot: it
+# also prints its BALANCE lines under its result) and tools/tests/test_<name>.gd.
 # Each scenario has its own watchdog; the outer timeout is a last resort.
 
 GODOT="${GODOT:-C:/dev/gamedev/Godot_v4.7.2-stable_win64_console.exe}"
@@ -11,7 +12,7 @@ mkdir -p "$LOGS"
 
 tests=("$@")
 if [ ${#tests[@]} -eq 0 ]; then
-	tests=(unit lint dialogue schedule places camp_walk hrapek first_meet day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
+	tests=(unit lint dialogue balance schedule places camp_walk hrapek first_meet day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
 fi
 
 failed=0
@@ -20,6 +21,7 @@ for name in "${tests[@]}"; do
 	[ "$name" = "dialogue" ] && script="res://tools/dialogue_test.gd"
 	[ "$name" = "unit" ] && script="res://tools/unit_test.gd"
 	[ "$name" = "lint" ] && script="res://tools/data_lint.gd"
+	[ "$name" = "balance" ] && script="res://tools/balance_sim.gd"
 	start=$(date +%s)
 	timeout 180 "$GODOT" --headless --path . --script "$script" > "$LOGS/$name.log" 2>&1
 	code=$?
@@ -35,5 +37,7 @@ for name in "${tests[@]}"; do
 	fi
 	[ "$ok" -eq 0 ] && failed=$((failed + 1))
 	printf "%-10s %4ss  %s\n" "$name" "$(( $(date +%s) - start ))" "$result"
+	# The balance bot measures the pace (TECH-3): its answers are lines of their own.
+	grep "^BALANCE" "$LOGS/$name.log" | sed 's/^/             /'
 done
 exit $failed

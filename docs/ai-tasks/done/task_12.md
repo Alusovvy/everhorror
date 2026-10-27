@@ -103,7 +103,7 @@ Priorytet: do ustalenia · Kolejność: po task_09 (task_09 przelicza czas na mi
 - **Powrót:** do mojego opisu (50% faktycznie przebytej drogi od wyjścia z obozu, bez rozpoznania i czasu na miejscu, w górę do 5 minut, nigdy ×2) nie było uwag, więc wdrażam go w tej wersji.
 
 ## Czego potrzebuję od Ciebie
-- **Przejścia [factcheck-test-12](../../human-tasks/factcheck-test-12.md)** w większym teście razem z 10 i 11, szczególnie punktu 12 (balans): czy powrót za połowę nie ułatwia za bardzo i czy zmęczenie jest odczuwalne.
+- **Przejścia [factcheck-test-12](../../human-tasks/done/factcheck-test-12.md)** w większym teście razem z 10 i 11, szczególnie punktu 12 (balans): czy powrót za połowę nie ułatwia za bardzo i czy zmęczenie jest odczuwalne.
 - **Decyzji na później:** jeśli tydzień okaże się za łatwy, zmęczenie jest najprostszym pokrętłem. Mogę na przykład ustawić mniejszy spadek we śnie (−40%) albo wyższy przyrost w tunelach (+10%/h).
 
 ## Test
@@ -117,7 +117,7 @@ Priorytet: do ustalenia · Kolejność: po task_09 (task_09 przelicza czas na mi
   - `unit`: 20 sprawdzeń zmęczenia i powrotu (przyrost w tunelu, w obozie i w drodze, ognisko, sen, pasma, ×2 z raną po podwojeniu, połowa drogi z zaokrągleniem, bez ×2, stary zapis, zapis i odczyt) oraz darmowa powtórzona opcja (3),
   - `day1`: po dniu z wyprawą zmęczenie jest wyraźne (> 25%), ale jeszcze bez słowa w rogu,
   - `kaplica`: powrót 1 h 30 min.
-- **Ręczne:** [factcheck-test-12](../../human-tasks/factcheck-test-12.md) (12 punktów, ok. 30 min).
+- **Ręczne:** [factcheck-test-12](../../human-tasks/done/factcheck-test-12.md) (12 punktów, ok. 30 min).
 
 ## Podsumowanie
 - **Zmęczenie:** 8% za godzinę w tunelach i 2% w obozie; sen zdejmuje 60%, a ognisko 15%. Widać je tylko słowami: od 75% w rogu ekranu i w plecaku. Przy 100% każda droga w głąb trwa dwa razy dłużej, a mapa to pokazuje.

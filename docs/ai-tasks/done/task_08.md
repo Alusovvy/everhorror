@@ -82,12 +82,12 @@ Nazwy węzłów, których używa gra (`MapTable/MapTableUse`, `Cloth/Bedroll/Bed
 - **„Hala” → „jaskinia”** w narracji to moja decyzja (w specyfikacji oznaczona [ROBOCZE]). Nie użyłem słowa „grota”, żeby obozu nie mylić z Grzybową grotą.
 
 ## Czego potrzebuję od Ciebie
-- Przejdź [factcheck-test-08](../../human-tasks/factcheck-test-08.md), szczególnie punkty o wrażeniu przestrzeni, świetle i ustawieniu postaci. Tego żaden test nie oceni.
+- Przejdź [factcheck-test-08](../../human-tasks/done/factcheck-test-08.md), szczególnie punkty o wrażeniu przestrzeni, świetle i ustawieniu postaci. Tego żaden test nie oceni.
 - Build robię tylko na Twoją prośbę. Ta zmiana dotyczy wyglądu całego obozu, więc nadaje się na nową wersję dla zespołu (0.5 albo 0.4.2).
 
 ## Test
 - Automatyczne: pełny zestaw w dwóch porcjach razem z nowymi testami, **16/16 zaliczonych**: unit, lint, dialogue, schedule, **places**, **camp_walk**, day1, save_load, rzapie, night1, day2, kaplica, day3, expedition, drudzy, week. Oba nowe testy są w domyślnym zestawie `tools/run_tests.sh`.
-- Ręczne: [factcheck-test-08](../../human-tasks/factcheck-test-08.md) (12 punktów, ok. 20 min).
+- Ręczne: [factcheck-test-08](../../human-tasks/done/factcheck-test-08.md) (12 punktów, ok. 20 min).
 
 ## Podsumowanie
 Obóz jest teraz naturalną jaskinią ok. 32 × 16 m ze sklepieniem ok. 6 m, a nie długim korytarzem z desek. Drewno zostało tylko w konstrukcjach: zagroda Racibora, rusztowanie nad magazynem, odrzwia, latarnie na słupach i jeden stary tor z wózkami. Strefy są w dawnej kolejności, ale luźniej, a ognisko stoi w środku. Wyjścia, nazwy węzłów, rozkład dnia i zapisy działają bez zmian. Ustawienie postaci sprawdzają dwa nowe testy: `places` (35 znaczników: podłoga, kolizje, kierunek, z próbami kontrolnymi) i `camp_walk` (gracz dochodzi do każdej strefy i każdego wyjścia). Na zrzutach rano, w dzień i wieczorem nic nie stoi krzywo. Pełny zestaw testów przechodzi (16/16). Zostało Twoje przejście factchecku. Build zrobię, jeśli o niego poprosisz.

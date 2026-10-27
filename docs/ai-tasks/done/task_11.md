@@ -90,10 +90,10 @@ Priorytet: do ustalenia · Kolejność: po task_10 (task_10 zmienia, gdzie i kie
 
 ## Czego potrzebuję od Ciebie
 - Przejrzenia przez Ren nowych zdań [ROBOCZE] (15 zdań o pomieszczeniach, opis Mirosława w kącie, zdanie Anzelma o Nasirze).
-- Przejścia [factcheck-test-11](../../human-tasks/factcheck-test-11.md) razem z 10 i 12, w większym teście, tak jak ustaliliśmy.
+- Przejścia [factcheck-test-11](../../human-tasks/done/factcheck-test-11.md) razem z 10 i 12, w większym teście, tak jak ustaliliśmy.
 
 ## Test
-Pełny zestaw po task_11 i task_12: **18/18 zaliczonych** (szczegóły w raporcie task_12). Nowe sprawdzenia: lint pokrycia powitań (29 warunków miejsca, powitania w terenie), 23 przypadki w `dialogue`, 3 w `unit` (powtórzona opcja). Ręczne: [factcheck-test-11](../../human-tasks/factcheck-test-11.md) (8 punktów, ok. 15 min).
+Pełny zestaw po task_11 i task_12: **18/18 zaliczonych** (szczegóły w raporcie task_12). Nowe sprawdzenia: lint pokrycia powitań (29 warunków miejsca, powitania w terenie), 23 przypadki w `dialogue`, 3 w `unit` (powtórzona opcja). Ręczne: [factcheck-test-11](../../human-tasks/done/factcheck-test-11.md) (8 punktów, ok. 15 min).
 
 ## Podsumowanie
 - **Zdanie o pomieszczeniu:** pierwsze spotkanie na szychcie w dniu 1 brzmi teraz na miejscu, z jednym zdaniem o sztolni, rząpiu albo przejściu za zawał.

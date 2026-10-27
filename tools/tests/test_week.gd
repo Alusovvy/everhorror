@@ -25,7 +25,27 @@ func scenario() -> void:
 	check(gs.npc_place(&"nasir") == "chory", "Nasir on the sick bed (%s)" % gs.npc_place(&"nasir"))
 	check(int(gs.get_flag("reminder_day", 0)) == 4, "Racibor reminded about the quota")
 
+	step("task_14 (UI-7, ZAP-11): SAVE REPORT in the pause menu writes the report and says where")
+	var reports_before := _report_files()
+	var pause = world.get_node("PauseMenu")
+	var button: Button = pause.get_node("Root/Center/Content/MainButtons/ReportButton")
+	var order: Array = pause.get_node("Root/Center/Content/MainButtons").get_children().map(func(n): return n.name)
+	check(order.find("ReportButton") == order.find("OptionsButton") + 1 and order.find("MainMenuButton") == order.find("ReportButton") + 1, "SAVE REPORT sits between OPTIONS and MAIN MENU %s" % [order])
+	check(button.text == "SAVE REPORT", "the button says SAVE REPORT")
+	button.pressed.emit()
+	var status: Label = pause.get_node("Root/ReportStatus")
+	var new_files := _new_report_files(reports_before)
+	check(status.visible and status.text.begins_with("Report saved:\n") and status.text.contains("raporty"), "the menu shows the path, in English (%s)" % status.text.replace("\n", " | "))
+	check(new_files.size() == 2 and new_files.any(func(f): return f.ends_with(".md")) and new_files.any(func(f): return f.ends_with(".json")), "a .md and a .json appeared (%s)" % [new_files])
+	for f in new_files:
+		if f.ends_with(".json"):
+			var parsed = JSON.parse_string(FileAccess.get_file_as_string("user://raporty/" + f))
+			check(parsed is Dictionary and parsed["ending"]["id"] == "w_trakcie" and int(parsed["now"]["day"]) == 4, "from the pause the report is \"w trakcie\", day 4")
+			check(parsed["days"].size() == 4 and parsed["days"][3]["dawn"] != null and bool(parsed["days"][3]["dawn"]["people"]["nasir"]["fever"]), "four days, the dawn of day 4 with Nasir's fever")
+	_remove_reports(new_files)
+
 	step("death: a wounded hero takes another blow; retry from the morning")
+	var before_death := _report_files()
 	var health_morning: int = gs.player_health
 	gs.player_health = 30
 	gs.hurt_player(40, "Test")
@@ -40,6 +60,8 @@ func scenario() -> void:
 	check(gs.day == 4 and is_equal_approx(gs.hour, 6.0) and gs.player_health == health_morning, "back at dawn of day 4 (%s, health %d)" % [gs.clock_text(), gs.player_health])
 	check(gs.has_fever(&"nasir") and not world.get_node("ScreenFade/EndPanel").visible, "the morning state is back")
 	check(FileAccess.file_exists("user://saves/auto.json"), "the dawn autosave is on disk")
+	check(_new_report_files(before_death).is_empty(), "task_14 (ZAP-11): the hero's death writes no report of its own")
+	check(gs.dawn_log.size() == 2 and int(gs.dawn_log[1]["day"]) == 4, "task_14 (ZAP-12): the retry brings back the dawn log of that morning (days %s)" % [gs.dawn_log.map(func(d): return int(d["day"]))])
 
 	step("the tremor leaves marks in the world")
 	gs.set_flag("tremor_seen")
@@ -64,6 +86,7 @@ func scenario() -> void:
 	check(seat.collision_layer == 0, "seat gone after the evening scene")
 
 	step("day 7 evening without the quota: the expedition leaves without you")
+	reports_before = _report_files()
 	gs.quest_log(&"czternasty", "kreski_rzapie")
 	for f in ["saw_marks_rzapie", "saw_marks_pillar", "opened_grabiec_cache", "saw_bread"]:
 		gs.set_flag(f)
@@ -86,3 +109,33 @@ func scenario() -> void:
 	var summary: String = world.get_node("ScreenFade/EndPanel/Center/VBox/Summary").text
 	check(summary.contains("Czternasty: ktoś odpowiedział ci lampą"), "the fourteenth in the summary")
 	print("   summary: ", summary.replace("\n", " | "))
+	var end_menu_button: Button = world.get_node("ScreenFade/EndPanel/Center/VBox/Buttons/MenuButton")
+	var screen_height: float = world.get_viewport().get_visible_rect().size.y
+	check(end_menu_button.get_global_rect().end.y <= screen_height and end_menu_button.get_global_rect().position.y >= 0.0, "task_14: the end screen's buttons are on screen (bottom %.0f of %.0f)" % [end_menu_button.get_global_rect().end.y, screen_height])
+
+	step("task_14 (ZAP-11): the end of the week writes the run report for this ending")
+	var ending_files := _new_report_files(reports_before)
+	check(ending_files.size() == 2, "one .md and one .json for the ending (%s)" % [ending_files])
+	check(summary.contains("Raport przebiegu zapisano: raporty/przebieg-"), "the end screen says where the report went")
+	for f in ending_files:
+		var text := FileAccess.get_file_as_string("user://raporty/" + f)
+		if f.ends_with(".md"):
+			check(text.contains("zakończenie: Zostałeś sam") and text.contains("## Kluczowe wybory") and text.contains("Nasir: wywieziony"), "the Markdown names the ending and the key choices (Nasir hauled up)")
+			check(text.contains("Jeszcze nie poznani:") and text.contains("## Ludzie o świcie"), "people the hero never met are listed apart, not in the tables")
+		else:
+			var parsed = JSON.parse_string(text)
+			check(parsed is Dictionary and parsed["ending"]["id"] == "zostales_sam" and int(parsed["now"]["day"]) == 8, "the JSON says \"zostales_sam\" on day 8")
+			check(parsed["days"].size() == 8 and parsed["days"][7]["dawn"] != null, "eight days, the last dawn included")
+			var tekla = parsed["choices"].filter(func(c): return c["id"] == "nasir")
+			check(tekla.size() == 1 and tekla[0]["value"] == "wywieziony", "the choices list has Nasir's fate")
+	_remove_reports(ending_files)
+
+func _report_files() -> Array:
+	return Array(DirAccess.get_files_at("user://raporty")).filter(func(f): return f.begins_with("przebieg-"))
+
+func _new_report_files(before: Array) -> Array:
+	return _report_files().filter(func(f): return not f in before)
+
+func _remove_reports(files: Array) -> void:
+	for f in files:
+		DirAccess.remove_absolute(ProjectSettings.globalize_path("user://raporty/" + f))

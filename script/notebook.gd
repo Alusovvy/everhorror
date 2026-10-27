@@ -154,11 +154,12 @@ func _mind_line(npc_id: StringName, female: bool) -> String:
 	return "Nie poznaje ludzi. Patrzy przez nich jak przez szybę."
 
 func _trust_line(npc_id: StringName, female: bool) -> String:
-	var trust := GameState.rep(npc_id)
-	if trust >= 20:
-		return "Ufa ci."
-	if trust >= 5:
-		return "Lubi cię, choć tego nie okazuje."
-	if trust < 0:
-		return "Nie ufa ci. Pilnuje się przy tobie."
+	# The bands live in GameState (trust_band_of) so the run report reads the same thresholds.
+	match GameState.trust_band_of(GameState.rep(npc_id)):
+		"ufa":
+			return "Ufa ci."
+		"lubi":
+			return "Lubi cię, choć tego nie okazuje."
+		"nie_ufa":
+			return "Nie ufa ci. Pilnuje się przy tobie."
 	return "Trzyma dystans. Jeszcze nie wie, co o tobie myśleć."

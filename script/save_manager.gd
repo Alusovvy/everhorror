@@ -22,7 +22,9 @@ const AUTO_SLOT := 0
 ## 4: the time log (task_09). Older saves load with an empty log.
 ## 5: options already asked (task_11) and the hero's fatigue (task_12). Older saves: none asked,
 ## rested.
-const SAVE_VERSION := 5
+## 6: the dawn log and the vein log for the run report (task_14, ZAP-12). Older saves load with
+## empty logs; the report then says "brak danych" for the days before.
+const SAVE_VERSION := 6
 const PERSIST_GROUP := "persist"
 
 var _pending: Dictionary = {}

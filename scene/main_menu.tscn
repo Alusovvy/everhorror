@@ -75,3 +75,22 @@ layout_mode = 2
 [node name="SaveSlotsPanel" parent="Center/Content" instance=ExtResource("4_slots")]
 visible = false
 layout_mode = 2
+
+[node name="VersionLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -360.0
+offset_top = -38.0
+offset_right = -16.0
+offset_bottom = -12.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.54, 0.5, 0.44, 0.8)
+theme_override_font_sizes/font_size = 14
+text = "dev"
+horizontal_alignment = 2

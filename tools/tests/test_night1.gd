@@ -21,6 +21,12 @@ func scenario() -> void:
 	check(gs.day == 2 and is_equal_approx(gs.hour, 6.0), "day 2, 06:00 (%s)" % gs.clock_text())
 	check(gs.has_note(&"odszyfrowana") and gs.has_flag("kaplica_known"), "message deciphered overnight, chapel known")
 
+	step("task_14 (NPC-18): the night does not touch Sabina, who is not here yet")
+	check(gs.sanity(&"sabina") == gs.npc_data(&"sabina").start_sanity, "Sabina keeps her sanity (%d)" % gs.sanity(&"sabina"))
+	check(gs.sanity(&"wszebor") == gs.npc_data(&"wszebor").start_sanity - 2, "Wszebor, out on his shift, lost 2")
+	check(gs.dawn_log.size() == 2 and int(gs.dawn_log[1]["day"]) == 2, "the dawn of day 2 is in the dawn log (ZAP-12)")
+	check(gs.dawn_log[1]["npcs"]["sabina"]["arrived"] == false and gs.dawn_log[1]["npcs"]["dobrawa"]["arrived"] == true, "…with Sabina not yet arrived and Dobrawa here")
+
 	step("day 2 morning in the camp")
 	check(npc("Dobrawa").present and gs.npc_place(&"dobrawa") == "dowodztwo", "Dobrawa at Racibor's table")
 	check(gs.npc_place(&"racibor") == "stol" and gs.npc_place(&"tekla") == "kuchnia", "breakfast again")
