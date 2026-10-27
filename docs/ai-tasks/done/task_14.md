@@ -38,7 +38,7 @@ Wymagania:
 Źródło: specyfikacja `8e46253` · ID: NPC-18, CZAS-16, UI-6, UI-7, ZAP-11, ZAP-12, TECH-1, TECH-2, TECH-3, wstęp (tydzień), `hieronim_gone` · Zgłoszenia: —
 
 Kontekst:
-- Etap 2 planu końcowego ([final-plan-human-readable.md](../../analizy/final-plan-human-readable.md), §1): trzy poprawki, wersja w menu głównym i `CHANGELOG.md` w zipie, czyli czysty build 0.5.3 do sesji gry PT0 (etap 3). Arkusz dla człowieka: [factcheck-test-14.md](../../human-tasks/factcheck-test-14.md) (PT0, jeden arkusz zamiast otwartych factchecków 08–13).
+- Etap 2 planu końcowego ([final-plan-human-readable.md](../../analizy/final-plan-human-readable.md), §1): trzy poprawki, wersja w menu głównym i `CHANGELOG.md` w zipie, czyli czysty build 0.5.3 do sesji gry PT0 (etap 3). Arkusz dla człowieka: [factcheck-test-14.md](../../human-tasks/done/factcheck-test-14.md) (PT0, jeden arkusz zamiast otwartych factchecków 08–13).
 - Decyzje już podjęte (zasada planu, §3 pkt 3: rekomendacja obowiązuje, dopóki Roland jej nie zawetuje):
   - do 0.5.3 wchodzą razem: trzy poprawki, wersja w menu głównym, raport przebiegu (ZAP-11, ZAP-12, UI-7) i bot balansu (TECH-3), które plan końcowy przewidywał w 0.5.4 (etap 4); `CHANGELOG.md` ma to podać wprost (wpis w dzienniku decyzji `09_produkcja.md` z 2026-10-26);
   - Drudzy z Exitium po spotkaniu podlegają wstrząsowi w piątą noc (−2) jak pozostali (NPC-18);
