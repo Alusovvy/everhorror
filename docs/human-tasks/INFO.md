@@ -3,18 +3,23 @@
 Arkusze, które wypełnia **człowiek**: factchecki (`factcheck-test-NN.md`), sesje gry (PT), odbiory. Agent tworzy je w głównej kopii gry z `factcheck_template.md` albo `playtest_template.md`, nigdy na gałęzi `spec/*`. Decyzje to karty w specyfikacji (`zgloszenia/`); stare `decision-*.md` w `done/` to historia.
 
 ## Strefy człowieka
-Pisze w nich tylko człowiek; hook i audyt przebiegu pilnują agenta.
-- Komórki kolumn `wynik`, `wynik człowieka`, `ocena`, `wynik (1–7)`, `uwagi`, `twój wybór`, `wybór`, `decyzja rolanda` i kolumn z końcówką `(człowiek)`. Przy kolumnie `skala` `wynik` to ocena 1–7.
-- Cała tabela pod nagłówkiem „wypełnia człowiek” albo pod linią `<!-- człowiek -->`.
-- Sekcje odpowiedzi: nagłówek „wypełnia człowiek” albo „(człowiek)” (bez tabeli) oraz treść między `<!-- odpowiedź człowieka -->` i `<!-- /odpowiedź człowieka -->`.
-- Linie nagłówka `Wyniki człowieka`, `Zwolnienie`, `Zamknięcie`.
-- Poza strefą: `oczekiwany wynik`, `wynik automatu` i tabele pod nagłówkiem z „automat” lub „(agent)”.
+To **jedyna definicja** stref człowieka. `CLAUDE.md`, skille, agenci i szablony tylko tu linkują. W strefach pisze wyłącznie człowiek; hook i audyt przebiegu pilnują agenta. Parser to `dashboard/src/work/sheets.ts` w specyfikacji; ta lista ma go odzwierciedlać.
+- **Kolumny tabel** (wielkość liter bez znaczenia): `wynik`, `wynik człowieka`, `wynik (1–7)`, `ocena`, `uwagi`, `uwagi człowieka`, `twój wybór`, `wybór`, `decyzja rolanda` oraz każda kolumna z końcówką `(człowiek)`. Przy tabeli z kolumną `skala` kolumna `wynik` to ocena 1–7.
+- **Cała tabela** pod nagłówkiem z „wypełnia człowiek” albo pod linią `<!-- człowiek -->`.
+- **Sekcje odpowiedzi** (bez tabeli): nagłówek z „wypełnia człowiek”, nagłówek kończący się na „(człowiek)” albo jeden ze starych nagłówków: „Twoje uwagi / propozycje”, „Uwagi ogólne”, „Uwagi człowieka”, „Gdzie było nudno albo trudno się połapać?”, „Inne uwagi i błędy”. Strefą jest też treść między `<!-- odpowiedź człowieka -->` i `<!-- /odpowiedź człowieka -->`.
+- **Linie nagłówka** `Wyniki człowieka`, `Zwolnienie`, `Zamknięcie`.
+- **Poza strefą:** kolumny `oczekiwany wynik` i `wynik automatu` oraz tabele pod nagłówkiem z „automat” lub „(agent)”.
+
+## Nazwy arkuszy
+- `factcheck-test-NN.md`: sprawdzenie zadania `task_NN` (z `factcheck_template.md`).
+- Sesja gry (PT0, PT1, …): z `playtest_template.md`. Plik też nazywa się `factcheck-test-NN.md`, gdzie NN to zadanie, którego build oceniamy, a numer sesji stoi w tytule. PT0 to [factcheck-test-14.md](factcheck-test-14.md) (build 0.5.3).
+- Zamknięte arkusze leżą w [done/](done/), razem ze starszą historią: `decision-*.md`, `factcheck-foundation-2026-10-26.md` i zastąpionym `factcheck-test-15.md`. Tych plików nie edytujemy.
 
 ## Znaczniki wyniku
 Komórka zaczyna się od ✅ ok, ❌ błąd, 💬 propozycja albo ⏭ pominięte, potem krótki opis. Skala to liczba 1–7. Wpis z „wpis agenta” nie jest dowodem człowieka.
 
 ## Kto co pisze
-- Człowiek: strefy człowieka. W dashboardzie każdy zapis to osobny commit tego pliku, podpisany przez zapisującego (autor, committer, `Wpisał-Człowiek`).
+- Człowiek: strefy człowieka. W dashboardzie każdy zapis to osobny commit tego pliku, z podpisem osoby, która wpisuje (autor, committer, `Wpisał-Człowiek`).
 - Agent: opis, kroki, oczekiwane wyniki i `## Wyniki automatu (agent)`; nigdy wyniku ani „sprawdzone”.
 
 ## Zwolnij, zastąp, zamknij

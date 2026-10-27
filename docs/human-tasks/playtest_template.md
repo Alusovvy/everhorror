@@ -5,12 +5,13 @@ Zamień NN, RRRR-MM-DD, <numer> (kolejna sesja: PT0, PT1, …) i <wersja>. Wype�
 Wszystko, co wypełnia człowiek, zostaw puste: kolumny „wynik” i „uwagi”, tabelę „Dane sesji” (nad nią stoi znacznik „człowiek” w komentarzu HTML), tabele skal, tabelę dni i odpowiedź między znacznikami odpowiedzi człowieka.
 Do 15 wierszy w „Sprawdzeniach”, tylko to, co ocenia człowiek: odczucie, czytelność, ton, obraz. Mechanikę pilnują testy automatyczne; ich wyniki idą do raportu zadania albo pod „Wyniki automatu (agent)”, nigdy do kolumn człowieka. Pięć pytań ankiety i jedno otwarte zostają bez zmian, żeby sesje dało się porównywać.
 Gdy build zapisuje raport przebiegu, dodaj na końcu sekcję „Raport przebiegu: dołącz plik” z tabelą „Plik .md, Plik .json, Uwagi” i tym samym znacznikiem nad tabelą (wzór: PT0, factcheck-test-14.md).
+Czas sesji podajemy jedną liczbą („1–3 h”), tą samą co w CZYTAJ_MNIE.txt, do czasu PT0, który pokaże rzeczywisty.
 Usuń ten komentarz po wypełnieniu.
 -->
 
 # PT<numer>: sesja gry na buildzie <wersja>
 
-> Zadanie: task_NN · Przygotowano: RRRR-MM-DD · Czas: 1–2 h
+> Zadanie: task_NN · Przygotowano: RRRR-MM-DD · Czas: 1–3 h
 > Kolumny „wynik” i „uwagi”, pola ankiety i odpowiedź otwartą wypełnia człowiek. Agent niczego tu nie wpisuje: puste pole znaczy „nie sprawdzono”.
 
 ## Co nowego w <wersja>

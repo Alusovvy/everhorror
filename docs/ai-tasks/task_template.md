@@ -1,5 +1,5 @@
 <!--
-Szablon zadania dla agenta AI. Skopiuj jako task_XX.md (XX = kolejny numer) i wypełnij sekcję Requirements.
+Szablon zadania dla agenta AI. Skopiuj jako task_XX.md (XX = kolejny numer) i wypełnij sekcję Wymagania.
 Reszta pliku należy do agenta: dopisuje swoje sekcje pod wymaganiami i kończy plik podsumowaniem.
 Zasady pracy z folderem: zob. INFO.md.
 Tytuł (opcjonalny): linia „# task_XX: <krótki tytuł>” pod tym komentarzem; dashboard pokazuje ją jako nazwę zadania, a bez niej nazwą jest początek wymagań. Usuń ją, jeśli niepotrzebna.
@@ -30,7 +30,7 @@ Priorytet: <niski / średni / wysoki> · Termin: <opcjonalnie>
 <!-- ↓↓↓ Sekcje poniżej wypełnia agent ↓↓↓ -->
 
 ## Co zostało zrobione
-<!-- Osobna podsekcja dla każdego punktu z Requirements. -->
+<!-- Osobna podsekcja dla każdego punktu z Wymagań. -->
 
 ## Decyzje i założenia
 <!-- Co agent przyjął sam, bo nie wynikało z wymagań. -->
