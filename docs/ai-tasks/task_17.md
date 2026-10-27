@@ -76,10 +76,10 @@ Gałąź `spec/2026-10-27-task17` w kopii wdrożeniowej (od `master` po scaleniu
 Brak nowych. Wariant A wybrał Roland w zgłoszeniu. Numeru wersji nie podniesiono. W specyfikacji nie zmieniano reguł ani żadnego [ROBOCZE].
 
 ## Czego potrzebuję od Ciebie
-Sprawdź dwa wiersze arkusza [factcheck-test-17](../human-tasks/factcheck-test-17.md), potem scal gałąź.
+Sprawdź dwa wiersze arkusza [factcheck-test-17](../human-tasks/done/factcheck-test-17.md), potem scal gałąź.
 
 ## Test
-Arkusz: [factcheck-test-17](../human-tasks/factcheck-test-17.md). `lore-checker`: bez sprzeczności. `convention-reviewer`: bez błędów. Po `--import`:
+Arkusz: [factcheck-test-17](../human-tasks/done/factcheck-test-17.md). `lore-checker`: bez sprzeczności. `convention-reviewer`: bez błędów. Po `--import`:
 - `unit`, `lint`, `dialogue`, `day1`: ALL PASSED.
 - Pełny zestaw (`tools/run_tests.sh`, za zgodą Rolanda), 19 scenariuszy: wszystkie ALL PASSED (balance 1415 sprawdzeń).
 

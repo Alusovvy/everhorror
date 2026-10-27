@@ -1,8 +1,9 @@
 # Factcheck test 17: palisada bez „niską” i komunikat stołu z mapą
 
-> Zadanie: [task_17](../ai-tasks/task_17.md) · Przygotowano: 2026-10-27 · Gałąź: `spec/2026-10-27-task17`
+> Zadanie: [task_17](../../ai-tasks/task_17.md) · Przygotowano: 2026-10-27 · Gałąź: `spec/2026-10-27-task17`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis.
 > Wyniki człowieka: Roland (dashboard), 2026-10-27 14:28
+> Zamknięcie: Roland (dashboard), 2026-10-27 14:28
 
 ## Co zostało dodane
 - Wstęp pierwszego dnia nie nazywa już palisady „niską”: „…przy stole z mapą w zagrodzie Racibora, za palisadą bez dachu…” (wstęp w `tydzien.md`, wariant A ze zgłoszenia o niskiej palisadzie).
