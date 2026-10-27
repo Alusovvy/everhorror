@@ -412,7 +412,7 @@ Wcześniejszy plan (8 fal, 30 zadań) był zbyt ambitny dla jednej osoby z agent
 |---|---|
 | Osobna kopia robocza specyfikacji i gałęzie `agent/*` | Specyfikację edytujemy lokalnie według `WORKFLOW.md`, commit po lincie z 0 błędów. Czasowy wyjątek task_15 (kopia `specification-praca`, już usunięta) zastąpiła prośba Rolanda z 2026-10-26, zob. [D-16](#decyzje-z-task_15-d-16d-21). Kopia gry `everhorror-wdrozenie` zostaje. |
 | Dziennik „Prace” i CLI `work/finalize/trace/review/report/doctor` | **Odkładamy.** Zostają tabele `WDROZENIA.md`. |
-| Natychmiastowa archiwizacja `docs_v2/` i `MECHANICS.md` | Wykonana 2026-10-27 po przeniesieniu LoreDoc i rejestru zasobów do specyfikacji (specyfikacja `e8c899e`, obrazy `ca9832b`): `docs_v2/` usunięty (`<SHA-docs_v2>`), `MECHANICS.md` w `docs/archiwum/` ([D-02](#decyzje-o-projekcie-i-procesie-d-01d-15)). |
+| Natychmiastowa archiwizacja `docs_v2/` i `MECHANICS.md` | Wykonana 2026-10-27 po przeniesieniu LoreDoc i rejestru zasobów do specyfikacji (specyfikacja `e8c899e`, obrazy `ca9832b`): `docs_v2/` usunięty (gra `bc68d01`; ostatnia treść: `10074fc`), `MECHANICS.md` w `docs/archiwum/` ([D-02](#decyzje-o-projekcie-i-procesie-d-01d-15)). |
 | CI gry, osobna tożsamość agenta, hook przed pushem | **Opcjonalne.** Lint ręcznie. Tożsamość agenta w przebiegach z dashboardu: [D-19](#decyzje-z-task_15-d-16d-21). |
 | Zawężenie uprawnień i podział `CLAUDE.md` w pierwszym tygodniu | Uprawnienia w etapie 4; podział `CLAUDE.md` zrobiono 2026-10-27. |
 | „Wydarzenia jako dane” w 3 częściach | **Tylko część 1**, w etapie 7. |
@@ -431,7 +431,7 @@ Roland, czat 2026-10-26: „all decisions go as recommended”, czyli wszystkie 
 | Karta | Decyzja | Etap |
 |---|---|---|
 | D-01 | Nowy sposób pracy: zasady z [§3](#3-zasady-które-obowiązują), krótki arkusz gry, zasada uczciwości wpisów. Zakres ograniczony przez [§8.3](#83-co-upraszczam). | 0–4 |
-| D-02 | `docs/MECHANICS.md` i `docs_v2/` idą do archiwum; rejestr zasobów i tekst LoreDoc przechodzą do specyfikacji. Wykonane 2026-10-27: LoreDoc i rejestr w specyfikacji (specyfikacja `e8c899e`, obrazy `ca9832b`), `docs_v2/` usunięty z repozytorium (historia gita: `<SHA-docs_v2>`), `MECHANICS.md` w `docs/archiwum/`. Taką formę archiwizacji zaproponował agent (rekomendacja, weto Rolanda). | 1, wykonane 2026-10-27 |
+| D-02 | `docs/MECHANICS.md` i `docs_v2/` idą do archiwum; rejestr zasobów i tekst LoreDoc przechodzą do specyfikacji. Wykonane 2026-10-27: LoreDoc i rejestr w specyfikacji (specyfikacja `e8c899e`, obrazy `ca9832b`), `docs_v2/` usunięty z repozytorium (gra `bc68d01`; ostatnia treść w historii gita: `10074fc`), `MECHANICS.md` w `docs/archiwum/`. Taką formę archiwizacji zaproponował agent (rekomendacja, weto Rolanda). | 1, wykonane 2026-10-27 |
 | D-03 | Karty decyzji trzymamy w `specification/zgloszenia/` jako „Rodzaj: decyzja”. | 1 |
 | D-04 | Pakiet odczucia: ruch, światło według głębokości, szepty 3D, łagodniejsze podświetlenie, mikro-horror. Próba w Kostnicy odpada (wybór D4 = a, Roland, czat 2026-10-26). | 5 |
 | D-05 | Presja: norma etapami, cena nocy, żyły ponad normę jako pokusa, rozmowy oddają czas. Liczby ustala bot. | 6 |
