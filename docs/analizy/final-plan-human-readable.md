@@ -15,11 +15,11 @@
 
 - **Etapy 0–2 są zrobione.** Praca jest zapisana i wypchnięta w obu repozytoriach. Build **0.5.3** jest scalony do `master` gry, a tag `v0.5.3` stoi na `e1ba7ca`.
 - **Zakres 0.5.3 się zmienił.** Raport przebiegu i bot balansu, planowane na 0.5.4 (etap 4), weszły do 0.5.3 w task_14. PT0 odbywa się więc na buildzie, który już zapisuje raport przebiegu (zob. [etap 4](#etap-4--pomiar-raport-i-bot-weszły-do-053)).
-- **task_14 jest sfinalizowane.** Zadanie leży w `docs/ai-tasks/done/`, a wiersz w `WDROZENIA.md` ma wpis `27e91e7`. Lista „Na gałęziach” jest pusta. Zdalna gałąź `spec/2026-10-26-task14` zostaje do decyzji Rolanda. Czasowa kopia robocza specyfikacji `specification-praca` już nie istnieje.
+- **task_14 jest sfinalizowane.** Zadanie leży w `docs/ai-tasks/done/`, a wiersz w `WDROZENIA.md` ma wpis `27e91e7`. Lista „Na gałęziach” jest pusta. Zdalną gałąź `spec/2026-10-26-task14` usunięto 2026-10-27 na prośbę Rolanda (czat); scalenie `5c08c5d` i tag `v0.5.3` zostają. Czasowa kopia robocza specyfikacji `specification-praca` już nie istnieje.
 - **Orkiestracja z dashboardu działa.** Zadania, arkusze, karty decyzji i przebiegi agenta obsługuje widok „Praca” (task_15, kod w `master` specyfikacji, ostatni commit dashboardu `88edde0`). Decyzje: [D-16…D-21](#decyzje-z-task_15-d-16d-21). Instrukcja obsługi: `specification/dashboard/INSTRUKCJA.md`.
 - **Następny krok: etap 3, sesja PT0.** Jest jeden połączony arkusz, `docs/human-tasks/factcheck-test-14.md`. Część A dotyczy gry 0.5.3: wiersze 1–15, ankieta i raport przebiegu. Część B to odbiór dashboardu: wiersze 16–29, a wiersz 29 odsyła do instrukcji. Sesja zajmuje 1–3 godziny ([D-25](#decyzje-z-porządkowania-dokumentacji-d-22d-26)). Wcześniejsze arkusze `factcheck-test-15` i `factcheck-foundation-2026-10-26` są zastąpione i leżą w `done/` jako historia.
 - **Punkt odniesienia K1 z bota** (task_14, nie od gracza): norma 12 żył pada między dniem 4, 13:00 (styl „żyły”) a dniem 5, 15:30 (styl „rozmowy”, wariant opóźniony). Cel [K1](#4-cele-mierzalne) to „nie wcześniej niż wieczorem dnia 6”.
-- **Czeka na wyraźne „tak” Rolanda:** hasło administratora dashboardu, pierwsze płatne kliknięcie przebiegu oraz źródło i licencja `assets/logo.png` przed demem publicznym ([D-21](#decyzje-z-task_15-d-16d-21)).
+- **Odłożone przez Rolanda:** hasło administratora dashboardu oraz źródło i licencja `assets/logo.png` („hasło i licencja na razie olać”, czat 2026-10-27; licencja logo wraca najpóźniej przed demem publicznym). Pierwsze płatne kliknięcie przebiegu już było: planowanie z 2026-10-27 ([D-21](#decyzje-z-task_15-d-16d-21)).
 
 ---
 
@@ -481,7 +481,7 @@ Pytania zespołowe:
 | D-18 | Domyślne modele przebiegów: Opus z effort high dla planowania, analizy i przeglądu; Sonnet z effort high dla wdrożenia, poprawek i domknięcia; próba bez zmian (Sonnet low). Limity kosztu bez zmian. Zastępuje „Opus max i Sonnet max” z `task_15.md` pkt 3. Haiku jest dziś dostępny w oknie uruchomienia tylko jako „własny identyfikator”. Zmiana wartości w kodzie dashboardu (`RUN_KINDS`, `AGENT_LABELS`) idzie osobnym commitem w przebiegu dokumentacji. | Roland, czat 2026-10-27: „Używajmy w kolejnych zadaniach Opus 5.5 High, Haiku 5.5 Max albo Sonnet 5.5 High, żeby było szybciej” |
 | D-19 | Tożsamość agenta w przebiegach z dashboardu to „Claude (agent)” z adresem `agent@everhorror.local`. Przebiegi działają na subskrypcji; płatne API tylko po `EVERHORROR_ALLOW_API_KEY=1`. | rekomendacja agenta (weto Rolanda), `task_15.md` pkt 4–5 |
 | D-20 | Włączenie dashboardu do `master` specyfikacji i zapis dokumentów procesu w grze. Wykonane: dashboard w `88edde0`, dokumenty procesu w `2a155ce`. | rekomendacja agenta (weto Rolanda), `task_15.md` pkt 6–7 |
-| D-21 | **Czeka na Rolanda.** Hasło administratora dashboardu (dziś puste), pierwsze płatne kliknięcie przebiegu („Sprawdź agenta”, grosze) oraz źródło i licencja `assets/logo.png` przed demem publicznym. Każda z tych rzeczy wymaga wyraźnego „tak”. | `task_15.md` pkt 8–9, D-10 |
+| D-21 | **Odłożone (Roland, czat 2026-10-27: „hasło i licencja na razie olać”).** Hasło administratora dashboardu (dziś puste), pierwsze płatne kliknięcie przebiegu („Sprawdź agenta”, grosze) oraz źródło i licencja `assets/logo.png` przed demem publicznym. Każda z tych rzeczy wymaga wyraźnego „tak”. | `task_15.md` pkt 8–9, D-10 |
 
 ### Decyzje z porządkowania dokumentacji (D-22…D-26)
 
