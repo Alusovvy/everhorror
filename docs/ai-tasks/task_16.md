@@ -78,5 +78,42 @@ Kierunek z analizy wstępnej obowiązuje: w jaskini świecą i dają się zaznac
 6. **Przegląd** `convention-reviewer` na diffie gałęzi.
 7. **Dokumenty:** arkusz `docs/human-tasks/factcheck-test-16.md` w głównej kopii (z `factcheck_template.md`; puste strefy człowieka). Wiersze: w jaskini świecą dokładnie dwie skały; obie da się zaznaczyć [E] (1 h, palik); po pierwszej komunikat „1 z 12”; mapa, ekwipunek, notes i podsumowanie pokazują 1; jaskinia nadal wygląda niepokojąco (światło). W specyfikacji: tylko wskaźnik w „Dla agenta” (`zyly_i_norma.md`: obiekty sztolni w `gen_mine_deep.gd`, `vein_mark()`), jeśli go brakuje. Poza tym wiersz „Na gałęziach” 🧪 i „W zadaniach” 🧪, lint, commit `[agent]`, push. W `tools/README.md` poprawić opis `interact_test.gd`, jeśli zmieni się cel.
 
+## Co zostało zrobione
+Gałąź `spec/2026-10-27-task16` w kopii wdrożeniowej, commit `40cf98c` (`task_16: w Starej sztolni dokładnie dwie żyły, które da się zaznaczyć`).
+
+### 1. ZYL-1: dwie żyły w Starej sztolni
+`tools/generators/gen_mine_deep.gd`: w grupie `BlueIronVeins` (nakładka błękitnego pulsu) zostały tylko skały e (`east_1`) i f (`east_2`), wskazywane zwróconymi węzłami zamiast `get_child(3/5)`. Dwa filary i skały c, d przeniesiono do nowej grupy `PlainRocks` (bez nakładki, na tych samych pozycjach). Scena `mine_deep.tscn` zregenerowana generatorem i `--import`, bez ręcznych zmian.
+
+### 2. ZYL-2: obie żyły da się zaznaczyć
+Fałszywa żyła (skała c z opisem „Przez skałę biegną cienkie żyłki…”) zniknęła razem z nakładką; opisu nie przenoszono, więc nie ma nowego tekstu do `lore-checker`. `vein_mark()` nazywa węzeł `VeinMark_<id>` (jak `gen_locations.gd`), więc drugi nie jest już `@Area3D@2`. Przy okazji poprawiona literówka „zdążła” → „zdążyła” w opisie `east_2`. Światła `VeinLights`: trzy zamiast czterech, jedno przy każdej żyle i jedno między filarami; żadnego przy skale bez żyły.
+
+### 3. ZYL-4 i zgłoszenie: licznik „0”
+Test odtwarzający (`tools/tests/test_expedition.gd`, nowy krok „task_16”): na prawdziwej scenie `east_1` daje komunikat „Żyły błękitu: 1 z 12”, `veins_mapped() == 1`, `quota_text()` zaczyna się od „Żyły błękitu: 1 z 12”, `Expeditions.veins_text(&"east")` to „żyły: 1 z 2 zaznaczone”. Podsumowanie po wyprawie (z żyłą z wyrobiska) ma „Nowe żyły na mapie: 2”. Nigdzie nie wyszło 0, więc w kodzie licznika nie było błędu. Hipoteza z analizy (gracz „zaznaczał” fałszywą żyłę, a licznik słusznie stał na 0) pozostaje najpewniejszym wyjaśnieniem, ale potwierdzi ją dopiero gra (arkusz, wiersze 2–5). Krok sprawdza też strukturę: dwie świecące skały, dwa `VeinMark_*` w `BlueIronVeins`, każdy węzeł o nazwie „Żyła błękitnego żelaza” ma `on_use_flag`.
+
+### Inne
+`tools/interact_test.gd:7`: cel zmieniony na `MineDeep/BlueIronVeins/VeinMark_east_1`. Dalsze kroki testu `expedition` przesunięte o godzinę (zaznaczenie w sztolni), np. 14:00 w wyrobisku i 16:30 po powrocie.
+
+## Decyzje i założenia
+- Zwykła skała zamiast fałszywej żyły (wprost z ZYL-2); bez karty decyzji.
+- Trzecie światło między filarami zostaje dla nastroju. To szczegół wizualny, ocenia go arkusz (wiersz 8). Nie jest to reguła, więc bez [ROBOCZE] w specyfikacji.
+- Specyfikacja: tylko wskaźnik w „Dla agenta” (`zyly_i_norma.md`). Reguły bez zmian, D-23: bez wiersza w „Zmianach agenta poza specyfikacją”.
+- Test zaznacza tylko `east_1`; `east_2` ma sprawdzoną strukturę (węzeł i flagę), ale nie jest klikana w teście. Zaznaczenie sprawdza arkusz (wiersz 5).
+
+## Czego potrzebuję od Ciebie
+Zagraj w jaskinię według arkusza [factcheck-test-16](../human-tasks/factcheck-test-16.md): świecą dwie skały, obie da się zaznaczyć, licznik po pierwszej to 1 z 12 (mapa, ekwipunek, notes, podsumowanie), jaskinia nadal wygląda niepokojąco. Jeśli „0” wróci mimo prawdziwej żyły, zapisz w arkuszu, gdzie je widzisz. Potem scal gałąź (dashboard „Scal do master gry”).
+
+## Test
+Arkusz: [factcheck-test-16](../human-tasks/factcheck-test-16.md). Kopia wdrożeniowa, po `--import`:
+```
+unit         RESULT: ALL PASSED
+lint         RESULT: ALL PASSED
+dialogue     RESULT: ALL PASSED
+expedition   RESULT: ALL PASSED  (po poprawce opisu w teście: ponowny przebieg, 13.8 s)
+day1         RESULT: ALL PASSED  (22.2 s)
+```
+Pełnego zestawu nie uruchamiano. `convention-reviewer`: bez błędów; uwagi (mylący opis asercji — poprawiony; `east_2` niezaznaczana w teście — opisane wyżej).
+
 ## Podsumowanie
+Zrobione na gałęzi `spec/2026-10-27-task16` (`40cf98c`), do sprawdzenia w grze: w Starej sztolni świecą i dają się zaznaczyć dokładnie dwie żyły, cztery skały bez żyły są zwykłym kamieniem, a test pokazuje licznik „1 z 12” po pierwszej żyle we wszystkich widokach. Zgłoszone „0” najpewniej wzięło się z fałszywej żyły, ale to potwierdzi dopiero arkusz. Poprzednia analiza:
+
 Przyczyna pierwszej części błędu jest pewna. Generator Starej sztolni nakłada świecenie żyły na sześć skał, a zaznaczyć da się tylko dwie (`east_1`, `east_2`). Jedna ze skał bez żyły nosi nawet nazwę „Żyła błękitnego żelaza” i ma tylko opis. Licznik w kodzie liczy od 1 w komunikacie, na mapie, w ekwipunku, w notesie i w podsumowaniu. Najpewniej „0” wzięło się z próby zaznaczenia tej fałszywej żyły, ale to potwierdzi dopiero test odtwarzający. Plan: w generatorze zostają dwie świecące żyły, fałszywa żyła i zbędne światła znikają, scena jest regenerowana, dochodzi test na liczniku i strukturze jaskini, a potem arkusz do sprawdzenia w grze. Decyzja Rolanda nie jest potrzebna, a specyfikacja się nie zmienia.
