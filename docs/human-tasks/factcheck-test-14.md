@@ -4,7 +4,7 @@
 > Jeden arkusz zamiast sześciu otwartych factchecków: [08](done/factcheck-test-08.md), [09](done/factcheck-test-09.md), [10](done/factcheck-test-10.md), [11](done/factcheck-test-11.md), [12](done/factcheck-test-12.md), [13](done/factcheck-test-13.md) (78 wierszy; decyzja [planu końcowego](../analizy/final-plan-human-readable.md), etap 3). Zostały tylko rzeczy, które ocenia człowiek: odczucie, czytelność, ton i obraz.
 > Połączono tu też odbiór dashboardu ([factcheck-test-15](done/factcheck-test-15.md)) i odbiór podstaw pracy ([factcheck-foundation](done/factcheck-foundation-2026-10-26.md)) na prośbę Rolanda (czat 2026-10-27: wszystko do sprawdzenia w jednej kolejnej sesji). Część A to gra (wiersze 1–15, ankieta, raport), część B to dashboard (wiersze 16–29); kolejność dowolna.
 > Kolumny „wynik” i „uwagi” oraz pola ankiety wypełnia człowiek. Agent niczego tu nie wpisuje: puste pole znaczy „nie sprawdzono”.
-> Wyniki człowieka: Roland (dashboard), 2026-10-27 07:39
+> Wyniki człowieka: Roland (dashboard), 2026-10-27 07:40
 
 ## Co nowego w 0.5.3
 - **Poprawki.** Sabina oraz Ottokar, Hieronim i Welf nie tracą poczytalności, zanim dotrą (NPC-18). Wstęp mówi, że stół z mapą stoi w zagrodzie Racibora, za niską palisadą bez dachu. Z kodu zniknął martwy warunek odejścia Hieronima (w grze bez zmian).
@@ -66,25 +66,25 @@ Pytania 1, 2, 4 i 5 wypełnij raz, po zakończeniu gry (albo po ostatnim dniu, d
 | Dzień | wynik (1–7) | uwagi |
 |---|---|---|
 | 1 | 3 |  |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
-| 6 | | |
-| 7 | | |
+| 2 | 4 |  |
+| 3 | 4 |  |
+| 4 | 4 |  |
+| 5 | 4 |  |
+| 6 | 4 |  |
+| 7 | 4 |  |
 
 | # | pytanie | skala | wynik | uwagi |
 |---|---|---|---|---|
-| 4 | Przywiązanie do ludzi z obozu | 1 = obojętni, 7 = bardzo mi na nich zależy | | |
-| 5 | Ciekawość „co niżej” | 1 = żadna, 7 = bardzo chcę wiedzieć | | |
+| 4 | Przywiązanie do ludzi z obozu | 1 = obojętni, 7 = bardzo mi na nich zależy | 4 |  |
+| 5 | Ciekawość „co niżej” | 1 = żadna, 7 = bardzo chcę wiedzieć | 4 |  |
 
 ## Gdzie było nudno albo trudno się połapać?
 
--
+brak odpowiedzi
 
 ## Inne uwagi i błędy
 
--
+brak odpowiedzi
 
 ## Raport przebiegu: dołącz plik
 Po zakończeniu tygodnia skopiuj z folderu raportów (adres wyżej) najnowsze `przebieg-….md` i `.json`, dołącz je do tego arkusza (np. obok niego, w tym folderze) i wpisz niżej ich nazwy. Jeśli raport nie powstał, zapisz to w uwagach.
