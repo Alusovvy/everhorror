@@ -8,6 +8,7 @@ Wymagania:
 1. Roland, dashboard 2026-10-27: „Dodatkowo w zakładce Praca "Zmiany do wdrożenia" dałbym pod panelem "do zaplanowania i pod "zapalnuj zadania" bo inaczej to sugeruje że będzimy planować to co jest do wdrożenia.”
 
 Rodzaj: narzędzia
+Poziom: narzędzia
 Zleca: Roland (dashboard, 2026-10-27)
 
 Kontekst:
@@ -55,7 +56,7 @@ Kryterium akceptacji w tym pliku wybiera A, a Roland zapisał plik w historii gr
 - **Testy.** Widok nie ma testów. Testy dashboardu (`node --test`) obejmują `derive`, `tasks`, `sheets`, `runs`, `spec`, `data`, ale nie komponenty React. Kolejność elementów sprawdzą tylko typowanie i człowiek.
 - **Commit.** Kod leży w master specyfikacji, a tam Roland ma teraz niezatwierdzone zmiany w 11 plikach rozdziałów 01–03 (`git status`, 2026-10-27). Commit tego zadania obejmuje tylko `dashboard/src/views/Work.tsx`, `dashboard/src/views/work.css` (i `dashboard/INSTRUKCJA.md`, jeśli się zmieni), podane jawnie.
 - **Kolejność i limity.** Zadanie od niczego nie zależy (`Kolejność: —`). Nie zajmuje miejsca jedynej otwartej gałęzi `spec/*` (kod jest w specyfikacji, a nie w grze), więc nie koliduje z task_16 i task_17.
-- **Gdzie wdrażać.** Zadania narzędziowe wdraża się na razie w terminalu (`/ai-task implement 18`), a nie przyciskiem dashboardu (`docs/ai-tasks/INFO.md`, punkt „Rozgrywka zaczyna się w specyfikacji”; `dashboard/INSTRUKCJA.md:58`).
+- **Gdzie wdrażać.** Zadanie narzędziowe idzie przez ten sam łańcuch z dashboardu co każde inne (D-36 pkt 8), na poziomie `narzędzia`: bez arkusza i bez builda do ogrania. Zastrzeżenie: cała zmiana leży w `<spec>/dashboard/`, a `docs/agent/run-rules.md` §1 odbiera przebiegowi zapis w tym folderze (zob. „Przepływ (D-36)”).
 
 ## Plan
 1. `dashboard/src/views/Work.tsx`, `PlanCard`: przenieść `{up.actionable > 0 && (<details className="wk-changes" …>…</details>)}` za `{plan && <ActionRow action={plan} … />}`. Poza kolejnością nic się nie zmienia.
@@ -67,16 +68,22 @@ Kryterium akceptacji w tym pliku wybiera A, a Roland zapisał plik w historii gr
    Gry ani Godota to nie dotyczy. Opis widoku w raporcie obejmie trzy stany: nic nowego (bez listy), same zgłoszenia bez zmian (bez listy), ponad 6 zmian (lista zwinięta pod przyciskiem).
 4. `dashboard/INSTRUKCJA.md:56` (krok 2): jedno zdanie, że pod przyciskiem jest zwijana lista „Zmiany do wdrożenia”: różnice od ostatniego wpisu w „W zadaniach”, a nie lista tego, co planowanie zaplanuje. Innych dokumentów zmiana nie dotyka.
 5. Lint (`node C:/dev/gamedev/everhorror/specification/dashboard/cli.ts lint`, 0 błędów). Potem commit w specyfikacji z jawnymi ścieżkami: `[agent] proces: dashboard — lista „Zmiany do wdrożenia” pod przyciskiem „Zaplanuj zadania” (task_18)`, i push master specyfikacji. Bez gałęzi gry i bez wierszy w `WDROZENIA.md`: zadanie narzędziowe nie dostaje wiersza „W zadaniach”, a „Na gałęziach” nie ma czego wpisać, bo nie powstaje żadna gałąź `spec/*`.
-6. Arkusz `docs/human-tasks/factcheck-test-18.md` w głównej kopii, z `factcheck_template.md`, z trzema wierszami:
-   - kolejność w karcie: liczniki, przycisk, lista;
+6. Bez arkusza (poziom `narzędzia`, D-36 pkt 4). Dowodem są sprawdzenia z kroku 3 i opis w raporcie, że:
+   - kolejność w karcie to liczniki, przycisk, lista;
    - lista nadal się zwija i rozwija, a przy najwyżej 6 zmianach otwiera się sama;
-   - stan „Nic nowego…” bez listy.
+   - stan „Nic nowego…” jest bez listy.
+7. Raport w tym pliku („Co zostało zrobione”, „Decyzje i założenia”, „Czego potrzebuję od Ciebie”, „Test”, „Podsumowanie”). Plik zadania przenosi do `done/` domknięcie po scaleniu, nie wykonawca.
 
-   Strefy człowieka zostają puste, plik niezatwierdzony.
-7. Raport w tym pliku („Co zostało zrobione”, „Decyzje i założenia”, „Czego potrzebuję od Ciebie”, „Test”, „Podsumowanie”). Po wdrożeniu w terminalu przenieść plik do `done/` według kroku 7 skilla `ai-task`.
+Pliki: dashboard/src/views/Work.tsx, dashboard/src/views/work.css, dashboard/INSTRUKCJA.md
+Ryzyko: niskie
 
 ## Pytania do Rolanda
 Brak. Jedyną niejasność (A czy B) rozstrzyga kryterium akceptacji; karty decyzji nie ma.
 
+## Przepływ (D-36)
+Poziom `narzędzia`: zmiana widoku dashboardu (kod w repozytorium specyfikacji, ścieżki w `Pliki:` liczone od jego korzenia) bez wpływu na grę, więc bez arkusza i bez builda do ogrania; po przeglądzie i testach scala się bez sprawdzenia człowieka.
+Ryzyko `niskie`: dwa pliki interfejsu i jedno zdanie dokumentacji.
+Do rozstrzygnięcia przed wdrożeniem: `docs/agent/run-rules.md` §1 zabrania przebiegowi zapisu w `<spec>/dashboard/`, a ta zmiana leży tylko tam; potrzebny wyjątek w regułach albo wykonanie przez koordynatora.
+
 ## Podsumowanie
-Zmiana jest drobna: w `PlanCard` (`Work.tsx`) zwijana lista „Zmiany do wdrożenia” przechodzi spod liczników pod przycisk „Zaplanuj zadania”. Do tego cienka linia oddzielająca w `work.css` i jedno zdanie w `INSTRUKCJA.md`. Logika i teksty bez zmian. Wdrożenie w terminalu (`/ai-task implement 18`), commit `[agent] proces: …` w specyfikacji, arkusz z trzema wierszami. Gry, Godota ani `WDROZENIA.md` zadanie nie dotyka. Możliwe osobne zadanie: licznik „N zmian w specyfikacji do wdrożenia” nad przyciskiem może dawać to samo wrażenie co lista.
+Zmiana jest drobna: w `PlanCard` (`Work.tsx`) zwijana lista „Zmiany do wdrożenia” przechodzi spod liczników pod przycisk „Zaplanuj zadania”. Do tego cienka linia oddzielająca w `work.css` i jedno zdanie w `INSTRUKCJA.md`. Logika i teksty bez zmian. Wdrożenie z dashboardu na poziomie `narzędzia`, commit `[agent] proces: …` w specyfikacji, bez arkusza (dowód w sprawdzeniach i raporcie). Gry, Godota ani `WDROZENIA.md` zadanie nie dotyka. Możliwe osobne zadanie: licznik „N zmian w specyfikacji do wdrożenia” nad przyciskiem może dawać to samo wrażenie co lista.

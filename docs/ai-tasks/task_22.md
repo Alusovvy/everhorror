@@ -9,6 +9,7 @@ Wymagania:
 Propozycje: P1 (reszta), P4, K4, T7 (lint), K6 (lint i konwencja) z analizy projektu (kontekst poniżej).
 
 Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
+Poziom: rozgrywka
 
 Kontekst:
 Źródło: przegląd projektu `docs/analizy/propozycje-projekt.md` (agent Fable 5.1, tylko odczyt, 2026-10-27). Ten plik zostaje usunięty po przeniesieniu propozycji do planu i zadań, więc cała treść potrzebna wykonawcy jest tutaj. Numery linii pochodzą z 2026-10-27 i mogą się przesunąć. Wszystko to narzędzia i lint: **rozgrywka nie zmienia się**, więc zadanie nie wymaga reguły ⬜ w specyfikacji. Szczególnie ważne przy T7: teksty wyświetlane graczowi muszą po zmianie wyglądać dokładnie tak samo jak przed nią. Koszt razem: S–M (pięć niezależnych części; można je robić po kolei w jednym przebiegu).
@@ -17,7 +18,7 @@ Kontekst:
    Konwencja K6 w `CLAUDE.md` (sekcja Conventions: nowy tekst dla gracza w skrypcie idzie przez `tr()` albo tabelę `Texts`) została dopisana przy odświeżeniu dokumentacji, więc tu zostaje tylko lint.
 
 1. **P1 (reszta). Uprawnienia agenta pozwalają jeszcze na merge, tag i push do master w głównej kopii.**
-   - *Problem.* `.claude/settings.json` dopuszcza `Bash(git:*)` i `Bash(node:*)`, a lista `deny` zakazuje force push, `reset --hard`, `clean`, `branch -D`, `worktree remove --force` oraz (po kroku 0) checkout, stash i rebase. `git merge`, `git switch`, `git tag` i `git push` do `master` nadal przechodzą; chroni je tylko tekst w `CLAUDE.md` (Hard rules: „Only Roland merges”, „never switch branches”). Plan wymienia zawężenie jako zaległość etapu 4 (`final-plan-human-readable.md:179`). Przebiegi z dashboardu mają własnego strażnika (`runguard.ts`), sesje terminalowe go nie mają.
+   - *Problem.* `.claude/settings.json` dopuszcza `Bash(git:*)` i `Bash(node:*)`, a lista `deny` zakazuje force push, `reset --hard`, `clean`, `branch -D`, `worktree remove --force` oraz (po kroku 0) checkout, stash i rebase. `git merge`, `git switch`, `git tag` i `git push` do `master` nadal przechodzą; chroni je tylko tekst w `CLAUDE.md` (Hard rules: „Only Roland merges”, „never switch branches”). Plan wymienia zawężenie jako zaległość etapu 4 (`docs/analizy/plan.md`, etap 4 w §1 i D-15; szczegóły w archiwum, §8.3). Przebiegi z dashboardu mają własnego strażnika (`runguard.ts`), sesje terminalowe go nie mają.
    - *Propozycja.* Zamienić szerokie `allow` na listę pozytywną: `git status/log/diff/show/branch --list/ls-files/rev-parse/remote -v/fetch`, `git -C <worktree> add/commit/switch -c/push origin spec/*`, `git -C <spec> add/commit/push`; w `deny` dodać: `git merge*`, `git switch*` (bez `-c`, więc wprost tylko tworzenie gałęzi jest dozwolone), `git tag*`, `git push * master`, `git worktree remove*` (także w formach `git -C * …`). `node` zawęzić do `node tools/*` i `node C:/dev/gamedev/everhorror/specification/dashboard/cli.ts *`.
    - *Ryzyko do sprawdzenia.* Przebiegi z dashboardu ładują uprawnienia projektu (`--setting-sources project`), więc zawężenie nie może zablokować poleceń, których potrzebują skille `spec-tasks`, `ai-task` i `spec-sync` (zawsze `git -C <pełna ścieżka>`, `node …/cli.ts lint`, `tools/run_tests.sh`). Wykonawca przechodzi po tych skillach i zestawia listę używanych poleceń z nową listą `allow`; brak pokrycia to błąd zadania.
    - *Test.* Trzy polecenia z `deny` (np. `git merge x`, `git tag x`, `git push origin master`) są odrzucone, a polecenia z listy skillów przechodzą. Wynik w raporcie.
@@ -29,7 +30,7 @@ Kontekst:
    - *Koszt:* S–M. *Priorytet analizy:* średni. *Etap:* 4, przydaje się od 0.5.4.
 
 3. **K4. Rejestr flag generowany z lintu zamiast ręcznej tabeli.**
-   - *Problem.* W kodzie i dialogach jest 168 różnych `set_flag("…")` i 26 `mark_today("…")` (zliczone wyszukiwaniem 2026-10-27), do tego flagi z generatorów. `08_technika.md:37–54` w specyfikacji dokumentuje 15. Plan szacuje około 85 % flag bez dokumentacji (`final-plan-human-readable.md:405`). `tools/data_lint.gd` (około linii 235–250) już zbiera każdą flagę czytaną i ustawianą, ale wynik wyrzuca.
+   - *Problem.* W kodzie i dialogach jest 168 różnych `set_flag("…")` i 26 `mark_today("…")` (zliczone wyszukiwaniem 2026-10-27), do tego flagi z generatorów. `08_technika.md:37–54` w specyfikacji dokumentuje 15. Plan szacuje około 85 % flag bez dokumentacji (archiwum `docs/archiwum/plan-historia-2026-10.md`, §8.2; `docs/analizy/plan.md` odsyła tam po szczegóły). `tools/data_lint.gd` (około linii 235–250) już zbiera każdą flagę czytaną i ustawianą, ale wynik wyrzuca.
    - *Propozycja.* Lint zapisuje `reports/flags.tsv` (flaga, gdzie ustawiana, gdzie czytana, czy ma ładunek), a mały skrypt `tools/generators/write_flags_doc.js` generuje z niego `docs/agent/flags.md` (plik generowany, w repozytorium). Tabela tekstowa, bez bazy i grafu (plan §5). `tools/README.md` opisuje generator.
    - *Poza tym zadaniem:* skrócenie `08_technika.md` do 15 najważniejszych flag z odnośnikiem do `docs/agent/flags.md` to zmiana w specyfikacji; wykonawca zgłasza ją w raporcie.
    - *Koszt:* S. *Priorytet analizy:* średni. *Etap:* dowolny.
@@ -41,7 +42,7 @@ Kontekst:
    - *Koszt:* S. *Priorytet analizy:* średni. *Etap:* 6 (przygotowanie).
 
 5. **K6 (lint). Teksty gry nie są gotowe na wersję angielską.**
-   - *Problem.* D-09 zakłada angielski „przez ten sam mechanizm tłumaczeń co gwara” (`final-plan-human-readable.md:278`). Mechanizm gwary to JSON „dokładna kwestia → wersja” tylko dla linii dialogów. Tymczasem około 300 polskich literałów siedzi w `script/*.gd` (`game_state.gd:371,432,479,581`, `expedition_summary.gd`, `run_report.gd`, `map_screen.gd`, `hud.gd`; liczba zliczona wyszukiwaniem), często składanych przez `%` z odmianą (`veins_acc()`, `days_left_text()`), której JSON nie przetłumaczy. Menu jest już po angielsku (UI-5), więc demo mieszałoby języki na jednym ekranie. Dziś w `script/` nie ma ani wywołań `tr()`, ani tabeli `Texts`.
+   - *Problem.* D-09 zakłada angielski „przez ten sam mechanizm tłumaczeń co gwara” (`docs/analizy/plan.md`, D-09 i etap 9 w §1). Mechanizm gwary to JSON „dokładna kwestia → wersja” tylko dla linii dialogów. Tymczasem około 300 polskich literałów siedzi w `script/*.gd` (`game_state.gd:371,432,479,581`, `expedition_summary.gd`, `run_report.gd`, `map_screen.gd`, `hud.gd`; liczba zliczona wyszukiwaniem), często składanych przez `%` z odmianą (`veins_acc()`, `days_left_text()`), której JSON nie przetłumaczy. Menu jest już po angielsku (UI-5), więc demo mieszałoby języki na jednym ekranie. Dziś w `script/` nie ma ani wywołań `tr()`, ani tabeli `Texts`.
    - *Propozycja na teraz.* Lint liczący polskie literały w `script/` (np. łańcuchy z polskimi znakami diakrytycznymi lub z listy słów; sposób liczenia opisać w `tools/README.md`). Liczba **może tylko spadać**: aktualny stan zapisany w pliku bazowym w repozytorium (np. `tools/lint_baseline.json`); lint kończy się błędem, gdy liczba wzrośnie, a przy spadku przypomina o obniżeniu wartości bazowej. Nie przenosimy istniejących tekstów masowo (to przed etapem 9: `translations/pl.csv` + `en.csv` dla skryptów, dialogi przez rozszerzony mechanizm gwary, odmiany przez funkcje per język; koszt M–L). Wykonawca ocenia, czy dodać minimalną tabelę `Texts`, żeby konwencja z `CLAUDE.md` miała dokąd prowadzić; jeśli nie, konwencja opiera się na `tr()`.
    - *Koszt:* S na start. *Priorytet analizy:* średni, wysoki przed etapem 9. *Etap:* 9 (przygotowanie od teraz).
 
@@ -72,7 +73,7 @@ Analiza z 2026-10-27, przebieg z dashboardu `20261027-151905-analyze-22-050463`.
 **Kolejność i gdzie wdrażać.**
 - Zadanie nie zależy od task_16–21.
 - W „Na gałęziach” stoi jednak otwarta gałąź `spec/2026-10-27-task17` (🧪, arkusz już zamknięty). Obowiązuje zasada „najwyżej jedna otwarta gałąź `spec/*`”, więc wdrożenie task_22 zaczyna się dopiero po scaleniu task17 i `/spec-sync finalize`.
-- Wdrożenie musi iść w terminalu (`/ai-task implement 22`), nie z dashboardu. Przebiegi z dashboardu mają zakaz zapisu w `.claude/**`, także w kopii wdrożeniowej (`buildSettings`, `dashboard/src/work/runs.ts:1037–1038`). Tak samo mówi `docs/ai-tasks/INFO.md`: zadania narzędziowe wdrażamy w terminalu.
+- Wdrożenie musi iść w terminalu (`/ai-task implement 22`), nie z dashboardu. Przebiegi z dashboardu mają zakaz zapisu w `.claude/**`, także w kopii wdrożeniowej (`buildSettings`, `dashboard/src/work/runs.ts:1037–1038`).
 
 **P1 (uprawnienia).** Jak jest dziś:
 - `.claude/settings.json` ma `allow` z `Bash(git:*)`, `Bash(node:*)`, `tools/run_tests.sh`, Godotem i pomocnikami (`cp -r`, `mkdir`, `ls`, `cat`, `grep`, `head`, `tail`, `wc`, `diff`, `date`).
@@ -98,7 +99,7 @@ Najważniejsze ryzyka:
 **P4 (skrypt wydania).** Jak jest dziś:
 - Wydanie to sześć kroków z `tools/README.md#wydanie`.
 - `stamp_build.js` ma już `--check` i `--spec <rev>`.
-- `make_zip.sh` sam sprawdza wersję, a gdy brak `zip`, używa PowerShella (w terminalu to działa, w przebiegu z dashboardu nie, ale wydanie nie jest przebiegiem z dashboardu).
+- `make_zip.sh` sam sprawdza wersję, a gdy brak `zip`, używa PowerShella (w terminalu to działa, w przebiegu z dashboardu nie; wydanie robi karta „Wydanie” na serwerze, D-36).
 
 Luki i ryzyka:
 - Konsolowy Godot potrafi zakończyć `--export-release` kodem 0 mimo błędu. Skrypt powinien więc sprawdzić, czy `build/windows/Everhorror.exe` istnieje i jest nowszy niż start skryptu.
@@ -130,7 +131,7 @@ Co ważne dla wykonawcy:
 - Kolejność ma znaczenie: T7 dodaje polskie słowa liczebników do `game_state.gd`, więc stan bazowy K6 zapisujemy po T7.
 
 ## Plan
-Rodzaj „narzędzia”, wdrożenie w terminalu: gałąź `spec/<data>-task22` od `master` we własnym worktree `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>` (zasada z `CLAUDE.md` od 2026-10-27; `everhorror-wdrozenie` tylko dla starszych gałęzi). Warunki startu: task17 scalony i domknięty; karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a). W „Na gałęziach” wiersz z `—` zamiast sha7 i z `task_22` jako ID, bez wiersza „W zadaniach”. Kroki:
+Rodzaj „narzędzia”, poziom `rozgrywka` (zob. „Decyzje i założenia”), wdrożenie w terminalu, bo przebieg z dashboardu nie może zapisywać w `.claude/` (`docs/agent/run-rules.md` §1; dotyczy P1, a zadanie ma jednego wykonawcę od początku do końca): gałąź `spec/<data>-task22` od `master` we własnej kopii gałęzi `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>`. Warunek startu: karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a). W „Na gałęziach” wiersz z `—` zamiast sha7 i z `task_22` jako ID, bez wiersza „W zadaniach”. Kroki:
 
 1. **K4.**
    - `data_lint.gd` zbiera każdą ścieżkę, w której flagę ustawia się i czyta. Dochodzą źródła `script/data/*.gd` i `tools/generators/write_world_data.js`.
@@ -165,8 +166,22 @@ Rodzaj „narzędzia”, wdrożenie w terminalu: gałąź `spec/<data>-task22` o
    - `tools/README.md`: wiersz `release.sh` i sekcja Wydanie (sześć kroków zostaje jako opis tego, co robi skrypt), reguły lintu T7 i K6 z opisem liczenia, `write_flags_doc.js` w Generatorach.
    - `docs/agent/README.md`: odnośnik do `flags.md`.
    - W raporcie propozycja skrócenia `08_technika.md:37–54` do 15 flag z odnośnikiem; to zmiana w specyfikacji, poza zadaniem.
-   - Plan §4 (wiersz task_22) bez zmian do scalenia.
-7. **Testy i przegląd.** `test-runner`: `unit lint dialogue` (zmienione `.dialogue` i może nowy `class_name`, więc najpierw `--import`). Potem `convention-reviewer` na diff. Arkusz `docs/human-tasks/factcheck-test-22.md` w głównej kopii: wiersze na diff uprawnień, `release.sh --dry-run`, `flags.md` i jeden rzut oka na wstęp oraz Racibora w grze (tekst bez zmian).
+   - Plan (`docs/analizy/plan.md`, „Gdzie jesteśmy”, wiersz otwartych zadań) bez zmian do scalenia.
+7. **Testy:** serwer po wdrożeniu uruchamia `unit lint dialogue`; w trakcie pracy agent robi najpierw `--import` (zmienione `.dialogue`, może nowy `class_name`) i uruchamia tylko potrzebne scenariusze. Przegląd diffu robi osobny przebieg łańcucha. Arkusz (poziom `rozgrywka`, D-36 pkt 4): jedna część `## Część: task_22` arkusza builda: wiersze na diff uprawnień, `release.sh --dry-run`, `flags.md` i jeden rzut oka na wstęp oraz Racibora w grze (tekst bez zmian).
+
+Pliki: .claude/settings.json, tools/data_lint.gd, tools/lint_baseline.json, tools/unit_test.gd, tools/generators/write_flags_doc.js, tools/generators/write_story_data.js, tools/generators/write_gwara.js, tools/release/release.sh, tools/README.md, data/quests, dialogue/system.dialogue, dialogue/racibor.dialogue, dialogue/miroslaw.dialogue, dialogue/nasir.dialogue, dialogue/gwara_slaska.json, script/game_state.gd, script/notebook.gd, docs/agent/flags.md, docs/agent/README.md
+Ryzyko: wysokie
+
+### Aktualizacja analizy (2026-10-27, przebieg `20261027-203608-analyze-22-edb32b`)
+Ponowne sprawdzenie planu wobec stanu po południu. Plan wyżej zostaje; zmienia się tylko to, co poniżej.
+- **Warunek startu z task17 odpada.** `spec/2026-10-27-task17` jest scalona (`ebd024c`, wiersz w „Wpisy” na `3f76c0f`), „Na gałęziach” jest pusta, a D-33 pozwala na trzy otwarte gałęzie `spec/*` naraz. Gałąź task_22 dostaje własną kopię w `C:/dev/gamedev/everhorror/everhorror-wt/`.
+- **Wdrożenie nadal tylko w terminalu.** Dashboard dalej odbiera przebiegom zapis w `.claude/**` głównej kopii i kopii gałęzi (`specification/dashboard/src/work/runs.ts:1176–1177`), więc zadanie zostaje w terminalu.
+- **Wersja to już 0.5.4** (`project.godot:14`, wydanie `c82a4dd`). Kryterium P4 mówi `release.sh 0.5.3 --dry-run`. `--dry-run` tylko wypisuje kroki, także krok zgodności wersji, i niczego nie sprawdza, więc kryterium da się spełnić dosłownie. Wykonawca uruchamia dodatkowo `release.sh 0.5.4 --dry-run` (bieżąca wersja) i `release.sh 9.9.9` (zatrzymanie na pierwszym kroku).
+- **Numery linii T7 są aktualne.** Sprawdzone wyszukiwaniem: `system.dialogue:105`, `racibor.dialogue:43,50,69,144,186`, `miroslaw.dialogue:192`, `write_gwara.js:180–181`, `game_state.gd:581`, `write_story_data.js:196,200,201`, `CZYTAJ_MNIE.txt:26`. Wyjątki Nasira to `nasir.dialogue:45,46,107` i `write_story_data.js:106`.
+- **`additionalDirectories` w `.claude/settings.json`** zna tylko `../everhorror-wdrozenie`. Przy P1 dochodzi `../everhorror-wt`, żeby sesja terminalowa widziała kopie gałęzi (szczegół przyjęty bez pytania, do weta w przeglądzie).
+- **Scalanie automatyczne (D-35)** ruszy samo, gdy arkusz jest wypełniony bez ❌, przegląd kodu ma `gotowe`, a build jest aktualny. Wymaganie P1 „Roland widzi diff przed zatwierdzeniem” spełnia przegląd (`/ai-task review 22`) albo wyłączenie scalania automatycznego na Praca na czas tej gałęzi. Decyzji to nie wymaga, tylko uwagi przy wypełnianiu arkusza.
+- **Wspólne pliki z innymi zadaniami** (więc nie wdrażać ich równolegle z task_22): task_29 (`write_story_data.js`, `notebook.gd`, `data_lint.gd`), task_30 i task_32 (`data_lint.gd`), task_33 (`write_story_data.js`), task_26 (`game_state.gd`). Wiersz `Pliki:` wyżej pozwala dashboardowi to wykryć.
+- **Etap 6 (ZYL-10, poz. 9 kolejki) wymienia do poprawy zdania z „dwanaście żył”.** T7 trzeba więc wdrożyć przed nim: wtedy zmiana normy to jedna liczba plus `quota_words()`.
 
 ## Co zostało zrobione
 <!-- Osobna podsekcja dla każdego punktu z Wymagań. -->
@@ -182,15 +197,15 @@ Rodzaj „narzędzia”, wdrożenie w terminalu: gałąź `spec/<data>-task22` o
   - komentarz `lint-quota` przy Nasirze i tabeli liczebników;
   - bez tabeli `Texts`.
 - Worktree: od 2026-10-27 każda gałąź zadania ma własny katalog w `everhorror-wt/` (`CLAUDE.md`), więc plan i reguły `node` biorą tę ścieżkę.
+- **Przepływ (D-36).** Poziom `rozgrywka`: T7 zmienia `script/game_state.gd`, `script/notebook.gd`, dialogi, gwarę i `data/quests` (tekst dla gracza ma pozostać identyczny), czyli kod i dane gry; poziom `narzędzia` ich nie obejmuje, choć większość zadania (lint, generatory, skrypt wydania, uprawnienia) to narzędzia, a rodzaj „narzędzia” znaczy tu tylko brak reguły ⬜. Ryzyko `wysokie`: zmiana uprawnień w `.claude/settings.json` może zatrzymać wszystkie kolejne przebiegi, a zadanie dotyka 19 plików, w tym dialogów i danych generowanych; łańcuch zatrzyma się po analizie, a diff uprawnień ogląda Roland w przeglądzie przed scaleniem. Skryptu `release.sh` agent nie uruchamia poza `--dry-run` i `9.9.9` (zatrzymanie na pierwszym kroku); wydanie robi karta „Wydanie” w dashboardzie.
 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
-Karta [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a); plan wyżej ją uwzględnia. Zostały dwie rzeczy:
-1. Scalić i domknąć task17 (`spec/2026-10-27-task17` stoi jeszcze w „Na gałęziach” jako 🧪), bo naraz może być otwarta tylko jedna gałąź `spec/*`.
-2. Uruchomić wdrożenie w terminalu (`/ai-task implement 22`), bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`. Ta sesja zrobi też płatną próbę uprawnień z pytania 2 (limit 0,5 USD).
+Karta [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a); plan wyżej ją uwzględnia. Task17 jest już scalony (aktualizacja 2026-10-27), więc została jedna rzecz:
+1. Uruchomić wdrożenie w terminalu (`/ai-task implement 22`), bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`. Ta sesja zrobi też płatną próbę uprawnień z pytania 2 (limit 0,5 USD).
 
 ## Test
-<!-- Jeśli zadanie zawiera implementację: link do docs/human-tasks/factcheck-test-XX.md -->
+Scenariusze zadania: tylko zestaw podstawowy (`unit lint dialogue`), uruchamia go serwer po wdrożeniu. Arkusz: część `## Część: task_22` arkusza builda.
 
 ## Podsumowanie
-Analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Karta decyzji jest rozstrzygnięta zgodnie z rekomendacjami: tag i push `master` gry trafiają na listę `ask`, uprawnienia sprawdza krótki przebieg w worktree zadania, `CZYTAJ_MNIE.txt` zostaje bez zmian (lint sprawdza zgodność z normą), a T7 obejmuje też wpisy notesu. Wdrożenie czeka tylko na domknięcie gałęzi task17 i idzie w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.
+Analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Karta decyzji jest rozstrzygnięta zgodnie z rekomendacjami: tag i push `master` gry trafiają na listę `ask`, uprawnienia sprawdza krótki przebieg w worktree zadania, `CZYTAJ_MNIE.txt` zostaje bez zmian (lint sprawdza zgodność z normą), a T7 obejmuje też wpisy notesu. Aktualizacja z tego samego dnia: task17 jest scalony, więc warunek startu odpada. Dopisany jest wiersz `Pliki:`, test `release.sh` uwzględnia wersję 0.5.4, a lista wspólnych plików z task_26, task_29, task_30, task_32 i task_33 wyklucza ich równoległe wdrażanie. Wdrożenie może ruszyć od razu, ale tylko w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.

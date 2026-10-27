@@ -9,6 +9,7 @@ Wymagania:
 Propozycje: K1, K8, D1 (część bez przepisywania historii) z analizy projektu (kontekst poniżej).
 
 Rodzaj: narzędzia · Zleca: Roland (czat, 2026-10-27)
+Poziom: rozgrywka
 
 Kontekst:
 Źródło: przegląd projektu `docs/analizy/propozycje-projekt.md` (agent Fable 5.1, tylko odczyt, 2026-10-27). Ten plik zostaje usunięty po przeniesieniu propozycji do planu i zadań, więc cała treść potrzebna wykonawcy jest tutaj. Numery linii pochodzą z 2026-10-27 i mogą się przesunąć. Zadanie nie zmienia rozgrywki (tylko usuwa nieużywane rzeczy i porządkuje pliki), więc nie wymaga reguły ⬜ w specyfikacji. Etap planu: „można teraz” (K1, K8), pierwsza część D1 teraz, reszta przy etapie 5 i 9. Koszt razem: S (około godziny pracy).
@@ -25,7 +26,7 @@ Kontekst:
    - *Koszt:* S. *Priorytet analizy:* niski–średni (brak licencji Sewer podnosi go, zob. D1).
 
 3. **D1 (część bez przepisywania historii). Publiczne repozytorium już rozpowszechnia pliki bez licencji.**
-   - *Problem.* Zdalne repozytorium to `github.com/Alusovvy/everhorror`; plan nazywa je publicznym (`final-plan-human-readable.md:511`, D-29; widoczności w GitHubie nie sprawdzono). W HEAD leżą: `assets/Sewer` (brak pliku licencji), `assets/sounds/cave_ambient.mp3` i `steps.mp3` (oba w buildzie), `assets/pics/sample-pic.jpg`, `assets/logo.png` („EVEROLD”, `06_oprawa.md:29–33,42,52`) oraz `addons/godot_mcp` bez LICENSE. D-10 i D-21 planują porządek „przed demem publicznym”, ale rozpowszechnianie trwa od pierwszego pusha.
+   - *Problem.* Zdalne repozytorium to `github.com/Alusovvy/everhorror`; plan nazywa je publicznym (`docs/analizy/plan.md`, etap 5 w §1; opis „Licencje” w archiwum, do którego plan odsyła; widoczności w GitHubie nie sprawdzono). W HEAD leżą: `assets/Sewer` (brak pliku licencji), `assets/sounds/cave_ambient.mp3` i `steps.mp3` (oba w buildzie), `assets/pics/sample-pic.jpg`, `assets/logo.png` („EVEROLD”, `06_oprawa.md:29–33,42,52`) oraz `addons/godot_mcp` bez LICENSE. D-10 i D-21 planują porządek „przed demem publicznym”, ale rozpowszechnianie trwa od pierwszego pusha.
    - *Propozycja na teraz.* Usunąć `Sewer` i `sample-pic.jpg` z HEAD (pkt 2), rozstrzygnąć `godot_mcp` (pkt 1). Logo zostaje do decyzji D-21 (warto wiedzieć, że jest publiczne). Wymiana obu plików `.mp3` na nagrania CC0 to etap 5 (D-10), nie to zadanie.
    - *Koszt:* S. *Priorytet analizy:* wysoki.
 
@@ -72,14 +73,18 @@ Priorytet: wysoki · Etap planu: teraz (część D1), reszta etapy 5 i 9 · Kole
 5. To zadanie nie usuwa niczego z historii gita (poza zakresem). Pliki bez licencji pozostają publiczne w starych commitach. Raport ma to powiedzieć wprost.
 
 ## Plan
-Rodzaj „narzędzia”: worktree `C:/dev/gamedev/everhorror/everhorror-wdrozenie`, gałąź `spec/<data>-task21` od `master` (najpierw trzeba sprawdzić, czy w „Na gałęziach” nie ma otwartego wiersza 🔧/🧪). Bez commita reguł w specyfikacji, wiersz w „Na gałęziach” z `—` zamiast sha7. Kroki po rozstrzygnięciu karty [2026-10-27_task21-dodatki-licencje](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md):
+Rodzaj „narzędzia”, poziom `rozgrywka` (zob. „Decyzje i założenia”): gałąź `spec/<data>-task21` od `master` we własnej kopii gałęzi `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>` (tworzy ją dashboard). Bez commita reguł w specyfikacji, wiersz w „Na gałęziach” z `—` zamiast sha7. Kroki po rozstrzygnięciu karty [2026-10-27_task21-dodatki-licencje](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md):
 1. **K1.** Usunąć `addons/beehave`, `addons/phantom_camera` (i `addons/gdUnit4`, jeśli wybór 1a). W `project.godot` usunąć ich wpisy z `[autoload]` i `[editor_plugins]` razem. W `export_presets.cfg` usunąć `docs_v2/*`, `assets/Sewer/*` (i `addons/gdUnit4/*` przy 1a).
 2. **godot_mcp** według pyt. 2: (a) `addons/godot_mcp/LICENSE` z tekstem upstreamu i adresem źródła w raporcie; (b) `git rm -r --cached addons/godot_mcp`, wpis w `.gitignore` i `exclude_filter`, usunięcie `MCPRuntimeProbe` i wtyczki z `project.godot`, folder skopiowany ręcznie do worktree, nota w `docs/agent/README.md` („MCP servers”); (c) bez zmian, punkt w raporcie jako otwarty do dema.
 3. **K8.** Usunąć `assets/Sewer/`, `assets/pics/` (cały, będzie pusty), `script/visual_interaction.gd` (+ `.uid`), `scene/visual_interaction/`. Przemianować `tools/_ui_shot_tmp.gd` → `tools/ui_shots.gd` razem z `.uid` (`git mv`, uid się nie zmienia). `interact_test`/`nav_walk_test` według punktu 3 analizy.
 4. **Dokumenty.** `docs/agent/README.md`: autoloady (:24), `visual_interaction` (:20), testy (:29), `assets/` (:33), tabela „Addons” zgodna z `addons/`. `tools/README.md`: wiersz :46, wiersz `ui_shots.gd` jako narzędzie (:57), lista wykluczeń w krokach wydania (:81). `CLAUDE.md` bez zmian (zgodnie z wymaganiem; wymienia tylko „addon autoloads” ogólnie). W raporcie gotowe zdania do `06_oprawa.md`: skreślić wiersze Sewer i `sample-pic.jpg` (:30, :33), poprawić :43 i :53, a przy 2a dopisać wiersz „Godot MCP (hybridindie) | <adres> | <licencja> | narzędzie edytora, w repo”. Spec zatwierdza Roland albo `/spec-tasks`; wykonawca go nie zmienia.
-5. **Testy** (worktree): `--import` (log do pliku: zero błędów i zero brakujących zasobów), potem `test-runner`: `unit lint dialogue day1`. Do tego jeden zrzut `tools/ui_shots.gd` (okno GPU, krótki) i raz `interact_test`/`nav_walk_test` przed decyzją z punktu 3. Pełnego zestawu nie uruchamiać.
-6. **Sprawdzenie kryteriów:** grep (poza `docs/archiwum/`, `docs/analizy/`, `docs/ai-tasks/`) bez `Beehave`, `PhantomCamera`, `Sewer`, `sample-pic`, `visual_interaction`, `_ui_shot_tmp`. Uwaga: zakończone pliki `docs/ai-tasks/done/` (task_01, task_16) i ten plik zadania z natury je zawierają, a wymaganie ich nie wyłącza. Traktuję je jako historię i nie edytuję [założenie]. Potem `convention-reviewer` na diff.
-7. **Arkusz** `docs/human-tasks/factcheck-test-21.md` w głównej kopii: gra startuje do menu, edytor otwiera projekt bez błędów brakujących wtyczek, most MCP łączy się (przy 2a/2c).
+5. **Testy:** serwer po wdrożeniu uruchamia `unit lint dialogue` i scenariusz `day1`; w trakcie pracy agent robi `--import` w kopii gałęzi (log do pliku: zero błędów i zero brakujących zasobów). Pełnego zestawu nie uruchamiać.
+   Do tego, poza scenariuszami serwera: jeden zrzut ekranu z `tools/ui_shots.gd` (okno GPU, krótki) i raz uruchomione `interact_test` oraz `nav_walk_test` przed decyzją z punktu 3.
+6. **Sprawdzenie kryteriów:** grep (poza `docs/archiwum/`, `docs/analizy/`, `docs/ai-tasks/`) bez `Beehave`, `PhantomCamera`, `Sewer`, `sample-pic`, `visual_interaction`, `_ui_shot_tmp`. Uwaga: zakończone pliki `docs/ai-tasks/done/` (task_01, task_16) i ten plik zadania z natury je zawierają, a wymaganie ich nie wyłącza. Traktuję je jako historię i nie edytuję [założenie]. Przegląd diffu robi osobny przebieg łańcucha.
+7. **Arkusz** (poziom `rozgrywka`, D-36 pkt 4): jedna część `## Część: task_21` arkusza builda: gra startuje do menu, edytor otwiera projekt bez błędów brakujących wtyczek, most MCP łączy się (przy 2a/2c).
+
+Pliki: addons/beehave, addons/phantom_camera, addons/gdUnit4, addons/godot_mcp/LICENSE, project.godot, export_presets.cfg, assets/Sewer, assets/pics, script/visual_interaction.gd, script/visual_interaction.gd.uid, scene/visual_interaction, tools/_ui_shot_tmp.gd, tools/_ui_shot_tmp.gd.uid, tools/ui_shots.gd, tools/ui_shots.gd.uid, tools/interact_test.gd, tools/nav_walk_test.gd, tools/run_tests.sh, tools/README.md, docs/agent/README.md
+Ryzyko: wysokie
 
 ### Rozstrzygnięcia karty (wznowienie analizy, 2026-10-27)
 Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md) ma status ✅ i linię „Roland, 2026-10-27 (dashboard): 2: a”.
@@ -92,6 +97,7 @@ Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/
 
 ## Decyzje i założenia
 <!-- Co agent przyjął sam, bo nie wynikało z wymagań. -->
+- **Przepływ (D-36).** Poziom `rozgrywka`: zadanie usuwa dodatki, autoloady, zasoby i scenę z `project.godot`, `export_presets.cfg` i `assets/`, czyli zmienia zawartość builda; poziom `narzędzia` nie obejmuje takich zmian, a rodzaj „narzędzia” znaczy tu tylko brak reguły ⬜ w specyfikacji. Ryzyko `wysokie`: zmiana autoloadów i usunięcie folderów może uniemożliwić start gry i testów, a więc zablokować sesję gry. `addons/gdUnit4` jest w `Pliki:` na wypadek „tak” Rolanda na jego usunięcie (domyślnie zostaje).
 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
@@ -100,7 +106,7 @@ Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/
 - opcjonalnie **„tak” na usunięcie GdUnit4** (pyt. 1 zostało bez wyboru, więc domyślnie zostaje).
 
 ## Test
-<!-- Jeśli zadanie zawiera implementację: link do docs/human-tasks/factcheck-test-XX.md -->
+Scenariusz zadania (uruchamia go serwer po wdrożeniu, poza zestawem podstawowym): `day1`. Arkusz: część `## Część: task_21` arkusza builda.
 
 ## Podsumowanie
 Analiza gotowa (2026-10-27): zależność od task_16 spełniona, plan w siedmiu krokach powyżej. Karta rozstrzygnięta (2: a): `godot_mcp` dostaje plik LICENSE z upstreamu. Tekst licencji musi dostarczyć Roland, bo przebiegi nie mają sieci. GdUnit4 bez wyboru, więc zostaje, a rekomendacja usunięcia trafi do raportu. Zadanie jest gotowe do `implement 21`.
