@@ -4,6 +4,7 @@
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis. Każda część poniżej to jedno zadanie z tego buildu; arkusz jest zamknięty, gdy zamknięte są wszystkie części.
 > Wyniki człowieka: Roland (dashboard), 2026-10-28 06:52
 > Build: f1e6f37 (Everhorror-test-task25-f1e6f37-windows.zip)
+> Zwolnienie: Roland (dashboard, 2026-10-28): Roland, czat 2026-10-28: ocena buildu test-master-0c0df0f podana w czacie, poprawki w task_39 (arkusz zwolniony, bez wpisów)
 
 ## Uwagi ogólne (wypełnia człowiek)
 
