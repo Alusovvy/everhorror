@@ -33,10 +33,9 @@ mkdir -p "$LOGS"
 
 # Known Godot exit noise and one known harmless line; everything else that logs `ERROR:` is red.
 # Keep this list short and say why each entry is here.
-ERROR_ALLOW='RID allocations of type|resources still in use at exit|Pages in use exist at exit in PagedAllocator|Parameter "material" is null|Capture not registered: .beehave.'
+ERROR_ALLOW='RID allocations of type|resources still in use at exit|Pages in use exist at exit in PagedAllocator|Parameter "material" is null'
 #  RID allocations / resources still in use / PagedAllocator: leak reports of the headless engine at exit.
 #  Parameter "material" is null: the dummy renderer at exit (material_get_instance_shader_parameters).
-#  Capture not registered: 'beehave': the Beehave autoload at every start; task_21 removes it.
 
 JOBS=1
 tests=()

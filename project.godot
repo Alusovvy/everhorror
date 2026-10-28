@@ -23,9 +23,6 @@ SaveManager="*res://script/save_manager.gd"
 GameState="*res://script/game_state.gd"
 VN="*res://script/vn.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-PhantomCameraManager="*res://addons/phantom_camera/scripts/managers/phantom_camera_manager.gd"
-BeehaveGlobalMetrics="*res://addons/beehave/metrics/beehave_global_metrics.gd"
-BeehaveGlobalDebugger="*res://addons/beehave/debug/global_debugger.gd"
 MCPRuntimeProbe="*res://addons/godot_mcp/mcp_runtime_probe.gd"
 
 [display]
@@ -39,7 +36,7 @@ project/assembly_name="everhorror"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/dialogue_manager/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/godot_mcp/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/godot_mcp/plugin.cfg")
 
 [filesystem]
 
