@@ -300,6 +300,7 @@ func _run() -> void:
 	_task14_report_after_review()
 	_task37_opening()
 	_save_fixtures()
+	_task20_play_time()
 
 	root.get_node("SaveManager").remove_test_dir()
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
@@ -556,6 +557,79 @@ func _task14_report() -> void:
 	var done: Dictionary = Report.collect(Report.ENDING_WEEK)
 	_check(bool(done["quota"]["met"]) and done["quota"]["reached_at"] != null and int(done["quota"]["reached_at"]["day"]) == 1 and done["quota"]["reached_at"]["time"] == "18:00", "12 veins at one an hour from 06:00: the quota at 18:00 (%s)" % [done["quota"]["reached_at"]])
 	_check(Report.to_markdown(done).contains("norma osiągnięta: dzień 1, 18:00"), "the Markdown says when")
+
+## task_20 (G5): real play time per day, its save and its column in the run report.
+func _task20_play_time() -> void:
+	print("--- task_20: the play-time counter advances only with a running world")
+	gs.reset()
+	_check(gs.play_ms == 0 and not gs._world_running(), "a fresh run has counted nothing, and with no gameplay scene the world is not running")
+	gs.play_tick(0.5, false)
+	_check(gs.play_ms == 0, "a paused or absent world adds nothing")
+	gs.play_tick(0.5, true)
+	_check(gs.play_ms == 500, "a running world adds the frame (500 ms)")
+	gs.play_tick(30.0, true)
+	_check(gs.play_ms == 1500, "a stall is capped at one second per frame (%d)" % gs.play_ms)
+
+	print("--- task_20: the day's play time moves into its dawn entry, a repeated dawn keeps it")
+	gs.start_next_day()
+	_check(int(gs.dawn_log[0].get("played_ms", 0)) == 1500 and gs.play_ms == 0 and not gs.dawn_log[1].has("played_ms"), "day 1's entry has 1500 ms, day 2 starts at 0")
+	gs.play_ms = 125000
+	gs.start_next_day()
+	gs.day = 2
+	gs.record_dawn()
+	gs.day = 3
+	_check(int(gs.dawn_log[1].get("played_ms", 0)) == 125000, "recording day 2's dawn again does not reset its play time")
+	gs.play_ms = 61000
+
+	print("--- task_20: the run report column and total")
+	var data: Dictionary = Report.collect(Report.ENDING_IN_PROGRESS)
+	var days: Array = data["days"]
+	_check(int(days[0]["time"]["played_ms"]) == 1500 and days[1]["time"]["played"] == "02:05" and days[2]["time"]["played"] == "01:01", "per day: 00:02, 02:05, and the live day 01:01 (%s)" % [days.map(func(d): return d["time"]["played"])])
+	_check(int(data["played_total_ms"]) == 187500 and data["played_total"] == "03:08", "the total adds the days (%s)" % data["played_total"])
+	var markdown: String = Report.to_markdown(data)
+	var time_section := markdown.get_slice("## Czas według kategorii", 1).get_slice("## Bohater o świcie", 0)
+	_check(time_section.contains("| czas realny dnia |") and time_section.contains("| 02:05 |") and time_section.contains("| 01:01 |") and time_section.contains("Razem: 03:08"), "the Markdown has the column and the total")
+	var parsed: Dictionary = JSON.parse_string(Report.to_json(data))
+	_check(int(parsed["played_total_ms"]) == 187500 and int(parsed["days"][1]["time"]["played_ms"]) == 125000, "the JSON has the milliseconds and the total")
+	gs.set_flag("opening")
+	var opening: Dictionary = Report.collect(Report.ENDING_OPENING)
+	_check(opening["ending"]["id"] == "koniec_otwarcia" and opening["played_total"] == "03:08" and Report.to_markdown(opening).contains("Razem: 03:08"), "the opening's ending report has them too")
+
+	print("--- task_20: save and load keep the counter; an old save has no data and no error")
+	var saved: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	gs.reset()
+	gs.load_state(saved)
+	_check(gs.play_ms == 61000 and int(gs.dawn_log[1].get("played_ms", 0)) == 125000 and int(gs.dawn_log[0].get("played_ms", 0)) == 1500, "play_ms and the stored days come back from JSON")
+	_check(int(JSON.parse_string(JSON.stringify(gs.save_state()))["play_ms"]) == 61000, "…and save again unchanged")
+	var old: Dictionary = saved.duplicate(true)
+	old.erase("play_ms")
+	for entry in old["dawn_log"]:
+		entry.erase("played_ms")
+	gs.load_state(old)
+	_check(gs.play_ms == -1, "a save without the field loads as \"no data\"")
+	gs.play_tick(0.5, true)
+	_check(gs.play_ms == -1, "…and the unknown part of that day is not guessed")
+	var thin: Dictionary = Report.collect(Report.ENDING_IN_PROGRESS)
+	_check(thin["played_total_ms"] == null and thin["played_total"] == "—" and thin["days"][2]["time"]["played"] == null, "the report has no play time for any day")
+	var thin_md: String = Report.to_markdown(thin)
+	_check(thin_md.contains("| czas realny dnia |") and thin_md.contains("Razem: —"), "…and says \"—\" in the column and in the total")
+	gs.start_next_day()
+	gs.play_tick(0.5, true)
+	_check(gs.play_ms == 500, "the next day counts from zero")
+	for version in [3, 4, 5, 6]:
+		var fixture = JSON.parse_string(FileAccess.get_file_as_string("res://tools/tests/fixtures/saves/v%d.json" % version))
+		gs.load_state(fixture["game_state"])
+		_check(gs.play_ms == -1 and Report.collect(Report.ENDING_IN_PROGRESS)["played_total"] == "—", "v%d: the old save reports \"—\"" % version)
+
+	print("--- task_20: a retry from the morning adds the failed attempt")
+	gs.reset()
+	gs.play_ms = 1000
+	gs.carry_play_time(2500)
+	_check(gs.play_ms == 3500, "the lost time is added to the restored day")
+	gs.play_ms = -1
+	gs.carry_play_time(2500)
+	_check(gs.play_ms == -1, "…unless the restored day has no data")
+	gs.reset()
 
 ## What the review of the first version found (ZAP-11): the quota time and the numbering of a save
 ## that already had veins, the words for women, the fever in the health table, the dash legend and

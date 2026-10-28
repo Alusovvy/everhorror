@@ -14,6 +14,15 @@ func scenario() -> void:
 	await start_world(_setup)
 	var slot_existed: bool = sm.has_save(3)
 
+	step("task_20: the play-time counter runs in the world and stops in the pause")
+	await frames(20)
+	check(gs.play_ms > 0, "the counter runs while the world does (%d ms)" % gs.play_ms)
+	paused = true
+	var frozen: int = gs.play_ms
+	await frames(20)
+	check(gs.play_ms == frozen, "…and stands still while the tree is paused")
+	paused = false
+
 	step("save, travel to the sump, take the bundle")
 	check(sm.save_game(3), "saved to slot 3")
 	check(int(sm.read_slot(3).get("version", 0)) == 6, "task_14: the save is version 6 (ZAP-12)")

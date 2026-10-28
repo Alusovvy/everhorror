@@ -65,6 +65,8 @@ const FEMININE := {
 const FEVER := "gorączka"
 const NO_DATA := "brak danych"
 const DASH := "—"
+## task_20 (G5): the time table's last column.
+const PLAYED_HEADER := "czas realny dnia"
 
 #region Categories (CZAS-16)
 
@@ -105,6 +107,8 @@ static func collect(ending: String = ENDING_IN_PROGRESS) -> Dictionary:
 		"now": {"day": current_day, "hour": GameState.hour, "time": GameState.time_text(GameState.hour)},
 		"quota": _quota_data(),
 		"days": days,
+		"played_total_ms": _played_total(days),
+		"played_total": _played_text_or_dash(_played_total(days)),
 		"people": people,
 		"veins": _vein_rows(),
 		"choices": _choices(),
@@ -160,7 +164,40 @@ static func _time_data(day: int) -> Dictionary:
 	if slept_at >= 0.0:
 		var night_at: float = GameState.DAY_START_HOUR + GameState.DAY_LENGTH_HOURS
 		unused = maxi(0, int(round((night_at - slept_at) * 60.0)))
-	return {"available": not entries.is_empty(), "minutes": minutes, "total": total, "entries": entries.size(), "unused_before_sleep_min": unused}
+	var played: Variant = _played_ms(day)
+	return {
+		"available": not entries.is_empty(), "minutes": minutes, "total": total, "entries": entries.size(), "unused_before_sleep_min": unused,
+		"played_ms": played, "played": null if played == null else played_text(int(played)),
+	}
+
+## task_20 (G5): real play time of one day in ms, or null when nobody counted it (a save from
+## before task_20, a day that was only partly played before such a save was loaded, tests with no
+## world). A finished day keeps it in its dawn_log entry; the day in progress (or the last day of
+## an ending) is still on the live counter.
+static func _played_ms(day: int) -> Variant:
+	var dawn := _dawn_for(day)
+	var stored := int(dawn.get("played_ms", 0))
+	if stored > 0:
+		return stored
+	if day == GameState.day and GameState.play_ms > 0:
+		return GameState.play_ms
+	return null
+
+## "mm:ss" (minutes may pass 59: "75:12"); a dash without data (task_20).
+static func played_text(ms: int) -> String:
+	var seconds := int(round(ms / 1000.0))
+	return "%02d:%02d" % [seconds / 60, seconds % 60]
+
+## The sum of the days that have a play time, or null when no day has one.
+static func _played_total(days: Array) -> Variant:
+	var total := 0
+	var any := false
+	for day in days:
+		var played: Variant = day.get("time", {}).get("played_ms")
+		if played != null:
+			total += int(played)
+			any = true
+	return total if any else null
 
 static func _hero_data(hero: Dictionary) -> Dictionary:
 	var health := int(hero.get("health", 0))
@@ -387,6 +424,8 @@ static func to_markdown(data: Dictionary) -> String:
 	lines.append("")
 	lines.append_array(_time_table(days))
 	lines.append("")
+	lines.append("Czas realny dnia to czas grania (mm:ss): liczy się tylko przy działającej, niezapauzowanej grze (rozmowy, mapa i notes się liczą, menu i pauza nie). Kreska (%s) oznacza brak danych (zapis sprzed tej funkcji). Razem: %s." % [DASH, _played_text_or_dash(data.get("played_total_ms"))])
+	lines.append("")
 	lines.append("## Bohater o świcie")
 	lines.append("")
 	lines.append_array(_hero_table(days))
@@ -428,6 +467,9 @@ static func to_markdown(data: Dictionary) -> String:
 	lines.append("Raport zapisała gra na tym komputerze (ZAP-11). Nic nie jest wysyłane przez sieć. Te same dane z surowymi liczbami leżą obok, w pliku .json.")
 	return "\n".join(lines) + "\n"
 
+static func _played_text_or_dash(ms: Variant) -> String:
+	return DASH if ms == null else played_text(int(ms))
+
 static func _quota_sentence(quota: Dictionary) -> String:
 	var reached: Variant = quota.get("reached_at")
 	if reached is Dictionary:
@@ -447,7 +489,7 @@ static func _table(headers: Array, rows: Array) -> Array[String]:
 static func _time_table(days: Array) -> Array[String]:
 	var headers: Array = ["Dzień"]
 	headers.append_array(CATEGORIES)
-	headers.append_array(["razem", "niewykorzystane przed snem"])
+	headers.append_array(["razem", "niewykorzystane przed snem", PLAYED_HEADER])
 	var rows: Array = []
 	for day in days:
 		var time: Dictionary = day.get("time", {})
@@ -459,8 +501,9 @@ static func _time_table(days: Array) -> Array[String]:
 			# Nothing logged: no data for a finished day, nothing yet for the day in progress.
 			var empty_text := "dzień trwa" if int(day.get("day", 0)) == _last_day(days) else NO_DATA
 			row.append(empty_text)
-			for i in headers.size() - 2:
+			for i in headers.size() - 3:
 				row.append(DASH)
+			row.append(_played_text_or_dash(time.get("played_ms")))
 			rows.append(row)
 			continue
 		var minutes: Dictionary = time.get("minutes", {})
@@ -469,6 +512,7 @@ static func _time_table(days: Array) -> Array[String]:
 		row.append(str(int(time.get("total", 0))))
 		var unused: Variant = time.get("unused_before_sleep_min")
 		row.append(str(int(unused)) if unused != null else "dzień trwa")
+		row.append(_played_text_or_dash(time.get("played_ms")))
 		rows.append(row)
 	return _table(headers, rows)
 

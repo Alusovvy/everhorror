@@ -159,7 +159,10 @@ func retry_morning() -> void:
 		go_to_main_menu()
 		return
 	_pending = _morning.duplicate(true)
+	# task_20: the failed attempt was played too, its time is added to the day (run report).
+	var lost_ms: int = GameState.play_ms
 	GameState.load_state(_pending.get("game_state", {}))
+	GameState.carry_play_time(lost_ms)
 	_change_scene(_pending["scene"])
 
 func _collect() -> Dictionary:
