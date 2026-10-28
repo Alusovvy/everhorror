@@ -56,7 +56,7 @@ func _build_quests() -> void:
 		text += "[font_size=21][color=#ffb861]%s[/color][/font_size]%s\n" % [data.title, mark]
 		text += "[font_size=14][color=#8a7f70]%s[/color][/font_size]\n" % data.giver
 		for entry_id in GameState.quests[quest_id]["entries"]:
-			text += "• %s\n" % data.entries.get(entry_id, entry_id)
+			text += "• %s\n" % GameState.quest_entry_text(data, entry_id)
 		if quest_id == &"zloza" and state == "active":
 			text += "[color=#9ec3ff]• %s.[/color]\n" % GameState.quota_text()
 		text += "\n"

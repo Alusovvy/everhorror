@@ -43,6 +43,21 @@ func _run() -> void:
 	_check(gwara == "Ty nowy? Siadej, jak chcesz. Ino mi nad gowom niy stój.", "Silesian line with the dialect on (got '%s')" % gwara)
 	gs.reset()
 
+	print("--- task_22 (T7): the quota line renders the same, with and without the dialect")
+	for dialect in [true, false]:
+		settings.silesian_dialect = dialect
+		settings.apply()
+		gs.reset()
+		gs.set_flag("met_miroslaw")
+		gs.day = 3
+		_seen.clear()
+		await _talk(mir, "start", ["Muszę iść."])
+		var quota_line := "Mirosław: Tydziyń, godo Racibor. Dwanaście żył. A potym fedrujymy na cołego." if dialect else "Mirosław: Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego."
+		_check(quota_line in _seen, "Mirosław's quota line, dialect %s" % ("on" if dialect else "off"))
+	settings.silesian_dialect = true
+	settings.apply()
+	gs.reset()
+
 	print("--- Mirosław: first talk, ask about the collapse")
 	await _talk(mir, "start", ["Co się stało z zachodnim chodnikiem?", "Muszę iść."])
 	_check(gs.has_flag("met_miroslaw"), "met_miroslaw set")
@@ -167,6 +182,7 @@ func _run() -> void:
 	await _task09()
 	await _task11()
 	await _task37()
+	await _quota_lines()
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit()
@@ -567,6 +583,38 @@ func _task11() -> void:
 	await _talk(load("res://dialogue/nasir.dialogue"), "start", ["Trzymaj się."])
 	_check(gs.has_flag("met_nasir") and _seen.any(func(t): return t.contains("pompiarz z Sułtanatu")), "Nasir met first in his fever: Anzelm says who he is")
 
+## task_22 (T7): every line that used to spell the quota by hand renders byte for byte as before
+## (standard Polish text; the miner's line is checked with and without the dialect above).
+func _quota_lines() -> void:
+	var settings = root.get_node("Settings")
+	settings.silesian_dialect = false
+	settings.apply()
+	var system: Resource = load("res://dialogue/system.dialogue")
+	var racibor: Resource = load("res://dialogue/racibor.dialogue")
+	print("--- task_22 (T7): the quota lines read as before")
+	gs.reset()
+	_seen.clear()
+	await _talk(system, "intro", [])
+	_check("Zarządca Racibor dał wam tydzień. Do wieczora siódmego dnia Kniaź chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano przyjdzie po raport wóz." in _seen, "week intro: the quota in words")
+	gs.reset()
+	gs.set_flag("met_racibor")
+	gs.set_flag("vein_rzapie")
+	gs.set_flag("vein_upadowa")
+	_seen.clear()
+	await _talk(racibor, "hub", ["Po co właściwie tu jesteśmy?", "Znam mapy dziadka.", "Mam zaznaczone żyły.", "Muszę iść."])
+	_check("Racibor: Kniaź chce po tygodniu zobaczyć dwanaście żył na mapie. Po miesiącu pierwszy wóz urobku." in _seen, "Racibor: why we are here")
+	_check("Racibor: Kniaź chce dwunastu żył do wieczora siódmego dnia. Każdą, na jaką trafisz, znacz na mapie." in _seen, "Racibor: the quest offer")
+	_check("Racibor: Tylko nie myśl, że na tym koniec. Do dwunastu jeszcze daleko." in _seen, "Racibor: the first report")
+	_seen.clear()
+	await _talk(racibor, "announcement", ["Dziadek sam zasypał upadową."])
+	_check(_seen.any(func(l): return l.begins_with("Racibor: Słuchajcie. Do wieczora siódmego dnia Kniaź chce dwunastu żył na mapie. Mamy ")), "Racibor: the announcement")
+	gs.reset()
+	gs.day = 7
+	_seen.clear()
+	await _talk(racibor, "reminder", ["Znajdę je."])
+	_check(_seen.any(func(l): return l.begins_with("Racibor: Dziś wieczorem liczę żyły.") and l.ends_with(" Kniaź chce dwunastu.")), "Racibor: the reminder on day 7")
+	gs.reset()
+
 ## task_37 (OTW-4…OTW-10): the three-day opening. Grandfather's papers with Bolko and alone, the
 ## guilt and the relief, the three ways with Mirosław and his next morning, the supper, the
 ## guards for the deferred people, the closing scene with each answer.
@@ -589,6 +637,7 @@ func _task37() -> void:
 	_seen.clear()
 	await _talk(system, "intro_opening", [])
 	_check(_seen.any(func(l): return l.contains("Za pierwsze dwie żyły obiecał odpis")), "the opening's intro names the first small job")
+	_check(_seen.any(func(l): return l.contains("Kniaź chce do końca tygodnia dwunastu żył błękitu na mapie.")), "the opening's intro spells the quota through quota_words()")
 	_check(gs.deferred(&"wszebor") and gs.deferred(&"dobrawa") and gs.deferred(&"ottokar") and not gs.deferred(&"bolko"), "who waits for later chapters")
 
 	print("--- task_37: the papers with Bolko (wrong answers loop back, cost only their 5 minutes)")

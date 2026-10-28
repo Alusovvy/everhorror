@@ -45,14 +45,14 @@ Racibor: [[Mów.|Słucham.|Do rzeczy.]]
 - Po co właściwie tu jesteśmy? [if not has_flag("rac_asked_why") /]
 	$> set_flag("rac_asked_why")
 	Racibor: Po błękit. Następca tronu szykuje się do wojny, a z błękitu kuje się ostrza, które nie tępią się latami.
-	Racibor: Kniaź chce po tygodniu zobaczyć dwanaście żył na mapie. Po miesiącu pierwszy wóz urobku.
+	Racibor: Kniaź chce po tygodniu zobaczyć {{quota_words()}} na mapie. Po miesiącu pierwszy wóz urobku.
 	Racibor: Kiedy ktoś mi opowiada o klątwach i szeptach w ścianach, pytam go, ile wozów urobku wywiózł. Zwykle wtedy milknie.
 	=> hub
 - Znam mapy dziadka. Mogę szukać dla ciebie żył. [if quest_state("zloza") == "" /]
 	$> start_quest("zloza")
 	$> give_item("kwit")
 	Racibor: Na to liczyłem. Twój dziadek znał tę kopalnię lepiej niż ktokolwiek żywy.
-	Racibor: Kniaź chce dwunastu żył do wieczora siódmego dnia. Każdą, na jaką trafisz, znacz na mapie.
+	Racibor: Kniaź chce {{quota_words("gen")}} do wieczora siódmego dnia. Każdą, na jaką trafisz, znacz na mapie.
 	Racibor: Za pierwsze dwie dostaniesz ode mnie odpis z archiwum. Raport sprzed czterdziestu lat, z czasów twojego dziadka. Wiem, że tego szukasz.
 	Racibor: I weź ten kwit. Tekla wyda ci za niego linę. Bez liny w stare chodniki nie ma co włazić.
 	if has_flag("vein_rzapie")
@@ -71,7 +71,7 @@ Racibor: [[Mów.|Słucham.|Do rzeczy.]]
 		else
 			Racibor: Nie jest źle. Na pierwszy raport starczy.
 		Racibor: Umowa to umowa.[wait=0.4] Masz. Odpis raportu sztygara sprzed czterdziestu lat. Czytaj uważnie. Ja przeczytałem trzy razy.
-		Racibor: Tylko nie myśl, że na tym koniec. Do dwunastu jeszcze daleko.
+		Racibor: Tylko nie myśl, że na tym koniec. Do {{quota_words("gen", false, false)}} jeszcze daleko.
 		$> set_flag("rac_first_report")
 		$> add_note("raport_archiwum")
 		$> quest_log("slady", "archiwum")
@@ -146,7 +146,7 @@ Racibor: [[Mów.|Słucham.|Do rzeczy.]]
 
 ~ announcement
 Racibor wstaje od stołu i stuka kubkiem w deski, aż wszyscy podnoszą głowy.
-Racibor: Słuchajcie. Do wieczora siódmego dnia Kniaź chce dwunastu żył na mapie. Mamy {{veins_mapped()}}. Resztę dopowiedzcie sobie sami.
+Racibor: Słuchajcie. Do wieczora siódmego dnia Kniaź chce {{quota_words("gen")}} na mapie. Mamy {{veins_mapped()}}. Resztę dopowiedzcie sobie sami.
 if has_flag("racibor_wants_upadowa")
 	Racibor: Najgrubsza żyła siedzi na dnie upadowej, za starym zawałem. Nasz przewodnik ją widział.
 	Racibor: Jak tylko policzymy żyły, otwieramy upadową. Mirosław, szykuj ładunki.
@@ -191,7 +191,7 @@ Racibor: To wszystko. Do roboty.
 ~ reminder
 Racibor odsuwa miskę i stuka łyżką w stół, aż wszyscy milkną.
 if day >= 7
-	Racibor: Dziś wieczorem liczę żyły. Na mapie mam {{veins_acc()}}. Kniaź chce dwunastu.
+	Racibor: Dziś wieczorem liczę żyły. Na mapie mam {{veins_acc()}}. Kniaź chce {{quota_words("gen", false, false)}}.
 	Racibor: Jutro rano przyjdzie wóz. Zabierze raport i tych, którzy zrobili swoje. Reszta może zostać na dole i szukać dalej. Na własny rachunek.
 elif veins_mapped() == 0
 	Racibor: Mamy dzień {{day}}, a na mapie ani jednej kreski. Ani jednej.

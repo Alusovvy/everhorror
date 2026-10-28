@@ -104,7 +104,7 @@ Robi się późno. Na dziś wystarczy, pora wracać na posłanie.
 ~ intro
 Zeszliście szybem wczoraj po zmroku. Lina skrzypiała przez całą drogę w dół, a na górze został tylko pusty wóz.
 Obóz rozbito w wielkiej jaskini na końcu starej kopalni. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
-Zarządca Racibor dał wam tydzień. Do wieczora siódmego dnia Kniaź chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano przyjdzie po raport wóz.
+Zarządca Racibor dał wam tydzień. Do wieczora siódmego dnia Kniaź chce mieć na mapie {{quota_words()}} błękitu. Ósmego dnia rano przyjdzie po raport wóz.
 W obozie zostali tylko zarządca, kwatermistrzyni i dwaj górnicy. Reszta ekipy od świtu kopie w chodnikach najbliżej obozu i wróci dopiero jutro. Chcesz ich poznać, to ich poszukaj.
 Pogadaj z ludźmi. Wyprawy planujesz przy stole z mapą w zagrodzie Racibora, za palisadą bez dachu. W chodnikach mapa [M] pokaże ci drogę dalej albo z powrotem. Na noc wracasz na posłanie.
 => END
@@ -113,7 +113,7 @@ Pogadaj z ludźmi. Wyprawy planujesz przy stole z mapą w zagrodzie Racibora, za
 ~ intro_opening
 Zeszliście szybem wczoraj po zmroku. Lina skrzypiała przez całą drogę w dół, a na górze został tylko pusty wóz.
 Obóz rozbito w wielkiej jaskini na końcu starej kopalni. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
-Kniaź chce do końca tygodnia dwunastu żył błękitu na mapie. Zarządca Racibor najpierw sprawdzi, czy w ogóle jesteś coś wart. Za pierwsze dwie żyły obiecał odpis z archiwum, z czasów, kiedy przepadł dziadek.
+Kniaź chce do końca tygodnia {{quota_words("gen")}} błękitu na mapie. Zarządca Racibor najpierw sprawdzi, czy w ogóle jesteś coś wart. Za pierwsze dwie żyły obiecał odpis z archiwum, z czasów, kiedy przepadł dziadek.
 Reszta ekipy kopie na zmiany w chodnikach przy obozie i na rozmowy nie ma czasu. Pogadać można z zarządcą, z kwatermistrzynią Teklą i z dwoma górnikami: starym Bolkiem, który znał dziadka, i Mirosławem od prochu.
 Wyprawy planujesz przy stole z mapą w zagrodzie Racibora, za palisadą bez dachu. W chodnikach mapa [M] pokaże ci drogę dalej albo z powrotem. Na noc wracasz na posłanie.
 => END

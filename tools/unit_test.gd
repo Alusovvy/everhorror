@@ -183,6 +183,25 @@ func _run() -> void:
 	gs.day = 7
 	_check(gs.days_left_text() == "termin mija dziś", "deadline today")
 
+	print("--- task_22 (T7): the quota in words, same text as when it was typed by hand")
+	_check(gs.QUOTA == 12, "the checks below are written for a quota of 12 (update them with D-05)")
+	_check(gs.quota_words() == "dwanaście żył" and gs.quota_words("gen") == "dwunastu żył", "quota_words: nominative and genitive")
+	_check(gs.quota_words("nom", true) == "Dwanaście żył" and gs.quota_words("gen", false, false) == "dwunastu", "quota_words: capital letter and numeral alone")
+	var zloza: QuestData = gs.QUESTS[&"zloza"]
+	_check(gs.quest_entry_text(zloza, "start") == "Kniaź chce dwunastu żył błękitu na mapie do wieczora siódmego dnia. Mam je znaleźć i zaznaczyć. Za pierwsze dwie Racibor obiecał odpis z archiwum Kniazia.", "quest entry start reads as before")
+	_check(gs.quest_entry_text(zloza, "zdane").ends_with("Do dwunastu jeszcze daleko."), "quest entry zdane reads as before")
+	_check(gs.quest_entry_text(zloza, "norma") == "Dwanaście żył. Norma Kniazia zrobiona.", "quest entry norma reads as before")
+	_check(gs.quest_entry_text(zloza, "rzapie") == zloza.entries["rzapie"] and gs.quest_entry_text(zloza, "brak") == "brak", "entries without a marker and unknown ids pass through")
+	gs.reset()
+	var toasts: Array[String] = []
+	var on_message := func(text: String) -> void: toasts.append(text)
+	gs.message.connect(on_message)
+	for vein in gs.vein_ids().slice(0, gs.QUOTA):
+		gs.set_flag("vein_" + vein)
+	gs._check_quota()  # already logged by the twelfth vein: no second toast
+	gs.message.disconnect(on_message)
+	_check(toasts.has("Dwanaście żył. Norma Kniazia zrobiona.") and toasts.count("Dwanaście żył. Norma Kniazia zrobiona.") == 1, "the quota-met toast reads as before and comes once (%d toasts in all)" % toasts.size())
+
 	print("--- The hero: bands and the wound floor")
 	gs.reset()
 	_check(gs.health_band() == "zdrowy" and gs.mind_band() == "spokojny", "start: healthy and calm")

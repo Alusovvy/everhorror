@@ -328,10 +328,193 @@ func _run() -> void:
 				print("   WARN %s:%d: the condition '%s' gates only on an item; add a quest or event guard" % [path, line_no, m.get_string(1)])
 	_warnings += item_only
 
+	_write_flag_registry(all_sources)
+	_check_quota_literals(all_sources)
+	_check_polish_literals()
+
 	print("WARNINGS: %d (flags only written %d, number before a noun %d, item-only responses %d)" % [_warnings, only_written, number_nouns, item_only])
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit(0 if _failures == 0 else 1)
+
+## T7 (task_22): the quota is one number (GameState.QUOTA, D-05), so no text spells it out. In
+## dialogue/, script/ and the story generator "dwanaście", "dwunastu" and "12 żył" are errors
+## unless the line, or the one before it, carries a `lint-quota` comment (twelve years, not veins;
+## the numeral table). Use {{quota_words()}} / GameState.quota_words() in dialogues and scripts,
+## {norma} markers in quest entries. tools/release/CZYTAJ_MNIE.txt is plain text: it may spell the
+## quota, but only as quota_words() does for the current QUOTA.
+func _check_quota_literals(all_sources: Dictionary) -> void:
+	print("--- T7: the quota is not spelled out in texts")
+	var sources := all_sources.duplicate()
+	sources["res://tools/generators/write_story_data.js"] = FileAccess.get_file_as_string("res://tools/generators/write_story_data.js")
+	var found := _quota_literal_hits(sources)
+	var hits: int = found["hits"].size()
+	var marked: int = found["marked"]
+	for hit in found["hits"]:
+		print("   LINT %s: the quota is spelled out (use quota_words() / {{quota_words()}} / a {norma} marker, or mark the line with `lint-quota`)" % hit)
+	# The rule itself: an old literal in a dialogue line is flagged, the exemption silences it (fixtures, not repo files).
+	var fixture_bad := {"res://dialogue/fixture.dialogue": "Racibor: Kniaź chce mieć na mapie dwanaście żył.\nRacibor: Do dwunastu żył daleko.\nRacibor: Mamy 12 żył.\n"}
+	var fixture_ok := {"res://dialogue/fixture.dialogue": "# lint-quota: twelve years, not veins\nNasir: Dwanaście lat w kamieniołomach.\nRacibor: Kniaź chce {{quota_words()}}.\n"}
+	_check(_quota_literal_hits(fixture_bad)["hits"].size() == 3 and _quota_literal_hits(fixture_ok)["hits"].is_empty() and _quota_literal_hits(fixture_ok)["marked"] == 1, "the T7 rule flags an old literal and honours `lint-quota` (fixtures)")
+	var readme := FileAccess.get_file_as_string("res://tools/release/CZYTAJ_MNIE.txt")
+	var expected: String = gs.quota_words("nom", false) + " błękitu"
+	var readme_ok := readme.replace("\r", "").replace("\n", " ").contains(expected)
+	if not readme_ok:
+		print("   LINT tools/release/CZYTAJ_MNIE.txt: the quota sentence no longer matches QUOTA (expected \"%s\")" % expected)
+	_check(hits == 0 and readme_ok, "no spelled-out quota (%d unmarked, %d marked `lint-quota`, CZYTAJ_MNIE %s)" % [hits, marked, "matches QUOTA" if readme_ok else "is stale"])
+
+## The T7 rule on a {path: text} dictionary: {"hits": ["path:line", …] (unmarked), "marked": n exempted}.
+func _quota_literal_hits(sources: Dictionary) -> Dictionary:
+	var re_quota := RegEx.create_from_string("[Dd]wanaście|[Dd]wunastu|12 żył")
+	var hits: Array[String] = []
+	var marked := 0
+	for path in sources:
+		if not (String(path).begins_with("res://dialogue/") or String(path).begins_with("res://script/") or String(path).ends_with("write_story_data.js")):
+			continue
+		var lines: PackedStringArray = sources[path].split("\n")
+		for i in lines.size():
+			if re_quota.search(lines[i]) == null:
+				continue
+			if lines[i].contains("lint-quota") or (i > 0 and lines[i - 1].contains("lint-quota")):
+				marked += 1
+				continue
+			hits.append("%s:%d" % [path, i + 1])
+	return {"hits": hits, "marked": marked}
+
+## K6 (task_22): Polish player text in scripts is not ready for the English version (D-09), so the
+## count of Polish string literals per file in script/ may only fall. A literal counts when it is a
+## string outside a comment and outside tr("…") and has a Polish letter (ąćęłńóśźż) or one of the
+## common Polish words below (texts without diacritics). The baseline is tools/lint_baseline.json
+## ("polish_literals": {file: count}); a rise is an error, a fall is a reminder to lower the
+## baseline. Delete the file and run the lint to write a new one.
+const POLISH_WORDS := "\\b(?:Nowe|kreski|mapie|mapa|Brak|Masz|Koniec|Wracasz|Idziesz|Zebrano|Zdobyto|Zaznaczono|Rozmowa|Zbyt|Kniazia|Racibor|godzin\\w*|minut\\w*|obozie|zyly|zyla|dzien|dnia|dni)\\b"
+
+func _check_polish_literals() -> void:
+	print("--- K6: Polish literals in script/ only fall (tools/lint_baseline.json)")
+	var re_string := RegEx.create_from_string("\"((?:[^\"\\\\]|\\\\.)*)\"")
+	var re_polish := RegEx.create_from_string("[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|" + POLISH_WORDS)
+	# `tr("…")` itself, not `str("…")` or `_tr("…")`: a word boundary before `tr(`.
+	var re_tr_call := RegEx.create_from_string("\\btr\\($")
+	var counts := {}
+	var files: Array[String] = []
+	for dir in ["res://script", "res://script/data"]:
+		for file in DirAccess.get_files_at(dir):
+			if file.ends_with(".gd"):
+				files.append(dir + "/" + file)
+	files.sort()
+	for path in files:
+		var count := 0
+		for line in FileAccess.get_file_as_string(path).split("\n"):
+			var comment_at := _comment_start(line)
+			for m in re_string.search_all(line):
+				if comment_at >= 0 and m.get_start() > comment_at:
+					continue
+				if re_tr_call.search(line.substr(0, m.get_start())) != null:
+					continue
+				if re_polish.search(m.get_string(1)) != null:
+					count += 1
+		if count > 0:
+			counts[path.trim_prefix("res://")] = count
+	var baseline_path := "res://tools/lint_baseline.json"
+	if not FileAccess.file_exists(baseline_path):
+		var out := FileAccess.open(baseline_path, FileAccess.WRITE)
+		out.store_string(JSON.stringify({"polish_literals": counts}, "\t", true) + "\n")
+		out.close()
+		print("   NOTE: tools/lint_baseline.json was missing, written from the current state (%d files)" % counts.size())
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(baseline_path))
+	var baseline: Dictionary = parsed.get("polish_literals", {}) if parsed is Dictionary else {}
+	var risen := 0
+	var total := 0
+	for file in counts:
+		total += int(counts[file])
+		if int(counts[file]) > int(baseline.get(file, 0)):
+			risen += 1
+			print("   LINT %s: %d Polish literals, baseline %d (new player text goes through tr(), K6)" % [file, counts[file], int(baseline.get(file, 0))])
+	for file in baseline:
+		if int(counts.get(file, 0)) < int(baseline[file]):
+			print("   NOTE %s: fell from %d to %d, lower the baseline in tools/lint_baseline.json" % [file, int(baseline[file]), int(counts.get(file, 0))])
+	_check(parsed is Dictionary and risen == 0, "%d Polish literals in %d scripts, none above the baseline (%d files rose)" % [total, counts.size(), risen])
+
+## Index of the `#` that starts a comment on this line (outside strings), or -1.
+func _comment_start(line: String) -> int:
+	var in_string := false
+	var i := 0
+	while i < line.length():
+		var c := line[i]
+		if in_string:
+			if c == "\\":
+				i += 1
+			elif c == "\"":
+				in_string = false
+		elif c == "\"":
+			in_string = true
+		elif c == "#":
+			return i
+		i += 1
+	return -1
+
+## K4 (task_22): reports/flags.tsv, one row per flag the sources set or read:
+## flag, set in, read in, payload (yes when the flag holds a value other than `true`), family.
+## Sorted, no line numbers and no dates, so the file (and docs/agent/flags.md made from it by
+## tools/generators/write_flags_doc.js) only changes when the flags change.
+func _write_flag_registry(all_sources: Dictionary) -> void:
+	print("--- K4: flag registry (reports/flags.tsv)")
+	var sources := all_sources.duplicate()
+	for file in DirAccess.get_files_at("res://script/data"):
+		if file.ends_with(".gd"):
+			sources["res://script/data/" + file] = FileAccess.get_file_as_string("res://script/data/" + file)
+	sources["res://tools/generators/write_world_data.js"] = FileAccess.get_file_as_string("res://tools/generators/write_world_data.js")
+	var set_patterns := ["set_flag\\(\\s*\"([^\"%+]+)\"\\s*(?:,\\s*([^)]*))?\\)", "mark_today\\(\\s*\"([^\"%+]+)\"()", "bump_flag\\(\\s*\"([^\"%+]+)\"()", "flags\\[\\s*\"([^\"%+]+)\"\\s*\\]\\s*=()", "\"on_use_flag\":\\s*\"([^\"%+]+)\"()"]
+	var read_patterns := ["has_flag\\(\\s*\"([^\"%+]+)\"", "get_flag\\(\\s*\"([^\"%+]+)\"", "earlier_day\\(\\s*\"([^\"%+]+)\"", "done_today\\(\\s*\"([^\"%+]+)\"", "\"required_flag\":\\s*\"([^\"%+]+)\"", "\"hidden_by_flag\":\\s*\"([^\"%+]+)\"", "\"flag:([^\"%+]+)\"", "\"noflag:([^\"%+]+)\""]
+	var set_in := {}
+	var read_in := {}
+	var payload := {}
+	for path in sources:
+		var short: String = String(path).trim_prefix("res://")
+		for pattern in set_patterns:
+			var re_set := RegEx.create_from_string(pattern)
+			for m in re_set.search_all(sources[path]):
+				var flag_name := m.get_string(1)
+				if not set_in.has(flag_name):
+					set_in[flag_name] = {}
+				set_in[flag_name][short] = true
+				var arg := m.get_string(2).strip_edges() if m.get_group_count() >= 2 else ""
+				if pattern.begins_with("set_flag"):
+					if arg != "" and arg != "true":
+						payload[flag_name] = true
+				elif not pattern.begins_with("flags") and not pattern.begins_with("\"on_use"):
+					payload[flag_name] = true
+		for pattern in read_patterns:
+			var re_read := RegEx.create_from_string(pattern)
+			for m in re_read.search_all(sources[path]):
+				var flag_name := m.get_string(1)
+				if not read_in.has(flag_name):
+					read_in[flag_name] = {}
+				read_in[flag_name][short] = true
+	var names := {}
+	for flag_name in set_in:
+		names[flag_name] = true
+	for flag_name in read_in:
+		names[flag_name] = true
+	var sorted_names := names.keys()
+	sorted_names.sort()
+	var rows: Array[String] = ["flag\tset_in\tread_in\tpayload\tfamily"]
+	for flag_name in sorted_names:
+		var family := ""
+		for prefix in FLAG_FAMILIES + ["first_room_", "fever_"]:
+			if String(flag_name).begins_with(prefix):
+				family = prefix
+		var set_list: Array = set_in.get(flag_name, {}).keys()
+		set_list.sort()
+		var read_list: Array = read_in.get(flag_name, {}).keys()
+		read_list.sort()
+		rows.append("%s\t%s\t%s\t%s\t%s" % [flag_name, ",".join(set_list), ",".join(read_list), "yes" if payload.has(flag_name) else "no", family])
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://reports"))
+	var file := FileAccess.open("res://reports/flags.tsv", FileAccess.WRITE)
+	_check(file != null and sorted_names.size() > 100, "reports/flags.tsv written (%d flags)" % sorted_names.size())
+	if file != null:
+		file.store_string("\n".join(rows) + "\n")
+		file.close()
 
 ## Places each NPC can have, read from the schedule scripts: every _at("<place>", …) in the
 ## NPC's CampSchedule function, plus "teren" for whoever FieldSchedule can put in the tunnels.
