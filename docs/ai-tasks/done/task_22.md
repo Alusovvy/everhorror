@@ -131,7 +131,7 @@ Co ważne dla wykonawcy:
 - Kolejność ma znaczenie: T7 dodaje polskie słowa liczebników do `game_state.gd`, więc stan bazowy K6 zapisujemy po T7.
 
 ## Plan
-Rodzaj „narzędzia”, poziom `rozgrywka` (zob. „Decyzje i założenia”), wdrożenie w terminalu, bo przebieg z dashboardu nie może zapisywać w `.claude/` (`docs/agent/run-rules.md` §1; dotyczy P1, a zadanie ma jednego wykonawcę od początku do końca): gałąź `spec/<data>-task22` od `master` we własnej kopii gałęzi `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>`. Warunek startu: karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a). W „Na gałęziach” wiersz z `—` zamiast sha7 i z `task_22` jako ID, bez wiersza „W zadaniach”. Kroki:
+Rodzaj „narzędzia”, poziom `rozgrywka` (zob. „Decyzje i założenia”), wdrożenie w terminalu, bo przebieg z dashboardu nie może zapisywać w `.claude/` (`docs/agent/run-rules.md` §1; dotyczy P1, a zadanie ma jednego wykonawcę od początku do końca): gałąź `spec/<data>-task22` od `master` we własnej kopii gałęzi `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>`. Warunek startu: karta [2026-10-27_task22-uprawnienia-i-norma](../../../../specification/zgloszenia/zamkniete/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a). W „Na gałęziach” wiersz z `—` zamiast sha7 i z `task_22` jako ID, bez wiersza „W zadaniach”. Kroki:
 
 1. **K4.**
    - `data_lint.gd` zbiera każdą ścieżkę, w której flagę ustawia się i czyta. Dochodzą źródła `script/data/*.gd` i `tools/generators/write_world_data.js`.
@@ -249,7 +249,7 @@ Zestawienie „polecenie skilla → reguła” (do uzupełnienia po zastosowaniu
 
 ## Decyzje i założenia
 <!-- Co agent przyjął sam, bo nie wynikało z wymagań. -->
-- Decyzje Rolanda: karta [2026-10-27_task22-uprawnienia-i-norma](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md), Roland, 2026-10-27 (dashboard): 1: a, 2: a, 3: a, 4: a.
+- Decyzje Rolanda: karta [2026-10-27_task22-uprawnienia-i-norma](../../../../specification/zgloszenia/zamkniete/2026-10-27_task22-uprawnienia-i-norma.md), Roland, 2026-10-27 (dashboard): 1: a, 2: a, 3: a, 4: a.
 - Przyjęte przez agenta bez pytania (do weta w przeglądzie; wymienione w karcie, sekcja „Przyjęte”):
   - zakaz `git switch` tylko w głównej kopii;
   - reguły zakazu ze spacją (`git merge *`), żeby nie łapały `merge-base`;
@@ -266,18 +266,38 @@ Zestawienie „polecenie skilla → reguła” (do uzupełnienia po zastosowaniu
 1. P1: zastosować diff z „Co zostało zrobione” w `.claude/settings.json`, zestawić polecenia skilli z regułami i zrobić płatną próbę `claude -p` (limit 0,5 USD). Bez tego zadanie jest wdrożone w 4/5.
 2. `git update-index --chmod=+x tools/release/release.sh`, potem `release.sh 0.5.3 --dry-run`, `release.sh 0.5.4 --dry-run` i `release.sh 9.9.9` (kryterium P4).
 
-Wcześniejsza treść: karta [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a); plan wyżej ją uwzględnia. Task17 jest już scalony (aktualizacja 2026-10-27), więc została jedna rzecz:
+Wcześniejsza treść: karta [2026-10-27_task22-uprawnienia-i-norma.md](../../../../specification/zgloszenia/zamkniete/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a); plan wyżej ją uwzględnia. Task17 jest już scalony (aktualizacja 2026-10-27), więc została jedna rzecz:
 1. Uruchomić wdrożenie w terminalu (`/ai-task implement 22`), bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`. Ta sesja zrobi też płatną próbę uprawnień z pytania 2 (limit 0,5 USD).
 
 ## Test
-Scenariusze zadania: tylko zestaw podstawowy (`unit lint dialogue`), uruchamia go serwer po wdrożeniu. Arkusz: część `## Część: task_22` w [factcheck-build-333b147](../human-tasks/factcheck-build-333b147.md).
+Scenariusze zadania: tylko zestaw podstawowy (`unit lint dialogue`), uruchamia go serwer po wdrożeniu. Arkusz: część `## Część: task_22` w [factcheck-build-333b147](../../human-tasks/factcheck-build-333b147.md).
 
 Wyniki agenta (kopia gałęzi, commit `333b147`):
 - `unit`: `RESULT: ALL PASSED`; `lint`: `RESULT: ALL PASSED` (WARNINGS: 20, tyle co przed zmianą); `dialogue`: `RESULT: ALL PASSED`.
 - Przed commitem był jeden czerwony przebieg `lint` (cztery trafienia reguły T7 w komentarzach pomocnika), poprawiony.
 - Pełnego zestawu nie uruchamiałem. Kroku `RULES` lintu nie było (kopia gałęzi nie ma sąsiedniej specyfikacji).
 
+## Poprawki (2026-10-28)
+Po ocenie koordynatora (zasada Rolanda „zostaje to, co nadal poprawia sytuację”), jeden wykonawca w terminalu, gałąź `spec/2026-10-28-task22`, commit scalający `1be063f` (rodzice `333b147` i `0cd8e61` z `master`).
+- **Ocena koordynatora.** P4 odpada: `tools/release/release.sh` usunięty (`git rm`, wzmianki w `tools/README.md` zdjęte). Wydanie robi karta „Wydanie” na dashboardzie, a ręcznie `tools/release/make_zip.sh`, który po scaleniu `master` robi też test eksportu (zob. „Wydanie” w `tools/README.md`). P1 (`.claude/settings.json`) przechodzi do koordynatora w terminalu i nie jest częścią tych poprawek. Zostają K4, T7 i K6.
+- **Scalenie `master`** (task_25, task_37, narzędzia źródła prawdy): konflikty tylko w `docs/agent/README.md` i `tools/README.md`. W pierwszym wzięta linia `master` o `data/` (eksport, `convert_text_resources_to_binary=false`) plus zdanie o `flags.md`; w drugim wiersz `stamp_build.js` z `master` (linia gałęzi z `release.sh` odpada razem z P4), reszta sekcji lintu i generatorów gałęzi zachowana.
+- **T7 po otwarciu.** `dialogue/system.dialogue`, węzeł `intro_opening` (task_37): „dwunastu żył błękitu” zamienione na `{{quota_words("gen")}}`, tekst dla gracza bez zmian. Nowa kontrola w `tools/dialogue_test.gd` (`_task37`): wstęp otwarcia zawiera „Kniaź chce do końca tygodnia dwunastu żył błękitu na mapie.”. Inne literały z task_37: tylko Nasir („dwunastu latach”, już oznaczone `lint-quota`). Linie Mirosława i Bolka bez zmian, więc `write_gwara.js` i `gwara_slaska.json` nietknięte.
+- **K6 po task_37.** Wzrósł tylko `script/run_report.gd` (100 → 105): etykieta `ENDING_TITLES` „Koniec otwarcia”, klucze czasu „Z Mirosławem po wybuchu” i „Nad kartką dziadka” oraz dwie wartości „obóz”. To dane raportu testerów (klucze muszą równać się etykietom czasu z dialogów, a `const` nie wywoła `tr()`), więc baza `tools/lint_baseline.json` podniesiona do 105 zamiast zmieniać zachowanie. `story_director.gd` bez wzrostu.
+- **K4.** `docs/agent/flags.md` zregenerowany (252 flagi, w tym `opening`, `opening_done`, `opening_maps`). Nowość: `node tools/generators/write_flags_doc.js --check` (nic nie zapisuje, kończy się 1, gdy plik jest nieaktualny); `tools/run_tests.sh lint` woła go po lincie (`+flags.md STALE` w linii wyniku i czerwony scenariusz). Sprawdzone: przed regeneracją lint pokazał `STALE`, po niej przeszedł. `tools/README.md` opisuje `--check`.
+- **Testy** (`tools/run_tests.sh unit lint dialogue opening day1 expedition`, kopia gałęzi po `--import`):
+  - `unit  3s  RESULT: ALL PASSED`
+  - `lint  8s  RESULT: ALL PASSED` (WARNINGS: 20, bez zmian; krok RULES pominięty, brak sąsiedniej specyfikacji w `everhorror-wt/`)
+  - `dialogue  6s  RESULT: ALL PASSED`
+  - `opening  52s  RESULT: ALL PASSED  (50.1 s)`
+  - `day1  24s  RESULT: ALL PASSED  (22.2 s)`
+  - `expedition  15s  RESULT: ALL PASSED  (13.9 s)`
+  - `tools/export_smoke.sh`: `RESULT: ALL PASSED (export smoke: day1 expedition ran from the exported pack)`.
+- **Po przeglądzie kodu** (commit `0201e9c`). Przegląd wskazał luki w pokryciu i trzy drobne wady lintu; zmiany: (1) `tools/dialogue_test.gd` (`_quota_lines`) sprawdza dosłownie wstęp tygodnia i pięć linii Racibora, a `tools/unit_test.gd` toast „Dwanaście żył. Norma Kniazia zrobiona.” (pojawia się raz); w `data_lint.gd` reguła T7 jest wydzielona do `_quota_literal_hits()` i ma test negatywny na tekstach próbnych (stary literał bez `lint-quota` jest zgłaszany, z wyjątkiem nie); (2) rejestr flag czyta też `get_flag("…")` i `earlier_day("…")`, więc `bet_target`, `hier_count`, `wall_fails` i `hrapek_meetings` mają czytających, `flags.md` zregenerowany, `--check` przechodzi; (3) K6 rozpoznaje `tr(` po granicy słowa (`str("…")` i `_tr("…")` już nie są wyjątkiem), baza `lint_baseline.json` bez zmian; (4) porównanie `CZYTAJ_MNIE.txt` usuwa też `\r`; (5) tablice liczebników w `game_state.gd` mają typ `Array[String]`. Testy `unit lint dialogue opening day1 expedition`: wszystkie `RESULT: ALL PASSED`.
+- **Arkusz.** Wiersze 1–4 części task_22 w `docs/human-tasks/factcheck-build-333b147.md` Roland sprawdził na buildzie `f1e6f37`, który nie zawierał `333b147`. Po tych poprawkach potrzebny jest nowy build i ponowne sprawdzenie tych wierszy (arkusza nie edytowałem). Wiersz 5 (`release.sh --dry-run`) jest nieaktualny, bo skrypt usunięto.
+
 ## Podsumowanie
-Wdrożenie z dashboardu (2026-10-28): K4, T7, K6 i P4 gotowe na gałęzi `spec/2026-10-28-task22` (commit `333b147`), testy `unit lint dialogue` zielone, teksty dla gracza bez zmian. P1 (`.claude/settings.json`) nie wykonane, bo przebieg z dashboardu nie może pisać w `.claude/`; diff jest w „Co zostało zrobione”. `release.sh` nieprzetestowany (strażnik nie uruchamia go bezpośrednio, brak bitu wykonywania). Obie rzeczy robi sesja terminalowa.
+Poprawki z 2026-10-28: P4 odrzucony (`release.sh` usunięty, wydanie zostaje przy karcie dashboardu i `make_zip.sh`), P1 przeszedł do koordynatora w terminalu. `master` scalony do gałęzi (commit `1be063f`); K4 (rejestr flag z flagami otwarcia plus kontrola aktualności w `lint`), T7 (wstęp otwarcia przez `quota_words()`, test w `dialogue`) i K6 (baza `run_report.gd` 105) uzupełnione. Testy `unit lint dialogue opening day1 expedition` i test eksportu zielone. Do zrobienia: nowy build i ponowne sprawdzenie wierszy 1–4 arkusza, P1.
+
+Poprzednie podsumowanie (wdrożenie z dashboardu, 2026-10-28): K4, T7, K6 i P4 gotowe na gałęzi `spec/2026-10-28-task22` (commit `333b147`), testy `unit lint dialogue` zielone, teksty dla gracza bez zmian. P1 (`.claude/settings.json`) nie wykonane, bo przebieg z dashboardu nie może pisać w `.claude/`; diff jest w „Co zostało zrobione”. `release.sh` nieprzetestowany (strażnik nie uruchamia go bezpośrednio, brak bitu wykonywania). Obie rzeczy robi sesja terminalowa.
 
 Poprzednie podsumowanie (analiza): analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Karta decyzji jest rozstrzygnięta zgodnie z rekomendacjami: tag i push `master` gry trafiają na listę `ask`, uprawnienia sprawdza krótki przebieg w worktree zadania, `CZYTAJ_MNIE.txt` zostaje bez zmian (lint sprawdza zgodność z normą), a T7 obejmuje też wpisy notesu. Aktualizacja z tego samego dnia: task17 jest scalony, więc warunek startu odpada. Dopisany jest wiersz `Pliki:`, test `release.sh` uwzględnia wersję 0.5.4, a lista wspólnych plików z task_26, task_29, task_30, task_32 i task_33 wyklucza ich równoległe wdrażanie. Wdrożenie może ruszyć od razu, ale tylko w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.

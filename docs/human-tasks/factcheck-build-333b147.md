@@ -1,6 +1,6 @@
 # Build 333b147: arkusz do ogrania
 
-> Zadania: [task_22](../ai-tasks/task_22.md), [task_25](../ai-tasks/done/task_25.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task22`
+> Zadania: [task_22](../ai-tasks/done/task_22.md), [task_25](../ai-tasks/done/task_25.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task22`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis. Każda część poniżej to jedno zadanie z tego buildu; arkusz jest zamknięty, gdy zamknięte są wszystkie części.
 > Wyniki człowieka: Roland (dashboard), 2026-10-28 06:52
 > Build: f1e6f37 (Everhorror-test-task25-f1e6f37-windows.zip)

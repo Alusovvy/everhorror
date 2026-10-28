@@ -23,6 +23,7 @@ Wpisy zadań domkniętych po 0.5.4 (dopisuje je domknięcie zadania). Przy wydan
 
 ### Zmienione
 - Wydana gra (ZIP) nie uruchamia już nieużywanych dodatków Beehave i Phantom Camera, a z paczki zniknęły nieużywane pliki: folder Sewer, przykładowe zdjęcie i prototyp interakcji. Rozgrywka bez zmian.
+- Liczba żył w dialogach i wpisach zadań składa się teraz z jednej funkcji (`quota_words()`), tekst dla gracza jest ten sam. Narzędzia dla twórców: rejestr flag (`docs/agent/flags.md`) i kontrole lintu (liczba żył, polskie literały w skryptach).
 
 ## [0.5.4] - 2026-10-27
 
