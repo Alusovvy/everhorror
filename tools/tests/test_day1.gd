@@ -56,8 +56,11 @@ func scenario() -> void:
 	await converse("Miroslaw", ["Mam dla ciebie lonty", "Wysadź zawał na zachodzie. (4 h)"])
 	check(gs.has_flag("west_blasted") and is_equal_approx(gs.hour, 16.0), "west blasted, 16:00 (%s)" % gs.clock_text())
 	check(world.get_node("Camp/WestSegment/BlastDebris").visible, "blast debris visible")
-	await converse("Miroslaw", ["Jak się trzymasz?", "Posiedzę z tobą chwilę.", "Muszę iść."])
-	check(gs.has_flag("mir_comforted"), "Mirosław comforted (sanity %d)" % gs.sanity(&"miroslaw"))
+	# task_37 (OTW-7): one of three ways, an hour with him.
+	var before_comfort: float = gs.hour
+	await converse("Miroslaw", ["Jak się trzymasz?", "Posiedzę z tobą w ciszy.", "Muszę iść."])
+	check(gs.has_flag("mir_comforted") and String(gs.get_flag("mir_support", "")) == "cisza", "Mirosław comforted, quietly (sanity %d)" % gs.sanity(&"miroslaw"))
+	check(gs.hour >= before_comfort + 1.0, "the hour with him (%s)" % gs.clock_text())
 	gs.advance_time(18.5 - gs.hour, "Do kolacji")
 	await wait_idle()
 	check(gs.npc_place(&"miroslaw") == "ognisko", "supper: Mirosław back by the fire")

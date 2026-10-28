@@ -55,6 +55,19 @@ Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
 	Bolko: Że siedzą w skale. Zamknięci jak chleb w piecu, co się nigdy nie dopiecze.
 	Bolko: I że jak ich kto obudzi, to lepiej, żeby był już daleko stąd.
 	=> hub
+- Usiądźmy nad kartką dziadka. (1 h) [if opening() and has_note("szyfr") and has_note("klucz") and not has_flag("deciphered") and rep("bolko") >= 0 /]
+	=> papers
+- Byłem w upadowej. To nie był twój stempel. [if opening() and has_flag("bolko_guilt") and has_flag("saw_charge") and not has_flag("bolko_relieved") /]
+	$> set_flag("bolko_relieved")
+	$> set_flag("bolko_relieved_day", day)
+	Opowiadasz mu o zawale na dnie: o sadzy na kamieniach, o klepkach z beczki, o stemplach nad zawałem, które stoją całe.
+	Bolko słucha z zamkniętymi oczami. Długo nic nie mówi.
+	Bolko: Całe stoją?[wait=0.4] Ten mój krzywy też?
+	Bolko: Czyli to nie strop. Ktoś to zasypał prochem. Ktoś, kto chciał, żeby zasypało.
+	Bolko: Czterdzieści lat nosiłem to jak kamień w kieszeni. A teraz nie wiem, czy mi lżej. Bo jak nie mój stempel, to kto? I po co?
+	$> change_rep("bolko", 5)
+	$> change_sanity("bolko", 4)
+	=> hub
 - Znalazłem kartkę zapisaną szyfrem dziadka. [if has_note("szyfr") and not has_flag("bolko_hint") /]
 	if rep("bolko") >= 5
 		Bolko: Dawaj.[wait=0.4] Jego ręka, nie ma dwóch zdań.
@@ -72,7 +85,7 @@ Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
 	Bolko: Mirosław wysadziłby i samego Kniazia, gdyby mu dać dość prochu.[wait=0.3] Porządny z niego chłop, tylko z ogniem ma na pieńku.
 	Bolko: Jak już huknie, posiedź z nim potem trochę. Wiem, co mówię.
 	=> hub
-- Była tu kiedyś jakaś kaplica? [if day >= 2 and rep("bolko") >= 5 and not has_flag("bolko_told_chapel") /]
+- Była tu kiedyś jakaś kaplica? [if day >= 2 and not opening() and rep("bolko") >= 5 and not has_flag("bolko_told_chapel") /]
 	$> set_flag("bolko_told_chapel")
 	$> set_flag("kaplica_known")
 	Bolko: Była. Pod jaskinią za Starą sztolnią, za wąskim przejściem. Chodziło się tam zapalić lampkę przed szychtą.
@@ -82,7 +95,7 @@ Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
 	$> set_flag("bolko_asked_tekla")
 	Bolko: Dobra baba. Kaszę gotuje taką, że łyżka w niej stoi. Tylko wszystko liczy dwa razy, a sprzedaje trzy.
 	=> hub
-- Co sądzisz o tej z Initium? [if day >= 2 and not has_flag("bolko_asked_dobrawa") /]
+- Co sądzisz o tej z Initium? [if day >= 2 and not deferred("dobrawa") and not has_flag("bolko_asked_dobrawa") /]
 	$> set_flag("bolko_asked_dobrawa")
 	Bolko: Maska, rękawice, a oczy jak u topielca. Drudzy w kopalni to nigdy nic dobrego.
 	Bolko: Nie podchodź do niej, synek. I nie dawaj jej niczego, co znajdziesz na dole.
@@ -101,7 +114,15 @@ Bolko: [[No?|Czego ci trzeba?|Pytaj, póki mam cierpliwość.]]
 	=> END
 
 ~ day2
-if rep("bolko") >= 10
+if has_flag("bolko_guilt") and not has_flag("bolko_relieved") and not has_flag("bolko_guilt_said") and rep("bolko") >= 0
+	$> set_flag("bolko_guilt_said")
+	Bolko: Nagadałem ci o tym stemplu. Stary człowiek, za dużo gada nad kartkami.
+	Bolko: Ale jak będziesz w upadowej, patrz na stemple. I powiedz mi potem, co widziałeś.
+	# The stempel talk must not swallow the day-2 secret of a trusting Bolko.
+	if rep("bolko") >= 10
+		Bolko: Ostatniego dnia, zanim zszedł, powiedział mi: jak wnuk tu kiedyś trafi, niech za błękitem nie idzie. Myślałem, że żartuje.
+		$> set_flag("bolko_day2_secret")
+elif rep("bolko") >= 10
 	Bolko: Wstałeś? To dobrze. Całą noc oka nie zmrużyłem, dziadek twój mi po głowie chodził.
 	Bolko: Ostatniego dnia, zanim zszedł, powiedział mi: jak wnuk tu kiedyś trafi, niech za błękitem nie idzie. Myślałem, że żartuje.
 	$> set_flag("bolko_day2_secret")
@@ -119,7 +140,14 @@ if rep("bolko") < 0
 	=> END
 if not done_today("bolko_greet")
 	$> mark_today("bolko_greet")
-	if has_flag("bolko_knows_fate") and not has_flag("bolko_lamp_said")
+	if has_flag("bolko_relieved") and earlier_day("bolko_relieved_day") and not has_flag("bolko_relieved_said")
+		$> set_flag("bolko_relieved_said")
+		Bolko: Spałem dziś jak kamień. Pierwszy raz od czterdziestu lat nie śniły mi się stemple.
+	elif has_flag("bolko_guilt") and not has_flag("bolko_relieved") and not has_flag("bolko_guilt_said")
+		$> set_flag("bolko_guilt_said")
+		Bolko: Nagadałem ci o tym stemplu. Stary człowiek, za dużo gada nad kartkami.
+		Bolko: Ale jak będziesz w upadowej, patrz na stemple. I powiedz mi potem, co widziałeś.
+	elif has_flag("bolko_knows_fate") and not has_flag("bolko_lamp_said")
 		$> set_flag("bolko_lamp_said")
 		Bolko: Całą noc myślałem o twoim dziadku. Zapalę mu lampkę w kaplicy. Tak się kiedyś robiło.
 	elif has_flag("plan_upadowa") and day == 3
@@ -131,3 +159,80 @@ if not done_today("bolko_greet")
 	else
 		Bolko: [[Żyjesz jeszcze? To dobrze.|Nie łaź dziś za daleko, coś mi w kościach strzyka.|Znowu ty. Siadaj, jak chcesz.]]
 => hub
+
+# task_37 (OTW-6): grandfather's papers with Bolko, instead of the reading in a dream. Three small
+# steps; a wrong answer costs only its five minutes, Bolko puts the hero back on track.
+~ papers
+$> set_flag("papers_with_bolko")
+$> advance_time(1, "Nad kartką dziadka")
+Bolko odsuwa miskę i rozkłada na skrzyni kartkę dziadka. Ty kładziesz obok deskę z zawału.
+Bolko: Deska z alfabetem. Dwa rzędy, dolny przesunięty. Twój dziadek tak się bawił, jak mu się nudziło po szychcie.
+=> papers_row
+
+~ papers_row
+Górny rząd na desce idzie zwyczajnie, od A. Dolny zaczyna się siedem liter dalej. Litery na kartce są drobne i pochyłe, jak zawsze u dziadka.
+- Szukam liter z kartki w dolnym rzędzie i czytam, co stoi nad nimi.
+	Pierwsze słowo wychodzi od razu. Potem drugie. Bolko mruczy pod nosem, jakby liczył stemple.
+	Bolko: No. Tak to się czyta.
+	=> papers_word
+- Szukam liter z kartki w górnym rzędzie i czytam dolny.
+	Wychodzi z tego bełkot: same spółgłoski, jak kaszel.
+	Bolko: Odwrotnie, synek. Klucz zostaje na górze, a wiadomość schodzi w dół. Tak mawiał.
+	=> papers_row
+- Czytam co drugą literę.
+	Po trzech linijkach masz garść liter, które nic nie znaczą.
+	Bolko: Nie kombinuj. Twój dziadek był sprytny, ale nie złośliwy. Dwa rzędy, siedem liter. Tyle.
+	=> papers_row
+
+~ papers_word
+Zdania układają się powoli. „Błękit nie bierze się ze skały. On rośnie z Nich. Każda tona, którą wywozimy na górę, to kawałek Ich ___.” Ostatnie słowo rozmazała woda.
+Bolko: Rozmyte. Co tam mogło stać?
+- „…kawałek Ich snu.”
+	Bolko długo milczy.
+	Bolko: Starzy gadali, że w skale ktoś śpi. Ja tam w bajki nie wierzę. Ale pasuje.
+	=> papers_route
+- „…kawałek Ich krwi.”
+	Bolko: Krew krzepnie, synek. A ten błękit świeci i rośnie. Coś tu nie gra.
+	Przypominasz sobie ściany w Starej sztolni. Światło przygasało i wracało, równo, jak oddech.
+	=> papers_word
+- „…kawałek Ich gniewu.”
+	Bolko: Gniew to raz-dwa i po wszystkim. A to rośnie latami, po cichu.
+	Przypominasz sobie ściany w Starej sztolni. Światło przygasało i wracało, równo, jak oddech.
+	=> papers_word
+
+~ papers_route
+Ostatnie zdania są krótsze od innych. „Nie schodźcie niżej, niż musicie. Ja zejdę, bo ktoś musi Ich zobaczyć, zanim Oni zobaczą nas.”
+Bolko: Zejdzie. Tylko którędy?
+- Upadową.
+	if has_note("raport_archiwum")
+		Raport z archiwum mówi o zasypanym zejściu do upadowej. Na mapie dziadka są przy niej trzy grube kreski. Wszystko się zgadza.
+	else
+		Na mapie dziadka przy upadowej są trzy grube kreski i nic więcej. Nigdzie indziej nie schodzi się tak stromo w dół.
+	=> papers_done
+- Starym szybem.
+	Bolko: Szybem schodziły zapasy, nie ludzie. Pomyśl, gdzie on chodził najczęściej.
+	Patrzysz na mapę dziadka. Przy zachodnim chodniku podwójna kreska, a dalej, w dół, trzy grube kreski. Upadowa.
+	=> papers_route
+- Zachodnim chodnikiem, dalej na zachód.
+	Bolko: Chodnik idzie płasko jak stół. To nie jest „niżej”.
+	Patrzysz na mapę dziadka. Przy zachodnim chodniku podwójna kreska, a dalej, w dół, trzy grube kreski. Upadowa.
+	=> papers_route
+
+~ papers_done
+$> add_note("odszyfrowana")
+$> quest_log("slady", "odszyfrowane")
+$> quest_log("slady", "nizej")
+$> set_flag("deciphered")
+$> set_flag("bolko_guilt")
+Bolko: Upadowa.[wait=0.4] Czterdzieści lat myślałem, że go tam przygniotło. Przez mój stempel.
+Bolko: Stawiałem stemple na dnie upadowej, nad zejściem w dół, dzień przed tym, jak przepadł. Jeden stał krzywo, wiedziałem o tym. Mówiłem sobie: jutro poprawię.
+Bolko: A jutra nie było. Jak się zasypało, to wiedziałem, czyja to wina. Nikomu nie powiedziałem.
+- To nie musiała być twoja wina.
+	$> change_rep("bolko", 3)
+	Bolko: Musiała, nie musiała. Przez czterdzieści lat człowiek się przyzwyczaja.
+- Dlaczego mówisz mi to dopiero teraz?
+	Bolko: Bo dopiero teraz ktoś czyta jego pismo. Mnie się to przez czterdzieści lat nie udało.
+- Nic nie mówisz.
+	Bolko składa kartkę na czworo i oddaje ci ją, nie patrząc w oczy.
+Bolko: Jak pójdziesz do upadowej, patrz na stemple. I powiedz mi potem, co widziałeś. Prawdę.
+=> END

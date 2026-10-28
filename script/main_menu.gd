@@ -3,6 +3,7 @@ extends Control
 @onready var logo: TextureRect = $Center/Content/Logo
 @onready var main_buttons: VBoxContainer = $Center/Content/MainButtons
 @onready var start_button: Button = $Center/Content/MainButtons/StartButton
+@onready var full_week_button: Button = $Center/Content/MainButtons/FullWeekButton
 @onready var options_button: Button = $Center/Content/MainButtons/OptionsButton
 @onready var load_button: Button = $Center/Content/MainButtons/LoadButton
 @onready var exit_button: Button = $Center/Content/MainButtons/ExitButton
@@ -14,7 +15,9 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	# UI-6: "0.5.3 · spec 27e91e7", dimmed, bottom right.
 	version_label.text = BuildInfo.label()
+	# task_37 (OTW-1): START is the three-day opening, the old week stays one entry below.
 	start_button.pressed.connect(SaveManager.new_game)
+	full_week_button.pressed.connect(SaveManager.new_game.bind(true))
 	options_button.pressed.connect(_open_options)
 	load_button.pressed.connect(_open_load)
 	exit_button.pressed.connect(get_tree().quit)
@@ -22,9 +25,9 @@ func _ready() -> void:
 	save_slots_panel.back_pressed.connect(_show_main)
 	_show_main()
 	_fade_in_logo()
-	# Testing aid: "Everhorror.exe -- --new-game" skips the menu.
+	# Testing aid: "Everhorror.exe -- --new-game" skips the menu ("--full-week" for the old week).
 	if "--new-game" in OS.get_cmdline_user_args():
-		SaveManager.new_game.call_deferred()
+		SaveManager.new_game.call_deferred("--full-week" in OS.get_cmdline_user_args())
 
 func _fade_in_logo() -> void:
 	logo.modulate.a = 0.0

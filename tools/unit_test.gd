@@ -298,6 +298,7 @@ func _run() -> void:
 	_task14_logs_and_categories()
 	_task14_report()
 	_task14_report_after_review()
+	_task37_opening()
 	_save_fixtures()
 
 	root.get_node("SaveManager").remove_test_dir()
@@ -661,6 +662,131 @@ func _row_cells(section: String, name: String) -> Array:
 
 #endregion
 
+#region task_37
+
+## OTW-1…OTW-3, OTW-6, OTW-9: who takes part in the opening, the three places, the nights that
+## leave the deferred people alone and read nothing by themselves, when the closing scene is due.
+func director_board() -> String:
+	var director = Story.new()
+	var board: String = director._morning_subtitle()
+	director.free()
+	return board
+
+func _task37_opening() -> void:
+	print("--- task_37: the three-day opening")
+	var Camp = load("res://script/camp_schedule.gd")
+	var Field = load("res://script/field_schedule.gd")
+	gs.reset()
+	_check(not gs.opening() and not gs.deferred(&"wszebor") and gs.has_arrived(&"wszebor"), "a reset alone is the full week")
+	gs.set_flag("opening")
+	_check(gs.opening(), "the flag makes it the opening")
+	for id in [&"wszebor", &"nasir", &"hagiwara", &"sobek", &"anzelm", &"dobrawa", &"hrapek", &"sabina", &"ottokar", &"hieronim", &"welf"]:
+		_check(gs.deferred(id) and not gs.has_arrived(id) and not gs.in_camp_today(id) and Camp.placement(id).is_empty(), "%s waits for a later chapter" % id)
+	for id in [&"racibor", &"bolko", &"miroslaw", &"tekla"]:
+		_check(not gs.deferred(id) and gs.in_camp_today(id), "%s takes part" % id)
+	_check(not gs.away_first_day(&"sobek") and Field.placement(&"sobek", &"east").is_empty(), "no day-1 shift in the opening")
+	gs.set_flag("drudzy_met")
+	_check(not gs.has_arrived(&"ottokar"), "meeting Exitium does not bring Ottokar into the opening's nights")
+	gs.clear_flag("drudzy_met")
+	_check(Ex.in_chapter(&"east") and Ex.in_chapter(&"west") and Ex.in_chapter(&"upadowa") and Ex.in_chapter(Ex.CAMP), "the opening's places")
+	_check(not Ex.in_chapter(&"rzapie") and not Ex.is_known(&"rzapie") and Ex.own_lock(&"kuznia") != "", "the sump and the forge wait")
+	gs.set_flag("visited_west")
+	gs.set_flag("west_blasted")
+	gs.give_item("lina")
+	var known: Array = Ex.known_places()
+	_check(known.has(&"upadowa") and not known.has(&"kuznia"), "past the west: the decline, not the forge (%s)" % str(known))
+	_check(Ex.route_lock(Ex.path(Ex.CAMP, &"upadowa")) == "", "the decline is reachable with the rope")
+	gs.set_flag("hrapek_free")
+	gs.day = 3
+	_check(Story.hrapek_due() == "", "no Hrapek in the opening")
+
+	print("--- task_37: the opening's nights")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.add_note(&"szyfr")
+	gs.add_note(&"klucz")
+	var director = Story.new()
+	var before := {}
+	for id in [&"wszebor", &"nasir", &"dobrawa", &"anzelm"]:
+		before[id] = gs.sanity(id)
+	for night in [1, 2, 3]:
+		gs.day = night
+		director._resolve_night()
+	_check(not gs.has_flag("deciphered") and not gs.has_note(&"odszyfrowana"), "the papers are never read in the night")
+	_check(not gs.has_fever(&"nasir") and not gs.has_flag("nasir_fever_started"), "no fever for Nasir")
+	for id in before:
+		_check(gs.sanity(id) == before[id], "%s keeps the sanity through three nights" % id)
+	gs.reset()
+	gs.add_note(&"szyfr")
+	gs.add_note(&"klucz")
+	gs.day = 1
+	director._resolve_night()
+	_check(gs.has_flag("deciphered"), "the full week still reads it in the night")
+
+	print("--- task_37: when the closing scene is due")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.day = 2
+	gs.hour = 21.0
+	_check(not director._opening_finale_due() and not director._opening_finale_due(true), "not on day 2")
+	gs.day = 3
+	gs.hour = 17.5
+	_check(not director._opening_finale_due() and director._opening_finale_due(true), "day 3, 17:30: only at the bed")
+	gs.hour = 18.0
+	_check(director._opening_finale_due(), "day 3, 18:00 in the camp")
+	gs.set_flag("location", "east")
+	_check(not director._opening_finale_due(), "not while away")
+	gs.clear_flag("location")
+	gs.set_flag("opening_done")
+	_check(not director._opening_finale_due(true), "only once")
+	gs.reset()
+	gs.day = 3
+	gs.hour = 19.0
+	_check(not director._opening_finale_due(true), "never in the full week")
+	director.free()
+
+	print("--- task_37: the morning board of day 2, supper only until 20:00, the report's variant")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.day = 2
+	var board: String = director_board()
+	_check(board == "Kocioł Tekli dymi od świtu. Przy szybie ktoś już klnie na zimno." and not board.contains("Dobraw"), "day 2 in the opening: the board never mentions Dobrawa (%s)" % board)
+	gs.reset()
+	gs.day = 2
+	_check(director_board() == "Nocą szybem zjechał ktoś nowy.", "the full week keeps its board")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.day = 3
+	gs.hour = 19.5
+	_check(Camp.placement(&"tekla").get("place", "") == "kuchnia", "19:30: Tekla at the kitchen (supper)")
+	gs.hour = 20.0
+	_check(Camp.placement(&"tekla").get("place", "") != "kuchnia", "20:00: no more supper at the kitchen")
+	gs.reset()
+	gs.set_flag("opening")
+	_check(Report.collect().get("wariant", "") == "otwarcie", "the run report says it is the opening")
+	gs.reset()
+	_check(Report.collect().get("wariant", "") == "tydzien", "…and the week")
+
+	print("--- task_37: the main menu: START is the opening, FULL WEEK the old week")
+	var menu: Control = load("res://scene/main_menu.tscn").instantiate()
+	root.add_child(menu)
+	var start_calls: Array = menu.start_button.pressed.get_connections().map(func(c): return c["callable"])
+	var week_calls: Array = menu.full_week_button.pressed.get_connections().map(func(c): return c["callable"])
+	_check(start_calls.any(func(c: Callable): return c.get_method() == &"new_game" and c.get_bound_arguments().is_empty()), "START calls new_game() (the opening)")
+	_check(week_calls.any(func(c: Callable): return c.get_method() == &"new_game" and c.get_bound_arguments() == [true]), "FULL WEEK calls new_game(true) (the week)")
+	root.remove_child(menu)
+	menu.free()
+
+	print("--- task_37: earlier_day()")
+	gs.reset()
+	gs.set_flag("mir_support_day", 1)
+	_check(not gs.earlier_day("mir_support_day") and not gs.earlier_day("nothing_here"), "same day / no flag: not earlier")
+	gs.day = 2
+	_check(gs.earlier_day("mir_support_day"), "a day later: earlier")
+	gs.reset()
+
+#endregion
+
 func _check(ok: bool, what: String) -> void:
 	print("   [%s] %s" % ["OK" if ok else "FAIL", what])
 	if not ok:
@@ -682,6 +808,7 @@ func _save_fixtures() -> void:
 		var state: Dictionary = fixture["game_state"]
 		gs.reset()
 		gs.load_state(state)
+		_check(not gs.opening() and not gs.deferred(&"wszebor") and Ex.in_chapter(&"rzapie"), "v%d: a save without the flag plays the full week" % version)
 		var again: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
 		_check(int(again["day"]) == int(state["day"]) and is_equal_approx(float(again["hour"]), float(state["hour"])), "v%d: day %d, hour %s" % [version, state["day"], state["hour"]])
 		for key in ["flags", "items", "notes", "quests", "npcs", "expedition"]:

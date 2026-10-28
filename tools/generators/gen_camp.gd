@@ -426,7 +426,9 @@ func _storage(camp: Node3D) -> void:
 	add(store, P + "Bag.gltf", Vector3(17.7, 0.0, 4.2), 110.0)
 	# tools on a workbench against the rock, next to the scaffold
 	var bench := add(store, P + "Workbench.gltf", Vector3(21.8, 0.0, 5.45), 180.0, 1.0, "ToolBench")
-	look(bench, "Narzędzia", "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór, a Wszebor co rano mówi, że to miękkie jaksarskie żelazo i szkoda osełki.", true)
+	var bench_look := look(bench, "Narzędzia", "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór, a Wszebor co rano mówi, że to miękkie jaksarskie żelazo i szkoda osełki.", true)
+	# task_37 (OTW-2): the opening has nobody by the name of Wszebor yet.
+	bench_look.set("opening_description", "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór i mruczy, że żelazo jest miękkie, a osełki szkoda.")
 	var pick := add(store, P + "Pickaxe_Bronze.gltf", Vector3(21.45, 0.9, 5.45), 0.0, 1.0)
 	pick.basis = Basis(Vector3.UP, 0.4 + PI / 2) * Basis(Vector3.RIGHT, PI / 2)
 	var axe := add(store, P + "Axe_Bronze.gltf", Vector3(22.35, 0.9, 5.4), 0.0, 1.0)
@@ -485,7 +487,9 @@ func _command(camp: Node3D) -> void:
 	candle(camp, P + "CandleStick_Triple.gltf", MAP + Vector3(-1.05, TABLE_TOP, -0.25), 1.4, 5.0)
 	add(camp, P + "Chair_1.gltf", MAP + Vector3(0.95, 0.0, -1.45), 0.0)
 	var ledger := add(camp, P + "BookStand.gltf", Vector3(27.5, 0.0, -4.3), -60.0, 1.0, "Ledger")
-	look(ledger, "Księga zarządcy", "Równe rubryki, pisane drobnym, starannym pismem Hagiwary: ludzie, zapasy, urobek, żyły. Przy urobku na razie same zera. Na ostatniej stronie, ręką Racibora: „Kniaź czeka”.", true)
+	var ledger_look := look(ledger, "Księga zarządcy", "Równe rubryki, pisane drobnym, starannym pismem Hagiwary: ludzie, zapasy, urobek, żyły. Przy urobku na razie same zera. Na ostatniej stronie, ręką Racibora: „Kniaź czeka”.", true)
+	# task_37 (OTW-2): the opening has no Hagiwara yet.
+	ledger_look.set("opening_description", "Równe rubryki, pisane drobnym, starannym pismem: ludzie, zapasy, urobek, żyły. Przy urobku na razie same zera. Na ostatniej stronie, ręką Racibora: „Kniaź czeka”.")
 	# the banner hangs from a crossbar behind him
 	post(pen, Vector3(MAP.x - 0.8, 0, -7.5), 3.6)
 	post(pen, Vector3(MAP.x + 0.8, 0, -7.5), 3.6)
@@ -527,7 +531,9 @@ func _infirmary(camp: Node3D, cloth: Node3D) -> void:
 	var room := group(camp, "Infirmary")
 	add(cloth, K + "bedroll.glb", Vector3(3.6, 0.0, -7.3), 90.0, 3.2, "SickBedroll")
 	var chest := add(room, P + "Crate_Wooden.gltf", Vector3(5.45, 0.0, -7.55), 10.0, 0.85, "HerbCrate")
-	look(chest, "Skrzynka Anzelma", "Zioła w płóciennych woreczkach, każdy podpisany drobnym pismem. Bandaże wygotowane i zwinięte w równe rolki. Na wieku wyryty płomień, a przez płomień ktoś przeciągnął nożem krechę.", true)
+	var chest_look := look(chest, "Skrzynka Anzelma", "Zioła w płóciennych woreczkach, każdy podpisany drobnym pismem. Bandaże wygotowane i zwinięte w równe rolki. Na wieku wyryty płomień, a przez płomień ktoś przeciągnął nożem krechę.", true)
+	# task_37 (OTW-2): the opening has no brother Anzelm yet; the text itself names nobody.
+	chest_look.set("opening_name", "Skrzynka z ziołami")
 	add(room, P + "SmallBottles_1.gltf", Vector3(5.45, 0.72, -7.55), 20.0)
 	add(room, P + "Potion_2.gltf", Vector3(5.8, 0.72, -7.35), 0.0)
 	add(room, P + "Bucket_Wooden_1.gltf", Vector3(6.2, 0.0, -6.9), 0.0)
@@ -540,7 +546,10 @@ func _scribe_corner(camp: Node3D) -> void:
 	var corner := group(camp, "ScribeCorner")
 	add(corner, P + "Stool.gltf", SCRIBE_STOOL, 0.0)
 	var desk := add(corner, P + "Crate_Wooden.gltf", SCRIBE_DESK, -8.0, 0.8, "TeaCrate")
-	look(desk, "Kącik Hagiwary", "Skrzynia zamiast stołu. Na niej kubek z naparem, który Hagiwara nazywa herbatą, pędzelek, kamień do rozcierania tuszu i zeszyt z wierszami. Wiersze są krótkie. Każdy o ciemności.", true)
+	var desk_look := look(desk, "Kącik Hagiwary", "Skrzynia zamiast stołu. Na niej kubek z naparem, który Hagiwara nazywa herbatą, pędzelek, kamień do rozcierania tuszu i zeszyt z wierszami. Wiersze są krótkie. Każdy o ciemności.", true)
+	# task_37 (OTW-2): the opening has no Hagiwara yet.
+	desk_look.set("opening_name", "Skrzynia w kącie")
+	desk_look.set("opening_description", "Skrzynia zamiast stołu. Na niej kubek z naparem, pędzelek, kamień do rozcierania tuszu i zeszyt z wierszami. Wiersze są krótkie. Każdy o ciemności.")
 	add(corner, P + "Mug.gltf", SCRIBE_DESK + Vector3(-0.1, 0.7, 0.15), 0.0)
 	add(corner, P + "Book_5.gltf", SCRIBE_DESK + Vector3(0.15, 0.7, -0.15), 60.0)
 	candle(corner, P + "CandleStick.gltf", SCRIBE_DESK + Vector3(0.1, 0.7, 0.3), 0.7, 3.5)

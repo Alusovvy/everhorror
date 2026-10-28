@@ -56,6 +56,10 @@ theme_override_constants/separation = 12
 layout_mode = 2
 text = "START"
 
+[node name="FullWeekButton" type="Button" parent="Center/Content/MainButtons"]
+layout_mode = 2
+text = "FULL WEEK (OLD DEMO)"
+
 [node name="OptionsButton" type="Button" parent="Center/Content/MainButtons"]
 layout_mode = 2
 text = "OPTIONS"

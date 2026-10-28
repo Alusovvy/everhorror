@@ -210,433 +210,433 @@ shader_parameter/vein_scale = null
 shader_parameter/vein_width = null
 shader_parameter/pulse_speed = null
 
-[node name="Camp" type="Node3D" unique_id=2042918619]
+[node name="Camp" type="Node3D" unique_id=1269965926]
 
-[node name="Cave" type="Node3D" parent="." unique_id=526081147]
+[node name="Cave" type="Node3D" parent="." unique_id=617304495]
 
-[node name="Floor" type="Node3D" parent="Cave" unique_id=1828831395]
+[node name="Floor" type="Node3D" parent="Cave" unique_id=66251386]
 
-[node name="ground_mines_a_1" type="MeshInstance3D" parent="Cave/Floor" unique_id=150847286 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_1" type="MeshInstance3D" parent="Cave/Floor" unique_id=2019851718 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 2, 0, -7)
 
-[node name="ground_mines_a_2" type="MeshInstance3D" parent="Cave/Floor" unique_id=1491173811 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_2" type="MeshInstance3D" parent="Cave/Floor" unique_id=417800963 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -3)
 
-[node name="ground_mines_a_3" type="MeshInstance3D" parent="Cave/Floor" unique_id=1718802031 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_3" type="MeshInstance3D" parent="Cave/Floor" unique_id=1598978508 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1)
 
-[node name="ground_mines_a_4" type="MeshInstance3D" parent="Cave/Floor" unique_id=60489239 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_4" type="MeshInstance3D" parent="Cave/Floor" unique_id=403972140 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 2, 0, 5)
 
-[node name="ground_mines_a_5" type="MeshInstance3D" parent="Cave/Floor" unique_id=1699418581 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_5" type="MeshInstance3D" parent="Cave/Floor" unique_id=1342298271 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, -7)
 
-[node name="ground_mines_a_6" type="MeshInstance3D" parent="Cave/Floor" unique_id=1001894663 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_6" type="MeshInstance3D" parent="Cave/Floor" unique_id=1334350854 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, -3)
 
-[node name="ground_mines_a_7" type="MeshInstance3D" parent="Cave/Floor" unique_id=382688557 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_7" type="MeshInstance3D" parent="Cave/Floor" unique_id=2128395192 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 1)
 
-[node name="ground_mines_a_8" type="MeshInstance3D" parent="Cave/Floor" unique_id=356160286 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_8" type="MeshInstance3D" parent="Cave/Floor" unique_id=587172863 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 6, 0, 5)
 
-[node name="ground_mines_a_9" type="MeshInstance3D" parent="Cave/Floor" unique_id=1360618355 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_9" type="MeshInstance3D" parent="Cave/Floor" unique_id=1711565072 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10, 0, -7)
 
-[node name="ground_mines_a_10" type="MeshInstance3D" parent="Cave/Floor" unique_id=1007100118 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_10" type="MeshInstance3D" parent="Cave/Floor" unique_id=1339951714 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10, 0, -3)
 
-[node name="ground_mines_a_11" type="MeshInstance3D" parent="Cave/Floor" unique_id=44312378 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_11" type="MeshInstance3D" parent="Cave/Floor" unique_id=2136667802 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 1)
 
-[node name="ground_mines_a_12" type="MeshInstance3D" parent="Cave/Floor" unique_id=880598053 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_12" type="MeshInstance3D" parent="Cave/Floor" unique_id=693834566 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 10, 0, 5)
 
-[node name="ground_mines_a_13" type="MeshInstance3D" parent="Cave/Floor" unique_id=754642548 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_13" type="MeshInstance3D" parent="Cave/Floor" unique_id=996060777 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0, -7)
 
-[node name="ground_mines_a_14" type="MeshInstance3D" parent="Cave/Floor" unique_id=1875225088 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_14" type="MeshInstance3D" parent="Cave/Floor" unique_id=1062538403 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 14, 0, -3)
 
-[node name="ground_mines_a_15" type="MeshInstance3D" parent="Cave/Floor" unique_id=1345477311 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_15" type="MeshInstance3D" parent="Cave/Floor" unique_id=1139544185 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0, 1)
 
-[node name="ground_mines_a_16" type="MeshInstance3D" parent="Cave/Floor" unique_id=603703516 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_16" type="MeshInstance3D" parent="Cave/Floor" unique_id=1675250780 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 14, 0, 5)
 
-[node name="ground_mines_a_17" type="MeshInstance3D" parent="Cave/Floor" unique_id=225662706 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_17" type="MeshInstance3D" parent="Cave/Floor" unique_id=1634743841 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -7)
 
-[node name="ground_mines_a_18" type="MeshInstance3D" parent="Cave/Floor" unique_id=926568100 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_18" type="MeshInstance3D" parent="Cave/Floor" unique_id=2131688585 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, -3)
 
-[node name="ground_mines_a_19" type="MeshInstance3D" parent="Cave/Floor" unique_id=1536007467 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_19" type="MeshInstance3D" parent="Cave/Floor" unique_id=2032472653 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 18, 0, 1)
 
-[node name="ground_mines_a_20" type="MeshInstance3D" parent="Cave/Floor" unique_id=888905310 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_20" type="MeshInstance3D" parent="Cave/Floor" unique_id=1545746696 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 18, 0, 5)
 
-[node name="ground_mines_a_21" type="MeshInstance3D" parent="Cave/Floor" unique_id=2024125218 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_21" type="MeshInstance3D" parent="Cave/Floor" unique_id=237751126 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -7)
 
-[node name="ground_mines_a_22" type="MeshInstance3D" parent="Cave/Floor" unique_id=1080896271 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_22" type="MeshInstance3D" parent="Cave/Floor" unique_id=1601173635 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, -3)
 
-[node name="ground_mines_a_23" type="MeshInstance3D" parent="Cave/Floor" unique_id=836017965 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_23" type="MeshInstance3D" parent="Cave/Floor" unique_id=1413740927 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 22, 0, 1)
 
-[node name="ground_mines_a_24" type="MeshInstance3D" parent="Cave/Floor" unique_id=291998652 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_24" type="MeshInstance3D" parent="Cave/Floor" unique_id=757320621 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 5)
 
-[node name="ground_mines_a_25" type="MeshInstance3D" parent="Cave/Floor" unique_id=243067198 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_25" type="MeshInstance3D" parent="Cave/Floor" unique_id=1932152426 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 26, 0, -7)
 
-[node name="ground_mines_a_26" type="MeshInstance3D" parent="Cave/Floor" unique_id=623931331 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_26" type="MeshInstance3D" parent="Cave/Floor" unique_id=370090117 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, -3)
 
-[node name="ground_mines_a_27" type="MeshInstance3D" parent="Cave/Floor" unique_id=636566962 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_27" type="MeshInstance3D" parent="Cave/Floor" unique_id=37702376 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 0, 1)
 
-[node name="ground_mines_a_28" type="MeshInstance3D" parent="Cave/Floor" unique_id=628289125 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_28" type="MeshInstance3D" parent="Cave/Floor" unique_id=1311675967 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 26, 0, 5)
 
-[node name="ground_mines_a_29" type="MeshInstance3D" parent="Cave/Floor" unique_id=19170555 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_29" type="MeshInstance3D" parent="Cave/Floor" unique_id=1838626253 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 30, 0, -7)
 
-[node name="ground_mines_a_30" type="MeshInstance3D" parent="Cave/Floor" unique_id=1918687976 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_30" type="MeshInstance3D" parent="Cave/Floor" unique_id=726771444 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 30, 0, -3)
 
-[node name="ground_mines_a_31" type="MeshInstance3D" parent="Cave/Floor" unique_id=1279296334 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_31" type="MeshInstance3D" parent="Cave/Floor" unique_id=1413839959 instance=ExtResource("1_mkuom")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 30, 0, 1)
 
-[node name="ground_mines_a_32" type="MeshInstance3D" parent="Cave/Floor" unique_id=1130502258 instance=ExtResource("1_mkuom")]
+[node name="ground_mines_a_32" type="MeshInstance3D" parent="Cave/Floor" unique_id=1744824518 instance=ExtResource("1_mkuom")]
 transform = Transform3D(1.1924881e-08, 0, -1, 0, 1, 0, 1, 0, 1.1924881e-08, 30, 0, 5)
 
-[node name="Walls" type="Node3D" parent="Cave" unique_id=197662285]
+[node name="Walls" type="Node3D" parent="Cave" unique_id=1537496961]
 
-[node name="wall_caves_a_1" type="MeshInstance3D" parent="Cave/Walls" unique_id=195609807 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_1" type="MeshInstance3D" parent="Cave/Walls" unique_id=1187872407 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.299271, 0, -0.04352796, 0, 1.3, 0, 0.04352796, 0, 1.299271, 3, 0.2, 7.217234)
 
-[node name="wall_caves_b_1" type="MeshInstance3D" parent="Cave/Walls" unique_id=114513851 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_1" type="MeshInstance3D" parent="Cave/Walls" unique_id=769424238 instance=ExtResource("5_l27qg")]
 transform = Transform3D(-1.2993153, 0, 0.042186726, 0, 1.3, 0, -0.042186726, 0, -1.2993153, 3, 0.2, -9.039354)
 
-[node name="wall_caves_b_2" type="MeshInstance3D" parent="Cave/Walls" unique_id=86091228 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_2" type="MeshInstance3D" parent="Cave/Walls" unique_id=4050180 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2999184, 0, -0.014561512, 0, 1.3, 0, 0.014561512, 0, 1.2999184, 9, 0.2, 7.2962856)
 
-[node name="wall_caves_a_2" type="MeshInstance3D" parent="Cave/Walls" unique_id=1320750488 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_2" type="MeshInstance3D" parent="Cave/Walls" unique_id=926190682 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(-1.2993846, 0, -0.03999457, 0, 1.3, 0, 0.03999457, 0, -1.2993846, 8.7, 0.2, -9.199191)
 
-[node name="wall_caves_a_3" type="MeshInstance3D" parent="Cave/Walls" unique_id=2038215064 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_3" type="MeshInstance3D" parent="Cave/Walls" unique_id=63329061 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2996007, 0, -0.03221779, 0, 1.3, 0, 0.03221779, 0, 1.2996007, 15, 0.2, 7.1360106)
 
-[node name="wall_caves_b_3" type="MeshInstance3D" parent="Cave/Walls" unique_id=804041762 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_3" type="MeshInstance3D" parent="Cave/Walls" unique_id=297210200 instance=ExtResource("5_l27qg")]
 transform = Transform3D(-1.2999884, 0, 0.005472864, 0, 1.3, 0, -0.005472864, 0, -1.2999884, 14.4, 0.2, -9.015305)
 
-[node name="wall_caves_b_4" type="MeshInstance3D" parent="Cave/Walls" unique_id=1114099098 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_4" type="MeshInstance3D" parent="Cave/Walls" unique_id=1750699846 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2999357, 0, 0.012928753, 0, 1.3, 0, -0.012928753, 0, 1.2999357, 21, 0.2, 7.068124)
 
-[node name="wall_caves_a_4" type="MeshInstance3D" parent="Cave/Walls" unique_id=1268529501 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_4" type="MeshInstance3D" parent="Cave/Walls" unique_id=596692566 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(-1.2999098, 0, -0.0153038725, 0, 1.3, 0, 0.0153038725, 0, -1.2999098, 20.1, 0.2, -9.18237)
 
-[node name="wall_caves_a_5" type="MeshInstance3D" parent="Cave/Walls" unique_id=1904828727 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_5" type="MeshInstance3D" parent="Cave/Walls" unique_id=2102363973 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2995095, 0, 0.03570631, 0, 1.3, 0, -0.03570631, 0, 1.2995095, 27, 0.2, 7.2288866)
 
-[node name="wall_caves_b_5" type="MeshInstance3D" parent="Cave/Walls" unique_id=930928806 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_5" type="MeshInstance3D" parent="Cave/Walls" unique_id=52106152 instance=ExtResource("5_l27qg")]
 transform = Transform3D(-1.2994814, 0, 0.036714707, 0, 1.3, 0, -0.036714707, 0, -1.2994814, 25.8, 0.2, -9.118483)
 
-[node name="wall_caves_b_6" type="MeshInstance3D" parent="Cave/Walls" unique_id=358725613 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_6" type="MeshInstance3D" parent="Cave/Walls" unique_id=974583806 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2999755, 0, 0.007980668, 0, 1.3, 0, -0.007980668, 0, 1.2999755, 33, 0.2, 7.13588)
 
-[node name="wall_caves_a_6" type="MeshInstance3D" parent="Cave/Walls" unique_id=180949478 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_6" type="MeshInstance3D" parent="Cave/Walls" unique_id=1471973023 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(-1.2999579, 0, -0.010454727, 0, 1.3, 0, 0.010454727, 0, -1.2999579, 31.5, 0.2, -9.0787735)
 
-[node name="wall_caves_a_7" type="MeshInstance3D" parent="Cave/Walls" unique_id=1292011102 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_7" type="MeshInstance3D" parent="Cave/Walls" unique_id=2007971681 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(-0.04337086, 0, -1.2992764, 0, 1.3, 0, 1.2992764, 0, -0.04337086, -0.07852479, 0.2, -8.1)
 
-[node name="wall_caves_c_1" type="MeshInstance3D" parent="Cave/Walls" unique_id=338221901 instance=ExtResource("6_fmc72")]
+[node name="wall_caves_c_1" type="MeshInstance3D" parent="Cave/Walls" unique_id=2008088697 instance=ExtResource("6_fmc72")]
 transform = Transform3D(0.011773612, 0, -1.2799459, 0, 1.28, 0, 1.2799459, 0, 0.011773612, -0.058977824, 0.2, -1.02)
 
-[node name="wall_caves_c_2" type="MeshInstance3D" parent="Cave/Walls" unique_id=1630928772 instance=ExtResource("6_fmc72")]
+[node name="wall_caves_c_2" type="MeshInstance3D" parent="Cave/Walls" unique_id=1992543934 instance=ExtResource("6_fmc72")]
 transform = Transform3D(0.036648307, 0, -1.2994833, 0, 1.3, 0, 1.2994833, 0, 0.036648307, -0.095506966, 0.2, 6.95)
 
-[node name="wall_caves_b_7" type="MeshInstance3D" parent="Cave/Walls" unique_id=1178991544 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_7" type="MeshInstance3D" parent="Cave/Walls" unique_id=1853769330 instance=ExtResource("5_l27qg")]
 transform = Transform3D(-0.010614906, 0, 1.2999567, 0, 1.3, 0, -1.2999567, 0, -0.010614906, 32.02923, 0.2, -8.6)
 
-[node name="wall_caves_a_8" type="MeshInstance3D" parent="Cave/Walls" unique_id=2105820393 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_8" type="MeshInstance3D" parent="Cave/Walls" unique_id=1858608940 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(-0.03290734, 0, 1.2995834, 0, 1.3, 0, -1.2995834, 0, -0.03290734, 32.28164, 0.2, -2.6)
 
-[node name="wall_caves_c_3" type="MeshInstance3D" parent="Cave/Walls" unique_id=1588871295 instance=ExtResource("6_fmc72")]
+[node name="wall_caves_c_3" type="MeshInstance3D" parent="Cave/Walls" unique_id=776586663 instance=ExtResource("6_fmc72")]
 transform = Transform3D(-0.013750162, 0, 1.2999272, 0, 1.3, 0, -1.2999272, 0, -0.013750162, 32.049454, 0.2, 7.1)
 
-[node name="Backing" type="Node3D" parent="Cave" unique_id=576739770]
+[node name="Backing" type="Node3D" parent="Cave" unique_id=197412267]
 
-[node name="South" type="MeshInstance3D" parent="Cave/Backing" unique_id=64418863]
+[node name="South" type="MeshInstance3D" parent="Cave/Backing" unique_id=498394945]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3.3, 7.8)
 material_override = ExtResource("7_3tyol")
 mesh = SubResource("BoxMesh_lbsgx")
 
-[node name="SouthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=304677217]
+[node name="SouthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=2074311755]
 
-[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/SouthBody" unique_id=1556994583]
+[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/SouthBody" unique_id=1478171747]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3.3, 7.8)
 shape = SubResource("BoxShape3D_hi0ix")
 
-[node name="North" type="MeshInstance3D" parent="Cave/Backing" unique_id=365253239]
+[node name="North" type="MeshInstance3D" parent="Cave/Backing" unique_id=1663119932]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3.3, -9.8)
 material_override = ExtResource("7_3tyol")
 mesh = SubResource("BoxMesh_g7gc2")
 
-[node name="NorthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=1676149227]
+[node name="NorthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=1747773559]
 
-[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/NorthBody" unique_id=1750824324]
+[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/NorthBody" unique_id=1092532393]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 3.3, -9.8)
 shape = SubResource("BoxShape3D_lxcql")
 
-[node name="EastNorth" type="MeshInstance3D" parent="Cave/Backing" unique_id=1765469085]
+[node name="EastNorth" type="MeshInstance3D" parent="Cave/Backing" unique_id=432087546]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8, 3.3, -4.55)
 material_override = ExtResource("7_3tyol")
 mesh = SubResource("BoxMesh_a5tsw")
 
-[node name="EastNorthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=2050460896]
+[node name="EastNorthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=503645610]
 
-[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/EastNorthBody" unique_id=1278685246]
+[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/EastNorthBody" unique_id=1247414503]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8, 3.3, -4.55)
 shape = SubResource("BoxShape3D_m20eo")
 
-[node name="EastSouth" type="MeshInstance3D" parent="Cave/Backing" unique_id=2072076730]
+[node name="EastSouth" type="MeshInstance3D" parent="Cave/Backing" unique_id=813316298]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8, 3.3, 6.6)
 material_override = ExtResource("7_3tyol")
 mesh = SubResource("BoxMesh_8kwci")
 
-[node name="EastSouthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=452762604]
+[node name="EastSouthBody" type="StaticBody3D" parent="Cave/Backing" unique_id=2117690927]
 
-[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/EastSouthBody" unique_id=302286190]
+[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/EastSouthBody" unique_id=1929665946]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8, 3.3, 6.6)
 shape = SubResource("BoxShape3D_0l51l")
 
-[node name="EastDoorTop" type="MeshInstance3D" parent="Cave/Backing" unique_id=17437933]
+[node name="EastDoorTop" type="MeshInstance3D" parent="Cave/Backing" unique_id=1990672296]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.2, 5.4, 3)
 material_override = ExtResource("7_3tyol")
 mesh = SubResource("BoxMesh_pmudi")
 
-[node name="EastDoorTopBody" type="StaticBody3D" parent="Cave/Backing" unique_id=2057240901]
+[node name="EastDoorTopBody" type="StaticBody3D" parent="Cave/Backing" unique_id=1796564272]
 
-[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/EastDoorTopBody" unique_id=275589656]
+[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/EastDoorTopBody" unique_id=914194097]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.2, 5.4, 3)
 shape = SubResource("BoxShape3D_od81l")
 
-[node name="WestTop" type="MeshInstance3D" parent="Cave/Backing" unique_id=1575271558]
+[node name="WestTop" type="MeshInstance3D" parent="Cave/Backing" unique_id=1727336582]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 5.5, -1)
 material_override = ExtResource("7_3tyol")
 mesh = SubResource("BoxMesh_gp3yq")
 
-[node name="WestTopBody" type="StaticBody3D" parent="Cave/Backing" unique_id=516499940]
+[node name="WestTopBody" type="StaticBody3D" parent="Cave/Backing" unique_id=1224029391]
 
-[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/WestTopBody" unique_id=721300911]
+[node name="Shape" type="CollisionShape3D" parent="Cave/Backing/WestTopBody" unique_id=346387858]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 5.5, -1)
 shape = SubResource("BoxShape3D_pyn1i")
 
-[node name="Vault" type="MeshInstance3D" parent="Cave/Backing" unique_id=99965079]
+[node name="Vault" type="MeshInstance3D" parent="Cave/Backing" unique_id=649028512]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 7, -1)
 material_override = ExtResource("7_3tyol")
 mesh = SubResource("BoxMesh_jh1q0")
 
-[node name="Vault" type="Node3D" parent="Cave" unique_id=571418219]
+[node name="Vault" type="Node3D" parent="Cave" unique_id=17215366]
 
-[node name="wall_caves_a_9" type="MeshInstance3D" parent="Cave/Vault" unique_id=766489443 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_9" type="MeshInstance3D" parent="Cave/Vault" unique_id=1466593573 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2995945, 0.032467764, 1.4192111e-09, 0, -5.6824803e-08, 1.3, 0.032467764, -1.2995945, -5.6807078e-08, 3.4, 6.55, -3.4)
 
-[node name="wall_caves_b_8" type="MeshInstance3D" parent="Cave/Vault" unique_id=1323671534 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_8" type="MeshInstance3D" parent="Cave/Vault" unique_id=1974194910 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2998059, -0.022464333, -9.819472e-10, 0, -5.6824803e-08, 1.3, -0.022464333, -1.2998059, -5.681632e-08, 3.4, 6.55, 2.7)
 
-[node name="wall_caves_a_10" type="MeshInstance3D" parent="Cave/Vault" unique_id=1292055008 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_10" type="MeshInstance3D" parent="Cave/Vault" unique_id=770258781 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2997441, 0.025791088, 1.1273643e-09, 0, -5.6824803e-08, 1.3, 0.025791088, -1.2997441, -5.6813615e-08, 3.4, 6.55, 8.8)
 
-[node name="wall_caves_b_9" type="MeshInstance3D" parent="Cave/Vault" unique_id=2017090917 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_9" type="MeshInstance3D" parent="Cave/Vault" unique_id=381889607 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2999837, 0.0064969454, 2.839905e-10, 0, -5.6824803e-08, 1.3, 0.0064969454, -1.2999837, -5.6824092e-08, 9.4, 6.55, -3.4)
 
-[node name="wall_caves_a_11" type="MeshInstance3D" parent="Cave/Vault" unique_id=486095260 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_11" type="MeshInstance3D" parent="Cave/Vault" unique_id=1435017537 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2971416, -0.08616087, -3.7662113e-09, 0, -5.6824803e-08, 1.3, -0.08616087, -1.2971416, -5.6699857e-08, 9.4, 6.55, 2.7)
 
-[node name="wall_caves_b_10" type="MeshInstance3D" parent="Cave/Vault" unique_id=535886140 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_10" type="MeshInstance3D" parent="Cave/Vault" unique_id=1501065197 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2997384, -0.02607438, -1.1397473e-09, 0, -5.6824803e-08, 1.3, -0.02607438, -1.2997384, -5.6813374e-08, 9.4, 6.55, 8.8)
 
-[node name="wall_caves_a_12" type="MeshInstance3D" parent="Cave/Vault" unique_id=865699721 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_12" type="MeshInstance3D" parent="Cave/Vault" unique_id=505509447 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2993821, -0.040076192, -1.751786e-09, 0, -5.6824803e-08, 1.3, -0.040076192, -1.2993821, -5.6797795e-08, 15.4, 6.55, -3.4)
 
-[node name="wall_caves_b_11" type="MeshInstance3D" parent="Cave/Vault" unique_id=1298047842 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_11" type="MeshInstance3D" parent="Cave/Vault" unique_id=1957012777 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2989472, 0.052306183, 2.2863758e-09, 0, -5.6824803e-08, 1.3, 0.052306183, -1.2989472, -5.6778788e-08, 15.4, 6.55, 2.7)
 
-[node name="wall_caves_a_13" type="MeshInstance3D" parent="Cave/Vault" unique_id=271603171 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_13" type="MeshInstance3D" parent="Cave/Vault" unique_id=598701168 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2987441, -0.057127316, -2.4971143e-09, 0, -5.6824803e-08, 1.3, -0.057127316, -1.2987441, -5.6769913e-08, 15.4, 6.55, 8.8)
 
-[node name="wall_caves_b_12" type="MeshInstance3D" parent="Cave/Vault" unique_id=1767652939 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_12" type="MeshInstance3D" parent="Cave/Vault" unique_id=1567676791 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2990369, 0.05003219, 2.1869764e-09, 0, -5.6824803e-08, 1.3, 0.05003219, -1.2990369, -5.67827e-08, 21.4, 6.55, -3.4)
 
-[node name="wall_caves_a_14" type="MeshInstance3D" parent="Cave/Vault" unique_id=1167601394 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_14" type="MeshInstance3D" parent="Cave/Vault" unique_id=522261995 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2995733, -0.03330377, -1.4557542e-09, 0, -5.6824803e-08, 1.3, -0.03330377, -1.2995733, -5.6806154e-08, 21.4, 6.55, 2.7)
 
-[node name="wall_caves_b_13" type="MeshInstance3D" parent="Cave/Vault" unique_id=222968352 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_13" type="MeshInstance3D" parent="Cave/Vault" unique_id=2037462911 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2999997, -0.000746635, -3.2636453e-11, 0, -5.6824803e-08, 1.3, -0.000746635, -1.2999997, -5.6824792e-08, 21.4, 6.55, 8.8)
 
-[node name="wall_caves_a_15" type="MeshInstance3D" parent="Cave/Vault" unique_id=1751043055 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_15" type="MeshInstance3D" parent="Cave/Vault" unique_id=1086077700 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2999321, 0.013279096, 5.8044775e-10, 0, -5.6824803e-08, 1.3, 0.013279096, -1.2999321, -5.6821836e-08, 27.4, 6.55, -3.4)
 
-[node name="wall_caves_b_14" type="MeshInstance3D" parent="Cave/Vault" unique_id=362013042 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_14" type="MeshInstance3D" parent="Cave/Vault" unique_id=947498590 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2969458, -0.089059435, -3.8929118e-09, 0, -5.6824803e-08, 1.3, -0.089059435, -1.2969458, -5.66913e-08, 27.4, 6.55, 2.7)
 
-[node name="wall_caves_a_16" type="MeshInstance3D" parent="Cave/Vault" unique_id=760182473 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_16" type="MeshInstance3D" parent="Cave/Vault" unique_id=289597297 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.299919, -0.014504989, -6.340332e-10, 0, -5.6824803e-08, 1.3, -0.014504989, -1.299919, -5.6821264e-08, 27.4, 6.55, 8.8)
 
-[node name="wall_caves_b_15" type="MeshInstance3D" parent="Cave/Vault" unique_id=1001725088 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_15" type="MeshInstance3D" parent="Cave/Vault" unique_id=630569427 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2999916, -0.0046335068, -2.0253701e-10, 0, -5.6824803e-08, 1.3, -0.0046335068, -1.2999916, -5.6824444e-08, 33.4, 6.55, -3.4)
 
-[node name="wall_caves_a_17" type="MeshInstance3D" parent="Cave/Vault" unique_id=1734364961 instance=ExtResource("3_0f3fe")]
+[node name="wall_caves_a_17" type="MeshInstance3D" parent="Cave/Vault" unique_id=1235645667 instance=ExtResource("3_0f3fe")]
 transform = Transform3D(1.2983963, -0.064550005, -2.8215703e-09, 0, -5.6824803e-08, 1.3, -0.064550005, -1.2983963, -5.6754708e-08, 33.4, 6.55, 2.7)
 
-[node name="wall_caves_b_16" type="MeshInstance3D" parent="Cave/Vault" unique_id=2001850153 instance=ExtResource("5_l27qg")]
+[node name="wall_caves_b_16" type="MeshInstance3D" parent="Cave/Vault" unique_id=381233239 instance=ExtResource("5_l27qg")]
 transform = Transform3D(1.2989396, 0.052496787, 2.2947075e-09, 0, -5.6824803e-08, 1.3, 0.052496787, -1.2989396, -5.677845e-08, 33.4, 6.55, 8.8)
 
-[node name="Rocks" type="Node3D" parent="Cave" unique_id=520397938]
+[node name="Rocks" type="Node3D" parent="Cave" unique_id=1663471116]
 
-[node name="Pillar" type="MeshInstance3D" parent="Cave/Rocks" unique_id=827000722 instance=ExtResource("8_3vr2d")]
+[node name="Pillar" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1052506022 instance=ExtResource("8_3vr2d")]
 transform = Transform3D(1.0648977, 0, 0.74564934, 0, 1.3, 0, -0.74564934, 0, 1.0648977, 7, 0, -3)
 
-[node name="cave_pillar_c_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=963504138 instance=ExtResource("9_snx0q")]
+[node name="cave_pillar_c_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=2072559899 instance=ExtResource("9_snx0q")]
 transform = Transform3D(0.85142773, 0, 0.29166892, 0, 0.9, 0, -0.29166892, 0, 0.85142773, 0.9, 2.4, -8.4)
 
-[node name="cave_pillar_c_2" type="MeshInstance3D" parent="Cave/Rocks" unique_id=2071930035 instance=ExtResource("9_snx0q")]
+[node name="cave_pillar_c_2" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1322564105 instance=ExtResource("9_snx0q")]
 transform = Transform3D(-0.4785348, 0, 0.7622365, 0, 0.9, 0, -0.7622365, 0, -0.4785348, 31.2, 2.4, -8.4)
 
-[node name="cave_pillar_c_3" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1477828056 instance=ExtResource("9_snx0q")]
+[node name="cave_pillar_c_3" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1466940672 instance=ExtResource("9_snx0q")]
 transform = Transform3D(0.49932763, 0, 0.74878025, 0, 0.9, 0, -0.74878025, 0, 0.49932763, 1, 2.4, 6.4)
 
-[node name="cave_wall_rocks_a_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1059568277 instance=ExtResource("10_gjajf")]
+[node name="cave_wall_rocks_a_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=2102888116 instance=ExtResource("10_gjajf")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 3, 4.3, -8.3)
 
-[node name="cave_wall_rocks_f_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=186954874 instance=ExtResource("11_dvtke")]
+[node name="cave_wall_rocks_f_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=998627791 instance=ExtResource("11_dvtke")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 12.5, 4.5, -8.3)
 
-[node name="cave_wall_rocks_g_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=345226863 instance=ExtResource("12_mremh")]
+[node name="cave_wall_rocks_g_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=2062830918 instance=ExtResource("12_mremh")]
 transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 29.5, 4, -8.2)
 
-[node name="cave_wall_rocks_e_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1209630958 instance=ExtResource("13_c2tuc")]
+[node name="cave_wall_rocks_e_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=903532444 instance=ExtResource("13_c2tuc")]
 transform = Transform3D(-1.2, 0, -1.04907336e-07, 0, 1.2, 0, 1.04907336e-07, 0, -1.2, 13.5, 4.4, 6.3)
 
-[node name="cave_wall_rocks_b_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=883022210 instance=ExtResource("14_njnc3")]
+[node name="cave_wall_rocks_b_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=510785657 instance=ExtResource("14_njnc3")]
 transform = Transform3D(-1.2, 0, -1.04907336e-07, 0, 1.2, 0, 1.04907336e-07, 0, -1.2, 22, 4.6, 6.3)
 
-[node name="cave_wall_rocks_d_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=828430558 instance=ExtResource("15_f5wmq")]
+[node name="cave_wall_rocks_d_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1499978933 instance=ExtResource("15_f5wmq")]
 transform = Transform3D(-1.2, 0, -1.04907336e-07, 0, 1.2, 0, 1.04907336e-07, 0, -1.2, 5.5, 4.2, 6.3)
 
-[node name="cave_wall_rocks_c_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=2103706937 instance=ExtResource("16_o1a8y")]
+[node name="cave_wall_rocks_c_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1896226658 instance=ExtResource("16_o1a8y")]
 transform = Transform3D(-5.2453668e-08, 0, -1.2, 0, 1.2, 0, 1.2, 0, -5.2453668e-08, 31.2, 4.2, -2)
 
-[node name="cave_wall_rocks_g_2" type="MeshInstance3D" parent="Cave/Rocks" unique_id=796282683 instance=ExtResource("12_mremh")]
+[node name="cave_wall_rocks_g_2" type="MeshInstance3D" parent="Cave/Rocks" unique_id=705070416 instance=ExtResource("12_mremh")]
 transform = Transform3D(-5.2453668e-08, 0, 1.2, 0, 1.2, 0, -1.2, 0, -5.2453668e-08, 0.7, 4.4, -1)
 
-[node name="cave_rocks_b_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1761989172 instance=ExtResource("17_40pcp")]
+[node name="cave_rocks_b_1" type="MeshInstance3D" parent="Cave/Rocks" unique_id=1089949933 instance=ExtResource("17_40pcp")]
 transform = Transform3D(-0.040263463, 0, 0.59864753, 0, 0.6, 0, -0.59864753, 0, -0.040263463, 15.2, 0.1, 5.9)
 
-[node name="DoorFrames" type="Node3D" parent="Cave" unique_id=1601704311]
+[node name="DoorFrames" type="Node3D" parent="Cave" unique_id=274532072]
 
-[node name="post_a_1" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=675807527 instance=ExtResource("18_7u33d")]
+[node name="post_a_1" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=1762561825 instance=ExtResource("18_7u33d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 0.95)
 
-[node name="post_a_2" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=763182238 instance=ExtResource("18_7u33d")]
+[node name="post_a_2" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=229332126 instance=ExtResource("18_7u33d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 5.05)
 
-[node name="beam_a_1" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=498528886 instance=ExtResource("20_e0ip5")]
+[node name="beam_a_1" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=42962885 instance=ExtResource("20_e0ip5")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.6, 3.9, 3)
 
-[node name="post_a_3" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=523167886 instance=ExtResource("18_7u33d")]
+[node name="post_a_3" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=2095577759 instance=ExtResource("18_7u33d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -5.05)
 
-[node name="post_a_4" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=545882797 instance=ExtResource("18_7u33d")]
+[node name="post_a_4" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=139310827 instance=ExtResource("18_7u33d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, -2.7)
 
-[node name="beam_a_2" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=464921288 instance=ExtResource("20_e0ip5")]
+[node name="beam_a_2" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=1489724543 instance=ExtResource("20_e0ip5")]
 transform = Transform3D(-2.786601e-08, 0, 1, 0, 1, 0, -0.6375, 0, -4.371139e-08, 0.6, 3.9, -3.875)
 
-[node name="post_a_5" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=967804391 instance=ExtResource("18_7u33d")]
+[node name="post_a_5" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=474859468 instance=ExtResource("18_7u33d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.4, 0, 0.95)
 
-[node name="post_a_6" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=526692683 instance=ExtResource("18_7u33d")]
+[node name="post_a_6" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=2134477791 instance=ExtResource("18_7u33d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.4, 0, 5.05)
 
-[node name="beam_a_3" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=1936033230 instance=ExtResource("20_e0ip5")]
+[node name="beam_a_3" type="MeshInstance3D" parent="Cave/DoorFrames" unique_id=2005778313 instance=ExtResource("20_e0ip5")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 31.4, 3.9, 3)
 
-[node name="CampProps" type="Node3D" parent="." unique_id=1605477953]
+[node name="CampProps" type="Node3D" parent="." unique_id=1089878401]
 
-[node name="Wood" type="Node3D" parent="CampProps" unique_id=22942000]
+[node name="Wood" type="Node3D" parent="CampProps" unique_id=61218108]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
 [node name="MiroslawLog" type="Node3D" parent="CampProps/Wood" unique_id=2017788031 instance=ExtResource("23_24i5w")]
 transform = Transform3D(1.5300877, 0, -0.46779472, 0, 1.6, 0, 0.46779472, 0, 1.5300877, 15.75, 0, 0.75)
 
-[node name="FireLog" type="Node3D" parent="CampProps/Wood" unique_id=284218742 instance=ExtResource("23_24i5w")]
+[node name="FireLog" type="Node3D" parent="CampProps/Wood" unique_id=378444881 instance=ExtResource("23_24i5w")]
 transform = Transform3D(-0.2087596, 0, 1.4854021, 0, 1.5, 0, -1.4854021, 0, -0.2087596, 13.8, 0, 1.45)
 
-[node name="FireLogNorth" type="Node3D" parent="CampProps/Wood" unique_id=651814562 instance=ExtResource("23_24i5w")]
+[node name="FireLogNorth" type="Node3D" parent="CampProps/Wood" unique_id=554813012 instance=ExtResource("23_24i5w")]
 transform = Transform3D(-0.13073365, 0, 1.494292, 0, 1.5, 0, -1.494292, 0, -0.13073365, 14.3, 0, -1.25)
 
-[node name="FireLogEast" type="Node3D" parent="CampProps/Wood" unique_id=1437069648 instance=ExtResource("23_24i5w")]
+[node name="FireLogEast" type="Node3D" parent="CampProps/Wood" unique_id=639591010 instance=ExtResource("23_24i5w")]
 transform = Transform3D(1.0724622, 0, 0.8999026, 0, 1.4, 0, -0.8999026, 0, 1.0724622, 15.5, 0, -0.84999996)
 
-[node name="Cloth" type="Node3D" parent="CampProps" unique_id=546049158]
+[node name="Cloth" type="Node3D" parent="CampProps" unique_id=997141018]
 script = ExtResource("21_h116n")
 material = ExtResource("24_fbm7q")
 
 [node name="Bedroll" type="Node3D" parent="CampProps/Cloth" unique_id=127369914 instance=ExtResource("25_r0yac")]
 transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 7.2, 0, 5.3)
 
-[node name="BedUse" type="Area3D" parent="CampProps/Cloth/Bedroll" unique_id=2097707967 groups=["story_use"]]
+[node name="BedUse" type="Area3D" parent="CampProps/Cloth/Bedroll" unique_id=1896845163 groups=["story_use"]]
 script = ExtResource("26_e7lt8")
 display_name = "Posłanie"
 action = 2
 prompt_text = "Połóż się spać"
 
-[node name="BolkoBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=1926988270 instance=ExtResource("25_r0yac")]
+[node name="BolkoBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=1519064422 instance=ExtResource("25_r0yac")]
 transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 4.6, 0, 5.3)
 
-[node name="MiroslawBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=1847140055 instance=ExtResource("25_r0yac")]
+[node name="MiroslawBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=1621526335 instance=ExtResource("25_r0yac")]
 transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 8.6, 0, -7.4)
 
 [node name="Tent" type="Node3D" parent="CampProps/Cloth" unique_id=1942352692 instance=ExtResource("27_chix1")]
 transform = Transform3D(-4.5, 0, -3.934025e-07, 0, 4.5, 0, 3.934025e-07, 0, -4.5, 11.4, 0, 5.2)
 
-[node name="SickBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=1030701979 instance=ExtResource("25_r0yac")]
+[node name="SickBedroll" type="Node3D" parent="CampProps/Cloth" unique_id=1361398142 instance=ExtResource("25_r0yac")]
 transform = Transform3D(-1.3987645e-07, 0, 3.2, 0, 3.2, 0, -3.2, 0, -1.3987645e-07, 3.6, 0, -7.3)
 
-[node name="TentBlock" type="StaticBody3D" parent="CampProps" unique_id=1588085302]
+[node name="TentBlock" type="StaticBody3D" parent="CampProps" unique_id=2146689377]
 
-[node name="Shape" type="CollisionShape3D" parent="CampProps/TentBlock" unique_id=378176257]
+[node name="Shape" type="CollisionShape3D" parent="CampProps/TentBlock" unique_id=236050060]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.4, 1, 5.2)
 shape = SubResource("BoxShape3D_k0xy8")
 
 [node name="Bag_1" type="Node3D" parent="CampProps" unique_id=1464869745 instance=ExtResource("28_a2011")]
 transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 5.9, 0, 5.75)
 
-[node name="Bag_2" type="Node3D" parent="CampProps" unique_id=1692632720 instance=ExtResource("28_a2011")]
+[node name="Bag_2" type="Node3D" parent="CampProps" unique_id=1533833598 instance=ExtResource("28_a2011")]
 transform = Transform3D(0.9396926, 0, -0.34202012, 0, 1, 0, 0.34202012, 0, 0.9396926, 3.3, 0, 5.65)
 
 [node name="WaterBarrel" type="Node3D" parent="CampProps" unique_id=406214766 instance=ExtResource("29_sqhf5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 5.65)
 
-[node name="Look" type="Area3D" parent="CampProps/WaterBarrel" unique_id=831017935]
+[node name="Look" type="Area3D" parent="CampProps/WaterBarrel" unique_id=320122067]
 script = ExtResource("26_e7lt8")
 display_name = "Beczka z wodą"
 description = "Woda spuszczona z góry w bukłakach. Pachnie żelazem. Tekla pilnuje, żeby nikt się w niej nie mył."
 
-[node name="post_a_7" type="MeshInstance3D" parent="CampProps" unique_id=1165784796 instance=ExtResource("18_7u33d")]
+[node name="post_a_7" type="MeshInstance3D" parent="CampProps" unique_id=877752021 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6052632, 0, 0, 0, 0.6052632, 0, 0, 0, 0.6052632, 6.5, 0, -0.62)
 
 [node name="SleepLantern" type="Node3D" parent="CampProps" unique_id=1062626669 instance=ExtResource("30_f7b1h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 1.45, -0.5)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/SleepLantern" unique_id=381543973]
+[node name="Light" type="OmniLight3D" parent="CampProps/SleepLantern" unique_id=1720222450]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.1
@@ -646,24 +646,24 @@ omni_attenuation = 1.3
 script = ExtResource("31_76g44")
 housing_casts_shadow = false
 
-[node name="Campfire" type="Node3D" parent="CampProps" unique_id=1403531695]
+[node name="Campfire" type="Node3D" parent="CampProps" unique_id=417956137]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 0.2)
 
-[node name="Stones" type="Node3D" parent="CampProps/Campfire" unique_id=465066774]
+[node name="Stones" type="Node3D" parent="CampProps/Campfire" unique_id=597115027]
 script = ExtResource("21_h116n")
 material = ExtResource("7_3tyol")
 
 [node name="Pit" type="Node3D" parent="CampProps/Campfire/Stones" unique_id=2013981249 instance=ExtResource("32_3cmek")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
-[node name="Flames" type="GPUParticles3D" parent="CampProps/Campfire" unique_id=1229507803]
+[node name="Flames" type="GPUParticles3D" parent="CampProps/Campfire" unique_id=1053281896]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 amount = 36
 lifetime = 0.9
 process_material = SubResource("ParticleProcessMaterial_k2rfv")
 draw_pass_1 = SubResource("QuadMesh_1phur")
 
-[node name="FireLight" type="OmniLight3D" parent="CampProps/Campfire" unique_id=321538400]
+[node name="FireLight" type="OmniLight3D" parent="CampProps/Campfire" unique_id=616119446]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, -0.45)
 light_color = Color(1, 0.55, 0.22, 1)
 light_energy = 3.2
@@ -674,7 +674,7 @@ script = ExtResource("31_76g44")
 strength = 0.3
 speed = 9.0
 
-[node name="FireCrackle" type="AudioStreamPlayer3D" parent="CampProps/Campfire" unique_id=2143452427]
+[node name="FireCrackle" type="AudioStreamPlayer3D" parent="CampProps/Campfire" unique_id=871287839]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 stream = ExtResource("33_40kkm")
 volume_db = -4.0
@@ -683,7 +683,7 @@ autoplay = true
 max_distance = 12.0
 bus = &"SFX"
 
-[node name="Stand" type="Node3D" parent="CampProps/Campfire" unique_id=1800572254]
+[node name="Stand" type="Node3D" parent="CampProps/Campfire" unique_id=1316217589]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
@@ -693,19 +693,19 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 [node name="Kettle" type="Node3D" parent="CampProps/Campfire" unique_id=952582066 instance=ExtResource("35_mg6tm")]
 transform = Transform3D(0.4322586, 0, 0.15732926, 0, 0.46, 0, -0.15732926, 0, 0.4322586, 0, 0.46, 0)
 
-[node name="FireLook" type="Area3D" parent="CampProps/Campfire/Kettle" unique_id=268312664]
+[node name="FireLook" type="Area3D" parent="CampProps/Campfire/Kettle" unique_id=1814457603]
 script = ExtResource("26_e7lt8")
 display_name = "Ognisko z kociołkiem"
 description = "Tekla gotuje tu dwa razy dziennie: rano kaszę, wieczorem to samo z tym, co zostało. Pali się połamanymi stemplami. Mirosław siada tak, żeby mieć do ognia jak najdalej."
 padding = 0.1
 
-[node name="PitBlock" type="StaticBody3D" parent="CampProps/Campfire" unique_id=841573307]
+[node name="PitBlock" type="StaticBody3D" parent="CampProps/Campfire" unique_id=308094121]
 
-[node name="Shape" type="CollisionShape3D" parent="CampProps/Campfire/PitBlock" unique_id=692877323]
+[node name="Shape" type="CollisionShape3D" parent="CampProps/Campfire/PitBlock" unique_id=1381262137]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("BoxShape3D_sd7tr")
 
-[node name="SeatUse" type="Area3D" parent="CampProps/Campfire" unique_id=1611936965]
+[node name="SeatUse" type="Area3D" parent="CampProps/Campfire" unique_id=430363764]
 script = ExtResource("26_e7lt8")
 display_name = "Usiądź przy ogniu"
 action = 1
@@ -733,7 +733,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.15, 0, 1.25)
 [node name="CommonTable" type="Node3D" parent="CampProps" unique_id=253052176 instance=ExtResource("42_cnbxr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2, 0, -4.2)
 
-[node name="Look" type="Area3D" parent="CampProps/CommonTable" unique_id=834232057]
+[node name="Look" type="Area3D" parent="CampProps/CommonTable" unique_id=1275217781]
 script = ExtResource("26_e7lt8")
 display_name = "Wspólny stół"
 description = "Tu się je, gra w kości i kłóci o to, kto dziś zjeżdża pierwszy. Deski lepią się od kaszy."
@@ -741,7 +741,7 @@ description = "Tu się je, gra w kości i kłóci o to, kto dziś zjeżdża pier
 [node name="BenchNorth" type="Node3D" parent="CampProps" unique_id=908055084 instance=ExtResource("43_rbgy8")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 17.2, 0, -5.0299997)
 
-[node name="BenchSouth" type="Node3D" parent="CampProps" unique_id=1010377937 instance=ExtResource("43_rbgy8")]
+[node name="BenchSouth" type="Node3D" parent="CampProps" unique_id=2002667826 instance=ExtResource("43_rbgy8")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 17.2, 0, -3.35)
 
 [node name="HeadStool" type="Node3D" parent="CampProps" unique_id=1943225754 instance=ExtResource("44_sio62")]
@@ -750,34 +750,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.95, 0, -4.2)
 [node name="Table_Plate_1" type="Node3D" parent="CampProps" unique_id=392785005 instance=ExtResource("45_mpfom")]
 transform = Transform3D(-0.941574, 0, 0.33680627, 0, 1, 0, -0.33680627, 0, -0.941574, 16.400002, 0.81, -4.5)
 
-[node name="Table_Plate_2" type="Node3D" parent="CampProps" unique_id=147909610 instance=ExtResource("45_mpfom")]
+[node name="Table_Plate_2" type="Node3D" parent="CampProps" unique_id=1138489612 instance=ExtResource("45_mpfom")]
 transform = Transform3D(-0.39061928, 0, -0.9205523, 0, 1, 0, 0.9205523, 0, -0.39061928, 17.800001, 0.81, -4.47)
 
-[node name="Table_Plate_3" type="Node3D" parent="CampProps" unique_id=460898133 instance=ExtResource("45_mpfom")]
+[node name="Table_Plate_3" type="Node3D" parent="CampProps" unique_id=47727794 instance=ExtResource("45_mpfom")]
 transform = Transform3D(-0.35832238, 0, -0.9335979, 0, 1, 0, 0.9335979, 0, -0.35832238, 16.5, 0.81, -3.8999999)
 
-[node name="Table_Plate_4" type="Node3D" parent="CampProps" unique_id=821290962 instance=ExtResource("45_mpfom")]
+[node name="Table_Plate_4" type="Node3D" parent="CampProps" unique_id=363900020 instance=ExtResource("45_mpfom")]
 transform = Transform3D(-0.97593135, 0, 0.21807809, 0, 1, 0, -0.21807809, 0, -0.97593135, 18.300001, 0.81, -4.2)
 
 [node name="Mug_1" type="Node3D" parent="CampProps" unique_id=289124524 instance=ExtResource("46_sdj8f")]
 transform = Transform3D(-0.66733605, 0, -0.74475676, 0, 1, 0, 0.74475676, 0, -0.66733605, 16.75, 0.81, -4.6299996)
 
-[node name="Mug_2" type="Node3D" parent="CampProps" unique_id=69771831 instance=ExtResource("46_sdj8f")]
+[node name="Mug_2" type="Node3D" parent="CampProps" unique_id=1188844496 instance=ExtResource("46_sdj8f")]
 transform = Transform3D(-0.14545563, 0, 0.9893648, 0, 1, 0, -0.9893648, 0, -0.14545563, 18.1, 0.81, -4.5499997)
 
-[node name="Mug_3" type="Node3D" parent="CampProps" unique_id=1802673719 instance=ExtResource("46_sdj8f")]
+[node name="Mug_3" type="Node3D" parent="CampProps" unique_id=1280138755 instance=ExtResource("46_sdj8f")]
 transform = Transform3D(0.9532253, 0, -0.3022607, 0, 1, 0, 0.3022607, 0, 0.9532253, 16.1, 0.81, -4.0499997)
 
 [node name="Table_Spoon_1" type="Node3D" parent="CampProps" unique_id=1750080209 instance=ExtResource("47_wfrjy")]
 transform = Transform3D(0.8660254, 0, 0.5, 0, 1, 0, -0.5, 0, 0.8660254, 16.45, 0.82, -4.5)
 
-[node name="Pot_1_2" type="Node3D" parent="CampProps" unique_id=1178626645 instance=ExtResource("40_68qdq")]
+[node name="Pot_1_2" type="Node3D" parent="CampProps" unique_id=1071289753 instance=ExtResource("40_68qdq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.300001, 0.81, -4.1499996)
 
 [node name="CandleStick_1" type="Node3D" parent="CampProps" unique_id=476793429 instance=ExtResource("48_nqw55")]
 transform = Transform3D(-0.36263356, 0, 0.9319318, 0, 1, 0, -0.9319318, 0, -0.36263356, 17.95, 0.81, -3.9499998)
 
-[node name="CandleLight" type="OmniLight3D" parent="CampProps" unique_id=439625429]
+[node name="CandleLight" type="OmniLight3D" parent="CampProps" unique_id=857228209]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.95, 1.11, -3.9499998)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 0.7
@@ -787,66 +787,67 @@ script = ExtResource("31_76g44")
 strength = 0.25
 speed = 7.0
 
-[node name="Storage" type="Node3D" parent="CampProps" unique_id=1318409276]
+[node name="Storage" type="Node3D" parent="CampProps" unique_id=2052053375]
 
-[node name="Scaffold" type="Node3D" parent="CampProps/Storage" unique_id=272708647]
+[node name="Scaffold" type="Node3D" parent="CampProps/Storage" unique_id=2111928449]
 
-[node name="post_a_8" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=1035158329 instance=ExtResource("18_7u33d")]
+[node name="post_a_8" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=974898020 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 16.3, 0, 3.3)
 
-[node name="post_a_9" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=1502334716 instance=ExtResource("18_7u33d")]
+[node name="post_a_9" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=884667928 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 20.1, 0, 3.3)
 
-[node name="post_a_10" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=784052006 instance=ExtResource("18_7u33d")]
+[node name="post_a_10" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=479854937 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 16.3, 0, 5.9)
 
-[node name="post_a_11" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=1155919911 instance=ExtResource("18_7u33d")]
+[node name="post_a_11" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=166852966 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 20.1, 0, 5.9)
 
-[node name="Platform" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=711325418 instance=ExtResource("49_527dd")]
+[node name="Platform" type="MeshInstance3D" parent="CampProps/Storage/Scaffold" unique_id=1863444707 instance=ExtResource("49_527dd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.2, 2.92, 4.7)
 
 [node name="Crate_Wooden_1" type="Node3D" parent="CampProps/Storage/Scaffold" unique_id=304031730 instance=ExtResource("50_375o6")]
 transform = Transform3D(0.77274066, 0, 0.20705524, 0, 0.8, 0, -0.20705524, 0, 0.77274066, 17.2, 3.18, 5.5)
 
-[node name="Bag_3" type="Node3D" parent="CampProps/Storage/Scaffold" unique_id=1353434937 instance=ExtResource("28_a2011")]
+[node name="Bag_3" type="Node3D" parent="CampProps/Storage/Scaffold" unique_id=148382347 instance=ExtResource("28_a2011")]
 transform = Transform3D(0.17364822, 0, 0.9848077, 0, 1, 0, -0.9848077, 0, 0.17364822, 19.2, 3.18, 5.2)
 
 [node name="Rope_3_1" type="Node3D" parent="CampProps/Storage/Scaffold" unique_id=863834313 instance=ExtResource("51_1t2h4")]
 transform = Transform3D(0.9848077, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.9848077, 18.3, 3.18, 4.2)
 
-[node name="Crate_Wooden_2" type="Node3D" parent="CampProps/Storage" unique_id=1714368219 instance=ExtResource("50_375o6")]
+[node name="Crate_Wooden_2" type="Node3D" parent="CampProps/Storage" unique_id=290721044 instance=ExtResource("50_375o6")]
 transform = Transform3D(0.9961947, 0, 0.08715574, 0, 1, 0, -0.08715574, 0, 0.9961947, 17.1, 0, 5.3)
 
-[node name="Crate_Wooden_3" type="Node3D" parent="CampProps/Storage" unique_id=1680825193 instance=ExtResource("50_375o6")]
+[node name="Crate_Wooden_3" type="Node3D" parent="CampProps/Storage" unique_id=782868800 instance=ExtResource("50_375o6")]
 transform = Transform3D(0.99026805, 0, -0.1391731, 0, 1, 0, 0.1391731, 0, 0.99026805, 18, 0, 5.35)
 
-[node name="Crate_Wooden_4" type="Node3D" parent="CampProps/Storage" unique_id=1851531909 instance=ExtResource("50_375o6")]
+[node name="Crate_Wooden_4" type="Node3D" parent="CampProps/Storage" unique_id=1990503088 instance=ExtResource("50_375o6")]
 transform = Transform3D(0.7881063, 0, 0.3184156, 0, 0.85, 0, -0.3184156, 0, 0.7881063, 17.55, 0.88, 5.35)
 
-[node name="Boxes" type="Node3D" parent="CampProps/Storage" unique_id=989979756]
+[node name="Boxes" type="Node3D" parent="CampProps/Storage" unique_id=1605578082]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
 [node name="box_1" type="Node3D" parent="CampProps/Storage/Boxes" unique_id=40961391 instance=ExtResource("52_yokiu")]
 transform = Transform3D(2.3475544, 0, 0.4989881, 0, 2.4, 0, -0.4989881, 0, 2.3475544, 19.3, 0, 5.3)
 
-[node name="box_2" type="Node3D" parent="CampProps/Storage/Boxes" unique_id=1126309149 instance=ExtResource("52_yokiu")]
+[node name="box_2" type="Node3D" parent="CampProps/Storage/Boxes" unique_id=1159209585 instance=ExtResource("52_yokiu")]
 transform = Transform3D(1.5320889, 0, 1.2855752, 0, 2, 0, -1.2855752, 0, 1.5320889, 19.25, 0.6, 5.25)
 
-[node name="Barrel_1" type="Node3D" parent="CampProps/Storage" unique_id=703571879 instance=ExtResource("29_sqhf5")]
+[node name="Barrel_1" type="Node3D" parent="CampProps/Storage" unique_id=2005676678 instance=ExtResource("29_sqhf5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.8, 0, 4.3)
 
-[node name="Bag_4" type="Node3D" parent="CampProps/Storage" unique_id=336640240 instance=ExtResource("28_a2011")]
+[node name="Bag_4" type="Node3D" parent="CampProps/Storage" unique_id=718534395 instance=ExtResource("28_a2011")]
 transform = Transform3D(-0.34202012, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, -0.34202012, 17.7, 0, 4.2)
 
 [node name="ToolBench" type="Node3D" parent="CampProps/Storage" unique_id=58918402 instance=ExtResource("53_yuok5")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 21.8, 0, 5.45)
 
-[node name="Look" type="Area3D" parent="CampProps/Storage/ToolBench" unique_id=133507242]
+[node name="Look" type="Area3D" parent="CampProps/Storage/ToolBench" unique_id=506428082]
 script = ExtResource("26_e7lt8")
 display_name = "Narzędzia"
 description = "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór, a Wszebor co rano mówi, że to miękkie jaksarskie żelazo i szkoda osełki."
+opening_description = "Kilofy, łopaty, kliny, zapasowe trzonki. Bolko ostrzy je co wieczór i mruczy, że żelazo jest miękkie, a osełki szkoda."
 
 [node name="Pickaxe_Bronze_1" type="Node3D" parent="CampProps/Storage" unique_id=857528358 instance=ExtResource("54_kk7kr")]
 transform = Transform3D(-0.38941836, 0.921061, -4.0260854e-08, 0, -4.371139e-08, -1, -0.921061, -0.38941836, 1.7022018e-08, 21.45, 0.9, 5.45)
@@ -857,53 +858,53 @@ transform = Transform3D(-0.9320391, 0.3623578, -1.5839163e-08, 0, -4.371139e-08,
 [node name="Whetstone_1" type="Node3D" parent="CampProps/Storage" unique_id=1427440708 instance=ExtResource("56_3sajd")]
 transform = Transform3D(-3.4969112e-08, 0, 0.8, 0, 0.8, 0, -0.8, 0, -3.4969112e-08, 23.2, 0, 5.6)
 
-[node name="Rails" type="Node3D" parent="CampProps/Storage" unique_id=1480581695]
+[node name="Rails" type="Node3D" parent="CampProps/Storage" unique_id=1057936632]
 
-[node name="rail_a_1" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=2012505081 instance=ExtResource("57_dnntn")]
+[node name="rail_a_1" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=1531105026 instance=ExtResource("57_dnntn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.5, 0.02, 2.6)
 
-[node name="rail_a_2" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=399077533 instance=ExtResource("57_dnntn")]
+[node name="rail_a_2" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=1267825187 instance=ExtResource("57_dnntn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.5, 0.02, 2.6)
 
-[node name="rail_a_3" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=1584520626 instance=ExtResource("57_dnntn")]
+[node name="rail_a_3" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=209020119 instance=ExtResource("57_dnntn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.5, 0.02, 2.6)
 
-[node name="rail_a_4" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=1507673654 instance=ExtResource("57_dnntn")]
+[node name="rail_a_4" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=491443253 instance=ExtResource("57_dnntn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.5, 0.02, 2.6)
 
-[node name="rail_end_1" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=1974389454 instance=ExtResource("58_3xghx")]
+[node name="rail_end_1" type="MeshInstance3D" parent="CampProps/Storage/Rails" unique_id=164406341 instance=ExtResource("58_3xghx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4, 0.02, 2.6)
 
-[node name="OreCart" type="Node3D" parent="CampProps/Storage/Rails" unique_id=868031872 instance=ExtResource("59_cm0up")]
+[node name="OreCart" type="Node3D" parent="CampProps/Storage/Rails" unique_id=868436866 instance=ExtResource("59_cm0up")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3, 0.02, 2.6)
 
-[node name="EmptyCart" type="Node3D" parent="CampProps/Storage/Rails" unique_id=1259441880 instance=ExtResource("60_l6qkr")]
+[node name="EmptyCart" type="Node3D" parent="CampProps/Storage/Rails" unique_id=1169945318 instance=ExtResource("60_l6qkr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.5, 0.02, 2.6)
 
-[node name="CartOre" type="Node3D" parent="CampProps/Storage" unique_id=612841525]
+[node name="CartOre" type="Node3D" parent="CampProps/Storage" unique_id=107333392]
 script = ExtResource("61_28fvm")
 overlay = SubResource("ShaderMaterial_lkbww")
 
-[node name="cave_rocks_b_2" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=804442301 instance=ExtResource("17_40pcp")]
+[node name="cave_rocks_b_2" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=995269324 instance=ExtResource("17_40pcp")]
 transform = Transform3D(0.23622434, 0, 0.21586582, 0, 0.32, 0, -0.21586582, 0, 0.23622434, 20.05, 0.95, 2.5)
 
-[node name="Look" type="Area3D" parent="CampProps/Storage/CartOre/cave_rocks_b_2" unique_id=330980977]
+[node name="Look" type="Area3D" parent="CampProps/Storage/CartOre/cave_rocks_b_2" unique_id=1788281354]
 script = ExtResource("26_e7lt8")
 display_name = "Wózek z urobkiem"
 description = "Urobek po starej ekipie. Stał tu czterdzieści lat i dalej świeci. Bolko przebiera go kamień po kamieniu i odkłada najlepsze kawałki na bok."
 solid = false
 padding = 0.2
 
-[node name="cave_rocks_a_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=619122015 instance=ExtResource("63_3ibet")]
+[node name="cave_rocks_a_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=652459064 instance=ExtResource("63_3ibet")]
 transform = Transform3D(0.011612159, 0, -0.2797591, 0, 0.28, 0, 0.2797591, 0, 0.011612159, 20.4, 0.93, 2.7)
 
-[node name="cave_rocks_c_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=57259683 instance=ExtResource("64_5m6a4")]
+[node name="cave_rocks_c_1" type="MeshInstance3D" parent="CampProps/Storage/CartOre" unique_id=620712455 instance=ExtResource("64_5m6a4")]
 transform = Transform3D(-0.13092916, 0, 0.21297313, 0, 0.25, 0, -0.21297313, 0, -0.13092916, 20.6, 0.98, 2.5)
 
-[node name="CartsLantern" type="Node3D" parent="CampProps/Storage" unique_id=702537450 instance=ExtResource("30_f7b1h")]
+[node name="CartsLantern" type="Node3D" parent="CampProps/Storage" unique_id=446944324 instance=ExtResource("30_f7b1h")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 20.1, 1.45, 3.2)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/Storage/CartsLantern" unique_id=1321271716]
+[node name="Light" type="OmniLight3D" parent="CampProps/Storage/CartsLantern" unique_id=1835151647]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 0.8
@@ -912,96 +913,96 @@ omni_attenuation = 1.3
 script = ExtResource("31_76g44")
 housing_casts_shadow = false
 
-[node name="Powder" type="Node3D" parent="CampProps" unique_id=654687743]
+[node name="Powder" type="Node3D" parent="CampProps" unique_id=192040877]
 
-[node name="Barrel_2" type="Node3D" parent="CampProps/Powder" unique_id=1444961007 instance=ExtResource("29_sqhf5")]
+[node name="Barrel_2" type="Node3D" parent="CampProps/Powder" unique_id=38505185 instance=ExtResource("29_sqhf5")]
 transform = Transform3D(-0.905751, 0, -0.4238102, 0, 1, 0, 0.4238102, 0, -0.905751, 19.4, 0, -7.5)
 
-[node name="Look" type="Area3D" parent="CampProps/Powder/Barrel_2" unique_id=1875877885]
+[node name="Look" type="Area3D" parent="CampProps/Powder/Barrel_2" unique_id=1156587509]
 script = ExtResource("26_e7lt8")
 display_name = "Beczki z prochem"
 description = "Proch Mirosława. Trzyma go jak najdalej od ogniska i od ludzi. Na wieku jednej beczki ktoś wydrapał nożem: NIE PALIĆ."
 
-[node name="Barrel_3" type="Node3D" parent="CampProps/Powder" unique_id=1735453858 instance=ExtResource("29_sqhf5")]
+[node name="Barrel_3" type="Node3D" parent="CampProps/Powder" unique_id=1820201125 instance=ExtResource("29_sqhf5")]
 transform = Transform3D(-0.73058814, 0, -0.6828184, 0, 1, 0, 0.6828184, 0, -0.73058814, 20.2, 0, -7.55)
 
-[node name="Barrel_4" type="Node3D" parent="CampProps/Powder" unique_id=452872596 instance=ExtResource("29_sqhf5")]
+[node name="Barrel_4" type="Node3D" parent="CampProps/Powder" unique_id=1442096528 instance=ExtResource("29_sqhf5")]
 transform = Transform3D(0.40232295, 0, 0.91549784, 0, 1, 0, -0.91549784, 0, 0.40232295, 19.8, 0, -6.85)
 
 [node name="FuseChest" type="Node3D" parent="CampProps/Powder" unique_id=162045958 instance=ExtResource("65_lu46h")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 18.5, 0, -7.55)
 
-[node name="Look" type="Area3D" parent="CampProps/Powder/FuseChest" unique_id=1815143784]
+[node name="Look" type="Area3D" parent="CampProps/Powder/FuseChest" unique_id=166341816]
 script = ExtResource("26_e7lt8")
 display_name = "Skrzynia z lontami"
 description = "Zamknięta na kłódkę. Klucz Mirosław nosi na szyi."
 
-[node name="Pen" type="Node3D" parent="CampProps" unique_id=210035298]
+[node name="Pen" type="Node3D" parent="CampProps" unique_id=2128007137]
 
-[node name="panel_wood_a_1" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1358702680 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_1" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1333999540 instance=ExtResource("66_cduw4")]
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 22.9, 0, -2.5)
 
-[node name="panel_wood_a_2" type="MeshInstance3D" parent="CampProps/Pen" unique_id=2141033849 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_2" type="MeshInstance3D" parent="CampProps/Pen" unique_id=750710765 instance=ExtResource("66_cduw4")]
 transform = Transform3D(0.55, 0, 0, 0, 0.55, 0, 0, 0, 0.55, 27.3, 0, -2.5)
 
-[node name="panel_wood_a_3" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1822976899 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_3" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1334029633 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-2.4041263e-08, 0, 0.55, 0, 0.55, 0, -0.55, 0, -2.4041263e-08, 21.8, 0, -3.6)
 
-[node name="panel_wood_a_4" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1695279756 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_4" type="MeshInstance3D" parent="CampProps/Pen" unique_id=2018690044 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-2.4041263e-08, 0, 0.55, 0, 0.55, 0, -0.55, 0, -2.4041263e-08, 28.4, 0, -3.6)
 
-[node name="panel_wood_a_5" type="MeshInstance3D" parent="CampProps/Pen" unique_id=901594706 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_5" type="MeshInstance3D" parent="CampProps/Pen" unique_id=184884641 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-2.4041263e-08, 0, 0.55, 0, 0.55, 0, -0.55, 0, -2.4041263e-08, 21.8, 0, -5.8)
 
-[node name="panel_wood_a_6" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1323642420 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_6" type="MeshInstance3D" parent="CampProps/Pen" unique_id=41422827 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-2.4041263e-08, 0, 0.55, 0, 0.55, 0, -0.55, 0, -2.4041263e-08, 28.4, 0, -5.8)
 
-[node name="panel_wood_a_7" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1748050984 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_7" type="MeshInstance3D" parent="CampProps/Pen" unique_id=19771406 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-2.4041263e-08, 0, 0.55, 0, 0.55, 0, -0.55, 0, -2.4041263e-08, 21.8, 0, -8)
 
-[node name="panel_wood_a_8" type="MeshInstance3D" parent="CampProps/Pen" unique_id=14916817 instance=ExtResource("66_cduw4")]
+[node name="panel_wood_a_8" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1530325563 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-2.4041263e-08, 0, 0.55, 0, 0.55, 0, -0.55, 0, -2.4041263e-08, 28.4, 0, -8)
 
-[node name="post_a_12" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1050812118 instance=ExtResource("18_7u33d")]
+[node name="post_a_12" type="MeshInstance3D" parent="CampProps/Pen" unique_id=2108817286 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6184211, 0, 0, 0, 0.6184211, 0, 0, 0, 0.6184211, 21.8, 0, -2.5)
 
-[node name="post_a_13" type="MeshInstance3D" parent="CampProps/Pen" unique_id=2074193349 instance=ExtResource("18_7u33d")]
+[node name="post_a_13" type="MeshInstance3D" parent="CampProps/Pen" unique_id=10950509 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6184211, 0, 0, 0, 0.6184211, 0, 0, 0, 0.6184211, 28.4, 0, -2.5)
 
-[node name="post_a_14" type="MeshInstance3D" parent="CampProps/Pen" unique_id=432754071 instance=ExtResource("18_7u33d")]
+[node name="post_a_14" type="MeshInstance3D" parent="CampProps/Pen" unique_id=387094448 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6184211, 0, 0, 0, 0.6184211, 0, 0, 0, 0.6184211, 21.8, 0, -4.7)
 
-[node name="post_a_15" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1226967089 instance=ExtResource("18_7u33d")]
+[node name="post_a_15" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1293039586 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6184211, 0, 0, 0, 0.6184211, 0, 0, 0, 0.6184211, 21.8, 0, -6.9)
 
-[node name="post_a_16" type="MeshInstance3D" parent="CampProps/Pen" unique_id=422534152 instance=ExtResource("18_7u33d")]
+[node name="post_a_16" type="MeshInstance3D" parent="CampProps/Pen" unique_id=388286184 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6184211, 0, 0, 0, 0.6184211, 0, 0, 0, 0.6184211, 28.4, 0, -4.7)
 
-[node name="post_a_17" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1939088245 instance=ExtResource("18_7u33d")]
+[node name="post_a_17" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1555076501 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6184211, 0, 0, 0, 0.6184211, 0, 0, 0, 0.6184211, 28.4, 0, -6.9)
 
-[node name="post_a_18" type="MeshInstance3D" parent="CampProps/Pen" unique_id=2020697991 instance=ExtResource("18_7u33d")]
+[node name="post_a_18" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1302721623 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 24, 0, -2.5)
 
-[node name="post_a_19" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1978145972 instance=ExtResource("18_7u33d")]
+[node name="post_a_19" type="MeshInstance3D" parent="CampProps/Pen" unique_id=538631448 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 26.2, 0, -2.5)
 
-[node name="beam_a_4" type="MeshInstance3D" parent="CampProps/Pen" unique_id=516499711 instance=ExtResource("20_e0ip5")]
+[node name="beam_a_4" type="MeshInstance3D" parent="CampProps/Pen" unique_id=559839839 instance=ExtResource("20_e0ip5")]
 transform = Transform3D(0.55, 0, 0, 0, 1, 0, 0, 0, 1, 25.1, 2.94, -2.5)
 
-[node name="post_a_20" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1147077795 instance=ExtResource("18_7u33d")]
+[node name="post_a_20" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1680069028 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.94736844, 0, 0, 0, 0.94736844, 0, 0, 0, 0.94736844, 24.300001, 0, -7.5)
 
-[node name="post_a_21" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1925278816 instance=ExtResource("18_7u33d")]
+[node name="post_a_21" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1649546988 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.94736844, 0, 0, 0, 0.94736844, 0, 0, 0, 0.94736844, 25.9, 0, -7.5)
 
-[node name="beam_a_5" type="MeshInstance3D" parent="CampProps/Pen" unique_id=1122258268 instance=ExtResource("20_e0ip5")]
+[node name="beam_a_5" type="MeshInstance3D" parent="CampProps/Pen" unique_id=712007243 instance=ExtResource("20_e0ip5")]
 transform = Transform3D(0.45, 0, 0, 0, 1, 0, 0, 0, 1, 25.1, 3.5, -7.5)
 
-[node name="CommandLantern" type="Node3D" parent="CampProps/Pen" unique_id=941738484 instance=ExtResource("30_f7b1h")]
+[node name="CommandLantern" type="Node3D" parent="CampProps/Pen" unique_id=1552642927 instance=ExtResource("30_f7b1h")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 21.86, 1.45, -5.2)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/Pen/CommandLantern" unique_id=311488712]
+[node name="Light" type="OmniLight3D" parent="CampProps/Pen/CommandLantern" unique_id=1720797699]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.6
@@ -1011,10 +1012,10 @@ omni_attenuation = 1.3
 script = ExtResource("31_76g44")
 housing_casts_shadow = false
 
-[node name="CommandLantern2" type="Node3D" parent="CampProps/Pen" unique_id=453969692 instance=ExtResource("30_f7b1h")]
+[node name="CommandLantern2" type="Node3D" parent="CampProps/Pen" unique_id=1843910721 instance=ExtResource("30_f7b1h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 28.34, 1.45, -6.2)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/Pen/CommandLantern2" unique_id=1893475293]
+[node name="Light" type="OmniLight3D" parent="CampProps/Pen/CommandLantern2" unique_id=1423367277]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.3
@@ -1023,10 +1024,10 @@ omni_attenuation = 1.3
 script = ExtResource("31_76g44")
 housing_casts_shadow = false
 
-[node name="MapTable" type="Node3D" parent="CampProps" unique_id=821262753 instance=ExtResource("42_cnbxr")]
+[node name="MapTable" type="Node3D" parent="CampProps" unique_id=1301181104 instance=ExtResource("42_cnbxr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1, 0, -5)
 
-[node name="MapTableUse" type="Area3D" parent="CampProps/MapTable" unique_id=1976374240 groups=["story_use"]]
+[node name="MapTableUse" type="Area3D" parent="CampProps/MapTable" unique_id=1523037824 groups=["story_use"]]
 script = ExtResource("26_e7lt8")
 display_name = "Stół z mapą"
 action = 2
@@ -1047,7 +1048,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2, 0.81, -4.7)
 [node name="CandleStick_Triple_1" type="Node3D" parent="CampProps" unique_id=1946591906 instance=ExtResource("71_eoq32")]
 transform = Transform3D(0.30710256, 0, 0.9516764, 0, 1, 0, -0.9516764, 0, 0.30710256, 24.050001, 0.81, -5.25)
 
-[node name="@OmniLight3D@2" type="OmniLight3D" parent="CampProps" unique_id=1017052049]
+[node name="@OmniLight3D@2" type="OmniLight3D" parent="CampProps" unique_id=1614176757]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.050001, 1.11, -5.25)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 1.4
@@ -1062,15 +1063,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.050001, 0, -6.45)
 [node name="Ledger" type="Node3D" parent="CampProps" unique_id=923650203 instance=ExtResource("73_y0u73")]
 transform = Transform3D(0.49999997, 0, -0.86602545, 0, 1, 0, 0.86602545, 0, 0.49999997, 27.5, 0, -4.3)
 
-[node name="Look" type="Area3D" parent="CampProps/Ledger" unique_id=486460146]
+[node name="Look" type="Area3D" parent="CampProps/Ledger" unique_id=1534535222]
 script = ExtResource("26_e7lt8")
 display_name = "Księga zarządcy"
 description = "Równe rubryki, pisane drobnym, starannym pismem Hagiwary: ludzie, zapasy, urobek, żyły. Przy urobku na razie same zera. Na ostatniej stronie, ręką Racibora: „Kniaź czeka”."
+opening_description = "Równe rubryki, pisane drobnym, starannym pismem: ludzie, zapasy, urobek, żyły. Przy urobku na razie same zera. Na ostatniej stronie, ręką Racibora: „Kniaź czeka”."
 
 [node name="KniazBanner" type="Node3D" parent="CampProps" unique_id=639269548 instance=ExtResource("74_jetb5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.300001, 2.66, -7.4)
 
-[node name="Look" type="Area3D" parent="CampProps/KniazBanner" unique_id=1948311720]
+[node name="Look" type="Area3D" parent="CampProps/KniazBanner" unique_id=1116127257]
 script = ExtResource("26_e7lt8")
 display_name = "Chorągiew Kniazia"
 description = "Herb Jacyntów: srebrny gród na czerwonym polu. Racibor powiesił ją pierwszego dnia, zanim ktokolwiek rozpakował swoje rzeczy."
@@ -1079,27 +1081,27 @@ solid = false
 [node name="LeaderBed" type="Node3D" parent="CampProps" unique_id=457769127 instance=ExtResource("75_04nvx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.9, 0, -6.75)
 
-[node name="Look" type="Area3D" parent="CampProps/LeaderBed" unique_id=873561435]
+[node name="Look" type="Area3D" parent="CampProps/LeaderBed" unique_id=370149746]
 script = ExtResource("26_e7lt8")
 display_name = "Łóżko zarządcy"
 description = "Prawdziwe łóżko, zniesione z góry w częściach. Jedyne w obozie."
 
-[node name="PayChest" type="Node3D" parent="CampProps" unique_id=552687375 instance=ExtResource("65_lu46h")]
+[node name="PayChest" type="Node3D" parent="CampProps" unique_id=1940052608 instance=ExtResource("65_lu46h")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 27.6, 0, -7.55)
 
-[node name="GuardSeat" type="Node3D" parent="CampProps" unique_id=1727925587]
+[node name="GuardSeat" type="Node3D" parent="CampProps" unique_id=458408271]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
-[node name="box_3" type="Node3D" parent="CampProps/GuardSeat" unique_id=831613745 instance=ExtResource("52_yokiu")]
+[node name="box_3" type="Node3D" parent="CampProps/GuardSeat" unique_id=950909786 instance=ExtResource("52_yokiu")]
 transform = Transform3D(1.9032462, 0, 0.8874983, 0, 2.1, 0, -0.8874983, 0, 1.9032462, 23, 0, -3.6)
 
 [node name="SupplyStall" type="Node3D" parent="CampProps" unique_id=1033190074 instance=ExtResource("76_avyys")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 26.6, 0, 5)
 
-[node name="StallBlock" type="StaticBody3D" parent="CampProps" unique_id=1067847747]
+[node name="StallBlock" type="StaticBody3D" parent="CampProps" unique_id=1241078895]
 
-[node name="Shape" type="CollisionShape3D" parent="CampProps/StallBlock" unique_id=897523463]
+[node name="Shape" type="CollisionShape3D" parent="CampProps/StallBlock" unique_id=1820827165]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.6, 0.5, 5)
 shape = SubResource("BoxShape3D_vaj52")
 
@@ -1112,10 +1114,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 0.93, 4.85)
 [node name="Pouch_Large_1" type="Node3D" parent="CampProps" unique_id=1300940719 instance=ExtResource("79_k71uo")]
 transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, 27.35, 0.93, 5.05)
 
-[node name="CandleStick_2" type="Node3D" parent="CampProps" unique_id=2094827732 instance=ExtResource("48_nqw55")]
+[node name="CandleStick_2" type="Node3D" parent="CampProps" unique_id=886422627 instance=ExtResource("48_nqw55")]
 transform = Transform3D(0.53407556, 0, 0.84543675, 0, 1, 0, -0.84543675, 0, 0.53407556, 26.65, 0.93, 5.1)
 
-[node name="@OmniLight3D@3" type="OmniLight3D" parent="CampProps" unique_id=2045846380]
+[node name="@OmniLight3D@3" type="OmniLight3D" parent="CampProps" unique_id=835281914]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.65, 1.23, 5.1)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 0.7
@@ -1125,34 +1127,34 @@ script = ExtResource("31_76g44")
 strength = 0.25
 speed = 7.0
 
-[node name="Rope_3_2" type="Node3D" parent="CampProps" unique_id=1885436679 instance=ExtResource("51_1t2h4")]
+[node name="Rope_3_2" type="Node3D" parent="CampProps" unique_id=979359180 instance=ExtResource("51_1t2h4")]
 transform = Transform3D(0.9848077, 0, 0.17364818, 0, 1, 0, -0.17364818, 0, 0.9848077, 24.7, 0, 5.6)
 
 [node name="Rope_2_1" type="Node3D" parent="CampProps" unique_id=1996346884 instance=ExtResource("80_oo7ut")]
 transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, 24.6, 0.1, 5.55)
 
-[node name="Barrel_5" type="Node3D" parent="CampProps" unique_id=515362730 instance=ExtResource("29_sqhf5")]
+[node name="Barrel_5" type="Node3D" parent="CampProps" unique_id=714339018 instance=ExtResource("29_sqhf5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.550001, 0, 5.6)
 
-[node name="Barrel_6" type="Node3D" parent="CampProps" unique_id=1887519072 instance=ExtResource("29_sqhf5")]
+[node name="Barrel_6" type="Node3D" parent="CampProps" unique_id=1880987408 instance=ExtResource("29_sqhf5")]
 transform = Transform3D(0.76604444, 0, 0.6427876, 0, 1, 0, -0.6427876, 0, 0.76604444, 29.300001, 0, 5.65)
 
-[node name="Crate_Wooden_5" type="Node3D" parent="CampProps" unique_id=1890082904 instance=ExtResource("50_375o6")]
+[node name="Crate_Wooden_5" type="Node3D" parent="CampProps" unique_id=1345167574 instance=ExtResource("50_375o6")]
 transform = Transform3D(0.9781476, 0, -0.2079117, 0, 1, 0, 0.2079117, 0, 0.9781476, 30.1, 0, 5.5)
 
 [node name="FarmCrate_Empty_1" type="Node3D" parent="CampProps" unique_id=90066023 instance=ExtResource("81_hj6pk")]
 transform = Transform3D(0.9961947, 0, 0.08715574, 0, 1, 0, -0.08715574, 0, 0.9961947, 30.050001, 0.93, 5.5)
 
-[node name="Bag_5" type="Node3D" parent="CampProps" unique_id=687643855 instance=ExtResource("28_a2011")]
+[node name="Bag_5" type="Node3D" parent="CampProps" unique_id=1114288088 instance=ExtResource("28_a2011")]
 transform = Transform3D(-0.9396926, 0, -0.34202015, 0, 1, 0, 0.34202015, 0, -0.9396926, 25.050001, 0, 5)
 
-[node name="post_a_22" type="MeshInstance3D" parent="CampProps" unique_id=361932034 instance=ExtResource("18_7u33d")]
+[node name="post_a_22" type="MeshInstance3D" parent="CampProps" unique_id=958327142 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6052632, 0, 0, 0, 0.6052632, 0, 0, 0, 0.6052632, 24.2, 0, 5.87)
 
-[node name="SupplyLantern" type="Node3D" parent="CampProps" unique_id=2078205614 instance=ExtResource("30_f7b1h")]
+[node name="SupplyLantern" type="Node3D" parent="CampProps" unique_id=1156536832 instance=ExtResource("30_f7b1h")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 24.2, 1.45, 5.75)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/SupplyLantern" unique_id=784752561]
+[node name="Light" type="OmniLight3D" parent="CampProps/SupplyLantern" unique_id=1144857006]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 shadow_enabled = true
@@ -1161,36 +1163,37 @@ omni_attenuation = 1.3
 script = ExtResource("31_76g44")
 housing_casts_shadow = false
 
-[node name="Infirmary" type="Node3D" parent="CampProps" unique_id=1292268017]
+[node name="Infirmary" type="Node3D" parent="CampProps" unique_id=2122271853]
 
-[node name="HerbCrate" type="Node3D" parent="CampProps/Infirmary" unique_id=294766882 instance=ExtResource("50_375o6")]
+[node name="HerbCrate" type="Node3D" parent="CampProps/Infirmary" unique_id=178308076 instance=ExtResource("50_375o6")]
 transform = Transform3D(0.8370866, 0, 0.14760095, 0, 0.85, 0, -0.14760095, 0, 0.8370866, 5.45, 0, -7.55)
 
-[node name="Look" type="Area3D" parent="CampProps/Infirmary/HerbCrate" unique_id=1575632863]
+[node name="Look" type="Area3D" parent="CampProps/Infirmary/HerbCrate" unique_id=1324576266]
 script = ExtResource("26_e7lt8")
 display_name = "Skrzynka Anzelma"
 description = "Zioła w płóciennych woreczkach, każdy podpisany drobnym pismem. Bandaże wygotowane i zwinięte w równe rolki. Na wieku wyryty płomień, a przez płomień ktoś przeciągnął nożem krechę."
+opening_name = "Skrzynka z ziołami"
 
-[node name="SmallBottles_1_2" type="Node3D" parent="CampProps/Infirmary" unique_id=768353700 instance=ExtResource("78_wf80c")]
+[node name="SmallBottles_1_2" type="Node3D" parent="CampProps/Infirmary" unique_id=476482214 instance=ExtResource("78_wf80c")]
 transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 5.45, 0.72, -7.55)
 
 [node name="Potion_2_1" type="Node3D" parent="CampProps/Infirmary" unique_id=419164212 instance=ExtResource("82_84x0a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 0.72, -7.35)
 
-[node name="Bucket_Wooden_1_2" type="Node3D" parent="CampProps/Infirmary" unique_id=277009405 instance=ExtResource("39_x8kor")]
+[node name="Bucket_Wooden_1_2" type="Node3D" parent="CampProps/Infirmary" unique_id=376556599 instance=ExtResource("39_x8kor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2, 0, -6.9)
 
-[node name="SickSeat" type="Node3D" parent="CampProps/Infirmary" unique_id=2093267174]
+[node name="SickSeat" type="Node3D" parent="CampProps/Infirmary" unique_id=653868001]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
-[node name="box_4" type="Node3D" parent="CampProps/Infirmary/SickSeat" unique_id=1683479223 instance=ExtResource("52_yokiu")]
+[node name="box_4" type="Node3D" parent="CampProps/Infirmary/SickSeat" unique_id=89178529 instance=ExtResource("52_yokiu")]
 transform = Transform3D(1.9696155, 0, 0.34729636, 0, 2, 0, -0.34729636, 0, 1.9696155, 3.6, 0, -5.9)
 
-[node name="CandleStick_3" type="Node3D" parent="CampProps/Infirmary" unique_id=2023738001 instance=ExtResource("48_nqw55")]
+[node name="CandleStick_3" type="Node3D" parent="CampProps/Infirmary" unique_id=488355953 instance=ExtResource("48_nqw55")]
 transform = Transform3D(0.017068999, 0, -0.9998543, 0, 1, 0, 0.9998543, 0, 0.017068999, 5.2, 0.72, -7.75)
 
-[node name="CandleLight" type="OmniLight3D" parent="CampProps/Infirmary" unique_id=201598367]
+[node name="CandleLight" type="OmniLight3D" parent="CampProps/Infirmary" unique_id=1171992686]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 1.02, -7.75)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 0.8
@@ -1200,29 +1203,31 @@ script = ExtResource("31_76g44")
 strength = 0.25
 speed = 7.0
 
-[node name="ScribeCorner" type="Node3D" parent="CampProps" unique_id=436439865]
+[node name="ScribeCorner" type="Node3D" parent="CampProps" unique_id=1186197661]
 
-[node name="Stool_1" type="Node3D" parent="CampProps/ScribeCorner" unique_id=1177204072 instance=ExtResource("44_sio62")]
+[node name="Stool_1" type="Node3D" parent="CampProps/ScribeCorner" unique_id=43098176 instance=ExtResource("44_sio62")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.7, 0, -6.9)
 
-[node name="TeaCrate" type="Node3D" parent="CampProps/ScribeCorner" unique_id=2052568492 instance=ExtResource("50_375o6")]
+[node name="TeaCrate" type="Node3D" parent="CampProps/ScribeCorner" unique_id=510065830 instance=ExtResource("50_375o6")]
 transform = Transform3D(0.79221445, 0, -0.11133849, 0, 0.8, 0, 0.11133849, 0, 0.79221445, 30.5, 0, -6.3)
 
-[node name="Look" type="Area3D" parent="CampProps/ScribeCorner/TeaCrate" unique_id=1268932962]
+[node name="Look" type="Area3D" parent="CampProps/ScribeCorner/TeaCrate" unique_id=2023411483]
 script = ExtResource("26_e7lt8")
 display_name = "Kącik Hagiwary"
 description = "Skrzynia zamiast stołu. Na niej kubek z naparem, który Hagiwara nazywa herbatą, pędzelek, kamień do rozcierania tuszu i zeszyt z wierszami. Wiersze są krótkie. Każdy o ciemności."
+opening_name = "Skrzynia w kącie"
+opening_description = "Skrzynia zamiast stołu. Na niej kubek z naparem, pędzelek, kamień do rozcierania tuszu i zeszyt z wierszami. Wiersze są krótkie. Każdy o ciemności."
 
-[node name="Mug_4" type="Node3D" parent="CampProps/ScribeCorner" unique_id=1246606135 instance=ExtResource("46_sdj8f")]
+[node name="Mug_4" type="Node3D" parent="CampProps/ScribeCorner" unique_id=1674683885 instance=ExtResource("46_sdj8f")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.4, 0.7, -6.15)
 
 [node name="Book_5_1" type="Node3D" parent="CampProps/ScribeCorner" unique_id=41544066 instance=ExtResource("83_ij0n5")]
 transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 30.65, 0.7, -6.4500003)
 
-[node name="CandleStick_4" type="Node3D" parent="CampProps/ScribeCorner" unique_id=213838855 instance=ExtResource("48_nqw55")]
+[node name="CandleStick_4" type="Node3D" parent="CampProps/ScribeCorner" unique_id=259887001 instance=ExtResource("48_nqw55")]
 transform = Transform3D(0.119100146, 0, 0.99288225, 0, 1, 0, -0.99288225, 0, 0.119100146, 30.6, 0.7, -6)
 
-[node name="CandleLight" type="OmniLight3D" parent="CampProps/ScribeCorner" unique_id=325824937]
+[node name="CandleLight" type="OmniLight3D" parent="CampProps/ScribeCorner" unique_id=1202960093]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.6, 1, -6)
 light_color = Color(1, 0.7, 0.4, 1)
 light_energy = 0.7
@@ -1232,13 +1237,13 @@ script = ExtResource("31_76g44")
 strength = 0.25
 speed = 7.0
 
-[node name="post_a_23" type="MeshInstance3D" parent="CampProps/ScribeCorner" unique_id=1482223475 instance=ExtResource("18_7u33d")]
+[node name="post_a_23" type="MeshInstance3D" parent="CampProps/ScribeCorner" unique_id=350009660 instance=ExtResource("18_7u33d")]
 transform = Transform3D(0.6052632, 0, 0, 0, 0.6052632, 0, 0, 0, 0.6052632, 30.87, 0, -4.8)
 
-[node name="ScribeLantern" type="Node3D" parent="CampProps/ScribeCorner" unique_id=971390876 instance=ExtResource("30_f7b1h")]
+[node name="ScribeLantern" type="Node3D" parent="CampProps/ScribeCorner" unique_id=543429532 instance=ExtResource("30_f7b1h")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.75, 1.45, -4.8)
 
-[node name="Light" type="OmniLight3D" parent="CampProps/ScribeCorner/ScribeLantern" unique_id=1800729175]
+[node name="Light" type="OmniLight3D" parent="CampProps/ScribeCorner/ScribeLantern" unique_id=1004053148]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 0.7
@@ -1246,34 +1251,34 @@ omni_attenuation = 1.3
 script = ExtResource("31_76g44")
 housing_casts_shadow = false
 
-[node name="Barricades" type="Node3D" parent="." unique_id=226063607]
+[node name="Barricades" type="Node3D" parent="." unique_id=722179511]
 
-[node name="Signs" type="Node3D" parent="Barricades" unique_id=1298760790]
+[node name="Signs" type="Node3D" parent="Barricades" unique_id=1632765230]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
 [node name="EastSign" type="Node3D" parent="Barricades/Signs" unique_id=632717869 instance=ExtResource("84_2h4k8")]
 transform = Transform3D(-1.5298986e-07, 0, -3.5, 0, 3.5, 0, 3.5, 0, -1.5298986e-07, 36.1, 0, 1.5)
 
-[node name="EastExitUse" type="Area3D" parent="Barricades/Signs/EastSign" unique_id=567812810 groups=["story_use"]]
+[node name="EastExitUse" type="Area3D" parent="Barricades/Signs/EastSign" unique_id=2025603383 groups=["story_use"]]
 script = ExtResource("26_e7lt8")
 display_name = "Drogowskaz"
 action = 2
 prompt_text = "Dokąd dalej? (albo [M])"
 
-[node name="WestSign" type="Node3D" parent="Barricades/Signs" unique_id=1745844301 instance=ExtResource("84_2h4k8")]
+[node name="WestSign" type="Node3D" parent="Barricades/Signs" unique_id=1782225406 instance=ExtResource("84_2h4k8")]
 transform = Transform3D(-1.5298986e-07, 0, 3.5, 0, 3.5, 0, -3.5, 0, -1.5298986e-07, -2.7, 0, 1.5)
 
-[node name="WestExitUse" type="Area3D" parent="Barricades/Signs/WestSign" unique_id=925826850 groups=["story_use"]]
+[node name="WestExitUse" type="Area3D" parent="Barricades/Signs/WestSign" unique_id=1036213481 groups=["story_use"]]
 script = ExtResource("26_e7lt8")
 display_name = "Drogowskaz"
 action = 2
 prompt_text = "Dokąd dalej? (albo [M])"
 
-[node name="EastBoards" type="MeshInstance3D" parent="Barricades" unique_id=1045442622 instance=ExtResource("66_cduw4")]
+[node name="EastBoards" type="MeshInstance3D" parent="Barricades" unique_id=1922553109 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 35.2, 0, 3)
 
-[node name="EastBoardsLook" type="Area3D" parent="Barricades/EastBoards" unique_id=1893583695]
+[node name="EastBoardsLook" type="Area3D" parent="Barricades/EastBoards" unique_id=660422077]
 script = ExtResource("26_e7lt8")
 display_name = "Zabite deskami zejście"
 description = "Chodnik zabity deskami. Ktoś napisał na nich kredą: „STARA SZTOLNIA”.
@@ -1281,10 +1286,10 @@ description = "Chodnik zabity deskami. Ktoś napisał na nich kredą: „STARA S
 Na wyprawę wyruszasz od stołu z mapą w obozie."
 solid = false
 
-[node name="EastLantern" type="Node3D" parent="Barricades" unique_id=1103575024 instance=ExtResource("30_f7b1h")]
+[node name="EastLantern" type="Node3D" parent="Barricades" unique_id=1336655708 instance=ExtResource("30_f7b1h")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 34, 1.35, 4.45)
 
-[node name="Light" type="OmniLight3D" parent="Barricades/EastLantern" unique_id=1576180353]
+[node name="Light" type="OmniLight3D" parent="Barricades/EastLantern" unique_id=602080557]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0.95)
 light_color = Color(1, 0.62, 0.32, 1)
 light_energy = 1.2
@@ -1294,16 +1299,16 @@ omni_attenuation = 1.3
 script = ExtResource("31_76g44")
 housing_casts_shadow = false
 
-[node name="EastBlock" type="StaticBody3D" parent="Barricades" unique_id=260347115]
+[node name="EastBlock" type="StaticBody3D" parent="Barricades" unique_id=1820011949]
 
-[node name="Shape" type="CollisionShape3D" parent="Barricades/EastBlock" unique_id=1881011809]
+[node name="Shape" type="CollisionShape3D" parent="Barricades/EastBlock" unique_id=140740300]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 35.2, 2, 3)
 shape = SubResource("BoxShape3D_67ohv")
 
-[node name="WestBoards" type="MeshInstance3D" parent="Barricades" unique_id=1586070623 instance=ExtResource("66_cduw4")]
+[node name="WestBoards" type="MeshInstance3D" parent="Barricades" unique_id=345733706 instance=ExtResource("66_cduw4")]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -1.8, 0, 3)
 
-[node name="WestBoardsLook" type="Area3D" parent="Barricades/WestBoards" unique_id=1781326378]
+[node name="WestBoardsLook" type="Area3D" parent="Barricades/WestBoards" unique_id=1730031195]
 script = ExtResource("26_e7lt8")
 display_name = "Zabity deskami chodnik"
 description = "Zachodni chodnik zabity deskami. Zza nich słychać, jak co jakiś czas osypuje się żwir.
@@ -1311,22 +1316,22 @@ description = "Zachodni chodnik zabity deskami. Zza nich słychać, jak co jaki�
 Na wyprawę wyruszasz od stołu z mapą w obozie."
 solid = false
 
-[node name="WestBlock" type="StaticBody3D" parent="Barricades" unique_id=1203483236]
+[node name="WestBlock" type="StaticBody3D" parent="Barricades" unique_id=1333384948]
 
-[node name="Shape" type="CollisionShape3D" parent="Barricades/WestBlock" unique_id=485948960]
+[node name="Shape" type="CollisionShape3D" parent="Barricades/WestBlock" unique_id=124955856]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 2, 3)
 shape = SubResource("BoxShape3D_6fqf7")
 
-[node name="WestSegment" type="Node3D" parent="." unique_id=1451098488]
+[node name="WestSegment" type="Node3D" parent="." unique_id=141404450]
 
-[node name="KeyWood" type="Node3D" parent="WestSegment" unique_id=1670322090]
+[node name="KeyWood" type="Node3D" parent="WestSegment" unique_id=1712067533]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
-[node name="KeyBoard" type="Node3D" parent="WestSegment/KeyWood" unique_id=1387970062 instance=ExtResource("84_2h4k8")]
+[node name="KeyBoard" type="Node3D" parent="WestSegment/KeyWood" unique_id=2044842782 instance=ExtResource("84_2h4k8")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -14.5, -2, 1.45)
 
-[node name="KeyBoardLook" type="Area3D" parent="WestSegment/KeyWood/KeyBoard" unique_id=733183864]
+[node name="KeyBoardLook" type="Area3D" parent="WestSegment/KeyWood/KeyBoard" unique_id=2034664535]
 script = ExtResource("26_e7lt8")
 display_name = "Deska z wyrytymi znakami"
 description = "Deska przybita do stempla. Ktoś wyrył na niej alfabet w dwóch rzędach, dolny przesunięty o siedem liter. W rogu znak dziadka: dwie skrzyżowane kreski i kropka.
@@ -1337,7 +1342,7 @@ on_use_note = &"klucz"
 on_use_quest = &"slady"
 on_use_quest_entry = "klucz"
 
-[node name="KeyGlow" type="OmniLight3D" parent="WestSegment" unique_id=1276106758]
+[node name="KeyGlow" type="OmniLight3D" parent="WestSegment" unique_id=109910918]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.5, 0.2, 2.4)
 light_color = Color(0.55, 0.65, 1, 1)
 light_energy = 0.5
@@ -1347,24 +1352,24 @@ script = ExtResource("31_76g44")
 strength = 0.3
 speed = 0.8
 
-[node name="FarBarrier" type="Node3D" parent="WestSegment" unique_id=1856128349]
+[node name="FarBarrier" type="Node3D" parent="WestSegment" unique_id=1748584354]
 
-[node name="cave_rocks_b_3" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=2035697180 instance=ExtResource("17_40pcp")]
+[node name="cave_rocks_b_3" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=379509664 instance=ExtResource("17_40pcp")]
 transform = Transform3D(0.34126368, 0, -1.1504518, 0, 1.2, 0, 1.1504518, 0, 0.34126368, -17.4, -1.7, 1.5)
 
-[node name="cave_rocks_c_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=1397015536 instance=ExtResource("64_5m6a4")]
+[node name="cave_rocks_c_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=863056712 instance=ExtResource("64_5m6a4")]
 transform = Transform3D(-0.29121584, 0, 1.3693769, 0, 1.4, 0, -1.3693769, 0, -0.29121584, -17.6, -1.7, 2.8)
 
-[node name="cave_rocks_a_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=939770433 instance=ExtResource("63_3ibet")]
+[node name="cave_rocks_a_2" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=1836623949 instance=ExtResource("63_3ibet")]
 transform = Transform3D(0.39931786, 0, -1.0249611, 0, 1.1, 0, 1.0249611, 0, 0.39931786, -17.3, -1.7, 4.3)
 
-[node name="cave_rocks_d_1" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=2035130244 instance=ExtResource("85_vmwc3")]
+[node name="cave_rocks_d_1" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=73711039 instance=ExtResource("85_vmwc3")]
 transform = Transform3D(-0.52858675, 0, -0.84887934, 0, 1, 0, 0.84887934, 0, -0.52858675, -17.9, -1.7, 3.6)
 
-[node name="BrokenBeam" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=195403942 instance=ExtResource("20_e0ip5")]
+[node name="BrokenBeam" type="MeshInstance3D" parent="WestSegment/FarBarrier" unique_id=816924559 instance=ExtResource("20_e0ip5")]
 transform = Transform3D(-4.1572e-08, -1.3507562e-08, 1, -0.309017, 0.95105654, 0, -0.95105654, -0.309017, -4.371139e-08, -17, -1.1, 3)
 
-[node name="BarrierLook" type="Area3D" parent="WestSegment/FarBarrier/BrokenBeam" unique_id=240680401]
+[node name="BarrierLook" type="Area3D" parent="WestSegment/FarBarrier/BrokenBeam" unique_id=1529832950]
 script = ExtResource("26_e7lt8")
 display_name = "Połamane stemple"
 description = "Dalej chodnik stromo opada w ciemność: to upadowa z mapy dziadka. Stemple połamało jak zapałki. Bez liny nie ma tu czego szukać.
@@ -1373,20 +1378,20 @@ Zejście zaplanujesz przy stole z mapą."
 solid = false
 padding = 0.3
 
-[node name="BarrierBlock" type="StaticBody3D" parent="WestSegment/FarBarrier" unique_id=583769193]
+[node name="BarrierBlock" type="StaticBody3D" parent="WestSegment/FarBarrier" unique_id=1360373680]
 
-[node name="Shape" type="CollisionShape3D" parent="WestSegment/FarBarrier/BarrierBlock" unique_id=1823030833]
+[node name="Shape" type="CollisionShape3D" parent="WestSegment/FarBarrier/BarrierBlock" unique_id=545531472]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17.5, -0.5, 3)
 shape = SubResource("BoxShape3D_jdvxk")
 
-[node name="Vein" type="Node3D" parent="WestSegment" unique_id=568455272]
+[node name="Vein" type="Node3D" parent="WestSegment" unique_id=617527719]
 script = ExtResource("61_28fvm")
 overlay = SubResource("ShaderMaterial_x78yb")
 
-[node name="cave_wall_rocks_c_2" type="MeshInstance3D" parent="WestSegment/Vein" unique_id=1593283297 instance=ExtResource("16_o1a8y")]
+[node name="cave_wall_rocks_c_2" type="MeshInstance3D" parent="WestSegment/Vein" unique_id=1453156505 instance=ExtResource("16_o1a8y")]
 transform = Transform3D(-1.2, 0, -1.04907336e-07, 0, 1.2, 0, 1.04907336e-07, 0, -1.2, -12.2, -0.8, 4.75)
 
-[node name="VeinGlow" type="OmniLight3D" parent="WestSegment" unique_id=860688016]
+[node name="VeinGlow" type="OmniLight3D" parent="WestSegment" unique_id=1120703588]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.2, -0.4, 3.6)
 light_color = Color(0.35, 0.6, 1, 1)
 light_energy = 1.4
@@ -1397,7 +1402,7 @@ mode = 1
 strength = 0.35
 speed = 0.7
 
-[node name="VeinMark_west_1" type="Area3D" parent="WestSegment" unique_id=254787646 node_paths=PackedStringArray("highlight_target")]
+[node name="VeinMark_west_1" type="Area3D" parent="WestSegment" unique_id=1569604455 node_paths=PackedStringArray("highlight_target")]
 script = ExtResource("26_e7lt8")
 display_name = "Żyła błękitnego żelaza"
 description = "Tuż za zawałem, na wysokości oczu. Dziadek musiał ją mijać setki razy, idąc swoją ulubioną drogą. Na jego mapie w tym miejscu jest kropka. Zaznaczasz ją po raz drugi."
@@ -1410,14 +1415,14 @@ highlight_target = NodePath("../Vein/cave_wall_rocks_c_2")
 solid = false
 padding = 0.1
 
-[node name="Stake_west_1" type="Node3D" parent="WestSegment" unique_id=750899942]
+[node name="Stake_west_1" type="Node3D" parent="WestSegment" unique_id=1658500776]
 script = ExtResource("21_h116n")
 material = ExtResource("22_abalh")
 
-[node name="VeinStake" type="Node3D" parent="WestSegment/Stake_west_1" unique_id=2001919259 instance=ExtResource("84_2h4k8")]
+[node name="VeinStake" type="Node3D" parent="WestSegment/Stake_west_1" unique_id=37802739 instance=ExtResource("84_2h4k8")]
 transform = Transform3D(1.4500924, 0, 0.67618924, 0, 1.6, 0, -0.67618924, 0, 1.4500924, -12, -2, 4)
 
-[node name="Look" type="Area3D" parent="WestSegment/Stake_west_1/VeinStake" unique_id=1034751076]
+[node name="Look" type="Area3D" parent="WestSegment/Stake_west_1/VeinStake" unique_id=618521791]
 script = ExtResource("26_e7lt8")
 display_name = "Twój palik"
 description = "Tu zaznaczyłeś żyłę dla Racibora. Na palu wyciąłeś nożem kreskę."
@@ -1425,29 +1430,29 @@ required_flag = "vein_west_1"
 solid = false
 padding = 0.08
 
-[node name="BlastDebris" type="Node3D" parent="WestSegment" unique_id=278794989]
+[node name="BlastDebris" type="Node3D" parent="WestSegment" unique_id=240881991]
 
-[node name="cave_rocks_a_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=1171589182 instance=ExtResource("63_3ibet")]
+[node name="cave_rocks_a_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=202445290 instance=ExtResource("63_3ibet")]
 transform = Transform3D(-0.7994318, 0, 0.030145684, 0, 0.8, 0, -0.030145684, 0, -0.7994318, -6.4, -0.6, 1.4)
 
-[node name="cave_rocks_c_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=370602146 instance=ExtResource("64_5m6a4")]
+[node name="cave_rocks_c_3" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=257667734 instance=ExtResource("64_5m6a4")]
 transform = Transform3D(-0.8834402, 0, -0.17185275, 0, 0.9, 0, 0.17185275, 0, -0.8834402, -7.2, -1, 4.6)
 
-[node name="cave_rocks_b_4" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=276602426 instance=ExtResource("17_40pcp")]
+[node name="cave_rocks_b_4" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=518897122 instance=ExtResource("17_40pcp")]
 transform = Transform3D(0.062902845, 0, 0.697168, 0, 0.7, 0, -0.697168, 0, 0.062902845, -8.3, -1.55, 1.6)
 
-[node name="cave_rocks_d_2" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=1058300902 instance=ExtResource("85_vmwc3")]
+[node name="cave_rocks_d_2" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=808415600 instance=ExtResource("85_vmwc3")]
 transform = Transform3D(0.5986533, 0, -0.04017748, 0, 0.6, 0, 0.04017748, 0, 0.5986533, -5.8, -0.3, 4.4)
 
-[node name="cave_rocks_a_4" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=2018488449 instance=ExtResource("63_3ibet")]
+[node name="cave_rocks_a_4" type="MeshInstance3D" parent="WestSegment/BlastDebris" unique_id=733369823 instance=ExtResource("63_3ibet")]
 transform = Transform3D(-0.4910343, 0, -0.34479755, 0, 0.6, 0, 0.34479755, 0, -0.4910343, -9.2, -1.9, 4.5)
 
-[node name="EastSegment" type="Node3D" parent="." unique_id=1947522684]
+[node name="EastSegment" type="Node3D" parent="." unique_id=488589028]
 
-[node name="FuseBox" type="Node3D" parent="EastSegment" unique_id=1760556731 instance=ExtResource("65_lu46h")]
+[node name="FuseBox" type="Node3D" parent="EastSegment" unique_id=8709137 instance=ExtResource("65_lu46h")]
 transform = Transform3D(-2.6226834e-08, 0, 0.6, 0, 0.6, 0, -0.6, 0, -2.6226834e-08, 70.4, -2.116, 7.4)
 
-[node name="FuseBoxPickup" type="Area3D" parent="EastSegment/FuseBox" unique_id=474986175]
+[node name="FuseBoxPickup" type="Area3D" parent="EastSegment/FuseBox" unique_id=761975834]
 script = ExtResource("26_e7lt8")
 display_name = "Skrzynka z lontami"
 description = "Skrzynka po starej ekipie. W środku, w natłuszczonym płótnie, leżą lonty. Suche. Ktoś się postarał, żeby przetrwały.
@@ -1460,139 +1465,139 @@ on_use_quest_entry = "znalezione"
 quest_only_if_active = true
 remove_after_use = true
 
-[node name="Markers" type="Node3D" parent="." unique_id=812042022]
+[node name="Markers" type="Node3D" parent="." unique_id=541050361]
 
-[node name="SpawnBed" type="Marker3D" parent="Markers" unique_id=984046737]
+[node name="SpawnBed" type="Marker3D" parent="Markers" unique_id=705980543]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 7.2, 0, 4.35)
 
-[node name="CampReturn" type="Marker3D" parent="Markers" unique_id=875975278]
+[node name="CampReturn" type="Marker3D" parent="Markers" unique_id=1622009654]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 29.3, 0, 3.9)
 
-[node name="EastEntry" type="Marker3D" parent="Markers" unique_id=886103003]
+[node name="EastEntry" type="Marker3D" parent="Markers" unique_id=887602536]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 37.2, 0, 3)
 
-[node name="WestEntry" type="Marker3D" parent="Markers" unique_id=2146802667]
+[node name="WestEntry" type="Marker3D" parent="Markers" unique_id=621668911]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -3.4, 0, 3)
 
-[node name="MiroslawFire" type="Marker3D" parent="Markers" unique_id=1490879567]
+[node name="MiroslawFire" type="Marker3D" parent="Markers" unique_id=1250316604]
 transform = Transform3D(-0.29827487, 0, -0.95448, 0, 1, 0, 0.95448, 0, -0.29827487, 15.6, 0, 0.7)
 
-[node name="MiroslawPowder" type="Marker3D" parent="Markers" unique_id=1746643277]
+[node name="MiroslawPowder" type="Marker3D" parent="Markers" unique_id=1561048850]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 19.8, 0, -6)
 
-[node name="MiroslawCorner" type="Marker3D" parent="Markers" unique_id=222500139]
+[node name="MiroslawCorner" type="Marker3D" parent="Markers" unique_id=22839487]
 transform = Transform3D(0.9396926, 0, 0.34202012, 0, 1, 0, -0.34202012, 0, 0.9396926, 10.6, 0, -7.6)
 
-[node name="BolkoEat" type="Marker3D" parent="Markers" unique_id=1975309830]
+[node name="BolkoEat" type="Marker3D" parent="Markers" unique_id=103901124]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, -5.0299997)
 
-[node name="BolkoStorage" type="Marker3D" parent="Markers" unique_id=1185987552]
+[node name="BolkoStorage" type="Marker3D" parent="Markers" unique_id=1014077801]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3, 0, 1.55)
 
-[node name="BolkoEvening" type="Marker3D" parent="Markers" unique_id=182782215]
+[node name="BolkoEvening" type="Marker3D" parent="Markers" unique_id=249314943]
 transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 4.6, 0, 4.2)
 
-[node name="BolkoBed" type="Marker3D" parent="Markers" unique_id=1080191093]
+[node name="BolkoBed" type="Marker3D" parent="Markers" unique_id=529199621]
 transform = Transform3D(0.49972245, 0, -0.8661856, 0, 1, 0, 0.8661856, 0, 0.49972245, 8.5, 0, 3.6)
 
-[node name="BolkoAway" type="Marker3D" parent="Markers" unique_id=2057156557]
+[node name="BolkoAway" type="Marker3D" parent="Markers" unique_id=928689411]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 4.9, 0, -3)
 
-[node name="RaciborEat" type="Marker3D" parent="Markers" unique_id=848075277]
+[node name="RaciborEat" type="Marker3D" parent="Markers" unique_id=1146848007]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 18.95, 0, -4.2)
 
-[node name="RaciborTable" type="Marker3D" parent="Markers" unique_id=1923994254]
+[node name="RaciborTable" type="Marker3D" parent="Markers" unique_id=249211781]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1, 0, -6.05)
 
-[node name="TeklaCook" type="Marker3D" parent="Markers" unique_id=1717412712]
+[node name="TeklaCook" type="Marker3D" parent="Markers" unique_id=1368070078]
 transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, 12.75, 0, -0.14999999)
 
-[node name="TeklaCounter" type="Marker3D" parent="Markers" unique_id=355760222]
+[node name="TeklaCounter" type="Marker3D" parent="Markers" unique_id=1113960235]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 26.6, 0, 5.7799997)
 
-[node name="TeklaGuarded" type="Marker3D" parent="Markers" unique_id=971180632]
+[node name="TeklaGuarded" type="Marker3D" parent="Markers" unique_id=1287751861]
 transform = Transform3D(-0.5547002, 0, 0.83205026, 0, 1, 0, -0.83205026, 0, -0.5547002, 23, 0, -3.6)
 
-[node name="DobrawaLeader" type="Marker3D" parent="Markers" unique_id=98125014]
+[node name="DobrawaLeader" type="Marker3D" parent="Markers" unique_id=2070855942]
 transform = Transform3D(-0.8619342, 0, -0.5070202, 0, 1, 0, 0.5070202, 0, -0.8619342, 26.6, 0, -3.5)
 
-[node name="DobrawaCarts" type="Marker3D" parent="Markers" unique_id=1960852333]
+[node name="DobrawaCarts" type="Marker3D" parent="Markers" unique_id=912164554]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 22.5, 0, 3.55)
 
-[node name="DobrawaApart" type="Marker3D" parent="Markers" unique_id=728872813]
+[node name="DobrawaApart" type="Marker3D" parent="Markers" unique_id=2024660216]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.6, 0, -0.9)
 
-[node name="WszeborEat" type="Marker3D" parent="Markers" unique_id=682678824]
+[node name="WszeborEat" type="Marker3D" parent="Markers" unique_id=824728548]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 17.800001, 0, -3.35)
 
-[node name="WszeborFire" type="Marker3D" parent="Markers" unique_id=898434027]
+[node name="WszeborFire" type="Marker3D" parent="Markers" unique_id=1308353764]
 transform = Transform3D(-0.9852118, 0, 0.17134094, 0, 1, 0, -0.17134094, 0, -0.9852118, 13.8, 0, 1.35)
 
-[node name="NasirEat" type="Marker3D" parent="Markers" unique_id=2073810072]
+[node name="NasirEat" type="Marker3D" parent="Markers" unique_id=1882067413]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 16.6, 0, -3.35)
 
-[node name="NasirWater" type="Marker3D" parent="Markers" unique_id=274814471]
+[node name="NasirWater" type="Marker3D" parent="Markers" unique_id=57477797]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 4.75)
 
-[node name="NasirEvening" type="Marker3D" parent="Markers" unique_id=1902759833]
+[node name="NasirEvening" type="Marker3D" parent="Markers" unique_id=1823278308]
 transform = Transform3D(-0.4740999, 0, -0.88047105, 0, 1, 0, 0.88047105, 0, -0.4740999, 5.8, 0, 2.4)
 
-[node name="NasirSick" type="Marker3D" parent="Markers" unique_id=1666148307]
+[node name="NasirSick" type="Marker3D" parent="Markers" unique_id=1429510066]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 3.6, 0, -5.9)
 
-[node name="HagiwaraEat" type="Marker3D" parent="Markers" unique_id=2106519342]
+[node name="HagiwaraEat" type="Marker3D" parent="Markers" unique_id=315456973]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.800001, 0, -5.0299997)
 
-[node name="HagiwaraLedger" type="Marker3D" parent="Markers" unique_id=841239073]
+[node name="HagiwaraLedger" type="Marker3D" parent="Markers" unique_id=915549773]
 transform = Transform3D(-0.9320045, 0, -0.36244667, 0, 1, 0, 0.36244667, 0, -0.9320045, 27.85, 0, -3.4)
 
-[node name="HagiwaraTea" type="Marker3D" parent="Markers" unique_id=370842751]
+[node name="HagiwaraTea" type="Marker3D" parent="Markers" unique_id=715442535]
 transform = Transform3D(0.6000003, 0, 0.7999998, 0, 1, 0, -0.7999998, 0, 0.6000003, 29.7, 0, -6.9)
 
-[node name="SobekGuard" type="Marker3D" parent="Markers" unique_id=723243588]
+[node name="SobekGuard" type="Marker3D" parent="Markers" unique_id=1308470746]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.4, 0, -0.2)
 
-[node name="SobekDice" type="Marker3D" parent="Markers" unique_id=388221707]
+[node name="SobekDice" type="Marker3D" parent="Markers" unique_id=1290876908]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 17.800001, 0, -3.35)
 
-[node name="AnzelmPray" type="Marker3D" parent="Markers" unique_id=841102563]
+[node name="AnzelmPray" type="Marker3D" parent="Markers" unique_id=1495097919]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 1.8, 0, -6.2)
 
-[node name="AnzelmInfirmary" type="Marker3D" parent="Markers" unique_id=1496710949]
+[node name="AnzelmInfirmary" type="Marker3D" parent="Markers" unique_id=461354431]
 transform = Transform3D(-0.7399402, 0, -0.6726726, 0, 1, 0, 0.6726726, 0, -0.7399402, 4.6, 0, -6.2)
 
-[node name="SabinaApart" type="Marker3D" parent="Markers" unique_id=1840567269]
+[node name="SabinaApart" type="Marker3D" parent="Markers" unique_id=2079051284]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 30.2, 0, -3.6)
 
-[node name="SabinaCart" type="Marker3D" parent="Markers" unique_id=1799958577]
+[node name="SabinaCart" type="Marker3D" parent="Markers" unique_id=705191199]
 transform = Transform3D(0.5547005, 0, 0.8320501, 0, 1, 0, -0.8320501, 0, 0.5547005, 19.1, 0, 1.8)
 
-[node name="SabinaSick" type="Marker3D" parent="Markers" unique_id=542365577]
+[node name="SabinaSick" type="Marker3D" parent="Markers" unique_id=1380364933]
 transform = Transform3D(-0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, -0.70710677, 4.6, 0, -4.9)
 
-[node name="SabinaEvening" type="Marker3D" parent="Markers" unique_id=433166498]
+[node name="SabinaEvening" type="Marker3D" parent="Markers" unique_id=345378416]
 transform = Transform3D(-0.7649112, 0, -0.6441358, 0, 1, 0, 0.6441358, 0, -0.7649112, 3.2, 0, 1)
 
-[node name="EastSpot1" type="Marker3D" parent="Markers" unique_id=1324019854]
+[node name="EastSpot1" type="Marker3D" parent="Markers" unique_id=454919204]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 40.6, 0, 2.1)
 
-[node name="WestSpot1" type="Marker3D" parent="Markers" unique_id=466989374]
+[node name="WestSpot1" type="Marker3D" parent="Markers" unique_id=1824150759]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -6.6, -0.8, 2.1)
 
-[node name="EastSpot2" type="Marker3D" parent="Markers" unique_id=287496080]
+[node name="EastSpot2" type="Marker3D" parent="Markers" unique_id=829597512]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 41.5, 0, 3.9)
 
-[node name="WestSpot2" type="Marker3D" parent="Markers" unique_id=188912952]
+[node name="WestSpot2" type="Marker3D" parent="Markers" unique_id=327961129]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -7.4, -1.2, 3.9)
 
-[node name="EastSpot3" type="Marker3D" parent="Markers" unique_id=1911890165]
+[node name="EastSpot3" type="Marker3D" parent="Markers" unique_id=285294161]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 42.4, 0, 2.1)
 
-[node name="WestSpot3" type="Marker3D" parent="Markers" unique_id=1730385005]
+[node name="WestSpot3" type="Marker3D" parent="Markers" unique_id=1887195719]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -8.2, -1.6, 2.1)
 
-[node name="EastSpot4" type="Marker3D" parent="Markers" unique_id=961931495]
+[node name="EastSpot4" type="Marker3D" parent="Markers" unique_id=1093787541]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 43.3, 0, 3.9)
 
-[node name="WestSpot4" type="Marker3D" parent="Markers" unique_id=1921659745]
+[node name="WestSpot4" type="Marker3D" parent="Markers" unique_id=684496892]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -9, -2, 3.9)
