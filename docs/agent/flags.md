@@ -2,7 +2,7 @@
 
 > Plik generowany: nie edytować ręcznie. Źródło: `reports/flags.tsv` (zapisuje `tools/run_tests.sh lint`), generator: `node tools/generators/write_flags_doc.js`.
 
-Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 11. „Ładunek: tak” znaczy, że flaga trzyma wartość inną niż `true` (miejsce, dzień, listę; `mark_today` i `bump_flag` zawsze). Brak „Czytana w” to flaga tylko zapisywana (ostrzeżenie lintu) albo czytana wyłącznie z nazwy składanej w czasie gry.
+Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 11. „Ładunek: tak” znaczy, że flaga trzyma wartość inną niż `true` (miejsce, dzień, listę; `mark_today` i `bump_flag` zawsze). Brak „Czytana w” to flaga tylko zapisywana (ostrzeżenie lintu) albo czytana wyłącznie z nazwy składanej w czasie gry.
 
 ## Flagi
 
@@ -28,18 +28,23 @@ Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 
 | `bolko_asked_why` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_day2_secret` | `dialogue/bolko.dialogue` | — | nie |
 | `bolko_greet` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | tak |
+| `bolko_guilt` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
+| `bolko_guilt_said` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_hint` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_knows_fate` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue`, `dialogue/racibor.dialogue`, `script/story_director.gd` | nie |
 | `bolko_lamp_said` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_on_sabina` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_on_wszebor` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
+| `bolko_relieved` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue`, `dialogue/racibor.dialogue`, `script/story_director.gd` | nie |
+| `bolko_relieved_day` | `dialogue/bolko.dialogue` | — | tak |
+| `bolko_relieved_said` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_told_chapel` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_tremor` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `campfire` | `dialogue/ognisko.dialogue` | `script/story_director.gd` | tak |
 | `crystal_to_dobrawa` | `dialogue/dobrawa.dialogue` | `dialogue/racibor.dialogue`, `script/run_report.gd`, `script/story_director.gd` | nie |
 | `crystal_to_ottokar` | `dialogue/ottokar.dialogue` | `dialogue/dobrawa.dialogue`, `dialogue/racibor.dialogue`, `script/run_report.gd`, `script/story_director.gd` | nie |
 | `crystal_to_racibor` | `dialogue/racibor.dialogue` | `dialogue/dobrawa.dialogue`, `script/run_report.gd`, `script/story_director.gd` | nie |
-| `deciphered` | `script/story_director.gd` | `script/story_director.gd` | nie |
+| `deciphered` | `dialogue/bolko.dialogue`, `dialogue/system.dialogue`, `script/story_director.gd` | `dialogue/bolko.dialogue`, `dialogue/drudzy.dialogue`, `dialogue/system.dialogue`, `script/story_director.gd` | nie |
 | `dob_asked_carts` | `dialogue/dobrawa.dialogue` | `dialogue/dobrawa.dialogue` | nie |
 | `dob_asked_crystal` | `dialogue/dobrawa.dialogue` | `dialogue/dobrawa.dialogue` | nie |
 | `dob_asked_pain` | `dialogue/dobrawa.dialogue` | `dialogue/dobrawa.dialogue` | nie |
@@ -114,6 +119,9 @@ Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 
 | `mir_night_blast_done` | `script/story_director.gd` | `script/story_director.gd` | nie |
 | `mir_saw_charge` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue`, `dialogue/racibor.dialogue`, `script/story_director.gd` | nie |
 | `mir_scolded` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue`, `script/run_report.gd` | nie |
+| `mir_support` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue` | tak |
+| `mir_support_answered` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue` | nie |
+| `mir_support_day` | `dialogue/miroslaw.dialogue` | — | tak |
 | `nas_asked_story` | `dialogue/nasir.dialogue` | `dialogue/nasir.dialogue` | nie |
 | `nas_djinn` | `dialogue/nasir.dialogue` | `dialogue/nasir.dialogue` | nie |
 | `nas_hello` | `dialogue/nasir.dialogue` | `dialogue/nasir.dialogue` | tak |
@@ -125,6 +133,9 @@ Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 
 | `nasir_carried_up` | `script/story_director.gd` | `script/run_report.gd`, `script/story_director.gd` | nie |
 | `nasir_fever_started` | `script/story_director.gd` | `dialogue/nasir.dialogue`, `script/run_report.gd`, `script/story_director.gd` | nie |
 | `opened_grabiec_cache` | `tools/generators/gen_locations.gd` | — | nie |
+| `opening` | `script/save_manager.gd` | `script/game_state.gd` | nie |
+| `opening_done` | `script/story_director.gd` | `script/story_director.gd` | nie |
+| `opening_maps` | `dialogue/drudzy.dialogue` | — | tak |
 | `ott_deal_done` | `dialogue/ottokar.dialogue` | `dialogue/ottokar.dialogue` | nie |
 | `ott_has_maps` | `dialogue/ottokar.dialogue` | — | nie |
 | `ott_nakamura` | `dialogue/ottokar.dialogue` | `dialogue/ottokar.dialogue` | nie |
@@ -132,6 +143,7 @@ Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 
 | `ott_what` | `dialogue/ottokar.dialogue` | `dialogue/ottokar.dialogue` | tak |
 | `ottokar_knows_crystal` | `dialogue/drudzy.dialogue` | — | nie |
 | `ottokar_offer_open` | `dialogue/drudzy.dialogue` | — | nie |
+| `papers_with_bolko` | `dialogue/bolko.dialogue` | `script/story_director.gd` | nie |
 | `plan_upadowa` | `dialogue/racibor.dialogue` | `dialogue/bolko.dialogue`, `dialogue/miroslaw.dialogue`, `dialogue/racibor.dialogue`, `dialogue/tekla.dialogue`, `script/run_report.gd`, `script/story_director.gd` | nie |
 | `protested_upadowa` | `dialogue/racibor.dialogue` | `dialogue/racibor.dialogue` | nie |
 | `pump_running` | `dialogue/nasir.dialogue` | `dialogue/miroslaw.dialogue`, `dialogue/nasir.dialogue`, `dialogue/wszebor.dialogue`, `tools/generators/gen_locations.gd`, `tools/generators/write_world_data.js` | nie |
@@ -164,7 +176,7 @@ Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 
 | `sabina_joined` | `script/story_director.gd` | `dialogue/anzelm.dialogue`, `dialogue/bolko.dialogue`, `dialogue/dobrawa.dialogue`, `dialogue/racibor.dialogue`, `dialogue/tekla.dialogue`, `script/camp_schedule.gd`, `script/run_report.gd`, `script/story_director.gd` | nie |
 | `sabina_sense` | `dialogue/sabina.dialogue` | `dialogue/sabina.dialogue` | tak |
 | `saw_bread` | `tools/generators/gen_locations.gd` | — | nie |
-| `saw_charge` | `tools/generators/gen_locations.gd` | `dialogue/miroslaw.dialogue`, `dialogue/system.dialogue` | nie |
+| `saw_charge` | `tools/generators/gen_locations.gd` | `dialogue/bolko.dialogue`, `dialogue/drudzy.dialogue`, `dialogue/miroslaw.dialogue`, `dialogue/system.dialogue`, `dialogue/tekla.dialogue`, `script/story_director.gd` | nie |
 | `saw_cracked_pillar` | `tools/generators/gen_locations.gd` | — | nie |
 | `saw_forge_mark` | `tools/generators/gen_locations.gd` | — | nie |
 | `saw_fresh_crack` | `tools/generators/gen_locations.gd` | — | nie |
@@ -182,6 +194,12 @@ Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 
 | `sob_hello` | `dialogue/sobek.dialogue` | `dialogue/sobek.dialogue` | tak |
 | `sob_steppe` | `dialogue/sobek.dialogue` | `dialogue/sobek.dialogue` | nie |
 | `sob_sword` | `dialogue/sobek.dialogue` | `dialogue/sobek.dialogue` | nie |
+| `supper` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | tak |
+| `supper_blast` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | nie |
+| `supper_eaten` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue`, `script/story_director.gd` | nie |
+| `supper_raport` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | nie |
+| `supper_szyfr` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | nie |
+| `supper_upadowa` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | nie |
 | `tekla_asked_dobrawa` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | nie |
 | `tekla_asked_favor` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | nie |
 | `tekla_asked_food` | `dialogue/tekla.dialogue` | `dialogue/tekla.dialogue` | nie |
@@ -216,7 +234,7 @@ Flag z literalną nazwą w źródłach: 223, z rodzin składanych w czasie gry: 
 | `welf_thanked` | `dialogue/welf.dialogue` | `dialogue/welf.dialogue` | nie |
 | `welf_wounded` | `script/story_director.gd` | `dialogue/welf.dialogue`, `script/field_schedule.gd`, `script/run_report.gd`, `script/story_director.gd` | nie |
 | `welf_wounded_day` | `script/story_director.gd` | — | tak |
-| `west_blasted` | `script/story_director.gd` | `dialogue/miroslaw.dialogue`, `dialogue/system.dialogue`, `script/story_director.gd`, `tools/generators/write_world_data.js` | nie |
+| `west_blasted` | `script/story_director.gd` | `dialogue/miroslaw.dialogue`, `dialogue/system.dialogue`, `dialogue/tekla.dialogue`, `script/story_director.gd`, `tools/generators/write_world_data.js` | nie |
 | `wsz_asked_home` | `dialogue/wszebor.dialogue` | `dialogue/wszebor.dialogue` | nie |
 | `wsz_asked_ring` | `dialogue/wszebor.dialogue` | `dialogue/wszebor.dialogue` | nie |
 | `wsz_field` | `dialogue/wszebor.dialogue` | `dialogue/wszebor.dialogue` | tak |

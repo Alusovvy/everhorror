@@ -185,6 +185,67 @@ Ponowne sprawdzenie planu wobec stanu po południu. Plan wyżej zostaje; zmienia
 
 ## Co zostało zrobione
 <!-- Osobna podsekcja dla każdego punktu z Wymagań. -->
+Wdrożenie z dashboardu, przebieg `20261028-063839-implement-22-2f950c`, gałąź `spec/2026-10-28-task22`, commit `333b147`. **P1 niewykonane** (zob. niżej), reszta gotowa.
+
+### P1: uprawnienia (`.claude/settings.json`): NIE WYKONANE
+Reguły przebiegu (`run-rules.md` §1) zabraniają zapisu w `.claude/`, a analiza już mówiła, że P1 trzeba robić w terminalu. Plik jest nietknięty. Poniżej propozycja diffu do zastosowania w sesji terminalowej w kopii gałęzi (po niej: próba z karty, pytanie 2a, `claude -p` z `--setting-sources project --permission-mode dontAsk --max-budget-usd 0.5`):
+
+```json
+"additionalDirectories": ["../specification", "../everhorror-wdrozenie", "../everhorror-wt"],
+"allow": [
+  "Bash(git status:*)", "Bash(git log:*)", "Bash(git diff:*)", "Bash(git show:*)", "Bash(git ls-files:*)",
+  "Bash(git rev-parse:*)", "Bash(git rev-list:*)", "Bash(git merge-base:*)", "Bash(git branch --list:*)",
+  "Bash(git branch --show-current:*)", "Bash(git branch --merged:*)", "Bash(git branch -d:*)", "Bash(git worktree list:*)",
+  "Bash(git worktree add:*)", "Bash(git remote -v:*)", "Bash(git fetch:*)", "Bash(git pull --ff-only:*)", "Bash(git mv:*)",
+  "Bash(git -C * status*)", "Bash(git -C * log*)", "Bash(git -C * diff*)", "Bash(git -C * show*)", "Bash(git -C * ls-files*)",
+  "Bash(git -C * rev-parse*)", "Bash(git -C * rev-list*)", "Bash(git -C * merge-base*)", "Bash(git -C * branch*)",
+  "Bash(git -C * worktree list*)", "Bash(git -C * add*)", "Bash(git -C * commit*)", "Bash(git -C * mv*)", "Bash(git -C * rm*)",
+  "Bash(git -C * restore*)", "Bash(git -C * switch*)", "Bash(git -C * fetch*)", "Bash(git -C * pull --ff-only*)", "Bash(git -C * push*)",
+  "Bash(node dashboard/cli.ts:*)", "Bash(node C:/dev/gamedev/everhorror/specification/dashboard/cli.ts:*)",
+  "Bash(node tools/*)", "Bash(node C:/dev/gamedev/everhorror/everhorror-wt/*/tools/*)", "Bash(node C:/dev/gamedev/everhorror/everhorror-wdrozenie/tools/*)",
+  "Bash(tools/run_tests.sh:*)", "Bash(tools/release/release.sh:*)",
+  "...bez zmian: Godot, cp -r, mkdir, ls, cat, grep, head, tail, wc, diff, date"
+],
+"ask": [
+  "Bash(git tag:*)", "Bash(git -C * tag*)",
+  "Bash(git -C C:/dev/gamedev/everhorror/everhorror push * master*)", "Bash(git push * master*)"
+],
+"deny": [
+  "...dotychczasowe (force push, reset --hard, clean, branch -D, checkout, stash, rebase) +",
+  "Bash(git merge *)", "Bash(git -C * merge *)",
+  "Bash(git worktree remove:*)", "Bash(git -C * worktree remove*)",
+  "Bash(git switch:*)"
+]
+```
+
+Uwagi do diffu:
+- **`git switch` w głównej kopii:** `git switch` bez `-C` (czyli forma `git switch …` wywołana z głównej kopii) jest odrzucona, a `git -C <kopia gałęzi> switch …` przechodzi (potrzebne `ai-task fix` i `spec-sync`). Reguły `deny` nie odróżniają ścieżek, więc w praktyce wystarczy zakaz formy bez `-C`; zakaz `git -C C:/dev/gamedev/everhorror/everhorror switch*` można dopisać wprost.
+- **Spacja we wzorcach** (`git merge *`), żeby nie łapać `git merge-base`, którego używa `spec-tasks`.
+- **Tag i push `master` gry** na liście `ask` (karta, 1a): w terminalu pyta Rolanda, w `dontAsk` jest odrzucane. Push `master` specyfikacji (`git -C …/specification push everhorror-spec master`) nie pasuje do wzorców z `…/everhorror push`, bo to inne repozytorium.
+- **Skrypty `node` z kopii gałęzi** (`tools/*`, `tools/generators/*.js`, `tools/release/stamp_build.js`) pokrywa `node tools/*` i `node …/everhorror-wt/*/tools/*`. `release.sh` dochodzi do `allow` (`tools/release/release.sh`), ale w przebiegu z dashboardu strażnik i tak go nie uruchomi bezpośrednio.
+- Reguły Bash nie są granicą bezpieczeństwa (ARCHITEKTURA.md, „Profil przebiegu”): chronią przed pomyłką.
+
+Zestawienie „polecenie skilla → reguła” (do uzupełnienia po zastosowaniu): odczyt git → `git status/log/diff/show/ls-files/rev-parse/rev-list/merge-base/branch --list/--merged/--show-current/worktree list/remote -v` i formy `-C`; `add/commit/mv/rm/restore/switch/push/pull --ff-only/fetch` tylko w formie `-C <ścieżka>`; `worktree add`, `branch -d` w głównej kopii; `node …/cli.ts …` (obie formy), `node tools/*`; `tools/run_tests.sh`; Godot `--import`. Niepokryte: `git push <remote> --delete spec/…` (po zgodzie Rolanda): pasuje do `git -C * push*`, więc przechodzi; merge, tag, push master gry, `worktree remove` są w `deny`/`ask`. Wynik próby `claude -p`: do wpisania po wykonaniu (nie wykonana w tym przebiegu).
+
+### P4: skrypt wydania
+`tools/release/release.sh <wersja> [--spec <rev>] [--dry-run]`: zgodność wersji z `project.godot` → `stamp_build.js --check` → `stamp_build.js [--spec]` → `--import` → `--export-release` (log w `reports/release-export.log`, potem sprawdzenie, że `Everhorror.exe` jest nowszy niż start) → `make_zip.sh`; na końcu wypisuje `git add/commit`, `git tag`, `git push` i przypomnienie o jednym commicie specyfikacji, niczego z tego nie wykonuje. `set -euo pipefail`, `--dry-run` tylko wypisuje. `tools/README.md` (wiersz w tabeli i sekcja Wydanie) opisuje skrypt.
+**Nieprzetestowane w tym przebiegu:** strażnik dashboardu nie uruchamia skryptów z kopii gałęzi bezpośrednio, a bit wykonywania nie dał się ustawić (`git update-index` jest zablokowany). Kryteria z `release.sh 0.5.3 --dry-run`, `release.sh 0.5.4 --dry-run` i `release.sh 9.9.9` (zatrzymanie na kroku 1) sprawdza człowiek w terminalu po `git update-index --chmod=+x tools/release/release.sh` (albo `bash tools/release/release.sh …`). Skrypt przeczytany linia po linii; bash `-nt` na pliku znacznika `reports/.release-start`.
+
+### K4: rejestr flag
+- `tools/data_lint.gd` (`_write_flag_registry`) zapisuje `reports/flags.tsv` (flaga, ustawiana w, czytana w, ładunek, rodzina), posortowany, bez numerów linii i dat. Dochodzą źródła `script/data/*.gd` i `write_world_data.js` (także `flag:`/`noflag:` grafu miejsc jako odczyty).
+- `tools/generators/write_flags_doc.js` robi z niego `docs/agent/flags.md` (234 flagi, nagłówek „plik generowany”, rodziny w osobnej części). Powtórne uruchomienie (lint + generator) nie zmieniło pliku (`git status` bez zmian po drugim przebiegu).
+- Lint nadal widzi to samo co przedtem (`read_flags.size() > 100`), nic nie usunięto.
+- `08_technika.md:37–54` w specyfikacji: **propozycja dla Rolanda** (poza zadaniem): skrócić do 15 najważniejszych flag z odnośnikiem do `docs/agent/flags.md`.
+
+### T7: liczba żył słowami
+- `GameState.quota_words(przypadek, wielka_litera, z_rzeczownikiem)` (tabela 0–20 z komentarzem `lint-quota`, dalej cyfry z `plural()`) i `GameState.quest_entry_text()` (markery `{norma}`, `{Norma}`, `{norma_dop}`, `{norma_dop_liczba}`).
+- Zamienione miejsca: `system.dialogue:105`, `racibor.dialogue:43,50,69,144,186`, `miroslaw.dialogue:192` (klucz i wartość w `write_gwara.js` zawierają identyczne `{{quota_words("nom", true)}}`; `dialogue/gwara_slaska.json` wygenerowany), komunikat w `game_state.gd` (`_check_quota`), trzy wpisy zadania „zloza” w `write_story_data.js` (`data/quests/zloza.tres` wygenerowany), notes (`notebook.gd`) i toast `quest_updated` używają `quest_entry_text()`.
+- Miejsca oznaczone `lint-quota` (wyjątki): `dialogue/nasir.dialogue:45,46,107` (lata, nie żyły), `write_story_data.js:107` (historia Nasira), obie tablice liczebników w `game_state.gd`. `CZYTAJ_MNIE.txt` bez zmian; lint sprawdza, że „… żył błękitu” zgadza się z `quota_words()` dla `QUOTA`.
+- Reguła lintu `_check_quota_literals` (czerwona). Po zmianie nic nie zgłasza. Reguły nie uruchomiłem na kodzie sprzed zmiany (gałąź nie ma wersji bez zamian, a `git stash`/`checkout` są zabronione); wiem tylko, że przy pierwszym przebiegu zgłosiła cztery wystąpienia w moich własnych komentarzach pomocnika, więc wzorzec działa.
+- Tekst dla gracza taki sam jak przed: nowe testy `unit` (wpisy `start`, `zdane`, `norma` = dosłowny dotychczasowy tekst) i `dialogue` (linia Mirosława z gwarą i bez; linie Racibora w istniejących scenariuszach w logu: „Kniaź chce dwunastu żył do wieczora siódmego dnia…”, „Do dwunastu jeszcze daleko.”, „…chce dwunastu żył na mapie. Mamy 2.”).
+
+### K6: polskie literały
+`_check_polish_literals` w `data_lint.gd` liczy dla każdego pliku `script/**/*.gd` łańcuchy poza komentarzami i `tr("…")` z polską literą albo słowem z listy `POLISH_WORDS`. Stan bazowy w `tools/lint_baseline.json` (17 plików, 337 literałów; liczy mniej niż wyszukiwanie z analizy, bo pomija komentarze). Wzrost = błąd, spadek = przypomnienie. Próba robocza: dopisany `const _TRIAL := "Próba robocza"` w `game_state.gd` dał `RESULT: 1 FAILED` i linię „63 Polish literals, baseline 62”; cofnięta. Tabela `Texts`: nie dodana (konwencja opiera się na `tr()`). Sposób liczenia opisany w `tools/README.md`.
 
 ## Decyzje i założenia
 <!-- Co agent przyjął sam, bo nie wynikało z wymagań. -->
@@ -201,11 +262,22 @@ Ponowne sprawdzenie planu wobec stanu po południu. Plan wyżej zostaje; zmienia
 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
-Karta [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a); plan wyżej ją uwzględnia. Task17 jest już scalony (aktualizacja 2026-10-27), więc została jedna rzecz:
+**Po przebiegu z dashboardu (2026-10-28) zostają dwie rzeczy dla sesji terminalowej** (w kopii gałęzi `spec/2026-10-28-task22`):
+1. P1: zastosować diff z „Co zostało zrobione” w `.claude/settings.json`, zestawić polecenia skilli z regułami i zrobić płatną próbę `claude -p` (limit 0,5 USD). Bez tego zadanie jest wdrożone w 4/5.
+2. `git update-index --chmod=+x tools/release/release.sh`, potem `release.sh 0.5.3 --dry-run`, `release.sh 0.5.4 --dry-run` i `release.sh 9.9.9` (kryterium P4).
+
+Wcześniejsza treść: karta [2026-10-27_task22-uprawnienia-i-norma.md](../../../specification/zgloszenia/2026-10-27_task22-uprawnienia-i-norma.md) jest rozstrzygnięta (Roland, 2026-10-27, dashboard: 1: a, 2: a, 3: a, 4: a); plan wyżej ją uwzględnia. Task17 jest już scalony (aktualizacja 2026-10-27), więc została jedna rzecz:
 1. Uruchomić wdrożenie w terminalu (`/ai-task implement 22`), bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`. Ta sesja zrobi też płatną próbę uprawnień z pytania 2 (limit 0,5 USD).
 
 ## Test
-Scenariusze zadania: tylko zestaw podstawowy (`unit lint dialogue`), uruchamia go serwer po wdrożeniu. Arkusz: część `## Część: task_22` arkusza builda.
+Scenariusze zadania: tylko zestaw podstawowy (`unit lint dialogue`), uruchamia go serwer po wdrożeniu. Arkusz: część `## Część: task_22` w [factcheck-build-333b147](../human-tasks/factcheck-build-333b147.md).
+
+Wyniki agenta (kopia gałęzi, commit `333b147`):
+- `unit`: `RESULT: ALL PASSED`; `lint`: `RESULT: ALL PASSED` (WARNINGS: 20, tyle co przed zmianą); `dialogue`: `RESULT: ALL PASSED`.
+- Przed commitem był jeden czerwony przebieg `lint` (cztery trafienia reguły T7 w komentarzach pomocnika), poprawiony.
+- Pełnego zestawu nie uruchamiałem. Kroku `RULES` lintu nie było (kopia gałęzi nie ma sąsiedniej specyfikacji).
 
 ## Podsumowanie
-Analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Karta decyzji jest rozstrzygnięta zgodnie z rekomendacjami: tag i push `master` gry trafiają na listę `ask`, uprawnienia sprawdza krótki przebieg w worktree zadania, `CZYTAJ_MNIE.txt` zostaje bez zmian (lint sprawdza zgodność z normą), a T7 obejmuje też wpisy notesu. Aktualizacja z tego samego dnia: task17 jest scalony, więc warunek startu odpada. Dopisany jest wiersz `Pliki:`, test `release.sh` uwzględnia wersję 0.5.4, a lista wspólnych plików z task_26, task_29, task_30, task_32 i task_33 wyklucza ich równoległe wdrażanie. Wdrożenie może ruszyć od razu, ale tylko w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.
+Wdrożenie z dashboardu (2026-10-28): K4, T7, K6 i P4 gotowe na gałęzi `spec/2026-10-28-task22` (commit `333b147`), testy `unit lint dialogue` zielone, teksty dla gracza bez zmian. P1 (`.claude/settings.json`) nie wykonane, bo przebieg z dashboardu nie może pisać w `.claude/`; diff jest w „Co zostało zrobione”. `release.sh` nieprzetestowany (strażnik nie uruchamia go bezpośrednio, brak bitu wykonywania). Obie rzeczy robi sesja terminalowa.
+
+Poprzednie podsumowanie (analiza): analiza gotowa (2026-10-27), plan w siedmiu krokach powyżej. Karta decyzji jest rozstrzygnięta zgodnie z rekomendacjami: tag i push `master` gry trafiają na listę `ask`, uprawnienia sprawdza krótki przebieg w worktree zadania, `CZYTAJ_MNIE.txt` zostaje bez zmian (lint sprawdza zgodność z normą), a T7 obejmuje też wpisy notesu. Aktualizacja z tego samego dnia: task17 jest scalony, więc warunek startu odpada. Dopisany jest wiersz `Pliki:`, test `release.sh` uwzględnia wersję 0.5.4, a lista wspólnych plików z task_26, task_29, task_30, task_32 i task_33 wyklucza ich równoległe wdrażanie. Wdrożenie może ruszyć od razu, ale tylko w terminalu, bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`.

@@ -8,6 +8,8 @@ else
 if day == 7
 	Jutro rano Racibor policzy żyły. Masz ich {{veins_mapped()}} z {{quota()}}.
 Kładziesz się?
+- Usiądź sam nad kartką dziadka. (1 h) [if opening() and has_note("szyfr") and has_note("klucz") and not has_flag("deciphered") /]
+	=> papers_alone
 - Tak, idę spać (koniec dnia {{day}}).
 	$> request("sleep")
 - Jeszcze nie.
@@ -34,7 +36,7 @@ I znowu te myśli. Nie twoje. Ciekawskie, łapczywe, jakby ktoś bardzo chciał 
 if has_flag("west_blasted")
 	Gdzieś daleko coś huka. Echo długo nie cichnie, tłucze się po chodnikach.
 Budzisz się z amuletem zaciśniętym w garści. Metal jest ciepły.
-if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen") and not opening()
 	$> set_flag("dream_decipher_seen")
 	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
@@ -49,7 +51,7 @@ elif has_flag("saw_charge")
 else
 	Stoisz przed gładką ścianą. Znaki przesuwają się po niej jak robaki pod skórą. Jeden ma twój kształt.
 I znowu te myśli, nie twoje. Tym razem spokojne. Ktoś, kto bardzo długo śpi, przewraca się na drugi bok.
-if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen") and not opening()
 	$> set_flag("dream_decipher_seen")
 	Budzisz się z ręką na amulecie. Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem.
 else
@@ -65,7 +67,7 @@ else
 	Liczy i liczy, a palców ciągle mu brakuje.
 Z bardzo daleka ktoś odpowiada na twój oddech swoim. Wolniejszym.
 Budzisz się zlany potem. Amulet jest ciepły, choć leżał na zimnej ziemi.
-if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen") and not opening()
 	$> set_flag("dream_decipher_seen")
 	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
@@ -78,7 +80,7 @@ if quest_state("czternasty") == "active" or has_flag("fourteenth_gift")
 if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalamany"
 	Gdzieś obok ktoś płacze przez sen. Poznajesz głos Mirosława, choć Mirosław nigdy nie płacze.
 Budzisz się i przez dłuższą chwilę nie wiesz, po której stronie skały jesteś.
-if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen") and not opening()
 	$> set_flag("dream_decipher_seen")
 	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
@@ -90,7 +92,7 @@ if quest_state("czternasty") == "active" or has_flag("fourteenth_gift")
 	Ktoś siedzi na skraju twojego snu i liczy szeptem. Dochodzi do czternastu, milknie i zaczyna od nowa. Czekasz na piętnaście. Nigdy nie pada.
 Chcesz zapytać, co miał policzyć, ale ogień gaśnie, a on razem z nim.
 Budzisz się przed świtem. W jaskini jest cicho, jakby wszyscy wstrzymali oddech.
-if has_note("odszyfrowana") and not has_flag("dream_decipher_seen")
+if has_note("odszyfrowana") and not has_flag("dream_decipher_seen") and not opening()
 	$> set_flag("dream_decipher_seen")
 	Na kolanach leży kartka dziadka, a pod szyfrem ktoś wypisał zdania. Twoim pismem. Nie pamiętasz, kiedy to zrobiłeś.
 => END
@@ -106,6 +108,69 @@ Zarządca Racibor dał wam tydzień. Do wieczora siódmego dnia Kniaź chce mie�
 W obozie zostali tylko zarządca, kwatermistrzyni i dwaj górnicy. Reszta ekipy od świtu kopie w chodnikach najbliżej obozu i wróci dopiero jutro. Chcesz ich poznać, to ich poszukaj.
 Pogadaj z ludźmi. Wyprawy planujesz przy stole z mapą w zagrodzie Racibora, za palisadą bez dachu. W chodnikach mapa [M] pokaże ci drogę dalej albo z powrotem. Na noc wracasz na posłanie.
 => END
+
+# task_37 (OTW-4): the intro of the three-day opening.
+~ intro_opening
+Zeszliście szybem wczoraj po zmroku. Lina skrzypiała przez całą drogę w dół, a na górze został tylko pusty wóz.
+Obóz rozbito w wielkiej jaskini na końcu starej kopalni. Dalej są już tylko chodniki, których od czterdziestu lat nikt nie sprawdzał. No i mapy dziadka.
+Kniaź chce do końca tygodnia {{quota_words("gen")}} błękitu na mapie. Zarządca Racibor najpierw sprawdzi, czy w ogóle jesteś coś wart. Za pierwsze dwie żyły obiecał odpis z archiwum, z czasów, kiedy przepadł dziadek.
+Reszta ekipy kopie na zmiany w chodnikach przy obozie i na rozmowy nie ma czasu. Pogadać można z zarządcą, z kwatermistrzynią Teklą i z dwoma górnikami: starym Bolkiem, który znał dziadka, i Mirosławem od prochu.
+Wyprawy planujesz przy stole z mapą w zagrodzie Racibora, za palisadą bez dachu. W chodnikach mapa [M] pokaże ci drogę dalej albo z powrotem. Na noc wracasz na posłanie.
+=> END
+
+# task_37 (OTW-6): grandfather's papers alone, at the bed, for when Bolko won't or the talk was
+# missed. The same three steps, the hero's own hints; back to the question about sleep after.
+~ papers_alone
+$> advance_time(1, "Nad kartką dziadka")
+Siadasz na posłaniu, kładziesz kartkę dziadka na kolanach, a deskę z zawału obok. Lampa kopci.
+Górny rząd na desce idzie zwyczajnie, od A. Dolny zaczyna się siedem liter dalej.
+=> alone_row
+
+~ alone_row
+- Szukam liter z kartki w dolnym rzędzie i czytam, co stoi nad nimi.
+	Pierwsze słowo wychodzi od razu. Potem drugie.
+	=> alone_word
+- Szukam liter z kartki w górnym rzędzie i czytam dolny.
+	Wychodzi bełkot. Dziadek mawiał, że klucz zostaje na górze, a wiadomość schodzi w dół. Może o to chodziło.
+	=> alone_row
+- Czytam co drugą literę.
+	Po trzech linijkach masz garść liter, które nic nie znaczą. Za bardzo kombinujesz.
+	=> alone_row
+
+~ alone_word
+Zdania układają się powoli. „Błękit nie bierze się ze skały. On rośnie z Nich. Każda tona, którą wywozimy na górę, to kawałek Ich ___.” Ostatnie słowo rozmazała woda.
+- „…kawałek Ich snu.”
+	Przypominasz sobie ściany w Starej sztolni, które przygasały i wracały, równo, jak oddech kogoś, kto śpi.
+	=> alone_route
+- „…kawałek Ich krwi.”
+	Krew krzepnie, a ten błękit świeci i rośnie. Przypominasz sobie ściany w Starej sztolni: światło przygasało i wracało, równo, jak oddech.
+	=> alone_word
+- „…kawałek Ich gniewu.”
+	Gniew mija, a to rośnie latami, po cichu. Przypominasz sobie ściany w Starej sztolni: światło przygasało i wracało, równo, jak oddech.
+	=> alone_word
+
+~ alone_route
+Ostatnie zdania są krótsze od innych. „Nie schodźcie niżej, niż musicie. Ja zejdę, bo ktoś musi Ich zobaczyć, zanim Oni zobaczą nas.”
+- Upadową.
+	if has_note("raport_archiwum")
+		Raport z archiwum mówi o zasypanym zejściu do upadowej. Na mapie dziadka są przy niej trzy grube kreski. Wszystko się zgadza.
+	else
+		Na mapie dziadka przy upadowej są trzy grube kreski i nic więcej. Nigdzie indziej nie schodzi się tak stromo w dół.
+	=> alone_done
+- Starym szybem.
+	Szybem schodziły zapasy, nie ludzie. Patrzysz na mapę dziadka: przy zachodnim chodniku podwójna kreska, a dalej, w dół, trzy grube kreski. Upadowa.
+	=> alone_route
+- Zachodnim chodnikiem, dalej na zachód.
+	Zachodni chodnik idzie płasko jak stół. To nie jest „niżej”. Na mapie dziadka dalej, w dół, są trzy grube kreski. Upadowa.
+	=> alone_route
+
+~ alone_done
+$> add_note("odszyfrowana")
+$> quest_log("slady", "odszyfrowane")
+$> quest_log("slady", "nizej")
+$> set_flag("deciphered")
+Składasz kartkę na czworo. Pod szyfrem stoją teraz zdania, twoim pismem. Tym razem wiesz, kiedy je napisałeś.
+=> sleep
 
 ~ left_behind
 Budzi cię cisza. Nie trzaska ogień, nikt nie chrapie, nikt nie klnie przy kociołku.

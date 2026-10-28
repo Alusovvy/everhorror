@@ -83,5 +83,22 @@ Poziom `rozgrywka`: poprawka zmienia ustawienie eksportu projektu i tym samym to
 Ryzyko `średnie`: jedno ustawienie w `project.godot` (sprawdzone sondą) i warstwa testu w kilku plikach narzędziowych, a nowy test łapie regresję.
 Stan po przebudowie procesu (commit `c5e7fb3`): scenariusz `export` i `tools/export_smoke.sh` (preset „Test Pack”, `day1` i `expedition` uruchamiane z wyeksportowanej paczki) już istnieją i są czerwone do tej poprawki. Kroki 2–4 planu czytaj więc tak: nie tworzyć drugiego presetu „Windows Smoke” ani drugiego scenariusza `export`; poprawka z kroku 1 ma zazielenić istniejący `tools/run_tests.sh export`, a dodatkowe sprawdzenia (`requires`, `hidden_meshes`, `node_paths`, `PackedColorArray`) wchodzą jako sonda albo dodatkowe scenariusze uruchamiane tym samym skryptem; wykonawca wybiera mniejszą zmianę i opisuje wybór w raporcie.
 
+## Co zostało zrobione
+**Wymagania 1 i 2 (ZYL-2/4/5, WYP-3/4/7, ZAP-11, kaptury).** `project.godot`: sekcja `[editor]` z `export/convert_text_resources_to_binary=false` (commit `f1e6f37` na `spec/2026-10-28-task25`). Dokumentacja: `tools/README.md` (sekcja „Eksport”: ustawienia nie wolno usuwać, `export` przed wydaniem), `docs/agent/README.md` (zdanie o pułapce przy danych miejsc).
+
+## Decyzje i założenia
+- Zgodnie z sekcją „Przepływ”: istniejący scenariusz `export` (`tools/export_smoke.sh`, preset „Test Pack”, `day1 expedition`) wystarcza; nie dodałem drugiego presetu ani osobnej sondy (mniejsza zmiana). Nie sprawdzałem osobno `node_paths` ani `PackedColorArray`: ustawienie jest globalne, a `expedition` z paczki przechodzi.
+- Nie uruchamiałem scenariusza `export` przed poprawką (czerwony według `tools/README.md` z poprzedniego przebiegu).
+- Rozmiaru ZIP-a przed i po nie mierzyłem (ZIP robi serwer).
+- Spec: bez zmian w regułach; wskaźnika w „Dla agenta” `03_mechaniki/zyly_i_norma.md` nie dopisałem.
+
+## Czego potrzebuję od Ciebie (po wdrożeniu)
+Czy dashboard (`cli.ts build`) ma uruchamiać `tools/run_tests.sh export` przed spakowaniem ZIP-a (zmiana w repo specyfikacji, poza tym zadaniem).
+
+## Test
+Arkusz: część task_25 w [factcheck-build-333b147](../../human-tasks/factcheck-build-333b147.md).
+- `tools/run_tests.sh export` → `RESULT: ALL PASSED (export smoke: day1 expedition ran from the exported pack)`
+- `tools/run_tests.sh unit lint` → unit ALL PASSED, lint ALL PASSED (20 ostrzeżeń, reguły spec pominięte: brak folderu specyfikacji w kopii)
+
 ## Podsumowanie
-Analiza gotowa: winne jest domyślne przekształcanie zasobów tekstowych na binarne przy eksporcie, a poprawka to jedno ustawienie w `project.godot` (sprawdzone sondą) i nowy scenariusz testu `export`, który eksportuje grę i porównuje dane w edytorze i w grze spakowanej. Plan dokłada sprawdzenie `node_paths` przy obrysach żył i `PackedColorArray`, których zgłoszenie nie badało. Pytań do Rolanda nie ma; zadanie czeka na wdrożenie (`/ai-task implement 25`).
+Wdrożone na gałęzi: jedno ustawienie eksportu (`convert_text_resources_to_binary=false`) naprawia listy tekstów w grze z ZIP-a, a scenariusz `export` jest zielony. Analiza (wcześniej): winne jest domyślne przekształcanie zasobów tekstowych na binarne przy eksporcie, a poprawka to jedno ustawienie w `project.godot` (sprawdzone sondą) i nowy scenariusz testu `export`, który eksportuje grę i porównuje dane w edytorze i w grze spakowanej. Plan dokłada sprawdzenie `node_paths` przy obrysach żył i `PackedColorArray`, których zgłoszenie nie badało. Pytań do Rolanda nie ma; zadanie czeka na wdrożenie (`/ai-task implement 25`).

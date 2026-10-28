@@ -65,15 +65,13 @@ Mirosław: [[No?|Czego?|Gadaj.]]
 		Mirosław: Ten huk... Ciągle go słyszę. Jakbym znowu siedział w tej piwnicy.
 	else
 		Mirosław: Żyję. W uszach mi dzwoni, ale żyję.
-	- Posiedzę z tobą chwilę.
-		$> set_flag("mir_comforted")
-		$> change_sanity("miroslaw", 8)
-		$> change_rep("miroslaw", 5)
-		if npc_place("miroslaw") == "ognisko"
-			Siedzicie przy ogniu i nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
-		else
-			Siadasz obok niego na skrzyni. Długo nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
-		Mirosław: ...Dzięki.
+	Ręce mu się trzęsą. Udaje, że to od zimna.
+	- Jak się stawia taki ładunek? (1 h)
+		=> support_work
+	- Posiedzę z tobą w ciszy. (1 h)
+		=> support_quiet
+	- Widzę, ile cię to kosztowało. (1 h)
+		=> support_named
 	- Weź się w garść, robota czeka.
 		$> set_flag("mir_scolded")
 		$> change_rep("miroslaw", -5)
@@ -153,6 +151,8 @@ if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalam
 	- Muszę iść. [#leave]
 		Mirosław nie odpowiada.
 	=> END
+elif has_flag("mir_support") and earlier_day("mir_support_day") and not has_flag("mir_support_answered")
+	=> support_morning
 elif has_flag("west_blasted")
 	Mirosław: No i proszę, zachodni chodnik stoi otworem. Mówiłem, że dam radę.
 	if has_flag("mir_comforted")
@@ -180,6 +180,9 @@ if sanity_band("miroslaw") == "na_krawedzi" or sanity_band("miroslaw") == "zalam
 	- Zostawiam cię. [#leave]
 		Mirosław nie odpowiada.
 	=> END
+if has_flag("mir_support") and earlier_day("mir_support_day") and not has_flag("mir_support_answered")
+	$> mark_today("mir_greet")
+	=> support_morning
 if not done_today("mir_greet")
 	$> mark_today("mir_greet")
 	if day == 3 and has_flag("plan_upadowa")
@@ -196,4 +199,55 @@ if not done_today("mir_greet")
 		Mirosław: Znowu mi się śniło, że wszystko wybucha. Tym razem po cichu. To było najgorsze.
 	else
 		Mirosław: [[Żyjesz? No to dobrze.|Proch suchy, ręce trzęsą się mniej. Dobry dzień.|Uważaj dziś na siebie. Ja uważam na beczki.]]
+=> hub
+
+# task_37 (OTW-7): an hour with him after the blast. Each way counts the same (mir_comforted, the
+# night as before); what differs is what he says now and the next morning.
+~ support_work
+$> advance_time(1, "Z Mirosławem po wybuchu")
+$> set_flag("mir_support", "robota")
+$> set_flag("mir_support_day", day)
+Mirosław: Ładunek?[wait=0.4] Najpierw patrzysz, gdzie skała chce pęknąć. Ona zawsze chce gdzieś pęknąć, trzeba tylko posłuchać.
+Mirosław: Potem wiercisz, ubijasz, a lont przycinasz tak, żeby zdążyć odejść. Nigdy na styk. Na styk robili ci, co już nie żyją.
+Mirosław mówi coraz spokojniej. Przy trzecim ładunku ręce przestają mu się trząść, choć sam tego nie zauważa.
+Mirosław: Dobrze się o tym gada. Jak gadam o robocie, to nie słyszę huku.
+=> support_end
+
+~ support_quiet
+$> advance_time(1, "Z Mirosławem po wybuchu")
+$> set_flag("mir_support", "cisza")
+$> set_flag("mir_support_day", day)
+if npc_place("miroslaw") == "ognisko"
+	Siedzicie przy ogniu i nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
+else
+	Siadasz obok niego na skrzyni. Długo nic nie mówicie. Po jakimś czasie Mirosław przestaje się trząść.
+Mirosław: ...Dzięki.
+=> support_end
+
+~ support_named
+$> advance_time(1, "Z Mirosławem po wybuchu")
+$> set_flag("mir_support", "nazwane")
+$> set_flag("mir_support_day", day)
+Mirosław: Kosztowało?[wait=0.4] Robota jak robota. Zawał stał, zawał poszedł.
+Mirosław zaciska pięści, żeby nie było widać, jak się trzęsą. Nie pomaga.
+Mirosław: Za każdym razem, jak lont się pali, mam dziesięć lat i siedzę w tej piwnicy. O tym nikt nie wie. Racibor odesłałby mnie na górę.
+Mirosław: Nie mów nikomu. Ale... dobrze, że ktoś wie.
+=> support_end
+
+~ support_end
+$> set_flag("mir_comforted")
+$> change_sanity("miroslaw", 8)
+$> change_rep("miroslaw", 5)
+=> hub
+
+~ support_morning
+$> set_flag("mir_support_answered")
+if get_flag("mir_support", "") == "robota"
+	Mirosław: Wiesz, co robiłem w nocy? Rysowałem na desce, jak bym postawił ładunek pod tamtym starym zawałem. Na sucho. Lepiej się śpi, jak się myśli o robocie.
+elif get_flag("mir_support", "") == "cisza"
+	Mirosław przesuwa się na skrzyni, robi ci miejsce, zanim cokolwiek powiesz.
+	Mirosław: Siadaj. Nie musisz nic gadać. Wtedy też nie musiałeś.
+else
+	Mirosław: To, co ci wtedy powiedziałem... Nikomu nie powtórzyłeś. Wiem, bo Racibor dalej krzyczy na mnie jak zawsze.
+	Mirosław: Dzięki.
 => hub

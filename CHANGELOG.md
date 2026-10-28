@@ -6,6 +6,21 @@ Co się zmieniło w kolejnych wersjach Everhorror, od najnowszej. Przy każdej w
 
 Wpisy zadań domkniętych po 0.5.4 (dopisuje je domknięcie zadania). Przy wydaniu serwer dashboardu (karta „Wydanie”) przenosi ten tekst pod nowy numer wersji z datą i skrótem commita specyfikacji.
 
+### Naprawione
+- W wydanej grze (ZIP) działa licznik żył: po pierwszej zaznaczonej żyle pokazuje „1 z 12”, a nie „0 z 12”. Na mapie przybywa niebieskich kresek, a lista miejsc pokazuje „żyły 1/2” (ZYL-2, ZYL-4).
+- Warunki wejścia do miejsc działają jak w specyfikacji: bez liny nie wejdziesz do Upadowej ani do Ślepego szybu, do Galerii potrzebny jest olej, do Zawalonego chodnika trzeba najpierw wysadzić zawał, do Kaplicy odkryć ją, a do Zalanego chodnika uruchomić pompy (WYP-4, WYP-7).
+- Racibor upomina rano w dniach 4–7 tylko wtedy, gdy żył przybywa za wolno, a w dniu 7 zawsze, gdy normy nie ma (ZYL-5).
+- Raport przebiegu (ZAP-11) podaje, kiedy zaznaczono każdą żyłę i kiedy padła norma; wcześniej przy każdej żyle stało „n = 0”.
+- Kaptur Racibora, Sobka i Welfa oraz części modelu Hrapka są w wydanej grze schowane, tak jak w edytorze.
+
+### Dodane
+- START w menu głównym zaczyna otwarcie na trzy dni, które kończy się wieczorem dnia 3 spotkaniem z Exitium. Pełny tydzień jest pod FULL WEEK (OLD DEMO), a zapis sprzed tej zmiany wczytuje się jako tydzień (OTW-1).
+- W obozie są cztery osoby: Racibor, Bolko, Mirosław i Tekla. Na mapie wypraw są tylko trzy miejsca: Stara sztolnia, Zawalony chodnik i Upadowa (OTW-2, OTW-3).
+- Wstęp podaje zlecenie na start: dwie żyły za odpis raportu z archiwum, lonty dla Mirosława i ślady dziadka. Tekla nie daje w otwarciu zadania tobołka. Poranek dnia 2 mówi o kotle Tekli, a ogłoszenie Racibora w dniu 3 nie wspomina Dobrawy (OTW-4, OTW-5).
+- Papiery dziadka czyta się w obozie, z Bolkiem (przy zaufaniu co najmniej 0) albo samemu przy posłaniu, w trzech krokach. Bolko wyznaje, że przez czterdzieści lat myślał, że dziadka przygniótł jego źle postawiony stempel (OTW-6).
+- Rozmowa z Mirosławem po wybuchu („Jak się trzymasz?”) ma trzy podejścia po 1 h: zapytać o robotę, posiedzieć w ciszy albo powiedzieć wprost, ile go to kosztuje. Kolacja u Tekli (18:00–20:00) reaguje na to, co się dziś stało (OTW-7, OTW-8).
+- W dniu 3 Exitium przychodzi po mapy dziadka: gracz je pokazuje, pyta po co albo odmawia. Ekran „Koniec otwarcia” podsumowuje stan gry (OTW-9, OTW-10).
+
 ## [0.5.4] - 2026-10-27
 
 Zgodność ze spec: `3f76c0f` · zadania: task_16, task_17 · gałęzie: `spec/2026-10-27-task16`, `spec/2026-10-27-task17`

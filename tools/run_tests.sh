@@ -50,7 +50,7 @@ done
 case "$JOBS" in ''|*[!0-9]*) JOBS=1 ;; esac
 [ "$JOBS" -lt 1 ] && JOBS=1
 if [ ${#tests[@]} -eq 0 ]; then
-	tests=(unit lint dialogue balance schedule places camp_walk hrapek first_meet day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
+	tests=(unit lint dialogue balance schedule places camp_walk hrapek first_meet day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week opening)
 fi
 
 # Godot (a Windows program) needs C:/… paths; Git Bash's /tmp/… would not open.
@@ -122,9 +122,18 @@ run_scenario() {
 				ok=0
 				result="$result  +check_generated FAILED, see $LOGS/check_generated.log"
 			}
+			node tools/generators/write_flags_doc.js --check > "$LOGS/flags_doc.log" 2>&1 || {
+				ok=0
+				result="$result  +flags.md STALE, see $LOGS/flags_doc.log"
+			}
 			node tools/rule_coverage.js --quiet > "$LOGS/rule_coverage.log" 2>&1
+			node tools/check_spec_data.js > "$LOGS/check_spec_data.log" 2>&1 || {
+				ok=0
+				result="$result  +check_spec_data FAILED, see $LOGS/check_spec_data.log"
+			}
 		else
-			result="$result  (node not found: check_generated and rule_coverage skipped)"
+			ok=0
+			result="$result  FAILED (node not found: required generator and spec checks could not run)"
 		fi
 	fi
 

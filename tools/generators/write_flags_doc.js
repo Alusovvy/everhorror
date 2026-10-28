@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Generates docs/agent/flags.md from reports/flags.tsv (written by `tools/run_tests.sh lint`).
-// Usage: node tools/generators/write_flags_doc.js
+// Usage: node tools/generators/write_flags_doc.js [--check]
+// --check writes nothing: it exits 1 when docs/agent/flags.md is not what the current flags.tsv gives
+// (the `lint` scenario runs it, so the registry cannot go stale).
 // The output is sorted and carries no dates or line numbers, so a second run gives the same file.
 const fs = require("fs");
 const path = require("path");
@@ -50,5 +52,15 @@ out.push("");
 out.push(table(families));
 out.push("");
 
-fs.writeFileSync(outPath, out.join("\n"));
-console.log(`docs/agent/flags.md: ${rows.length} flags`);
+const text = out.join("\n");
+if (process.argv.includes("--check")) {
+	const current = fs.existsSync(outPath) ? fs.readFileSync(outPath, "utf8").replace(/\r\n/g, "\n") : "";
+	if (current !== text) {
+		console.error("docs/agent/flags.md is out of date: run `node tools/generators/write_flags_doc.js` and commit it");
+		process.exit(1);
+	}
+	console.log(`docs/agent/flags.md is current (${rows.length} flags)`);
+} else {
+	fs.writeFileSync(outPath, text);
+	console.log(`docs/agent/flags.md: ${rows.length} flags`);
+}
