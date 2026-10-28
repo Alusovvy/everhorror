@@ -30,7 +30,7 @@ mkdir -p "$TMP/run" "$TMP/saves"
 start=$(date +%s)
 timeout 600 "$GODOT" --headless --path . --export-pack "Test Pack" "$NATIVE/game.pck" > "$TMP/export.log" 2>&1
 export_status=$?
-ERROR_ALLOW='RID allocations of type|resources still in use at exit|Pages in use exist at exit in PagedAllocator|Parameter "material" is null|Capture not registered: .beehave.'
+ERROR_ALLOW='RID allocations of type|resources still in use at exit|Pages in use exist at exit in PagedAllocator|Parameter "material" is null'
 unexpected_errors() {
 	grep -E '^[[:space:]]*(SCRIPT |USER )?ERROR:' "$1" | grep -Ev "$ERROR_ALLOW"
 }
