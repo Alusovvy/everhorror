@@ -78,10 +78,12 @@ Domyślne w `src/work/runs.ts` dashboardu zgodne z tą tabelą. `CLAUDE.md`, INS
 | planowanie | Opus 5.5 | medium | 8 / 120 |
 | analiza | Opus 5.5 | medium | 4 / 80 |
 | przegląd | Opus 5.5 | medium | 2 / 60 |
-| wdrożenie | Sonnet 5.5 | high | 8 / 150 |
-| poprawki | Sonnet 5.5 | high | 6 / 120 |
-| domknięcie | Haiku 5.5 | max | 1 / 40 |
-| próba („Sprawdź agenta”) | Haiku 5.5 | low | 0,5 / 4 |
+| wdrożenie | Sonnet 5.5 | medium | 8 / 150 |
+| poprawki | Sonnet 5.5 | medium | 6 / 120 |
+| domknięcie | Haiku 5.5 | medium | 1 / 40 |
+| próba („Sprawdź agenta”) | Haiku 5.5 | medium | 0,5 / 4 |
+
+Wysiłek medium we wszystkich rodzajach przebiegów dashboardu (Roland, dashboard 2026-10-28, task_36); wcześniej wdrożenie i poprawki miały high, domknięcie max, a próba low. Krótki przebieg po karcie decyzji (analiza z `plan zależy od wyboru: tak`) to Sonnet 5.5 medium, 20 tur. Zapamiętane w oknie startu ustawienia sprzed tej zmiany dashboard raz pominął.
 
 W sesjach terminalowych: orkiestracja, przegląd, planowanie i analiza na Opus 5.5 medium; kod i poprawki na Sonnet 5.5 high, prostsze zadania na Haiku 5.5 max (Roland, D-29, 2026-10-27). Haiku eskalujemy do Sonnet high, gdy przegląd znajdzie jego błąd albo coś się psuje. Opus high tylko za zgodą Rolanda. Jedno zadanie = jeden wykonawca od początku do końca, co najwyżej jeden przegląd po nim.
 
