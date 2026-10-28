@@ -78,7 +78,7 @@ Gałąź `spec/2026-10-28-task37`, kopia `../everhorror-wt/spec-2026-10-28-task3
 - Bez zmian zostają: raport przebiegu wymienia osoby odłożone wśród „jeszcze nie poznanych”, a wyznanie Bolka przy liście z kaplicy (tylko w tygodniu) po nowej scenie się powtarza; w otwarciu kaplicy nie ma.
 
 ## Czego potrzebuję od Ciebie
-- Ogranie buildu według arkusza [factcheck-build-b250ebb.md](../../human-tasks/factcheck-build-b250ebb.md). Pytania o hak są w wierszach 12–13.
+- Ogranie buildu według arkusza [factcheck-build-b250ebb.md](../../human-tasks/done/factcheck-build-b250ebb.md). Pytania o hak są w wierszach 12–13.
 - Weto albo zgoda na teksty [ROBOCZE]: wstęp, papiery, Mirosław, kolacja, scena z Exitium, a także godzina 18:00 i sceny po 1 h (`07_balans.md` „Otwarcie”).
 - Konflikty przy scalaniu są możliwe z otwartymi zadaniami, które dotykają tych samych dialogów i dni: task_26 (ognisko dni 2–4, poranki), task_29 (historia postaci), task_30 (ciągi kwestii), NPC-21 (szychta dnia 1; w otwarciu go nie ma).
 - Kopia gałęzi task_21 (`spec/2026-10-28-task21`) ma niezacommitowaną pracę i nie ma wiersza w „Na gałęziach”. Licząc gałęzie gita, to czwarta otwarta gałąź `spec/*` (D-33: do trzech); według księgi trzecia.
@@ -94,7 +94,7 @@ Wyniki agenta (kopia gałęzi, po `--import`, na końcu po poprawkach z przeglą
 - `day1` 24s RESULT: ALL PASSED
 - Przed poprawkami z przeglądu, sprawdzenie tygodnia: `balance` ALL PASSED (1415 checks, norma jak przed zmianą: dzień 4, 13:00 … dzień 5, 15:30), `schedule`, `first_meet`, `night1`, `drudzy`, `day3`, `save_load` ALL PASSED. Pełnego zestawu nie uruchamiano.
 
-Arkusz: [factcheck-build-b250ebb.md](../../human-tasks/factcheck-build-b250ebb.md).
+Arkusz: [factcheck-build-b250ebb.md](../../human-tasks/done/factcheck-build-b250ebb.md).
 
 Build do ogrania (`node <spec>/dashboard/cli.ts build task_37`, 2026-10-28): **nie powstał**. Nowy krok „test eksportu” (dashboard `691ad9d`) przepuścił `day1`, ale nie `expedition`: `RESULT: 10 FAILED` (żyły 0 z 12, zachodni chodnik otwarty przed wybuchem). To znany błąd eksportu, który gubi listy w zasobach ([zgłoszenie](../../../../specification/zgloszenia/zamkniete/2026-10-27_eksport-gubi-listy.md)); poprawka leży na gałęzi task_25, jeszcze nie w `master`. Gałąź task_37 wyszła z `master` `7109aeb`, więc ma ten sam błąd. Grywalny build będzie po scaleniu task_25 i włączeniu `master` do tej gałęzi; tę decyzję podejmuje Roland, agent nie scala. Log: `build/do-ogrania/Everhorror-test-task37-b250ebb-windows.log`.
 

@@ -1,8 +1,9 @@
 # Build b250ebb: arkusz do ogrania
 
-> Zadania: [task_37](../ai-tasks/done/task_37.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task37`
+> Zadania: [task_37](../../ai-tasks/done/task_37.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task37`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis. Każda część poniżej to jedno zadanie z tego buildu; arkusz jest zamknięty, gdy zamknięte są wszystkie części.
 > Zwolnienie: Roland (dashboard, 2026-10-28): Roland, czat 2026-10-28: ocena buildu test-master-0c0df0f podana w czacie, poprawki w task_39 (arkusz zwolniony, bez wpisów)
+> Zamknięcie: Roland (dashboard), 2026-10-28 18:40
 
 ## Raport przebiegu: dołącz plik
 Po zakończeniu otwarcia (ekran „Koniec otwarcia”) kliknij w dashboardzie „Dołącz raport przebiegu”: para plików z folderu raportów gry trafia obok arkusza (`raporty/`), a linki do niej do tabeli. Jeśli raport nie powstał, zapisz to w uwagach.
