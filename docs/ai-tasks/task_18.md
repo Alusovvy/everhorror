@@ -112,5 +112,8 @@ Obie zmiany są kosmetyczne i może je zrobić sesja z terminala.
 ### Test
 Zmiany w kodzie nie było, więc nie uruchamiałem testów ani typowania. Dowód to odczyt kodu z numerami linii powyżej (stan `master` specyfikacji, `git status` bez zmian). Widoku nie oglądałem w przeglądarce.
 
+## Raport z wdrożenia, ponowny przebieg (agent, 2026-10-28, przebieg `20261028-063924-implement-18-94e477`)
+Stan sprawdzony ponownie: w `<spec>/dashboard/src/views/Work.tsx` `ActionRow` z przyciskiem planowania stoi w linii 763, a `details.wk-changes` z listą „Zmiany do wdrożenia” zaraz po nim (linia 765), więc kolejność liczniki, przycisk, lista jest już spełniona. Kopia gałęzi `spec/2026-10-28-task18` jest czysta i bez commitów względem `master`; kod nie został zmieniony, testów ani typowania nie uruchamiałem. Zgodnie z kontraktem dopisano do `WDROZENIA.md` wiersz „Na gałęziach” (🧪, `--commit —`; wiersza „W zadaniach” nie ma, zadanie narzędziowe). Dwa drobiazgi (linia oddzielająca w `work.css`, zdanie w `INSTRUKCJA.md`) nadal czekają na sesję z terminala, bo `<spec>/dashboard/` jest dla przebiegu zablokowany.
+
 ## Podsumowanie
 Kryterium akceptacji (liczniki, przycisk „Zaplanuj zadania”, pod nim zwijana lista „Zmiany do wdrożenia”) jest już spełnione w `master` specyfikacji dzięki wcześniejszym commitom `d88595a` i `d0706cf`, więc ten przebieg nie zmienił kodu. Nierobione zostały dwa opcjonalne drobiazgi z planu leżące w zablokowanym `<spec>/dashboard/`: linia oddzielająca w `work.css` i zdanie w `INSTRUKCJA.md`; opisane wyżej do wykonania z terminala. Wpisu w księdze nie dodano, bo nic się nie zmieniło.
