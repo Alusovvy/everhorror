@@ -20,6 +20,7 @@ Wpisy zadań domkniętych po 0.5.4 (dopisuje je domknięcie zadania). Przy wydan
 - Papiery dziadka czyta się w obozie, z Bolkiem (przy zaufaniu co najmniej 0) albo samemu przy posłaniu, w trzech krokach. Bolko wyznaje, że przez czterdzieści lat myślał, że dziadka przygniótł jego źle postawiony stempel (OTW-6).
 - Rozmowa z Mirosławem po wybuchu („Jak się trzymasz?”) ma trzy podejścia po 1 h: zapytać o robotę, posiedzieć w ciszy albo powiedzieć wprost, ile go to kosztuje. Kolacja u Tekli (18:00–20:00) reaguje na to, co się dziś stało (OTW-7, OTW-8).
 - W dniu 3 Exitium przychodzi po mapy dziadka: gracz je pokazuje, pyta po co albo odmawia. Ekran „Koniec otwarcia” podsumowuje stan gry (OTW-9, OTW-10).
+- Raport przebiegu (SAVE REPORT w pauzie oraz raporty „Koniec otwarcia” i „Koniec tygodnia”) pokazuje czas realny każdego dnia („czas realny dnia”) i sumę. Liczy się czas grania: w menu głównym i w pauzie licznik stoi. W starych zapisach dni bez danych pokazują „—”.
 
 ### Zmienione
 - Wydana gra (ZIP) nie uruchamia już nieużywanych dodatków Beehave i Phantom Camera, a z paczki zniknęły nieużywane pliki: folder Sewer, przykładowe zdjęcie i prototyp interakcji. Rozgrywka bez zmian.
