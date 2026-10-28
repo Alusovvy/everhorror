@@ -166,6 +166,7 @@ func _run() -> void:
 	await _task06()
 	await _task09()
 	await _task11()
+	await _task37()
 
 	print("\nRESULT: %s" % ("ALL PASSED" if _failures == 0 else "%d FAILED" % _failures))
 	quit()
@@ -565,6 +566,151 @@ func _task11() -> void:
 	_seen.clear()
 	await _talk(load("res://dialogue/nasir.dialogue"), "start", ["Trzymaj się."])
 	_check(gs.has_flag("met_nasir") and _seen.any(func(t): return t.contains("pompiarz z Sułtanatu")), "Nasir met first in his fever: Anzelm says who he is")
+
+## task_37 (OTW-4…OTW-10): the three-day opening. Grandfather's papers with Bolko and alone, the
+## guilt and the relief, the three ways with Mirosław and his next morning, the supper, the
+## guards for the deferred people, the closing scene with each answer.
+func _task37() -> void:
+	var bolko: Resource = load("res://dialogue/bolko.dialogue")
+	var mir: Resource = load("res://dialogue/miroslaw.dialogue")
+	var tekla: Resource = load("res://dialogue/tekla.dialogue")
+	var racibor: Resource = load("res://dialogue/racibor.dialogue")
+	var system: Resource = load("res://dialogue/system.dialogue")
+	var drudzy: Resource = load("res://dialogue/drudzy.dialogue")
+	var fire: Resource = load("res://dialogue/ognisko.dialogue")
+	# The checks below read the standard Polish lines.
+	var settings = root.get_node("Settings")
+	settings.silesian_dialect = false
+	settings.apply()
+
+	print("--- task_37: the opening's intro and who takes part")
+	gs.reset()
+	gs.set_flag("opening")
+	_seen.clear()
+	await _talk(system, "intro_opening", [])
+	_check(_seen.any(func(l): return l.contains("Za pierwsze dwie żyły obiecał odpis")), "the opening's intro names the first small job")
+	_check(gs.deferred(&"wszebor") and gs.deferred(&"dobrawa") and gs.deferred(&"ottokar") and not gs.deferred(&"bolko"), "who waits for later chapters")
+
+	print("--- task_37: the papers with Bolko (wrong answers loop back, cost only their 5 minutes)")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.set_flag("met_bolko")
+	gs.add_note(&"szyfr")
+	gs.add_note(&"klucz")
+	var hour_before: float = gs.hour
+	_seen.clear()
+	await _talk(bolko, "start", ["Usiądźmy nad kartką dziadka.", "Szukam liter z kartki w górnym", "Szukam liter z kartki w dolnym",
+		"„…kawałek Ich krwi.”", "„…kawałek Ich snu.”", "Starym szybem.", "Upadową.", "To nie musiała być twoja wina."])
+	_check(gs.has_flag("deciphered") and gs.has_note(&"odszyfrowana") and gs.has_flag("papers_with_bolko"), "read together with Bolko")
+	_check("odszyfrowane" in gs.quests[&"slady"]["entries"] and "nizej" in gs.quests[&"slady"]["entries"], "quest entries odszyfrowane and nizej")
+	_check(gs.has_flag("bolko_guilt") and _seen.any(func(l): return l.contains("Przez mój stempel")), "Bolko tells about his prop")
+	_check(gs.hour >= hour_before + 1.0 and gs.hour < hour_before + 1.9, "the papers take an hour (%.2f → %.2f)" % [hour_before, gs.hour])
+	_check(not gs.has_flag("kaplica_known"), "no chapel in the opening")
+
+	print("--- task_37: the next morning, the upadowa, the relief")
+	gs.start_next_day()
+	_seen.clear()
+	await _talk(bolko, "start", ["Pójdę już."])
+	_check(gs.has_flag("bolko_guilt_said"), "Bolko comes back to his prop the next morning")
+	gs.set_flag("saw_charge")
+	var rep_before: int = gs.rep(&"bolko")
+	await _talk(bolko, "start", ["Byłem w upadowej. To nie był twój stempel.", "Pójdę już."])
+	_check(gs.has_flag("bolko_relieved") and gs.rep(&"bolko") == rep_before + 5, "the relief: trust +5 (%d → %d)" % [rep_before, gs.rep(&"bolko")])
+	gs.start_next_day()
+	_seen.clear()
+	await _talk(bolko, "start", ["Pójdę już."])
+	_check(_seen.any(func(l): return l.contains("nie śniły mi się stemple")), "the morning after the relief")
+
+	print("--- task_37: the papers alone at the bed, and never with a sulking Bolko")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.set_flag("met_bolko")
+	gs.add_note(&"szyfr")
+	gs.add_note(&"klucz")
+	gs.change_rep(&"bolko", -5)
+	gs.start_next_day()
+	_seen.clear()
+	await _talk(bolko, "start", [])
+	_check(not gs.has_flag("deciphered"), "Bolko with his back turned does not sit with you")
+	_requests.clear()
+	await _talk(system, "sleep", ["Usiądź sam nad kartką dziadka.", "Czytam co drugą", "Szukam liter z kartki w dolnym",
+		"„…kawałek Ich snu.”", "Upadową.", "Jeszcze nie."])
+	_check(gs.has_flag("deciphered") and not gs.has_flag("papers_with_bolko") and "nizej" in gs.quests[&"slady"]["entries"], "read alone at the bed")
+	_check(not ("sleep" in _requests), "the bed asks about sleep again afterwards")
+	gs.reset()
+	gs.add_note(&"szyfr")
+	gs.add_note(&"klucz")
+	_seen.clear()
+	await _talk(system, "sleep", ["Jeszcze nie."])
+	_check(not _seen.any(func(l): return l.contains("nad kartką")), "the full week has no papers at the bed")
+
+	print("--- task_37: three ways with Mirosław, each answered the next morning")
+	for way in [["Jak się stawia taki ładunek?", "robota", "Rysowałem na desce"], ["Posiedzę z tobą w ciszy.", "cisza", "Siadaj. Nie musisz nic gadać"], ["Widzę, ile cię to kosztowało.", "nazwane", "Nikomu nie powtórzyłeś"]]:
+		gs.reset()
+		gs.set_flag("met_miroslaw")
+		gs.set_flag("west_blasted")
+		var sanity_before: int = gs.sanity(&"miroslaw")
+		var start_hour: float = gs.hour
+		await _talk(mir, "start", ["Jak się trzymasz?", way[0], "Muszę iść."])
+		_check(String(gs.get_flag("mir_support", "")) == way[1] and gs.has_flag("mir_comforted"), "%s: comforted" % way[1])
+		_check(gs.sanity(&"miroslaw") == mini(sanity_before + 8, 50) and gs.hour >= start_hour + 1.0, "%s: the same numbers, an hour" % way[1])
+		gs.start_next_day()
+		_seen.clear()
+		await _talk(mir, "start", ["Muszę iść."])
+		_check(_seen.any(func(l): return l.contains(way[2])) and gs.has_flag("mir_support_answered"), "%s: his next morning" % way[1])
+
+	print("--- task_37: the supper at Tekla's, the reactions once")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.set_flag("met_tekla")
+	gs.hour = 18.5
+	gs.places[&"tekla"] = "kuchnia"
+	gs.set_flag("west_blasted")
+	gs.add_note(&"szyfr")
+	var sanity_hero: int = gs.player_sanity
+	_seen.clear()
+	await _talk(tekla, "start", ["Siądę do kolacji.", "Muszę iść."])
+	_check(gs.has_flag("supper_eaten") and gs.done_today("supper"), "supper eaten")
+	_check(_seen.any(func(l): return l.contains("Ale huknęło")) and _seen.any(func(l): return l.contains("twoją torbę")), "reactions to the blast and the cipher")
+	_check(gs.player_sanity == sanity_hero, "no reward for the supper")
+	_seen.clear()
+	await _talk(tekla, "start", ["Muszę iść."])
+	_check(not _seen.any(func(l): return l.contains("Siądę do kolacji")), "once a day")
+	gs.reset()
+	gs.set_flag("met_tekla")
+	gs.hour = 18.5
+	gs.places[&"tekla"] = "kuchnia"
+	_seen.clear()
+	await _talk(tekla, "start", ["Muszę iść."])
+	_check(not gs.has_flag("supper_eaten"), "no supper choice in the full week")
+
+	print("--- task_37: Tekla's bundle, Dobrawa and the campfire wait in the opening")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.set_flag("met_tekla")
+	gs.start_next_day()
+	await _talk(tekla, "start", ["Potrzebuję liny.", "Muszę iść."])
+	_check(not gs.has_flag("tekla_asked_favor") and gs.quest_state("towar") == "", "no bundle job in the opening")
+	_seen.clear()
+	gs.set_flag("met_racibor")
+	await _talk(racibor, "start", ["Muszę iść."])
+	_check(_seen.any(func(l): return l.contains("Szychta od świtu")) and not _seen.any(func(l): return l.contains("Initium")), "Racibor on day 2: no guest from Initium")
+	gs.day = 1
+	gs.hour = 20.5
+	_seen.clear()
+	await _talk(fire, "start", [])
+	_check(not _seen.any(func(l): return l.contains("Połowa ekipy")) and not _seen.any(func(l): return l.begins_with("Wszebor")), "the opening's campfire: only the four")
+
+	print("--- task_37: the closing scene, each answer")
+	for answer in [[["Pokazujesz mu mapy"], "pokazane"], [["Mapy dziadka nie są"], "odmowa"], [["Po co ci one?", "Muszę się zastanowić."], "zwloka"], [["Po co ci one?", "Nie dostaniesz ich."], "odmowa"]]:
+		gs.reset()
+		gs.set_flag("opening")
+		gs.day = 3
+		gs.hour = 18.0
+		_seen.clear()
+		await _talk(drudzy, "finale", answer[0].duplicate())
+		_check(String(gs.get_flag("opening_maps", "")) == answer[1], "%s → %s" % [answer[0], answer[1]])
+		_check(_seen.any(func(l): return l.contains("Stuk. Stuk. Stuk.")), "%s: the cliffhanger" % answer[1])
 
 func _talk(resource: Resource, cue: String, choices: Array) -> void:
 	var line = await dm.get_next_dialogue_line(resource, cue)

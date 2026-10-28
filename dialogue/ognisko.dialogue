@@ -10,8 +10,12 @@ elif npc_status("miroslaw") == "camp"
 	$> mark_today("mir_company")
 	$> change_sanity("miroslaw", 2)
 	Mirosław siedzi po drugiej stronie, dalej od płomienia niż wszyscy. Ale siedzi.
-if day == 1
+if day == 1 and opening()
+	Przy ogniu jest luźno. Górnicy z szychty jedzą w biegu i padają na posłania bez słowa.
+elif day == 1
 	Przy ogniu jest luźno. Połowa ekipy została na nocnej szychcie w chodnikach i wróci dopiero rano.
+if opening()
+	=> gawedy_otwarcie
 if day >= 7
 	=> ostatni
 elif day == 6
@@ -90,4 +94,18 @@ if quota_met()
 else
 	O jutrzejszym liczeniu nie mówi nikt. Milczenie siedzi przy ogniu razem z wami, na najlepszym miejscu.
 $> change_player_sanity(4)
+=> END
+
+# task_37 (OTW-8): the opening's evening, with whoever of the four is in the camp.
+~ gawedy_otwarcie
+if npc_status("bolko") == "camp"
+	Bolko wyciąga nogi do ognia, aż trzeszczą mu kolana.
+	Bolko: Za starej ekipy przy ogniu brakowało ławek, tylu nas było. Śpiewało się, kłóciło. Teraz się siedzi i słucha, czy strop nie trzeszczy.
+if npc_status("racibor") == "camp"
+	Racibor przysiada na brzegu skrzyni, z mapą na kolanach. Nawet przy ogniu liczy.
+	Racibor: Liczę, bo jak przestanę, zacznę myśleć o Kniaziu.
+if npc_status("tekla") == "camp"
+	Tekla: Dość strachów. Kto ma kubek, dostanie wrzątku z igliwiem. Kto nie ma, niech się grzeje opowieściami.
+Przez chwilę jaskinia jest tylko jaskinią, ogień tylko ogniem, a ludzie tylko ludźmi.
+$> change_player_sanity(5)
 => END

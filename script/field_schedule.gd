@@ -25,7 +25,8 @@ const FIRST_DAY_POSES := {
 }
 
 static func placement(npc_id: StringName, place_id: StringName) -> Dictionary:
-	if place_id == &"oboz":
+	# task_37 (OTW-2): nobody deferred is met in the tunnels of the opening either.
+	if place_id == &"oboz" or GameState.deferred(npc_id):
 		return {}
 	var met: Array = GameState.get_flag("encounter_npcs", [])
 	if String(GameState.get_flag("encounter_place", "")) == String(place_id) and String(npc_id) in met:

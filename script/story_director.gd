@@ -83,7 +83,8 @@ func _intro() -> void:
 	await fade.fade_out(0.01)
 	await fade.show_card("Dzień 1", "Obóz ekspedycji w jaskini pod starą kopalnią")
 	await fade.fade_in(1.0)
-	await VN.play(SYSTEM_DIALOGUE, "intro")
+	# task_37 (OTW-4): the opening has its own intro, with the first small job in it.
+	await VN.play(SYSTEM_DIALOGUE, "intro_opening" if GameState.opening() else "intro")
 	GameState.message.emit("[E] rozmowa i badanie   ·   [J] notes   ·   [I] ekwipunek   ·   [M] mapa w chodnikach   ·   [Esc] pauza")
 	SaveManager.capture_morning()
 	_busy = false
@@ -147,6 +148,7 @@ func _refresh_camp() -> void:
 		_busy = false
 	else:
 		apply_world_state()
+	_check_opening_finale()
 
 func _on_time_advanced(_hours: float, _reason: String) -> void:
 	_refresh_camp.call_deferred()
@@ -163,7 +165,11 @@ func _on_used(interactable: Interactable) -> void:
 		"MapTableUse":
 			map_screen.open_table()
 		"BedUse":
-			VN.start(SYSTEM_DIALOGUE, "sleep")
+			# task_37 (OTW-9): on the last day of the opening the bed brings the closing scene.
+			if _opening_finale_due(true):
+				_opening_finale()
+			else:
+				VN.start(SYSTEM_DIALOGUE, "sleep")
 		_:
 			# Signposts in the tunnels open the field map: onwards or back to the camp.
 			if use_name.ends_with("ExitUse"):
@@ -265,6 +271,7 @@ func _return_to_camp() -> void:
 	if GameState.has_flag("sabina_joined") and not GameState.has_flag("sabina_arrival_seen"):
 		GameState.set_flag("sabina_arrival_seen")
 		GameState.message.emit("W obozie czeka już Sabina z Exitium. Racibor nie wygląda na zachwyconego.")
+	_check_opening_finale()
 
 func _place_player(marker: Node3D) -> void:
 	if marker == null:
@@ -281,6 +288,9 @@ func _place_player(marker: Node3D) -> void:
 
 ## Decides who from the Exitium expedition is at this place (kept until the hero leaves).
 func _roll_encounter(place_id: StringName) -> void:
+	# task_37 (OTW-9): in the opening Exitium comes to the camp at the end, never on the way.
+	if GameState.opening():
+		return
 	var met: Array[String] = []
 	if GameState.day >= 3 and not GameState.has_flag("drudzy_met"):
 		for id in FieldSchedule.DRUDZY:
@@ -347,6 +357,9 @@ func _meet_drudzy_if_due(place_id: StringName) -> void:
 ## once a day; a second meeting is certain on the first way back on day 5. He dies in the night
 ## after day 5; the first way back after that finds the body, if the hero ever met him.
 static func hrapek_due() -> String:
+	# task_37 (OTW-2): Hrapek waits for a later chapter.
+	if GameState.deferred(&"hrapek"):
+		return ""
 	if not GameState.has_flag("hrapek_free") or GameState.has_flag("hrapek_found"):
 		return ""
 	var meetings := int(GameState.get_flag("hrapek_meetings", 0))
@@ -444,7 +457,7 @@ func _resolve_night() -> String:
 	GameState.change_sanity(&"bolko", -2 if not GameState.has_flag("bolko_knows_fate") else -5)
 	GameState.change_sanity(&"racibor", -4 if GameState.quota_met() or night < 5 else -7)
 	GameState.change_sanity(&"tekla", -10 if GameState.has_flag("tekla_reported") else -2)
-	if night >= 2 and not GameState.has_flag("dobrawa_left"):
+	if night >= 2 and not GameState.has_flag("dobrawa_left") and GameState.has_arrived(&"dobrawa"):
 		GameState.change_sanity(&"dobrawa", -5)
 		if GameState.sanity(&"dobrawa") <= 0 and not GameState.has_flag("dobrawa_leaving"):
 			GameState.set_flag("dobrawa_leaving")
@@ -487,7 +500,8 @@ func _resolve_night() -> String:
 		GameState.complete_quest(&"czternasty")
 		if news == "":
 			news = "Przy twoim posłaniu stoi stara górnicza lampa. Pali się. Nikt się nie przyznaje."
-	if GameState.has_note(&"szyfr") and GameState.has_note(&"klucz") and not GameState.has_flag("deciphered"):
+	# task_37 (OTW-6): in the opening the hero reads it himself in the camp, with Bolko or alone.
+	if GameState.has_note(&"szyfr") and GameState.has_note(&"klucz") and not GameState.has_flag("deciphered") and not GameState.opening():
 		GameState.add_note(&"odszyfrowana")
 		GameState.quest_log(&"slady", "odszyfrowane")
 		GameState.set_flag("deciphered")
@@ -502,7 +516,7 @@ func _resolve_new_people(night: int) -> void:
 			GameState.change_sanity(id, -2)
 	if GameState.npcs.has(&"anzelm") and GameState.has_flag("sabina_joined") and not GameState.has_flag("anzelm_sabina_peace"):
 		GameState.change_sanity(&"anzelm", -2)
-	if not GameState.npcs.has(&"nasir") or GameState.npc_status(&"nasir") == "gone":
+	if not GameState.npcs.has(&"nasir") or GameState.npc_status(&"nasir") == "gone" or not GameState.has_arrived(&"nasir"):
 		return
 	if night == 3 and not GameState.has_flag("nasir_fever_started"):
 		GameState.set_flag("nasir_fever_started")
@@ -530,6 +544,9 @@ func _morning_subtitle() -> String:
 	if GameState.sanity_band(&"miroslaw") in ["na_krawedzi", "zalamany"] and GameState.npc_status(&"miroslaw") != "dead":
 		return "Mirosława nie ma przy ognisku."
 	if GameState.day == 2:
+		# task_37 (OTW-5): nobody comes down the shaft in the opening.
+		if GameState.opening():
+			return tr("Kocioł Tekli dymi od świtu. Przy szybie ktoś już klnie na zimno.")
 		return "Nocą szybem zjechał ktoś nowy."
 	if GameState.day == 4 and GameState.has_fever(&"nasir"):
 		return "Nasir kaszle od świtu. Anzelm kręci głową."
@@ -559,6 +576,81 @@ func _quota_lags() -> bool:
 		return false
 	var expected := int(floor(GameState.QUOTA * (GameState.day - 1) / 7.0)) - 1
 	return GameState.veins_mapped() < expected or GameState.day == GameState.QUOTA_DAY
+
+#endregion
+
+#region The end of the opening
+
+## task_37 (OTW-9): on the last day of the opening the Exitium expedition comes to the palisade once
+## the hero is in the camp from the evening hour on, or earlier when he goes to bed.
+func _opening_finale_due(at_bed := false) -> bool:
+	if not GameState.opening() or GameState.has_flag("opening_done") or GameState.is_away():
+		return false
+	if GameState.day < GameState.OPENING_LAST_DAY:
+		return false
+	return at_bed or GameState.day > GameState.OPENING_LAST_DAY or GameState.hour >= GameState.OPENING_FINALE_HOUR - 0.001
+
+func _check_opening_finale() -> void:
+	if _busy or VN.is_active() or not _opening_finale_due():
+		return
+	await _opening_finale()
+
+## The closing scene, the run report and the end screen (OTW-10). No night follows.
+func _opening_finale() -> void:
+	_busy = true
+	GameState.set_flag("opening_done")
+	await VN.play(DRUDZY_DIALOGUE, "finale", &"ottokar")
+	var report_path := RunReport.write(RunReport.ENDING_OPENING)
+	await fade.show_end(_opening_summary(report_path), tr("Koniec otwarcia"))
+
+func _opening_summary(report_path := "") -> String:
+	var band := {"spokojny": tr("spokojny"), "niespokojny": tr("niespokojny"), "na_krawedzi": tr("na krawędzi"), "zalamany": tr("załamany")}
+	var lines: Array[String] = []
+	lines.append(tr("Exitium przyszło po mapy dziadka. Tu kończy się otwarcie."))
+	lines.append("")
+	lines.append(tr("Żyły błękitu na mapie: %d") % GameState.veins_mapped())
+	lines.append(tr("Raport z archiwum: %s") % (tr("u ciebie, Racibor dotrzymał słowa") if GameState.has_note(&"raport_archiwum") else tr("jeszcze nie")))
+	lines.append(tr("Wiadomość dziadka: %s") % _opening_message_summary())
+	lines.append(tr("Upadowa: %s") % _opening_upadowa_summary())
+	lines.append(tr("Mapy dziadka: %s") % _opening_maps_summary())
+	lines.append("")
+	lines.append(tr("Mirosław: %s") % (tr("nie żyje, zabrał ze sobą zachodni chodnik") if GameState.npc_status(&"miroslaw") == "dead" else band.get(GameState.sanity_band(&"miroslaw"), "?")))
+	var trust := GameState.rep(&"bolko")
+	var bolko := tr("ufa ci") if trust >= 10 else (tr("nie ufa ci") if trust < 0 else tr("ostrożny"))
+	if GameState.has_flag("bolko_relieved"):
+		bolko += tr(", wie już, że to nie jego stempel")
+	lines.append(tr("Bolko: %s") % bolko)
+	lines.append(tr("Tekla: %s") % (tr("zna cię z kolacji") if GameState.has_flag("supper_eaten") else tr("liczy każdą świeczkę")))
+	lines.append(tr("Racibor: %s") % (tr("liczy na ciebie") if GameState.rep(&"racibor") >= 10 else (tr("ma cię na oku") if GameState.rep(&"racibor") < 0 else tr("zdystansowany"))))
+	lines.append("")
+	lines.append(tr("Dziękujemy za grę."))
+	if report_path != "":
+		lines.append(tr("Raport przebiegu zapisano: %s/%s") % [SaveManager.report_dir.get_file(), report_path.get_file()])
+	return "\n".join(lines)
+
+func _opening_message_summary() -> String:
+	if GameState.has_flag("deciphered"):
+		return tr("odczytana razem z Bolkiem") if GameState.has_flag("papers_with_bolko") else tr("odczytana w pojedynkę")
+	if GameState.has_note(&"szyfr"):
+		return tr("kartka i klucz czekają") if GameState.has_note(&"klucz") else tr("szyfr bez klucza")
+	return tr("nieodnaleziona")
+
+func _opening_upadowa_summary() -> String:
+	if GameState.has_flag("mir_saw_charge"):
+		return tr("zawał od ładunku, Mirosław nie ma wątpliwości")
+	if GameState.has_flag("saw_charge"):
+		return tr("okopcone kamienie, klepki z beczki")
+	return tr("nikt jej jeszcze nie oglądał")
+
+func _opening_maps_summary() -> String:
+	match String(GameState.get_flag("opening_maps", "")):
+		"pokazane":
+			return tr("Ottokar je przerysował")
+		"odmowa":
+			return tr("zostały u ciebie, Ottokar odszedł bez nich")
+		"zwloka":
+			return tr("Ottokar czeka na odpowiedź")
+	return tr("bez odpowiedzi")
 
 #endregion
 

@@ -108,10 +108,14 @@ func read_slot(slot: int) -> Dictionary:
 	push_warning("Save slot %d is corrupted." % slot)
 	return {}
 
-func new_game() -> void:
+## task_37 (OTW-1): a new game is the three-day opening; `full_week` starts the old week instead
+## (the second menu entry, the balance bot's week and most world scenarios).
+func new_game(full_week := false) -> void:
 	_pending = {}
 	_morning = {}
 	GameState.reset()
+	if not full_week:
+		GameState.set_flag("opening")
 	_change_scene(GAME_SCENE)
 
 func go_to_main_menu() -> void:

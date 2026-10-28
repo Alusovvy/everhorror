@@ -35,3 +35,76 @@ Ottokar: Idziemy. Welf. Hieronim. Hieronim!
 Hieronim nachyla się do ciebie tak blisko, że czujesz od niego zapach kurzu i spalonych ziół.
 Hieronim: Nie schodź za nim, wnuczku. On idzie tam, skąd się nie wraca, i nawet o tym nie wie. Hehe.
 => END
+
+# task_37 (OTW-9): the end of the opening. The Exitium expedition comes to the palisade on the
+# evening of day 3; Ottokar wants grandfather's maps. A small choice, a reaction, the cliffhanger.
+~ finale
+Przy palisadzie robi się jasno. Nie żółto jak od lampy, tylko biało i zimno, jakby ktoś niósł w garści kawałek księżyca.
+Czworo ludzi w długich płaszczach staje przy wejściu do obozu. Troje w żelaznych maskach. Czwarty, siwy, bez maski, uśmiecha się do sklepienia jak do starego znajomego.
+Racibor wstaje tak szybko, że przewraca kubek. Bolko cofa się w cień. Tekla zasłania sobą kocioł, jakby ktoś miał go zabrać.
+Ottokar: Spokojnie. Nie podchodźcie bliżej niż na trzy kroki. To dla waszego dobra, nie dla mojego.
+Ottokar: Ottokar von Brühl, przewodniczący rozwoju w Exitium. Wasz zarządca ma już nasze pismo. Z pieczęcią Kniazia.
+Racibor: Mam. Nie było w nim ani słowa o tym, że przyjdziecie po nocy.
+Ottokar: Nie przyszliśmy do pana, zarządco.[wait=0.4] Przyszliśmy do niego.
+Ottokar patrzy na ciebie. Amulet dziadka robi się ciepły.
+Ottokar: Wnuk przewodnika. Twój dziadek zostawił po sobie mapy. Chodniki, których nikt poza nim nie widział, i znaki, których nikt poza nim nie umiał czytać.
+if has_flag("deciphered")
+	Ottokar: Ty już umiesz. Widzę to po tobie.
+if has_flag("saw_charge")
+	Ottokar: I byłeś w upadowej. Masz jej pył na butach. Ktoś ją zasypał z rozmysłem, prawda? Nas to nie dziwi.
+Ottokar: Pokaż mi te mapy. Exitium płaci za wiedzę lepiej niż Kniaź za błękit.
+- Pokazujesz mu mapy dziadka.
+	=> finale_show
+- Po co ci one?
+	=> finale_ask
+- Mapy dziadka nie są na sprzedaż.
+	=> finale_refuse
+
+~ finale_ask
+Ottokar: Uczciwe pytanie.[wait=0.4] Wasz Kniaź chce błękitu, bo z błękitu kuje się ostrza. Mnie interesuje, skąd błękit się bierze.
+Ottokar: Twój dziadek, jak słyszałem, zszedł niżej niż ktokolwiek. Chcę wiedzieć, co tam zobaczył. I czy to jeszcze śpi.
+Siwy bez maski chichocze cicho za jego plecami.
+Hieronim: Śpi, śpi. Chrapie. Hehe.
+Ottokar: Hieronimie.
+- Pokazujesz mu mapy dziadka.
+	=> finale_show
+- Nie dostaniesz ich.
+	=> finale_refuse
+- Muszę się zastanowić.
+	$> set_flag("opening_maps", "zwloka")
+	Ottokar: Zastanów się. Mam czas. Cała moja wyprawa ma czas.
+	Racibor: To mój przewodnik. Jak się zastanowi, najpierw powie mnie.
+	Ottokar: Oczywiście, zarządco. Oczywiście.
+	=> finale_end
+
+~ finale_show
+$> set_flag("opening_maps", "pokazane")
+Rozkładasz mapy dziadka na stole zarządcy. Ottokar nie dotyka papieru. Przerysowuje każdą kreskę do swojej księgi, bez pośpiechu, jakby miał na to sto lat.
+Przy upadowej zatrzymuje pióro i długo patrzy na trzy grube kreski.
+Ottokar: Dziękuję. Dałeś mi więcej, niż myślisz.
+Bolko: Czterdzieści lat nikomu tych map nie pokazał. Nawet mnie.
+Bolko odwraca się i odchodzi na swoje posłanie, nie mówiąc nic więcej.
+$> change_rep("bolko", -5)
+=> finale_end
+
+~ finale_refuse
+$> set_flag("opening_maps", "odmowa")
+Ottokar: Wszystko jest na sprzedaż. Tylko nie wszystko za pieniądze.
+if npc_status("miroslaw") == "camp" and sanity_band("miroslaw") != "na_krawedzi" and sanity_band("miroslaw") != "zalamany"
+	Mirosław staje obok ciebie. Ręce mu się trzęsą, ale stoi.
+	Mirosław: Słyszał pan. Map nie ma.
+else
+	Racibor: Słyszał pan przewodnika.
+Racibor nic więcej nie mówi, ale widzisz, że zapamiętał twoją odmowę. Nie wiesz, czy na dobre, czy na złe.
+$> change_rep("racibor", 3)
+=> finale_end
+
+~ finale_end
+Ottokar: Sabina zostanie w waszym obozie. Exitium ma prawo patrzeć na każde wydobycie w Wąwozie, z nadania Kniazia.
+Jedna z zamaskowanych postaci kiwa głową i stawia torbę pod palisadą, jakby już tu mieszkała.
+Ottokar: Idziemy. Welf. Hieronim. Hieronim!
+Siwy nachyla się do ciebie tak blisko, że czujesz od niego zapach kurzu i spalonych ziół.
+Hieronim: Nie schodź za nim, wnuczku. On idzie tam, skąd się nie wraca, i nawet o tym nie wie. Hehe.
+Białe światło odpływa w chodnik. Obóz długo milczy.
+Wtedy to słyszysz. Z głębi, z zachodu, spod zawału w upadowej. Stuk. Stuk. Stuk. Równo, cierpliwie. Jakby ktoś po drugiej stronie wiedział, że już tu jesteś.
+=> END

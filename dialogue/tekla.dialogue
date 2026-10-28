@@ -26,11 +26,13 @@ Tekla: [[No?|Co tam?|Czego ci trzeba?]]
 		Tekla: Kwit od Racibora. No proszę, jaki porządny.[wait=0.3] Masz. Dwadzieścia sążni konopnej. Oddasz całą albo zapłacisz.
 	else
 		Tekla: Liny wydaję za kwitem od Racibora. Takie są zasady, nie ja je wymyśliłam.
-		if not has_flag("tekla_asked_favor")
+		if not has_flag("tekla_asked_favor") and not opening()
 			Tekla: Chyba że...[wait=0.4] Chodź bliżej. Mam sprawę, tylko nie przy wszystkich.
 			=> favor
 	=> hub
-- Masz dla mnie jakąś robotę? [if not has_flag("tekla_asked_favor") /]
+- Siądę do kolacji. [if opening() and npc_place("tekla") == "kuchnia" and hour >= 18 and not done_today("supper") /]
+	=> supper
+- Masz dla mnie jakąś robotę? [if not has_flag("tekla_asked_favor") and not opening() /]
 	=> favor
 - Mam twój tobołek. [if has_flag("took_bundle") and quest_state("towar") != "done" and has_item("tobolek") /]
 	=> bundle
@@ -87,7 +89,7 @@ Tekla: [[No?|Co tam?|Czego ci trzeba?]]
 		- Nie mam nic cennego.
 			Tekla: To wróć, jak będziesz miał.
 	=> hub
-- Co sądzisz o tej kobiecie w masce? [if day >= 2 and not has_flag("tekla_asked_dobrawa") /]
+- Co sądzisz o tej kobiecie w masce? [if day >= 2 and not deferred("dobrawa") and not has_flag("tekla_asked_dobrawa") /]
 	$> set_flag("tekla_asked_dobrawa")
 	Tekla: Nie je, nie pije, nie siada. Wczoraj przez godzinę stała przy starych wózkach i mówiła coś do kamieni.
 	Tekla: Kupcy mają takie powiedzenie. Kiedy Drudzy przychodzą do miasta, ceny idą w górę. Kiedy wychodzą, zostają same długi.
@@ -190,4 +192,38 @@ elif not done_today("tekla_greet")
 		Tekla: Ostatni dzień. Kasza jest, świece są, a Racibor od rana nic nie jadł. Liczy.
 	else
 		Tekla: [[Kasza jest, tylko zimna. Jak ci się nie podoba, to idź się poskarżyć zarządcy.|Znowu ty. Czego tym razem?|Świece liczę. Nie przeszkadzaj, bo zacznę od nowa.]]
+=> hub
+
+# task_37 (OTW-8): supper at Tekla's kitchen, 18:00-20:00, once a day, no reward. Tekla and the
+# others react once to what has happened: the first evening, the blast, the cipher, the report,
+# the upadowa.
+~ supper
+$> mark_today("supper")
+Tekla stawia przed tobą miskę kaszy. Łyżka stoi w niej sama.
+if not has_flag("supper_eaten")
+	Tekla: Siadaj, nowy. Jedz, póki ciepła. Jutro będzie taka sama, tylko zimniejsza.
+	Przy kotle przewija się kilku górników z szychty. Jedzą na stojąco, kiwają ci głowami i wracają do chodników.
+$> set_flag("supper_eaten")
+if has_flag("west_blasted") and not has_flag("supper_blast")
+	$> set_flag("supper_blast")
+	Tekla: Ale huknęło. Pół kaszy wysypało mi się do ognia.
+	if npc_status("miroslaw") == "dead"
+		Nikt nie siada na końcu ławy, gdzie zwykle jadł Mirosław.
+	elif npc_place("miroslaw") == "kat"
+		Miska Mirosława stoi na ławie nietknięta. Tekla przykrywa ją deską, żeby nie wystygła.
+	else
+		Mirosław je na końcu ławy, plecami do ognia. Tekla dokłada mu drugą chochlę, nie pytając.
+if has_note("szyfr") and not has_flag("supper_szyfr")
+	$> set_flag("supper_szyfr")
+	Bolko zerka na twoją torbę, w której nosisz kartkę dziadka, i szybko odwraca wzrok.
+	Tekla: Co wy tacy tajemniczy? Jak to skarb, to dzielimy się po równo. Jak długi, to was nie znam.
+if has_note("raport_archiwum") and not has_flag("supper_raport")
+	$> set_flag("supper_raport")
+	Racibor: Przewodnik dostał ode mnie papier z archiwum Kniazia. Kto przyniesie mi żyły, ten też coś dostanie.
+	Tekla: Papier z archiwum. Ja bym wolała słoninę.
+if has_flag("saw_charge") and not has_flag("supper_upadowa")
+	$> set_flag("supper_upadowa")
+	Tekla: Byłeś w upadowej? Czuć od ciebie stary dym. Tak pachniał mój ojciec, jak wracał od beczek z prochem.
+	Tekla milknie, jakby powiedziała o słowo za dużo, i wraca do kotła.
+Tekla: Miska na skrzynię, jak zjesz. Sama się nie umyje.
 => hub

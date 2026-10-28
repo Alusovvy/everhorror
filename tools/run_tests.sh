@@ -50,7 +50,7 @@ done
 case "$JOBS" in ''|*[!0-9]*) JOBS=1 ;; esac
 [ "$JOBS" -lt 1 ] && JOBS=1
 if [ ${#tests[@]} -eq 0 ]; then
-	tests=(unit lint dialogue balance schedule places camp_walk hrapek first_meet day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week)
+	tests=(unit lint dialogue balance schedule places camp_walk hrapek first_meet day1 save_load rzapie night1 day2 kaplica day3 expedition drudzy week opening)
 fi
 
 # Godot (a Windows program) needs C:/… paths; Git Bash's /tmp/… would not open.

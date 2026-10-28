@@ -14,7 +14,9 @@ const REPORT_VERSION := 1
 const ENDING_WEEK := "koniec_tygodnia"
 const ENDING_ALONE := "zostales_sam"
 const ENDING_IN_PROGRESS := "w_trakcie"
-const ENDING_TITLES := {ENDING_WEEK: "Koniec tygodnia", ENDING_ALONE: "Zostałeś sam", ENDING_IN_PROGRESS: "w trakcie"}
+## task_37 (OTW-10): the three-day opening ends with the Exitium expedition at the palisade.
+const ENDING_OPENING := "koniec_otwarcia"
+const ENDING_TITLES := {ENDING_WEEK: "Koniec tygodnia", ENDING_ALONE: "Zostałeś sam", ENDING_OPENING: "Koniec otwarcia", ENDING_IN_PROGRESS: "w trakcie"}
 
 ## CZAS-16: every line of the time log belongs to one of these.
 const CATEGORIES: Array[String] = ["rozmowy", "drogi", "żyły", "pomoc", "obóz", "eksploracja", "przedmioty", "sen", "inne"]
@@ -31,6 +33,8 @@ const LABEL_CATEGORY := {
 	"Kości z Sobkiem": "obóz",
 	"Przy ogniu z Mirosławem": "obóz",
 	"Z Mirosławem w kącie": "obóz",
+	"Z Mirosławem po wybuchu": "obóz",
+	"Nad kartką dziadka": "obóz",
 	"Obracanie kręgów": "eksploracja",
 	"Rozbijanie skrytki": "eksploracja",
 	"Powrót do obozu": "drogi",

@@ -11,7 +11,12 @@ if not has_flag("met_racibor")
 	Racibor: Racibor. Zarządzam tą ekspedycją z nadania Kniazia. Wszystko, co tu robisz, i tak do mnie dotrze. Wolę usłyszeć to od ciebie.
 elif day == 2 and not has_flag("rac_day2")
 	$> set_flag("rac_day2")
-	Racibor: Wstałeś. Dobrze. Mamy gościa z Initium, jeśli jeszcze nie zauważyłeś.
+	if opening() and veins_mapped() == 0
+		Racibor: Wstałeś. Dobrze. Szychta od świtu na dole, a ja dalej nie mam od ciebie ani jednej kreski.
+	elif opening()
+		Racibor: Wstałeś. Dobrze. Szychta od świtu na dole. Kreski na mapie same się nie narysują.
+	else
+		Racibor: Wstałeś. Dobrze. Mamy gościa z Initium, jeśli jeszcze nie zauważyłeś.
 elif has_flag("protested_upadowa") and has_note("list_dziadka") and not has_flag("racibor_doubts")
 	Racibor: Pokaż mi jeszcze raz ten list. Tylko tak, żeby nikt nie widział.
 	Racibor czyta długo. Potem składa kartkę na czworo i oddaje ci ją, nie patrząc w oczy.
@@ -104,7 +109,7 @@ Racibor: [[Mów.|Słucham.|Do rzeczy.]]
 		$> set_flag("got_rope")
 		Racibor: Masz linę. Należy ci się.
 	=> hub
-- Kim jest ta kobieta w masce? [if day >= 2 and not has_flag("rac_asked_dobrawa") and not has_flag("dobrawa_left") /]
+- Kim jest ta kobieta w masce? [if day >= 2 and not deferred("dobrawa") and not has_flag("rac_asked_dobrawa") and not has_flag("dobrawa_left") /]
 	$> set_flag("rac_asked_dobrawa")
 	Racibor: Druga z Initium. Nazywa się Dobrawa. Kniaź nie pytał mnie o zdanie.
 	Racibor: Initium chce wiedzieć, skąd się bierze błękit. Ja chcę, żeby go było dużo. Na razie nam po drodze.
@@ -170,11 +175,14 @@ if has_flag("plan_upadowa")
 	if has_flag("bolko_knows_fate")
 		Bolko: Nad grobem przewodnika kopać nie będziesz, panie zarządco. Po moim trupie.
 		Racibor: Jeśli trzeba będzie, to i po twoim, Bolko.
+	elif has_flag("bolko_relieved")
+		Bolko: Ktoś już raz to zasypał, panie zarządco. Prochem, z rozmysłem. Nie strop.
+		Racibor: To odkopiemy z rozmysłem.
 if has_flag("tekla_reported")
 	Tekla siedzi na skrzyni obok stołu zarządcy i nie podnosi wzroku.
 if has_flag("dobrawa_left")
 	Miejsce przy starych wózkach, gdzie zwykle stała Dobrawa, jest puste.
-elif has_flag("plan_upadowa")
+elif has_flag("plan_upadowa") and not deferred("dobrawa")
 	Dobrawa: Jeśli otworzycie upadową, obudzicie to, co przewodnik uśpił. Initium wam wtedy nie pomoże.
 	Racibor: Initium nie zarządza tą kopalnią.
 Racibor: To wszystko. Do roboty.
