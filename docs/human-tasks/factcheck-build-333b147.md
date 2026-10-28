@@ -2,6 +2,8 @@
 
 > Zadania: [task_22](../ai-tasks/task_22.md), [task_25](../ai-tasks/task_25.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task22`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis. Każda część poniżej to jedno zadanie z tego buildu; arkusz jest zamknięty, gdy zamknięte są wszystkie części.
+> Wyniki człowieka: Roland (dashboard), 2026-10-28 06:52
+> Build: f1e6f37 (Everhorror-test-task25-f1e6f37-windows.zip)
 
 ## Uwagi ogólne (wypełnia człowiek)
 
@@ -22,12 +24,12 @@
 
 | # | co sprawdzić | jak | oczekiwany wynik | wynik | uwagi |
 |---|---|---|---|---|---|
-| 1 | Wstęp do gry | nowa gra, przeczytać wstęp | „…Kniaź chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano przyjdzie po raport wóz.” bez zmian | | |
-| 2 | Racibor, pierwsza rozmowa | „Po co właściwie tu jesteśmy?” i „Znam mapy dziadka…” | „…zobaczyć dwanaście żył na mapie” oraz „Kniaź chce dwunastu żył do wieczora siódmego dnia” | | |
-| 3 | Wpis w notesie | po przyjęciu zadania otworzyć notes (J), zakładka zadań | wpis „Kniaź chce dwunastu żył błękitu na mapie do wieczora siódmego dnia…” | | |
-| 4 | Mirosław, dzień 3 | porozmawiać z Mirosławem 3. dnia (gwara włączona i wyłączona) | „Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego.” (wersja śląska: „Tydziyń, godo Racibor…”) | | |
-| 5 | `release.sh --dry-run` | w terminalu: `tools/release/release.sh 0.5.5 --dry-run` (wymaga bitu wykonywania: `git update-index --chmod=+x`) | wypisuje sześć kroków i polecenia git, niczego nie uruchamia | | |
-| 6 | `docs/agent/flags.md` | otworzyć plik | tabela flag z kolumnami „ustawiana w / czytana w / ładunek”, część dla rodzin `vein_*`, `visited_*` | | |
+| 1 | Wstęp do gry | nowa gra, przeczytać wstęp | „…Kniaź chce mieć na mapie dwanaście żył błękitu. Ósmego dnia rano przyjdzie po raport wóz.” bez zmian | ✅ |  |
+| 2 | Racibor, pierwsza rozmowa | „Po co właściwie tu jesteśmy?” i „Znam mapy dziadka…” | „…zobaczyć dwanaście żył na mapie” oraz „Kniaź chce dwunastu żył do wieczora siódmego dnia” | ✅ |  |
+| 3 | Wpis w notesie | po przyjęciu zadania otworzyć notes (J), zakładka zadań | wpis „Kniaź chce dwunastu żył błękitu na mapie do wieczora siódmego dnia…” | ✅ |  |
+| 4 | Mirosław, dzień 3 | porozmawiać z Mirosławem 3. dnia (gwara włączona i wyłączona) | „Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego.” (wersja śląska: „Tydziyń, godo Racibor…”) | ✅ |  |
+| 5 | `release.sh --dry-run` | w terminalu: `tools/release/release.sh 0.5.5 --dry-run` (wymaga bitu wykonywania: `git update-index --chmod=+x`) | wypisuje sześć kroków i polecenia git, niczego nie uruchamia | ✅ |  |
+| 6 | `docs/agent/flags.md` | otworzyć plik | tabela flag z kolumnami „ustawiana w / czytana w / ładunek”, część dla rodzin `vein_*`, `visited_*` | ✅ |  |
 
 ### Wyniki automatu (agent)
 Testy uruchomione przez agenta, z prawdziwymi wynikami. To nie jest weryfikacja człowieka.
