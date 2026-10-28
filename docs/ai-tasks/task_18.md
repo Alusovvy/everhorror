@@ -85,5 +85,32 @@ Poziom `narzędzia`: zmiana widoku dashboardu (kod w repozytorium specyfikacji, 
 Ryzyko `niskie`: dwa pliki interfejsu i jedno zdanie dokumentacji.
 Do rozstrzygnięcia przed wdrożeniem: `docs/agent/run-rules.md` §1 zabrania przebiegowi zapisu w `<spec>/dashboard/`, a ta zmiana leży tylko tam; potrzebny wyjątek w regułach albo wykonanie przez koordynatora.
 
-## Podsumowanie
+## Podsumowanie analizy
 Zmiana jest drobna: w `PlanCard` (`Work.tsx`) zwijana lista „Zmiany do wdrożenia” przechodzi spod liczników pod przycisk „Zaplanuj zadania”. Do tego cienka linia oddzielająca w `work.css` i jedno zdanie w `INSTRUKCJA.md`. Logika i teksty bez zmian. Wdrożenie z dashboardu na poziomie `narzędzia`, commit `[agent] proces: …` w specyfikacji, bez arkusza (dowód w sprawdzeniach i raporcie). Gry, Godota ani `WDROZENIA.md` zadanie nie dotyka. Możliwe osobne zadanie: licznik „N zmian w specyfikacji do wdrożenia” nad przyciskiem może dawać to samo wrażenie co lista.
+
+## Raport z wdrożenia (agent, 2026-10-28, przebieg `20261028-063804-implement-18-abdfdd`)
+
+### Co zostało zrobione
+**Wymaganie 1 (lista „Zmiany do wdrożenia” pod przyciskiem „Zaplanuj zadania”).** Nie zmieniałem żadnego pliku. Przy sprawdzaniu kodu w repozytorium specyfikacji (`master`, drzewo robocze czyste) okazało się, że kolejność jest już taka, jak chce kryterium akceptacji:
+- `dashboard/src/views/Work.tsx`, `PlanCard`: nagłówek (`:727`), liczniki `ul.wk-counts` (`:733-757`), „Liczone od…” (`:760-762`), `ActionRow` z przyciskiem planowania (`:763`), a dopiero potem `details.wk-changes` z listą (`:764-772`).
+- Przeniesienie weszło wcześniej, w commitach `d88595a` i `d0706cf` (oba z `task_18` w komunikacie, „Praca z Wznów, Wyjaśnione…”). Ten przebieg tego nie powtarza.
+
+Nie zrobiłem też dwóch drobiazgów z planu, bo leżą wyłącznie w `<spec>/dashboard/`, a reguły przebiegu (`run-rules.md` §1 i zakres tego przebiegu) zabraniają tam zapisu:
+1. `dashboard/src/views/work.css`, ok. linii 802: `.wk-changes` ma dziś tylko `margin: 10px 0`. Plan zakładał cienką linię oddzielającą listę od przycisku, np. `border-top: 1px solid var(--border); padding-top: 6px;`. Uwaga: ta sama klasa jest użyta w `WorkItem.tsx:268` (commity i pliki gałęzi), więc bezpieczniej ograniczyć regułę do karty planu (np. `.card .wk-action + .wk-changes`).
+2. `dashboard/INSTRUKCJA.md`: jedno zdanie przy kroku planowania, że pod przyciskiem jest zwijana lista „Zmiany do wdrożenia” (różnice od ostatniego wpisu w „W zadaniach”, a nie lista tego, co planowanie zaplanuje).
+
+Obie zmiany są kosmetyczne i może je zrobić sesja z terminala.
+
+### Decyzje i założenia
+- Odczyt (A) z analizy (ta sama karta, pod licznikami i pod przyciskiem) jest już w kodzie; odczyt (B) (osobna karta) nie jest potrzebny.
+- Nie wpisywałem 🧪 do `WDROZENIA.md` ani nie robiłem commitu: nie ma zmian do zatwierdzenia w grze ani w specyfikacji, a w repozytorium specyfikacji nie powstała żadna zmiana. Poziom `narzędzia`: bez arkusza.
+
+### Czego potrzebuję od Ciebie
+- Zdecyduj, czy zadanie wystarcza w obecnym stanie (kryterium akceptacji spełnione), czy sesja z terminala ma dopisać linię w `work.css` i zdanie w `INSTRUKCJA.md`.
+- Gałąź `spec/2026-10-28-task18` nie ma żadnych zmian względem `master`; nie ma czego scalać.
+
+### Test
+Zmiany w kodzie nie było, więc nie uruchamiałem testów ani typowania. Dowód to odczyt kodu z numerami linii powyżej (stan `master` specyfikacji, `git status` bez zmian). Widoku nie oglądałem w przeglądarce.
+
+## Podsumowanie
+Kryterium akceptacji (liczniki, przycisk „Zaplanuj zadania”, pod nim zwijana lista „Zmiany do wdrożenia”) jest już spełnione w `master` specyfikacji dzięki wcześniejszym commitom `d88595a` i `d0706cf`, więc ten przebieg nie zmienił kodu. Nierobione zostały dwa opcjonalne drobiazgi z planu leżące w zablokowanym `<spec>/dashboard/`: linia oddzielająca w `work.css` i zdanie w `INSTRUKCJA.md`; opisane wyżej do wykonania z terminala. Wpisu w księdze nie dodano, bo nic się nie zmieniło.
