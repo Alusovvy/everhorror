@@ -1,6 +1,6 @@
 # Build b250ebb: arkusz do ogrania
 
-> Zadania: [task_37](../ai-tasks/task_37.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task37`
+> Zadania: [task_37](../ai-tasks/done/task_37.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task37`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis. Każda część poniżej to jedno zadanie z tego buildu; arkusz jest zamknięty, gdy zamknięte są wszystkie części.
 
 ## Raport przebiegu: dołącz plik
