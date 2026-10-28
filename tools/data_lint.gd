@@ -345,10 +345,28 @@ func _run() -> void:
 ## quota, but only as quota_words() does for the current QUOTA.
 func _check_quota_literals(all_sources: Dictionary) -> void:
 	print("--- T7: the quota is not spelled out in texts")
-	var re_quota := RegEx.create_from_string("[Dd]wanaście|[Dd]wunastu|12 żył")
 	var sources := all_sources.duplicate()
 	sources["res://tools/generators/write_story_data.js"] = FileAccess.get_file_as_string("res://tools/generators/write_story_data.js")
-	var hits := 0
+	var found := _quota_literal_hits(sources)
+	var hits: int = found["hits"].size()
+	var marked: int = found["marked"]
+	for hit in found["hits"]:
+		print("   LINT %s: the quota is spelled out (use quota_words() / {{quota_words()}} / a {norma} marker, or mark the line with `lint-quota`)" % hit)
+	# The rule itself: an old literal in a dialogue line is flagged, the exemption silences it (fixtures, not repo files).
+	var fixture_bad := {"res://dialogue/fixture.dialogue": "Racibor: Kniaź chce mieć na mapie dwanaście żył.\nRacibor: Do dwunastu żył daleko.\nRacibor: Mamy 12 żył.\n"}
+	var fixture_ok := {"res://dialogue/fixture.dialogue": "# lint-quota: twelve years, not veins\nNasir: Dwanaście lat w kamieniołomach.\nRacibor: Kniaź chce {{quota_words()}}.\n"}
+	_check(_quota_literal_hits(fixture_bad)["hits"].size() == 3 and _quota_literal_hits(fixture_ok)["hits"].is_empty() and _quota_literal_hits(fixture_ok)["marked"] == 1, "the T7 rule flags an old literal and honours `lint-quota` (fixtures)")
+	var readme := FileAccess.get_file_as_string("res://tools/release/CZYTAJ_MNIE.txt")
+	var expected: String = gs.quota_words("nom", false) + " błękitu"
+	var readme_ok := readme.replace("\r", "").replace("\n", " ").contains(expected)
+	if not readme_ok:
+		print("   LINT tools/release/CZYTAJ_MNIE.txt: the quota sentence no longer matches QUOTA (expected \"%s\")" % expected)
+	_check(hits == 0 and readme_ok, "no spelled-out quota (%d unmarked, %d marked `lint-quota`, CZYTAJ_MNIE %s)" % [hits, marked, "matches QUOTA" if readme_ok else "is stale"])
+
+## The T7 rule on a {path: text} dictionary: {"hits": ["path:line", …] (unmarked), "marked": n exempted}.
+func _quota_literal_hits(sources: Dictionary) -> Dictionary:
+	var re_quota := RegEx.create_from_string("[Dd]wanaście|[Dd]wunastu|12 żył")
+	var hits: Array[String] = []
 	var marked := 0
 	for path in sources:
 		if not (String(path).begins_with("res://dialogue/") or String(path).begins_with("res://script/") or String(path).ends_with("write_story_data.js")):
@@ -360,14 +378,8 @@ func _check_quota_literals(all_sources: Dictionary) -> void:
 			if lines[i].contains("lint-quota") or (i > 0 and lines[i - 1].contains("lint-quota")):
 				marked += 1
 				continue
-			hits += 1
-			print("   LINT %s:%d: the quota is spelled out (use quota_words() / {{quota_words()}} / a {norma} marker, or mark the line with `lint-quota`)" % [path, i + 1])
-	var readme := FileAccess.get_file_as_string("res://tools/release/CZYTAJ_MNIE.txt")
-	var expected: String = gs.quota_words("nom", false) + " błękitu"
-	var readme_ok := readme.replace("\n", " ").contains(expected)
-	if not readme_ok:
-		print("   LINT tools/release/CZYTAJ_MNIE.txt: the quota sentence no longer matches QUOTA (expected \"%s\")" % expected)
-	_check(hits == 0 and readme_ok, "no spelled-out quota (%d unmarked, %d marked `lint-quota`, CZYTAJ_MNIE %s)" % [hits, marked, "matches QUOTA" if readme_ok else "is stale"])
+			hits.append("%s:%d" % [path, i + 1])
+	return {"hits": hits, "marked": marked}
 
 ## K6 (task_22): Polish player text in scripts is not ready for the English version (D-09), so the
 ## count of Polish string literals per file in script/ may only fall. A literal counts when it is a
@@ -381,6 +393,8 @@ func _check_polish_literals() -> void:
 	print("--- K6: Polish literals in script/ only fall (tools/lint_baseline.json)")
 	var re_string := RegEx.create_from_string("\"((?:[^\"\\\\]|\\\\.)*)\"")
 	var re_polish := RegEx.create_from_string("[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|" + POLISH_WORDS)
+	# `tr("…")` itself, not `str("…")` or `_tr("…")`: a word boundary before `tr(`.
+	var re_tr_call := RegEx.create_from_string("\\btr\\($")
 	var counts := {}
 	var files: Array[String] = []
 	for dir in ["res://script", "res://script/data"]:
@@ -395,7 +409,7 @@ func _check_polish_literals() -> void:
 			for m in re_string.search_all(line):
 				if comment_at >= 0 and m.get_start() > comment_at:
 					continue
-				if line.substr(0, m.get_start()).ends_with("tr("):
+				if re_tr_call.search(line.substr(0, m.get_start())) != null:
 					continue
 				if re_polish.search(m.get_string(1)) != null:
 					count += 1
@@ -451,7 +465,7 @@ func _write_flag_registry(all_sources: Dictionary) -> void:
 			sources["res://script/data/" + file] = FileAccess.get_file_as_string("res://script/data/" + file)
 	sources["res://tools/generators/write_world_data.js"] = FileAccess.get_file_as_string("res://tools/generators/write_world_data.js")
 	var set_patterns := ["set_flag\\(\\s*\"([^\"%+]+)\"\\s*(?:,\\s*([^)]*))?\\)", "mark_today\\(\\s*\"([^\"%+]+)\"()", "bump_flag\\(\\s*\"([^\"%+]+)\"()", "flags\\[\\s*\"([^\"%+]+)\"\\s*\\]\\s*=()", "\"on_use_flag\":\\s*\"([^\"%+]+)\"()"]
-	var read_patterns := ["has_flag\\(\\s*\"([^\"%+]+)\"", "done_today\\(\\s*\"([^\"%+]+)\"", "\"required_flag\":\\s*\"([^\"%+]+)\"", "\"hidden_by_flag\":\\s*\"([^\"%+]+)\"", "\"flag:([^\"%+]+)\"", "\"noflag:([^\"%+]+)\""]
+	var read_patterns := ["has_flag\\(\\s*\"([^\"%+]+)\"", "get_flag\\(\\s*\"([^\"%+]+)\"", "earlier_day\\(\\s*\"([^\"%+]+)\"", "done_today\\(\\s*\"([^\"%+]+)\"", "\"required_flag\":\\s*\"([^\"%+]+)\"", "\"hidden_by_flag\":\\s*\"([^\"%+]+)\"", "\"flag:([^\"%+]+)\"", "\"noflag:([^\"%+]+)\""]
 	var set_in := {}
 	var read_in := {}
 	var payload := {}

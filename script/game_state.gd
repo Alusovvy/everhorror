@@ -618,8 +618,8 @@ func veins_acc() -> String:
 
 ## Polish numerals 0-20 as words (feminine, for "żyła"). The `lint-quota` marker exempts a line
 ## from the data_lint rule on spelled-out quotas.
-const NUMERALS_NOM := ["zero", "jedna", "dwie", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście", "dwadzieścia"] # lint-quota
-const NUMERALS_GEN := ["zera", "jednej", "dwóch", "trzech", "czterech", "pięciu", "sześciu", "siedmiu", "ośmiu", "dziewięciu", "dziesięciu", "jedenastu", "dwunastu", "trzynastu", "czternastu", "piętnastu", "szesnastu", "siedemnastu", "osiemnastu", "dziewiętnastu", "dwudziestu"] # lint-quota
+const NUMERALS_NOM: Array[String] = ["zero", "jedna", "dwie", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście", "dwadzieścia"] # lint-quota
+const NUMERALS_GEN: Array[String] = ["zera", "jednej", "dwóch", "trzech", "czterech", "pięciu", "sześciu", "siedmiu", "ośmiu", "dziewięciu", "dziesięciu", "jedenastu", "dwunastu", "trzynastu", "czternastu", "piętnastu", "szesnastu", "siedemnastu", "osiemnastu", "dziewiętnastu", "dwudziestu"] # lint-quota
 
 ## The quota in words for dialogues and messages (the number lives only in QUOTA, D-05):
 ## quota_words() → numeral and noun ("N żył"), ("gen") → genitive, ("nom", true) → capitalised,

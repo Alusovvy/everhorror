@@ -18,8 +18,8 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `anzelm_brewing_day` | `dialogue/anzelm.dialogue` | `dialogue/anzelm.dialogue` | tak |
 | `anzelm_care` | `dialogue/anzelm.dialogue`, `script/game_state.gd` | `dialogue/anzelm.dialogue`, `script/game_state.gd` | tak |
 | `anzelm_sabina_peace` | `dialogue/anzelm.dialogue` | `dialogue/anzelm.dialogue`, `dialogue/sabina.dialogue`, `script/camp_schedule.gd`, `script/run_report.gd`, `script/story_director.gd` | nie |
-| `bet_day` | `dialogue/sobek.dialogue` | — | tak |
-| `bet_target` | `dialogue/sobek.dialogue` | — | tak |
+| `bet_day` | `dialogue/sobek.dialogue` | `dialogue/sobek.dialogue` | tak |
+| `bet_target` | `dialogue/sobek.dialogue` | `dialogue/sobek.dialogue` | tak |
 | `bolko_asked_blast` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_asked_dobrawa` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_asked_first` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
@@ -36,7 +36,7 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `bolko_on_sabina` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_on_wszebor` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_relieved` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue`, `dialogue/racibor.dialogue`, `script/story_director.gd` | nie |
-| `bolko_relieved_day` | `dialogue/bolko.dialogue` | — | tak |
+| `bolko_relieved_day` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | tak |
 | `bolko_relieved_said` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_told_chapel` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `bolko_tremor` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
@@ -62,8 +62,8 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `drudzy_met_at` | `script/story_director.gd` | — | tak |
 | `drudzy_seen` | `script/story_director.gd` | `script/story_director.gd` | tak |
 | `dwie_drugie` | `dialogue/dobrawa.dialogue` | `dialogue/dobrawa.dialogue` | nie |
-| `encounter_npcs` | `script/story_director.gd` | — | tak |
-| `encounter_place` | `script/story_director.gd` | `script/story_director.gd` | tak |
+| `encounter_npcs` | `script/story_director.gd` | `script/field_schedule.gd`, `script/story_director.gd` | tak |
+| `encounter_place` | `script/story_director.gd` | `script/field_schedule.gd`, `script/story_director.gd` | tak |
 | `found_cipher` | `tools/generators/gen_mine_deep.gd` | — | nie |
 | `found_key` | `tools/generators/gen_camp.gd` | — | nie |
 | `fourteenth_gift` | `script/story_director.gd` | `dialogue/system.dialogue`, `script/run_report.gd`, `script/story_director.gd` | nie |
@@ -75,12 +75,12 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `hag_empire` | `dialogue/hagiwara.dialogue` | `dialogue/hagiwara.dialogue` | nie |
 | `hag_exile` | `dialogue/hagiwara.dialogue` | `dialogue/hagiwara.dialogue` | nie |
 | `hag_hello` | `dialogue/hagiwara.dialogue` | `dialogue/hagiwara.dialogue` | tak |
-| `hier_count` | `dialogue/hieronim.dialogue` | — | tak |
+| `hier_count` | `dialogue/hieronim.dialogue` | `dialogue/hieronim.dialogue` | tak |
 | `hrapek_dead` | `script/story_director.gd` | `script/run_report.gd`, `script/story_director.gd` | nie |
 | `hrapek_found` | `dialogue/hrapek.dialogue` | `script/run_report.gd`, `script/story_director.gd` | nie |
 | `hrapek_free` | `script/story_director.gd` | `script/story_director.gd` | nie |
 | `hrapek_left` | `dialogue/hrapek.dialogue` | — | nie |
-| `hrapek_meetings` | `script/story_director.gd` | — | tak |
+| `hrapek_meetings` | `script/story_director.gd` | `dialogue/hrapek.dialogue`, `script/story_director.gd` | tak |
 | `hrapek_q` | `dialogue/hrapek.dialogue`, `script/game_state.gd`, `script/story_director.gd` | — | tak |
 | `hrapek_ring` | `dialogue/hrapek.dialogue` | `script/run_report.gd`, `script/story_director.gd` | nie |
 | `hrapek_seen` | `script/story_director.gd` | `script/story_director.gd` | tak |
@@ -92,7 +92,7 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `hrapek_told_work` | `dialogue/hrapek.dialogue` | `dialogue/hrapek.dialogue` | nie |
 | `intro_done` | `script/story_director.gd` | `script/story_director.gd` | nie |
 | `kaplica_known` | `dialogue/bolko.dialogue`, `dialogue/dobrawa.dialogue`, `script/story_director.gd` | `tools/generators/write_world_data.js` | nie |
-| `location` | `script/story_director.gd` | — | tak |
+| `location` | `script/story_director.gd` | `script/game_state.gd` | tak |
 | `met_anzelm` | `dialogue/anzelm.dialogue` | `dialogue/anzelm.dialogue` | nie |
 | `met_bolko` | `dialogue/bolko.dialogue` | `dialogue/bolko.dialogue` | nie |
 | `met_dobrawa` | `dialogue/dobrawa.dialogue` | `dialogue/dobrawa.dialogue` | nie |
@@ -121,7 +121,7 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `mir_scolded` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue`, `script/run_report.gd` | nie |
 | `mir_support` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue` | tak |
 | `mir_support_answered` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue` | nie |
-| `mir_support_day` | `dialogue/miroslaw.dialogue` | — | tak |
+| `mir_support_day` | `dialogue/miroslaw.dialogue` | `dialogue/miroslaw.dialogue` | tak |
 | `nas_asked_story` | `dialogue/nasir.dialogue` | `dialogue/nasir.dialogue` | nie |
 | `nas_djinn` | `dialogue/nasir.dialogue` | `dialogue/nasir.dialogue` | nie |
 | `nas_hello` | `dialogue/nasir.dialogue` | `dialogue/nasir.dialogue` | tak |
@@ -135,7 +135,7 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `opened_grabiec_cache` | `tools/generators/gen_locations.gd` | — | nie |
 | `opening` | `script/save_manager.gd` | `script/game_state.gd` | nie |
 | `opening_done` | `script/story_director.gd` | `script/story_director.gd` | nie |
-| `opening_maps` | `dialogue/drudzy.dialogue` | — | tak |
+| `opening_maps` | `dialogue/drudzy.dialogue` | `script/story_director.gd` | tak |
 | `ott_deal_done` | `dialogue/ottokar.dialogue` | `dialogue/ottokar.dialogue` | nie |
 | `ott_has_maps` | `dialogue/ottokar.dialogue` | — | nie |
 | `ott_nakamura` | `dialogue/ottokar.dialogue` | `dialogue/ottokar.dialogue` | nie |
@@ -162,9 +162,9 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `racibor_wants_upadowa` | `dialogue/racibor.dialogue` | `dialogue/racibor.dialogue` | nie |
 | `read_letter` | `tools/generators/gen_locations.gd` | — | nie |
 | `reminder_day` | `script/story_director.gd` | — | tak |
-| `ring1` | `dialogue/sciana.dialogue` | — | tak |
-| `ring2` | `dialogue/sciana.dialogue` | — | tak |
-| `ring3` | `dialogue/sciana.dialogue` | — | tak |
+| `ring1` | `dialogue/sciana.dialogue` | `dialogue/sciana.dialogue` | tak |
+| `ring2` | `dialogue/sciana.dialogue` | `dialogue/sciana.dialogue` | tak |
+| `ring3` | `dialogue/sciana.dialogue` | `dialogue/sciana.dialogue` | tak |
 | `sab_child` | `dialogue/sabina.dialogue` | `dialogue/sabina.dialogue` | nie |
 | `sab_heal_secret` | `dialogue/sabina.dialogue` | `dialogue/sabina.dialogue` | nie |
 | `sab_hello` | `dialogue/sabina.dialogue` | `dialogue/sabina.dialogue` | tak |
@@ -226,7 +226,7 @@ Flag z literalną nazwą w źródłach: 241, z rodzin składanych w czasie gry: 
 | `took_shard` | `tools/generators/gen_locations.gd` | — | nie |
 | `took_smith_flask` | `tools/generators/gen_locations.gd` | — | nie |
 | `tremor_seen` | `script/story_director.gd` | `dialogue/bolko.dialogue`, `dialogue/wszebor.dialogue`, `tools/generators/gen_locations.gd` | nie |
-| `wall_fails` | `dialogue/sciana.dialogue` | — | tak |
+| `wall_fails` | `dialogue/sciana.dialogue` | `dialogue/sciana.dialogue` | tak |
 | `wall_open` | `dialogue/sciana.dialogue` | `dialogue/dobrawa.dialogue`, `dialogue/racibor.dialogue`, `script/story_director.gd`, `tools/generators/gen_locations.gd` | nie |
 | `wall_seen` | `dialogue/sciana.dialogue` | `dialogue/sciana.dialogue` | nie |
 | `welf_helped` | `dialogue/welf.dialogue` | `dialogue/welf.dialogue`, `script/field_schedule.gd`, `script/run_report.gd`, `script/story_director.gd` | nie |

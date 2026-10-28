@@ -192,6 +192,15 @@ func _run() -> void:
 	_check(gs.quest_entry_text(zloza, "zdane").ends_with("Do dwunastu jeszcze daleko."), "quest entry zdane reads as before")
 	_check(gs.quest_entry_text(zloza, "norma") == "Dwanaście żył. Norma Kniazia zrobiona.", "quest entry norma reads as before")
 	_check(gs.quest_entry_text(zloza, "rzapie") == zloza.entries["rzapie"] and gs.quest_entry_text(zloza, "brak") == "brak", "entries without a marker and unknown ids pass through")
+	gs.reset()
+	var toasts: Array[String] = []
+	var on_message := func(text: String) -> void: toasts.append(text)
+	gs.message.connect(on_message)
+	for vein in gs.vein_ids().slice(0, gs.QUOTA):
+		gs.set_flag("vein_" + vein)
+	gs._check_quota()  # already logged by the twelfth vein: no second toast
+	gs.message.disconnect(on_message)
+	_check(toasts.has("Dwanaście żył. Norma Kniazia zrobiona.") and toasts.count("Dwanaście żył. Norma Kniazia zrobiona.") == 1, "the quota-met toast reads as before and comes once (%d toasts in all)" % toasts.size())
 
 	print("--- The hero: bands and the wound floor")
 	gs.reset()
