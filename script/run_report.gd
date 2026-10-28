@@ -100,6 +100,7 @@ static func collect(ending: String = ENDING_IN_PROGRESS) -> Dictionary:
 		"report_version": REPORT_VERSION,
 		"build": {"version": BuildInfo.version(), "spec": BuildInfo.SPEC_SHA},
 		"generated_at": Time.get_datetime_string_from_system(),
+		"wariant": "otwarcie" if GameState.opening() else "tydzien",
 		"ending": {"id": ending, "title": ENDING_TITLES.get(ending, ending)},
 		"now": {"day": current_day, "hour": GameState.hour, "time": GameState.time_text(GameState.hour)},
 		"quota": _quota_data(),

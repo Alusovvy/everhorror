@@ -29,6 +29,10 @@ static var _highlight_material: ShaderMaterial
 ## Text shown after pressing the interact key (DESCRIBE).
 @export_multiline var description: String = ""
 @export var action: Action = Action.DESCRIBE
+## task_37 (OTW-2): what the opening shows instead of `display_name` / `description` when the
+## text would name someone who is not in the camp yet. Empty = the same text in both variants.
+@export var opening_name: String = ""
+@export_multiline var opening_description: String = ""
 ## Prompt after "[E]". Empty = display_name.
 @export var prompt_text: String = ""
 ## Hours this action costs (0 = free). Shown in the prompt.
@@ -104,9 +108,17 @@ func _ready() -> void:
 	GameState.flags_changed.connect(refresh_from_state)
 	refresh_from_state()
 
+## The name in the prompt and the description title: the opening's own when it has one.
+func shown_name() -> String:
+	return opening_name if opening_name != "" and GameState.opening() else display_name
+
+## The description text: the opening's own when it has one.
+func shown_description() -> String:
+	return opening_description if opening_description != "" and GameState.opening() else description
+
 ## Prompt shown by the HUD, e.g. "Porozmawiaj z Mirosławem · 1 h".
 func get_prompt() -> String:
-	var text := prompt_text if prompt_text != "" else display_name
+	var text := prompt_text if prompt_text != "" else shown_name()
 	if time_cost_hours > 0.0:
 		text += " · %s h" % _format_hours(time_cost_hours)
 		if not GameState.can_afford(time_cost_hours):

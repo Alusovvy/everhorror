@@ -684,6 +684,39 @@ func _task37() -> void:
 	await _talk(tekla, "start", ["Muszę iść."])
 	_check(not gs.has_flag("supper_eaten"), "no supper choice in the full week")
 
+	print("--- task_37: the stempel talk does not swallow Bolko's day-2 secret")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.day = 2
+	gs.set_flag("met_bolko")
+	gs.set_flag("bolko_guilt")
+	gs.change_rep(&"bolko", 20)
+	_seen.clear()
+	await _talk(bolko, "day2", ["Pójdę już."])
+	_check(gs.has_flag("bolko_guilt_said") and gs.has_flag("bolko_day2_secret"), "the guilt line and then the secret both play")
+	_check(_seen.any(func(l): return l.contains("niech za błękitem nie idzie")), "the secret is said")
+
+	print("--- task_37: no supper after 20:00 (Tekla is back at the counter)")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.set_flag("met_tekla")
+	gs.hour = 20.5
+	gs.places[&"tekla"] = "lada"
+	_seen.clear()
+	await _talk(tekla, "start", ["Muszę iść."])
+	_check(not gs.has_flag("supper_eaten") and not gs.done_today("supper"), "20:30: no supper offered")
+
+	print("--- task_37: the announcement of day 3 in the opening never mentions Dobrawa")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.day = 3
+	gs.set_flag("racibor_wants_upadowa")
+	gs.add_note(&"list_dziadka")
+	_seen.clear()
+	await _talk(racibor, "announcement", ["Nic nie mówisz."])
+	_check(gs.has_flag("plan_upadowa") and _seen.any(func(l): return l.contains("upadow")), "the announcement plays with the decline planned")
+	_check(not _seen.any(func(l): return l.contains("Dobraw") or l.contains("Initium")), "no Dobrawa, no Initium in the announcement")
+
 	print("--- task_37: Tekla's bundle, Dobrawa and the campfire wait in the opening")
 	gs.reset()
 	gs.set_flag("opening")

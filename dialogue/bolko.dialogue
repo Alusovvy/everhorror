@@ -118,6 +118,10 @@ if has_flag("bolko_guilt") and not has_flag("bolko_relieved") and not has_flag("
 	$> set_flag("bolko_guilt_said")
 	Bolko: Nagadałem ci o tym stemplu. Stary człowiek, za dużo gada nad kartkami.
 	Bolko: Ale jak będziesz w upadowej, patrz na stemple. I powiedz mi potem, co widziałeś.
+	# The stempel talk must not swallow the day-2 secret of a trusting Bolko.
+	if rep("bolko") >= 10
+		Bolko: Ostatniego dnia, zanim zszedł, powiedział mi: jak wnuk tu kiedyś trafi, niech za błękitem nie idzie. Myślałem, że żartuje.
+		$> set_flag("bolko_day2_secret")
 elif rep("bolko") >= 10
 	Bolko: Wstałeś? To dobrze. Całą noc oka nie zmrużyłem, dziadek twój mi po głowie chodził.
 	Bolko: Ostatniego dnia, zanim zszedł, powiedział mi: jak wnuk tu kiedyś trafi, niech za błękitem nie idzie. Myślałem, że żartuje.

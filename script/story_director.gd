@@ -165,11 +165,9 @@ func _on_used(interactable: Interactable) -> void:
 		"MapTableUse":
 			map_screen.open_table()
 		"BedUse":
-			# task_37 (OTW-9): on the last day of the opening the bed brings the closing scene.
-			if _opening_finale_due(true):
-				_opening_finale()
-			else:
-				VN.start(SYSTEM_DIALOGUE, "sleep")
+			# task_37 (OTW-9): the bed asks the usual question; on the last day of the opening
+			# "yes, I go to sleep" brings the closing scene instead of the night.
+			VN.start(SYSTEM_DIALOGUE, "sleep")
 		_:
 			# Signposts in the tunnels open the field map: onwards or back to the camp.
 			if use_name.ends_with("ExitUse"):
@@ -180,7 +178,10 @@ func _on_dialogue_finished(_npc_id: StringName) -> void:
 		var action: String = _pending_actions.pop_front()
 		match action:
 			"sleep":
-				await _sleep()
+				if _opening_finale_due(true):
+					await _opening_finale()
+				else:
+					await _sleep()
 			"blast":
 				await _blast()
 	_refresh_camp()
@@ -598,6 +599,9 @@ func _check_opening_finale() -> void:
 ## The closing scene, the run report and the end screen (OTW-10). No night follows.
 func _opening_finale() -> void:
 	_busy = true
+	# The pause menu (and so a save with "opening_done" but without the end screen) stays shut
+	# until the end screen takes over: this modal is never popped, the opening is over.
+	GameState.push_modal()
 	GameState.set_flag("opening_done")
 	await VN.play(DRUDZY_DIALOGUE, "finale", &"ottokar")
 	var report_path := RunReport.write(RunReport.ENDING_OPENING)

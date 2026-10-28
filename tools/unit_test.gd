@@ -654,10 +654,24 @@ func _task14_report_after_review() -> void:
 	_check(nobody.contains("Jeszcze nikogo nie poznano.") and not nobody.contains("rozmawiałeś"), "nobody met: \"Jeszcze nikogo nie poznano.\"")
 
 ## The cells of the row that starts with `name` in a Markdown table, without the outer pipes.
+func _row_cells(section: String, name: String) -> Array:
+	for line in section.split("\n"):
+		if line.begins_with("| %s |" % name):
+			return Array(line.split("|", false)).map(func(cell): return cell.strip_edges())
+	return []
+
+#endregion
+
 #region task_37
 
 ## OTW-1…OTW-3, OTW-6, OTW-9: who takes part in the opening, the three places, the nights that
 ## leave the deferred people alone and read nothing by themselves, when the closing scene is due.
+func director_board() -> String:
+	var director = Story.new()
+	var board: String = director._morning_subtitle()
+	director.free()
+	return board
+
 func _task37_opening() -> void:
 	print("--- task_37: the three-day opening")
 	var Camp = load("res://script/camp_schedule.gd")
@@ -731,6 +745,38 @@ func _task37_opening() -> void:
 	_check(not director._opening_finale_due(true), "never in the full week")
 	director.free()
 
+	print("--- task_37: the morning board of day 2, supper only until 20:00, the report's variant")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.day = 2
+	var board: String = director_board()
+	_check(board == "Kocioł Tekli dymi od świtu. Przy szybie ktoś już klnie na zimno." and not board.contains("Dobraw"), "day 2 in the opening: the board never mentions Dobrawa (%s)" % board)
+	gs.reset()
+	gs.day = 2
+	_check(director_board() == "Nocą szybem zjechał ktoś nowy.", "the full week keeps its board")
+	gs.reset()
+	gs.set_flag("opening")
+	gs.day = 3
+	gs.hour = 19.5
+	_check(Camp.placement(&"tekla").get("place", "") == "kuchnia", "19:30: Tekla at the kitchen (supper)")
+	gs.hour = 20.0
+	_check(Camp.placement(&"tekla").get("place", "") != "kuchnia", "20:00: no more supper at the kitchen")
+	gs.reset()
+	gs.set_flag("opening")
+	_check(Report.collect().get("wariant", "") == "otwarcie", "the run report says it is the opening")
+	gs.reset()
+	_check(Report.collect().get("wariant", "") == "tydzien", "…and the week")
+
+	print("--- task_37: the main menu: START is the opening, FULL WEEK the old week")
+	var menu: Control = load("res://scene/main_menu.tscn").instantiate()
+	root.add_child(menu)
+	var start_calls: Array = menu.start_button.pressed.get_connections().map(func(c): return c["callable"])
+	var week_calls: Array = menu.full_week_button.pressed.get_connections().map(func(c): return c["callable"])
+	_check(start_calls.any(func(c: Callable): return c.get_method() == &"new_game" and c.get_bound_arguments().is_empty()), "START calls new_game() (the opening)")
+	_check(week_calls.any(func(c: Callable): return c.get_method() == &"new_game" and c.get_bound_arguments() == [true]), "FULL WEEK calls new_game(true) (the week)")
+	root.remove_child(menu)
+	menu.free()
+
 	print("--- task_37: earlier_day()")
 	gs.reset()
 	gs.set_flag("mir_support_day", 1)
@@ -738,14 +784,6 @@ func _task37_opening() -> void:
 	gs.day = 2
 	_check(gs.earlier_day("mir_support_day"), "a day later: earlier")
 	gs.reset()
-
-#endregion
-
-func _row_cells(section: String, name: String) -> Array:
-	for line in section.split("\n"):
-		if line.begins_with("| %s |" % name):
-			return Array(line.split("|", false)).map(func(cell): return cell.strip_edges())
-	return []
 
 #endregion
 
@@ -770,6 +808,7 @@ func _save_fixtures() -> void:
 		var state: Dictionary = fixture["game_state"]
 		gs.reset()
 		gs.load_state(state)
+		_check(not gs.opening() and not gs.deferred(&"wszebor") and Ex.in_chapter(&"rzapie"), "v%d: a save without the flag plays the full week" % version)
 		var again: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
 		_check(int(again["day"]) == int(state["day"]) and is_equal_approx(float(again["hour"]), float(state["hour"])), "v%d: day %d, hour %s" % [version, state["day"], state["hour"]])
 		for key in ["flags", "items", "notes", "quests", "npcs", "expedition"]:
