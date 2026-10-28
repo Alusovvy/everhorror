@@ -55,8 +55,8 @@ Technical detail moved out of `CLAUDE.md` on 2026-10-27 (documentation consolida
 |---|---|---|---|
 | Dialogue Manager | 4.1.0 | VN dialogue (`.dialogue` files) | `DialogueManager` |
 | GdUnit4 | 6.2.1 | installed for editor-side authoring only; the agent's suite is the RESULT-line scripts in `tools/` (GdUnit's headless CLI races the editor's import cache, so don't wire it into `run_tests.sh`) | — |
-| Godot MCP | 2026.09.23 | editor bridge for `godot-editor` | `MCPRuntimeProbe` |
-- Plugins were enabled by editing `project.godot` (`[editor_plugins]`), and their autoloads were added by hand, because `_enable_plugin()` only runs when you toggle a plugin in the editor. Keep both in sync if you add or remove an addon.
+| Godot MCP | 2026.09.23 | editor bridge for `godot-editor`; MIT (`addons/godot_mcp/LICENSE`, upstream github.com/hybridindie/godot-mcp) | `MCPRuntimeProbe` |
+- Beehave and Phantom Camera were removed in task_21 (unused, 2026-10-28). Plugins were enabled by editing `project.godot` (`[editor_plugins]`), and their autoloads were added by hand, because `_enable_plugin()` only runs when you toggle a plugin in the editor. Keep both in sync if you add or remove an addon.
 
 ## MCP servers
 Configured in [.mcp.json](../../.mcp.json).
