@@ -569,6 +569,22 @@ func _task20_play_time() -> void:
 	_check(gs.play_ms == 500, "a running world adds the frame (500 ms)")
 	gs.play_tick(30.0, true)
 	_check(gs.play_ms == 1500, "a stall is capped at one second per frame (%d)" % gs.play_ms)
+	gs.reset()
+	for i in 144:
+		gs.play_tick(1.0 / 144.0, true)
+	_check(absi(gs.play_ms - 1000) <= 2, "144 frames of 1/144 s add one second, no truncation loss (%d ms)" % gs.play_ms)
+	gs.reset()
+	for i in 1000:
+		gs.play_tick(0.0005, true)
+	_check(absi(gs.play_ms - 500) <= 2, "1000 frames of 0.5 ms add half a second (%d ms)" % gs.play_ms)
+	gs.reset()
+	gs.play_frozen = true
+	gs.play_tick(0.5, true)
+	_check(gs.play_ms == 0, "the counter stands still while the end screen is shown")
+	gs.reset()
+	_check(not gs.play_frozen, "a new state clears the end-screen freeze")
+	gs.play_tick(0.5, true)
+	gs.play_tick(1.5, true)
 
 	print("--- task_20: the day's play time moves into its dawn entry, a repeated dawn keeps it")
 	gs.start_next_day()
@@ -621,14 +637,26 @@ func _task20_play_time() -> void:
 		gs.load_state(fixture["game_state"])
 		_check(gs.play_ms == -1 and Report.collect(Report.ENDING_IN_PROGRESS)["played_total"] == "—", "v%d: the old save reports \"—\"" % version)
 
-	print("--- task_20: a retry from the morning adds the failed attempt")
+	print("--- task_20: a retry from the morning keeps the counter as it was at death")
 	gs.reset()
-	gs.play_ms = 1000
-	gs.carry_play_time(2500)
-	_check(gs.play_ms == 3500, "the lost time is added to the restored day")
+	gs.play_ms = 5000
+	var morning: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	gs.play_ms = 12000
+	gs.load_state(morning)
+	gs.restore_play_time(12000, 1)
+	_check(gs.play_ms == 12000, "the first retry: the snapshot's 5000 ms are not counted twice (%d)" % gs.play_ms)
+	gs.play_ms = 15000
+	gs.load_state(morning)
+	gs.restore_play_time(15000, 1)
+	_check(gs.play_ms == 15000, "a second retry in a row does not inflate the day (%d)" % gs.play_ms)
+	gs.load_state(morning)
+	gs.restore_play_time(900, 2)
+	_check(gs.play_ms == 5000, "a death on another day than the snapshot's leaves the snapshot's value")
 	gs.play_ms = -1
-	gs.carry_play_time(2500)
-	_check(gs.play_ms == -1, "…unless the restored day has no data")
+	var unknown: Dictionary = JSON.parse_string(JSON.stringify(gs.save_state()))
+	gs.load_state(unknown)
+	gs.restore_play_time(-1, 1)
+	_check(gs.play_ms == -1, "no data stays no data")
 	gs.reset()
 
 ## What the review of the first version found (ZAP-11): the quota time and the numbering of a save

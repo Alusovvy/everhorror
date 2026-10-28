@@ -195,6 +195,11 @@ var vein_log: Array = []
 ## dawn_log entry of the day that ended ("played_ms") and starts the new day at 0. -1 = no data
 ## (a save from before task_20 was loaded in the middle of a day). Saved as an optional field.
 var play_ms: int = 0
+## Sub-millisecond remainder of the frames already added (a frame at 144 Hz is 6.94 ms).
+var _play_acc := 0.0
+## True while the end screen (death, the end of the opening or the week) is shown: the overlay does
+## not pause the tree, but nobody is playing. reset() and load_state() clear it.
+var play_frozen := false
 ## One frame never adds more than this many seconds (a window drag or a loading stall is not play).
 const PLAY_TICK_CAP := 1.0
 
@@ -221,14 +226,21 @@ func _world_running() -> bool:
 ## Adds one frame to today's play time when `running` (a stand-alone call so a test can simulate
 ## the world). No data (-1) stays no data.
 func play_tick(delta: float, running: bool) -> void:
-	if not running or play_ms < 0:
+	if not running or play_frozen or play_ms < 0:
 		return
-	play_ms += int(minf(delta, PLAY_TICK_CAP) * 1000.0)
+	_play_acc += minf(delta, PLAY_TICK_CAP) * 1000.0
+	var whole := int(_play_acc)
+	play_ms += whole
+	_play_acc -= whole
 
-## Adds the play time of a failed attempt at the day (retry from the morning) to the restored day.
-func carry_play_time(lost_ms: int) -> void:
-	if play_ms >= 0 and lost_ms > 0:
-		play_ms += lost_ms
+## Retry from the morning (after load_state of the dawn snapshot): the counter at the moment of death
+## already contains the time the snapshot had (it counts on from it), so it replaces the snapshot's
+## value instead of being added to it; two retries in a row do not inflate the day. Only when the
+## death was on the day the snapshot belongs to (otherwise the snapshot's own value stays).
+func restore_play_time(counter_at_death: int, died_on_day: int) -> void:
+	if day == died_on_day:
+		play_ms = counter_at_death
+		_play_acc = 0.0
 
 ## Moves today's play time into the dawn_log entry of the day that is ending.
 func _close_play_day() -> void:
@@ -261,6 +273,8 @@ func reset() -> void:
 	dawn_log = []
 	vein_log = []
 	play_ms = 0
+	_play_acc = 0.0
+	play_frozen = false
 	for id in NPCS:
 		var data: NpcData = NPCS[id]
 		npcs[id] = {"sanity": data.start_sanity, "health": data.max_health, "reputation": data.start_reputation, "status": "camp"}

@@ -53,12 +53,17 @@ func scenario() -> void:
 	var buttons := "ScreenFade/EndPanel/Center/VBox/Buttons/"
 	check(world.get_node("ScreenFade/EndPanel").visible and world.get_node(buttons + "RetryButton").visible, "death screen with 'retry from morning'")
 	check(world.get_node("ScreenFade/EndPanel/Center/VBox/Title").text == "Nie żyjesz", "death title")
+	# task_20: the end screen does not pause the tree, but the play-time counter stands still on it.
+	var at_death: int = gs.play_ms
+	await frames(20)
+	check(gs.play_frozen and gs.play_ms == at_death, "task_20: the play-time counter stands still on the death screen (%d ms)" % at_death)
 	world.get_node(buttons + "RetryButton").pressed.emit()
 	await frames(15)
 	world = current_scene
 	await wait_idle()
 	check(gs.day == 4 and is_equal_approx(gs.hour, 6.0) and gs.player_health == health_morning, "back at dawn of day 4 (%s, health %d)" % [gs.clock_text(), gs.player_health])
 	check(gs.has_fever(&"nasir") and not world.get_node("ScreenFade/EndPanel").visible, "the morning state is back")
+	check(not gs.play_frozen and gs.play_ms >= at_death and gs.play_ms < at_death + 5000, "task_20: the retry keeps the day's counter as it was at death, not doubled (%d, was %d)" % [gs.play_ms, at_death])
 	check(FileAccess.file_exists(sm.slot_path(0)), "the dawn autosave is on disk")
 	check(_new_report_files(before_death).is_empty(), "task_14 (ZAP-11): the hero's death writes no report of its own")
 	check(gs.dawn_log.size() == 2 and int(gs.dawn_log[1]["day"]) == 4, "task_14 (ZAP-12): the retry brings back the dawn log of that morning (days %s)" % [gs.dawn_log.map(func(d): return int(d["day"]))])
