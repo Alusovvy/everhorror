@@ -45,6 +45,7 @@ func show_card(title: String, subtitle: String = "", hold: float = 2.2) -> void:
 
 ## The final screen. `retry` adds a button that starts the day again (after a death).
 func show_end(summary: String, title: String = "Everhorror: koniec wersji demo", retry: Callable = Callable()) -> void:
+	GameState.play_frozen = true
 	await fade_out(1.2)
 	end_title.text = title
 	end_summary.text = summary

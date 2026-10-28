@@ -159,7 +159,12 @@ func retry_morning() -> void:
 		go_to_main_menu()
 		return
 	_pending = _morning.duplicate(true)
+	# task_20: the failed attempt was played too: the day keeps the counter as it was at death (it
+	# already includes the time of the snapshot).
+	var lost_ms: int = GameState.play_ms
+	var died_on_day: int = GameState.day
 	GameState.load_state(_pending.get("game_state", {}))
+	GameState.restore_play_time(lost_ms, died_on_day)
 	_change_scene(_pending["scene"])
 
 func _collect() -> Dictionary:

@@ -184,18 +184,74 @@ var travelling := false
 ## task_14 (ZAP-12), for the run report: one entry per dawn (day 1 at reset(), then
 ## start_next_day()): {"day", "veins", "hero": {health, sanity, fever, fatigue},
 ## "npcs": {id: {sanity, health, rep, status, fever, arrived}}, "flags_new": [names set since the
-## last dawn]}. Saved; a save from before version 6 has none ("brak danych" in the report).
+## last dawn], "played_ms" (task_20: play time of that day, once the day has ended; optional)}. Saved; a save from before version 6 has none ("brak danych" in the report).
 var dawn_log: Array = []
 ## task_14 (ZAP-12): every vein as it was marked, {"id", "day", "at", "n"} (+ "via" when someone
 ## else marked it for the hero); "n" counts the veins on the map including this one. Saved like
 ## the dawn log.
 var vein_log: Array = []
+## task_20 (G5), for the run report: milliseconds of real play time spent on the current day. It
+## grows only while the world scene runs unpaused (play_tick); start_next_day() moves it into the
+## dawn_log entry of the day that ended ("played_ms") and starts the new day at 0. -1 = no data
+## (a save from before task_20 was loaded in the middle of a day). Saved as an optional field.
+var play_ms: int = 0
+## Sub-millisecond remainder of the frames already added (a frame at 144 Hz is 6.94 ms).
+var _play_acc := 0.0
+## True while the end screen (death, the end of the opening or the week) is shown: the overlay does
+## not pause the tree, but nobody is playing. reset() and load_state() clear it.
+var play_frozen := false
+## One frame never adds more than this many seconds (a window drag or a loading stall is not play).
+const PLAY_TICK_CAP := 1.0
 
 ## Open modal screens (dialogue, map, notebook…). While > 0 the player can't move.
 var _modal_count := 0
 
 func _ready() -> void:
 	reset()
+
+func _process(delta: float) -> void:
+	play_tick(delta, _world_running())
+
+#region Play time
+
+## True while the gameplay scene is the current one and the tree is not paused (the pause menu
+## pauses the tree; the main menu and the tests without a world are not "playing"). A dialogue,
+## the map or the notebook do not pause the tree: reading them is play.
+func _world_running() -> bool:
+	if not is_inside_tree():
+		return false
+	var tree := get_tree()
+	return not tree.paused and tree.current_scene != null and tree.current_scene.scene_file_path == SaveManager.GAME_SCENE
+
+## Adds one frame to today's play time when `running` (a stand-alone call so a test can simulate
+## the world). No data (-1) stays no data.
+func play_tick(delta: float, running: bool) -> void:
+	if not running or play_frozen or play_ms < 0:
+		return
+	_play_acc += minf(delta, PLAY_TICK_CAP) * 1000.0
+	var whole := int(_play_acc)
+	play_ms += whole
+	_play_acc -= whole
+
+## Retry from the morning (after load_state of the dawn snapshot): the counter at the moment of death
+## already contains the time the snapshot had (it counts on from it), so it replaces the snapshot's
+## value instead of being added to it; two retries in a row do not inflate the day. Only when the
+## death was on the day the snapshot belongs to (otherwise the snapshot's own value stays).
+func restore_play_time(counter_at_death: int, died_on_day: int) -> void:
+	if day == died_on_day:
+		play_ms = counter_at_death
+		_play_acc = 0.0
+
+## Moves today's play time into the dawn_log entry of the day that is ending.
+func _close_play_day() -> void:
+	if play_ms > 0:
+		for entry in dawn_log:
+			if int(entry.get("day", 0)) == day:
+				entry["played_ms"] = play_ms
+				break
+	play_ms = 0
+
+#endregion
 
 func reset() -> void:
 	day = 1
@@ -216,6 +272,9 @@ func reset() -> void:
 	asked = {}
 	dawn_log = []
 	vein_log = []
+	play_ms = 0
+	_play_acc = 0.0
+	play_frozen = false
 	for id in NPCS:
 		var data: NpcData = NPCS[id]
 		npcs[id] = {"sanity": data.start_sanity, "health": data.max_health, "reputation": data.start_reputation, "status": "camp"}
@@ -275,6 +334,7 @@ func logged_minutes(on_day: int) -> int:
 	return total
 
 func start_next_day() -> void:
+	_close_play_day()
 	day += 1
 	hour = DAY_START_HOUR
 	# A night's sleep takes off a good part of the fatigue, not all of it (decision-task-12: 2a).
@@ -320,6 +380,9 @@ func record_dawn() -> void:
 		entry["flags_all"] = fresh
 	for i in dawn_log.size():
 		if int(dawn_log[i].get("day", 0)) == day:
+			# A repeated dawn keeps the play time already stored on the entry (task_20).
+			if dawn_log[i].has("played_ms"):
+				entry["played_ms"] = dawn_log[i]["played_ms"]
 			dawn_log[i] = entry
 			return
 	dawn_log.append(entry)
@@ -1058,6 +1121,7 @@ func save_state() -> Dictionary:
 		"asked": asked.duplicate(),
 		"dawn_log": dawn_log.duplicate(true),
 		"vein_log": vein_log.duplicate(true),
+		"play_ms": play_ms,
 	}
 
 ## Saves from older versions lack the hero and the expedition: they start healthy, in the camp.
@@ -1096,6 +1160,9 @@ func load_state(data: Dictionary) -> void:
 	dawn_log = (saved_dawns as Array).duplicate(true) if saved_dawns is Array else []
 	var saved_veins: Variant = data.get("vein_log", [])
 	vein_log = (saved_veins as Array).duplicate(true) if saved_veins is Array else []
+	# task_20: an optional field. A save without it (made before) has no play time for the day in
+	# progress: -1 = no data, the report shows a dash for that day; the next day starts counting.
+	play_ms = int(data.get("play_ms", -1))
 	expedition = data.get("expedition", {})
 	if not expedition.is_empty():
 		# JSON turns numbers into floats and loses nothing else we need.
