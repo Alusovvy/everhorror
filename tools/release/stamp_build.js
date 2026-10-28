@@ -3,8 +3,7 @@
 // the version agrees in project.godot, CHANGELOG.md and tools/release/CZYTAJ_MNIE.txt (TECH-2).
 //
 // Usage, from anywhere (paths come from this file's location):
-//   node tools/release/stamp_build.js                  stamp the HEAD of the spec; a "+" is added
-//                                                      when the spec has uncommitted changes
+//   node tools/release/stamp_build.js                  stamp the recorded implementation baseline
 //   node tools/release/stamp_build.js --spec <rev>     stamp that spec commit instead (a commit is
 //                                                      a commit: no "+"), e.g. the one the
 //                                                      CHANGELOG names as "Zgodność ze spec"
@@ -21,7 +20,7 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const root = path.resolve(__dirname, '..', '..');
-const specDir = path.resolve(process.env.SPEC_DIR || path.join(root, '..', 'specification'));
+const specDir = require('../check_spec_data.js').specificationDir(root);
 
 function fail(message) {
 	console.error('stamp_build: ' + message);
@@ -67,14 +66,15 @@ function git(args) {
 }
 
 const wanted = argument('--spec');
-const sha = git(['rev-parse', '--short=7', '--verify', `${wanted || 'HEAD'}^{commit}`]);
-if (!sha) fail(`no commit "${wanted || 'HEAD'}" in ${specDir} (set SPEC_DIR if the specification lives elsewhere)`);
-let stamp = sha;
+let revision = wanted;
 if (!wanted) {
-	const status = git(['status', '--porcelain']);
-	if (status === null) fail(`could not read the state of ${specDir}`);
-	if (status !== '') stamp += '+';
+	try {
+		revision = execFileSync(process.execPath, [path.join(specDir, 'dashboard', 'cli.ts'), 'baseline', '--required', '--rev', 'HEAD'], { cwd: specDir, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
+	} catch { fail(`could not resolve the recorded implementation baseline in ${specDir}`); }
+	if (!/^[0-9a-f]{7,40}$/.test(revision)) fail('WDROZENIA.md has no valid implementation baseline');
 }
+const stamp = git(['rev-parse', '--short=7', '--verify', `${revision}^{commit}`]);
+if (!stamp) fail(`no commit "${revision}" in ${specDir} (set SPEC_DIR if the specification lives elsewhere)`);
 
 const target = path.join(root, 'script', 'build_info.gd');
 const source = fs.readFileSync(target, 'utf8');
