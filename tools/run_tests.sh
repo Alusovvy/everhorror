@@ -123,8 +123,13 @@ run_scenario() {
 				result="$result  +check_generated FAILED, see $LOGS/check_generated.log"
 			}
 			node tools/rule_coverage.js --quiet > "$LOGS/rule_coverage.log" 2>&1
+			node tools/check_spec_data.js > "$LOGS/check_spec_data.log" 2>&1 || {
+				ok=0
+				result="$result  +check_spec_data FAILED, see $LOGS/check_spec_data.log"
+			}
 		else
-			result="$result  (node not found: check_generated and rule_coverage skipped)"
+			ok=0
+			result="$result  FAILED (node not found: required generator and spec checks could not run)"
 		fi
 	fi
 

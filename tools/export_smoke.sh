@@ -29,9 +29,16 @@ mkdir -p "$TMP/run" "$TMP/saves"
 
 start=$(date +%s)
 timeout 600 "$GODOT" --headless --path . --export-pack "Test Pack" "$NATIVE/game.pck" > "$TMP/export.log" 2>&1
-if [ ! -s "$TMP/game.pck" ]; then
-	echo "RESULT: 1 FAILED (the export of the \"Test Pack\" preset made no .pck)"
-	grep -E "^(SCRIPT )?ERROR" "$TMP/export.log" | head -5
+export_status=$?
+ERROR_ALLOW='RID allocations of type|resources still in use at exit|Pages in use exist at exit in PagedAllocator|Parameter "material" is null|Capture not registered: .beehave.'
+unexpected_errors() {
+	grep -E '^[[:space:]]*(SCRIPT |USER )?ERROR:' "$1" | grep -Ev "$ERROR_ALLOW"
+}
+if [ "$export_status" -ne 0 ] || [ ! -s "$TMP/game.pck" ] || unexpected_errors "$TMP/export.log" >/dev/null; then
+	mkdir -p reports/tests
+	cp "$TMP/export.log" reports/tests/export_pack.log
+	echo "RESULT: 1 FAILED (Test Pack export: exit $export_status; missing pack or errors; see reports/tests/export_pack.log)"
+	unexpected_errors "$TMP/export.log" | head -5
 	exit 1
 fi
 echo "export: $(( $(date +%s) - start ))s, game.pck $(( $(stat -c %s "$TMP/game.pck") / 1048576 )) MB"
@@ -47,13 +54,15 @@ for name in "${scenarios[@]}"; do
 	base="${EVERHORROR_TEST_DIR:-$NATIVE/saves}"
 	# From an empty folder, so that nothing is read from the project: only from the pack.
 	( cd "$TMP/run" && EVERHORROR_TEST_DIR="$base/export-$name" timeout 240 "$GODOT" --headless --main-pack "$NATIVE/game.pck" --script "$script" > "$TMP/$name.log" 2>&1 )
-	result=$(grep -m1 "^RESULT" "$TMP/$name.log")
+	run_status=$?
+	result=$(grep '^RESULT:' "$TMP/$name.log" | tail -1)
 	[ -z "$result" ] && result="no RESULT line, see the log"
-	case "$result" in
-		*"ALL PASSED"*) ;;
-		*) failed=$((failed + 1)); failed_names="$failed_names $name"; mkdir -p reports/tests; cp "$TMP/$name.log" "reports/tests/export_$name.log"
-		   grep "\[FAIL\]" "$TMP/$name.log" | head -5 | sed 's/^/             /' >> "$TMP/fails.txt" ;;
-	esac
+	if [ "$run_status" -ne 0 ] || [[ ! "$result" =~ ^RESULT:\ ALL\ PASSED([[:space:]]|$) ]] || grep '^RESULT:' "$TMP/$name.log" | grep -Ev '^RESULT: ALL PASSED([[:space:]]|$)' >/dev/null || unexpected_errors "$TMP/$name.log" >/dev/null; then
+		failed=$((failed + 1)); failed_names="$failed_names $name"
+		mkdir -p reports/tests; cp "$TMP/$name.log" "reports/tests/export_$name.log"
+		grep -E '\[FAIL\]|^[[:space:]]*(SCRIPT |USER )?ERROR:' "$TMP/$name.log" | head -5 | sed 's/^/             /' >> "$TMP/fails.txt"
+		result="FAILED (exit $run_status): $result"
+	fi
 	printf "%-12s %s\n" "$name" "$result"
 done
 [ -f "$TMP/fails.txt" ] && cat "$TMP/fails.txt"
