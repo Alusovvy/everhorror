@@ -270,7 +270,7 @@ Wcześniejsza treść: karta [2026-10-27_task22-uprawnienia-i-norma.md](../../..
 1. Uruchomić wdrożenie w terminalu (`/ai-task implement 22`), bo przebiegi z dashboardu nie mogą zapisywać w `.claude/`. Ta sesja zrobi też płatną próbę uprawnień z pytania 2 (limit 0,5 USD).
 
 ## Test
-Scenariusze zadania: tylko zestaw podstawowy (`unit lint dialogue`), uruchamia go serwer po wdrożeniu. Arkusz: część `## Część: task_22` w [factcheck-build-333b147](../../human-tasks/factcheck-build-333b147.md).
+Scenariusze zadania: tylko zestaw podstawowy (`unit lint dialogue`), uruchamia go serwer po wdrożeniu. Arkusz: część `## Część: task_22` w [factcheck-build-333b147](../../human-tasks/done/factcheck-build-333b147.md).
 
 Wyniki agenta (kopia gałęzi, commit `333b147`):
 - `unit`: `RESULT: ALL PASSED`; `lint`: `RESULT: ALL PASSED` (WARNINGS: 20, tyle co przed zmianą); `dialogue`: `RESULT: ALL PASSED`.

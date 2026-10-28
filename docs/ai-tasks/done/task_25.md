@@ -96,7 +96,7 @@ Stan po przebudowie procesu (commit `c5e7fb3`): scenariusz `export` i `tools/exp
 Czy dashboard (`cli.ts build`) ma uruchamiać `tools/run_tests.sh export` przed spakowaniem ZIP-a (zmiana w repo specyfikacji, poza tym zadaniem).
 
 ## Test
-Arkusz: część task_25 w [factcheck-build-333b147](../../human-tasks/factcheck-build-333b147.md).
+Arkusz: część task_25 w [factcheck-build-333b147](../../human-tasks/done/factcheck-build-333b147.md).
 - `tools/run_tests.sh export` → `RESULT: ALL PASSED (export smoke: day1 expedition ran from the exported pack)`
 - `tools/run_tests.sh unit lint` → unit ALL PASSED, lint ALL PASSED (20 ostrzeżeń, reguły spec pominięte: brak folderu specyfikacji w kopii)
 
