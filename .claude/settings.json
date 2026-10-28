@@ -2,7 +2,8 @@
   "permissions": {
     "additionalDirectories": [
       "../specification",
-      "../everhorror-wdrozenie"
+      "../everhorror-wdrozenie",
+      "../everhorror-wt"
     ],
     "allow": [
       "Bash(git:*)",
@@ -19,6 +20,14 @@
       "Bash(wc:*)",
       "Bash(diff:*)",
       "Bash(date:*)"
+    ],
+    "ask": [
+      "Bash(git tag:*)",
+      "Bash(git -C * tag *)",
+      "Bash(git merge:*)",
+      "Bash(git -C * merge *)",
+      "Bash(git push everhorror *)",
+      "Bash(git -C * push everhorror *)"
     ],
     "deny": [
       "Bash(git push --force:*)",
