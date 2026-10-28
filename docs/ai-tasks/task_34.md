@@ -69,6 +69,11 @@ Poziom `rozgrywka`: nowy element interfejsu gry (paski stanu) i opcja w menu. Ar
 Ryzyko `średnie`: opcja w `settings.cfg`, HUD i panel opcji: kilka skryptów i scen interfejsu.
 Odniesienie do planu w wymaganiu 1 (dawny plik, §3 pkt 8) zostaje bez zmian, bo wymagania są niezmienne; te zasady projektowe są dziś w `docs/analizy/plan.md` §3 pkt 8.
 
+## Zmiana w specyfikacji a166db2
+(spec-tasks, 2026-10-28) UI-9 (05_interfejs.md) ⬜ zmienił się tylko redakcyjnie: w punkcie „Konflikt, nazwany wprost” odnośnik do planu brzmi teraz „zasady projektowe planu (`everhorror/docs/analizy/plan.md (historia: docs/archiwum/plan-historia-2026-10.md)` §3 pkt 8: „słowa zamiast liczb”, „bez nowych liczników”)”. Treść reguły i plan bez zmian.
+
+Karta [„paski stanu”](../../../specification/zgloszenia/2026-10-27_paski-stanu.md) ma teraz obie odpowiedzi: „**Roland, 2026-10-28 (dashboard):** 1: a, 2: a”. Pytanie 2a (PT0b z włączonymi paskami, arkusz zapisuje to w „Dane sesji”) potwierdza to, co już zakłada plan (pkt 6), więc nic się w nim nie zmienia.
+
 ## Podsumowanie
 
 Zadanie jest małe i gotowe do wdrożenia, bez nowych pytań: karta „paski stanu” ma rozstrzygnięte pytanie 1, a otwarte pytanie 2 (PT0b z paskami czy bez) wdrożenia nie blokuje. Plan: opcja `Settings.show_condition_bars` (domyślnie włączona) z przełącznikiem w OPTIONS, dwa cienkie podpisane paski w kontenerze rogu HUD-u pod słowami stanu, odświeżane w `_process()` (bo zmęczenie emituje sygnał tylko przy zmianie pasma), ukrywane przy `is_modal()` jak winieta; test `unit` opcji i sprawdzenie widoczności w `hrapek`. Uwaga na kolejność: `hud.gd`/`hud.tscn` zmieniają też task_26 i task_27, więc nie wdrażać ich równolegle z tym.
