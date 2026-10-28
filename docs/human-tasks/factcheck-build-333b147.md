@@ -1,6 +1,6 @@
 # Build 333b147: arkusz do ogrania
 
-> Zadania: [task_22](../ai-tasks/task_22.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task22`
+> Zadania: [task_22](../ai-tasks/task_22.md), [task_25](../ai-tasks/task_25.md) · Przygotowano: 2026-10-28 · Gałąź: `spec/2026-10-28-task22`
 > Kolumny „wynik” i „uwagi” wypełnia człowiek; agent niczego w nich nie wpisuje, a puste pole znaczy „nie sprawdzono”. Znaczniki wyniku: ✅ ok, ❌ błąd, 💬 propozycja, ⏭ pominięte, potem krótki opis. Każda część poniżej to jedno zadanie z tego buildu; arkusz jest zamknięty, gdy zamknięte są wszystkie części.
 
 ## Uwagi ogólne (wypełnia człowiek)
@@ -37,3 +37,32 @@ Testy uruchomione przez agenta, z prawdziwymi wynikami. To nie jest weryfikacja 
 | unit | `tools/run_tests.sh unit` | ALL PASSED (w tym nowe przypadki `quota_words` i wpisów „zloza”) | `reports/tests/unit.log` |
 | lint | `tools/run_tests.sh lint` | ALL PASSED (nowe reguły T7 i K6, zapis `flags.tsv`) | `reports/tests/lint.log` |
 | dialogue | `tools/run_tests.sh dialogue` | ALL PASSED (w tym linia Mirosława z gwarą i bez) | `reports/tests/dialogue.log` |
+
+## Część: task_25 — Eksport gubi listy (licznik żył 0, warunki dróg)
+
+### Co zostało dodane
+- Gra z ZIP-a znów zna żyły i warunki wejścia do miejsc: eksport nie zamienia już zasobów tekstowych na binarne i nie gubi list tekstów (ZYL-2, ZYL-4, ZYL-5, WYP-3, WYP-4, WYP-7, ZAP-11). Wszystkie wiersze poniżej sprawdzaj na ZIP-ie buildu do ogrania, nie w edytorze.
+- Wróciły też schowane części modeli postaci (kaptur Racibora, Sobka i Welfa, części modelu Hrapka).
+
+### Test
+
+| # | co sprawdzić | jak | oczekiwany wynik | wynik | uwagi |
+|---|---|---|---|---|---|
+| 1 | Komunikat po pierwszej żyle | zaznaczyć pierwszą żyłę błękitu | komunikat „1 z 12”, nie „0 z 12” | | |
+| 2 | Licznik żył | po pierwszej żyle sprawdzić mapę, ekwipunek (I) i notes (J) | wszędzie „1 z 12” | | |
+| 3 | Mapa i lista miejsc | otworzyć mapę (M) po zaznaczeniu żyły | na rysunku przybywa niebieska kreska, lista miejsc pokazuje „żyły 1/2” | | |
+| 4 | Upadowa i Ślepy szyb | iść tam bez liny | miejsca zamknięte | | |
+| 5 | Zawalony chodnik, Kaplica | iść do chodnika przed wybuchem, do Kaplicy przed jej odkryciem | zamknięte | | |
+| 6 | Zalany chodnik, Galeria | iść do chodnika przy stojących pompach, do Galerii bez oleju | zamknięte | | |
+| 7 | Kaptury i Hrapek | obejrzeć Racibora, Sobka, Welfa i Hrapka | brak kaptura u trzech pierwszych, poprawny model Hrapka | | |
+| 8 | Obrys żyły | podejść do żyły | obrys żyły świeci przy zbliżeniu | | |
+| 9 | Raport przebiegu | po tygodniu otworzyć raport przebiegu | przy żyłach `n` różne od 0 | | |
+
+### Wyniki automatu (agent)
+Testy uruchomione przez agenta, z prawdziwymi wynikami. To nie jest weryfikacja człowieka.
+
+| Test | Polecenie | Wynik | Raport |
+|---|---|---|---|
+| export | `tools/run_tests.sh export` | ALL PASSED (day1 expedition z wyeksportowanej paczki, 53 s; przed poprawką czerwony, wg tools/README.md) | `reports/tests/export.log` |
+| unit | `tools/run_tests.sh unit` | ALL PASSED | `reports/tests/unit.log` |
+| lint | `tools/run_tests.sh lint` | ALL PASSED | `reports/tests/lint.log` |
