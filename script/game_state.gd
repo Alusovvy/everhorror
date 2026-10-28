@@ -125,6 +125,15 @@ const FIRST_ROOM_CAPACITY := 2
 ## mages: the meeting; Sabina: once she has moved into the camp). Until then nothing that
 ## happens at night, the tremor included, touches them.
 const ARRIVAL_FLAG := {&"sabina": "sabina_joined", &"ottokar": "drudzy_met", &"hieronim": "drudzy_met", &"welf": "drudzy_met"}
+## task_37 (spec 04_tresc/otwarcie.md, OTW-1…OTW-3): a new game is the three-day opening (flag
+## "opening"); a save without the flag is the full week. In the opening only the four camp people
+## take part; these wait for later chapters (not in the camp, on no shift, nothing happens to them
+## at night), and the Exitium mages are seen only in the closing scene. The map has three places.
+const OPENING_DEFERRED: Array[StringName] = [&"wszebor", &"nasir", &"hagiwara", &"sobek", &"anzelm", &"dobrawa", &"hrapek", &"sabina", &"ottokar", &"hieronim", &"welf"]
+const OPENING_PLACES: Array[StringName] = [&"east", &"west", &"upadowa"]
+## The opening ends on the evening of this day (OTW-9, 07_balans.md "Otwarcie").
+const OPENING_LAST_DAY := 3
+const OPENING_FINALE_HOUR := 18.0
 ## Places of the expedition map (Expeditions). The camp itself is "oboz".
 const LOCATIONS: Dictionary = {
 	&"east": preload("res://data/locations/east.tres"),
@@ -412,6 +421,11 @@ func done_today(flag_name: String) -> bool:
 
 func mark_today(flag_name: String) -> void:
 	set_flag(flag_name, day)
+
+## task_37: a flag holding a day (`mark`-style payload) was set on an earlier day than today. For
+## dialogues ("the next morning"), which cannot call int().
+func earlier_day(flag_name: String) -> bool:
+	return has_flag(flag_name) and int(get_flag(flag_name, 0)) < day
 
 ## Counts in a flag and returns the new count (Hrapek's questions in a row: `if bump_flag("hrapek_q") >= 3`).
 func bump_flag(flag_name: String) -> int:
@@ -951,21 +965,32 @@ func first_room_slot(npc_id: StringName) -> int:
 			break
 	return slot
 
-## Out on the day-1 shift: not in the camp, not even in the evening.
+## Out on the day-1 shift: not in the camp, not even in the evening. The opening has no shift.
 func away_first_day(npc_id: StringName) -> bool:
-	return day == 1 and npc_id in FIRST_MEET
+	return day == 1 and npc_id in FIRST_MEET and not opening()
+
+## task_37 (OTW-1): this run is the three-day opening, not the full week.
+func opening() -> bool:
+	return has_flag("opening")
+
+## task_37 (OTW-2): this person waits for a later chapter and takes no part in the opening.
+func deferred(npc_id: StringName) -> bool:
+	return opening() and npc_id in OPENING_DEFERRED
 
 ## For dialogues and scenes: this person is in the camp today (the campfire on day 1 has only
 ## the four who stayed).
 func in_camp_today(npc_id: StringName) -> bool:
-	return npc_status(npc_id) == "camp" and not away_first_day(npc_id)
+	return npc_status(npc_id) == "camp" and not away_first_day(npc_id) and not deferred(npc_id)
 
 ## task_14 (NPC-18): has this person reached the story yet? Sabina counts from the moment she
 ## moves into the camp (`sabina_joined`), Ottokar, Hieronim and Welf from the first meeting with
 ## the Exitium expedition (`drudzy_met`); everyone else is part of the week from the start. The
 ## nightly sanity losses and the tremor skip anyone who has not arrived. Derived from the flags,
 ## so nothing is saved and nobody's status changes.
+## task_37 (OTW-2): in the opening the deferred people never arrive.
 func has_arrived(npc_id: StringName) -> bool:
+	if deferred(npc_id):
+		return false
 	return not ARRIVAL_FLAG.has(npc_id) or has_flag(String(ARRIVAL_FLAG[npc_id]))
 
 #endregion

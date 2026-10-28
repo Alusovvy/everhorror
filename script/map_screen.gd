@@ -88,7 +88,8 @@ func _choices() -> Array[StringName]:
 	else:
 		result.append(Expeditions.CAMP)
 		for id in Expeditions.neighbours(origin):
-			if id != Expeditions.CAMP:
+			# task_37 (OTW-3): places of later chapters are not on the opening's map.
+			if id != Expeditions.CAMP and Expeditions.in_chapter(id):
 				result.append(id)
 	var hours := {}
 	for id in result:

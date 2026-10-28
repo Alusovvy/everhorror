@@ -95,8 +95,8 @@ func _on_interacted(target: Interactable) -> void:
 	# so their text is pinned for a while instead (E closes it earlier).
 	var vanishes := target.remove_after_use or (target.hidden_by_flag != "" and target.hidden_by_flag == target.on_use_flag)
 	if vanishes:
-		_pinned_title = target.display_name
-		_pinned_body = target.description
+		_pinned_title = target.shown_name()
+		_pinned_body = target.shown_description()
 		_pinned_until = Time.get_ticks_msec() / 1000.0 + PICKUP_SECONDS
 		_described = null
 	else:
@@ -151,5 +151,5 @@ func _refresh() -> void:
 		description_title.text = _pinned_title
 		description_body.text = _pinned_body
 	elif _described:
-		description_title.text = _described.display_name
-		description_body.text = _described.description
+		description_title.text = _described.shown_name()
+		description_body.text = _described.shown_description()

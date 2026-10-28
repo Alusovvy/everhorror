@@ -117,6 +117,8 @@ static func is_visited(id: StringName) -> bool:
 ## A place is on the hero's map once he has been next to it (it borders the camp or a visited
 ## place) or once someone told him about it (a "flag:" requirement that is already met).
 static func is_known(id: StringName) -> bool:
+	if not in_chapter(id):
+		return false
 	if is_visited(id):
 		return true
 	var data := place(id)
@@ -129,6 +131,11 @@ static func is_known(id: StringName) -> bool:
 		if requirement.begins_with("flag:") and GameState.has_flag(requirement.get_slice(":", 1)):
 			return true
 	return false
+
+## task_37 (OTW-3): the opening has three places; the rest of the map waits for later chapters
+## (never shown, never walked through).
+static func in_chapter(id: StringName) -> bool:
+	return id == CAMP or not GameState.opening() or id in GameState.OPENING_PLACES
 
 static func known_places() -> Array[StringName]:
 	var result: Array[StringName] = []
@@ -143,6 +150,8 @@ static func own_lock(id: StringName) -> String:
 	var data := place(id)
 	if data == null:
 		return ""
+	if not in_chapter(id):
+		return TranslationServer.translate("Na to przyjdzie jeszcze czas.")
 	for requirement in data.requires:
 		var kind := requirement.get_slice(":", 0)
 		var value := requirement.get_slice(":", 1)

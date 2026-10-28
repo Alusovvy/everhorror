@@ -46,8 +46,9 @@ func scenario() -> void:
 
 ## Starts a new game in the world scene. `setup` changes the fresh GameState before the world's
 ## _ready, so the camp is laid out for that day and hour (set "intro_done" to skip the intro).
-func start_world(setup: Callable = Callable()) -> void:
-	sm.new_game()
+## task_37: scenarios play the full week unless they ask for the three-day opening.
+func start_world(setup: Callable = Callable(), opening := false) -> void:
+	sm.new_game(not opening)
 	if setup.is_valid():
 		setup.call()
 	await frames(10)

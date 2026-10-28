@@ -12,7 +12,7 @@
 - **PT0 daje tylko kierunek** (krótka sesja, bez raportu). Punkt odniesienia K1–K5 da dopiero **PT0b**: pełny tydzień z raportem, 2–3 godziny, **od nowa na buildzie z poprawką eksportu** (każdy build z ZIP-a gubi listy tekstów w zasobach, więc licznik żył stoi na „0 z 12”; zgłoszenie `zgloszenia/2026-10-27_eksport-gubi-listy.md`).
 - **Punkt odniesienia K1 z bota:** norma 12 żył pada między dniem 4, 13:00 (styl „żyły”) a dniem 5, 15:30 (styl „rozmowy”); cel to „nie wcześniej niż wieczorem dnia 6”.
 - **Dashboard** prowadzi proces; przebudowa według audytu 2026-10-27 (D-36, D-37) weszła 2026-10-27: łańcuch zadania „Przeprowadź zadanie” z zatrzymaniami (karta decyzji, czerwony test serwera, „poprawki”, konflikt, plan poza `Pliki:` albo `Ryzyko: wysokie`), ekran „Do rozstrzygnięcia” z trybem auto-rekomendacji (domyślnie wyłączony), poziomy zadań `tekst/narzędzia/rozgrywka` i jeden arkusz na build, testy serwera po wdrożeniu i poprawkach, build do ogrania (D-32), przebiegi równolegle (D-33), scalanie automatyczne na faktach z serwera (D-35), wydanie z karty „Wydanie”, sekret administratora, widok Graf, CI testów dashboardu. Reguły przebiegu: [docs/agent/run-rules.md](../agent/run-rules.md); audyt i jego ustalenia: [archiwum](../archiwum/audyt-2026-10-27/README.md).
-- **Otwarte zadania** (`docs/ai-tasks/`, przepisane 2026-10-27 na nowy przepływ: linie `Poziom:`, `Pliki:`, `Ryzyko:`): task_18, task_20–22 (narzędzia gry: pomiar, porządek repozytorium, procesy; task_18 i część task_22 tylko z terminala, bo dotykają `dashboard/` i `.claude/`) i task_25–35 (z reguł ⬜ z 2026-10-27; task_25 pierwsze — poprawka eksportu dla PT0b). Na żywo: widok Praca. Osobne foldery testów i czerwone `^ERROR:` już są (D-36 pkt 12).
+- **Otwarte zadania** (`docs/ai-tasks/`): task_20–22 (narzędzia gry: pomiar, porządek repozytorium, procesy; w ocenie „czy mają sens” po task_37, Roland, czat 2026-10-28). **Zamknięte 2026-10-28:** task_25 (poprawka eksportu), task_36 (dashboard: tablica zadań), task_37 (otwarcie na trzy dni, OTW-1…OTW-10, scalone i domknięte). **Usunięte 2026-10-28:** task_26–35 (zadania z reguł ⬜ z 2026-10-27, zastąpione przez task_37, który zmienia projekt dema; wiersze „W zadaniach” ❌, wiersze kolejki usunięte; same reguły ⬜ w plikach działów zostają do decyzji Rolanda). Na żywo: widok Praca.
 - **Pokrycie reguł testami:** 31 ze 165 ID reguł pojawia się w kodzie lub testach (liczone 2026-10-27; lint pokrycia `reports/rule-coverage.json` ma to mierzyć, reguła ✅ bez odniesienia daje ostrzeżenie).
 - **Odłożone:** źródło i licencja `assets/logo.png` (wraca najpóźniej przed demem publicznym); korekty specyfikacji do stanu gry czekają na jedną zgodę (archiwum, „Odłożone”).
 
@@ -78,10 +78,12 @@ Domyślne w `src/work/runs.ts` dashboardu zgodne z tą tabelą. `CLAUDE.md`, INS
 | planowanie | Opus 5.5 | medium | 8 / 120 |
 | analiza | Opus 5.5 | medium | 4 / 80 |
 | przegląd | Opus 5.5 | medium | 2 / 60 |
-| wdrożenie | Sonnet 5.5 | high | 8 / 150 |
-| poprawki | Sonnet 5.5 | high | 6 / 120 |
-| domknięcie | Haiku 5.5 | max | 1 / 40 |
-| próba („Sprawdź agenta”) | Haiku 5.5 | low | 0,5 / 4 |
+| wdrożenie | Sonnet 5.5 | medium | 8 / 150 |
+| poprawki | Sonnet 5.5 | medium | 6 / 120 |
+| domknięcie | Haiku 5.5 | medium | 1 / 40 |
+| próba („Sprawdź agenta”) | Haiku 5.5 | medium | 0,5 / 4 |
+
+Wysiłek medium we wszystkich rodzajach przebiegów dashboardu (Roland, dashboard 2026-10-28, task_36); wcześniej wdrożenie i poprawki miały high, domknięcie max, a próba low. Krótki przebieg po karcie decyzji (analiza z `plan zależy od wyboru: tak`) to Sonnet 5.5 medium, 20 tur. Zapamiętane w oknie startu ustawienia sprzed tej zmiany dashboard raz pominął.
 
 W sesjach terminalowych: orkiestracja, przegląd, planowanie i analiza na Opus 5.5 medium; kod i poprawki na Sonnet 5.5 high, prostsze zadania na Haiku 5.5 max (Roland, D-29, 2026-10-27). Haiku eskalujemy do Sonnet high, gdy przegląd znajdzie jego błąd albo coś się psuje. Opus high tylko za zgodą Rolanda. Jedno zadanie = jeden wykonawca od początku do końca, co najwyżej jeden przegląd po nim.
 

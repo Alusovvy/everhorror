@@ -16,6 +16,8 @@ for file in build/windows/Everhorror.exe tools/release/CZYTAJ_MNIE.txt CHANGELOG
 	[ -f "$file" ] || { echo "make_zip: missing $file (export first)" >&2; exit 1; }
 done
 
+bash tools/export_smoke.sh
+
 out="build/Everhorror-demo-${version}-windows.zip"
 rm -f "$out"
 if command -v zip >/dev/null 2>&1; then
