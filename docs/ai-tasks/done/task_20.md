@@ -124,10 +124,10 @@ Zakres po okrojeniu planu (2026-10-28): tylko **G5**. G4 i K5 odpadły z planu, 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
 
-Wdrożenie już się odbyło (gałąź `spec/2026-10-28-task20`). Do zrobienia po Twojej stronie: arkusz [factcheck-build-368ac18.md](../../human-tasks/factcheck-build-368ac18.md), część `task_20`, dwa wiersze: (1) po rozegranym dniu raport przebiegu ma kolumnę „czas realny dnia” z wiarygodną wartością i sumę; (2) po wczytaniu starego zapisu (sprzed zmiany) kolumna pokazuje „—” i nie ma błędu. Żadnych pytań.
+Wdrożenie już się odbyło (gałąź `spec/2026-10-28-task20`). Do zrobienia po Twojej stronie: arkusz [factcheck-build-368ac18.md](../../human-tasks/done/factcheck-build-368ac18.md), część `task_20`, dwa wiersze: (1) po rozegranym dniu raport przebiegu ma kolumnę „czas realny dnia” z wiarygodną wartością i sumę; (2) po wczytaniu starego zapisu (sprzed zmiany) kolumna pokazuje „—” i nie ma błędu. Żadnych pytań.
 
 ## Test
-Arkusz: [factcheck-build-368ac18.md](../../human-tasks/factcheck-build-368ac18.md), część `## Część: task_20`. Uruchomione przez agenta na gałęzi (po `--import`), `tools/run_tests.sh unit lint dialogue opening day1 save_load` oraz `week` (zmieniony `retry_morning`):
+Arkusz: [factcheck-build-368ac18.md](../../human-tasks/done/factcheck-build-368ac18.md), część `## Część: task_20`. Uruchomione przez agenta na gałęzi (po `--import`), `tools/run_tests.sh unit lint dialogue opening day1 save_load` oraz `week` (zmieniony `retry_morning`):
 ```
 unit          3s  RESULT: ALL PASSED
 lint          8s  RESULT: ALL PASSED
