@@ -21,6 +21,9 @@ Wpisy zadań domkniętych po 0.5.4 (dopisuje je domknięcie zadania). Przy wydan
 - Rozmowa z Mirosławem po wybuchu („Jak się trzymasz?”) ma trzy podejścia po 1 h: zapytać o robotę, posiedzieć w ciszy albo powiedzieć wprost, ile go to kosztuje. Kolacja u Tekli (18:00–20:00) reaguje na to, co się dziś stało (OTW-7, OTW-8).
 - W dniu 3 Exitium przychodzi po mapy dziadka: gracz je pokazuje, pyta po co albo odmawia. Ekran „Koniec otwarcia” podsumowuje stan gry (OTW-9, OTW-10).
 
+### Zmienione
+- Wydana gra (ZIP) nie uruchamia już nieużywanych dodatków Beehave i Phantom Camera, a z paczki zniknęły nieużywane pliki: folder Sewer, przykładowe zdjęcie i prototyp interakcji. Rozgrywka bez zmian.
+
 ## [0.5.4] - 2026-10-27
 
 Zgodność ze spec: `3f76c0f` · zadania: task_16, task_17 · gałęzie: `spec/2026-10-27-task16`, `spec/2026-10-27-task17`

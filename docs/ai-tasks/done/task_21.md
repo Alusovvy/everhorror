@@ -73,7 +73,7 @@ Priorytet: wysoki · Etap planu: teraz (część D1), reszta etapy 5 i 9 · Kole
 5. To zadanie nie usuwa niczego z historii gita (poza zakresem). Pliki bez licencji pozostają publiczne w starych commitach. Raport ma to powiedzieć wprost.
 
 ## Plan
-Rodzaj „narzędzia”, poziom `rozgrywka` (zob. „Decyzje i założenia”): gałąź `spec/<data>-task21` od `master` we własnej kopii gałęzi `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>` (tworzy ją dashboard). Bez commita reguł w specyfikacji, wiersz w „Na gałęziach” z `—` zamiast sha7. Kroki po rozstrzygnięciu karty [2026-10-27_task21-dodatki-licencje](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md):
+Rodzaj „narzędzia”, poziom `rozgrywka` (zob. „Decyzje i założenia”): gałąź `spec/<data>-task21` od `master` we własnej kopii gałęzi `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>` (tworzy ją dashboard). Bez commita reguł w specyfikacji, wiersz w „Na gałęziach” z `—` zamiast sha7. Kroki po rozstrzygnięciu karty [2026-10-27_task21-dodatki-licencje](../../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md):
 1. **K1.** Usunąć `addons/beehave`, `addons/phantom_camera` (i `addons/gdUnit4`, jeśli wybór 1a). W `project.godot` usunąć ich wpisy z `[autoload]` i `[editor_plugins]` razem. W `export_presets.cfg` usunąć `docs_v2/*`, `assets/Sewer/*` (i `addons/gdUnit4/*` przy 1a).
 2. **godot_mcp** według pyt. 2: (a) `addons/godot_mcp/LICENSE` z tekstem upstreamu i adresem źródła w raporcie; (b) `git rm -r --cached addons/godot_mcp`, wpis w `.gitignore` i `exclude_filter`, usunięcie `MCPRuntimeProbe` i wtyczki z `project.godot`, folder skopiowany ręcznie do worktree, nota w `docs/agent/README.md` („MCP servers”); (c) bez zmian, punkt w raporcie jako otwarty do dema.
 3. **K8.** Usunąć `assets/Sewer/`, `assets/pics/` (cały, będzie pusty), `script/visual_interaction.gd` (+ `.uid`), `scene/visual_interaction/`. Przemianować `tools/_ui_shot_tmp.gd` → `tools/ui_shots.gd` razem z `.uid` (`git mv`, uid się nie zmienia). `interact_test`/`nav_walk_test` według punktu 3 analizy.
@@ -87,13 +87,29 @@ Pliki: addons/beehave, addons/phantom_camera, addons/gdUnit4, addons/godot_mcp/L
 Ryzyko: wysokie
 
 ### Rozstrzygnięcia karty (wznowienie analizy, 2026-10-27)
-Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md) ma status ✅ i linię „Roland, 2026-10-27 (dashboard): 2: a”.
+Karta [2026-10-27_task21-dodatki-licencje.md](../../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md) ma status ✅ i linię „Roland, 2026-10-27 (dashboard): 2: a”.
 - **Pyt. 2 → a.** `addons/godot_mcp` zostaje w repozytorium, dostaje plik `LICENSE` z tekstem licencji upstreamu, a raport podaje adres źródła i wiersz do `06_oprawa.md`. `project.godot` (wtyczka, `MCPRuntimeProbe`) się nie zmienia. **Warunek:** przebiegi z dashboardu nie mają sieci, więc tekst i adres licencji musi dostarczyć Roland (albo sesja z siecią), np. w uwadze do przebiegu `implement` albo jako plik położony w `addons/godot_mcp/`. Bez tego wykonawca robi resztę zadania, a kryterium licencji zgłasza w raporcie jako niespełnione. Licencji nie zgaduje. Jeśli upstream licencji nie ma, karta wraca z wyborem b/c (tak stanowi opcja a).
 - **Pyt. 1 (GdUnit4): bez wyboru.** Roland nie wybrał wariantu, a status quo nie wymaga zmiany. Plan: **GdUnit4 zostaje** (folder, wpis w `[editor_plugins]`, wykluczenie `addons/gdUnit4/*` w `export_presets.cfg`), a raport powtarza rekomendację jednym zdaniem: „Usunąć GdUnit4, bo nie ma w nim żadnego testu, a jego CLI nie wejdzie do `run_tests.sh`”. To spełnia kryterium „zgłoszona Rolandowi z jednym zdaniem rekomendacji”. Usunięcie tylko po wyraźnym „tak” Rolanda (np. w uwadze do przebiegu `implement`).
 - **Miejsce pracy.** Po zmianie `CLAUDE.md` każda gałąź zadania dostaje własny worktree `C:/dev/gamedev/everhorror/everhorror-wt/<gałąź>` (tworzy go dashboard). `everhorror-wdrozenie` służy tylko gałęziom sprzed tej zmiany, więc krok „worktree” w planie wyżej czytaj jako `everhorror-wt/spec/<data>-task21`.
 
 ## Co zostało zrobione
 <!-- Osobna podsekcja dla każdego punktu z Wymagań. -->
+Gałąź `spec/2026-10-28-task21` (kopia `C:/dev/gamedev/everhorror/everhorror-wt/spec-2026-10-28-task21`), głowa `0ffd106`, trzy commity: `d799cb0` (porządek), `441796a` (scalenie `master`, konflikty w `docs/agent/README.md` i `tools/README.md` rozwiązane z zachowaniem obu zamiarów; `project.godot` scalił się sam: sekcja `[editor]` z `export/convert_text_resources_to_binary=false` z task_25 zostaje obok skróconych list), `0ffd106` (dodatki, licencja, dokumenty).
+
+**K1. Beehave i Phantom Camera.**
+- Foldery `addons/beehave` i `addons/phantom_camera` usunięte z HEAD. W `project.godot` nie ma ich autoloadów (`PhantomCameraManager`, `BeehaveGlobalMetrics`, `BeehaveGlobalDebugger`) ani wtyczek; `[autoload]` ma `Settings`, `SaveManager`, `GameState`, `VN`, `DialogueManager`, `MCPRuntimeProbe`, a `[editor_plugins]` dialogue_manager, gdUnit4 i godot_mcp.
+- `grep -rIn -i "beehave\|phantom_camera\|PhantomCamera"` po repozytorium (bez `.git`, `.godot`, `reports/`, `build/`) trafia już tylko w historię: `docs/ai-tasks/task_21.md` (ten plik), `docs/ai-tasks/done/task_14.md` (wzmianka w raporcie zakończonego zadania) i `docs/archiwum/audyt-2026-10-27/gra.md`. W kodzie, scenach, `*.cfg`, `*.sh`, `*.godot` i dokumentach roboczych: 0 trafień.
+- `tools/export_smoke.sh`: z listy `ERROR_ALLOW` zdjęty wpis `Capture not registered: .beehave.`; po usunięciu dodatku ten błąd nie występuje (`grep -c "Capture not registered" reports/tests/*.log` = 0 dla każdego logu, test eksportu przechodzi).
+- **GdUnit4 zostaje** (folder, wpis w `[editor_plugins]`, wykluczenie `addons/gdUnit4/*` w `export_presets.cfg`), bo karta `2026-10-27_task21-dodatki-licencje.md` pyt. 1 nie ma odpowiedzi Rolanda. Rekomendacja w jednym zdaniu: usunąć GdUnit4, bo nie ma w nim żadnego testu, a jego CLI ścigałoby się z pamięcią podręczną importu i nie wejdzie do `run_tests.sh`. Usunięcie dopiero po wyraźnym „tak" Rolanda.
+- `export_presets.cfg`: wpisy `docs_v2/*` i `assets/Sewer/*` usunięte (martwe), `addons/phantom_camera/examples/*` usunięty razem z folderem, `*.cs` i `addons/gdUnit4/*` zostają. Preset „Test Pack" nadal ma `tools/` w eksporcie (test eksportu uruchamia scenariusze z paczki).
+
+**K8. Martwe pliki.** Usunięte: `assets/Sewer/` (52 pliki z `.import`, razem z `.gdignore`), `assets/pics/` (cały), `script/visual_interaction.gd` (+ `.uid`), `scene/visual_interaction/`, `tools/interact_test.gd` i `tools/nav_walk_test.gd` (+ `.uid`; wybrałem usunięcie zgodnie z rekomendacją analizy: `interact_test` pokrywają `tests/test_expedition.gd` i `test_base.find_interactable`, `nav_walk_test` pokrywa `tests/test_camp_walk.gd`; wpisy zdjęte z `tools/README.md`, `docs/agent/README.md` i `tools/run_tests.sh`). `tools/_ui_shot_tmp.gd` przemianowany `git mv` na `tools/ui_shots.gd` (z `.uid`) i opisany w `tools/README.md` jako narzędzie. Nie uruchomiłem tu `ui_shots.gd` na oknie GPU (jeden zrzut próbny z kryteriów akceptacji pozostaje do wykonania przy okazji arkusza).
+
+**D1. Licencje w HEAD.** `Sewer` i `sample-pic.jpg` poza HEAD (poniżej uwaga o historii). `addons/godot_mcp/LICENSE` dodany z tekstem MIT (Copyright (c) 2026 Johnny D), źródło: https://github.com/hybridindie/godot-mcp (upstream jest na licencji MIT; tekst dostarczył koordynator z dostępem do sieci). Rejestr zasobów w specyfikacji uzupełniony commitem `d3678dd` w repozytorium spec (`06_oprawa.md`: nowy wiersz „Godot MCP … MIT", wiersze Sewer i `sample-pic.jpg` usunięte z tabeli i z zastrzeżenia o ryzyku, osobna linia o usunięciu z HEAD). Wiersz w „Na gałęziach" dopisany commitem `3e51a81`.
+
+**Czego to zadanie nie robi.** Historia gita nie jest przepisana: `Sewer`, `sample-pic.jpg` oraz `godot_mcp` bez licencji pozostają publiczne w starszych commitach (przepisanie tylko po wyraźnym „tak" Rolanda). `cave_ambient.mp3`, `steps.mp3` i `assets/logo.png` bez zmian (D-10, D-21).
+
+**Dokumenty.** `docs/agent/README.md`: tabela „Addons" (Dialogue Manager, GdUnit4, Godot MCP z licencją MIT; Beehave i Phantom Camera usunięte, nota o tym), układ `assets/`, lista autoloadów, wzmianki o `visual_interaction` i prototypowych testach. `tools/README.md`: tabela narzędzi, lista wykluczeń eksportu, uwaga o pomiarze. `CLAUDE.md` nie wymagał zmiany.
 
 ## Decyzje i założenia
 <!-- Co agent przyjął sam, bo nie wynikało z wymagań. -->
@@ -101,12 +117,25 @@ Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/
 
 ## Czego potrzebuję od Ciebie
 <!-- Pytania, decyzje, pliki, dostęp, klucze API. -->
-Karta [2026-10-27_task21-dodatki-licencje.md](../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md) rozstrzygnięta: 2: a. Przed `implement 21` potrzebuję jeszcze:
+Karta [2026-10-27_task21-dodatki-licencje.md](../../../../specification/zgloszenia/2026-10-27_task21-dodatki-licencje.md) rozstrzygnięta: 2: a. Przed `implement 21` potrzebuję jeszcze:
 - **adresu i pełnego tekstu licencji** `hybridindie/godot-mcp` (przebieg nie ma sieci), w uwadze do przebiegu albo jako plik w `addons/godot_mcp/`;
 - opcjonalnie **„tak” na usunięcie GdUnit4** (pyt. 1 zostało bez wyboru, więc domyślnie zostaje).
 
 ## Test
 Scenariusz zadania (uruchamia go serwer po wdrożeniu, poza zestawem podstawowym): `day1`. Arkusz: część `## Część: task_21` arkusza builda.
 
+Wynik własny (2026-10-28, kopia gałęzi, głowa `0ffd106`; `--import` dwa razy, bez błędów brakujących zasobów: zostają tylko znane ostrzeżenia „invalid UID" z paczki Loafbrr, niezwiązane z tym zadaniem, i zwykłe błędy wycieku przy zamknięciu `--headless`):
+```
+unit          3s  RESULT: ALL PASSED
+lint          8s  RESULT: ALL PASSED
+dialogue      6s  RESULT: ALL PASSED
+day1         24s  RESULT: ALL PASSED  (22.2 s)
+expedition   15s  RESULT: ALL PASSED  (13.9 s)
+```
+Test eksportu (`tools/export_smoke.sh`, po zdjęciu wyjątku `.beehave.` z `ERROR_ALLOW`): `export: 11s, game.pck 105 MB`, `day1 RESULT: ALL PASSED (21.9 s)`, `expedition RESULT: ALL PASSED (13.5 s)`, `RESULT: ALL PASSED (export smoke: day1 expedition ran from the exported pack)`. `grep -c "Capture not registered" reports/tests/*.log` = 0. Specyfikacja: `node dashboard/cli.ts lint` 0 błędów, 0 uwag.
+
+## Poprawki (2026-10-28)
+Pierwszy przebieg implementacji z dashboardu został zabity, zanim zatwierdził zmiany (w kopii gałęzi zostały zmiany w indeksie i w drzewie roboczym). Audyt tamtego przebiegu zgłosił naruszenia `MASTER_MOVED` i `HUMAN_ZONE`; to fałszywy alarm: `master` w głównej kopii przesunął własny commit Rolanda `7109aeb` (wyniki arkuszy), zrobiony w trakcie przebiegu, a nie agent. Pracę dokończył pojedynczy wykonawca w terminalu: zatwierdził zastaną pracę (`d799cb0`), scalił `master` (`441796a`), usunął Beehave i Phantom Camera, dodał LICENSE, poprawił rejestr zasobów w specyfikacji, zaktualizował dokumenty i uruchomił testy (`0ffd106`). Główna kopia gry nie została zmieniona poza tym plikiem zadania.
+
 ## Podsumowanie
-Analiza gotowa (2026-10-27): zależność od task_16 spełniona, plan w siedmiu krokach powyżej. Karta rozstrzygnięta (2: a): `godot_mcp` dostaje plik LICENSE z upstreamu. Tekst licencji musi dostarczyć Roland, bo przebiegi nie mają sieci. GdUnit4 bez wyboru, więc zostaje, a rekomendacja usunięcia trafi do raportu. Zadanie jest gotowe do `implement 21`.
+Zadanie wdrożone na gałęzi `spec/2026-10-28-task21` (głowa `0ffd106`), do sprawdzenia: Beehave i Phantom Camera usunięte razem z autoloadami i wtyczkami, `Sewer`, `pics`, prototyp `visual_interaction` i dwa nieużywane testy poza HEAD, `_ui_shot_tmp` to teraz `ui_shots`, `godot_mcp` ma LICENSE (MIT, upstream hybridindie/godot-mcp), rejestr zasobów w specyfikacji poprawiony (`d3678dd`). `unit lint dialogue day1 expedition` i test eksportu przechodzą. GdUnit4 zostaje: rekomendacja to usunąć go (nie ma w nim testów, jego CLI nie wejdzie do `run_tests.sh`), ale decyzja czeka na odpowiedź Rolanda na kartę (pyt. 1). Historia gita nie jest przepisana, więc usunięte pliki bez licencji są nadal w starszych commitach. Do zrobienia przy arkuszu: jeden zrzut próbny z `tools/ui_shots.gd` na oknie GPU.
