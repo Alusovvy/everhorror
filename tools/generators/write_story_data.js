@@ -104,7 +104,7 @@ npc({
 npc({
   id: "nasir", display_name: "Nasir z Bakaszu", dialogue_name: "Nasir", instr: "Nasirem", faction: 2,
   role: "Pompiarz i górnik z Sułtanatu Nerdii", max_sanity: 100, start_sanity: 72,
-  history: "Nerdyjczyk z Bakaszu. Jako chłopak trafił do sułtańskich kamieniołomów za długi ojca. Wykupił się po dwunastu latach, podpatrując waldgrosseńskich inżynierów wodnych, aż umiał wypompować wodę z każdej dziury. Mówi, że gdzie woda, tam życie, a gdzie jej za dużo, tam śmierć. Na północy marznie od pierwszego dnia. Na szyi nosi szklany paciorek, który nazywa Dalekim Klejnotem.",
+  history: "Nerdyjczyk z Bakaszu. Jako chłopak trafił do sułtańskich kamieniołomów za długi ojca. Wykupił się po dwunastu latach, podpatrując waldgrosseńskich inżynierów wodnych, aż umiał wypompować wodę z każdej dziury. Mówi, że gdzie woda, tam życie, a gdzie jej za dużo, tam śmierć. Na północy marznie od pierwszego dnia. Na szyi nosi szklany paciorek, który nazywa Dalekim Klejnotem.", // lint-quota: years, not veins
   zero: "Przestaje schodzić pod ziemię. Siada pod szybem, patrzy w kwadrat nieba i szepcze do Dżinów w swoim języku.",
 });
 npc({
@@ -194,12 +194,13 @@ quest("lonty", "Lonty dla Mirosława", "Mirosław z Głuszy", {
   wysadzone: "Mirosław wysadził zawał. Zachodni chodnik jest otwarty.",
 });
 quest("zloza", "Złoża dla Kniazia", "Racibor, zarządca", {
-  start: "Kniaź chce dwunastu żył błękitu na mapie do wieczora siódmego dnia. Mam je znaleźć i zaznaczyć. Za pierwsze dwie Racibor obiecał odpis z archiwum Kniazia.",
+  // {norma}, {Norma}, {norma_dop}, {norma_dop_liczba} become the quota in words (GameState.quest_entry_text).
+  start: "Kniaź chce {norma_dop} błękitu na mapie do wieczora siódmego dnia. Mam je znaleźć i zaznaczyć. Za pierwsze dwie Racibor obiecał odpis z archiwum Kniazia.",
   rzapie: "Zaznaczyłem żyłę w rząpiu pod starym szybem.",
   upadowa: "Zaznaczyłem żyłę na dnie upadowej. Gruba jak ramię.",
   kaplica: "Zaznaczyłem żyłę w kaplicy. Cała ściana jest tam z błękitu.",
-  zdane: "Zdałem pierwszy raport. Racibor dał mi odpis raportu sprzed czterdziestu lat. Do dwunastu jeszcze daleko.",
-  norma: "Dwanaście żył. Norma Kniazia zrobiona.",
+  zdane: "Zdałem pierwszy raport. Racibor dał mi odpis raportu sprzed czterdziestu lat. Do {norma_dop_liczba} jeszcze daleko.",
+  norma: "{Norma}. Norma Kniazia zrobiona.",
 });
 quest("towar", "Tobołek Tekli", "Tekla, kwatermistrzyni", {
   start: "Kiedy spuszczali zapasy starym szybem, Tekli urwał się tobołek i wpadł do rząpia. Mam go wyłowić i nikomu o tym nie mówić.",

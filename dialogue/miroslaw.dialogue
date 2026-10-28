@@ -189,7 +189,7 @@ if not done_today("mir_greet")
 		else
 			Mirosław: Proch jest, lonty są. Tylko ręce mi się jakoś nie chcą rwać do tej roboty.
 	elif day == 3
-		Mirosław: Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego.
+		Mirosław: Tydzień, mówi Racibor. {{quota_words("nom", true)}}. A potem fedrujemy na całego.
 	elif day >= 7
 		Mirosław: Dziś Racibor liczy. Jakby nie liczył, to i tak wszyscy liczymy. Dni, beczki, kto jeszcze śpi spokojnie.
 	elif sanity_band("miroslaw") == "niespokojny"

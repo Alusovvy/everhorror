@@ -43,6 +43,21 @@ func _run() -> void:
 	_check(gwara == "Ty nowy? Siadej, jak chcesz. Ino mi nad gowom niy stój.", "Silesian line with the dialect on (got '%s')" % gwara)
 	gs.reset()
 
+	print("--- task_22 (T7): the quota line renders the same, with and without the dialect")
+	for dialect in [true, false]:
+		settings.silesian_dialect = dialect
+		settings.apply()
+		gs.reset()
+		gs.set_flag("met_miroslaw")
+		gs.day = 3
+		_seen.clear()
+		await _talk(mir, "start", ["Muszę iść."])
+		var quota_line := "Mirosław: Tydziyń, godo Racibor. Dwanaście żył. A potym fedrujymy na cołego." if dialect else "Mirosław: Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego."
+		_check(quota_line in _seen, "Mirosław's quota line, dialect %s" % ("on" if dialect else "off"))
+	settings.silesian_dialect = true
+	settings.apply()
+	gs.reset()
+
 	print("--- Mirosław: first talk, ask about the collapse")
 	await _talk(mir, "start", ["Co się stało z zachodnim chodnikiem?", "Muszę iść."])
 	_check(gs.has_flag("met_miroslaw"), "met_miroslaw set")

@@ -1,0 +1,21 @@
+{
+	"polish_literals": {
+		"script/camp_schedule.gd": 8,
+		"script/data/item_data.gd": 2,
+		"script/expedition_summary.gd": 15,
+		"script/expeditions.gd": 3,
+		"script/field_schedule.gd": 1,
+		"script/game_state.gd": 62,
+		"script/hud.gd": 2,
+		"script/interactable.gd": 2,
+		"script/inventory_screen.gd": 15,
+		"script/map_drawing.gd": 1,
+		"script/map_screen.gd": 16,
+		"script/notebook.gd": 25,
+		"script/run_report.gd": 100,
+		"script/save_slots_panel.gd": 1,
+		"script/story_director.gd": 82,
+		"script/vn.gd": 1,
+		"script/vn_balloon.gd": 1
+	}
+}

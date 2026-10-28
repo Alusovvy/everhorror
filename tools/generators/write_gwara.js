@@ -177,8 +177,8 @@ const gwara = {
     "Niy idź jeszcze. Jak ftoś siedzi łobok, to wybuchy som cisze.",
   "Słyszałeś Racibora. Jak policzy żyły, mam wysadzić upadową.":
     "Słyszołeś Racibora. Jak porachuje żyły, mom wysadzić upadowo.",
-  "Tydzień, mówi Racibor. Dwanaście żył. A potem fedrujemy na całego.":
-    "Tydziyń, godo Racibor. Dwanaście żył. A potym fedrujymy na cołego.",
+  "Tydzień, mówi Racibor. {{quota_words(\"nom\", true)}}. A potem fedrujemy na całego.":
+    "Tydziyń, godo Racibor. {{quota_words(\"nom\", true)}}. A potym fedrujymy na cołego.",
   "Dziś Racibor liczy. Jakby nie liczył, to i tak wszyscy liczymy. Dni, beczki, kto jeszcze śpi spokojnie.":
     "Dzisiej Racibor rachuje. A choćby niy rachowoł, to i tak wszyscy rachujymy. Dni, beczki, fto jeszcze śpi spokojnie.",
   "Znowu mi się śniło, że wszystko wybucha. Tym razem po cichu. To było najgorsze.":

@@ -578,7 +578,7 @@ func _check_quota() -> void:
 	if quota_met() and not has_flag("quota_met_logged"):
 		flags["quota_met_logged"] = true
 		quest_log(&"zloza", "norma")
-		message.emit("Dwanaście żył. Norma Kniazia zrobiona.")
+		message.emit("%s. Norma Kniazia zrobiona." % quota_words("nom", true))
 
 ## "7 z 12" plus the deadline, for the map, the notebook and the summary.
 func quota_text() -> String:
@@ -601,6 +601,35 @@ func veins_acc() -> String:
 	if n == 1:
 		return "jedną żyłę"
 	return "%d %s" % [n, plural(n, "żyłę", "żyły", "żył")]
+
+## Polish numerals 0-20 as words (feminine, for "żyła"). The `lint-quota` marker exempts a line
+## from the data_lint rule on spelled-out quotas.
+const NUMERALS_NOM := ["zero", "jedna", "dwie", "trzy", "cztery", "pięć", "sześć", "siedem", "osiem", "dziewięć", "dziesięć", "jedenaście", "dwanaście", "trzynaście", "czternaście", "piętnaście", "szesnaście", "siedemnaście", "osiemnaście", "dziewiętnaście", "dwadzieścia"] # lint-quota
+const NUMERALS_GEN := ["zera", "jednej", "dwóch", "trzech", "czterech", "pięciu", "sześciu", "siedmiu", "ośmiu", "dziewięciu", "dziesięciu", "jedenastu", "dwunastu", "trzynastu", "czternastu", "piętnastu", "szesnastu", "siedemnastu", "osiemnastu", "dziewiętnastu", "dwudziestu"] # lint-quota
+
+## The quota in words for dialogues and messages (the number lives only in QUOTA, D-05):
+## quota_words() → numeral and noun ("N żył"), ("gen") → genitive, ("nom", true) → capitalised,
+## ("gen", false, false) → the genitive numeral alone. Past 20 it falls back to digits.
+func quota_words(grammatical_case: String = "nom", capital: bool = false, with_noun: bool = true) -> String:
+	var n := QUOTA
+	var numeral: String
+	var noun: String
+	if grammatical_case == "gen":
+		numeral = NUMERALS_GEN[n] if n < NUMERALS_GEN.size() else str(n)
+		noun = "żyły" if n == 1 else "żył"
+	else:
+		numeral = NUMERALS_NOM[n] if n < NUMERALS_NOM.size() else str(n)
+		noun = plural(n, "żyła", "żyły", "żył")
+	var result := "%s %s" % [numeral, noun] if with_noun else numeral
+	return result.substr(0, 1).to_upper() + result.substr(1) if capital else result
+
+## A quest entry as the player reads it: {norma} → quota_words(), {Norma} (sentence start),
+## {norma_dop} → genitive, {norma_dop_liczba} → the genitive numeral alone.
+func quest_entry_text(data: QuestData, entry_id: String) -> String:
+	var text: String = data.entries.get(entry_id, entry_id)
+	if not text.contains("{"):
+		return text
+	return text.replace("{norma_dop_liczba}", quota_words("gen", false, false)).replace("{norma_dop}", quota_words("gen")).replace("{Norma}", quota_words("nom", true)).replace("{norma}", quota_words())
 
 ## "został jeden dzień", "zostały 2 dni", "zostało 5 dni" ("termin mija dziś" on the last day).
 func days_left_text() -> String:
@@ -818,7 +847,7 @@ func quest_log(quest_id: StringName, entry_id: String) -> void:
 		return
 	quest["entries"].append(entry_id)
 	var data: QuestData = QUESTS[quest_id]
-	quest_updated.emit(data, data.entries.get(entry_id, ""))
+	quest_updated.emit(data, quest_entry_text(data, entry_id) if data.entries.has(entry_id) else "")
 
 func complete_quest(quest_id: StringName) -> void:
 	if quests.has(quest_id):

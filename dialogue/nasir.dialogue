@@ -42,7 +42,9 @@ Nasir: [[Mów, habibi.|Słucham.|Tak?]]
 - Jak trafiłeś z Sułtanatu do Jaksaru? [if not has_flag("nas_asked_story") /]
 	$> set_flag("nas_asked_story")
 	Nasir: Ojciec miał długi. W Nerdii długi spłaca się sobą albo dziećmi. Ojciec wybrał dzieci.
+	# lint-quota: twelve years, not veins
 	Nasir: Dwanaście lat w kamieniołomach sułtana. Nosiłem wodę inżynierom z Waldgrossen, bo nikt inny nie chciał. Patrzyłem, słuchałem.
+	# lint-quota: twelve years, not veins
 	Nasir: Po dwunastu latach umiałem wypompować wodę z każdej dziury. Wykupiłem się i poszedłem tam, gdzie takich jak ja potrzebują. Czyli tam, gdzie mokro i ciemno.
 	=> hub
 - Opowiedz o Sułtanacie. [if has_flag("nas_asked_story") and not has_flag("nas_sultanate") /]
@@ -104,6 +106,7 @@ if not has_flag("met_nasir")
 	Anzelm mówi cicho, że to Nasir, pompiarz z Sułtanatu. Gorączka złapała go, zanim zdążyliście się poznać.
 if not has_flag("nas_sick_seen")
 	$> set_flag("nas_sick_seen")
+	# lint-quota: twelve years, not veins
 	Nasir: Habibi... Wiesz, co jest najgłupsze? Dwanaście lat w kamieniołomie, w upale, i nic. A tu, w zimnie... Zimno mnie dopadło.
 else
 	Nasir: [[Jeszcze... jestem.|Dżiny stoją przy łóżku. Powiedz im, żeby poczekały.|Zimno. Tak strasznie zimno.]]

@@ -183,6 +183,16 @@ func _run() -> void:
 	gs.day = 7
 	_check(gs.days_left_text() == "termin mija dziś", "deadline today")
 
+	print("--- task_22 (T7): the quota in words, same text as when it was typed by hand")
+	_check(gs.QUOTA == 12, "the checks below are written for a quota of 12 (update them with D-05)")
+	_check(gs.quota_words() == "dwanaście żył" and gs.quota_words("gen") == "dwunastu żył", "quota_words: nominative and genitive")
+	_check(gs.quota_words("nom", true) == "Dwanaście żył" and gs.quota_words("gen", false, false) == "dwunastu", "quota_words: capital letter and numeral alone")
+	var zloza: QuestData = gs.QUESTS[&"zloza"]
+	_check(gs.quest_entry_text(zloza, "start") == "Kniaź chce dwunastu żył błękitu na mapie do wieczora siódmego dnia. Mam je znaleźć i zaznaczyć. Za pierwsze dwie Racibor obiecał odpis z archiwum Kniazia.", "quest entry start reads as before")
+	_check(gs.quest_entry_text(zloza, "zdane").ends_with("Do dwunastu jeszcze daleko."), "quest entry zdane reads as before")
+	_check(gs.quest_entry_text(zloza, "norma") == "Dwanaście żył. Norma Kniazia zrobiona.", "quest entry norma reads as before")
+	_check(gs.quest_entry_text(zloza, "rzapie") == zloza.entries["rzapie"] and gs.quest_entry_text(zloza, "brak") == "brak", "entries without a marker and unknown ids pass through")
+
 	print("--- The hero: bands and the wound floor")
 	gs.reset()
 	_check(gs.health_band() == "zdrowy" and gs.mind_band() == "spokojny", "start: healthy and calm")
