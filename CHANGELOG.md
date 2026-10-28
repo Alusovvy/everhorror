@@ -6,6 +6,13 @@ Co się zmieniło w kolejnych wersjach Everhorror, od najnowszej. Przy każdej w
 
 Wpisy zadań domkniętych po 0.5.4 (dopisuje je domknięcie zadania). Przy wydaniu serwer dashboardu (karta „Wydanie”) przenosi ten tekst pod nowy numer wersji z datą i skrótem commita specyfikacji.
 
+### Naprawione
+- W wydanej grze (ZIP) działa licznik żył: po pierwszej zaznaczonej żyle pokazuje „1 z 12”, a nie „0 z 12”. Na mapie przybywa niebieskich kresek, a lista miejsc pokazuje „żyły 1/2” (ZYL-2, ZYL-4).
+- Warunki wejścia do miejsc działają jak w specyfikacji: bez liny nie wejdziesz do Upadowej ani do Ślepego szybu, do Galerii potrzebny jest olej, do Zawalonego chodnika trzeba najpierw wysadzić zawał, do Kaplicy odkryć ją, a do Zalanego chodnika uruchomić pompy (WYP-4, WYP-7).
+- Racibor upomina rano w dniach 4–7 tylko wtedy, gdy żył przybywa za wolno, a w dniu 7 zawsze, gdy normy nie ma (ZYL-5).
+- Raport przebiegu (ZAP-11) podaje, kiedy zaznaczono każdą żyłę i kiedy padła norma; wcześniej przy każdej żyle stało „n = 0”.
+- Kaptur Racibora, Sobka i Welfa oraz części modelu Hrapka są w wydanej grze schowane, tak jak w edytorze.
+
 ## [0.5.4] - 2026-10-27
 
 Zgodność ze spec: `3f76c0f` · zadania: task_16, task_17 · gałęzie: `spec/2026-10-27-task16`, `spec/2026-10-27-task17`
